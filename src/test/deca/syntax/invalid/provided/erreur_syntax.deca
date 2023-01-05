@@ -1,0 +1,26 @@
+// Description:
+//    tests de programme lexicalement correct.
+//
+// Resultats:
+//    Ligne 11 : Erreur de syntaxe.
+//    test_lex ne doit pas donner d'erreur.
+//
+// Historique:
+//    cree le 01/01/2023
+
+// Un exemple de programme Deca
+class A {
+    protected int x ;
+        int getX() {
+        return x ;
+       }
+    void setX(int x) {
+        this.x = x ;
+    }
+}
+
+{
+ A a = new A() ;
+ println("a.getX() = ", a.getX()) ;
+ a.setX(1) ;
+}

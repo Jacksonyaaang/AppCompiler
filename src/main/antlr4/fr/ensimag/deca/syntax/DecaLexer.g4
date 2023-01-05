@@ -11,6 +11,108 @@ options {
 @members {
 }
 
-// Deca lexer rules.
-DUMMY_TOKEN: .; // A FAIRE : Règle bidon qui reconnait tous les caractères.
-                // A FAIRE : Il faut la supprimer et la remplacer par les vraies règles.
+OBRACE : '{';
+CBRACE : '}';
+OPARENT : '(';
+CPARENT : ')';
+SEMI : ';';
+COMMA : ',';
+PRINT : 'print';
+PRINTLN : 'println';
+PRINTX : 'printx';
+PRINTLNX : 'printlnx';
+WHILE : 'while';
+RETURN : 'return';
+IF : 'if';
+ELSE : 'else';
+AND : '&&';
+OR : '||';
+EQEQ : '==';
+NEQ : '!=';
+GEQ : '>=';
+LEQ : '<=';
+GT : '>';
+LT : '<';
+INSTANCEOF: 'instaceof';
+PLUS : '+';
+MINUS : '-';
+TIMES : '*';
+SLASH : '/';
+EQUALS : '=';
+PERCENT : '%';
+EXCLAM : '!';
+DOT : '.';
+READINT : 'readInt';
+READFLOAT : 'readFloat';
+NEW : 'new';
+TRUE : 'true';
+FALSE : 'false';
+THIS : 'this';
+NULL : 'null';
+CLASS : 'class';
+EXTENDS : 'extends';
+PROTECTED : 'protected';
+ASM : 'asm';
+
+
+
+fragment LETTER : 'a' .. 'z' | 'A' .. 'Z';
+fragment DIGIT : '0'..'9';
+IDENT : (LETTER | '$' | '_')(LETTER | DIGIT | '$' | '_')*; // Exception : les mots réservés ne sont pas des identificateurs. A FAIRE
+
+
+fragment POSITIVE_DIGIT : '1'..'9';
+INT : '0' | POSITIVE_DIGIT DIGIT*; 
+// Une erreur de compilation est levée si un littéral
+// entier n’est pas codable comme un entier signé positif sur 32 bits A FAIRE 
+
+fragment SIGN : '+' | '-' | ; 
+fragment NUM : DIGIT+;
+fragment EXP : ('E' | 'e') SIGN NUM;
+fragment DEC : NUM '.' NUM;
+fragment FLOATDEC : (DEC + DEC EXP) ('F' | 'f' | ); 
+fragment DIGITHEX : '0'..'9' | 'A'..'F'|'a'..'f';
+fragment NUMHEX : DIGITHEX+;
+fragment FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 'f' |  ); 
+FLOAT : FLOATDEC | FLOATHEX;
+
+//Erreur pris du poly
+//Les littéraux flottants sont convertis en arrondissant si besoin au flottant IEEE-754 simple précision
+//le plus proche. Une erreur de compilation est levée si un littéral est trop grand et que l’arrondi se fait
+//vers l’infini, ou bien qu’un littéral non nul est trop petit et que l’arrondi se fait vers zéro. A FAIRE
+
+fragment EOL : '\n'; 
+fragment STRING_CAR : ~('"' | '\\' | '\n');
+STRING : '"' (STRING_CAR | '\\"' | '\\\\')* '"';
+MULTI_LINE_STRING : '"' (STRING_CAR | EOL | '\\"' | '\\\\')* '"';
+
+fragment FILENAME : (LETTER | DIGIT | '.' | '-' | '_')+;
+INCLUDE : '#include' (' ')* '"' FILENAME '"';
+
+// COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  {skip();};
+// COMMENTAIREMULTILIGNE : '/*' .*? '*/'  {skip();};
+// WS : (' '|'\t'|'\n'|'\r')+ {skip();} ;
+
+COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  ->skip;
+COMMENTAIREMULTILIGNE : '/*' .*? '*/'  ->skip;
+WS : (' '|'\t'|'\n'|'\r')+ ->skip;
+
+
+// COMMENTAIREMULTILIGNE : '/*' .*? '*/' -> skip ;
+// COMMENTAIRESURUNELIGNE : '//' ~[\r\n]*  -> skip ;
+// SAUT : [\n\r\t]+ -> skip ;
+// WS : [ ]+ -> skip ;
+
+// WS  :   ( '\n'
+//         | ' '
+//         | '\t'
+//         | '\r'
+//         ) {
+//               skip(); 
+//           }
+//     ;
+
+// TAB : [\t]+ -> skip ;
+// RETOURCHARIOT : [\r]+ -> skip ;
+//WS  :    [ \t\r\n COMMENTAIREMULTILIGNECOMMENTAIRESURUNELIGNE] -> skip;
+//WS  :   (' '| '\t' | '\r' | '\n' | COMMENTAIREMULTILIGNE | COMMENTAIRESURUNELIGNE)  { skip();};
