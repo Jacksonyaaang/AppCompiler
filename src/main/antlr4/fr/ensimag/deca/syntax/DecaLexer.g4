@@ -89,30 +89,24 @@ MULTI_LINE_STRING : '"' (STRING_CAR | EOL | '\\"' | '\\\\')* '"';
 fragment FILENAME : (LETTER | DIGIT | '.' | '-' | '_')+;
 INCLUDE : '#include' (' ')* '"' FILENAME '"';
 
-// COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  {skip();};
-// COMMENTAIREMULTILIGNE : '/*' .*? '*/'  {skip();};
-// WS : (' '|'\t'|'\n'|'\r')+ {skip();} ;
-
-COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  ->skip;
-COMMENTAIREMULTILIGNE : '/*' .*? '*/'  ->skip;
-WS : (' '|'\t'|'\n'|'\r')+ ->skip;
+//A FAIRE copied from the slide 36 Analyse lexicale
+// L'inclusion de fichier est traitée en analyse lexicale.
+// Utiliser la méthode doInclude de AbstractDecaLexer.java.
 
 
-// COMMENTAIREMULTILIGNE : '/*' .*? '*/' -> skip ;
-// COMMENTAIRESURUNELIGNE : '//' ~[\r\n]*  -> skip ;
-// SAUT : [\n\r\t]+ -> skip ;
-// WS : [ ]+ -> skip ;
+COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  {skip();};
+COMMENTAIREMULTILIGNE : '/*' .*? '*/'  {skip();};
+WS : (' '
+   |'\t'
+   |'\n'
+   |'\r'
+   )+ {skip();};
 
-// WS  :   ( '\n'
-//         | ' '
-//         | '\t'
-//         | '\r'
-//         ) {
-//               skip(); 
-//           }
-//     ;
-
-// TAB : [\t]+ -> skip ;
-// RETOURCHARIOT : [\r]+ -> skip ;
-//WS  :    [ \t\r\n COMMENTAIREMULTILIGNECOMMENTAIRESURUNELIGNE] -> skip;
-//WS  :   (' '| '\t' | '\r' | '\n' | COMMENTAIREMULTILIGNE | COMMENTAIRESURUNELIGNE)  { skip();};
+// COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  ->skip;
+// COMMENTAIREMULTILIGNE : '/*' .*? '*/'  ->skip;
+// WS : (' '
+//    |'\t'
+//    |'\n'
+//    |'\r'
+//    )+ ->skip;
+   

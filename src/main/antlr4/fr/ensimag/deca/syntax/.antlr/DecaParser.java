@@ -26,8 +26,8 @@ public class DecaParser extends AbstractDecaParser {
 		MINUS=25, TIMES=26, SLASH=27, EQUALS=28, PERCENT=29, EXCLAM=30, DOT=31, 
 		READINT=32, READFLOAT=33, NEW=34, TRUE=35, FALSE=36, THIS=37, NULL=38, 
 		CLASS=39, EXTENDS=40, PROTECTED=41, ASM=42, IDENT=43, INT=44, FLOAT=45, 
-		EOL=46, STRING_CAR=47, STRING=48, MULTI_LINE_STRING=49, FILENAME=50, INCLUDE=51, 
-		COMMENTAIREMULTILIGNE=52, COMMENTAIRESURUNELIGNE=53, WS=54;
+		STRING=46, MULTI_LINE_STRING=47, INCLUDE=48, COMMENTAIRESURUNELIGNE=49, 
+		COMMENTAIREMULTILIGNE=50, WS=51;
 	public static final int
 		RULE_prog = 0, RULE_main = 1, RULE_block = 2, RULE_list_decl = 3, RULE_decl_var_set = 4, 
 		RULE_list_decl_var = 5, RULE_decl_var = 6, RULE_list_inst = 7, RULE_inst = 8, 
@@ -59,7 +59,7 @@ public class DecaParser extends AbstractDecaParser {
 			"'||'", "'=='", "'!='", "'>='", "'<='", "'>'", "'<'", "'instaceof'", 
 			"'+'", "'-'", "'*'", "'/'", "'='", "'%'", "'!'", "'.'", "'readInt'", 
 			"'readFloat'", "'new'", "'true'", "'false'", "'this'", "'null'", "'class'", 
-			"'extends'", "'protected'", "'asm'", null, null, null, "'\n'"
+			"'extends'", "'protected'", "'asm'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -70,9 +70,8 @@ public class DecaParser extends AbstractDecaParser {
 			"OR", "EQEQ", "NEQ", "GEQ", "LEQ", "GT", "LT", "INSTANCEOF", "PLUS", 
 			"MINUS", "TIMES", "SLASH", "EQUALS", "PERCENT", "EXCLAM", "DOT", "READINT", 
 			"READFLOAT", "NEW", "TRUE", "FALSE", "THIS", "NULL", "CLASS", "EXTENDS", 
-			"PROTECTED", "ASM", "IDENT", "INT", "FLOAT", "EOL", "STRING_CAR", "STRING", 
-			"MULTI_LINE_STRING", "FILENAME", "INCLUDE", "COMMENTAIREMULTILIGNE", 
-			"COMMENTAIRESURUNELIGNE", "WS"
+			"PROTECTED", "ASM", "IDENT", "INT", "FLOAT", "STRING", "MULTI_LINE_STRING", 
+			"INCLUDE", "COMMENTAIRESURUNELIGNE", "COMMENTAIREMULTILIGNE", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -3103,9 +3102,9 @@ public class DecaParser extends AbstractDecaParser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\38\u0235\4\2\t\2\4"+
-		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
-		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\65\u0235\4\2\t\2"+
+		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
+		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
 		"\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36\4\37\t\37\4 \t \4!"+
 		"\t!\4\"\t\"\4#\t#\4$\t$\4%\t%\4&\t&\3\2\3\2\3\2\3\2\3\2\3\3\3\3\3\3\3"+
@@ -3263,7 +3262,7 @@ public class DecaParser extends AbstractDecaParser {
 		"\3\2\2\2\u01b6\u019d\3\2\2\2\u01b6\u01a1\3\2\2\2\u01b6\u01a5\3\2\2\2\u01b6"+
 		"\u01ab\3\2\2\2\u01b6\u01b3\3\2\2\2\u01b7-\3\2\2\2\u01b8\u01b9\5\62\32"+
 		"\2\u01b9\u01ba\b\30\1\2\u01ba/\3\2\2\2\u01bb\u01bc\7.\2\2\u01bc\u01ca"+
-		"\b\31\1\2\u01bd\u01be\7/\2\2\u01be\u01ca\b\31\1\2\u01bf\u01c0\7\62\2\2"+
+		"\b\31\1\2\u01bd\u01be\7/\2\2\u01be\u01ca\b\31\1\2\u01bf\u01c0\7\60\2\2"+
 		"\u01c0\u01ca\b\31\1\2\u01c1\u01c2\7%\2\2\u01c2\u01ca\b\31\1\2\u01c3\u01c4"+
 		"\7&\2\2\u01c4\u01ca\b\31\1\2\u01c5\u01c6\7\'\2\2\u01c6\u01ca\b\31\1\2"+
 		"\u01c7\u01c8\7(\2\2\u01c8\u01ca\b\31\1\2\u01c9\u01bb\3\2\2\2\u01c9\u01bd"+
@@ -3297,8 +3296,8 @@ public class DecaParser extends AbstractDecaParser {
 		"\u0220\7\b\2\2\u0220\u0221\5J&\2\u0221\u0222\b$\1\2\u0222\u0224\3\2\2"+
 		"\2\u0223\u021f\3\2\2\2\u0224\u0227\3\2\2\2\u0225\u0223\3\2\2\2\u0225\u0226"+
 		"\3\2\2\2\u0226\u0229\3\2\2\2\u0227\u0225\3\2\2\2\u0228\u021d\3\2\2\2\u0228"+
-		"\u0229\3\2\2\2\u0229G\3\2\2\2\u022a\u022b\7\62\2\2\u022b\u022f\b%\1\2"+
-		"\u022c\u022d\7\63\2\2\u022d\u022f\b%\1\2\u022e\u022a\3\2\2\2\u022e\u022c"+
+		"\u0229\3\2\2\2\u0229G\3\2\2\2\u022a\u022b\7\60\2\2\u022b\u022f\b%\1\2"+
+		"\u022c\u022d\7\61\2\2\u022d\u022f\b%\1\2\u022e\u022a\3\2\2\2\u022e\u022c"+
 		"\3\2\2\2\u022fI\3\2\2\2\u0230\u0231\5.\30\2\u0231\u0232\5\62\32\2\u0232"+
 		"\u0233\b&\1\2\u0233K\3\2\2\2\'U`ox\u0081\u00b7\u00cd\u00d6\u00e0\u00e3"+
 		"\u00ef\u00fc\u010a\u011b\u011d\u013d\u013f\u0150\u0152\u0168\u016a\u0178"+

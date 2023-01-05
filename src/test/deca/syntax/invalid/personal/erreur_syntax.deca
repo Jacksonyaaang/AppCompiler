@@ -20,7 +20,7 @@ class A {
 }
 
 {
- A a = new A() ;
+ A a = new A() 
  println("a.getX() = ", a.getX()) ;
  a.setX(1) ;
 }

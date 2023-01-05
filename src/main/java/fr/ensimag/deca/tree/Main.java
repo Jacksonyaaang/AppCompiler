@@ -18,6 +18,8 @@ public class Main extends AbstractMain {
     private ListInst insts;
     public Main(ListDeclVar declVariables,
             ListInst insts) {
+        System.out.println(declVariables);
+        System.out.println(insts);
         Validate.notNull(declVariables);
         Validate.notNull(insts);
         this.declVariables = declVariables;
