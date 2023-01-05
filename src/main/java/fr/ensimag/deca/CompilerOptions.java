@@ -21,11 +21,15 @@ public class CompilerOptions {
     public static final int INFO  = 1;
     public static final int DEBUG = 2;
     public static final int TRACE = 3;
+    
     private HashSet<String> optionPool;  //hash table pour stocker les options 
+    boolean pyAllIn=false;//pour vérifier p y condition
+    boolean[] checkTable = new boolean[6];  //y compris (par ordre : p->0, v->1, n->2 , r->3, P->4, w->5)-> length =6
+    
     public int getDebug() {
         return debug;
     }
-
+    
     public boolean getParallel() {
         return parallel;
     }
@@ -44,9 +48,79 @@ public class CompilerOptions {
     private List<File> sourceFiles = new ArrayList<File>();
     
     
-    private void switchOptionCase(String option)
+    private void switchOptionCase(String option, String addStr) throws IllegalArgumentException
     {
-        boolean pyAllIn = false;
+       // (par ordre : p->0, v->1, n->2 , r->3, P->4, w->5)-
+        if (optionPool.contains(option)){
+            switch(option){
+                case "-p":
+                    if (checkTable[0]==true){
+                        System.out.println("quit this turn");  //delete after .....................................
+                        break;
+                    }
+                    if (pyAllIn==true){
+                        try {
+                            throw new IllegalArgumentException();
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("\n[Please Retry]\n[Fault Detected!!]Can't pass simultaneously the option '-p' and '-v' ");
+                            System.exit(1);  //or return ???
+                        }
+                    }
+                    checkTable[0]=true;
+                    pyAllIn=true;
+                    //pas fini, attendre 'étape de construction d'arbre' est fait
+                    System.out.println("arret apres la construction d'arbre........");
+                    break;
+                case "-v":
+                    if (checkTable[1]==true){
+                        System.out.println("quit this turn");  //delete after .....................................
+                        break;
+                    }
+                    if (pyAllIn==true){
+                        try {
+                            throw new IllegalArgumentException();
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("\n[Please Retry]\n[Fault Detected!!]Can't pass simultaneously the option '-p' and '-v' ");
+                            System.exit(1);  //or return ???
+                        }
+                    }
+                    checkTable[1]=true;
+                    //throw new IllegalArgumentException("\n[Please Retry]\n[Fault Detected!!]Can't pass simultaneously the option '-p' and '-v' ");
+                    pyAllIn=true;
+                    //pas fini, att "arrête decac après l'étape de vérifications" est fait
+                    System.out.println("arrête decac après l'étape de vérifications");
+                    break;
+                case "-n":
+                    if (checkTable[2]==true){
+                        System.out.println("quit this turn");  //delete after .....................................
+                        break;
+                    }
+                    checkTable[2]=true;
+                    System.out.println("supprime les tests à l'exécution spécifiés dans..............");
+                    break;
+                case "-r":
+                    if (checkTable[3]==true){
+                        System.out.println("quit this turn");  //delete after .....................................
+                        break;
+                    }
+                    checkTable[3]=true;
+                    System.out.println("\n working in the -r, with bana.. value is : "+addStr);
+                    break;
+                case "-d":
+                    System.out.println("active the debug info ");
+                    break;
+                case "-P":  //use the addStr to determinate the name of file 
+                    if (checkTable[4]==true){
+                        System.out.println("quit this turn");  //delete after .....................................
+                        break;
+                    }
+                    checkTable[4]=true;
+                    
+                    
+            }
+
+        }else
+            throw new IllegalArgumentException(option+"is not an available option");
 
 
     }
@@ -56,7 +130,7 @@ public class CompilerOptions {
         System.out.println("Deca 1.0 Compiler\n\n@author gl15\n\nCopyright 2023- Free Software Foundation, Ensimag");
     } 
     
-    public void parseArgs(String[] args) throws CLIException {
+    public void parseArgs(String[] args) throws CLIException, NumberFormatException {
         // A FAIRE : parcourir args pour positionner les options correctement.
         //when the argument space is empty
         if (args.length==0){
@@ -78,14 +152,61 @@ public class CompilerOptions {
         optionPool.add("-d");
         optionPool.add("-P");
         optionPool.add("-w");
-         if (args.length==1&&args[0].equals("-b"))
+        //a boolean table for eliminating the case duplication ex: decac -r 6 -r -5  : is not acceptable, so neglige the second one 
+
+
+
+        int len = args.length;
+        if (args.length==1&&args[0].equals("-b"))
             bannerOption();
         else{
-            for (int i=0;i<args.length; ++i){
-                if (args[i].equals("-b"))
-                    throw new IllegalArgumentException("can't use '-b' with multiples arguments");
-                else
-                    switchOptionCase(args[i]);
+            for (int i=0;i<len; ++i){
+
+
+                if (args[i].equals("-b")){
+                    try{
+                        throw new IllegalArgumentException();
+                    }catch (IllegalArgumentException e){
+                        System.out.println("\n[Please Retry]\n[Fault Detected!!] Can't use '-b' with multiples arguments");
+                        System.exit(1);  //or return ???
+                    }
+                }             
+                else{
+                    if (args[i].equals("-r")){
+                        //try catch pour traiter le cas : apres "-r", X est pas une value 
+                        try {
+                            if (i+1==len||(Integer.parseInt(args[i+1])<=4&&Integer.parseInt(args[i+1])>=16)){
+                                try {
+                                    throw new IllegalArgumentException();
+                                    
+                                } catch (IllegalArgumentException e) {
+                                    System.out.println("\n[Please Retry]\n[Fault Detected!!] Must have a banalise register value with the range '4<=X<=16' after '-r'");
+                                    System.exit(1);  //or return ???
+                                }
+                            }
+                        } catch (NumberFormatException e) {
+                            if (optionPool.contains(args[i+1])){
+                                //la condition ici pour dire user faut ajouter une bonne valeur apres le -r et  avant la option prochaine
+                                System.out.println("\n[Please Retry]\n[Fault Detected!!] Must have a banalise register VALUE with the range '4<=X<=16' after '-r'");
+                                System.exit(1);  //or return ???
+                            }
+                            else  //ici exception pour les cas user a entré n'importe quoi apres le -r 
+                                System.out.println("\n[Please Retry]\n[Fault Detected!!] The X after '-r' must with the range '4<=X<=16' VALUE ! ");
+                                
+                        }
+                        switchOptionCase(args[i], args[i+1]);
+                        i++;
+                        continue;
+                    }
+                    else if (args[i].equals("-P")){
+                        StringBuilder sb= new StringBuilder();
+                        continue;
+
+                    }
+                    switchOptionCase(args[i], "-1");  //normal case
+
+                }
+
             }
         } 
 
