@@ -122,27 +122,27 @@ INT : ('0' | POSITIVE_DIGIT (DIGIT)*)
 //flottants (décimaux et hexadécimaux)  Littéraux flottants
 fragment NUM : (DIGIT)+
 ;
-fragment SIGN : ('+' | '-' | [ ])
+fragment SIGN : ('+' | '-' | )
 ;
 fragment EXP : ('E' | 'e') SIGN NUM
 ;
 fragment DEC : NUM '.' NUM
 ;
-fragment FLOATDEC : (DEC | (DEC EXP)) ('F' | 'f'|[ ])
+fragment FLOATDEC : (DEC | (DEC EXP)) ('F' | 'f'| )
 ;
 fragment DIGITHEX : (('A'..'F')|('a'..'f')|('0' .. '9'))
 ;
 fragment NUMHEX : (DIGITHEX)+
 ;
-fragment FLOATHEX : ('0x'|'0X')NUMHEX '.' NUMHEX ('P'|'p') SIGN NUM ('F'|'f'|[ ]) //('0x'|'0X') NUMHEX '.' NUMHEX ('P'|'p') SIGN NUM ('F'|'f')*
+fragment FLOATHEX : ('0x'|'0X')NUMHEX '.' NUMHEX ('P'|'p') SIGN NUM ('F'|'f'| ) //('0x'|'0X') NUMHEX '.' NUMHEX ('P'|'p') SIGN NUM ('F'|'f')*
 ;
-FLOAT : (FLOATDEC | FLOATHEX)
+FLOAT : (FLOATDEC| FLOATHEX)
 ;
 
 
 
 //chaînes de caractères 
-fragment STRING_CAR : ~('"'|'\\')+
+fragment STRING_CAR : ~('"'|'\\')
 ;
 
 //
