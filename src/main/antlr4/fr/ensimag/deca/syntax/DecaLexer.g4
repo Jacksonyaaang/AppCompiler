@@ -94,19 +94,19 @@ INCLUDE : '#include' (' ')* '"' FILENAME '"';
 // Utiliser la méthode doInclude de AbstractDecaLexer.java.
 
 
-COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  {skip();};
-COMMENTAIREMULTILIGNE : '/*' .*? '*/'  {skip();};
-WS : (' '
-   |'\t'
-   |'\n'
-   |'\r'
-   )+ {skip();};
-
-// COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  ->skip;
-// COMMENTAIREMULTILIGNE : '/*' .*? '*/'  ->skip;
+// COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  {skip();};
+// COMMENTAIREMULTILIGNE : '/*' .*? '*/'  {skip();};
 // WS : (' '
 //    |'\t'
 //    |'\n'
 //    |'\r'
-//    )+ ->skip;
+//    )+ {skip();};
+
+COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  ->skip;
+COMMENTAIREMULTILIGNE : '/*' .*? '*/'  ->skip;
+WS : (' '
+   |'\t'
+   |'\n'
+   |'\r'
+   )+ ->skip;
    
