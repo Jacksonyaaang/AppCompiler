@@ -22,7 +22,7 @@ public class CompilerOptions {
     public static final int DEBUG = 2;
     public static final int TRACE = 3;
     
-    private HashSet<String> optionPool;  //hash table pour stocker les options 
+    private HashSet<String> optionPool = new HashSet<>();  //hash table pour stocker les options 
     boolean pyAllIn=false;//pour vérifier p y condition
     boolean[] checkTable = new boolean[6];  //y compris (par ordre : p->0, v->1, n->2 , r->3, P->4, w->5)-> length =6
     
@@ -129,6 +129,17 @@ public class CompilerOptions {
     private void bannerOption(){
         System.out.println("Deca 1.0 Compiler\n\n@author gl15\n\nCopyright 2023- Free Software Foundation, Ensimag");
     } 
+
+    private void setUpOptions(){
+        optionPool.add("-b");
+        optionPool.add("-p");
+        optionPool.add("-v");
+        optionPool.add("-n");
+        optionPool.add("-r");  //-r X
+        optionPool.add("-d");
+        optionPool.add("-P");
+        optionPool.add("-w");
+    }
     
     public void parseArgs(String[] args) throws CLIException, NumberFormatException {
         // A FAIRE : parcourir args pour positionner les options correctement.
@@ -143,19 +154,8 @@ public class CompilerOptions {
             "-P\t: s'il y a plusieurs fichiers sources, lance la compilation des fichiers en parallèle (pour accélérer la compilation)\n"+
             " \nusage :'decac [[-p | -v] [-n] [-r X] [-d]* [-P] [-w] <fichier deca>...] | [-b]' ");
         }
-    	optionPool = new HashSet<>();
-        optionPool.add("-b");
-        optionPool.add("-p");
-        optionPool.add("-v");
-        optionPool.add("-n");
-        optionPool.add("-r");  //-r X
-        optionPool.add("-d");
-        optionPool.add("-P");
-        optionPool.add("-w");
+        setUpOptions();
         //a boolean table for eliminating the case duplication ex: decac -r 6 -r -5  : is not acceptable, so neglige the second one 
-
-
-
         int len = args.length;
         if (args.length==1&&args[0].equals("-b"))
             bannerOption();
