@@ -12,7 +12,7 @@ import org.apache.commons.lang.Validate;
 /**
  * Full if/else if/else statement.
  *
- * @author gl15
+ * @author gl15 Steven MADEC
  * @date 01/01/2023
  */
 public class IfThenElse extends AbstractInst {
@@ -41,9 +41,31 @@ public class IfThenElse extends AbstractInst {
         throw new UnsupportedOperationException("not yet implemented");
     }
 
+    public AbstractExpr getCondition() { return condition; }
+
+    public ListInst getThenBranch() { return thenBranch; }
+
+    public ListInst getElseBranch() { return elseBranch; }
+
+
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("not yet implemented");
+    s.print("if (");
+    getCondition().decompile(s);
+
+    s.println(") {");
+
+    s.indent();
+    getThenBranch().decompile(s);
+    s.unindent();
+
+    s.println("} else {");
+
+    s.indent();
+    getElseBranch().decompile(s);
+    s.unindent();
+    s.print("}");
+
     }
 
     @Override

@@ -53,9 +53,16 @@ public abstract class AbstractPrint extends AbstractInst {
         return printHex;
     }
 
+    protected abstract String getPrintName();
+
+    protected abstract String getPrintxName();
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("not yet implemented");
+        if(getPrintHex()){s.print(getPrintxName());}
+        else{s.print(getPrintName());}
+        s.print("(");
+        getArguments().decompile(s);
+        s.print(");");
     }
 
     @Override

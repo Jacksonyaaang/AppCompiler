@@ -13,6 +13,14 @@ public class Print extends AbstractPrint {
         super(printHex, arguments);
     }
 
+    protected String getPrintName(){
+        return "print";
+    }
+
+    protected String getPrintxName(){
+        return "printx";
+    }
+
     @Override
     String getSuffix() {
         return "";
