@@ -5,7 +5,6 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Level;
@@ -49,6 +48,16 @@ public class CompilerOptions {
     private boolean parallel = false;
     private boolean printBanner = false;
     private List<File> sourceFiles = new ArrayList<File>();
+
+    // public void multipleFileCompile(CompilerOptions cp){
+    //     /* will run the compiler for each file */
+    //     for (int i=0; i<sourceFiles.size(); ++i){
+    //         DecacCompiler compiler = new DecacCompiler(cp, sourceFiles.get(i));
+    //         Thread thrd = new Thread(compiler);
+    //         thrd.start();
+    //     }
+        
+    // }
     
     
     private void switchOptionCase(String option, String addStr) throws IllegalArgumentException

@@ -37,7 +37,14 @@ public class DecacMain {
             // compiler, et lancer l'exécution des méthodes compile() de chaque
             // instance en parallèle. Il est conseillé d'utiliser
             // java.util.concurrent de la bibliothèque standard Java.
-            
+            for (int i=0;i<options.getSourceFiles().size(); ++i){
+                MultiThread m = new MultiThread(options, options.getSourceFiles().get(i));
+                Thread t = new Thread(m);
+                t.start();
+                if (m.isError()){
+                    error = true;
+                }
+            }
         } else {
             for (File source : options.getSourceFiles()) {
                 DecacCompiler compiler = new DecacCompiler(options, source);
