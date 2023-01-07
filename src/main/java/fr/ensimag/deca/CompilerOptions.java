@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Level;
@@ -23,6 +24,8 @@ public class CompilerOptions {
     public static final int TRACE = 3;
     
     private HashSet<String> optionPool = new HashSet<>();  //hash table pour stocker les options 
+  //  private HashSet<String> fileCompilePool= new HashSet<>();
+
     boolean pyAllIn=false;//pour vérifier p y condition
     boolean[] checkTable = new boolean[6];  //y compris (par ordre : p->0, v->1, n->2 , r->3, P->4, w->5)-> length =6
     
@@ -115,12 +118,28 @@ public class CompilerOptions {
                         break;
                     }
                     checkTable[4]=true;
-                    
-                    
+                    System.out.println("comiler plusieur fichiers dans le même temps");
+                    parallel = true;
+                    break;
             }
 
-        }else
-            throw new IllegalArgumentException(option+"is not an available option");
+        }else //pool doesnt contain , so either file.deca or invalide 
+        {
+            StringBuilder sbFileName = new StringBuilder(option);
+            if (sbFileName.substring(sbFileName.length()-5).equals(".deca")){
+    //           fileCompilePool.add(sbFileName.toString()); //use for -P 
+                File tempo = new File(sbFileName.toString());
+                sourceFiles.add(tempo);
+
+            }else{
+                try {
+                    throw new IllegalArgumentException();
+                } catch (IllegalArgumentException e) {
+                    System.out.println("\n[Please Retry]\n[Fault Detected!!] "+option+"is not an available option");
+                    System.exit(1);  //or return ???
+                }
+            }
+        }
 
 
     }
@@ -140,6 +159,36 @@ public class CompilerOptions {
         optionPool.add("-P");
         optionPool.add("-w");
     }
+//    private void compilerFichier(){
+//        /*y compris le cas "plusieur fichier compilé et un seul" */
+//        
+//        //for "-P"
+//        if (plusieurFileCompile){
+//            //ajouter la fonctionalité de compilation apres le "->"  (peut etre une fonction de compilateur qui prend le paramètre comme le nom de fichier compilé, ici est singleFile (fichier compiler))
+//            //A FAIRE  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//
+//            fileCompilePool.forEach((singleFile)->System.out.println("Compile "+singleFile));
+//
+//
+//        }else{
+//            // un seul (il y'a pas -P)
+//            try {
+//                if (fileCompilePool.size()>1){
+//                    throw new IllegalArgumentException();
+//                }
+//            } catch (IllegalArgumentException e) {
+//                System.out.println("\n[Please Retry]\n[Fault Detected!!] multiple file, use '-P' ");
+//                System.exit(1);  //or return ???
+//            }
+//            if (fileCompilePool.size()==1){
+//                Iterator<String> itr = fileCompilePool.iterator();
+//                String fileCompile = itr.next();
+//                System.out.println("A FAire !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   compiler un seul fichier");
+//                //A FAire !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   compiler un seul fichier 
+//            }
+//        }
+//
+//    }
     
     public void parseArgs(String[] args) throws CLIException, NumberFormatException {
         // A FAIRE : parcourir args pour positionner les options correctement.
@@ -157,11 +206,13 @@ public class CompilerOptions {
         setUpOptions();
         //a boolean table for eliminating the case duplication ex: decac -r 6 -r -5  : is not acceptable, so neglige the second one 
         int len = args.length;
-        if (args.length==1&&args[0].equals("-b"))
+        if (args.length==1&&args[0].equals("-b")){
+            printBanner=true;
             bannerOption();
+        }
+
         else{
             for (int i=0;i<len; ++i){
-
 
                 if (args[i].equals("-b")){
                     try{
@@ -198,17 +249,16 @@ public class CompilerOptions {
                         i++;
                         continue;
                     }
-                    else if (args[i].equals("-P")){
-                        StringBuilder sb= new StringBuilder();
-                        continue;
-
-                    }
                     switchOptionCase(args[i], "-1");  //normal case
 
                 }
 
-            }
-        } 
+            }  //fin "for"
+        } //fin "else"
+
+        //rependre les options (fonctionalité)
+  //      compilerFichier(); 
+
 
     	
         Logger logger = Logger.getRootLogger();
