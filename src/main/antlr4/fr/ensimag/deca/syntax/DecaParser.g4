@@ -27,6 +27,7 @@ options {
     import fr.ensimag.deca.tree.*;
     import fr.ensimag.deca.tools.*;
     import java.io.PrintStream;
+
 }
 
 @members {
@@ -34,6 +35,9 @@ options {
     protected AbstractProgram parseProgram() {
         return prog().tree;
     }
+    protected IfThenElse tempIfThenElse = null;
+    protected IfThenElse temptree = null;
+
 }
 
 prog returns[AbstractProgram tree]
@@ -59,8 +63,8 @@ main returns[AbstractMain tree]
 
 block returns[ListDeclVar decls, ListInst insts]
     : OBRACE list_decl list_inst CBRACE {
-            //assert($list_decl.tree != null);
-            //assert($list_inst.tree != null);
+            assert($list_decl.tree != null);
+            assert($list_inst.tree != null);
             $decls = $list_decl.tree;
             $insts = $list_inst.tree;
         }
@@ -95,21 +99,17 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
         }
     : i=ident {
         assert($i.tree != null);
-        System.out.println("test position 1");
          }
       (EQUALS e=expr {
+        assert($e.tree != null);
         $tree = new DeclVar($t, $i.tree, new Initialization($e.tree));  
         setLocation($tree, $ident.start);
-        System.out.println("test position 2");
-        assert($e.tree != null);
         }
       )? {
         if ($tree == null){
             $tree = new DeclVar($t, $i.tree, new NoInitialization());  
             setLocation($tree, $ident.start);
-            System.out.println("test position 3 prime");
         }
-        System.out.println("test position 3");
         }
     ;
 
@@ -127,44 +127,66 @@ list_inst returns[ListInst tree]
 inst returns[AbstractInst tree]
     : e1=expr SEMI {
             assert($e1.tree != null);
+            $tree = $expr.tree;
         }
     | SEMI {
         }
     | PRINT OPARENT list_expr CPARENT SEMI {
-            //assert($list_expr.tree != null);
+            assert($list_expr.tree != null);
+            $tree = new Print(false, $list_expr.tree);
         }
     | PRINTLN OPARENT list_expr CPARENT SEMI {
-            //assert($list_expr.tree != null);
+            assert($list_expr.tree != null);
+            $tree = new Println(false, $list_expr.tree);
         }
     | PRINTX OPARENT list_expr CPARENT SEMI {
-            //assert($list_expr.tree != null);
+            assert($list_expr.tree != null);
+            $tree = new Print(true, $list_expr.tree);
         }
     | PRINTLNX OPARENT list_expr CPARENT SEMI {
-            //assert($list_expr.tree != null);
+            assert($list_expr.tree != null);
+            $tree = new Println(true, $list_expr.tree);
         }
     | if_then_else {
-            //assert($if_then_else.tree != null);
+            assert($if_then_else.tree != null);
+            $tree = $if_then_else.tree;
         }
     | WHILE OPARENT condition=expr CPARENT OBRACE body=list_inst CBRACE {
-            //assert($condition.tree != null);
-            //assert($body.tree != null);
+            assert($condition.tree != null);
+            assert($body.tree != null);
+            $tree = new While($condition.tree, $body.tree);
         }
     | RETURN expr SEMI {
-            //assert($expr.tree != null);
+            assert($expr.tree != null);
         }
     ;
 
 if_then_else returns[IfThenElse tree]
 @init {
+    this.tempIfThenElse = null;
+    this.temptree = null;
 }
     : if1=IF OPARENT condition=expr CPARENT OBRACE li_if=list_inst CBRACE {
+            assert($expr.tree != null);
+            assert($list_inst.tree != null);
+            $tree = new IfThenElse($condition.tree, $li_if.tree, new ListInst());
+            this.tempIfThenElse = $tree;
         }
       (ELSE elsif=IF OPARENT elsif_cond=expr CPARENT OBRACE elsif_li=list_inst CBRACE {
+            
+            this.temptree = new IfThenElse($elsif_cond.tree,
+                                             $elsif_li.tree,
+                                              new ListInst());
+            this.tempIfThenElse.getElseBranch().add(this.temptree);  
+            this.tempIfThenElse = this.temptree;  
         }
       )*
       (ELSE OBRACE li_else=list_inst CBRACE {
+            this.tempIfThenElse.setElseBranch($li_else.tree); 
         }
       )?
+      {
+      }
     ;
 
 list_expr returns[ListExpr tree]
@@ -199,7 +221,7 @@ assign_expr returns[AbstractExpr tree]
         EQUALS e2=assign_expr {
             assert($e.tree != null);
             assert($e2.tree != null);
-            $tree = new Assign($e.tree, $e2.tree);
+            $tree = new Assign( (Identifier )$e.tree, $e2.tree);
             setLocation($tree, $e.start);
         }
       | /* epsilon */ {
@@ -357,8 +379,8 @@ select_expr returns[AbstractExpr tree]
             $tree = $e.tree;
         }
     | e1=select_expr DOT i=ident {
-            //assert($e1.tree != null);
-            //assert($i.tree != null);
+            assert($e1.tree != null);
+            assert($i.tree != null);
             //A FAIRE la fonction selection dans tree voir poly page 69
             //$tree=Selection($e1.tree, $i.tree);
 
@@ -398,8 +420,8 @@ primary_expr returns[AbstractExpr tree]
         }
         // A FAIRE LA CLASS NEW
     | cast=OPARENT type CPARENT OPARENT expr CPARENT {
-            //assert($type.tree != null);
-            //assert($expr.tree != null);
+            assert($type.tree != null);
+            assert($expr.tree != null);
         }
     // A FAIRE LA CLASS CAST
     | literal {
@@ -444,17 +466,20 @@ literal returns[AbstractExpr tree]
     ;
 
 ident returns[AbstractIdentifier tree]
-    : IDENT {
-        tableSymbole = new SymbolTable();
-        $tree = new Identifier();
+    :
+     IDENT {
+        $tree = new Identifier(this.getDecacCompiler().createSymbol($IDENT.text));
         }
     ;
 
 /****     Class related rules     ****/
 
 list_classes returns[ListDeclClass tree]
+    @init   {
+            $tree = new ListDeclClass();
+        }
     :
-      (c1=class_decl {
+      (c1=class_decl { // A FAIRE, ajoute des classes declare
         }
       )*
     ;

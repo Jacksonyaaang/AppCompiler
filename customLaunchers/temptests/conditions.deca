@@ -11,14 +11,10 @@
     if (i == 5){
         print("hi");
     }
-    else if (5 <= 10) {
-        print("hi");
-    }
-    else if (7 <= 10){
-        print("hi");
-    }
     else {
         print("hi");
     }
+
 }
+
 
