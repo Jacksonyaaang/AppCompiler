@@ -18,6 +18,14 @@ public class Println extends AbstractPrint {
         super(printHex, arguments);
     }
 
+    protected String getPrintName(){
+        return "println";
+    }
+
+    protected String getPrintxName(){
+        return "printlnx";
+    }
+
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
         super.codeGenInst(compiler);
