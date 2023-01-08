@@ -11,6 +11,7 @@ options {
 @members {
 }
 
+<<<<<<< HEAD
 OBRACE : '{';
 CBRACE : '}';
 OPARENT : '(';
@@ -109,4 +110,3 @@ WS : (' '
 //    |'\n'
 //    |'\r'
 //    )+ ->skip;
-   
