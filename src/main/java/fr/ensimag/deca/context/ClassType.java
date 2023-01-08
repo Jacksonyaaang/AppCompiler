@@ -67,12 +67,16 @@ public class ClassType extends Type {
         ClassDefinition CurClassDef = this.getDefinition();
         while (CurClassDef.getSuperClass() != null){
             ClassType CurClass = CurClassDef.getSuperClass().getType();
-            if (CurClass.sameType(potentialSuperClass)) return true;
+            if (CurClass.sameType(potentialSuperClass)) {
+                return true;
+            }
             CurClassDef = CurClassDef.getSuperClass();    
-        }return false;
+        }
+        return false;
         
         //throw new UnsupportedOperationException("not yet implemented"); 
     }
 
 
 }
+
