@@ -12,7 +12,7 @@ import org.apache.commons.lang.Validate;
 /**
  * Full if/else if/else statement.
  *
- * @author gl15 Steven MADEC
+ * @author gl15
  * @date 01/01/2023
  */
 public class IfThenElse extends AbstractInst {
