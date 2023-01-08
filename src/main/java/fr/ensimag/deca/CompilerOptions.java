@@ -22,12 +22,51 @@ public class CompilerOptions {
     public static final int DEBUG = 2;
     public static final int TRACE = 3;
     
-    private HashSet<String> optionPool = new HashSet<>();  //hash table pour stocker les options 
-  //  private HashSet<String> fileCompilePool= new HashSet<>();
+    private HashSet<String> optionPool = new HashSet<>();  //hash set pour stocker les options 
 
-    boolean pyAllIn=false;//pour vérifier p y condition
-    boolean[] checkTable = new boolean[6];  //y compris (par ordre : p->0, v->1, n->2 , r->3, P->4, w->5)-> length =6
+
+    private void setUpOptions(){
+        //On ajoute tout le options possibles
+        optionPool.add("-b");
+        optionPool.add("-p");
+        optionPool.add("-v");
+        optionPool.add("-n");
+        optionPool.add("-r");  //-r X
+        optionPool.add("-d");
+        optionPool.add("-P");
+        optionPool.add("-w");
+    }
+
+    //Ce tableau de boolean indique si une option a ete deja appelee 
+    //les options sont organisees de la maniere suivante
+    // (par ordre : p->0, v->1, n->2 , r->3, d->4, P->5, w->6)
+    private boolean[] optionsInvoked;
+    int numberOfOptions = 7; //besides -b
     
+    private boolean decompile;
+    private boolean verfiryAndStop;
+
+    /**
+     * Cette fonction cree le tableau options Invoked et initiale tout les 
+     * valeurs du tableau à 0
+     */
+    private void initialiseInvokedTable() {
+        optionsInvoked  = new boolean[numberOfOptions];
+        for (int i=0; i<numberOfOptions; i++){optionsInvoked[i] = false;}
+    }
+    
+    private void printbool() {
+        for (int i=0; i<numberOfOptions; i++){System.out.println("bool " + i + " " + optionsInvoked[i]); }
+    }
+
+    public boolean isDecompile() {
+        return decompile;
+    }
+
+    public boolean isVerfiryAndStop() {
+        return verfiryAndStop;
+    }
+
     public int getDebug() {
         return debug;
     }
@@ -43,231 +82,130 @@ public class CompilerOptions {
     public List<File> getSourceFiles() {
         return Collections.unmodifiableList(sourceFiles);
     }
+
+    public int getNumberOfRegisters() {
+        return numberOfRegisters;
+    }
     
     private int debug = 0;
     private boolean parallel = false;
     private boolean printBanner = false;
     private List<File> sourceFiles = new ArrayList<File>();
+    //On specifie le nombre de registres qu'on utilisera
+    //La valeur par defaut est egal a 16, mais peut varie entre 4 et 16
+    private int numberOfRegisters = 16; 
 
-    // public void multipleFileCompile(CompilerOptions cp){
-    //     /* will run the compiler for each file */
-    //     for (int i=0; i<sourceFiles.size(); ++i){
-    //         DecacCompiler compiler = new DecacCompiler(cp, sourceFiles.get(i));
-    //         Thread thrd = new Thread(compiler);
-    //         thrd.start();
-    //     }
-        
-    // }
-    
-    
-    private void switchOptionCase(String option, String addStr) throws IllegalArgumentException
+    /**
+     * 
+     * @param option
+     * @param addStr
+     * @throws CLIException Cette exception est jete dans le cas
+     *  ou il existe un probleme avec les options donnees
+     *  Par exemple : si on a deux options qui sont incompatibles
+     */
+    private void switchOptionCase(String option, String addStr) throws CLIException
     {
-       // (par ordre : p->0, v->1, n->2 , r->3, P->4, w->5)-
+       // (par ordre : p->0, v->1, n->2 , r->3, d->4, P->5, w->6)
         if (optionPool.contains(option)){
             switch(option){
                 case "-p":
-                    if (checkTable[0]==true){
-                        System.out.println("quit this turn");  //delete after .....................................
-                        break;
+                    //On verifie si l'option a ete deja detectee, on ne fait rien dans ce cas
+                    if (optionsInvoked[0] == true){ break; }
+                    if (optionsInvoked[1] == true){ 
+                        //Les deux options -v -p sont incompatible
+                        throw new CLIException("[Please Retry]\n[Fault Detected!!]Can't pass simultaneously the option '-p' and '-v' ");
                     }
-                    if (pyAllIn==true){
-                        try {
-                            throw new IllegalArgumentException();
-                        } catch (IllegalArgumentException e) {
-                            System.out.println("\n[Please Retry]\n[Fault Detected!!]Can't pass simultaneously the option '-p' and '-v' ");
-                            System.exit(1);  //or return ???
-                        }
-                    }
-                    checkTable[0]=true;
-                    pyAllIn=true;
-                    //pas fini, attendre 'étape de construction d'arbre' est fait
-                    System.out.println("arret apres la construction d'arbre........");
+                    optionsInvoked[0]=true;
+                    decompile = true;
                     break;
                 case "-v":
-                    if (checkTable[1]==true){
-                        System.out.println("quit this turn");  //delete after .....................................
-                        break;
+                    if (optionsInvoked[1]==true){ break; }
+                    if (optionsInvoked[0] == true){ 
+                        //Les deux options -v -p sont incompatible
+                        throw new CLIException("[Please Retry]\n[Fault Detected!!]Can't pass simultaneously the option '-p' and '-v' ");
                     }
-                    if (pyAllIn==true){
-                        try {
-                            throw new IllegalArgumentException();
-                        } catch (IllegalArgumentException e) {
-                            System.out.println("\n[Please Retry]\n[Fault Detected!!]Can't pass simultaneously the option '-p' and '-v' ");
-                            System.exit(1);  //or return ???
-                        }
-                    }
-                    checkTable[1]=true;
-                    //throw new IllegalArgumentException("\n[Please Retry]\n[Fault Detected!!]Can't pass simultaneously the option '-p' and '-v' ");
-                    pyAllIn=true;
-                    //pas fini, att "arrête decac après l'étape de vérifications" est fait
-                    System.out.println("arrête decac après l'étape de vérifications");
+                    optionsInvoked[1]=true;
+                    verfiryAndStop = true;
                     break;
                 case "-n":
-                    if (checkTable[2]==true){
-                        System.out.println("quit this turn");  //delete after .....................................
-                        break;
-                    }
-                    checkTable[2]=true;
-                    System.out.println("supprime les tests à l'exécution spécifiés dans..............");
+                    if (optionsInvoked[2]==true){break;}
+                    optionsInvoked[2]=true;
+                    //A FAIRE par ceux qui font la partie B voir poly page 103 option : -n
                     break;
                 case "-r":
-                    if (checkTable[3]==true){
-                        System.out.println("quit this turn");  //delete after .....................................
-                        break;
-                    }
-                    checkTable[3]=true;
-                    System.out.println("\n working in the -r, with bana.. value is : "+addStr);
+                    if (optionsInvoked[3]==true){break;}
+                    optionsInvoked[3]=true;
+                    numberOfRegisters = Integer.parseInt(addStr);
                     break;
                 case "-d":
-                    System.out.println("active the debug info ");
+                    if (optionsInvoked[4]==false){debug=1;}
+                    if (debug == 3){break;}
+                    debug++;
                     break;
-                case "-P":  //use the addStr to determinate the name of file 
-                    if (checkTable[4]==true){
-                        System.out.println("quit this turn");  //delete after .....................................
-                        break;
-                    }
-                    checkTable[4]=true;
-                    System.out.println("comiler plusieur fichiers dans le même temps");
+                case "-P":   
+                    if (optionsInvoked[5]==true){break;}
+                    optionsInvoked[5]=true;
                     parallel = true;
                     break;
+                case "-w":   
+                    if (optionsInvoked[6]==true){break;}
+                    optionsInvoked[6]=true;
+                    //A FAIRE Affichage de warning de compilation voir poly
+                    break;
             }
 
-        }else //pool doesnt contain , so either file.deca or invalide 
-        {
+        }
+        else  {
+            //Si l'argument donnee n'est pas une option on verifie s'il s'agit d'un fichier 
+            //Sinon on jete une exception
             StringBuilder sbFileName = new StringBuilder(option);
             if (sbFileName.substring(sbFileName.length()-5).equals(".deca")){
-    //           fileCompilePool.add(sbFileName.toString()); //use for -P 
-                File tempo = new File(sbFileName.toString());
-                sourceFiles.add(tempo);
-
-            }else{
-                try {
-                    throw new IllegalArgumentException();
-                } catch (IllegalArgumentException e) {
-                    System.out.println("\n[Please Retry]\n[Fault Detected!!] "+option+"is not an available option");
-                    System.exit(1);  //or return ???
-                }
+                sourceFiles.add(new File(sbFileName.toString()));
+            }
+            else{
+                throw new CLIException("[Please Retry]\n[Fault Detected!] Didn't not understand the following paramater: " + option);
             }
         }
-
-
     }
 
-    //-b
-    private void bannerOption(){
-        System.out.println("Deca 1.0 Compiler\n\n@author gl15\n\nCopyright 2023- Free Software Foundation, Ensimag");
-    } 
-
-    private void setUpOptions(){
-        optionPool.add("-b");
-        optionPool.add("-p");
-        optionPool.add("-v");
-        optionPool.add("-n");
-        optionPool.add("-r");  //-r X
-        optionPool.add("-d");
-        optionPool.add("-P");
-        optionPool.add("-w");
-    }
-//    private void compilerFichier(){
-//        /*y compris le cas "plusieur fichier compilé et un seul" */
-//        
-//        //for "-P"
-//        if (plusieurFileCompile){
-//            //ajouter la fonctionalité de compilation apres le "->"  (peut etre une fonction de compilateur qui prend le paramètre comme le nom de fichier compilé, ici est singleFile (fichier compiler))
-//            //A FAIRE  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//
-//            fileCompilePool.forEach((singleFile)->System.out.println("Compile "+singleFile));
-//
-//
-//        }else{
-//            // un seul (il y'a pas -P)
-//            try {
-//                if (fileCompilePool.size()>1){
-//                    throw new IllegalArgumentException();
-//                }
-//            } catch (IllegalArgumentException e) {
-//                System.out.println("\n[Please Retry]\n[Fault Detected!!] multiple file, use '-P' ");
-//                System.exit(1);  //or return ???
-//            }
-//            if (fileCompilePool.size()==1){
-//                Iterator<String> itr = fileCompilePool.iterator();
-//                String fileCompile = itr.next();
-//                System.out.println("A FAire !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   compiler un seul fichier");
-//                //A FAire !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   compiler un seul fichier 
-//            }
-//        }
-//
-//    }
     
     public void parseArgs(String[] args) throws CLIException, NumberFormatException {
         // A FAIRE : parcourir args pour positionner les options correctement.
         //when the argument space is empty
-        if (args.length==0){
-            System.out.println("The available options:\n-b\t: affiche une bannière dont le nom de l'équipe\n"+
-            "-p\t: arrête decac après l'étape de construction del'arbre, et affiche la décompilation de ce dernier\n"+
-            "-v\t: arrête decac après l'étape de vérifications\n"+
-            "-n\t: supprime les tests à l'exécution spécifiés dans les points 11.1 et 11.3 de la sémantique de Deca.\n"+
-            "-r X\t: limite les registres banalisés disponibles à R0 ... R{X-1}, avec 4 <= X <= 16\n"+
-            "-d\t: active les traces de debug. Répéter l'option plusieurs fois pour avoir plus de traces.\n"+
-            "-P\t: s'il y a plusieurs fichiers sources, lance la compilation des fichiers en parallèle (pour accélérer la compilation)\n"+
-            " \nusage :'decac [[-p | -v] [-n] [-r X] [-d]* [-P] [-w] <fichier deca>...] | [-b]' ");
-        }
+        if (args.length==0){throw new CLIException("[Please Retry]\n[Fault Detected!!] Please provide arguments ");    }
+        //On initialize les structures de donnees qu'on va utiliser
         setUpOptions();
-        //a boolean table for eliminating the case duplication ex: decac -r 6 -r -5  : is not acceptable, so neglige the second one 
+        initialiseInvokedTable();
         int len = args.length;
         if (args.length==1&&args[0].equals("-b")){
             printBanner=true;
-            bannerOption();
         }
-
         else{
             for (int i=0;i<len; ++i){
-
                 if (args[i].equals("-b")){
-                    try{
-                        throw new IllegalArgumentException();
-                    }catch (IllegalArgumentException e){
-                        System.out.println("\n[Please Retry]\n[Fault Detected!!] Can't use '-b' with multiples arguments");
-                        System.exit(1);  //or return ???
-                    }
+                        throw new CLIException("[Please Retry]\n[Fault Detected!!] Can't use '-b' with multiples arguments");
                 }             
                 else{
                     if (args[i].equals("-r")){
                         //try catch pour traiter le cas : apres "-r", X est pas une value 
                         try {
-                            if (i+1==len||(Integer.parseInt(args[i+1])<=4&&Integer.parseInt(args[i+1])>=16)){
-                                try {
-                                    throw new IllegalArgumentException();
-                                    
-                                } catch (IllegalArgumentException e) {
-                                    System.out.println("\n[Please Retry]\n[Fault Detected!!] Must have a banalise register value with the range '4<=X<=16' after '-r'");
-                                    System.exit(1);  //or return ???
-                                }
+                            if (i+1==len||(Integer.parseInt(args[i+1])<=4 || Integer.parseInt(args[i+1])>=16)){
+                                throw new NumberFormatException("[Please Retry]\n[Fault Detected!!] Must have a banalise register value with the range '4<=X<=16' after '-r'");
                             }
-                        } catch (NumberFormatException e) {
+                        } catch (NumberFormatException e) { 
                             if (optionPool.contains(args[i+1])){
-                                //la condition ici pour dire user faut ajouter une bonne valeur apres le -r et  avant la option prochaine
-                                System.out.println("\n[Please Retry]\n[Fault Detected!!] Must have a banalise register VALUE with the range '4<=X<=16' after '-r'");
-                                System.exit(1);  //or return ???
+                                throw new CLIException("[Please Retry]\n[Fault Detected!!] The X after '-r' must with the range '4<=X<=16' VALUE ! ");
                             }
-                            else  //ici exception pour les cas user a entré n'importe quoi apres le -r 
-                                System.out.println("\n[Please Retry]\n[Fault Detected!!] The X after '-r' must with the range '4<=X<=16' VALUE ! ");
-                                
                         }
-                        switchOptionCase(args[i], args[i+1]);
+                        switchOptionCase(args[i], args[i+1]); //we extract the number of registers from args[i+1] 
                         i++;
                         continue;
                     }
-                    switchOptionCase(args[i], "-1");  //normal case
-
+                    switchOptionCase(args[i], "-1");  
                 }
 
-            }  //fin "for"
-        } //fin "else"
-
-        //rependre les options (fonctionalité)
-  //      compilerFichier(); 
-
+            }  
+        } 
 
     	
         Logger logger = Logger.getRootLogger();
@@ -292,11 +230,16 @@ public class CompilerOptions {
         } else {
             logger.info("Java assertions disabled");
         }
-
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     protected void displayUsage() {
-        throw new UnsupportedOperationException("not yet implemented");
+        System.out.println("The available options:\n-b\t: affiche une bannière dont le nom de l'équipe\n"+
+        "-p\t: arrête decac après l'étape de construction del'arbre, et affiche la décompilation de ce dernier\n"+
+        "-v\t: arrête decac après l'étape de vérifications\n"+
+        "-n\t: supprime les tests à l'exécution spécifiés dans les points 11.1 et 11.3 de la sémantique de Deca.\n"+
+        "-r X\t: limite les registres banalisés disponibles à R0 ... R{X-1}, avec 4 <= X <= 16\n"+
+        "-d\t: active les traces de debug. Répéter l'option plusieurs fois pour avoir plus de traces.\n"+
+        "-P\t: s'il y a plusieurs fichiers sources, lance la compilation des fichiers en parallèle (pour accélérer la compilation)\n"+
+        " \nusage :'decac [[-p | -v] [-n] [-r X] [-d]* [-P] [-w] <fichier deca>...] | [-b]' ");
     }
 }

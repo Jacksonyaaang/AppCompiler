@@ -39,6 +39,7 @@ import org.apache.log4j.Logger;
 public class DecacCompiler {
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
     
+
     /**
      * Portable newline character.
      */
@@ -188,10 +189,17 @@ public class DecacCompiler {
             return true;
         }
         assert(prog.checkAllLocations());
-
+        if (compilerOptions.isDecompile()){
+            prog.decompile();
+            return false;
+        }
 
         prog.verifyProgram(this);
         assert(prog.checkAllDecorations());
+
+        if (compilerOptions.isVerfiryAndStop()){
+            return false;
+        }
 
         addComment("start main program");
         prog.codeGenProgram(this);
