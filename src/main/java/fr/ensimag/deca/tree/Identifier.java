@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.TypeDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
@@ -176,7 +177,12 @@ public class Identifier extends AbstractIdentifier {
      */
     @Override
     public Type verifyType(DecacCompiler compiler) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        //verifions que le type de definition n'est pas null
+        TypeDefinition typeDefi = compiler.environmentType.defOfType(name);
+        if (typeDefi == null){
+        throw new ContextualError("le type de l'ident n'est pas defini", getLocation());
+        }return typeDefi.getType();
+        //throw new UnsupportedOperationException("not yet implemented");
     }
     
     
