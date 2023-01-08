@@ -19,11 +19,11 @@ public class ListExpr extends TreeList<AbstractExpr> {
     @Override
     public void decompile(IndentPrintStream s) {
         AbstractExpr e1 = getList().get(0);
-        e1.decompile();
+        e1.decompile(s);
         for( int i = 1; i<getList().size(); i++){
             s.print(",");
             AbstractExpr e = getList().get(i);
-            e.decompile();
+            e.decompile(s);
         }
     }
 }

@@ -42,25 +42,19 @@ public class IfThenElse extends AbstractInst {
         throw new UnsupportedOperationException("not yet implemented");
     }
 
-    public AbstractExpr getCondition() { return condition; }
-
-    public ListInst getThenBranch() { return thenBranch; }
-
-    public ListInst getElseBranch() { return elseBranch; }
-
-
     @Override
     public void decompile(IndentPrintStream s) {
     s.print("if (");
     getCondition().decompile(s);
 
-    s.println(") {");
+    s.println("){");
 
     s.indent();
     getThenBranch().decompile(s);
     s.unindent();
 
-    s.println("} else {");
+    s.println("}");
+    s.println("else {");
 
     s.indent();
     getElseBranch().decompile(s);
@@ -83,6 +77,10 @@ public class IfThenElse extends AbstractInst {
         thenBranch.prettyPrint(s, prefix, false);
         elseBranch.prettyPrint(s, prefix, true);
     }
+
+    public AbstractExpr getCondition() { return condition; }
+
+    public ListInst getThenBranch() { return thenBranch; }
 
     public ListInst getElseBranch() {
         return elseBranch;
