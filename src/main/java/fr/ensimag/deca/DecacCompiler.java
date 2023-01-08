@@ -22,7 +22,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
 
 /**
- * Decac compiler instance.
+ * Decac compiler instance.Symbol
  *
  * This class is to be instantiated once per source file to be compiled. It
  * contains the meta-data used for compiling (source file name, compilation
@@ -39,6 +39,7 @@ import org.apache.log4j.Logger;
 public class DecacCompiler {
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
     
+
     /**
      * Portable newline character.
      */
@@ -122,12 +123,11 @@ public class DecacCompiler {
  
 
     /** The global environment for types (and the symbolTable) */
-    public final EnvironmentType environmentType = new EnvironmentType(this);
     public final SymbolTable symbolTable = new SymbolTable();
+    public final EnvironmentType environmentType = new EnvironmentType(this);
 
     public Symbol createSymbol(String name) {
-        return null; // A FAIRE: remplacer par la ligne en commentaire ci-dessous
-        // return symbolTable.create(name);
+        return symbolTable.create(name);
     }
 
     /**
@@ -189,10 +189,17 @@ public class DecacCompiler {
             return true;
         }
         assert(prog.checkAllLocations());
-
+        if (compilerOptions.isDecompile()){
+            prog.decompile();
+            return false;
+        }
 
         prog.verifyProgram(this);
         assert(prog.checkAllDecorations());
+
+        if (compilerOptions.isVerfiryAndStop()){
+            return false;
+        }
 
         addComment("start main program");
         prog.codeGenProgram(this);
