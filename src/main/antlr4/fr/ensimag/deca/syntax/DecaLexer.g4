@@ -11,6 +11,10 @@ options {
 @members {
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> develop
 OBRACE : '{';
 CBRACE : '}';
 OPARENT : '(';
@@ -100,6 +104,9 @@ INCLUDE : '#include' (' ')* '"' FILENAME '"';
 //    |'\t'
 //    |'\n'
 //    |'\r'
+<<<<<<< HEAD
+//    )+ ->skip;
+=======
 //    )+ {skip();};
 
 COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  ->skip;
@@ -110,3 +117,4 @@ WS : (' '
    |'\r'
    )+ ->skip;
    
+>>>>>>> develop
