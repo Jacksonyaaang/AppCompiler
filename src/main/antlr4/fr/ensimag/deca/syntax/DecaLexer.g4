@@ -12,6 +12,9 @@ options {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> develop
 OBRACE : '{';
 CBRACE : '}';
 OPARENT : '(';
@@ -71,7 +74,7 @@ fragment SIGN : '+' | '-' | ;
 fragment NUM : DIGIT+;
 fragment EXP : ('E' | 'e') SIGN NUM;
 fragment DEC : NUM '.' NUM;
-fragment FLOATDEC : (DEC + DEC EXP) ('F' | 'f' | ); 
+fragment FLOATDEC : (DEC | DEC EXP) ('F' | 'f' | ); 
 fragment DIGITHEX : '0'..'9' | 'A'..'F'|'a'..'f';
 fragment NUMHEX : DIGITHEX+;
 fragment FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 'f' |  ); 
@@ -95,18 +98,23 @@ INCLUDE : '#include' (' ')* '"' FILENAME '"';
 // Utiliser la méthode doInclude de AbstractDecaLexer.java.
 
 
-COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  {skip();};
-COMMENTAIREMULTILIGNE : '/*' .*? '*/'  {skip();};
-WS : (' '
-   |'\t'
-   |'\n'
-   |'\r'
-   )+ {skip();};
-
-// COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  ->skip;
-// COMMENTAIREMULTILIGNE : '/*' .*? '*/'  ->skip;
+// COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  {skip();};
+// COMMENTAIREMULTILIGNE : '/*' .*? '*/'  {skip();};
 // WS : (' '
 //    |'\t'
 //    |'\n'
 //    |'\r'
+<<<<<<< HEAD
 //    )+ ->skip;
+=======
+//    )+ {skip();};
+
+COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  ->skip;
+COMMENTAIREMULTILIGNE : '/*' .*? '*/'  ->skip;
+WS : (' '
+   |'\t'
+   |'\n'
+   |'\r'
+   )+ ->skip;
+   
+>>>>>>> develop

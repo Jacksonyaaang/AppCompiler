@@ -1,10 +1,13 @@
 package fr.ensimag.deca;
 
 import java.io.File;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 
 public class MultiThread implements Runnable{
 
-    private CompilerOptions compiler;
+    private CompilerOptions compilerOptions;
     private File fichier;
     private boolean error=false;
     
@@ -14,15 +17,17 @@ public class MultiThread implements Runnable{
     }
 
 
-    public MultiThread(CompilerOptions compiler, File fichier) {
-        this.compiler = compiler;
+    public MultiThread(CompilerOptions compilerOptions, File fichier) {
+        this.compilerOptions = compilerOptions;
         this.fichier = fichier;
     }
 
 
     @Override
     public void run() {
-        DecacCompiler com = new DecacCompiler(compiler, fichier);
+        Logger logger = Logger.getRootLogger();
+        logger.info("Starting thread to compile " + compilerOptions.getSourceFiles().get(0));
+        DecacCompiler com = new DecacCompiler(compilerOptions, fichier);
         if (com.compile()) {
             error = true;
         }
