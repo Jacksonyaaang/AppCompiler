@@ -42,7 +42,7 @@ public abstract class AbstractPrint extends AbstractInst {
                 for (AbstractExpr expr : arguments.getList()) {
                     expr.verifyExpr(compiler, localEnv, currentClass);
                 }
-        throw new UnsupportedOperationException("not yet implemented");
+        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override

@@ -34,6 +34,7 @@ public class Main extends AbstractMain {
         // Vous avez le droit de changer le profil fourni pour ces méthodes
         // (mais ce n'est à priori pas nécessaire).
         LOG.debug("verify Main: end");
+        //declVariables.verifyListDeclVariable(compiler, null, null);
         insts.verifyListInst(compiler, new EnvironmentExp(null), null, null);
         //throw new UnsupportedOperationException("not yet implemented");
     }
