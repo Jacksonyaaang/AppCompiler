@@ -2,6 +2,7 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
@@ -33,6 +34,7 @@ public class Main extends AbstractMain {
         // Vous avez le droit de changer le profil fourni pour ces méthodes
         // (mais ce n'est à priori pas nécessaire).
         LOG.debug("verify Main: end");
+        insts.verifyListInst(compiler, new EnvironmentExp(null), null, null);
         //throw new UnsupportedOperationException("not yet implemented");
     }
 
