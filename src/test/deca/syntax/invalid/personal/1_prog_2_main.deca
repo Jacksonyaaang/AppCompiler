@@ -1,0 +1,14 @@
+// Description:
+//    tests de non-terminal 'prog' qui ne peut pas procède deux main.
+//
+// Resultats:
+//    Ligne 15 : Erreur de syntaxe.
+//
+// Historique:
+//    cree le 01/01/2023
+
+// Un exemple de programme Deca
+{
+}
+{
+}

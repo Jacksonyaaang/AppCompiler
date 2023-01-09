@@ -11,10 +11,6 @@ options {
 @members {
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> develop
 OBRACE : '{';
 CBRACE : '}';
 OPARENT : '(';
@@ -104,17 +100,23 @@ INCLUDE : '#include' (' ')* '"' FILENAME '"';
 //    |'\t'
 //    |'\n'
 //    |'\r'
-<<<<<<< HEAD
 //    )+ ->skip;
-=======
 //    )+ {skip();};
 
-COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  ->skip;
-COMMENTAIREMULTILIGNE : '/*' .*? '*/'  ->skip;
+COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  {skip();};
+COMMENTAIREMULTILIGNE : '/*' .*? '*/'  {skip();};
 WS : (' '
    |'\t'
    |'\n'
    |'\r'
-   )+ ->skip;
-   
->>>>>>> develop
+   )+ {skip();};
+
+
+// COMMENTAIRESURUNELIGNE : '//' ~[\n\r]* '\n'  ->skip;
+// COMMENTAIREMULTILIGNE : '/*' .*? '*/'  ->skip;
+// WS : (' '
+//    |'\t'
+//    |'\n'
+//    |'\r'
+//    )+ ->skip;
+

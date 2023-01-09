@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
  */
 public class DecacMain {
     private static Logger LOG = Logger.getLogger(DecacMain.class);
-    
+
     public static void main(String[] args) {
         // example log4j message.
         LOG.info("Decac compiler started");
@@ -27,11 +27,12 @@ public class DecacMain {
         }
         if (options.getPrintBanner()) {
             System.out.println("Deca 1.0 Compiler\n\n@author gl15\n\nCopyright 2023- Free Software Foundation, Ensimag");
-            error = true;
+            System.exit(0);
         }
         if (options.getSourceFiles().isEmpty()) {
             System.out.println("Please place the files you want to compile in the arguments of the program");
-            error = true;
+            options.displayUsage();
+            System.exit(0);
         }
         if (options.getParallel()) {
             for (int i=0;i<options.getSourceFiles().size(); ++i){

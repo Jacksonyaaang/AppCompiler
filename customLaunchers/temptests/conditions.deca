@@ -1,11 +1,11 @@
 // Description:
-//    Programme minimaliste utilisant println.
+//    Programme minimaliste qui test la partie A du language sans object.
 //
 // Resultats:
-//    Hello
+//    Programme syntaxiquement correct
 //
 // Historique:
-//    cree le 04/01/2023
+//    cree le 08/01/2023
 
 {
     if (i == 5){

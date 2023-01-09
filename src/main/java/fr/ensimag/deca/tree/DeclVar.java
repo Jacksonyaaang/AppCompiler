@@ -35,10 +35,22 @@ public class DeclVar extends AbstractDeclVar {
             throws ContextualError {
     }
 
-    
+
+
+    public AbstractIdentifier getType() { return type; }
+
+    public AbstractIdentifier getVarName() { return varName; }
+
+    public AbstractInitialization getInitialization() { return initialization; }
+
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("not yet implemented");
+        getType().decompile(s);
+        s.print(" ");
+        getVarName().decompile(s);
+        getInitialization().decompile(s);
+        s.print(";");
+
     }
 
     @Override

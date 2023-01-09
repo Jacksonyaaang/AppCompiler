@@ -19,8 +19,6 @@ public class Main extends AbstractMain {
     private ListInst insts;
     public Main(ListDeclVar declVariables,
             ListInst insts) {
-        System.out.println(declVariables);
-        System.out.println(insts);
         Validate.notNull(declVariables);
         Validate.notNull(insts);
         this.declVariables = declVariables;
@@ -33,9 +31,8 @@ public class Main extends AbstractMain {
         // A FAIRE: Appeler méthodes "verify*" de ListDeclVarSet et ListInst.
         // Vous avez le droit de changer le profil fourni pour ces méthodes
         // (mais ce n'est à priori pas nécessaire).
-        LOG.debug("verify Main: end");
-        //declVariables.verifyListDeclVariable(compiler, null, null);
         insts.verifyListInst(compiler, new EnvironmentExp(null), null, null);
+        LOG.debug("verify Main: end");
         //throw new UnsupportedOperationException("not yet implemented");
     }
 
