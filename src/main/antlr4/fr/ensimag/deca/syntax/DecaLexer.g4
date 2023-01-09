@@ -11,10 +11,6 @@ options {
 @members {
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> develop
 OBRACE : '{';
 CBRACE : '}';
 OPARENT : '(';
@@ -114,4 +110,3 @@ WS : (' '
 //    |'\r'
 //    )+ ->skip;
    
->>>>>>> develop
