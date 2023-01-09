@@ -1,5 +1,7 @@
 package fr.ensimag.deca.context;
 
+import static org.mockito.ArgumentMatchers.nullable;
+
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
@@ -22,7 +24,9 @@ public class IntType extends Type {
 
     @Override
     public boolean sameType(Type otherType) {
-        throw new UnsupportedOperationException("not yet implemented");
+        if (otherType instanceof IntType) return true;
+        return false;
+        //throw new UnsupportedOperationException("not yet implemented");
     }
 
 

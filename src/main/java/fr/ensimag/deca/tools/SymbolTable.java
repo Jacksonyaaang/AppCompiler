@@ -25,10 +25,18 @@ public class SymbolTable {
      * this Symbol. Otherwise, create a new Symbol and add it to the table.
      */
     public Symbol create(String name) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
         if (!map.keySet().contains(name)){
             map.put(name, new SymbolTable.Symbol(name));
         }
         return map.get(name);
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     }
 
     public static class Symbol {
