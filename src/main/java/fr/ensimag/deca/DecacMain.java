@@ -27,11 +27,20 @@ public class DecacMain {
         }
         if (options.getPrintBanner()) {
             System.out.println("Deca 1.0 Compiler\n\n@author gl15\n\nCopyright 2023- Free Software Foundation, Ensimag");
+<<<<<<< HEAD
             error = true;
         }
         if (options.getSourceFiles().isEmpty()) {
             System.out.println("Please place the files you want to compile in the arguments of the program");
             error = true;
+=======
+            System.exit(0);
+        }
+        if (options.getSourceFiles().isEmpty()) {
+            System.out.println("Please place the files you want to compile in the arguments of the program");
+            options.displayUsage();
+            System.exit(0);
+>>>>>>> master
         }
         if (options.getParallel()) {
             for (int i=0;i<options.getSourceFiles().size(); ++i){

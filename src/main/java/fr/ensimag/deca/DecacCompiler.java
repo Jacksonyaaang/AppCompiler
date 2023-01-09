@@ -4,6 +4,7 @@ import fr.ensimag.deca.context.EnvironmentType;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
+import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.tree.AbstractProgram;
@@ -137,9 +138,10 @@ public class DecacCompiler {
      */
     public boolean compile() {
         String sourceFile = source.getAbsolutePath();
-        String destFile = null;
-        // A FAIRE: calculer le nom du fichier .ass à partir du nom du
-        // A FAIRE: fichier .deca.
+        StringBuilder destination = new StringBuilder();
+        destination.append(sourceFile);
+        destination.replace(sourceFile.length()-4, sourceFile.length(), "ass");
+        String destFile = destination.toString() ;
         PrintStream err = System.err;
         PrintStream out = System.out;
         LOG.debug("Compiling file " + sourceFile + " to assembly file " + destFile);
@@ -190,9 +192,13 @@ public class DecacCompiler {
         }
         assert(prog.checkAllLocations());
         if (compilerOptions.isDecompile()){
-            prog.decompile();
+            prog.decompile(out);
             return false;
+<<<<<<< HEAD
         }
+=======
+        }   
+>>>>>>> master
 
         prog.verifyProgram(this);
         assert(prog.checkAllDecorations());

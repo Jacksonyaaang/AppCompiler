@@ -39,10 +39,9 @@ public abstract class AbstractPrint extends AbstractInst {
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
-                for (AbstractExpr expr : arguments.getList()) {
-                    expr.verifyExpr(compiler, localEnv, currentClass);
-                }
-        throw new UnsupportedOperationException("not yet implemented");
+                for (AbstractExpr expr : arguments.getList()){
+                        expr.verifyExpr(compiler, localEnv, currentClass);
+                    }
     }
 
     @Override
@@ -56,9 +55,16 @@ public abstract class AbstractPrint extends AbstractInst {
         return printHex;
     }
 
+    protected abstract String getPrintName();
+
+    protected abstract String getPrintxName();
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("not yet implemented");
+        if(getPrintHex()){s.print(getPrintxName());}
+        else{s.print(getPrintName());}
+        s.print("(");
+        getArguments().decompile(s);
+        s.print(");");
     }
 
     @Override
