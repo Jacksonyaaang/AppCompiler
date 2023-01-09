@@ -1,0 +1,14 @@
+// Description:
+//    tests de non-terminal 'list_decl_var' qui manque ',' entre 2 variables.
+//
+// Resultats:
+//    Ligne 10 : Erreur de syntaxe.
+//
+// Historique:
+//    cree le 01/01/2023
+
+// Un exemple de programme Deca
+{
+    int a=0 b=0;
+
+}

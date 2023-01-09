@@ -191,7 +191,7 @@ public class DecacCompiler {
             return true;
         }
         assert(prog.checkAllLocations());
-        if (compilerOptions.isDecompile()){
+        if (compilerOptions.isDecompile()) {
             prog.decompile(out);
             return false;
         }   
