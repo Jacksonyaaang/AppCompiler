@@ -38,5 +38,4 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         }
         return compiler.environmentType.INT;
     }
-
 }
