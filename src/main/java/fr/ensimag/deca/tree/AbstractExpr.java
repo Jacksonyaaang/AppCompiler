@@ -82,6 +82,7 @@ public abstract class AbstractExpr extends AbstractInst {
             EnvironmentExp localEnv, ClassDefinition currentClass, 
             Type expectedType)
             throws ContextualError {
+        System.out.println("On est dans AbstractExpr.java");
         try{
             Type t = verifyExpr(compiler, localEnv, currentClass);
             if(!(expectedType.isFloat() && t.isInt()) || !expectedType.sameType(t)){
@@ -98,6 +99,7 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
+        System.out.println("On est dans AbstractExpr.java");
             verifyExpr(compiler, localEnv, currentClass);
         //throw new UnsupportedOperationException("not yet implemented");
     }

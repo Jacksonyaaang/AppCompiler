@@ -21,6 +21,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
+        System.out.println("On est dans AbstractOpArith.java");
         if(!getLeftOperand().getType().isFloat() || !getLeftOperand().getType().isInt() ||
                 !getRightOperand().getType().isFloat() || !getRightOperand().getType().isInt()){
             throw new ContextualError("Incompatible pour les opérations arithmétiques",getLocation());

@@ -18,6 +18,7 @@ public class ReadInt extends AbstractReadExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
         ClassDefinition currentClass) throws ContextualError {
+        System.out.println("On est dans ReadInt.java");
         setType(compiler.environmentType.INT);
         return getType();  
         //throw new UnsupportedOperationException("not yet implemented");

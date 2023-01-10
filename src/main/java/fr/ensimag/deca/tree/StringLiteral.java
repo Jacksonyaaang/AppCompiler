@@ -34,6 +34,7 @@ public class StringLiteral extends AbstractStringLiteral {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
+            System.out.println("On est dans StringLiteral.java");
                 this.setType(compiler.environmentType.STRING);
                 return getType();
                 //A FAIRE correctement

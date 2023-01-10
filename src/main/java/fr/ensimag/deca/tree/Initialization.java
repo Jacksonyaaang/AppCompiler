@@ -35,6 +35,7 @@ public class Initialization extends AbstractInitialization {
     protected void verifyInitialization(DecacCompiler compiler, Type t,
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
+        System.out.println("On est dans Initialization.java");
         try {
             expression.verifyRValue(compiler, localEnv, currentClass, t);
         } catch (ContextualError e){

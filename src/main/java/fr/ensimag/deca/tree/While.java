@@ -43,6 +43,7 @@ public class While extends AbstractInst {
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
+            System.out.println("On est dans While.java");
             condition.verifyCondition(compiler, localEnv, currentClass);
             body.verifyListInst(compiler, localEnv, currentClass, returnType);
     }
