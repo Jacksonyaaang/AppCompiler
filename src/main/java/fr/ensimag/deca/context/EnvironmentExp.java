@@ -65,7 +65,12 @@ public class EnvironmentExp {
      */
     public void declare(Symbol name, ExpDefinition def) throws DoubleDefException {
         if (!envExp.containsKey(name)) envExp.put(name, def);
+        else {throw new DoubleDefException();}
         //throw new UnsupportedOperationException("not yet implemented");
+    }
+
+    public Map<Symbol, ExpDefinition> getExp(){
+        return envExp;
     }
 
 }

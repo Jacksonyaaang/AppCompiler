@@ -82,7 +82,15 @@ public abstract class AbstractExpr extends AbstractInst {
             EnvironmentExp localEnv, ClassDefinition currentClass, 
             Type expectedType)
             throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        try{
+            Type t = verifyExpr(compiler, localEnv, currentClass);
+            if(!(expectedType.isFloat() && t.isInt()) || !expectedType.sameType(t)){
+                throw new ContextualError("Not exepected type", getLocation());
+            }
+        } catch (ContextualError e){
+            e.fillInStackTrace();
+        }
+        return this;
     }
     
     

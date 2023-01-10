@@ -1,10 +1,7 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
@@ -31,8 +28,24 @@ public class DeclVar extends AbstractDeclVar {
 
     @Override
     protected void verifyDeclVar(DecacCompiler compiler,
-            EnvironmentExp localEnv, ClassDefinition currentClass)
-            throws ContextualError {
+        EnvironmentExp localEnv, ClassDefinition currentClass)
+        throws ContextualError {
+        try{
+            Type t = type.verifyType(compiler);
+            if(t.isVoid()) {
+                throw new ContextualError("Le type ne peut pas être void", getLocation());
+            }
+            if(!localEnv.getExp().containsKey(varName.getName())){
+                varName.setDefinition(type.getDefinition());
+                localEnv.declare(varName.getName(), new VariableDefinition(type.getType(), type.getLocation()));
+            }
+            initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
+        }catch (ContextualError e){
+            e.fillInStackTrace();
+        }catch (EnvironmentExp.DoubleDefException e){
+            e.fillInStackTrace();
+        }
+
     }
 
 
