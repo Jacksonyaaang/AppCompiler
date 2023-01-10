@@ -170,9 +170,12 @@ public class Identifier extends AbstractIdentifier {
             ClassDefinition currentClass) throws ContextualError {
         System.out.println("On est dans Identifier.java");
         if(!localEnv.getExp().containsKey(getName())){
-            throw new ContextualError("L'identificateur n'est pas défini",getLocation());
+            //throw new ContextualError("L'identificateur n'est pas défini",getLocation());
         }
-        setType(compiler.environmentType.defOfType(name).getType());
+        System.out.println(name.getName());
+       if (localEnv.getExp().get(name) == null)
+           System.out.println("Oups def");
+        setType(localEnv.getExp().get(name).getType());
         return getType();
     }
 

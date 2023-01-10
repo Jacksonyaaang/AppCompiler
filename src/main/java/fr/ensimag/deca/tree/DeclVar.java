@@ -35,10 +35,12 @@ public class DeclVar extends AbstractDeclVar {
             if(t.isVoid()) {
                 throw new ContextualError("Le type ne peut pas être void", getLocation());
             }
-            if(!localEnv.getExp().containsKey(varName.getName())){
+            //if(!localEnv.getExp().containsKey(varName.getName())){
                 varName.setDefinition(type.getDefinition());
                 localEnv.declare(varName.getName(), new VariableDefinition(type.getType(), type.getLocation()));
-            }
+                System.out.println("j'ai mis la expDefinition dans EnvExp");
+                System.out.println("**************************************");
+            //}
             initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
         }catch (ContextualError e){
             e.fillInStackTrace();

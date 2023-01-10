@@ -83,14 +83,14 @@ public abstract class AbstractExpr extends AbstractInst {
             Type expectedType)
             throws ContextualError {
         System.out.println("On est dans AbstractExpr.java");
-        try{
-            Type t = verifyExpr(compiler, localEnv, currentClass);
-            if(!(expectedType.isFloat() && t.isInt()) || !expectedType.sameType(t)){
-                throw new ContextualError("Not exepected type", getLocation());
-            }
-        } catch (ContextualError e){
-            e.fillInStackTrace();
-        }
+//        try{
+//            Type t = verifyExpr(compiler, localEnv, currentClass);
+//            if(!(expectedType.isFloat() && t.isInt()) || !expectedType.sameType(t)){
+//                throw new ContextualError("Not exepected type", getLocation());
+//            }
+//        } catch (ContextualError e){
+//            e.fillInStackTrace();
+//        }
         return this;
     }
     
