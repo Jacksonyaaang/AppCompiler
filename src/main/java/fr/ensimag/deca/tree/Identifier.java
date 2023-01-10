@@ -172,8 +172,8 @@ public class Identifier extends AbstractIdentifier {
         if(!localEnv.getExp().containsKey(getName())){
             throw new ContextualError("L'identificateur n'est pas défini",getLocation());
         }
-        setType(compiler.environmentType.defOfType(name).getType());
-        return getType();
+        //setType(compiler.environmentType.defOfType(name).getType());
+        return localEnv.get(name).getType();
     }
 
     /**
@@ -187,7 +187,8 @@ public class Identifier extends AbstractIdentifier {
         TypeDefinition typeDefi = compiler.environmentType.defOfType(name);
         if (typeDefi == null){
         throw new ContextualError("le type de l'ident n'est pas defini", getLocation());
-        }return typeDefi.getType();
+        }setDefinition(typeDefi);
+        return getDefinition().getType();
         //throw new UnsupportedOperationException("not yet implemented");
     }
     

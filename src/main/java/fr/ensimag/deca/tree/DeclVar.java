@@ -32,18 +32,18 @@ public class DeclVar extends AbstractDeclVar {
         throws ContextualError {
         try{
             Type t = type.verifyType(compiler);
+            type.setType(t);
             if(t.isVoid()) {
                 throw new ContextualError("Le type ne peut pas être void", getLocation());
             }
-            if(!localEnv.getExp().containsKey(varName.getName())){
-                varName.setDefinition(type.getDefinition());
-                localEnv.declare(varName.getName(), new VariableDefinition(type.getType(), type.getLocation()));
-            }
             initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
+            VariableDefinition VDf = new VariableDefinition(type.getType(), varName.getLocation());
+            varName.setDefinition(VDf);
+            localEnv.declare(varName.getName(), varName.getExpDefinition());
         }catch (ContextualError e){
             e.fillInStackTrace();
         }catch (EnvironmentExp.DoubleDefException e){
-            e.fillInStackTrace();
+            throw new ContextualError("double declaration", varName.getLocation());
         }
 
     }
