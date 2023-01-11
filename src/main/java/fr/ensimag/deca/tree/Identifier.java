@@ -51,14 +51,14 @@ public class Identifier extends AbstractIdentifier {
     
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{   
-        //this.setRegisterDeRetour(this.LoadGencode(compiler));
+        this.setRegisterDeRetour(this.LoadGencode(compiler));
     }
 
     @Override
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
         assert( reg != null);
-        //compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), reg),
-         //                            "loading "+getName()+ " into memory");
+        compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), reg),
+                                    "loading "+getName()+ " into memory");
     }
 
 

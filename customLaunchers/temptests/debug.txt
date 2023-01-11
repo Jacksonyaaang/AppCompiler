@@ -1,0 +1,126 @@
+[AbstractBinaryExpr][codeGenInst] ---- Start ---- Generating code for abstact binary expression
+-----Start table----
+R0->empty 
+R1->empty 
+R2->empty 
+R3->empty 
+-----End table----
+[AbstractBinaryExpr][codeGenInst] Exploring Left
+Left register null
+[AbstractBinaryExpr][codeGenInst] Exploring Right
+[AbstractBinaryExpr][codeGenInst] ---- Start ---- Generating code for abstact binary expression
+-----Start table----
+R0->empty 
+R1->empty 
+R2->empty 
+R3->empty 
+-----End table----
+[AbstractBinaryExpr][codeGenInst] Exploring Left
+[AbstractBinaryExpr][codeGenInst] ---- Start ---- Generating code for abstact binary expression
+-----Start table----
+R0->empty 
+R1->empty 
+R2->empty 
+R3->empty 
+-----End table----
+[AbstractBinaryExpr][codeGenInst] Exploring Left
+[IntLiteral][codeGenInst] generating code for int literal value 1
+-----Start table----
+R0->empty 
+R1->empty 
+R2->empty 
+R3->empty 
+-----End table----
+[Abstractexpr][[LoadGencode]  Reserving an non empty register with the name R2
+[IntLiteral][loadItemintoRegister] loading 1 into memory at register R2
+Left register R2
+[AbstractBinaryExpr][codeGenInst] Exploring Right
+[AbstractBinaryExpr][codeGenInst] ---- Start ---- Generating code for abstact binary expression
+-----Start table----
+R0->empty 
+R1->empty 
+R2->Taken 
+R3->empty 
+-----End table----
+[AbstractBinaryExpr][codeGenInst] Exploring Left
+[IntLiteral][codeGenInst] generating code for int literal value 2
+-----Start table----
+R0->empty 
+R1->empty 
+R2->Taken 
+R3->empty 
+-----End table----
+[Abstractexpr][[LoadGencode]  Reserving an non empty register with the name R3
+[IntLiteral][loadItemintoRegister] loading 2 into memory at register R3
+Left register R3
+[AbstractBinaryExpr][codeGenInst] Exploring Right
+[AbstractBinaryExpr][codeGenInst] ---- Start ---- Generating code for abstact binary expression
+-----Start table----
+R0->empty 
+R1->empty 
+R2->Taken 
+R3->Taken 
+-----End table----
+[AbstractBinaryExpr][codeGenInst] Exploring Left
+[IntLiteral][codeGenInst] generating code for int literal value 3
+-----Start table----
+R0->empty 
+R1->empty 
+R2->Taken 
+R3->Taken 
+-----End table----
+[Abstractexpr][LoadGencode]  Reserving an used register with the name R2
+[IntLiteral][loadItemintoRegister] loading 3 into memory at register R2
+Left register R2
+[AbstractBinaryExpr][codeGenInst] Exploring Right
+[AbstractBinaryExpr][codeGenInst] ---- Start ---- Generating code for abstact binary expression
+-----Start table----
+R0->empty 
+R1->empty 
+R2->Taken 
+R3->Taken 
+-----End table----
+[AbstractBinaryExpr][codeGenInst] Exploring Left
+[IntLiteral][codeGenInst] generating code for int literal value 4
+-----Start table----
+R0->empty 
+R1->empty 
+R2->Taken 
+R3->Taken 
+-----End table----
+[Abstractexpr][LoadGencode]  Reserving an used register with the name R2
+[IntLiteral][loadItemintoRegister] loading 4 into memory at register R2
+Left register R2
+[AbstractBinaryExpr][codeGenInst] Exploring Right
+[IntLiteral][codeGenInst] generating code for int literal value 5
+-----Start table----
+R0->empty 
+R1->empty 
+R2->Taken 
+R3->Taken 
+-----End table----
+[Abstractexpr][LoadGencode]  Reserving an used register with the name R2
+[IntLiteral][loadItemintoRegister] loading 5 into memory at register R2
+Right register equal R2
+[AbstractBinaryExpr][codeGenInst] Right, this register is being used twice  R2
+[AbstractBinaryExpr][codeGenInst] Right, size of register stack 1 and the peek register is equal to  R2
+[Multiply][executeBinaryOperation] generating code for multiply between: R2 and R2
+Right register equal R0
+[Multiply][executeBinaryOperation] generating code for multiply between: R0 and R2
+Right register equal R0
+[Multiply][executeBinaryOperation] generating code for multiply between: R0 and R3
+Right register equal R3
+[Multiply][executeBinaryOperation] generating code for multiply between: R3 and R2
+Left register R2
+[AbstractBinaryExpr][codeGenInst] Exploring Right
+[IntLiteral][codeGenInst] generating code for int literal value 6
+-----Start table----
+R0->empty 
+R1->empty 
+R2->empty 
+R3->empty 
+-----End table----
+[Abstractexpr][[LoadGencode]  Reserving an non empty register with the name R2
+[IntLiteral][loadItemintoRegister] loading 6 into memory at register R2
+Right register equal R2
+[AbstractBinaryExpr][codeGenInst] Right, this register is being used twice  R2

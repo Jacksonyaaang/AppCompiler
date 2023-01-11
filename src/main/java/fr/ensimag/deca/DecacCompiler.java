@@ -2,6 +2,7 @@ package fr.ensimag.deca;
 
 import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.codegen.RegisterMangementUnit;
+import fr.ensimag.deca.codegen.StackManagementUnit;
 import fr.ensimag.deca.context.EnvironmentType;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
@@ -58,7 +59,6 @@ public class DecacCompiler {
         this.compilerOptions = compilerOptions;
         this.source = source;
         registerManagement = new RegisterMangementUnit(compilerOptions.getNumberOfRegisters());
-
     }
 
     /**
@@ -140,7 +140,21 @@ public class DecacCompiler {
      */
     private final IMAProgram program = new IMAProgram();
 
+    /**
+     * Cette unité est utilisée pour associer des adresses à des variables,
+     * et elle est aussi utilisée pour calculer le nombre de variable temporaire necessaire pour executer 
+     * les blocs 
+     */
+    public final StackManagementUnit stackManagement = new StackManagementUnit();  
 
+
+    public StackManagementUnit getStackManagement() {
+        return stackManagement;
+    }
+
+    public int incrementGbCompiler() {
+        return stackManagement.incrementGbCounter();
+    }
 
     /**
      * Cette structure de donnée stocke la liste des registeurs dans un ordre temporel
@@ -171,6 +185,8 @@ public class DecacCompiler {
     public Symbol createSymbol(String name) {
         return symbolTable.create(name);
     }
+
+    
 
     /**
      * Run the compiler (parse source file, generate code)

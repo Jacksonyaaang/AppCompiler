@@ -12,18 +12,23 @@ package fr.ensimag.deca.codegen;
 
 public class StackManagementUnit {
     
-    // private int gbCounter = 0;
-    // //Lb counter for every class
-
-    // public Map<Register, Boolean> registerOccupation =  new HashMap<Register, Boolean>();
-
-    // RegisterMangementUnit(int numberOfRegister){
-    //     assertTrue(numberOfRegister <= 16 && numberOfRegister >=4 );
-    //     for (int reg = 0; reg <= numberOfRegister; reg++ ){
-    //         registerOccupation.put(Register.R[reg], false);
-    //     }
-    // }
-
+    //cette valeur est utilisée pour la classe
+    private int gbCounter = 0;
+    private int stacksizeNeeded = 0;
     
-    
+    public int getGbCounter() {
+        return gbCounter;
+    }
+    public int incrementGbCounter() {
+        gbCounter++;
+        return gbCounter;
+    }
+
+    public int getStacksizeNeeded() {
+        return stacksizeNeeded;
+    }
+    public int incrementStacksizeNeeded() {
+        stacksizeNeeded++;
+        return stacksizeNeeded;
+    }
 }

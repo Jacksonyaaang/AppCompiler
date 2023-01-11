@@ -1,17 +1,4 @@
 
-
-class A {
-    int x;
-    B b = new B();
-}
-
-class C {
-    A a;
-}
-class B extends A{
-    int y;
-}
-
 {
     A a = new A();
     int x;

@@ -69,6 +69,7 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         System.out.println(compiler.getRegisterManagement());
         System.out.println("[AbstractBinaryExpr][codeGenInst] Exploring Left");
         LOG.debug("[AbstractBinaryExpr][codeGenInst] Exploring Left");
+
         getLeftOperand().codeGenInst(compiler);
         System.out.println("Left register " + getLeftOperand().getRegisterDeRetour());
         
@@ -84,34 +85,71 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
                         getLeftOperand().getRegisterDeRetour());
             }
             else{
-                //Si jamais les registres sont les même, cela veux dire que un registre est dans le stack et l'autre est utilisée
+                throw new CodeGenError("Should never have equal registers with the new approch; this must never be called");
+
+                    //Si jamais les registres sont les même, cela veux dire que un registre est dans le stack et l'autre est utilisée
                 //Dans ce cas, on fait un pop du registre à droite et on le met dans le registre R0 pour faire le calcule dedans
-                //ensuite on fera un load qur ce qui est dans le registre initial
-                if (getRightOperand().getRegisterToPop().size() != 1) {
-                    throw new CodeGenError("La taille du stack dans l'operand droite doit être égal à 0");
-                }
-                getRightOperand().getRegisterToPop().pop(); //On elimine le variable du stack de l'expression, 
-                                                            //afin de pourvoir réduire le nombre d'operation
-                compiler.addInstruction(new POP(Register.getR(0)), getOperatorName());
-                this.executeBinaryOperation( compiler, getRightOperand().getRegisterDeRetour(),
-                        getLeftOperand().getRegisterDeRetour());
+                // //ensuite on fera un load qur ce qui est dans le registre initial
+                // System.out.println("[AbstractBinaryExpr][codeGenInst] Right, this register is being used twice  " +
+                //                     getLeftOperand().getRegisterDeRetour());
+                // LOG.debug("[AbstractBinaryExpr][codeGenInst] Right, this register is being used twice  " +
+                //                                     getLeftOperand().getRegisterDeRetour());
+
+                // System.out.println("[AbstractBinaryExpr][codeGenInst] Right, size of register stack " +
+                //                     getRightOperand().getRegisterToPop().size() + " and the peek register is equal to  "
+                //                     + getRightOperand().getPeekRegisterToPop());
+                // LOG.debug("[AbstractBinaryExpr][codeGenInst] Right, size of register stack " 
+                //              + getRightOperand().getRegisterToPop().size() + " and the peek register is equal to  "
+                //             + getRightOperand().getPeekRegisterToPop());       
+
+                // if (!(getRightOperand().getRegisterToPop().size() != 1 || getRightOperand().getRegisterToPop().size() != 0)) {
+                //     throw new CodeGenError("La taille du stack dans l'operand droite doit être égal à 1 ou 0 , actual size = " + 
+                //                                     getRightOperand().getRegisterToPop().size() ); 
+                // }import fr.ensimag.ima.pseudocode.RegisterOffset;
+
+                // else if (getRightOperand().getRegisterToPop().size()  == 1){
+                //     if (getRightOperand().getPeekRegisterToPop() != getLeftOperand().getRegisterDeRetour()){
+                //         throw new CodeGenError("Dans le cas ou le Le registre sont égaux, dans le stack du registre à droite "+
+                //         "on doit avoir le registre de droite sinon on ne pas faire le pop" + 
+                //                             getRightOperand().getRegisterDeRetour()); 
+                //     }
+                //     getRightOperand().getRegisterToPop().pop(); 
+                //     compiler.addInstruction(new POP(Register.getR(0)), "Poping the value stored in the stack(left operand) and " 
+                //                                 + "placing in R0 ");
+                //     this.executeBinaryOperation(compiler, getLeftOperand().getRegisterDeRetour(), Register.getR(0));
+                //     this.setRegisterDeRetour(Register.getR(0));
+                //     //On elimine le variable du stack de l'expression, 
+                //     //afin de pourvoir réduire le nombre d'operation
+                // }
+                // else{
+                //     throw new CodeGenError("Data has been lost in the register " + 
+                //              getRightOperand().getRegisterDeRetour() ); 
+                // }
+                // // if (!(getLeftOperand().getRegisterToPop().size() != 1 || getLeftOperand().getRegisterToPop().size() != 0)) {
+                // //     throw new CodeGenError("La taille du stack dans l'operand gauche doit être égal à 1, actual size = " + 
+                // //                                     getLeftOperand().getRegisterToPop().size() );
+                // // }
+                // // else if (getLeftOperand().getRegisterToPop().size()  == 1) {
+                // //     getLeftOperand().getRegisterToPop().pop(); 
+                // // }
+
+
+                //compiler.addInstruction(new LOAD(getLeftOperand().getRegisterDeRetour(), Register.getR(0)), "Placing right operand in R0 registre");
+                //compiler.addInstruction(new POP(getLeftOperand().getRegisterDeRetour()), "Poping the value stored in the stack  and " 
+                //                                                                        + "placing in the left operand register ");
+
             }
         }
-        //Dans ce cas l'a on utilise des valeurs temporaires, dans ce cas on n'a pas de registe libre
-        // ainsi on retourne le resultat dans le registre R0 afin de ne pas perdre d'inforamtion
-        if (getLeftOperand().getRegisterToPop().size() !=0){
-            compiler.addInstruction(new LOAD(getLeftOperand().getRegisterDeRetour(), Register.getR(0)) , "Using R0 register to return values since other registers are being used");
-            this.setRegisterDeRetour(Register.getR(0));
-        }
-        else{
+        if (this.getRegisterDeRetour() == null) {
             this.setRegisterDeRetour(getLeftOperand().getRegisterDeRetour());
         }
         getRightOperand().popRegisters(compiler);
-        getLeftOperand().popRegisters(compiler);
-        compiler.getRegisterManagement().freeRegister(getLeftOperand().getRegisterDeRetour());
+        this.transferPopRegisters(getLeftOperand().getRegisterToPop());
+        compiler.getRegisterManagement().decrementOccupationRegister(getRightOperand().getRegisterDeRetour());
+        //compiler.getRegisterManagement().freeRegister(getLeftOperand().getRegisterDeRetour());
     }
 
-    /**
+    /** 
      * Cette méthode est utilisée par les classes qui hérite cette méthodes afin de pouvoir s'ajuster 
      * au different type d'operation binaire (par exemple addition, )
      * @param compiler

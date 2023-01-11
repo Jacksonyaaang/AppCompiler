@@ -1,6 +1,6 @@
 {
-    int x;
 
-    x=readInt() ;
-    println(0.5*(x*x)) ;
+    int x = 5;
+    int a;
+    a = 4*x;
 }

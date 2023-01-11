@@ -34,7 +34,7 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     private static final Logger LOG = Logger.getLogger(AbstractExpr.class);
 
-    private GPRegister registerDeRetour;
+    private GPRegister registerDeRetour = null;
 
     public GPRegister getRegisterDeRetour() {
         return registerDeRetour;
@@ -51,6 +51,25 @@ public abstract class AbstractExpr extends AbstractInst {
 
     public Stack<GPRegister> getRegisterToPop() {
         return registerToPop;
+    }
+
+    public void transferPopRegisters(Stack<GPRegister> stackToCopy){
+        Stack<GPRegister> tempStack = new Stack<GPRegister>();
+        while(stackToCopy.size() != 0){
+            tempStack.push(stackToCopy.pop());
+        }
+        while(tempStack.size() != 0){
+            registerToPop.push(tempStack.pop());
+        }
+    }
+
+
+    public GPRegister getPeekRegisterToPop() {
+        if ( registerToPop.size() !=0 ){
+            return registerToPop.peek();
+        }
+        return null;
+
     }
 
     public void popRegisters(DecacCompiler compiler) {
@@ -175,17 +194,27 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
         //A FAIRE
         LOG.debug("i have visited abstract expr");
-        System.out.println("i have visited abstract expr");
+        System.out.println("[Abstractexpr][codeGenInst] I have visited abstract expr");
     }
 
+    /**
+     * Cette méthodes est utilisé par les literaux et les indentificateur à fin de mettre leur valeur 
+     * dans un registre, la méthode loadItemintoRegister est custom à chaque type par exemple pour les indentificateur 
+     * ca cherche les adresses et pour le literaux ca prend leur valeur brute et la positionne dans un registre 
+     */
     protected GPRegister LoadGencode(DecacCompiler compiler) throws CodeGenError {
         GPRegister regReserved = null;
         if (compiler.getRegisterManagement().isThereAnAvaliableRegsiterSup2()){
             regReserved = compiler.getRegisterManagement().getAnEmptyStableRegisterAndReserveIt(); 
-            compiler.pushGlobalRegisterStack(regReserved);
+            assert(regReserved !=null );
+            System.out.println("[Abstractexpr][[LoadGencode]  Reserving an non empty register with the name " + regReserved);
+            LOG.debug("[Abstractexpr][LoadGencode]  Reserving an non empty register with the name " + regReserved);
         }
         else{
             regReserved = compiler.getRegisterManagement().getAUsedStableRegisterAndKeepItReserved(); 
+            assert(regReserved !=null );
+            System.out.println("[Abstractexpr][LoadGencode]  Reserving an used register with the name " + regReserved);
+            LOG.debug("[Abstractexpr][LoadGencode]  Reserving an used register with the name " + regReserved);
             compiler.addInstruction(new PUSH(regReserved));
             this.getRegisterToPop().push(regReserved);
         }
@@ -194,7 +223,7 @@ public abstract class AbstractExpr extends AbstractInst {
     }
     
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister regReserved) throws CodeGenError {
-        throw new CodeGenError("This method should not be called at this level, loadItemintoRegister");
+        throw new CodeGenError("[AbstractExpr] This method should not be called at this level, loadItemintoRegister");
     }
 
     

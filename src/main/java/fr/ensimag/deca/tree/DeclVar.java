@@ -2,9 +2,12 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.RegisterMangementUnit;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.Register;
 
 /**
  * @author gl15
@@ -25,6 +28,7 @@ public class DeclVar extends AbstractDeclVar {
         this.varName = varName;
         this.initialization = initialization;
     }
+    
 
     @Override
     protected void verifyDeclVar(DecacCompiler compiler,
@@ -45,7 +49,7 @@ public class DeclVar extends AbstractDeclVar {
         }catch (EnvironmentExp.DoubleDefException e){
             throw new ContextualError("double declaration", varName.getLocation());
         }
-
+        this.varName.getExpDefinition().setOperand(new RegisterOffset(compiler.incrementGbCompiler(), Register.GB)); 
     }
 
 

@@ -21,6 +21,7 @@ public class RegisterMangementUnit {
     
     public int numberOfRegister;
     public Map<GPRegister, Boolean> registerOccupation =  new HashMap<GPRegister, Boolean>();
+    public Map<GPRegister, Integer> registerUsage =  new HashMap<GPRegister, Integer>();
     public GPRegister emptyRegsiter;
 
     /**
@@ -32,6 +33,7 @@ public class RegisterMangementUnit {
         assert(numberOfRegister <= 16 && numberOfRegister >=4 );
         for (int reg = 0; reg < numberOfRegister; reg++ ){
             registerOccupation.put(Register.getR(reg), false);
+            registerUsage.put(Register.getR(reg), 0);
         }
     }
 
@@ -87,6 +89,7 @@ public class RegisterMangementUnit {
             if(value == false){
                 if (verifyRegisterIsStable(registre)){
                     registerOccupation.replace(registre, true);
+                    registerUsage.replace(registre, 1);
                     return entry.getKey();
                 }
             }
@@ -99,16 +102,26 @@ public class RegisterMangementUnit {
      * @return  un registre different de r0 et r1
      */
     public GPRegister getAUsedStableRegisterAndKeepItReserved(){
+        GPRegister returnedRegister = null;
+        int usage = -1;
         for (Map.Entry<GPRegister, Boolean> entry : registerOccupation.entrySet()) {
             Boolean value = entry.getValue();
             GPRegister registre = entry.getKey();
             if(value == true){
                 if (verifyRegisterIsStable(registre)){
-                    return entry.getKey();
+                    if (usage == -1){
+                        usage = registerUsage.get(registre);
+                        returnedRegister = registre;
+                    }
+                    else if (registerUsage.get(registre) < usage) {
+                        usage = registerUsage.get(registre);
+                        returnedRegister = registre;
+                    }
                 }
             }
         }
-        return null;
+        registerUsage.replace(returnedRegister, registerUsage.get(returnedRegister)+1);
+        return returnedRegister;
     }
 
     /**
@@ -120,6 +133,7 @@ public class RegisterMangementUnit {
             Boolean value = entry.getValue();
             if (value == false){
                 registerOccupation.put(entry.getKey(), true);
+                registerUsage.replace(entry.getKey(), registerUsage.get(entry.getKey())+1);
                 return entry.getKey();
             }
         }
@@ -129,12 +143,23 @@ public class RegisterMangementUnit {
     public GPRegister freeAllRegisters(){
         for (Map.Entry<GPRegister, Boolean> entry : registerOccupation.entrySet()) {
             registerOccupation.replace(entry.getKey(), false);
+            registerUsage.replace(entry.getKey(),0);
         }
         return null;
     }
 
     public void freeRegister(GPRegister register){
         registerOccupation.replace(register, false);
+        registerUsage.replace(register,0);
+    }
+
+    public void decrementOccupationRegister(GPRegister register){
+        if (!(registerUsage.get(register) == 0)){
+            registerUsage.replace(register, registerUsage.get(register)-1);
+            if (registerUsage.get(register) == 0){
+                registerOccupation.replace(register, false);
+            }
+        }
     }
 
     @Override
@@ -143,7 +168,7 @@ public class RegisterMangementUnit {
         output.append("-----Start table----\n");
         for (Map.Entry<GPRegister, Boolean> entry : registerOccupation.entrySet()) {
             String status = entry.getValue() ? "Taken": "empty";
-            output.append(entry.getKey() + "->" + status +" \n");
+            output.append(entry.getKey() + "->" + status + " ; Usage = "+ registerUsage.get(entry.getKey()) +" \n");
         }
         output.append("-----End table----");
         return output.toString();        

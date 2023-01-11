@@ -46,7 +46,7 @@ public class IntLiteral extends AbstractExpr {
         System.out.println("[IntLiteral][loadItemintoRegister] loading "+getValue()+ " into memory at register " + reg);
         LOG.debug("[IntLiteral][loadItemintoRegister] loading "+getValue()+ " into memory at register " + reg);
         compiler.addInstruction(new LOAD(new ImmediateInteger(value) , reg),
-                                     "loading "+getValue()+ " into memory");
+                                     "loading "+getValue()+ " into memory"); 
     }
     
     @Override
