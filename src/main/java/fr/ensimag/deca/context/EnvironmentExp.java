@@ -36,6 +36,9 @@ public class EnvironmentExp {
     }
 
     public static class DoubleDefException extends Exception {
+        public DoubleDefException (String message){
+            super(message);
+        }
         private static final long serialVersionUID = -2733379901827316441L;
     }
 
@@ -65,7 +68,7 @@ public class EnvironmentExp {
      */
     public void declare(Symbol name, ExpDefinition def) throws DoubleDefException {
         if (!envExp.containsKey(name)) envExp.put(name, def);
-        else {throw new DoubleDefException();}
+        else {throw new DoubleDefException("La variable est déjà déclarée");}
         //throw new UnsupportedOperationException("not yet implemented");
     }
 

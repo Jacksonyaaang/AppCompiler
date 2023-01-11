@@ -30,7 +30,7 @@ public class DeclVar extends AbstractDeclVar {
     protected void verifyDeclVar(DecacCompiler compiler,
         EnvironmentExp localEnv, ClassDefinition currentClass)
         throws ContextualError {
-        try{
+
             Type t = type.verifyType(compiler);
             type.setType(t);
             if(t.isVoid()) {
@@ -39,13 +39,10 @@ public class DeclVar extends AbstractDeclVar {
             initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
             VariableDefinition VDf = new VariableDefinition(type.getType(), varName.getLocation());
             varName.setDefinition(VDf);
-            localEnv.declare(varName.getName(), varName.getExpDefinition());
-        }catch (ContextualError e){
-            e.fillInStackTrace();
-        }catch (EnvironmentExp.DoubleDefException e){
-            throw new ContextualError("double declaration", varName.getLocation());
+            try{localEnv.declare(varName.getName(), varName.getExpDefinition());
+            } catch (EnvironmentExp.DoubleDefException e) {
+                System.out.println(e.getMessage());
         }
-
     }
 
 
