@@ -5,6 +5,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.IntType;
 
 /**
  * Arithmetic binary operations (+, -, /, ...)
@@ -20,14 +21,17 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
 
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass) throws ContextualError {
+        ClassDefinition currentClass) throws ContextualError {
         System.out.println("On est dans AbstractOpArith.java");
-        getRightOperand().setType(getRightOperand().verifyExpr(compiler,localEnv, currentClass));
-        if (getLeftOperand().getType() == null && getRightOperand().getType() == null){
-            System.out.println("le type d'une des operandes est null");
+        getRightOperand().setType(getRightOperand().verifyExpr(compiler, localEnv, currentClass));
+        getLeftOperand().setType(getLeftOperand().verifyExpr(compiler, localEnv, currentClass));
+        if (getLeftOperand().getType().isInt()){
+            System.out.println(getLeftOperand().getType().getName().getName());
+            System.out.println(getRightOperand().getType().getName().getName());
         }
-        if(!getLeftOperand().getType().isFloat() || !getLeftOperand().getType().isInt() ||
-                !getRightOperand().getType().isFloat() || !getRightOperand().getType().isInt()){
+        if(!getLeftOperand().getType().isFloat() && !((IntType)getLeftOperand().getType()).isInt() &&
+                !getRightOperand().getType().isFloat() && !((IntType)getRightOperand().getType()).isInt() &&
+                !(getLeftOperand() instanceof AbstractReadExpr) && !(getRightOperand() instanceof AbstractReadExpr)){
             throw new ContextualError("Incompatible pour les opérations arithmétiques",getLocation());
         } else {
             if (getLeftOperand().getType().isFloat() && getRightOperand().getType().isInt()){
@@ -40,7 +44,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
             } else if (getLeftOperand().getType().isFloat() && getRightOperand().getType().isFloat()){
                 return compiler.environmentType.FLOAT;
             }
-        }
+        }System.out.println("FIN ARTH");
         return compiler.environmentType.INT;
     }
 }
