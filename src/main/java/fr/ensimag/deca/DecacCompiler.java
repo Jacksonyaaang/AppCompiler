@@ -17,6 +17,7 @@ import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.deca.codegen.ListError;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -46,7 +47,8 @@ import org.apache.log4j.Logger;
  */
 public class DecacCompiler {
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
-    
+    private ListError erreurs;
+
 
     /**
      * Portable newline character.
