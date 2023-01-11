@@ -21,7 +21,7 @@ public class UnaryMinus extends AbstractUnaryExpr {
             ClassDefinition currentClass) throws ContextualError {
             getOperand().setType(getOperand().verifyExpr(compiler, localEnv, currentClass));
             if (!getOperand().getType().isInt() && !getOperand().getType().isFloat())
-                throw new ContextualError("Not ne s'applique qu'au boolean ", getLocation())
+                throw new ContextualError("Not ne s'applique qu'au boolean ", getLocation());
             setType(compiler.environmentType.BOOLEAN);
             return getType();
         //throw new UnsupportedOperationException("not yet implemented");
