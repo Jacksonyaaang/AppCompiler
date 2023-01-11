@@ -6,6 +6,7 @@ PATH=./src/test/script/launchers/:"$PATH"
 #PATH=./src/test/deca/context/valid/provided:"$PATH"
 
 RED="\e[31m"
+RED_BOLD="\e[1;31m"
 GREEN="\e[32m"
 ENDCOLOR="\e[0m"
 
@@ -19,14 +20,14 @@ echo -e "${GREENFOND}AUTO VALIDE CONTEXT TEST START : ${ENDCOLOR} \n"
 test_context_valide (){
     if test_context "$1" 2>&1 | grep -q -e "$i:[0-9]*"
     then
-        echo -e "${RED}TEST NOT PASS!!  Issue file : $i ${SCR}"
+        echo -e "${RED}TEST NOT PASS!!  Issue file :${ENDCOLOR} ${RED_BOLD} $i ${SCR}"
         exit 1
     else
         echo -e "${GREEN}TEST PASS! ${ENDCOLOR} ${THUMBS_UP}"    
     fi
 }
 
-for i in src/test/deca/context/valid/personal/*.deca
+for i in src/test/deca/context/valid/*.deca
 do
     test_context_valide "$i"
 done

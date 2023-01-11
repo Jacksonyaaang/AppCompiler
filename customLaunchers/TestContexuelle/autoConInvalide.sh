@@ -8,6 +8,7 @@ PATH=./src/test/script/launchers/:"$PATH"
 RED="\e[31m"
 GREEN="\e[32m"
 ENDCOLOR="\e[0m"
+RED_BOLD="\e[1;31m"
 
 THUMBS_UP='\U1F44D' 
 SMILE='\U1F60E' 
@@ -20,12 +21,12 @@ test_context_invalide (){
     then
         echo -e "${GREEN}TEST PASS! ${ENDCOLOR} ${THUMBS_UP}"    
     else
-        echo -e "${RED}TEST NOT PASS!!  Issue file : $i ${SCR}"
+        echo -e "${RED}TEST NOT PASS!!  Issue file :${ENDCOLOR}${RED_BOLD} $i ${SCR}"
         exit 1
     fi
 }
 
-for i in src/test/deca/context/invalid/personal/*.deca
+for i in src/test/deca/context/invalid/*.deca
 do
     test_context_invalide "$i"
 done
