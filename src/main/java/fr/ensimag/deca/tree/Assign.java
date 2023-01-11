@@ -35,7 +35,23 @@ public class Assign extends AbstractBinaryExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        System.out.println("On est dans Assign.java");
+        try{
+            Type typOpLeft = getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
+            if (!(getRightOperand() instanceof AbstractReadExpr))
+                getRightOperand().verifyRValue(compiler, localEnv, currentClass, typOpLeft);
+            else{
+                Type typOpRight = getRightOperand().verifyExpr(compiler, localEnv, currentClass);
+                if (!typOpLeft.sameType(typOpRight))
+                    throw new ContextualError("can't affecte read to this variable", getLocation());
+            }
+            setType(typOpLeft);
+            return getType();
+        } catch (ContextualError e){
+            e.fillInStackTrace();
+        }
+
+        return getLeftOperand().getType();
     }
 
 

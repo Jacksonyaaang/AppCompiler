@@ -2,6 +2,7 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
@@ -27,13 +28,14 @@ public class ListInst extends TreeList<AbstractInst> {
     public void verifyListInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
+        System.out.println("On est dans ListInst.java");
         //A FAIRE PROPREMENT
         for (AbstractInst inst : getList()) {
             inst.verifyInst(compiler, localEnv, currentClass, returnType);;
-        }
+        }    
     }
 
-    public void codeGenListInst(DecacCompiler compiler) {
+    public void codeGenListInst(DecacCompiler compiler) throws CodeGenError {
         for (AbstractInst i : getList()) {
             i.codeGenInst(compiler);
         }

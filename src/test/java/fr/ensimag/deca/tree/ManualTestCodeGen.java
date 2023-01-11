@@ -5,6 +5,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.syntax.*;
 import fr.ensimag.deca.CompilerOptions;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.tree.AbstractProgram;
 import java.io.File;
 import java.io.IOException;
@@ -30,13 +31,20 @@ public class ManualTestCodeGen {
         if (lex.getSourceName() != null) {
             file = new File(lex.getSourceName());
         }
-        final DecacCompiler decacCompiler = new DecacCompiler(new CompilerOptions(), file);
+        CompilerOptions options = new CompilerOptions();
+        options.setNumberOfRegisters(4);
+        DecacCompiler decacCompiler = new DecacCompiler(options, file);
         parser.setDecacCompiler(decacCompiler);
         AbstractProgram prog = parser.parseProgramAndManageErrors(System.err);
         if (prog == null) {
             System.exit(1);
         } else {
-            prog.codeGenProgram(decacCompiler);
+            try {
+                prog.codeGenProgram(decacCompiler);
+            } catch (CodeGenError e) {
+                System.out.println((e.getMessage()));
+                e.printStackTrace();
+            }
             String result = decacCompiler.displayIMAProgram();
             System.out.println(result);
         }

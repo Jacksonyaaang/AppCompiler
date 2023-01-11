@@ -16,6 +16,11 @@ public class GPRegister extends Register {
 
     private int number;
 
+    @Override
+    public int hashCode() {
+        return number;
+    }
+
     GPRegister(String name, int number) {
         super(name);
         this.number = number;

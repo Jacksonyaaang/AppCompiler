@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
@@ -31,13 +32,17 @@ public class Main extends AbstractMain {
         // A FAIRE: Appeler méthodes "verify*" de ListDeclVarSet et ListInst.
         // Vous avez le droit de changer le profil fourni pour ces méthodes
         // (mais ce n'est à priori pas nécessaire).
-        insts.verifyListInst(compiler, new EnvironmentExp(null), null, null);
+        /*On initialise d'abord l'environnement d'expression de parent null dans le cas
+        de sans Object */
+        EnvironmentExp EnvExpInit = new EnvironmentExp(null);
+        declVariables.verifyListDeclVariable(compiler, EnvExpInit, null);
+        insts.verifyListInst(compiler, EnvExpInit, null, null);
         LOG.debug("verify Main: end");
         //throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
-    protected void codeGenMain(DecacCompiler compiler) {
+    protected void codeGenMain(DecacCompiler compiler) throws CodeGenError{
         // A FAIRE: traiter les déclarations de variables.
         compiler.addComment("Beginning of main instructions:");
         insts.codeGenListInst(compiler);

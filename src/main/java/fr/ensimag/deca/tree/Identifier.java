@@ -4,6 +4,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.TypeDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Definition;
@@ -15,9 +16,18 @@ import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
+
 import java.io.PrintStream;
+
+import javax.print.attribute.standard.Copies;
+
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
+import org.mockito.internal.verification.RegisteredInvocations;
 
 /**
  * Deca Identifier
@@ -38,6 +48,19 @@ public class Identifier extends AbstractIdentifier {
     public Definition getDefinition() {
         return definition;
     }
+    
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{   
+        //this.setRegisterDeRetour(this.LoadGencode(compiler));
+    }
+
+    @Override
+    public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
+        assert( reg != null);
+        //compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), reg),
+         //                            "loading "+getName()+ " into memory");
+    }
+
 
     /**
      * Like {@link #getDefinition()}, but works only if the definition is a
@@ -168,7 +191,12 @@ public class Identifier extends AbstractIdentifier {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        System.out.println("On est dans Identifier.java");
+        if(!localEnv.getExp().containsKey(getName())){
+            throw new ContextualError("L'identificateur n'est pas défini",getLocation());
+        }
+        //setType(compiler.environmentType.defOfType(name).getType());
+        return localEnv.get(name).getType();
     }
 
     /**
@@ -178,10 +206,12 @@ public class Identifier extends AbstractIdentifier {
     @Override
     public Type verifyType(DecacCompiler compiler) throws ContextualError {
         //verifions que le type de definition n'est pas null
+        System.out.println("On est dans Identifier.java");
         TypeDefinition typeDefi = compiler.environmentType.defOfType(name);
         if (typeDefi == null){
         throw new ContextualError("le type de l'ident n'est pas defini", getLocation());
-        }return typeDefi.getType();
+        }setDefinition(typeDefi);
+        return getDefinition().getType();
         //throw new UnsupportedOperationException("not yet implemented");
     }
     

@@ -1,5 +1,7 @@
 package fr.ensimag.deca;
 
+import fr.ensimag.deca.codegen.CodeGenError;
+import fr.ensimag.deca.codegen.RegisterMangementUnit;
 import fr.ensimag.deca.context.EnvironmentType;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
@@ -10,14 +12,19 @@ import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.tree.AbstractProgram;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.ima.pseudocode.AbstractLine;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Stack;
+
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
@@ -50,6 +57,17 @@ public class DecacCompiler {
         super();
         this.compilerOptions = compilerOptions;
         this.source = source;
+        registerManagement = new RegisterMangementUnit(compilerOptions.getNumberOfRegisters());
+
+    }
+
+    /**
+     * Unité qui fait la gestion des registres utilsées dans la partie 
+     */
+    private RegisterMangementUnit registerManagement  ;
+
+    public RegisterMangementUnit getRegisterManagement() {
+        return registerManagement;
     }
 
     /**
@@ -123,7 +141,30 @@ public class DecacCompiler {
      * The main program. Every instruction generated will eventually end up here.
      */
     private final IMAProgram program = new IMAProgram();
- 
+
+
+
+    /**
+     * Cette structure de donnée stocke la liste des registeurs dans un ordre temporel
+     * qui seront retournée
+     */
+    private Stack<GPRegister> globalRegisterStack = new Stack<GPRegister>();
+
+    public Stack<GPRegister> getGlobalRegisterStack() {
+        return globalRegisterStack;
+    }
+
+    public void pushGlobalRegisterStack(GPRegister register) {
+        globalRegisterStack.push(register);
+    }
+
+    public GPRegister popGlobalRegisterStack() {
+        return globalRegisterStack.pop();
+    }
+
+    public GPRegister peekGlobalRegisterStack() {
+        return globalRegisterStack.peek();
+    }
 
     /** The global environment for types (and the symbolTable) */
     public final SymbolTable symbolTable = new SymbolTable();
@@ -185,7 +226,7 @@ public class DecacCompiler {
      */
     private boolean doCompile(String sourceName, String destName,
             PrintStream out, PrintStream err)
-            throws DecacFatalError, LocationException {
+            throws DecacFatalError, LocationException, CodeGenError {
         AbstractProgram prog = doLexingAndParsing(sourceName, err);
 
         if (prog == null) {
@@ -196,7 +237,7 @@ public class DecacCompiler {
         if (compilerOptions.isDecompile()) {
             prog.decompile(out);
             return false;
-        }
+        }   
 
         prog.verifyProgram(this);
         assert(prog.checkAllDecorations());

@@ -4,6 +4,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.FloatType;
 import fr.ensimag.deca.context.IntType;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
@@ -37,15 +38,15 @@ public abstract class AbstractPrint extends AbstractInst {
 
     @Override
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass, Type returnType)
-            throws ContextualError {
-                for (AbstractExpr expr : arguments.getList()){
-                        expr.verifyExpr(compiler, localEnv, currentClass);
-                    }
+        ClassDefinition currentClass, Type returnType)
+        throws ContextualError {
+        for (AbstractExpr expr : arguments.getList()){
+                    expr.verifyExpr(compiler, localEnv, currentClass);
+        }
     }
 
     @Override
-    protected void codeGenInst(DecacCompiler compiler) {
+    protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
         for (AbstractExpr a : getArguments().getList()) {
             a.codeGenPrint(compiler);
         }
