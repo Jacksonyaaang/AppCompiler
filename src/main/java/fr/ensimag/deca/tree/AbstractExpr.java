@@ -2,15 +2,25 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
-import java.io.PrintStream;
-import org.apache.commons.lang.Validate;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.POP;
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
 
+import java.io.PrintStream;
+import java.util.Stack;
+
+import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
+
+    
 /**
  * Expression, i.e. anything that has a value.
  *
@@ -22,6 +32,33 @@ public abstract class AbstractExpr extends AbstractInst {
      * @return true if the expression does not correspond to any concrete token
      * in the source code (and should be decompiled to the empty string).
      */
+    private static final Logger LOG = Logger.getLogger(AbstractExpr.class);
+
+    private GPRegister registerDeRetour;
+
+    public GPRegister getRegisterDeRetour() {
+        return registerDeRetour;
+    }
+
+    public void setRegisterDeRetour(GPRegister registerDeRetour) {
+        this.registerDeRetour = registerDeRetour;
+    }
+    /**
+     * Cette structure de donnée stocke la liste des registeurs dans un ordre temporel
+     * qui seront retournée
+     */
+    private Stack<GPRegister> registerToPop = new Stack<GPRegister>();
+
+    public Stack<GPRegister> getRegisterToPop() {
+        return registerToPop;
+    }
+
+    public void popRegisters(DecacCompiler compiler) {
+        while (registerToPop.size() != 0){
+            compiler.addInstruction(new POP(registerToPop.pop()));;
+        }
+    }
+
     boolean isImplicit() {
         return false;
     }
@@ -113,14 +150,36 @@ public abstract class AbstractExpr extends AbstractInst {
      *
      * @param compiler
      */
-    protected void codeGenPrint(DecacCompiler compiler) {
+    protected void codeGenPrint(DecacCompiler compiler) throws CodeGenError {
         throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
-    protected void codeGenInst(DecacCompiler compiler) {
-        throw new UnsupportedOperationException("not yet implemented");
+    protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
+        //A FAIRE
+        LOG.debug("i have visited abstract expr");
+        System.out.println("i have visited abstract expr");
     }
+
+    protected GPRegister LoadGencode(DecacCompiler compiler) throws CodeGenError {
+        GPRegister regReserved = null;
+        if (compiler.getRegisterManagement().isThereAnAvaliableRegsiterSup2()){
+            regReserved = compiler.getRegisterManagement().getAnEmptyStableRegisterAndReserveIt(); 
+            compiler.pushGlobalRegisterStack(regReserved);
+        }
+        else{
+            regReserved = compiler.getRegisterManagement().getAUsedStableRegisterAndKeepItReserved(); 
+            compiler.addInstruction(new PUSH(regReserved));
+            this.getRegisterToPop().push(regReserved);
+        }
+        this.loadItemintoRegister(compiler, regReserved);
+        return regReserved;
+    }
+    
+    public void loadItemintoRegister(DecacCompiler compiler, GPRegister regReserved) throws CodeGenError {
+        throw new CodeGenError("This method should not be called at this level, loadItemintoRegister");
+    }
+
     
 
     @Override
@@ -139,4 +198,22 @@ public abstract class AbstractExpr extends AbstractInst {
             s.println();
         }
     }
+
+    public Boolean checkIfExprIsTerminal(AbstractExpr expr){
+        if (expr instanceof Identifier){
+            return true;
+        }
+        else if (expr instanceof BooleanLiteral ){
+            return true;
+        }
+        else if (expr instanceof FloatLiteral){
+            return true;
+        }
+        else if (expr instanceof IntLiteral){
+            return true;
+        }
+        return false;
+
+    }
+    
 }

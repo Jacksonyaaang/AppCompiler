@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
@@ -37,7 +38,7 @@ public class Main extends AbstractMain {
     }
 
     @Override
-    protected void codeGenMain(DecacCompiler compiler) {
+    protected void codeGenMain(DecacCompiler compiler) throws CodeGenError{
         // A FAIRE: traiter les déclarations de variables.
         compiler.addComment("Beginning of main instructions:");
         insts.codeGenListInst(compiler);

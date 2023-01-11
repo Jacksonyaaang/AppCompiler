@@ -4,6 +4,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.TypeDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Definition;
@@ -15,9 +16,18 @@ import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
+
 import java.io.PrintStream;
+
+import javax.print.attribute.standard.Copies;
+
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
+import org.mockito.internal.verification.RegisteredInvocations;
 
 /**
  * Deca Identifier
@@ -38,6 +48,19 @@ public class Identifier extends AbstractIdentifier {
     public Definition getDefinition() {
         return definition;
     }
+    
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{   
+        //this.setRegisterDeRetour(this.LoadGencode(compiler));
+    }
+
+    @Override
+    public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
+        assert( reg != null);
+        //compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), reg),
+         //                            "loading "+getName()+ " into memory");
+    }
+
 
     /**
      * Like {@link #getDefinition()}, but works only if the definition is a

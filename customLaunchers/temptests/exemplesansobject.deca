@@ -7,8 +7,23 @@
 // Historique:
 //    cree le 04/01/2023
 
+class A {
+    int x;
+    B b = new B();
+}
+
+class C {
+    A a;
+}
+class B extends A{
+    int y;
+}
+
 {
-    int x ;
+    A a = new A();
+    int x;
+    int y;
+
     x=readInt() ;
     println(0.5*(x*x)) ;
 }

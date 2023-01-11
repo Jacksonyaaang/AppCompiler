@@ -87,6 +87,11 @@ public class CompilerOptions {
         return numberOfRegisters;
     }
     
+    public void setNumberOfRegisters(int numberOfRegisters) {
+        this.numberOfRegisters = numberOfRegisters;
+    }
+
+
     private int debug = 0;
     private boolean parallel = false;
     private boolean printBanner = false;
