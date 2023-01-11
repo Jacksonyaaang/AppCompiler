@@ -22,7 +22,7 @@ public class Not extends AbstractUnaryExpr {
             ClassDefinition currentClass) throws ContextualError {
             getOperand().setType(getOperand().verifyExpr(compiler, localEnv, currentClass));
             if (!getOperand().getType().isBoolean())
-                throw new ContextualError("Not ne s'applique qu'au boolean ", getLocation())
+                throw new ContextualError("Not ne s'applique qu'au boolean ", getLocation());
             setType(compiler.environmentType.BOOLEAN);
             return getType();
     }
