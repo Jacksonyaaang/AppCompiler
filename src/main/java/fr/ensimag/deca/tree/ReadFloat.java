@@ -17,8 +17,11 @@ public class ReadFloat extends AbstractReadExpr {
 
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        ClassDefinition currentClass) throws ContextualError {
+        System.out.println("On est dans ReadFloat.java");
+        setType(compiler.environmentType.FLOAT);
+        return getType();  
+        //throw new UnsupportedOperationException("not yet implemented");
     }
 
 

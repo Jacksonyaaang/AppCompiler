@@ -1,11 +1,4 @@
-// Description:
-//    Programme du exemple sans object dans le cours.
-//
-// Resultats:
-//    Depend de l'input
-//
-// Historique:
-//    cree le 04/01/2023
+
 
 class A {
     int x;

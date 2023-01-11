@@ -119,7 +119,17 @@ public abstract class AbstractExpr extends AbstractInst {
             EnvironmentExp localEnv, ClassDefinition currentClass, 
             Type expectedType)
             throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        System.out.println("On est dans AbstractExpr.java");
+        try{
+            Type t = verifyExpr(compiler, localEnv, currentClass);
+            //if(!(expectedType.isFloat() && t.isInt()) || !expectedType.sameType(t)){
+            if (!expectedType.sameType(t))
+                throw new ContextualError("Not exepected type", getLocation());
+            //}
+        } catch (ContextualError e){
+            e.fillInStackTrace();
+        }
+        return this;
     }
     
     
@@ -127,7 +137,9 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        System.out.println("On est dans AbstractExpr.java");
+            verifyExpr(compiler, localEnv, currentClass);
+        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     /**
@@ -142,7 +154,12 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     void verifyCondition(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+            Type type_cond = verifyExpr(compiler, localEnv, currentClass);
+            if (type_cond != null && type_cond.isBoolean()) setType(type_cond);
+            else{
+                throw new ContextualError("la condition doit être booléan", getLocation());
+            }
+        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     /**
