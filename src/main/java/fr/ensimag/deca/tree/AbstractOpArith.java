@@ -35,29 +35,29 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
                 !getRightOperand().getType().isFloat() && !((IntType)getRightOperand().getType()).isInt() &&
                 !(getLeftOperand() instanceof AbstractReadExpr) && !(getRightOperand() instanceof AbstractReadExpr)){
             throw new ContextualError("Incompatible pour les opérations arithmétiques",getLocation());
-        } else {
-            if (getLeftOperand().getType().isFloat() && getRightOperand().getType().isInt()){
-                ConvFloat cF = new ConvFloat(getRightOperand());
-                cF.verifyExpr(compiler, localEnv, currentClass);
-                setRightOperand(cF);
-                System.out.println("jsuis bien là float int");
-                setType(compiler.environmentType.FLOAT);
-                return compiler.environmentType.FLOAT;
-            }
-            else if (getLeftOperand().getType().isInt() && getRightOperand().getType().isFloat()){
-                ConvFloat cF = new ConvFloat(getLeftOperand());
-                cF.verifyExpr(compiler, localEnv, currentClass);
-                setLeftOperand(cF);
-                //setLeftOperand(new ConvFloat(getLeftOperand()));
-                System.out.println("jsuis bien là int float");
-                setType(compiler.environmentType.FLOAT);
-                return compiler.environmentType.FLOAT;
-            } else if (getLeftOperand().getType().isFloat() && getRightOperand().getType().isFloat()){
-                System.out.println("jsuis bien là float float");
-                setType(compiler.environmentType.FLOAT);
-                return compiler.environmentType.FLOAT;
-            }
-        }System.out.println("FIN ARTH");
+        }
+        if (getLeftOperand().getType().isFloat() && getRightOperand().getType().isInt()){
+            ConvFloat cF = new ConvFloat(getRightOperand());
+            cF.verifyExpr(compiler, localEnv, currentClass);
+            setRightOperand(cF);
+            System.out.println("jsuis bien là float int");
+            setType(compiler.environmentType.FLOAT);
+            return compiler.environmentType.FLOAT;
+        }
+        else if (getLeftOperand().getType().isInt() && getRightOperand().getType().isFloat()){
+            ConvFloat cF = new ConvFloat(getLeftOperand());
+            cF.verifyExpr(compiler, localEnv, currentClass);
+            setLeftOperand(cF);
+            //setLeftOperand(new ConvFloat(getLeftOperand()));
+            System.out.println("jsuis bien là int float");
+            setType(compiler.environmentType.FLOAT);
+            return compiler.environmentType.FLOAT;
+        } else if (getLeftOperand().getType().isFloat() && getRightOperand().getType().isFloat()){
+            System.out.println("jsuis bien là float float");
+            setType(compiler.environmentType.FLOAT);
+            return compiler.environmentType.FLOAT;
+        }
+        System.out.println("FIN ARTH");
         return compiler.environmentType.INT;
     }
 }
