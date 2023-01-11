@@ -167,12 +167,14 @@ public class Identifier extends AbstractIdentifier {
 
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass) throws ContextualError {
-        System.out.println("On est dans Identifier.java");
+                           ClassDefinition currentClass) throws ContextualError {
+        //System.out.println("On est dans Identifier.java");
         if(!localEnv.getExp().containsKey(getName())){
             throw new ContextualError("L'identificateur n'est pas défini",getLocation());
         }
-        //setType(compiler.environmentType.defOfType(name).getType());
+        System.out.println(getName().getName());
+        Definition Defi = localEnv.get(name);
+        setDefinition(Defi);
         return localEnv.get(name).getType();
     }
 
@@ -185,9 +187,13 @@ public class Identifier extends AbstractIdentifier {
         //verifions que le type de definition n'est pas null
         System.out.println("On est dans Identifier.java");
         TypeDefinition typeDefi = compiler.environmentType.defOfType(name);
+        //System.out.println();
         if (typeDefi == null){
-        throw new ContextualError("le type de l'ident n'est pas defini", getLocation());
+            System.out.println("typeDefi est null");
+            throw new ContextualError("le type de l'ident n'est pas defini", getLocation());
         }setDefinition(typeDefi);
+        if (getDefinition() == null)
+            System.out.println("getDefinition est  null");
         return getDefinition().getType();
         //throw new UnsupportedOperationException("not yet implemented");
     }
@@ -219,6 +225,8 @@ public class Identifier extends AbstractIdentifier {
     @Override
     protected void prettyPrintType(PrintStream s, String prefix) {
         Definition d = getDefinition();
+        if (d == null)
+            System.out.println("la definition est null mecs");
         if (d != null) {
             s.print(prefix);
             s.print("definition: ");
