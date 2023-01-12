@@ -1,0 +1,23 @@
+{
+    int i=0;
+    int valide=0;
+    while(i<4){
+        i++;
+    }
+    if(i==4){
+        valide+=1;
+    }
+    boolean b1=true;
+    boolean b2=false;
+    int x=2;
+    int y=x;
+    int z=3;
+    while((x<(y+z))&&(b1||b2)||b2){
+        x++;
+    }
+    if(x==5){
+        valide+=10;
+    }
+    print("while[ "+valide+"/11 ]\n");
+
+}

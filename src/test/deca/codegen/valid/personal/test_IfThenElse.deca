@@ -1,0 +1,73 @@
+{
+    if(true){
+        print("true is true\n");
+    }
+    else{
+        print("true is fals\n");
+    }
+    boolean b1=true;
+    if(b1){
+        print("b1=true is true\n");
+    }
+    boolean b2=false;
+    int i=0;
+    if(b1&&b1){
+        i+=1000;
+    }
+    if(!b1&&b2){
+        i+=100;
+    }
+    if(!b2&&b1){
+        i+=10;
+    }
+    if(!b2&&b2){
+        i+=1;
+    }
+    print("b1&&b2[ "+i+"/1111 ]\n")
+    i=0;
+    if(b1||b1){
+        i+=1000;
+    }
+    if(b1||b2){
+        i+=100;
+    }
+    if(b2||b1){
+        i+=10;
+    }
+    if(!b2||b2){
+        i+=1;
+    }
+    print("b1||b2[ "+i+"/1111 ]\n")
+    i=0;
+    int x=2;
+    int y=1;
+    if(x>y){
+        i+=1000;
+    }
+    if(!x<y){
+        i+=100;
+    }
+    y=2;
+    if(b2>=b1){
+        i+=10;
+    }
+    if(b2<=b2){
+        i+=1;
+    }
+    print("x(greater/lower)y[ "+i+"/1111 ]\n");
+    i=0;
+    int z=3;
+    if((x<(y+z))&&(b1||b2)||b2){
+        i+=100;
+    }
+    if(!!!!!!!!!!(x<z)){
+        i+=10;
+    }
+    if(!!!!!!!!!!!(x<z)){
+    }
+    else{
+        i+=1;
+    }
+    print("comparaison plus complexes[ "+i+"/111 ]\n");
+    i=0;
+}
