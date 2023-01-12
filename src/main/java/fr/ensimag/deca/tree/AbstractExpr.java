@@ -2,15 +2,30 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
-import java.io.PrintStream;
-import org.apache.commons.lang.Validate;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.POP;
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+//import fr.ensimag.ima.pseudocode.instructions.WBOOL;
+import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
 
+import java.io.PrintStream;
+import java.util.Stack;
+
+import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
+
+    
 /**
  * Expression, i.e. anything that has a value.
  *
@@ -22,6 +37,52 @@ public abstract class AbstractExpr extends AbstractInst {
      * @return true if the expression does not correspond to any concrete token
      * in the source code (and should be decompiled to the empty string).
      */
+    private static final Logger LOG = Logger.getLogger(AbstractExpr.class);
+
+    private GPRegister registerDeRetour = null;
+
+    public GPRegister getRegisterDeRetour() {
+        return registerDeRetour;
+    }
+
+    public void setRegisterDeRetour(GPRegister registerDeRetour) {
+        this.registerDeRetour = registerDeRetour;
+    }
+    /**
+     * Cette structure de donnée stocke la liste des registeurs dans un ordre temporel
+     * qui seront retournée
+     */
+    private Stack<GPRegister> registerToPop = new Stack<GPRegister>();
+
+    public Stack<GPRegister> getRegisterToPop() {
+        return registerToPop;
+    }
+
+    public void transferPopRegisters(Stack<GPRegister> stackToCopy){
+        Stack<GPRegister> tempStack = new Stack<GPRegister>();
+        while(stackToCopy.size() != 0){
+            tempStack.push(stackToCopy.pop());
+        }
+        while(tempStack.size() != 0){
+            registerToPop.push(tempStack.pop());
+        }
+    }
+
+
+    public GPRegister getPeekRegisterToPop() {
+        if ( registerToPop.size() !=0 ){
+            return registerToPop.peek();
+        }
+        return null;
+
+    }
+
+    public void popRegisters(DecacCompiler compiler) {
+        while (registerToPop.size() != 0){
+            compiler.addInstruction(new POP(registerToPop.pop()));;
+        }
+    }
+
     boolean isImplicit() {
         return false;
     }
@@ -124,14 +185,69 @@ public abstract class AbstractExpr extends AbstractInst {
      *
      * @param compiler
      */
-    protected void codeGenPrint(DecacCompiler compiler) {
-        throw new UnsupportedOperationException("not yet implemented");
+    protected void codeGenPrint(DecacCompiler compiler) throws CodeGenError {
+        this.codeGenInst(compiler);
+        LOG.debug("[AbstractExpr][codeGenPrint]Method has been visited wity type " + this.getType());
+        if(getType() == compiler.environmentType.INT){
+            LOG.debug("[AbstractExpr][codeGenPrint] Priting an int");
+            compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
+            compiler.addInstruction(new WINT());
+        }
+        else if(getType() == compiler.environmentType.FLOAT){
+            LOG.debug("[AbstractExpr][codeGenPrint] Priting an flaot");
+            compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
+            if(compiler.isPrintHex())
+                compiler.addInstruction(new WFLOAT());
+            else{
+                compiler.addInstruction(new WFLOATX());
+            }
+        }
+        else if(getType() == compiler.environmentType.BOOLEAN){
+            //A faire: eliminated this part of the code since it we can not reach it 
+            //due to contextual errors
+            LOG.debug("[AbstractExpr][codeGenPrint] Priting an ");
+            compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
+            compiler.addInstruction(new WINT());
+        }
+        //PRINT HEXA
     }
 
     @Override
-    protected void codeGenInst(DecacCompiler compiler) {
-        throw new UnsupportedOperationException("not yet implemented");
+    protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
+        LOG.debug("[Abstractexpr][codeGenInst] I have visited abstract expr");
+        //System.out.println("[Abstractexpr][codeGenInst] I have visited abstract expr");
+        throw new CodeGenError("[Abstractexpr][codeGenInst]Cette méthode ne doit jamais être appélée");
     }
+
+    /**
+     * Cette méthodes est utilisé par les literaux et les indentificateur à fin de mettre leur valeur 
+     * dans un registre, la méthode loadItemintoRegister est custom à chaque type par exemple pour les indentificateur 
+     * ca cherche les adresses et pour le literaux ca prend leur valeur brute et la positionne dans un registre 
+     */
+    protected GPRegister LoadGencode(DecacCompiler compiler) throws CodeGenError {
+        GPRegister regReserved = null;
+        if (compiler.getRegisterManagement().areThereAnAvaliableRegsiterSup2()){
+            regReserved = compiler.getRegisterManagement().getAnEmptyStableRegisterAndReserveIt(); 
+            assert(regReserved !=null );
+            //System.out.println("[Abstractexpr][[LoadGencode]  Reserving an non empty register with the name " + regReserved);
+            LOG.debug("[Abstractexpr][LoadGencode]  Reserving an non empty register with the name " + regReserved);
+        }
+        else{
+            regReserved = compiler.getRegisterManagement().getAUsedStableRegisterAndKeepItReserved(); 
+            assert(regReserved !=null );
+            //System.out.println("[Abstractexpr][LoadGencode]  Reserving an used register with the name " + regReserved);
+            LOG.debug("[Abstractexpr][LoadGencode]  Reserving an used register with the name " + regReserved);
+            compiler.addInstruction(new PUSH(regReserved));
+            this.getRegisterToPop().push(regReserved);
+        }
+        this.loadItemintoRegister(compiler, regReserved);
+        return regReserved;
+    }
+    
+    public void loadItemintoRegister(DecacCompiler compiler, GPRegister regReserved) throws CodeGenError {
+        throw new CodeGenError("[AbstractExpr] This method should not be called at this level, loadItemintoRegister");
+    }
+
     
 
     @Override
@@ -150,4 +266,22 @@ public abstract class AbstractExpr extends AbstractInst {
             s.println();
         }
     }
+
+    public Boolean checkIfExprIsTerminal(AbstractExpr expr){
+        if (expr instanceof Identifier){
+            return true;
+        }
+        else if (expr instanceof BooleanLiteral ){
+            return true;
+        }
+        else if (expr instanceof FloatLiteral){
+            return true;
+        }
+        else if (expr instanceof IntLiteral){
+            return true;
+        }
+        return false;
+
+    }
+    
 }

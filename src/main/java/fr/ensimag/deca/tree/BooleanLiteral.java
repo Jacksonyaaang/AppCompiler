@@ -2,10 +2,15 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+
 import java.io.PrintStream;
 
 /**
@@ -25,6 +30,17 @@ public class BooleanLiteral extends AbstractExpr {
         return value;
     }
 
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{   
+        this.setRegisterDeRetour(this.LoadGencode(compiler));
+    }
+
+    public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
+        assert(reg != null);
+        compiler.addInstruction(new LOAD(new ImmediateInteger(value ? 1 :0) , reg),
+                                     "loading "+getValue()+ " into memory");
+    }
+    
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {

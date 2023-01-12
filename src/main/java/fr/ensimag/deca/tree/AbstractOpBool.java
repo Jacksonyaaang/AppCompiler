@@ -1,6 +1,13 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.*;
+
+import org.apache.log4j.Logger;
+
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.deca.DecacCompiler;
 
 /**
@@ -10,6 +17,21 @@ import fr.ensimag.deca.DecacCompiler;
  */
 public abstract class AbstractOpBool extends AbstractBinaryExpr {
 
+    int boolOpIdentifier = 0;
+    
+    public int getBoolOpIdentifier() {
+        return boolOpIdentifier;
+    }
+
+    public void setBoolOpIdentifier(int boolOpIdentifier) {
+        this.boolOpIdentifier = boolOpIdentifier;
+    }
+
+    @Override
+    public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
+        throw new CodeGenError("Cette fonction ne doit pas être appeller à ce niveau");
+    }
+    
     public AbstractOpBool(AbstractExpr leftOperand, AbstractExpr rightOperand) {
         super(leftOperand, rightOperand);
     }
@@ -27,13 +49,13 @@ public abstract class AbstractOpBool extends AbstractBinaryExpr {
         System.out.println( getRightOperand().getType() instanceof  BooleanType);
         System.out.println( getLeftOperand().getType() instanceof  BooleanType);
         if (!(getLeftOperand().getType() instanceof BooleanType && getRightOperand().getType() instanceof  BooleanType)) {
-            System.out.println("ayfeZKUGLAEIHK");
-                throw new ContextualError("Opération compatible qu'avec des boolean",getLocation());
-            }
+            throw new ContextualError("Opération compatible qu'avec des boolean",getLocation());
+        }
 
        // if(getLeftOperand().getType().sameType(getLeftOperand().getType()) && getRightOperand().getType().isBoolean() &&)
 
         return compiler.environmentType.BOOLEAN;
     }
+
 
 }

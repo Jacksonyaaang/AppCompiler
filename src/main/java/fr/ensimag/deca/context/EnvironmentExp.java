@@ -47,8 +47,13 @@ public class EnvironmentExp {
      * symbol is undefined.
      */
     public ExpDefinition get(Symbol key) {
-        return this.envExp.get(key);
+        //return this.envExp.get(key);
         //throw new UnsupportedOperationException("not yet implemented");
+        if (!envExp.containsKey(key)&&parentEnvironment==null)
+            return null;
+        if (envExp.containsKey(key))
+            return envExp.get(key);
+        return parentEnvironment.get(key);
     }
 
     /**

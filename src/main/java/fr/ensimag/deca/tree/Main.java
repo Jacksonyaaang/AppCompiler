@@ -1,9 +1,15 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -37,14 +43,21 @@ public class Main extends AbstractMain {
         declVariables.verifyListDeclVariable(compiler, EnvExpInit, null);
         insts.verifyListInst(compiler, EnvExpInit, null, null);
         LOG.debug("verify Main: end");
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
-    protected void codeGenMain(DecacCompiler compiler) {
-        // A FAIRE: traiter les déclarations de variables.
+    protected void codeGenMain(DecacCompiler compiler) throws CodeGenError{
         compiler.addComment("Beginning of main instructions:");
+        declVariables.codeGenListDecl(compiler);
         insts.codeGenListInst(compiler);
+        int sizeStack = compiler.getStackManagement().measureStacksizeNeededMain(compiler);
+        //On reserve de l'espace dans le stack
+        if (sizeStack != 0){
+            compiler.getProgram().addFirst(new TSTO(new ImmediateInteger(sizeStack)));
+            compiler.getErrorManagementUnit().activeError("stack_overflow_error");
+            compiler.getProgram().addFirst(new BOV(new Label("stack_overflow_error")));
+            compiler.getProgram().addFirst(new TSTO(new ImmediateInteger(sizeStack)));
+        }
     }
     
     @Override

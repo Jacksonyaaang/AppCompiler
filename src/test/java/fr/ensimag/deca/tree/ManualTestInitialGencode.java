@@ -6,6 +6,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 
 /**
  *
@@ -30,7 +31,12 @@ public class ManualTestInitialGencode {
     
     public static String gencodeSource(AbstractProgram source) {
         DecacCompiler compiler = new DecacCompiler(null,null);
-        source.codeGenProgram(compiler);
+        try {
+            source.codeGenProgram(compiler);
+        } catch (CodeGenError e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         return compiler.displayIMAProgram();
     }
 

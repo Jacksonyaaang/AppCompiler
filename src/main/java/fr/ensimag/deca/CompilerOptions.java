@@ -87,6 +87,11 @@ public class CompilerOptions {
         return numberOfRegisters;
     }
     
+    public void setNumberOfRegisters(int numberOfRegisters) {
+        this.numberOfRegisters = numberOfRegisters;
+    }
+
+
     private int debug = 0;
     private boolean parallel = false;
     private boolean printBanner = false;
@@ -195,6 +200,8 @@ public class CompilerOptions {
                         } catch (NumberFormatException e) { 
                             if (optionPool.contains(args[i+1])){
                                 throw new CLIException("[Please Retry]\n[Fault Detected!!] The X after '-r' must with the range '4<=X<=16' VALUE ! ");
+                            }else{
+                                throw new CLIException("[Please Retry]\n[Fault Detected!!] The X after '-r' must with the range '4<=X<=16' VALUE !");
                             }
                         }
                         switchOptionCase(args[i], args[i+1]); //we extract the number of registers from args[i+1] 
