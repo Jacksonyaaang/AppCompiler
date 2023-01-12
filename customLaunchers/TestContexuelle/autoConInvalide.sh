@@ -27,7 +27,7 @@ test_context_invalide (){
 }
 
 redirect_result(){
-    test_context "$1" > src/test/deca/context/invalid/result/$(basename "${1%.deca}").lis
+    test_context "$1" > src/test/deca/context/invalid/result/$(basename "${1%.deca}").lis 2>&1 &
 }
 
 for i in src/test/deca/context/invalid/*.deca
