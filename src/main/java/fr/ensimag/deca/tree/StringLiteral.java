@@ -35,8 +35,8 @@ public class StringLiteral extends AbstractStringLiteral {
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
             System.out.println("On est dans StringLiteral.java");
-                this.setType(compiler.environmentType.STRING);
-                return getType();
+            setType(compiler.environmentType.STRING);
+            return getType();
                 //A FAIRE correctement
                 //throw new UnsupportedOperationException("not yet implemented");
 
