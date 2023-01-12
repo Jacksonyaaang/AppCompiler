@@ -144,9 +144,19 @@ public abstract class AbstractExpr extends AbstractInst {
             Type expectedType)
             throws ContextualError {
         System.out.println("On est dans AbstractExpr.java");
-        Type t = verifyExpr(compiler, localEnv, currentClass);
+        LOG.debug("[AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments" );
+        Type t = this.verifyExpr(compiler, localEnv, currentClass);
+        LOG.debug("[AbstractExpr][verifyRValue] type " + t + " ,expected type " +expectedType);
+        if (expectedType.isFloat() && t.isInt()){
+            ConvFloat cF = new ConvFloat(this);
+            cF.verifyExpr(compiler, localEnv, currentClass);
+
+            LOG.debug("[Assign][verifyExpr] Conv int -> float");
+            return cF;
+        }
         if (!expectedType.sameType(t))
             throw new ContextualError("Not expected type", getLocation());
+        setType(expectedType);
         return this;
     }
     
@@ -156,8 +166,8 @@ public abstract class AbstractExpr extends AbstractInst {
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
         System.out.println("On est dans AbstractExpr.java");
-            verifyExpr(compiler, localEnv, currentClass);
-        //throw new UnsupportedOperationException("not yet implemented");
+        LOG.debug("[AbstractExpr][verifyInst] Verify the expression from the instruction");
+        verifyExpr(compiler, localEnv, currentClass);
     }
 
     /**
@@ -172,12 +182,12 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     void verifyCondition(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-            Type type_cond = verifyExpr(compiler, localEnv, currentClass);
-            if (type_cond != null && type_cond.isBoolean()) setType(type_cond);
-            else{
-                throw new ContextualError("la condition doit être booléan", getLocation());
-            }
-        //throw new UnsupportedOperationException("not yet implemented");
+        LOG.debug("[AbstractExpr][verifyInst] Verify the expression from the instruction");
+        Type type_cond = verifyExpr(compiler, localEnv, currentClass);
+        if (type_cond != null && type_cond.isBoolean()) setType(type_cond);
+        else{
+            throw new ContextualError("la condition doit être booléan", getLocation());
+        }
     }
 
     /**
