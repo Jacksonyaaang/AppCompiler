@@ -45,7 +45,29 @@ public class IfThenElse extends AbstractInst {
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
         throw new UnsupportedOperationException("not yet implemented");
+        LOG.debug("[IfThenElse][CodeGenInst] generating code for RIfThenElse");
+        System.out.println("[IfThenElse][codeGenInst] generating code for IfThenElse");
+        System.out.println(compiler.getRegisterManagement());
+        this.setRegisterDeRetour(this.LoadGencode(compiler));
+        System.out.println("[IfThenElse][codeGenInst] exiting method");
     }
+
+    @Override
+    public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
+        assert(reg != null);
+        if(this.condition.instanceof(Equals)){
+            Label elseLab = new Label("else");
+            Label endLab = new Label("end");
+            compiler.addInstruction(new CMP());
+            compiler.addInstruction(new BNQ(elseLab));
+            this.thenBranch.codeGenListInst(compiler);
+            compiler.addInstruction(new BRA(elseLab));
+            compiler.addInstruction(elseLab);
+            this.elseBranch.codeGenListInst(compiler);
+            compiler.addInstruction(endLab);
+        }
+    }
+
 
     @Override
     public void decompile(IndentPrintStream s) {
