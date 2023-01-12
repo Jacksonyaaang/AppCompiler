@@ -63,18 +63,18 @@ public class Assign extends AbstractBinaryExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        System.out.println("On est dans Assign.java");
+        LOG.debug("[Assign][verifyExpr] Verify left and right expression in assignment");
         Type typOpLeft = getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
         if (!(getRightOperand() instanceof AbstractReadExpr))
-            getRightOperand().verifyRValue(compiler, localEnv, currentClass, typOpLeft);
+            setRightOperand(getRightOperand().verifyRValue(compiler, localEnv, currentClass, typOpLeft));
         else{
             Type typOpRight = getRightOperand().verifyExpr(compiler, localEnv, currentClass);
             if (!typOpLeft.sameType(typOpRight))
-                throw new ContextualError("can't affecte read to this variable", getLocation());
+                throw new ContextualError("Impossible d'assigner read à cette variable", getLocation());
         }
         setType(typOpLeft);
         return getType();
-        //return getLeftOperand().getType();
+
     }
 
 
