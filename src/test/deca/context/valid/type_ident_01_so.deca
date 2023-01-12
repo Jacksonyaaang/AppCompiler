@@ -1,0 +1,15 @@
+// Description:
+//    Tester la cohérence du type des idnetifier
+//
+// Resultats:
+//    TEST PASS
+//
+// Historique:
+//    cree le 01/01/2023
+
+{
+        int a=0;
+        int b;
+        a=b;
+
+}
