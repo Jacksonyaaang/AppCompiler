@@ -2,6 +2,7 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
@@ -14,6 +15,13 @@ import org.apache.commons.lang.Validate;
  * @date 01/01/2023
  */
 public class Initialization extends AbstractInitialization {
+
+    @Override
+    public void codegenInitial(DecacCompiler compiler) throws CodeGenError {
+        expression.codeGenInst(compiler);
+        assert(expression.getRegisterDeRetour() != null);
+        super.setRegistreDeRetour(expression.getRegisterDeRetour());
+    }
 
     public AbstractExpr getExpression() {
         return expression;
@@ -36,12 +44,7 @@ public class Initialization extends AbstractInitialization {
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
         System.out.println("On est dans Initialization.java");
-        try {
-            expression.verifyRValue(compiler, localEnv, currentClass, t);
-        } catch (ContextualError e){
-        e.fillInStackTrace();
-        }
-
+        expression.verifyRValue(compiler, localEnv, currentClass, t);
     }
 
 

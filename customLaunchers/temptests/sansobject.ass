@@ -1,0 +1,12 @@
+ADDSP #5	
+LOAD #5, R2	; loading 5 into memory
+	STORE R2, 1(GB)	; Initializing the variable x and loading it into memory
+	LOAD #4, R2	; loading 4 into memory
+	MUL 1(GB), R2
+	STORE R2, 2(GB)	;  Assiging a value to a
+	LOAD 2(GB), R1
+	WINT
+	WNL
+	HALT
+	
+

@@ -4,6 +4,8 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.MUL;
 
 import org.apache.log4j.Logger;
@@ -22,10 +24,22 @@ public class Multiply extends AbstractOpArith {
 
     @Override
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultregister) throws CodeGenError {
-        LOG.debug("[Multiply][executeBinaryOperation] generating code for int literal value " );
+        LOG.debug("[Multiply][executeBinaryOperation] generating code for multiply between: " 
+                    +val + " and " + resultregister );
         System.out.println("[Multiply][executeBinaryOperation] generating code for multiply between: " 
                         +val + " and " + resultregister);
-        compiler.addInstruction(new MUL(val, resultregister));
+        if (getConvNeeded()){
+            addConvertInstructions(compiler);
+        }
+        if (!getWorkWithFloats()){
+            compiler.addInstruction(new MUL(val, resultregister));
+        }
+        else{
+            compiler.addInstruction(new MUL(val, resultregister));
+            // A FAIRE CALL METHODE THAT WILL ADD OVERFLOW MUL AT THE END
+            compiler.addInstruction(new BOV(new Label("overflow_error")), "Checking for overflow since "
+                                                                     +"the operation is between two floats ");
+        }
     }
 
 

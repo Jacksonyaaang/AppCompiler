@@ -40,6 +40,14 @@ public class ManualTestCodeGen {
             System.exit(1);
         } else {
             try {
+                prog.verifyProgram(decacCompiler);
+            } catch (Exception e) {
+                System.out.println((e.getMessage()));
+                e.printStackTrace();
+                System.out.println("----------Verify failed-------");
+            }
+
+            try {
                 prog.codeGenProgram(decacCompiler);
             } catch (CodeGenError e) {
                 System.out.println((e.getMessage()));
