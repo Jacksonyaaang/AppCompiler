@@ -26,7 +26,12 @@ test_context_valide (){
     fi
 }
 
+redirect_result(){
+    test_synt "$1" > src/test/deca/syntax/valid/result/$(basename "${1%.deca}").lis
+}
+
 for i in src/test/deca/syntax/valid/*.deca
 do
     test_context_valide "$i"
+    redirect_result "$i"
 done

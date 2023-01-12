@@ -25,8 +25,12 @@ test_context_invalide (){
         exit 1
     fi
 }
+redirect_result(){
+    test_synt "$1" > src/test/deca/syntax/invalid/result/$(basename "${1%.deca}").lis
+}
 
 for i in src/test/deca/syntax/invalid/*.deca
 do
     test_context_invalide "$i"
+    redirect_result "$i"
 done
