@@ -8,6 +8,7 @@
 //    cree le 01/01/2023
 
 {
+        j;  //ici c'est pour faire passer qu'il est bien mais non (test de pom.xml)
         int a=9, c;
         a=c;
 }
