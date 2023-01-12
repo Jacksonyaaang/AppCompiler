@@ -1,0 +1,13 @@
+// Description:
+//    Tester l'affectation de variables non-valeur
+//
+// Resultats:
+//    
+//
+// Historique:
+//    cree le 01/01/2023
+
+{
+        int a=9, c;
+        a=c;
+}
