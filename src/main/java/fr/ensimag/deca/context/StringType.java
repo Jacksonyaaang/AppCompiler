@@ -23,8 +23,8 @@ public class StringType extends Type {
     @Override
     public boolean sameType(Type otherType) {
         if (otherType instanceof StringType){
-            if (this.getName().getName().equals(((StringType)otherType).getName().getName()))
-                return true;
+            //if (this.getName().getName().equals(((StringType)otherType).getName().getName()))
+            return true;
         }return false;
         //throw new UnsupportedOperationException("not yet implemented");
     }
