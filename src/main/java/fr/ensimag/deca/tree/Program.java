@@ -37,7 +37,6 @@ public class Program extends AbstractProgram {
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify program: start");
         main.verifyMain(compiler);
-        compiler.getErrorManagementUnit().writeListError(compiler);
         //throw new UnsupportedOperationException("not yet implemented");
         // LOG.debug("verify program: end");
     }
@@ -48,6 +47,7 @@ public class Program extends AbstractProgram {
         compiler.addComment("Main program");
         main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());
+        compiler.getErrorManagementUnit().writeListError(compiler);
     }
 
     @Override

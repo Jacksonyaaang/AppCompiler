@@ -37,6 +37,7 @@ public class ListError {
             throw new IllegalArgumentException("le nom "+ err_name +" ne correspond à aucune erreur existante\n");
         }
         else{
+            System.out.println("ERROR is being made to value true " + err_name );
             this.list.replace(err_name, true);
         }
     }

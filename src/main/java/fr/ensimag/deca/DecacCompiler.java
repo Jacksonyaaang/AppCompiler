@@ -143,6 +143,10 @@ public class DecacCompiler {
      */
     private final IMAProgram program = new IMAProgram();
 
+    public IMAProgram getProgram() {
+        return program;
+    }
+
     /**
      * Cette unité est utilisée pour associer des adresses à des variables,
      * et elle est aussi utilisée pour calculer le nombre de variable temporaire necessaire pour executer 
@@ -168,28 +172,6 @@ public class DecacCompiler {
 
     public ListError getErrorManagementUnit() {
         return errorManagementUnit;
-    }
-
-    /**
-     * Cette structure de donnée stocke la liste des registeurs dans un ordre temporel
-     * qui seront retournée
-     */
-    private Stack<GPRegister> globalRegisterStack = new Stack<GPRegister>();
-
-    public Stack<GPRegister> getGlobalRegisterStack() {
-        return globalRegisterStack;
-    }
-
-    public void pushGlobalRegisterStack(GPRegister register) {
-        globalRegisterStack.push(register);
-    }
-
-    public GPRegister popGlobalRegisterStack() {
-        return globalRegisterStack.pop();
-    }
-
-    public GPRegister peekGlobalRegisterStack() {
-        return globalRegisterStack.peek();
     }
 
     /** The global environment for types (and the symbolTable) */

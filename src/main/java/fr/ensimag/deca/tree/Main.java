@@ -43,7 +43,6 @@ public class Main extends AbstractMain {
         declVariables.verifyListDeclVariable(compiler, EnvExpInit, null);
         insts.verifyListInst(compiler, EnvExpInit, null, null);
         LOG.debug("verify Main: end");
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
@@ -54,10 +53,10 @@ public class Main extends AbstractMain {
         int sizeStack = compiler.getStackManagement().measureStacksizeNeededMain(compiler);
         //On reserve de l'espace dans le stack
         if (sizeStack != 0){
-            compiler.addInstruction(new TSTO(new ImmediateInteger(sizeStack)));
+            compiler.getProgram().addFirst(new TSTO(new ImmediateInteger(sizeStack)));
             compiler.getErrorManagementUnit().activeError("stack_overflow_error");
-            compiler.addInstruction(new BOV(new Label("stack_overflow_error")));
-            compiler.addInstruction(new TSTO(new ImmediateInteger(sizeStack)));
+            compiler.getProgram().addFirst(new BOV(new Label("stack_overflow_error")));
+            compiler.getProgram().addFirst(new TSTO(new ImmediateInteger(sizeStack)));
         }
     }
     
