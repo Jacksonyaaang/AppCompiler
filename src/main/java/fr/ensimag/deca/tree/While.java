@@ -7,8 +7,14 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.BNE;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
+
 import java.io.PrintStream;
+import org.apache.log4j.Logger;
 import org.apache.commons.lang.Validate;
 
 /**
@@ -19,7 +25,7 @@ import org.apache.commons.lang.Validate;
 public class While extends AbstractInst {
     private AbstractExpr condition;
     private ListInst body;
-
+    private static final Logger LOG = Logger.getLogger(IfThenElse.class);
     public AbstractExpr getCondition() {
         return condition;
     }
@@ -37,9 +43,22 @@ public class While extends AbstractInst {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
-        throw new UnsupportedOperationException("not yet implemented");
+        LOG.debug("[IfThenElse][CodeGenInst] generating code for IfThenElse");
+        System.out.println("[IfThenElse][codeGenInst] generating code for IfThenElse");
+        System.out.println(compiler.getRegisterManagement());
+        Label while_begin=new Label("while_begin");
+        compiler.addLabel(while_begin);
+        this.condition.codeGenInst(compiler);
+        GPRegister Rret = this.condition.getRegisterDeRetour();
+        this.body.codeGenListInst(compiler);
+        compiler.addInstruction(new CMP(1,Rret));
+        compiler.addInstruction(new BEQ(while_begin));
     }
 
+    public void loadItemintoRegister(DecacCompiler compiler, GPRegister regReserved) throws CodeGenError {
+        throw new CodeGenError("[AbstractExpr] This method should not be called at this level, loadItemintoRegister");
+    }
+    
     @Override
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
