@@ -41,7 +41,8 @@ public class DeclVar extends AbstractDeclVar {
             varName.setDefinition(VDf);
             try{localEnv.declare(varName.getName(), varName.getExpDefinition());
             } catch (EnvironmentExp.DoubleDefException e) {
-                throw new ContextualError(e.getMessage(), varName.getLocation());
+                //System.out.println(e.getMessage());
+                throw new ContextualError(e.getMessage(), getLocation());
         }
     }
 
