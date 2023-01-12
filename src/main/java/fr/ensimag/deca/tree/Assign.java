@@ -36,7 +36,7 @@ public class Assign extends AbstractBinaryExpr {
         else{
             Type typOpRight = getRightOperand().verifyExpr(compiler, localEnv, currentClass);
             if (!typOpLeft.sameType(typOpRight))
-                throw new ContextualError("can't affecte read to this variable", getLocation());
+                throw new ContextualError("can't affect read to this variable", getLocation());
         }
         setType(typOpLeft);
         return getType();
