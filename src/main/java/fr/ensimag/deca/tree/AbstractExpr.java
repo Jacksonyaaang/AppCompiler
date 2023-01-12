@@ -13,6 +13,10 @@ import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 import fr.ensimag.ima.pseudocode.instructions.PUSH;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+//import fr.ensimag.ima.pseudocode.instructions.WBOOL;
 
 import java.io.PrintStream;
 import java.util.Stack;
@@ -181,14 +185,32 @@ public abstract class AbstractExpr extends AbstractInst {
      * @param compiler
      */
     protected void codeGenPrint(DecacCompiler compiler) throws CodeGenError {
-        throw new UnsupportedOperationException("not yet implemented");
+        this.codeGenInst(compiler);
+        if(getType() == compiler.environmentType.INT){
+            compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
+            compiler.addInstruction(new WINT());
+        }
+        else if(getType() == compiler.environmentType.FLOAT){
+            compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
+            compiler.addInstruction(new WFLOAT());
+        }
+        // else if(getType() == compiler.environmentType.BOOLEAN){
+        //     compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
+        //     compiler.addInstruction(new WBOOLEAN());
+            
+        // }
     }
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
         //A FAIRE
         LOG.debug("i have visited abstract expr");
+<<<<<<< HEAD
         System.out.println("[Abstractexpr][codeGenInst] I have visited abstract expr");
+=======
+        System.out.println("i have visited abstract expr");
+        
+>>>>>>> remotes/origin/victor
     }
 
     /**
@@ -200,9 +222,13 @@ public abstract class AbstractExpr extends AbstractInst {
         GPRegister regReserved = null;
         if (compiler.getRegisterManagement().isThereAnAvaliableRegsiterSup2()){
             regReserved = compiler.getRegisterManagement().getAnEmptyStableRegisterAndReserveIt(); 
+<<<<<<< HEAD
             assert(regReserved !=null );
             System.out.println("[Abstractexpr][[LoadGencode]  Reserving an non empty register with the name " + regReserved);
             LOG.debug("[Abstractexpr][LoadGencode]  Reserving an non empty register with the name " + regReserved);
+=======
+            
+>>>>>>> remotes/origin/victor
         }
         else{
             regReserved = compiler.getRegisterManagement().getAUsedStableRegisterAndKeepItReserved(); 

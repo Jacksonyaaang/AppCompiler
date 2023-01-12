@@ -6,10 +6,18 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.EnvironmentExp;
+<<<<<<< HEAD
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 import fr.ensimag.deca.codegen.CodeGenError;
 import org.apache.log4j.Logger;
 
+=======
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.DVal;
+import org.apache.log4j.Logger;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+>>>>>>> remotes/origin/victor
 /**
  * Assignment, i.e. lvalue = expr.
  *
@@ -17,6 +25,7 @@ import org.apache.log4j.Logger;
  * @date 01/01/2023
  */
 public class Assign extends AbstractBinaryExpr {
+    private static final Logger LOG = Logger.getLogger(Assign.class);
 
     @Override
     public AbstractLValue getLeftOperand() {
@@ -25,10 +34,24 @@ public class Assign extends AbstractBinaryExpr {
         return (AbstractLValue)super.getLeftOperand();
     }
 
+<<<<<<< HEAD
     private static final Logger LOG = Logger.getLogger(IntLiteral.class);
+=======
+    // protected void codeGenInst(DecacCompiler compiler) {
+    //     compiler.addInstruction();
+    // }
+
+>>>>>>> remotes/origin/victor
 
     public Assign(AbstractLValue leftOperand, AbstractExpr rightOperand) {
         super(leftOperand, rightOperand);
+    }
+
+    public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultregister){
+        LOG.debug("[Assign][executeBinaryOperation] generating code for int literal value " );
+        System.out.println("[Assign][executeBinaryOperation] generating code for assignement of: " 
+                        +val + " to " + resultregister);
+        compiler.addInstruction(new LOAD(val, resultregister));
     }
 
     @Override
