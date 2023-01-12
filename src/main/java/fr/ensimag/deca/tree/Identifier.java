@@ -37,6 +37,9 @@ import org.mockito.internal.verification.RegisteredInvocations;
  */
 public class Identifier extends AbstractIdentifier {
     
+    private static final Logger LOG = Logger.getLogger(UnaryMinus.class);
+
+
     @Override
     protected void checkDecoration() {
         if (getDefinition() == null) {
@@ -51,12 +54,14 @@ public class Identifier extends AbstractIdentifier {
     
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{   
+        LOG.debug("[Identifier][codeGenInst] Loading identifier into memory" + this.getName());
         this.setRegisterDeRetour(this.LoadGencode(compiler));
     }
 
     @Override
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
         assert( reg != null);
+        LOG.debug("[Identifier][loadItemintoRegister] Loading " + this.getName() + "into the register " + reg);
         compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), reg),
                                     "loading "+getName()+ " into memory");
     }
@@ -193,12 +198,14 @@ public class Identifier extends AbstractIdentifier {
                            ClassDefinition currentClass) throws ContextualError {
         //System.out.println("On est dans Identifier.java");
         if(!localEnv.getExp().containsKey(getName())){
-            throw new ContextualError("L'identificateur n'est pas défini",getLocation());
+            throw new ContextualError("L'identificateur n'est pas défini ",getLocation());
         }
         System.out.println(getName().getName());
         Definition Defi = localEnv.get(name);
         setDefinition(Defi);
-        return localEnv.get(name).getType();
+        setType(localEnv.get(name).getType());
+        return getType();
+        //return localEnv.get(name).getType();
     }
 
     /**
@@ -210,15 +217,15 @@ public class Identifier extends AbstractIdentifier {
         //verifions que le type de definition n'est pas null
         System.out.println("On est dans Identifier.java");
         TypeDefinition typeDefi = compiler.environmentType.defOfType(name);
-        //System.out.println();
         if (typeDefi == null){
             System.out.println("typeDefi est null");
             throw new ContextualError("le type de l'ident n'est pas defini", getLocation());
-        }setDefinition(typeDefi);
-        if (getDefinition() == null)
+        }
+        setDefinition(typeDefi);
+        if (getDefinition() == null){
             System.out.println("getDefinition est  null");
+        }
         return getDefinition().getType();
-        //throw new UnsupportedOperationException("not yet implemented");
     }
     
     

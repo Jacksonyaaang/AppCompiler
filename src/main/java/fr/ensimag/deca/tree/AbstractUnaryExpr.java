@@ -47,17 +47,16 @@ public abstract class AbstractUnaryExpr extends AbstractExpr {
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{    
         LOG.debug("[AbstractUnaryExpr][codeGenInst] generating code for an UnaryOperation");
-        //System.out.println("[AbstractUnaryExpr][codeGenInst] Exploring operand");
         LOG.debug("[AbstractUnaryExpr][codeGenInst] Exploring operand");
         getOperand().codeGenInst(compiler);
         this.addUnaryInstruction(compiler,getOperand().getRegisterDeRetour());
-        LOG.debug("[AbstractUnaryExpr]unary minus operand" + getOperand().getRegisterDeRetour());
-        //System.out.println("[AbstractUnaryExpr]unary minus operand" + getOperand().getRegisterDeRetour());
+        LOG.debug("[AbstractUnaryExpr]unary General operand" + getOperand().getRegisterDeRetour());
+        this.setRegisterDeRetour(getRegisterDeRetour());
         this.transferPopRegisters(getOperand().getRegisterToPop());
     }
 
     public void addUnaryInstruction(DecacCompiler compiler, GPRegister registerDeRetour) throws CodeGenError {
-        throw new CodeGenError("cette methode ne doit pas être invoqué à ce niveau");
+        throw new CodeGenError("cette methode ne doit pas être invoqué à ce niveau, class name = " + this.getClass().getSimpleName());
     }
 
 

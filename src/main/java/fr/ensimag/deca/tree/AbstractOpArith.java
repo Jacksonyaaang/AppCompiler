@@ -54,9 +54,9 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         else if (getLeftOperand().getType().isInt() && getRightOperand().getType().isFloat()){
             ConvFloat cF = new ConvFloat(getLeftOperand());
             cF.verifyExpr(compiler, localEnv, currentClass);
-            setLeftOperand(cF);
+            setLeftOperand(cF); 
             //setLeftOperand(new ConvFloat(getLeftOperand()));
-            System.out.println("jsuis bien là int float");
+            System.out.println("Je suis dans int float");
             setType(compiler.environmentType.FLOAT);
             //return getType();
         } else if (getLeftOperand().getType().isFloat() && getRightOperand().getType().isFloat()){

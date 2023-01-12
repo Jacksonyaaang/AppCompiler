@@ -27,6 +27,7 @@ public class UnaryMinus extends AbstractUnaryExpr {
 
     @Override
     public void addUnaryInstruction(DecacCompiler compiler, GPRegister registerDeRetour) throws CodeGenError {
+        LOG.debug("[UnaryMinus][addUnaryInstruction] doing an unary minus operation with "+ registerDeRetour); 
         compiler.addInstruction(new OPP(registerDeRetour, registerDeRetour), "Doing an unary minus");
     }
 
@@ -39,10 +40,7 @@ public class UnaryMinus extends AbstractUnaryExpr {
                 throw new ContextualError("Not ne s'applique qu'au boolean ", getLocation());
             setType(compiler.environmentType.BOOLEAN);
             return getType();
-        //throw new UnsupportedOperationException("not yet implemented");
     }
-
-
 
 
 

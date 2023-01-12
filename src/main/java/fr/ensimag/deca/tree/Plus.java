@@ -40,7 +40,7 @@ public class Plus extends AbstractOpArith {
             compiler.addInstruction(new BOV(new Label("overflow_error")), "Checking for overflow since "
                                                                         +"the operation is between two floats ");
             compiler.getErrorManagementUnit().activeError("overflow_error");
-            }
+        }
     }
     
 

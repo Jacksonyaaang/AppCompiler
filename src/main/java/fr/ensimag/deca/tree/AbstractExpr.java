@@ -156,8 +156,7 @@ public abstract class AbstractExpr extends AbstractInst {
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
         System.out.println("On est dans AbstractExpr.java");
-            verifyExpr(compiler, localEnv, currentClass);
-        //throw new UnsupportedOperationException("not yet implemented");
+        verifyExpr(compiler, localEnv, currentClass);
     }
 
     /**
@@ -177,7 +176,6 @@ public abstract class AbstractExpr extends AbstractInst {
             else{
                 throw new ContextualError("la condition doit être booléan", getLocation());
             }
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     /**
