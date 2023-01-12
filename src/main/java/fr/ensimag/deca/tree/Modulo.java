@@ -3,7 +3,11 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.REM;
+import fr.ensimag.ima.pseudocode.Label;
 
 import org.apache.log4j.Logger;
 
@@ -34,20 +38,21 @@ public class Modulo extends AbstractOpArith {
     }
 
     @Override
-    public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultregister) throws CodeGenError {
+    public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
         LOG.debug("[Modulo][executeBinaryOperation] Running modulo operation " );
-        System.out.println("[Modulo][executeBinaryOperation] generating code for modulo between: " 
-                                            +val + " and " + resultregister);
+        //System.out.println("[Modulo][executeBinaryOperation] generating code for modulo between: " 
+                                //            +val + " and " + resultRegister);
+        LOG.debug("[Modulo][executeBinaryOperation] generating code for modulo between: " 
+                    +val + " and " + resultRegister);
         if (getConvNeeded()){
             addConvertInstructions(compiler);
         }
-        if (!getWorkWithFloats()){
-            compiler.addInstruction(new REM(val, resultregister));
-        }
-        else{
-            //A FAIRE, VERIFIE S'IL Y A UNE CHOSE A FAIRE POUR LES FLOAT
-            compiler.addInstruction(new REM(val, resultregister));
-        }
+        DVal literal0 = new ImmediateInteger(0);
+        compiler.addInstruction(new CMP(literal0, resultRegister));                                            
+        compiler.addInstruction(new BEQ(new Label("div0_error")), "Checking for modulo by 0 "
+                                    +"the operation is between two ints ");
+        compiler.getErrorManagementUnit().activeError("div0_error");
+        compiler.addInstruction(new REM(val, resultRegister));
     }
 
 

@@ -79,22 +79,18 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
     }
 
     /**
-     * Cette méthode est utilisée pour plusieurs operations binaires, par exemple les operation 
-     * arithmétique, inégalitée, égalité //A FAIRE SÉPCIFIER le reste
+     * codeGenInst Cette méthode est utilisée pour plusieurs operations binaires, par exemple les operation 
+     * arithmétique, inégalitée, égalité, operation d'inégalité
      */
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{    
         LOG.debug("[AbstractBinaryExpr][codeGenInst] generating code for abstact binary expression ");
-        System.out.println("[AbstractBinaryExpr][codeGenInst] ---- Start ---- Generating code for abstact binary expression");
-        System.out.println(compiler.getRegisterManagement());
-        System.out.println("[AbstractBinaryExpr][codeGenInst] Exploring Left");
+        //LOG.debug(compiler.getRegisterManagement());
         LOG.debug("[AbstractBinaryExpr][codeGenInst] Exploring Left");
         checkIfWeWorkWithFloatAndIfConvIsNeeded(compiler);
         getLeftOperand().codeGenInst(compiler);
-        System.out.println("Left register " + getLeftOperand().getRegisterDeRetour());
-        
-        //La méthode dans le if, vérifie s'il s'agit d'un identificateur et dans ce cas 
-        //elle exploitra les adresses.
+        LOG.debug(" [AbstractBinaryExpr][codeGenInst] Left register " + getLeftOperand().getRegisterDeRetour());
+        //S'il s'agit d'un identificateur
         if (rightOperandIdentifier(compiler, rightOperand) != null){
             this.executeBinaryOperation( compiler, ((Identifier) getRightOperand()).getExpDefinition().getOperand(), 
                                     getLeftOperand().getRegisterDeRetour());
@@ -117,7 +113,6 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         getRightOperand().popRegisters(compiler);
         this.transferPopRegisters(getLeftOperand().getRegisterToPop());
         compiler.getRegisterManagement().decrementOccupationRegister(getRightOperand().getRegisterDeRetour());
-        //compiler.getRegisterManagement().freeRegister(getLeftOperand().getRegisterDeRetour());
     }
 
     public void checkIfWeWorkWithFloatAndIfConvIsNeeded(DecacCompiler compiler){
@@ -157,20 +152,21 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
      * au different type d'operation binaire (par exemple addition, )
      * @param compiler
      * @param val
-     * @param resultregister
+     * @param resultRegister
      */
-    public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultregister) throws CodeGenError {
+    public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
         throw new CodeGenError("This method should not be visited");
     }
 
     private DAddr rightOperandIdentifier(DecacCompiler compiler,AbstractExpr expr) throws CodeGenError {
-        if (!convNeeded && expr instanceof Identifier) {
+        if (!convNeeded && !(this instanceof Divide) && expr instanceof Identifier) {
             return ((Identifier) expr).getExpDefinition().getOperand();
         }
-        System.out.println("[AbstractBinaryExpr][codeGenInst] Exploring Right");
+        //System.out.println("[AbstractBinaryExpr][codeGenInst] Exploring Right");
         LOG.debug("[AbstractBinaryExpr][codeGenInst] Exploring Right");           
         getRightOperand().codeGenInst(compiler);
-        System.out.println("Right register equal " + getRightOperand().getRegisterDeRetour());
+        //System.out.println("Right register equal " + getRightOperand().getRegisterDeRetour());
+        LOG.debug("Right register equal " + getRightOperand().getRegisterDeRetour());
         return null;
     }
 

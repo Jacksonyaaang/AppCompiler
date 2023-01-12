@@ -5,6 +5,11 @@ import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -43,10 +48,17 @@ public class Main extends AbstractMain {
 
     @Override
     protected void codeGenMain(DecacCompiler compiler) throws CodeGenError{
-        // A FAIRE: traiter les déclarations de variables.
         compiler.addComment("Beginning of main instructions:");
         declVariables.codeGenListDecl(compiler);
         insts.codeGenListInst(compiler);
+        int sizeStack = compiler.getStackManagement().measureStacksizeNeededMain(compiler);
+        //On reserve de l'espace dans le stack
+        if (sizeStack != 0){
+            compiler.addInstruction(new TSTO(new ImmediateInteger(sizeStack)));
+            compiler.getErrorManagementUnit().activeError("stack_overflow_error");
+            compiler.addInstruction(new BOV(new Label("stack_overflow_error")));
+            compiler.addInstruction(new TSTO(new ImmediateInteger(sizeStack)));
+        }
     }
     
     @Override

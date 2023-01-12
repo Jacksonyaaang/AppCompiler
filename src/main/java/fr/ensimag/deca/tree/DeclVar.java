@@ -55,7 +55,7 @@ public class DeclVar extends AbstractDeclVar {
             }
         this.varName.getExpDefinition().setOperand(new RegisterOffset(compiler.incrementGbCompiler(), Register.GB)); 
         LOG.debug("Saving " + this.varName.getName() + " into " + this.varName.getExpDefinition().getOperand());
-        System.out.println("Saving " + this.varName.getName() + " into " + this.varName.getExpDefinition().getOperand());
+        System.out.println("[DeclVar] Saving " + this.varName.getName() + " into " + this.varName.getExpDefinition().getOperand());
     }
 
     @Override

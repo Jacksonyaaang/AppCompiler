@@ -1,9 +1,7 @@
 
 {
-    A a = new A();
     int x;
     int y;
-
     x=readInt() ;
     println(0.5*(x*x)) ;
 }

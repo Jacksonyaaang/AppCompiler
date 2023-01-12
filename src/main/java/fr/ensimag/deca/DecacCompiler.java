@@ -47,9 +47,8 @@ import org.apache.log4j.Logger;
  * @date 01/01/2023
  */
 public class DecacCompiler {
-    private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
-    private ListError erreurs;
 
+    private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
 
     /**
      * Portable newline character.
@@ -161,6 +160,17 @@ public class DecacCompiler {
     }
 
     /**
+     * Cette unité est utilisée pour associer des adresses à des variables,
+     * et elle est aussi utilisée pour calculer le nombre de variable temporaire necessaire pour executer 
+     * les blocs 
+     */
+    public final ListError errorManagementUnit = new ListError();  
+
+    public ListError getErrorManagementUnit() {
+        return errorManagementUnit;
+    }
+
+    /**
      * Cette structure de donnée stocke la liste des registeurs dans un ordre temporel
      * qui seront retournée
      */
@@ -190,7 +200,15 @@ public class DecacCompiler {
         return symbolTable.create(name);
     }
 
-    
+    private boolean printHex;
+
+    public boolean isPrintHex() {
+        return printHex;
+    }
+
+    public void setPrintHex(boolean printHex) {
+        this.printHex = printHex;
+    }
 
     /**
      * Run the compiler (parse source file, generate code)

@@ -2,4 +2,5 @@
     int x = 5;
     int a;
     a = 4*x;
+    print(a);
 }

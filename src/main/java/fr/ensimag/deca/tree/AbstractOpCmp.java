@@ -2,6 +2,11 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
+
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.deca.DecacCompiler;
 
 /**
  *
@@ -12,6 +17,11 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
 
     public AbstractOpCmp(AbstractExpr leftOperand, AbstractExpr rightOperand) {
         super(leftOperand, rightOperand);
+    }
+
+    @Override
+    public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
+        throw new CodeGenError("Cette fonction ne doit pas être appeller à ce niveau");
     }
 
     @Override

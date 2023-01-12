@@ -17,6 +17,7 @@ import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 //import fr.ensimag.ima.pseudocode.instructions.WBOOL;
+import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
 
 import java.io.PrintStream;
 import java.util.Stack;
@@ -192,25 +193,24 @@ public abstract class AbstractExpr extends AbstractInst {
         }
         else if(getType() == compiler.environmentType.FLOAT){
             compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
-            compiler.addInstruction(new WFLOAT());
+            if(compiler.isPrintHex())
+                compiler.addInstruction(new WFLOAT());
+            else{
+                compiler.addInstruction(new WFLOATX());
+            }
         }
-        // else if(getType() == compiler.environmentType.BOOLEAN){
-        //     compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
-        //     compiler.addInstruction(new WBOOLEAN());
-            
-        // }
+        else if(getType() == compiler.environmentType.BOOLEAN){
+            compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
+            compiler.addInstruction(new WINT());
+        }
+        //PRINT HEXA
     }
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
-        //A FAIRE
-        LOG.debug("i have visited abstract expr");
-<<<<<<< HEAD
-        System.out.println("[Abstractexpr][codeGenInst] I have visited abstract expr");
-=======
-        System.out.println("i have visited abstract expr");
-        
->>>>>>> remotes/origin/victor
+        LOG.debug("[Abstractexpr][codeGenInst] I have visited abstract expr");
+        //System.out.println("[Abstractexpr][codeGenInst] I have visited abstract expr");
+        throw new CodeGenError("[Abstractexpr][codeGenInst]Cette méthode ne doit jamais être appélée");
     }
 
     /**
@@ -220,20 +220,16 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     protected GPRegister LoadGencode(DecacCompiler compiler) throws CodeGenError {
         GPRegister regReserved = null;
-        if (compiler.getRegisterManagement().isThereAnAvaliableRegsiterSup2()){
+        if (compiler.getRegisterManagement().areThereAnAvaliableRegsiterSup2()){
             regReserved = compiler.getRegisterManagement().getAnEmptyStableRegisterAndReserveIt(); 
-<<<<<<< HEAD
             assert(regReserved !=null );
-            System.out.println("[Abstractexpr][[LoadGencode]  Reserving an non empty register with the name " + regReserved);
+            //System.out.println("[Abstractexpr][[LoadGencode]  Reserving an non empty register with the name " + regReserved);
             LOG.debug("[Abstractexpr][LoadGencode]  Reserving an non empty register with the name " + regReserved);
-=======
-            
->>>>>>> remotes/origin/victor
         }
         else{
             regReserved = compiler.getRegisterManagement().getAUsedStableRegisterAndKeepItReserved(); 
             assert(regReserved !=null );
-            System.out.println("[Abstractexpr][LoadGencode]  Reserving an used register with the name " + regReserved);
+            //System.out.println("[Abstractexpr][LoadGencode]  Reserving an used register with the name " + regReserved);
             LOG.debug("[Abstractexpr][LoadGencode]  Reserving an used register with the name " + regReserved);
             compiler.addInstruction(new PUSH(regReserved));
             this.getRegisterToPop().push(regReserved);

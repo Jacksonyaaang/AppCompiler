@@ -37,7 +37,7 @@ public class IntLiteral extends AbstractExpr {
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{   
         LOG.debug("[IntLiteral][codeGenInst] generating code for int literal value " + getValue());
-        System.out.println("[IntLiteral][codeGenInst] generating code for int literal value " + getValue());
+        //System.out.println("[IntLiteral][codeGenInst] generating code for int literal value " + getValue());
         System.out.println(compiler.getRegisterManagement());
         this.setRegisterDeRetour(this.LoadGencode(compiler));
     }
@@ -45,7 +45,7 @@ public class IntLiteral extends AbstractExpr {
     @Override
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
         assert(reg != null);
-        System.out.println("[IntLiteral][loadItemintoRegister] loading "+getValue()+ " into memory at register " + reg);
+        //System.out.println("[IntLiteral][loadItemintoRegister] loading "+getValue()+ " into memory at register " + reg);
         LOG.debug("[IntLiteral][loadItemintoRegister] loading "+getValue()+ " into memory at register " + reg);
         compiler.addInstruction(new LOAD(new ImmediateInteger(value) , reg),
                                      "loading "+getValue()+ " into memory"); 
@@ -60,12 +60,12 @@ public class IntLiteral extends AbstractExpr {
         //throw new UnsupportedOperationException("not yet implemented");
     }
 
-    //victor
-    @Override
-    protected void codeGenPrint(DecacCompiler compiler) {
-        compiler.addInstruction(new LOAD(value,Register.getR(1)));
-        compiler.addInstruction(new WINT());
-    }
+    // //victor
+    // @Override
+    // protected void codeGenPrint(DecacCompiler compiler) {
+    //     compiler.addInstruction(new LOAD(value,Register.getR(1)));
+    //     compiler.addInstruction(new WINT());
+    // }
 
 
     @Override

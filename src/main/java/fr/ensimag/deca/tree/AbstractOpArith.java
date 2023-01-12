@@ -24,7 +24,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     }
 
     @Override
-    public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultregister) throws CodeGenError {
+    public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
         //A FAIRE, check overflow, and create a function that checks types and converts values when needed
         //Look for types of int literals and float literals and variable types  
         throw new CodeGenError("Method should not be called at this level");

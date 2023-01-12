@@ -1,5 +1,10 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.GPRegister;
+
 
 /**
  *
@@ -10,6 +15,11 @@ public abstract class AbstractOpExactCmp extends AbstractOpCmp {
 
     public AbstractOpExactCmp(AbstractExpr leftOperand, AbstractExpr rightOperand) {
         super(leftOperand, rightOperand);
+    }
+
+    @Override
+    public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
+        throw new CodeGenError("Cette fonction ne doit pas être appeller à ce niveau");
     }
 
 
