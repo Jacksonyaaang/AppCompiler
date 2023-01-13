@@ -39,6 +39,8 @@ options {
     protected IfThenElse temptree = null;
     protected Initialization tempInit = null;
     protected NoInitialization tempInitNoInit = null;
+    protected StringBuilder sb = null;  
+
 }
 
 prog returns[AbstractProgram tree]
@@ -470,7 +472,11 @@ literal returns[AbstractExpr tree]
         setLocation($tree, $fd);
         }
     | STRING {
-        $tree = new StringLiteral($STRING.text);
+        this.sb = new StringBuilder();
+        this.sb.append($STRING.text); 
+        this.sb.deleteCharAt(0);
+        this.sb.deleteCharAt(sb.length()-1);
+        $tree = new StringLiteral(this.sb.toString());
         setLocation($tree, $STRING);
         }
     | TRUE {

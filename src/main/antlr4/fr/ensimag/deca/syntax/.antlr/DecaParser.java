@@ -131,6 +131,8 @@ public class DecaParser extends AbstractDecaParser {
 	    protected IfThenElse temptree = null;
 	    protected Initialization tempInit = null;
 	    protected NoInitialization tempInitNoInit = null;
+	    protected StringBuilder sb = null;  
+
 
 	public DecaParser(TokenStream input) {
 		super(input);
@@ -2378,7 +2380,11 @@ public class DecaParser extends AbstractDecaParser {
 				setState(447);
 				((LiteralContext)_localctx).STRING = match(STRING);
 
-				        ((LiteralContext)_localctx).tree =  new StringLiteral((((LiteralContext)_localctx).STRING!=null?((LiteralContext)_localctx).STRING.getText():null));
+				        this.sb = new StringBuilder();
+				        this.sb.append((((LiteralContext)_localctx).STRING!=null?((LiteralContext)_localctx).STRING.getText():null)); 
+				        this.sb.deleteCharAt(0);
+				        this.sb.deleteCharAt(sb.length()-1);
+				        ((LiteralContext)_localctx).tree =  new StringLiteral(this.sb.toString());
 				        setLocation(_localctx.tree, ((LiteralContext)_localctx).STRING);
 				        
 				}
