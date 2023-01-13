@@ -10,7 +10,7 @@
 {
 	int a = 0;
 	int b = 1;
-	float f = O.5;
+	float f = 0.5;
 	boolean bool = true;
 	if (a == b){
 		println(" a == b ");
