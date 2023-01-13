@@ -1,0 +1,8 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:37) - verify program: start
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:30) - verify Main: start
+On est dans ListDeclVar.java
+On est dans Identifier.java
+On est dans Initialization.java
+On est dans AbstractExpr.java
+On est dans IntLiteral.java
+src/test/deca/context/invalid/aff_notSameType_01_so.deca:15:18: Not expected type

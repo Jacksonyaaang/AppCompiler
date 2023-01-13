@@ -35,7 +35,8 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
         System.out.println(getLeftOperand().getType().getName().getName());
         System.out.println(getRightOperand().getType().getName().getName());
         if((!getLeftOperand().getType().isFloat() && !(getLeftOperand().getType()).isInt()) ||
-            (!getRightOperand().getType().isInt() && !(getLeftOperand().getType()).isFloat())){
+            (!getRightOperand().getType().isInt() && !(getLeftOperand().getType()).isFloat()) ||
+            !getRightOperand().getType().isBoolean() && !(getLeftOperand().getType()).isBoolean()){
             throw new ContextualError("Incompatible pour la comparaison",getLocation());
         }
         if (getLeftOperand().getType().isFloat() && getRightOperand().getType().isInt()){
