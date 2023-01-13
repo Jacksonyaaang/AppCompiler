@@ -1,0 +1,20 @@
+// Description:
+//    Teste la déclaration de variable, initialisée ou non.
+//
+// Resultats:
+//    5, 10.5
+//
+// Historique:
+//    cree le 13/01/2023
+
+{
+int a = 5, c;
+float f = 10.5;
+boolean b = false;
+
+int a2;
+float f2;
+boolean b2;
+
+print(a, f);
+}

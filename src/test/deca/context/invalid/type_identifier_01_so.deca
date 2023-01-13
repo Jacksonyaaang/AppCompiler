@@ -1,0 +1,14 @@
+// Description:
+//    Teste le typage lors de la déclaration de variable.
+//
+// Resultats:
+//    Ligne 13: Le type String n'est pas défini.
+//
+// Historique:
+//    cree le 13/01/2023
+
+
+{
+// Doit être refuse.
+String str;
+}
