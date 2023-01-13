@@ -1,0 +1,13 @@
+// Description:
+//    Operations arithmetiques
+//
+// Resultats:
+//    Ligne 12: Les opérations arithmétiques ne sont compatibles qu'avec des int et des float.
+// 
+// Historique:
+//    cree le 13/01/2023
+{
+	float b = 0.5;
+	boolean c = true;
+	b = b + c;
+}

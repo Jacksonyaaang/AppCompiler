@@ -1,0 +1,13 @@
+// Description:
+//    UnaryMinus
+//
+// Resultats:
+//    Ligne 12: Les opérations booléennes ne sont compatibles qu'avec des booleans.
+// 
+// Historique:
+//    cree le 13/01/2023
+{
+	boolean b = true;
+	boolean c = false;
+	b = -c;
+}

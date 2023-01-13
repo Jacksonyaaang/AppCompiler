@@ -1,0 +1,7 @@
+//comparaison Incompatible entre a et b à la ligne 5
+{
+	int a = 0;
+	boolean b = true;
+	if (a == b){
+	}
+}
