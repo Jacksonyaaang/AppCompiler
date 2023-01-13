@@ -1,3 +1,8 @@
+// Description:
+//    operations arithmetiques Moins.
+//
+// Historique:
+//    cree le 13/01/2023
 {
 	int aI = 0;
 	int bI = 1;
