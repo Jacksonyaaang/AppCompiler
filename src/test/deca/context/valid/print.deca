@@ -13,6 +13,5 @@
         boolean boo=true;
         print("println(b)");
         println(a, b);
-        print("very good!",a, b, boo);
 
 }

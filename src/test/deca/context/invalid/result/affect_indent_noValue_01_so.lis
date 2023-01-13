@@ -2,14 +2,12 @@ DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:38) - verify progr
 DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:36) - verify Main: start
 DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:52) - [ListDeclVar][verifyListDeclVariable]
 DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
-On est dans Identifier.java
 DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:214) - [Identifier][verifyType] Verify that declaration type is correct
 DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
 DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:146) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments
 DEBUG fr.ensimag.deca.tree.IntLiteral.verifyExpr(IntLiteral.java:57) - [IntLiteral][verifyExpr]
 DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:58) - Saving a into 1(GB)
 DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
-On est dans Identifier.java
 DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:214) - [Identifier][verifyType] Verify that declaration type is correct
 DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:58) - Saving c into 2(GB)
 DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]

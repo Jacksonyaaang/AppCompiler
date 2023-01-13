@@ -10,6 +10,7 @@
         int a=0;
         int c;
         float b =7.7;
+        boolean test = a instanceOf b;
 
 
         //attentre ils font les trus de classes

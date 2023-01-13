@@ -2,6 +2,9 @@
 
     int x = 18;
     int y = 5;
+    int a=0;
+    int b=99;
+    int c =7;
     boolean z = false;
 
     int plus = x + y;
@@ -10,17 +13,16 @@
     int divide = x / y;
     int multiply = x * y;
 
-    boolean equal = i == y;
-    boolean different = i!= y;
-    boolean and = x && y;
-    boolean or = x || y;
+    boolean equal = x == y;
+    boolean different = x!= y;
+
 
     boolean greaterOrEqual = x >= y;
     boolean greaterThan = x > y;
     boolean lowerOrEqual = x >= y;
-    boolean greaterThan = x >= y;
+    boolean greaterOrEuqualThan = x >= y;
 
     x = 2*(a+b+(c-5));
-    z = (x||y)&&(equal&&different||greaterOrEqual);
+    z = (equal&&different||greaterOrEqual);
 
 }
