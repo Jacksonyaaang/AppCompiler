@@ -1,18 +1,16 @@
-DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:37) - verify program: start
-DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:30) - verify Main: start
-On est dans ListDeclVar.java
-On est dans ListInst.java
-On est dans IfThenElse.java
-On est dans AbstractOpBool.java
-On est dans BooleanLiteral.java
-On est dans BooleanLiteral.java
-boolean
-boolean
-true
-true
-On est dans ListInst.java
-On est dans ListInst.java
-DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:39) - verify Main: end
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:38) - verify program: start
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:36) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:52) - [ListDeclVar][verifyListDeclVariable]
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]
+DEBUG fr.ensimag.deca.tree.IfThenElse.verifyInst(IfThenElse.java:48) - [IfThenElse][verifyInst] Verify the condition and the instructions of the if then else
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyCondition(AbstractExpr.java:184) - [AbstractExpr][verifyInst] Verify the condition of a While or ifEhenElse
+DEBUG fr.ensimag.deca.tree.AbstractOpBool.verifyExpr(AbstractOpBool.java:44) - [AbstractOpBool][verifyExpr] Verify the boolean expressions
+DEBUG fr.ensimag.deca.tree.BooleanLiteral.verifyExpr(BooleanLiteral.java:49) - [BooleanLiteral][verifyExpr]
+DEBUG fr.ensimag.deca.tree.BooleanLiteral.verifyExpr(BooleanLiteral.java:49) - [BooleanLiteral][verifyExpr]
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:45) - verify Main: end
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:40) - verify program: end
 `> [10, 0] Program
    +> ListDeclClass [List with 0 elements]
    `> [10, 0] Main

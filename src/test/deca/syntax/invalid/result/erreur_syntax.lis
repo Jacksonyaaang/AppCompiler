@@ -1,0 +1,11 @@
+Exception in thread "main" java.lang.AssertionError
+	at fr.ensimag.deca.syntax.DecaParser.list_inst(DecaParser.java:586)
+	at fr.ensimag.deca.syntax.DecaParser.block(DecaParser.java:277)
+	at fr.ensimag.deca.syntax.DecaParser.decl_method(DecaParser.java:2987)
+	at fr.ensimag.deca.syntax.DecaParser.class_body(DecaParser.java:2689)
+	at fr.ensimag.deca.syntax.DecaParser.class_decl(DecaParser.java:2579)
+	at fr.ensimag.deca.syntax.DecaParser.list_classes(DecaParser.java:2520)
+	at fr.ensimag.deca.syntax.DecaParser.prog(DecaParser.java:166)
+	at fr.ensimag.deca.syntax.DecaParser.parseProgram(DecaParser.java:129)
+	at fr.ensimag.deca.syntax.AbstractDecaParser.parseProgramAndManageErrors(AbstractDecaParser.java:40)
+	at fr.ensimag.deca.syntax.ManualTestSynt.main(ManualTestSynt.java:30)

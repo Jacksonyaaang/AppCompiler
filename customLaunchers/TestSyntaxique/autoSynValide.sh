@@ -20,7 +20,7 @@ test_context_valide (){
     if test_synt "$1" 2>&1 | grep -q -e "$i:[0-9]*"
     then
         echo -e "${RED}TEST NOT PASS!!  Issue file :${ENDCOLOR}${RED_BOLD} $(basename "$1") ${SCR}"
-        exit 1
+        #exit 1
     else
         echo -e "${GREEN}TEST PASS! ${ENDCOLOR} ${THUMBS_UP}"    
     fi

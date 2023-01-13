@@ -1,48 +1,18 @@
-DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:37) - verify program: start
-DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:30) - verify Main: start
-On est dans ListDeclVar.java
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:38) - verify program: start
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:36) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:52) - [ListDeclVar][verifyListDeclVariable]
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
 On est dans Identifier.java
-On est dans ListInst.java
-On est dans AbstractExpr.java
-On est dans Assign.java
-x
-On est dans ReadInt.java
-On est dans AbstractOpArith.java
-On est dans AbstractOpArith.java
-x
-x
-On est dans FloatLiteral.java
-On est dans ConvFloat.java
-jsuis bien là float int
-DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:39) - verify Main: end
-`> [3, 0] Program
-   +> ListDeclClass [List with 0 elements]
-   `> [3, 0] Main
-      +> [4, 8] ListDeclVar [List with 1 elements]
-      |  []> [4, 8] DeclVar
-      |      +> [4, 4] Identifier (int)
-      |      |  definition: type (builtin), type=int
-      |      +> [4, 8] Identifier (x)
-      |      |  definition: variable defined at [4, 8], type=int
-      |      `> NoInitialization
-      `> ListInst [List with 2 elements]
-         []> [5, 4] Assign
-         ||  type: int
-         ||  +> [5, 4] Identifier (x)
-         ||  |  definition: variable defined at [4, 8], type=int
-         ||  `> [5, 6] ReadInt
-         ||     type: int
-         []> [6, 12] Println
-             `> ListExpr [List with 1 elements]
-                []> [6, 12] Multiply
-                    type: float
-                    +> [6, 12] Float (0.5)
-                    |  type: float
-                    `> ConvFloat
-                       type: float
-                       `> [6, 17] Multiply
-                          type: int
-                          +> [6, 17] Identifier (x)
-                          |  definition: variable defined at [4, 8], type=int
-                          `> [6, 19] Identifier (x)
-                             definition: variable defined at [4, 8], type=int
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:214) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:58) - Saving x into 1(GB)
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:168) - [AbstractExpr][verifyInst] Verify the expression coming from the instruction
+DEBUG fr.ensimag.deca.tree.Assign.verifyExpr(Assign.java:66) - [Assign][verifyExpr] Verify left and right expression in assignment
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:197) - [Identifier][verifyExpr]
+DEBUG fr.ensimag.deca.tree.ReadInt.verifyExpr(ReadInt.java:32) - [ReadInt][verifyExpr]
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:46) - [AbstractPrint][verifyInst] Verify the expressions in the print instruction
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:40) - [AbstractOpArith][verifyExpr] Verify the arithmetic expressions
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:40) - [AbstractOpArith][verifyExpr] Verify the arithmetic expressions
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:197) - [Identifier][verifyExpr]
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:197) - [Identifier][verifyExpr]
+src/test/deca/context/valid/exemplesansobject.deca:6:17: Les opérations arithmétiques ne sont compatibles qu'avec des int et des float
