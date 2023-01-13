@@ -201,7 +201,8 @@ public class Identifier extends AbstractIdentifier {
         }
         Definition Defi = localEnv.get(name);
         setDefinition(Defi);
-        return localEnv.get(name).getType();
+        setType(localEnv.get(name).getType());
+        return getType();
     }
 
     /**
