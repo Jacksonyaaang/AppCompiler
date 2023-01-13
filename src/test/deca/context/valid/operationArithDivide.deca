@@ -15,6 +15,6 @@
 	//operations entre un int et un float
 	aF = aF / aI;
 	//operation entre un float et un int
-	aF = aI / aF
+	aF = aI / aF;
 }
 	
