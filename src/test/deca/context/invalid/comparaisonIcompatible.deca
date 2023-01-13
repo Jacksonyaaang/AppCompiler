@@ -1,4 +1,11 @@
-//comparaison Incompatible entre a et b à la ligne 5
+// Description:
+//    Comparaison
+//
+// Resultats:
+//    Ligne 12: Comparaison incompatible entre int et bool
+// 
+// Historique:
+//    cree le 13/01/2023
 {
 	int a = 0;
 	boolean b = true;

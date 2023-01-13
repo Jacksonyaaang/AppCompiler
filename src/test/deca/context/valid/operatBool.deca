@@ -1,0 +1,13 @@
+// Description:
+//    les operations sur les booléens.
+//
+//
+// Historique:
+//    cree le 13/01/2023
+{
+	boolean b1 = true;
+	boolean b2 = false;
+	b1 = b1 && b2;
+	b2 = b2 || b1;
+	b1 = !b1;
+}

@@ -1,3 +1,8 @@
+// Description:
+//    operations arithmetiques division.
+//
+// Historique:
+//    cree le 13/01/2023
 {
 	int aI = 0;
 	int bI = 1;
@@ -10,6 +15,6 @@
 	//operations entre un int et un float
 	aF = aF / aI;
 	//operation entre un float et un int
-	aF = aI / aF
+	aF = aI / aF;
 }
 	
