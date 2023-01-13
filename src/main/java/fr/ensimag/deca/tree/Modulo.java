@@ -34,11 +34,11 @@ public class Modulo extends AbstractOpArith {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
+            LOG.debug("[Modulo][verifyExpr]");
             getRightOperand().setType(getRightOperand().verifyExpr(compiler, localEnv, currentClass));
             getLeftOperand().setType(getLeftOperand().verifyExpr(compiler, localEnv, currentClass));
             if (!getLeftOperand().getType().isInt() || !getRightOperand().getType().isInt())
-                throw new ContextualError("les operandes pour Modlo doivent être des entiers", getLocation());
-        //throw new UnsupportedOperationException("not yet implemented");
+                throw new ContextualError("Les opérandes utilisées pour un calcul de modulo doivent être des entiers", getLocation());
             setType(compiler.environmentType.INT);
             return getType();
     }

@@ -46,7 +46,7 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         this.workWithFloats = workWithFloats;
     }
 
-    private static final Logger LOG = Logger.getLogger(IntLiteral.class);
+    private static final Logger LOG = Logger.getLogger(AbstractBinaryExpr.class);
 
     public AbstractExpr getLeftOperand() {
         return leftOperand;

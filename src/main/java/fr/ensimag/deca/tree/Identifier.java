@@ -36,8 +36,8 @@ import org.mockito.internal.verification.RegisteredInvocations;
  * @date 01/01/2023
  */
 public class Identifier extends AbstractIdentifier {
-    
-    private static final Logger LOG = Logger.getLogger(UnaryMinus.class);
+
+    private static final Logger LOG = Logger.getLogger(Identifier.class);
 
 
     @Override
@@ -196,11 +196,11 @@ public class Identifier extends AbstractIdentifier {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
                            ClassDefinition currentClass) throws ContextualError {
-        //System.out.println("On est dans Identifier.java");
+        LOG.debug("[Identifier][verifyExpr]");
+        //Envoie une ContextualError si l'identificateur n'est pas défini
         if(!localEnv.getExp().containsKey(getName())){
-            throw new ContextualError("L'identificateur n'est pas défini ",getLocation());
+            throw new ContextualError("L'identificateur " + getName().getName() + " n'est pas défini",getLocation());
         }
-        System.out.println(getName().getName());
         Definition Defi = localEnv.get(name);
         setDefinition(Defi);
         setType(localEnv.get(name).getType());
@@ -214,21 +214,18 @@ public class Identifier extends AbstractIdentifier {
      */
     @Override
     public Type verifyType(DecacCompiler compiler) throws ContextualError {
-        //verifions que le type de definition n'est pas null
         System.out.println("On est dans Identifier.java");
+        LOG.debug("[Identifier][verifyType] Verify that declaration type is correct");
         TypeDefinition typeDefi = compiler.environmentType.defOfType(name);
+        //Envoie une ContextualError si le type de définition est null
         if (typeDefi == null){
             System.out.println("typeDefi est null");
-            throw new ContextualError("le type de l'ident n'est pas defini", getLocation());
+            throw new ContextualError("Le type de l'identificateur " + getName().getName() + " n'est pas defini", getLocation());
         }
         setDefinition(typeDefi);
-        if (getDefinition() == null){
-            System.out.println("getDefinition est  null");
-        }
         return getDefinition().getType();
     }
-    
-    
+
     private Definition definition;
 
 
@@ -255,9 +252,6 @@ public class Identifier extends AbstractIdentifier {
     @Override
     protected void prettyPrintType(PrintStream s, String prefix) {
         Definition d = getDefinition();
-        if (d == null){
-            LOG.debug("La definition est null ");
-        }
         if (d != null) {
             s.print(prefix);
             s.print("definition: ");

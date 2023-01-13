@@ -23,7 +23,7 @@ import org.apache.log4j.Logger;
  */
 public class FloatLiteral extends AbstractExpr {
 
-    private static final Logger LOG = Logger.getLogger(IntLiteral.class);
+    private static final Logger LOG = Logger.getLogger(FloatLiteral.class);
 
     public float getValue() {
         return value;
@@ -42,10 +42,10 @@ public class FloatLiteral extends AbstractExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-            System.out.println("On est dans FloatLiteral.java");
+            LOG.debug("[FloatLiteral][verifyExpr]");
             setType(compiler.environmentType.FLOAT);
             return getType();
-        //throw new UnsupportedOperationException("not yet implemented");        
+
     }
 
 

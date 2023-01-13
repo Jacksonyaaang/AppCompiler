@@ -29,7 +29,7 @@ public class Assign extends AbstractBinaryExpr {
         return (AbstractLValue)super.getLeftOperand();
     }
 
-    private static final Logger LOG = Logger.getLogger(IntLiteral.class);
+    private static final Logger LOG = Logger.getLogger(Assign.class);
 
     public Assign(AbstractLValue leftOperand, AbstractExpr rightOperand) {
         super(leftOperand, rightOperand);
@@ -61,16 +61,17 @@ public class Assign extends AbstractBinaryExpr {
             ClassDefinition currentClass) throws ContextualError {
         LOG.debug("[Assign][verifyExpr] Verify left and right expression in assignment");
         Type typOpLeft = getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
+        //Si on n'utilise pas la méthode readInt ou readFloat lors de l'affectation, on vérifie l'expression de droite de l'affectation
         if (!(getRightOperand() instanceof AbstractReadExpr))
             setRightOperand(getRightOperand().verifyRValue(compiler, localEnv, currentClass, typOpLeft));
+        //Si on utilise la méthode readInt ou readFloat lors de l'affectation, on vérifie l'expression associée
         else{
             Type typOpRight = getRightOperand().verifyExpr(compiler, localEnv, currentClass);
             if (!typOpLeft.sameType(typOpRight))
-                throw new ContextualError("Impossible d'assigner read à cette variable", getLocation());
+                throw new ContextualError("Impossible d'assigner le résultat de la méthode read à cette variable", getLocation());
         }
         setType(typOpLeft);
         return getType();
-
     }
 
 
