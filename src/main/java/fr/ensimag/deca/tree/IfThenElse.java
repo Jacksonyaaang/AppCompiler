@@ -39,15 +39,16 @@ public class IfThenElse extends AbstractInst {
         this.thenBranch = thenBranch;
         this.elseBranch = elseBranch;
     }
-    
+
+
     @Override
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass, Type returnType)
-            throws ContextualError {
-            System.out.println("On est dans IfThenElse.java");
-            condition.verifyCondition(compiler, localEnv, currentClass);
-            thenBranch.verifyListInst(compiler, localEnv, currentClass, returnType);
-            elseBranch.verifyListInst(compiler, localEnv, currentClass, returnType);
+        ClassDefinition currentClass, Type returnType)
+        throws ContextualError {
+        LOG.debug("[IfThenElse][verifyInst] Verify the condition and the instructions of the if then else");
+        condition.verifyCondition(compiler, localEnv, currentClass);
+        thenBranch.verifyListInst(compiler, localEnv, currentClass, returnType);
+        elseBranch.verifyListInst(compiler, localEnv, currentClass, returnType);
     }
 
     @Override

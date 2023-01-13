@@ -30,7 +30,7 @@ public class ReadFloat extends AbstractReadExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
         ClassDefinition currentClass) throws ContextualError {
-        System.out.println("On est dans ReadFloat.java");
+        LOG.debug("[ReadFloat][verifyExpr]");
         setType(compiler.environmentType.FLOAT);
         return getType();  
     }

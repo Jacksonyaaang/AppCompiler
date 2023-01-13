@@ -40,11 +40,12 @@ public class DeclVar extends AbstractDeclVar {
     protected void verifyDeclVar(DecacCompiler compiler,
         EnvironmentExp localEnv, ClassDefinition currentClass)
         throws ContextualError {
-
+        LOG.debug("[DeclVar][verifyDecleVar] Verify a variable declaration");
         Type t = type.verifyType(compiler);
         type.setType(t);
+        //Vérification de la condition type =/= void de la règle 3.17
         if(t.isVoid()) {
-            throw new ContextualError("Le type ne peut pas être void", getLocation());
+            throw new ContextualError("Déclaraion de variables de type void impossible", getLocation());
         }
         initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
         VariableDefinition VDf = new VariableDefinition(type.getType(), varName.getLocation());
@@ -55,8 +56,7 @@ public class DeclVar extends AbstractDeclVar {
         }
         this.varName.getExpDefinition().setOperand(new RegisterOffset(compiler.incrementGbCompiler(), Register.GB)); 
         LOG.debug("Saving " + this.varName.getName() + " into " + this.varName.getExpDefinition().getOperand());
-        //System.out.println("[DeclVar] Saving " + this.varName.getName() + " into " + this.varName.getExpDefinition().getOperand());
-    }
+        }
 
     @Override
     public void codeGenDecl(DecacCompiler compiler) throws CodeGenError {

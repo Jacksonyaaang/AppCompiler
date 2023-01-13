@@ -143,14 +143,14 @@ public abstract class AbstractExpr extends AbstractInst {
             EnvironmentExp localEnv, ClassDefinition currentClass, 
             Type expectedType)
             throws ContextualError {
-        System.out.println("On est dans AbstractExpr.java");
         LOG.debug("[AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments" );
+        //Vérification du membre de droite d'une affectation
         Type t = this.verifyExpr(compiler, localEnv, currentClass);
-        LOG.debug("[AbstractExpr][verifyRValue] type " + t + " ,expected type " +expectedType);
+
+        // Conversion du membre droit en float s'il est de tye int et que le membre de gauche est de type float
         if (expectedType.isFloat() && t.isInt()){
             ConvFloat cF = new ConvFloat(this);
             cF.verifyExpr(compiler, localEnv, currentClass);
-
             LOG.debug("[Assign][verifyExpr] Conv int -> float");
             return cF;
         }
@@ -165,8 +165,7 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
-        System.out.println("On est dans AbstractExpr.java");
-        LOG.debug("[AbstractExpr][verifyInst] Verify the expression from the instruction");
+        LOG.debug("[AbstractExpr][verifyInst] Verify the expression coming from the instruction");
         verifyExpr(compiler, localEnv, currentClass);
     }
 
@@ -182,12 +181,14 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     void verifyCondition(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        LOG.debug("[AbstractExpr][verifyInst] Verify the expression from the instruction");
+        LOG.debug("[AbstractExpr][verifyInst] Verify the condition of a While or ifEhenElse");
         Type type_cond = verifyExpr(compiler, localEnv, currentClass);
+        //Si le type de la condition est null ou n'est pas boolean, on jette une ContextualError
         if (type_cond != null && type_cond.isBoolean()) setType(type_cond);
         else{
             throw new ContextualError("la condition doit être booléan", getLocation());
         }
+        setType(compiler.environmentType.BOOLEAN);
     }
 
     /**

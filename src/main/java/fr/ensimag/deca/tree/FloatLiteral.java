@@ -13,6 +13,7 @@ import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 /**
  * Single precision, floating-point literal
@@ -21,6 +22,8 @@ import org.apache.commons.lang.Validate;
  * @date 01/01/2023
  */
 public class FloatLiteral extends AbstractExpr {
+
+    private static final Logger LOG = Logger.getLogger(FloatLiteral.class);
 
     public float getValue() {
         return value;
@@ -39,10 +42,10 @@ public class FloatLiteral extends AbstractExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-            System.out.println("On est dans FloatLiteral.java");
+            LOG.debug("[FloatLiteral][verifyExpr]");
             setType(compiler.environmentType.FLOAT);
             return getType();
-        //throw new UnsupportedOperationException("not yet implemented");        
+
     }
 
     @Override

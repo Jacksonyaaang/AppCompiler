@@ -17,6 +17,8 @@ import fr.ensimag.deca.DecacCompiler;
  */
 public abstract class AbstractOpBool extends AbstractBinaryExpr {
 
+    private static final Logger LOG = Logger.getLogger(AbstractOpBool.class);
+
     int boolOpIdentifier = 0;
     
     public int getBoolOpIdentifier() {
@@ -39,21 +41,15 @@ public abstract class AbstractOpBool extends AbstractBinaryExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        System.out.println("On est dans AbstractOpBool.java");
+        LOG.debug("[AbstractOpBool][verifyExpr] Verify the boolean expressions");
+        //Vérification des expressions des membres de droite et de gauche
         getRightOperand().setType(getRightOperand().verifyExpr(compiler, localEnv, currentClass));
         getLeftOperand().setType(getLeftOperand().verifyExpr(compiler, localEnv, currentClass));
-
-        System.out.println(getLeftOperand().getType().getName().getName());
-        System.out.println(getRightOperand().getType().getName().getName());
-
-        System.out.println( getRightOperand().getType() instanceof  BooleanType);
-        System.out.println( getLeftOperand().getType() instanceof  BooleanType);
+        //Si les deux opérandes ne sont pas de type boolean, on envoie une ContextualError
         if (!(getLeftOperand().getType() instanceof BooleanType && getRightOperand().getType() instanceof  BooleanType)) {
-            throw new ContextualError("Opération compatible qu'avec des boolean",getLocation());
+            throw new ContextualError("Les opérations booléennes ne sont compatibles qu'avec des boolean",getLocation());
         }
-
-       // if(getLeftOperand().getType().sameType(getLeftOperand().getType()) && getRightOperand().getType().isBoolean() &&)
-
+        setType(compiler.environmentType.BOOLEAN);
         return compiler.environmentType.BOOLEAN;
     }
 
