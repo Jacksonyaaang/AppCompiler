@@ -36,9 +36,9 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
         getLeftOperand().setType(getLeftOperand().verifyExpr(compiler, localEnv, currentClass));
         //Si le type des opérandes n'est pas approprié (ni int ni float), une ContextualError est envoyée
         if((!getLeftOperand().getType().isFloat() && !(getLeftOperand().getType()).isInt()) ||
-            (!getRightOperand().getType().isInt() && !(getRightOperand().getType()).isFloat()) ||
-            !getLeftOperand().getType().isBoolean() && !getRightOperand().getType().isBoolean()){
-            throw new ContextualError("Les opérations de comparaison ne sont compatibles qu'avec des int et des float",getLocation());
+            (!getRightOperand().getType().isInt() && !(getLeftOperand().getType()).isFloat()) ||
+            !getRightOperand().getType().isBoolean() && !(getLeftOperand().getType()).isBoolean()){
+            throw new ContextualError("Incompatible pour la comparaison",getLocation());
         }
         // Conversion de l'opérande droite en float si elle est de tye int et que l'opérande gauche est de type float
         if (getLeftOperand().getType().isFloat() && getRightOperand().getType().isInt()){
