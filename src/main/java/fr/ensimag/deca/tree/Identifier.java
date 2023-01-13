@@ -248,8 +248,6 @@ public class Identifier extends AbstractIdentifier {
     @Override
     protected void prettyPrintType(PrintStream s, String prefix) {
         Definition d = getDefinition();
-        if (d == null)
-            System.out.println("la definition est null mecs");
         if (d != null) {
             s.print(prefix);
             s.print("definition: ");
