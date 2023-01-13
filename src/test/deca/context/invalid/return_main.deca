@@ -1,0 +1,11 @@
+// Description:
+//    Tester return dans le main
+//
+// Resultats:
+//    mismatched input ';' expecting {'(', '-', '!', 'readInt', 'readFloat', 'new', 'true', 'false', 'this', 'null', IDENT, INT, FLOAT, STRING}
+//
+// Historique:
+//    cree le 01/01/2023
+{
+	return;
+}

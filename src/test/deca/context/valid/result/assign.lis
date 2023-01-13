@@ -1,0 +1,49 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:37) - verify program: start
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:30) - verify Main: start
+On est dans ListDeclVar.java
+On est dans Identifier.java
+On est dans Initialization.java
+On est dans AbstractExpr.java
+On est dans IntLiteral.java
+On est dans Identifier.java
+On est dans ListInst.java
+On est dans AbstractExpr.java
+On est dans Assign.java
+a
+On est dans ReadInt.java
+On est dans AbstractExpr.java
+On est dans Assign.java
+b
+On est dans ReadFloat.java
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:39) - verify Main: end
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> [12, 14] ListDeclVar [List with 2 elements]
+      |  []> [11, 12] DeclVar
+      |  ||  +> [11, 8] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [11, 12] Identifier (a)
+      |  ||  |  definition: variable defined at [11, 12], type=int
+      |  ||  `> [11, 14] Initialization
+      |  ||     `> [11, 14] Int (0)
+      |  ||        type: int
+      |  []> [12, 14] DeclVar
+      |      +> [12, 8] Identifier (float)
+      |      |  definition: type (builtin), type=float
+      |      +> [12, 14] Identifier (b)
+      |      |  definition: variable defined at [12, 14], type=float
+      |      `> NoInitialization
+      `> ListInst [List with 2 elements]
+         []> [13, 8] Assign
+         ||  type: int
+         ||  +> [13, 8] Identifier (a)
+         ||  |  definition: variable defined at [11, 12], type=int
+         ||  `> [13, 12] ReadInt
+         ||     type: int
+         []> [16, 8] Assign
+             type: float
+             +> [16, 8] Identifier (b)
+             |  definition: variable defined at [12, 14], type=float
+             `> [16, 12] ReadFloat
+                type: float

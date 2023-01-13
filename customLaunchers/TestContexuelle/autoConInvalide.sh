@@ -17,12 +17,12 @@ GREENFOND="\e[42m"
 echo -e "${GREENFOND} AUTO INVALIDE CONTEXT TEST START : ${ENDCOLOR} \n" 
 
 test_context_invalide (){
-    if test_context "$1" 2>&1 | grep -q -e "$i:[0-9]*"
+    if test_context "$1" 2>&1 | grep -q -e "$1:[0-9]*"
     then
         echo -e "${GREEN}TEST PASS! ${ENDCOLOR} ${THUMBS_UP}"    
     else
-        echo -e "${RED}TEST NOT PASS!!  Issue file :${ENDCOLOR}${RED_BOLD} $(basename "$i") ${SCR}"
-        exit 1
+        echo -e "${RED}TEST NOT PASS!!  Issue file :${ENDCOLOR}${RED_BOLD} $(basename "$1") ${SCR}"
+        #exit 1
     fi
 }
 

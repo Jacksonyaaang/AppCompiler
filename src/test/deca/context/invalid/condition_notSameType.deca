@@ -1,0 +1,17 @@
+// Description:
+//    Tester la condition quand les paramères nr sont pas le même type
+//
+// Resultats:
+//    Incompatible pour la comparaison
+//
+// Historique:
+//    cree le 01/01/2023
+{
+
+	int a=0;
+	int b,c,d=9;
+	boolean m  = true;
+	if (a==m){
+
+	}
+}

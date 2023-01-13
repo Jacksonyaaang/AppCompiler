@@ -1,0 +1,18 @@
+// Description:
+//    Tester le fonctionnement de print
+//
+// Resultats:
+//    TEST PASS
+//
+// Historique:
+//    cree le 01/01/2023
+
+{
+        int a=0;
+        float b =7.7;
+        boolean boo=true;
+        print("println(b)");
+        println(a, b);
+        print("very good!",a, b, boo);
+
+}

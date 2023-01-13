@@ -1,0 +1,10 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:37) - verify program: start
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:30) - verify Main: start
+On est dans ListDeclVar.java
+On est dans ListInst.java
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:39) - verify Main: end
+`> [1, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [1, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 0 elements]

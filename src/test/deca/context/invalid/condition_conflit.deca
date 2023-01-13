@@ -1,0 +1,14 @@
+// Description:
+//    Tester la conflit dans la condition, le premier argument est false le deuxime est true
+//
+// Resultats:
+//    TEST PASS
+//
+// Historique:
+//    cree le 01/01/2023
+
+{
+        if (false&&true){
+
+        }
+}
