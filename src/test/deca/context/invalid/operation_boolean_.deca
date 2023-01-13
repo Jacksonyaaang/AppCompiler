@@ -1,0 +1,13 @@
+// Description:
+//    Tester essayer utiliser l'opération de boolean entre les autres types
+//
+// Resultats:
+//    affectation_boolean_.deca:12:15: Les opérations booléennes ne sont compatibles qu'avec des boolean
+//
+// Historique:
+//    cree le 01/01/2023
+{
+	int a=0;
+	int b=8;
+	boolean boo = a||b;
+}
