@@ -62,7 +62,7 @@ while_begin2:
 	LOAD 4(GB), R4	; loading b2 into memory
 	CMP #0, R4	; [Or]Comparing in the right branch 
 	BEQ End_Or_Id_3	; [OR] checking if the second element is true 
-	LOAD #0, R4	; Or is true , We place the value 1 in the return Register
+	LOAD #1, R3	; Or is true , We place the value 1 in the return Register
 End_Or_Id_3:
 	CMP #0, R3	; [AND]Comparing in the right branch 
 	BNE AND_Success_id2	; [AND] checking if the first element is true
@@ -74,7 +74,7 @@ AND_Success_id2:
 	LOAD 4(GB), R3	; loading b2 into memory
 	CMP #0, R3	; [Or]Comparing in the right branch 
 	BEQ End_Or_Id_1	; [OR] checking if the second element is true 
-	LOAD #0, R3	; Or is true , We place the value 1 in the return Register
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
 End_Or_Id_1:
 	CMP #1, R2
 	BNE while_end2
@@ -97,11 +97,11 @@ while_end2:
 	BRA end_ifthenelse_2
 else2:
 end_ifthenelse_2:
-	WSTR """while[ """
+	WSTR "while[ "
 	LOAD 2(GB), R2	; loading valide into memory
 	LOAD R2, R1
 	WINT
-	WSTR """/11 ]"""
+	WSTR "/11 ]"
 	WNL
 	HALT
 stack_overflow_error:

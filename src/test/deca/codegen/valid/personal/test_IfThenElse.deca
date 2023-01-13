@@ -1,5 +1,8 @@
 // Description:
-//    Tester if then else et operation boolean
+//    Test de génération de "IfThenElse" et operation boolean, test de différent cas d'utilisation.
+//
+//    TEST SansObjet partie C
+//
 //    Retourne une série de 0 et de 1 donc chaques 1 indique le bon fonctionnement du teste
 //    dont le numéro correspond à la position de ce 1 en partant de la gauche.
 // Resultats:
@@ -19,6 +22,8 @@
     int x=2;
     int y=1;
     int z=3;
+    
+    //test true et false
     if(true){
         println("true is true ");
     }
@@ -28,6 +33,8 @@
     if(b1){
         println("b1=true is true");
     }
+
+    //test "et", couverture de toute la table de vérité 
     if(b1&&b1){
         i = i + 1000;
     } 
@@ -42,6 +49,8 @@
     }
     println("b1&&b2[ ",i,"/1111 ]");
     i=0;
+
+    //test "ou", couverture de toute la table de vérité
     if(b1||b1){
         i = i+ 1000;
     }
@@ -57,6 +66,7 @@
     println("b1||b2[ ",i,"/1111 ]");
     i=0;
 
+    //test innégalités 
     if(x>y){
         i = i+ 1000;
     }
