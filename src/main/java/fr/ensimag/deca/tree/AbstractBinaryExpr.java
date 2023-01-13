@@ -90,7 +90,8 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         checkIfWeWorkWithFloatAndIfConvIsNeeded(compiler);
         getLeftOperand().codeGenInst(compiler);
         LOG.debug(" [AbstractBinaryExpr][codeGenInst] Left register " + getLeftOperand().getRegisterDeRetour());
-        //S'il s'agit d'un identificateur
+        //S'il s'agit d'un identificateur dans l'operand droit, on fait un traitement spécial 
+        //qui exploite l'adresse de l'indentificateur
         if (rightOperandIdentifier(compiler, rightOperand) != null){
             this.executeBinaryOperation( compiler, ((Identifier) getRightOperand()).getExpDefinition().getOperand(), 
                                     getLeftOperand().getRegisterDeRetour());
@@ -104,7 +105,7 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
                         getLeftOperand().getRegisterDeRetour());
             }
             else{
-                throw new CodeGenError("Should never have equal registers with the new approch; this must never be called");
+                throw new CodeGenError(getLocation(), "Should never have equal registers with the new approch; this must never be called");
             }
         }
         if (this.getRegisterDeRetour() == null) {
@@ -116,34 +117,22 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
     }
 
     public void checkIfWeWorkWithFloatAndIfConvIsNeeded(DecacCompiler compiler){
+        LOG.debug("[AbstractBinaryExpr][checkIfWeWorkWithFloatAndIfConvIsNeeded] Conv float is needed in this binary operation");
         if (getLeftOperand().getType() == compiler.environmentType.FLOAT 
             && getRightOperand().getType() == compiler.environmentType.FLOAT ){
             workWithFloats = true;
-            convNeeded = false;
         }
         if (getLeftOperand().getType() == compiler.environmentType.INT 
             && getRightOperand().getType() == compiler.environmentType.FLOAT ){
             workWithFloats = true;
-            convNeeded = true;
         }
         if (getLeftOperand().getType() == compiler.environmentType.FLOAT 
             && getRightOperand().getType() == compiler.environmentType.INT ){
             workWithFloats = true;
-            convNeeded = true;
         }
         if (getLeftOperand().getType() == compiler.environmentType.INT 
             && getRightOperand().getType() == compiler.environmentType.INT ){
             workWithFloats = false;
-            convNeeded = false;
-        }
-    }
-
-    public void addConvertInstructions(DecacCompiler compiler){
-        if (getLeftOperand().getType() == compiler.environmentType.INT ){
-            compiler.addInstruction(new FLOAT(getLeftOperand().getRegisterDeRetour(), getLeftOperand().getRegisterDeRetour()), "Converting left operand into a Float");            
-        }
-        if (getRightOperand().getType() == compiler.environmentType.INT ){
-            compiler.addInstruction(new FLOAT(getRightOperand().getRegisterDeRetour(), getRightOperand().getRegisterDeRetour()), "Converting right operand into a Float");            
         }
     }
 
@@ -155,18 +144,17 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
      * @param resultRegister
      */
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
-        throw new CodeGenError("This method should not be visited");
+        throw new CodeGenError(getLocation(), "This method should not be visited");
     }
 
     private DAddr rightOperandIdentifier(DecacCompiler compiler,AbstractExpr expr) throws CodeGenError {
         if (!convNeeded && !(this instanceof Divide) && expr instanceof Identifier) {
             return ((Identifier) expr).getExpDefinition().getOperand();
         }
-        //System.out.println("[AbstractBinaryExpr][codeGenInst] Exploring Right");
         LOG.debug("[AbstractBinaryExpr][codeGenInst] Exploring Right");           
         getRightOperand().codeGenInst(compiler);
-        //System.out.println("Right register equal " + getRightOperand().getRegisterDeRetour());
-        LOG.debug("Right register equal " + getRightOperand().getRegisterDeRetour());
+        LOG.debug("[AbstractBinaryExpr][rightOperandIdentifier] Right operation is placed in the following register  " +
+                         getRightOperand().getRegisterDeRetour());
         return null;
     }
 
@@ -214,13 +202,13 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
 //             + getRightOperand().getPeekRegisterToPop());       
 
 // if (!(getRightOperand().getRegisterToPop().size() != 1 || getRightOperand().getRegisterToPop().size() != 0)) {
-//     throw new CodeGenError("La taille du stack dans l'operand droite doit être égal à 1 ou 0 , actual size = " + 
+//     throw new CodeGenError(getLocation(), "La taille du stack dans l'operand droite doit être égal à 1 ou 0 , actual size = " + 
 //                                     getRightOperand().getRegisterToPop().size() ); 
 // }import fr.ensimag.ima.pseudocode.RegisterOffset;
 
 // else if (getRightOperand().getRegisterToPop().size()  == 1){
 //     if (getRightOperand().getPeekRegisterToPop() != getLeftOperand().getRegisterDeRetour()){
-//         throw new CodeGenError("Dans le cas ou le Le registre sont égaux, dans le stack du registre à droite "+
+//         throw new CodeGenError(getLocation(), "Dans le cas ou le Le registre sont égaux, dans le stack du registre à droite "+
 //         "on doit avoir le registre de droite sinon on ne pas faire le pop" + 
 //                             getRightOperand().getRegisterDeRetour()); 
 //     }
@@ -233,11 +221,11 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
 //     //afin de pourvoir réduire le nombre d'operation
 // }
 // else{
-//     throw new CodeGenError("Data has been lost in the register " + 
+//     throw new CodeGenError(getLocation(), "Data has been lost in the register " + 
 //              getRightOperand().getRegisterDeRetour() ); 
 // }
 // // if (!(getLeftOperand().getRegisterToPop().size() != 1 || getLeftOperand().getRegisterToPop().size() != 0)) {
-// //     throw new CodeGenError("La taille du stack dans l'operand gauche doit être égal à 1, actual size = " + 
+// //     throw new CodeGenError(getLocation(), "La taille du stack dans l'operand gauche doit être égal à 1, actual size = " + 
 // //                                     getLeftOperand().getRegisterToPop().size() );
 // // }
 // // else if (getLeftOperand().getRegisterToPop().size()  == 1) {

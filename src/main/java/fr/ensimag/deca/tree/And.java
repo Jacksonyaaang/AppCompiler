@@ -30,11 +30,9 @@ public class And extends AbstractOpBool {
         //A FAIRE, optimisation du code de la boucle if   
         super.setBoolOpIdentifier(compiler.getStackManagement().incrementOpBoolIncrementer());
         LOG.debug("[And][codeGenInst] Working on And boolean operation ");
-        //System.out.println("[And][codeGenInst] Exploring Left");
         LOG.debug("[And][codeGenInst] Exploring Left");
         getLeftOperand().codeGenInst(compiler);
         LOG.debug("Left register " + getLeftOperand().getRegisterDeRetour());
-        //System.out.println("Left register " + getLeftOperand().getRegisterDeRetour());
         compiler.addInstruction(new CMP(new ImmediateInteger(0), getLeftOperand().getRegisterDeRetour()), 
                                         "[AND]Comparing in the left branch ");
         compiler.addInstruction(new BEQ(new Label("End_And_False_Id_" +super.getBoolOpIdentifier() )), 
@@ -42,7 +40,6 @@ public class And extends AbstractOpBool {
 
         getRightOperand().codeGenInst(compiler);
         if (getRightOperand().getRegisterDeRetour() != getLeftOperand().getRegisterDeRetour()){
-            //System.out.println("[And][codeGenInst] Exploring Right");
             LOG.debug("[And][codeGenInst] Exploring Right");
             compiler.addInstruction(new CMP(new ImmediateInteger(0), getRightOperand().getRegisterDeRetour()), 
                                     "[AND]Comparing in the right branch ");
@@ -53,7 +50,7 @@ public class And extends AbstractOpBool {
             compiler.addLabel(new Label("AND_Success_id" +super.getBoolOpIdentifier()));
         }
         else{
-            throw new CodeGenError("Should never have equal registers with this approch; this must never be called");
+            throw new CodeGenError(getLocation(), "Should never have equal registers with this approch; this must never be called");
         }
         this.setRegisterDeRetour(getLeftOperand().getRegisterDeRetour());
         getRightOperand().popRegisters(compiler);

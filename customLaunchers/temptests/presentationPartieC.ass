@@ -1,0 +1,22 @@
+	TSTO #3
+	BOV stack_overflow_error
+	TSTO #3
+; start main program
+; Main program
+; Beginning of main instructions:
+	LOAD #1, R2	; loading 1 into memory
+	STORE R2, 1(GB)	; Initializing the variable x and loading it into memory
+	LOAD #2, R2	; loading 2 into memory
+	STORE R2, 2(GB)	; Initializing the variable y and loading it into memory
+	LOAD #2, R2	; loading 2 into memory
+	MUL 1(GB), R2
+	LOAD #3, R3	; loading 3 into memory
+	MUL 2(GB), R3
+	SUB R3, R2
+	STORE R2, 3(GB)	;  Assiging a value to z
+	HALT
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

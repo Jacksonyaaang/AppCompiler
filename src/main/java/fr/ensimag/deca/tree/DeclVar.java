@@ -40,7 +40,7 @@ public class DeclVar extends AbstractDeclVar {
     protected void verifyDeclVar(DecacCompiler compiler,
         EnvironmentExp localEnv, ClassDefinition currentClass)
         throws ContextualError {
-
+        
         Type t = type.verifyType(compiler);
         type.setType(t);
         if(t.isVoid()) {
@@ -49,13 +49,15 @@ public class DeclVar extends AbstractDeclVar {
         initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
         VariableDefinition VDf = new VariableDefinition(type.getType(), varName.getLocation());
         varName.setDefinition(VDf);
-        try{localEnv.declare(varName.getName(), varName.getExpDefinition());
-        } catch (EnvironmentExp.DoubleDefException e) {
+        try{
+            localEnv.declare(varName.getName(), varName.getExpDefinition());
+        } 
+        catch (EnvironmentExp.DoubleDefException e) {
             throw new ContextualError(e.getMessage(), getLocation());
         }
+        //On associe à la variable défini une adresse dans le stack avec une adresse X(Gb)
         this.varName.getExpDefinition().setOperand(new RegisterOffset(compiler.incrementGbCompiler(), Register.GB)); 
-        LOG.debug("Saving " + this.varName.getName() + " into " + this.varName.getExpDefinition().getOperand());
-        //System.out.println("[DeclVar] Saving " + this.varName.getName() + " into " + this.varName.getExpDefinition().getOperand());
+        LOG.debug("[DeclVar] Saving " + this.varName.getName() + " into " + this.varName.getExpDefinition().getOperand());
     }
 
     @Override

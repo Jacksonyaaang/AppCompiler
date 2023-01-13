@@ -10,6 +10,8 @@
 	MUL 1(GB), R2
 	STORE R2, 2(GB)	;  Assiging a value to a
 	LOAD 2(GB), R2	; loading a into memory
+	LOAD R2, R1
+	WINT
 	HALT
 stack_overflow_error:
 	WSTR "Error: stack_overflow_error"

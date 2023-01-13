@@ -41,13 +41,16 @@ public abstract class AbstractPrint extends AbstractInst {
         ClassDefinition currentClass, Type returnType)
         throws ContextualError {
         for (AbstractExpr expr : arguments.getList()){
-                    expr.verifyExpr(compiler, localEnv, currentClass);
+            expr.setType(expr.verifyExpr(compiler, localEnv, currentClass));
+            System.out.println(expr.getType().getName().getName());
+            if (expr.getType().isBoolean())
+                throw  new ContextualError("On peut pas printer des booléens ", getLocation());
         }
     }
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
-        if (printHex){
+        if (printHex == true){
             compiler.setPrintHex(true);
         }
         else{

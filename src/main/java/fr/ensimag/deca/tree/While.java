@@ -16,8 +16,8 @@ import fr.ensimag.ima.pseudocode.instructions.BSR;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 
 import java.io.PrintStream;
-import org.apache.log4j.Logger;
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 
 /**
@@ -49,9 +49,8 @@ public class While extends AbstractInst {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
+        identifier = compiler.getStackManagement().incrementWhileIncrementer();
         LOG.debug("[While][CodeGenInst] generating code for While");
-        //System.out.println("[While][codeGenInst] generating code for While");
-        //System.out.println(compiler.getRegisterManagement());
         Label whileBegin = new Label("while_begin" + identifier);
         Label whileEnd = new Label("while_end"+ identifier);
         compiler.addLabel(whileBegin);
@@ -64,10 +63,6 @@ public class While extends AbstractInst {
         compiler.addLabel(whileEnd);
     }
 
-    public void loadItemintoRegister(DecacCompiler compiler, GPRegister regReserved) throws CodeGenError {
-        throw new CodeGenError("[AbstractExpr] This method should not be called at this level, loadItemintoRegister");
-    }
-    
     @Override
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)

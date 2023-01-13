@@ -1,73 +1,95 @@
+// Description:
+//    test ifthenelse et opérations binaires
+//
+// Resultats:
+//    true is true
+//    b1=true is true 
+//    b1&&b2[ 1111/1111 ]
+//    b1||b2[ 1111/1111 ]
+//    x(greater/lower)y[ 1111/1111 ]
+//    comparaison plus complexes[ 111/111 ]
+// Historique:
+//    cree le 01/01/2023
+// 
+//
+//
+
+
 {
+    boolean b1=true;
+    boolean b2=false;
+    int i=0;
+    int x=2;
+    int y=1;
+    int z=3;
     if(true){
-        println("true is true");
+        println("true is true ");
     }
     else{
-        println("true is fals");
+        println("true is false ");
     }
-    boolean b1=true;
     if(b1){
         println("b1=true is true");
     }
-    boolean b2=false;
-    int i=0;
     if(b1&&b1){
-        i+=1000;
+        i = i + 1000;
+    } 
+    if(!(b1&&b2)){
+        i = i + 100;
     }
-    if(!b1&&b2){
-        i+=100;
+    if(!(b2&&b1)){
+        i = i + 10;
     }
-    if(!b2&&b1){
-        i+=10;
+    if(!(b2&&b2)){
+        i = i + 1;
     }
-    if(!b2&&b2){
-        i+=1;
-    }
-    println("b1&&b2[ "+i+"/1111 ]")
+    println("b1&&b2[ ",i,"/1111 ]");
     i=0;
     if(b1||b1){
-        i+=1000;
+        i = i+ 1000;
     }
     if(b1||b2){
-        i+=100;
+        i = i+ 100;
     }
     if(b2||b1){
-        i+=10;
+        i = i+ 10;
     }
-    if(!b2||b2){
-        i+=1;
+    if(!(b2||b2)){
+        i = i+ 1;
     }
-    println("b1||b2[ ",i,"/1111 ]")
+    println("b1||b2[ ",i,"/1111 ]");
     i=0;
-    int x=2;
-    int y=1;
+
     if(x>y){
-        i+=1000;
+        i = i+ 1000;
     }
-    if(!x<y){
-        i+=100;
+    if(!(x<y)){   
+        b1=true;
+        i = i+ 100;
     }
-    y=2;
-    if(b2>=b1){
-        i+=10;
+    
+    x=1;
+    y=0;
+    if(x>=y){
+        i = i+ 10;
     }
-    if(b2<=b2){
-        i+=1;
+    if(y<=x){
+        i = i+ 1;
     }
-    println("x(greater/lower)y[ ",i,"/1111 ]\n");
+    println("x(greater/lower)y[ ",i,"/1111 ]");
     i=0;
-    int z=3;
     if((x<(y+z))&&(b1||b2)||b2){
-        i+=100;
+        i = i+ 100;
     }
     if(!!!!!!!!!!(x<z)){
-        i+=10;
+        i = i+ 10;
     }
     if(!!!!!!!!!!!(x<z)){
     }
     else{
-        i+=1;
+        i = i+ 1;
     }
     println("comparaison plus complexes[ ",i,"/111 ]");
     i=0;
+    
 }

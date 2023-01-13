@@ -54,12 +54,11 @@ public class IfThenElse extends AbstractInst {
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
         identifier = compiler.getStackManagement().incrementIfIncrementer();
         LOG.debug("[IfThenElse][CodeGenInst] generating code for IfThenElse");
-        //System.out.println("[IfThenElse][codeGenInst] generating code for IfThenElse");
         this.condition.codeGenInst(compiler);
         GPRegister Rret = this.condition.getRegisterDeRetour();
         Label elseLab = new Label("else"+identifier);
-        Label endLab = new Label("end_While"+identifier);
-        compiler.addInstruction(new CMP(1,Rret));
+        Label endLab = new Label("end_ifthenelse_"+identifier);
+        compiler.addInstruction(new CMP(1,Rret), "Comparing expr output in the ifthenelse");
         compiler.addInstruction(new BNE(elseLab));
         this.thenBranch.codeGenListInst(compiler);
         compiler.addInstruction(new BRA(endLab));

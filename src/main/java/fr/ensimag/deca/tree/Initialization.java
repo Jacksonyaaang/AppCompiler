@@ -44,7 +44,7 @@ public class Initialization extends AbstractInitialization {
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
         System.out.println("On est dans Initialization.java");
-        expression.verifyRValue(compiler, localEnv, currentClass, t);
+        expression = expression.verifyRValue(compiler, localEnv, currentClass, t);
     }
 
 

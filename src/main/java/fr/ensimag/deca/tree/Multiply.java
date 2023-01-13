@@ -26,13 +26,9 @@ public class Multiply extends AbstractOpArith {
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
         LOG.debug("[Multiply][executeBinaryOperation] generating code for multiply between: " 
                     +val + " and " + resultRegister );
-        // System.out.println("[Multiply][executeBinaryOperation] generating code for multiply between: " 
-        //                 +val + " and " + resultRegister);
         LOG.debug("[Multiply][executeBinaryOperation] generating code for multiply between: " 
                     +val + " and " + resultRegister);
-        if (getConvNeeded()){
-            addConvertInstructions(compiler);
-        }
+
         if (!getWorkWithFloats()){
             compiler.addInstruction(new MUL(val, resultRegister));
         }

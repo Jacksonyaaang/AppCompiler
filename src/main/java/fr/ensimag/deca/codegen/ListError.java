@@ -6,8 +6,12 @@ import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import fr.ensimag.ima.pseudocode.instructions.WNL;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.ERROR;
+import org.apache.log4j.Logger;
+
 
 public class ListError {
+    private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
+
     //list[0]:statut de stack_overflow_error
     //list[1]:statut de overflow_error
     //list[2]:statut de io_error
@@ -37,7 +41,7 @@ public class ListError {
             throw new IllegalArgumentException("le nom "+ err_name +" ne correspond à aucune erreur existante\n");
         }
         else{
-            System.out.println("ERROR is being made to value true " + err_name );
+            LOG.debug("ERROR is being made to value true " + err_name );
             this.list.replace(err_name, true);
         }
     }

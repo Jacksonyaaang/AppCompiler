@@ -21,7 +21,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
 
     @Override
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
-        throw new CodeGenError("Cette fonction ne doit pas être appeller à ce niveau");
+        throw new CodeGenError(getLocation(), "Cette fonction ne doit pas être appeller à ce niveau");
     }
 
     @Override
@@ -45,7 +45,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
         System.out.println(getLeftOperand().getType().getName().getName());
         System.out.println(getRightOperand().getType().getName().getName());
         if((!getLeftOperand().getType().isFloat() && !(getLeftOperand().getType()).isInt()) ||
-            (!getRightOperand().getType().isInt() && !(getLeftOperand().getType()).isFloat())){
+            (!getRightOperand().getType().isInt() && !(getRightOperand().getType()).isFloat())){
             throw new ContextualError("Incompatible pour la comparaison",getLocation());
         }
         if (getLeftOperand().getType().isFloat() && getRightOperand().getType().isInt()){

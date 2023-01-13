@@ -39,6 +39,6 @@ public abstract class AbstractInitialization extends Tree {
             throws ContextualError;
 
         public void codegenInitial(DecacCompiler compiler) throws CodeGenError {
-            throw new CodeGenError("[codegenInitial] Method should not be called at this level");
+            throw new CodeGenError(getLocation(), "[codegenInitial] Method should not be called at this level");
         }
 }

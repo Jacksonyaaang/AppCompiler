@@ -1,7 +1,13 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.instructions.FLOAT;
+
+import org.apache.log4j.Logger;
+
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.EnvironmentExp;
 
@@ -12,6 +18,9 @@ import fr.ensimag.deca.context.EnvironmentExp;
  * @date 01/01/2023
  */
 public class ConvFloat extends AbstractUnaryExpr {
+    
+    private static final Logger LOG = Logger.getLogger(ConvFloat.class);
+
     public ConvFloat(AbstractExpr operand) {
         super(operand);
     }
@@ -22,9 +31,13 @@ public class ConvFloat extends AbstractUnaryExpr {
         System.out.println("On est dans ConvFloat.java");
         setType(compiler.environmentType.FLOAT);
         return getType();
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
+    public void addUnaryInstruction(DecacCompiler compiler, GPRegister registerDeRetour) throws CodeGenError {
+        LOG.debug("[ConvFloat][AbstractExpr] Passed by conv float but not doing any treatement here");
+        compiler.addInstruction(new FLOAT(registerDeRetour, registerDeRetour), "Doing an unary minus");
+    }
+    
 
     @Override
     protected String getOperatorName() {

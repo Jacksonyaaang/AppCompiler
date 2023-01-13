@@ -27,7 +27,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
         //A FAIRE, check overflow, and create a function that checks types and converts values when needed
         //Look for types of int literals and float literals and variable types  
-        throw new CodeGenError("Method should not be called at this level");
+        throw new CodeGenError(getLocation(), "Method should not be called at this level");
     }
 
 
@@ -35,7 +35,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
         ClassDefinition currentClass) throws ContextualError {
-        System.out.println("On est dans AbstractOpArith.java");
+        System.out.println("On est dans AbstractOpArith.java" + getLocation());
         getRightOperand().setType(getRightOperand().verifyExpr(compiler, localEnv, currentClass));
         getLeftOperand().setType(getLeftOperand().verifyExpr(compiler, localEnv, currentClass));
         if(!getLeftOperand().getType().isFloat() && !((IntType)getLeftOperand().getType()).isInt() &&
@@ -54,9 +54,9 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         else if (getLeftOperand().getType().isInt() && getRightOperand().getType().isFloat()){
             ConvFloat cF = new ConvFloat(getLeftOperand());
             cF.verifyExpr(compiler, localEnv, currentClass);
-            setLeftOperand(cF);
+            setLeftOperand(cF); 
             //setLeftOperand(new ConvFloat(getLeftOperand()));
-            System.out.println("jsuis bien là int float");
+            System.out.println("Je suis dans int float");
             setType(compiler.environmentType.FLOAT);
             //return getType();
         } else if (getLeftOperand().getType().isFloat() && getRightOperand().getType().isFloat()){

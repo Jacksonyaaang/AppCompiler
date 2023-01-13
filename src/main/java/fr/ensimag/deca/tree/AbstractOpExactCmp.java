@@ -19,7 +19,7 @@ public abstract class AbstractOpExactCmp extends AbstractOpCmp {
 
     @Override
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
-        throw new CodeGenError("Cette fonction ne doit pas être appeller à ce niveau");
+        throw new CodeGenError(getLocation(), "Cette fonction ne doit pas être appeller à ce niveau");
     }
 
 
