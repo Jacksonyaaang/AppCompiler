@@ -39,10 +39,7 @@ public class ReadFloat extends AbstractReadExpr {
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError
      {
         LOG.debug("[ReadFloat][CodeGenInst] generating code for ReadFloat");
-        //System.out.println("[ReadFloat][codeGenInst] generating code for ReadFloat");
-        //System.out.println(compiler.getRegisterManagement());
         this.setRegisterDeRetour(this.LoadGencode(compiler));
-        //System.out.println("[ReadFloat][codeGenInst] exiting generation method method");
         LOG.debug("[ReadFloat][codeGenInst] exiting generation method method");
     }
 

@@ -43,7 +43,6 @@ public class IntLiteral extends AbstractExpr {
     @Override
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
         assert(reg != null);
-        //System.out.println("[IntLiteral][loadItemintoRegister] loading "+getValue()+ " into memory at register " + reg);
         LOG.debug("[IntLiteral][loadItemintoRegister] loading "+getValue()+ " into memory at register " + reg);
         compiler.addInstruction(new LOAD(new ImmediateInteger(value) , reg),
                                      "loading "+getValue()+ " into memory"); 

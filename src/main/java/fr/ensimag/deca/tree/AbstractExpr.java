@@ -224,8 +224,7 @@ public abstract class AbstractExpr extends AbstractInst {
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
         LOG.debug("[Abstractexpr][codeGenInst] I have visited abstract expr");
-        //System.out.println("[Abstractexpr][codeGenInst] I have visited abstract expr");
-        throw new CodeGenError("[Abstractexpr][codeGenInst]Cette méthode ne doit jamais être appélée");
+        throw new CodeGenError(getLocation(), "[Abstractexpr][codeGenInst]Cette méthode ne doit jamais être appélée");
     }
 
     /**
@@ -238,13 +237,11 @@ public abstract class AbstractExpr extends AbstractInst {
         if (compiler.getRegisterManagement().areThereAnAvaliableRegsiterSup2()){
             regReserved = compiler.getRegisterManagement().getAnEmptyStableRegisterAndReserveIt(); 
             assert(regReserved !=null );
-            //System.out.println("[Abstractexpr][[LoadGencode]  Reserving an non empty register with the name " + regReserved);
             LOG.debug("[Abstractexpr][LoadGencode]  Reserving an non empty register with the name " + regReserved);
         }
         else{
             regReserved = compiler.getRegisterManagement().getAUsedStableRegisterAndKeepItReserved(); 
             assert(regReserved !=null );
-            //System.out.println("[Abstractexpr][LoadGencode]  Reserving an used register with the name " + regReserved);
             LOG.debug("[Abstractexpr][LoadGencode]  Reserving an used register with the name " + regReserved);
             compiler.addInstruction(new PUSH(regReserved));
             this.getRegisterToPop().push(regReserved);
@@ -254,7 +251,7 @@ public abstract class AbstractExpr extends AbstractInst {
     }
     
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister regReserved) throws CodeGenError {
-        throw new CodeGenError("[AbstractExpr] This method should not be called at this level, loadItemintoRegister");
+        throw new CodeGenError(getLocation(), "[AbstractExpr] This method should not be called at this level, loadItemintoRegister");
     }
 
     

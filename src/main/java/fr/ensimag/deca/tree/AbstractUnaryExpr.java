@@ -56,7 +56,7 @@ public abstract class AbstractUnaryExpr extends AbstractExpr {
     }
 
     public void addUnaryInstruction(DecacCompiler compiler, GPRegister registerDeRetour) throws CodeGenError {
-        throw new CodeGenError("cette methode ne doit pas être invoqué à ce niveau, class name = " + this.getClass().getSimpleName());
+        throw new CodeGenError(getLocation(), "cette methode ne doit pas être invoqué à ce niveau, class name = " + this.getClass().getSimpleName());
     }
 
 

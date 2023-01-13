@@ -26,8 +26,7 @@ public class Greater extends AbstractOpIneq {
     @Override
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
         LOG.debug("[Greater][executeBinaryOperation] Running Greater operation " );
-        //System.out.println("[Greater][executeBinaryOperation] generating code for Greater between: " 
-        //                                    +val + " and " + resultRegister);
+
         LOG.debug("[Greater][executeBinaryOperation] generating code for Greater between: " 
                                             +val + " and " + resultRegister);
 

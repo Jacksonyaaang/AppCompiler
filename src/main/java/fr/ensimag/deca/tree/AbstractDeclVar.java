@@ -31,6 +31,6 @@ public abstract class AbstractDeclVar extends Tree {
             throws ContextualError;
             
     public void codeGenDecl(DecacCompiler compiler) throws CodeGenError {
-        throw new CodeGenError("This method must not be called at this level");
+        throw new CodeGenError(getLocation(), "This method must not be called at this level");
     }
 }

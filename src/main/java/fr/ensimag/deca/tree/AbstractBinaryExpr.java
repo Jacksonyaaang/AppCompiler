@@ -105,7 +105,7 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
                         getLeftOperand().getRegisterDeRetour());
             }
             else{
-                throw new CodeGenError("Should never have equal registers with the new approch; this must never be called");
+                throw new CodeGenError(getLocation(), "Should never have equal registers with the new approch; this must never be called");
             }
         }
         if (this.getRegisterDeRetour() == null) {
@@ -144,7 +144,7 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
      * @param resultRegister
      */
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
-        throw new CodeGenError("This method should not be visited");
+        throw new CodeGenError(getLocation(), "This method should not be visited");
     }
 
     private DAddr rightOperandIdentifier(DecacCompiler compiler,AbstractExpr expr) throws CodeGenError {
@@ -202,13 +202,13 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
 //             + getRightOperand().getPeekRegisterToPop());       
 
 // if (!(getRightOperand().getRegisterToPop().size() != 1 || getRightOperand().getRegisterToPop().size() != 0)) {
-//     throw new CodeGenError("La taille du stack dans l'operand droite doit être égal à 1 ou 0 , actual size = " + 
+//     throw new CodeGenError(getLocation(), "La taille du stack dans l'operand droite doit être égal à 1 ou 0 , actual size = " + 
 //                                     getRightOperand().getRegisterToPop().size() ); 
 // }import fr.ensimag.ima.pseudocode.RegisterOffset;
 
 // else if (getRightOperand().getRegisterToPop().size()  == 1){
 //     if (getRightOperand().getPeekRegisterToPop() != getLeftOperand().getRegisterDeRetour()){
-//         throw new CodeGenError("Dans le cas ou le Le registre sont égaux, dans le stack du registre à droite "+
+//         throw new CodeGenError(getLocation(), "Dans le cas ou le Le registre sont égaux, dans le stack du registre à droite "+
 //         "on doit avoir le registre de droite sinon on ne pas faire le pop" + 
 //                             getRightOperand().getRegisterDeRetour()); 
 //     }
@@ -221,11 +221,11 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
 //     //afin de pourvoir réduire le nombre d'operation
 // }
 // else{
-//     throw new CodeGenError("Data has been lost in the register " + 
+//     throw new CodeGenError(getLocation(), "Data has been lost in the register " + 
 //              getRightOperand().getRegisterDeRetour() ); 
 // }
 // // if (!(getLeftOperand().getRegisterToPop().size() != 1 || getLeftOperand().getRegisterToPop().size() != 0)) {
-// //     throw new CodeGenError("La taille du stack dans l'operand gauche doit être égal à 1, actual size = " + 
+// //     throw new CodeGenError(getLocation(), "La taille du stack dans l'operand gauche doit être égal à 1, actual size = " + 
 // //                                     getLeftOperand().getRegisterToPop().size() );
 // // }
 // // else if (getLeftOperand().getRegisterToPop().size()  == 1) {

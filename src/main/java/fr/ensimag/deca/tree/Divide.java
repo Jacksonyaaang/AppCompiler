@@ -33,8 +33,7 @@ public class Divide extends AbstractOpArith {
     @Override
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
         LOG.debug("[Division][executeBinaryOperation] Running Division operation " );
-        //System.out.println("[Division][executeBinaryOperation] generating code for Division between: " 
-                //                            +val + " and " + resultRegister);
+
 
         if (!getWorkWithFloats()){
             DVal literal0 = new ImmediateInteger(0);

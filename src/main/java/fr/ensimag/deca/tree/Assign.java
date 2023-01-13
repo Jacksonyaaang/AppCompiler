@@ -53,7 +53,6 @@ public class Assign extends AbstractBinaryExpr {
             assert(((Identifier) getLeftOperand()).getExpDefinition().getOperand() != null);
             assert(getLeftOperand() instanceof Identifier);
             LOG.debug("[Assign][codeGenInst] Assiging a value to " + ((Identifier) getLeftOperand()).getName());
-            //System.out.println(" [Assign][codeGenInst] Assiging a value to " + ((Identifier) getLeftOperand()).getName());
             compiler.addInstruction(new STORE(this.getRightOperand().getRegisterDeRetour(),
                                             ((Identifier) getLeftOperand()).getExpDefinition().getOperand()),                                          
                                             " Assiging a value to " + ((Identifier) getLeftOperand()).getName()); 

@@ -1,0 +1,77 @@
+{
+    boolean b1=true;
+    boolean b2=false;
+    int i=0;
+    int x=2;
+    int y=1;
+    int z=3;
+    if(true){
+        println("true is true ");
+    }
+    else{
+        println("true is false ");
+    }
+    if(b1){
+        println("b1=true is true");
+    }
+    if(b1&&b1){
+        i = i + 1000;
+    } 
+    if(!b1&&b2){
+        i = i + 100;
+    }
+    if(!b2&&b1){
+        i = i + 10;
+    }
+    if(!b2&&b2){
+        i = i + 1;
+    }
+    println("b1&&b2[ ",i,"/1111 ]");
+    i=0;
+    if(b1||b1){
+        i = i+ 1000;
+    }
+    if(b1||b2){
+        i = i+ 100;
+    }
+    if(b2||b1){
+        i = i+ 10;
+    }
+    if(!b2||b2){
+        i = i+ 1;
+    }
+    println("b1||b2[ ",i,"/1111 ]");
+    i=0;
+
+    if(x>y){
+        i = i+ 1000;
+    }
+    if(!(x<y)){   
+        b1=true;
+        i = i+ 100;
+    }
+    y=2;
+    /*
+    if(b2>=b1){
+        i = i+ 10;
+    }
+    if(b2<=b2){
+        i = i+ 1;
+    }
+    println("x(greater/lower)y[ ",i,"/1111 ]");
+    i=0;
+    if((x<(y+z))&&(b1||b2)||b2){
+        i = i+ 100;
+    }
+    if(!!!!!!!!!!(x<z)){
+        i = i+ 10;
+    }
+    if(!!!!!!!!!!!(x<z)){
+    }
+    else{
+        i = i+ 1;
+    }
+    println("comparaison plus complexes[ "+i+"/111 ]");
+    i=0;
+    */
+}
