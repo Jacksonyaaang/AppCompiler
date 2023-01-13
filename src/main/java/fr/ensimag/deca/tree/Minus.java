@@ -30,9 +30,7 @@ public class Minus extends AbstractOpArith {
                             +val + " and " + resultRegister);
         LOG.debug("[Plus][executeBinaryOperation] generating code for Plus between: " 
         +val + " and " + resultRegister);
-        if (getConvNeeded()){
-            addConvertInstructions(compiler);
-        }
+
         if (!getWorkWithFloats()){
             compiler.addInstruction(new SUB(val, resultRegister));
         }

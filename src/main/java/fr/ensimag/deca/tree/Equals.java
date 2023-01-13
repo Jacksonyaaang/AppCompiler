@@ -27,9 +27,7 @@ public class Equals extends AbstractOpExactCmp {
         LOG.debug("[Equals][executeBinaryOperation] Running Equals operation " );
         //System.out.println("[Equals][executeBinaryOperation] generating code for Equals between: " 
        //                                     +val + " and " + resultRegister);
-        if (getConvNeeded()){
-            addConvertInstructions(compiler);
-        }
+
         compiler.addInstruction(new CMP(val, resultRegister), "Comparing registers for Equals operation ");
         compiler.addInstruction(new SEQ(resultRegister), "Placing Equals result " +
                                                        "into the register  ");   

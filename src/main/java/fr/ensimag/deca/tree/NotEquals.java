@@ -31,9 +31,7 @@ public class NotEquals extends AbstractOpExactCmp {
                                             +val + " and " + resultRegister);
         LOG.debug("[NotEquals][executeBinaryOperation] generating code for NotEquals between: " 
             +val + " and " + resultRegister);
-        if (getConvNeeded()){
-            addConvertInstructions(compiler);
-        }
+
         compiler.addInstruction(new CMP(val, resultRegister), "Comparing registers for NotEquals operation ");
         compiler.addInstruction(new SNE(resultRegister), "Placing NotEquals result " +
                                                         "into the register  ");   

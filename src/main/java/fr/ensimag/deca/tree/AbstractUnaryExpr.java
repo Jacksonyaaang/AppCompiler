@@ -51,7 +51,7 @@ public abstract class AbstractUnaryExpr extends AbstractExpr {
         getOperand().codeGenInst(compiler);
         this.addUnaryInstruction(compiler,getOperand().getRegisterDeRetour());
         LOG.debug("[AbstractUnaryExpr]unary General operand" + getOperand().getRegisterDeRetour());
-        this.setRegisterDeRetour(getRegisterDeRetour());
+        this.setRegisterDeRetour(getOperand().getRegisterDeRetour());
         this.transferPopRegisters(getOperand().getRegisterToPop());
     }
 

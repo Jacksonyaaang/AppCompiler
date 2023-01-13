@@ -29,9 +29,7 @@ public class LowerOrEqual extends AbstractOpIneq {
         //                                     +val + " and " + resultRegister);
         LOG.debug("[LowerOrEqual][executeBinaryOperation] generating code for LowerOrEqual between: " 
         +val + " and " + resultRegister);
-        if (getConvNeeded()){
-            addConvertInstructions(compiler);
-        }
+
         compiler.addInstruction(new CMP(val, resultRegister), "Comparing registers for LowerOrEqual operation ");
         compiler.addInstruction(new SLE(resultRegister), "Placing LowerOrEqual result " +
                                                         "into the register  ");   

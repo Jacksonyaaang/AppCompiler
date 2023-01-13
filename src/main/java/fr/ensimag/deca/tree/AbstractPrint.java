@@ -50,7 +50,7 @@ public abstract class AbstractPrint extends AbstractInst {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
-        if (printHex){
+        if (printHex == true){
             compiler.setPrintHex(true);
         }
         else{

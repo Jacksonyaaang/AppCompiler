@@ -31,9 +31,7 @@ public class GreaterOrEqual extends AbstractOpIneq {
         //                                     +val + " and " + resultRegister);
         LOG.debug("[GreaterOrEqual][executeBinaryOperation] generating code for GreaterOrEqual between: " 
             +val + " and " + resultRegister);
-        if (getConvNeeded()){
-            addConvertInstructions(compiler);
-        }
+
         compiler.addInstruction(new CMP(val, resultRegister), "Comparing registers for GreaterOrEqual operation ");
         compiler.addInstruction(new SGE(resultRegister), "Placing GreaterOrEqual result " +
                                                         "into the register  ");   

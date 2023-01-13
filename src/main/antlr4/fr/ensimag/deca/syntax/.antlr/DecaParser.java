@@ -1,4 +1,4 @@
-// Generated from c:\Users\victo\Documents\gl15\src\main\antlr4\fr\ensimag\deca\syntax\DecaParser.g4 by ANTLR 4.9.2
+// Generated from /home/frikha/ensimag/GL/Projet_GL/src/main/antlr4/fr/ensimag/deca/syntax/DecaParser.g4 by ANTLR 4.9.2
 
     import fr.ensimag.deca.tree.*;
     import fr.ensimag.deca.tools.*;

@@ -30,9 +30,7 @@ public class Greater extends AbstractOpIneq {
         //                                    +val + " and " + resultRegister);
         LOG.debug("[Greater][executeBinaryOperation] generating code for Greater between: " 
                                             +val + " and " + resultRegister);
-        if (getConvNeeded()){
-            addConvertInstructions(compiler);
-        }
+
         compiler.addInstruction(new CMP(val, resultRegister), "Comparing registers for Greater operation ");
         compiler.addInstruction(new SGT(resultRegister), "Placing Greater result " +
                                                         "into the register  ");   

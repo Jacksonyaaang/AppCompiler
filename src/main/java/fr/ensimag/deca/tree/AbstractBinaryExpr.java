@@ -90,7 +90,8 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         checkIfWeWorkWithFloatAndIfConvIsNeeded(compiler);
         getLeftOperand().codeGenInst(compiler);
         LOG.debug(" [AbstractBinaryExpr][codeGenInst] Left register " + getLeftOperand().getRegisterDeRetour());
-        //S'il s'agit d'un identificateur, on fait un traitement spécial qui nous fait gagners
+        //S'il s'agit d'un identificateur dans l'operand droit, on fait un traitement spécial 
+        //qui exploite l'adresse de l'indentificateur
         if (rightOperandIdentifier(compiler, rightOperand) != null){
             this.executeBinaryOperation( compiler, ((Identifier) getRightOperand()).getExpDefinition().getOperand(), 
                                     getLeftOperand().getRegisterDeRetour());
@@ -120,32 +121,19 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         if (getLeftOperand().getType() == compiler.environmentType.FLOAT 
             && getRightOperand().getType() == compiler.environmentType.FLOAT ){
             workWithFloats = true;
-            //convNeeded = false;
         }
         if (getLeftOperand().getType() == compiler.environmentType.INT 
             && getRightOperand().getType() == compiler.environmentType.FLOAT ){
             workWithFloats = true;
-            //convNeeded = true;
         }
         if (getLeftOperand().getType() == compiler.environmentType.FLOAT 
             && getRightOperand().getType() == compiler.environmentType.INT ){
             workWithFloats = true;
-            //convNeeded = true;
         }
         if (getLeftOperand().getType() == compiler.environmentType.INT 
             && getRightOperand().getType() == compiler.environmentType.INT ){
             workWithFloats = false;
-            //convNeeded = false;
         }
-    }
-
-    public void addConvertInstructions(DecacCompiler compiler){
-        // if (getLeftOperand().getType() == compiler.environmentType.INT ){
-        //     compiler.addInstruction(new FLOAT(getLeftOperand().getRegisterDeRetour(), getLeftOperand().getRegisterDeRetour()), "Converting left operand into a Float");            
-        // }
-        // if (getRightOperand().getType() == compiler.environmentType.INT ){
-        //     compiler.addInstruction(new FLOAT(getRightOperand().getRegisterDeRetour(), getRightOperand().getRegisterDeRetour()), "Converting right operand into a Float");            
-        // }
     }
 
     /** 
@@ -163,11 +151,10 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         if (!convNeeded && !(this instanceof Divide) && expr instanceof Identifier) {
             return ((Identifier) expr).getExpDefinition().getOperand();
         }
-        //System.out.println("[AbstractBinaryExpr][codeGenInst] Exploring Right");
         LOG.debug("[AbstractBinaryExpr][codeGenInst] Exploring Right");           
         getRightOperand().codeGenInst(compiler);
-        //System.out.println("Right register equal " + getRightOperand().getRegisterDeRetour());
-        LOG.debug("Right register equal " + getRightOperand().getRegisterDeRetour());
+        LOG.debug("[AbstractBinaryExpr][rightOperandIdentifier] Right operation is placed in the following register  " +
+                         getRightOperand().getRegisterDeRetour());
         return null;
     }
 

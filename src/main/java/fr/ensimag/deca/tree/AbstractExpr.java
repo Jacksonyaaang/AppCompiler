@@ -206,7 +206,7 @@ public abstract class AbstractExpr extends AbstractInst {
         else if(getType() == compiler.environmentType.FLOAT){
             LOG.debug("[AbstractExpr][codeGenPrint] Priting an flaot");
             compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
-            if(compiler.isPrintHex())
+            if(!(compiler.isPrintHex()))
                 compiler.addInstruction(new WFLOAT());
             else{
                 compiler.addInstruction(new WFLOATX());
@@ -219,7 +219,6 @@ public abstract class AbstractExpr extends AbstractInst {
             compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
             compiler.addInstruction(new WINT());
         }
-        //PRINT HEXA
     }
 
     @Override

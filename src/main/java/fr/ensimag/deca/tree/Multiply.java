@@ -30,9 +30,7 @@ public class Multiply extends AbstractOpArith {
         //                 +val + " and " + resultRegister);
         LOG.debug("[Multiply][executeBinaryOperation] generating code for multiply between: " 
                     +val + " and " + resultRegister);
-        if (getConvNeeded()){
-            addConvertInstructions(compiler);
-        }
+
         if (!getWorkWithFloats()){
             compiler.addInstruction(new MUL(val, resultRegister));
         }

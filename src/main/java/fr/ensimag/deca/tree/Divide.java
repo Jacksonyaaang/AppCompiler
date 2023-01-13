@@ -35,9 +35,7 @@ public class Divide extends AbstractOpArith {
         LOG.debug("[Division][executeBinaryOperation] Running Division operation " );
         //System.out.println("[Division][executeBinaryOperation] generating code for Division between: " 
                 //                            +val + " and " + resultRegister);
-        if (getConvNeeded()){
-            addConvertInstructions(compiler);
-        }
+
         if (!getWorkWithFloats()){
             DVal literal0 = new ImmediateInteger(0);
             compiler.addInstruction(new CMP(literal0, resultRegister));

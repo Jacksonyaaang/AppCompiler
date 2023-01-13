@@ -46,13 +46,10 @@ public class Modulo extends AbstractOpArith {
     @Override
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
         LOG.debug("[Modulo][executeBinaryOperation] Running modulo operation " );
-        //System.out.println("[Modulo][executeBinaryOperation] generating code for modulo between: " 
-                                //            +val + " and " + resultRegister);
+
         LOG.debug("[Modulo][executeBinaryOperation] generating code for modulo between: " 
                     +val + " and " + resultRegister);
-        if (getConvNeeded()){
-            addConvertInstructions(compiler);
-        }
+
         DVal literal0 = new ImmediateInteger(0);
         compiler.addInstruction(new CMP(literal0, resultRegister));                                            
         compiler.addInstruction(new BEQ(new Label("div0_error")), "Checking for modulo by 0 "

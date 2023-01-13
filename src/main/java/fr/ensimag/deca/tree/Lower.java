@@ -30,9 +30,7 @@ public class Lower extends AbstractOpIneq {
         //                                     +val + " and " + resultRegister);
         LOG.debug("[Lower][executeBinaryOperation] generating code for Lower between: " 
                     +val + " and " + resultRegister);
-        if (getConvNeeded()){
-            addConvertInstructions(compiler);
-        }
+
         compiler.addInstruction(new CMP(val, resultRegister), "Comparing registers for Lower operation ");
         compiler.addInstruction(new SLT(resultRegister), "Placing Lower result " +
                                                         "into the register  ");   
