@@ -1,0 +1,6 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:38) - verify program: start
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:36) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:52) - [ListDeclVar][verifyListDeclVariable]
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:214) - [Identifier][verifyType] Verify that declaration type is correct
+src/test/deca/context/invalid/decl_var_01_so.deca:12:5: Déclaraion de variables de type void impossible

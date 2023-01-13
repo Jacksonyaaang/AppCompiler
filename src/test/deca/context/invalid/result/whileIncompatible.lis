@@ -1,0 +1,8 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:38) - verify program: start
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:36) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:52) - [ListDeclVar][verifyListDeclVariable]
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]
+DEBUG fr.ensimag.deca.tree.While.verifyInst(While.java:70) - [While][verifyInst]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyCondition(AbstractExpr.java:184) - [AbstractExpr][verifyInst] Verify the condition of a While or ifEhenElse
+DEBUG fr.ensimag.deca.tree.IntLiteral.verifyExpr(IntLiteral.java:57) - [IntLiteral][verifyExpr]
+src/test/deca/context/invalid/whileIncompatible.deca:10:7: la condition doit être booléan

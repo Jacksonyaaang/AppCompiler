@@ -1,0 +1,8 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:38) - verify program: start
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:36) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:52) - [ListDeclVar][verifyListDeclVariable]
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:168) - [AbstractExpr][verifyInst] Verify the expression coming from the instruction
+DEBUG fr.ensimag.deca.tree.Assign.verifyExpr(Assign.java:66) - [Assign][verifyExpr] Verify left and right expression in assignment
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:197) - [Identifier][verifyExpr]
+src/test/deca/context/invalid/decl_var_04_so.deca:12:0: L'identificateur a n'est pas défini

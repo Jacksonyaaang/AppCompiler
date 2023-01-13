@@ -1,0 +1,38 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:38) - verify program: start
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:36) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:52) - [ListDeclVar][verifyListDeclVariable]
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:214) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:58) - Saving i into 1(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:214) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:58) - Saving f into 2(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:214) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:58) - Saving b into 3(GB)
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:45) - verify Main: end
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:40) - verify program: end
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> [13, 8] ListDeclVar [List with 3 elements]
+      |  []> [11, 4] DeclVar
+      |  ||  +> [11, 0] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [11, 4] Identifier (i)
+      |  ||  |  definition: variable defined at [11, 4], type=int
+      |  ||  `> NoInitialization
+      |  []> [12, 6] DeclVar
+      |  ||  +> [12, 0] Identifier (float)
+      |  ||  |  definition: type (builtin), type=float
+      |  ||  +> [12, 6] Identifier (f)
+      |  ||  |  definition: variable defined at [12, 6], type=float
+      |  ||  `> NoInitialization
+      |  []> [13, 8] DeclVar
+      |      +> [13, 0] Identifier (boolean)
+      |      |  definition: type (builtin), type=boolean
+      |      +> [13, 8] Identifier (b)
+      |      |  definition: variable defined at [13, 8], type=boolean
+      |      `> NoInitialization
+      `> ListInst [List with 0 elements]
