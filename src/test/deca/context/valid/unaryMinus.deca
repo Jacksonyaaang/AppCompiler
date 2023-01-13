@@ -1,0 +1,10 @@
+// Description:
+//    operations arithmetiques unary Minus.
+//
+// Historique:
+//    cree le 13/01/2023
+{
+	int a = 1;
+	int b = -a;
+	float f = -b;
+}
