@@ -85,7 +85,7 @@ public abstract class AbstractExpr extends AbstractInst {
         System.out.println("On est dans AbstractExpr.java");
         Type t = verifyExpr(compiler, localEnv, currentClass);
         if (!expectedType.sameType(t))
-            throw new ContextualError("Not exepected type", getLocation());
+            throw new ContextualError("Not expected type", getLocation());
         return this;
     }
     
