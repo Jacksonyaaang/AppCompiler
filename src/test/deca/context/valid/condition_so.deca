@@ -1,0 +1,15 @@
+// Description:
+//    Tester la condition if  else if et else
+//
+// Resultats:
+//    TEST PASS
+//
+// Historique:
+//    cree le 01/01/2023
+{
+
+	boolean testBool = true;
+	if (testBool==false){
+		
+	}
+}

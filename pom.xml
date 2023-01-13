@@ -269,6 +269,24 @@
                             <goal>exec</goal>
                         </goals>
                     </execution>
+
+                    <!-- pour la partie syntaxe-->
+                    <execution>
+                        <id>Test-Syntaxe-Valide</id>
+                        <configuration>
+                            <executable>./customLaunchers/TestSyntaxique/autoSynValide.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals><goal>exec</goal></goals>
+                    </execution>
+                    <execution>
+                        <id>Test-Syntaxe-Invalide</id>
+                        <configuration>
+                            <executable>./customLaunchers/TestSyntaxique/autoSynInvalide.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals><goal>exec</goal></goals>
+                    </execution>
                 </executions>
             </plugin>
 

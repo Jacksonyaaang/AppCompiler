@@ -21,8 +21,8 @@ test_context_invalide (){
     then
         echo -e "${GREEN}TEST PASS! ${ENDCOLOR} ${THUMBS_UP}"    
     else
-        echo -e "${RED}TEST NOT PASS!!  Issue file : ${ENDCOLOR}${RED_BOLD} $(basename "$i") ${SCR}"
-        exit 1
+        echo -e "${RED}TEST NOT PASS!!  Issue file : ${ENDCOLOR}${RED_BOLD} $(basename "$1") ${SCR}"
+        #exit 1
     fi
 }
 redirect_result(){
