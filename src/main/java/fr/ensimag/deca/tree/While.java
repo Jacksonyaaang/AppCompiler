@@ -54,6 +54,9 @@ public class While extends AbstractInst {
         Label whileEnd = new Label("while_end"+ identifier);
         compiler.addLabel(whileBegin);
         this.condition.codeGenInst(compiler);
+        /*On élimine les regitres qu'on doit pop de l'expr de condition 
+        car elle ne seront pas utilisée plus tard*/
+        this.condition.emptyRegisterToPop();
         GPRegister Rret = this.condition.getRegisterDeRetour();
         compiler.addInstruction(new CMP(1,Rret));
         compiler.addInstruction(new BNE(whileEnd));
@@ -64,11 +67,11 @@ public class While extends AbstractInst {
 
     @Override
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass, Type returnType)
-            throws ContextualError {
-            System.out.println("On est dans While.java");
-            condition.verifyCondition(compiler, localEnv, currentClass);
-            body.verifyListInst(compiler, localEnv, currentClass, returnType);
+        ClassDefinition currentClass, Type returnType)
+        throws ContextualError {
+        LOG.debug("[While][verifyInst]");
+        condition.verifyCondition(compiler, localEnv, currentClass);
+        body.verifyListInst(compiler, localEnv, currentClass, returnType);
     }
 
     

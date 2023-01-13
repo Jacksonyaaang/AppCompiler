@@ -33,13 +33,10 @@ public class Divide extends AbstractOpArith {
     @Override
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
         LOG.debug("[Division][executeBinaryOperation] Running Division operation " );
-
-
         if (!getWorkWithFloats()){
+            assert(val instanceof GPRegister);
             DVal literal0 = new ImmediateInteger(0);
-            compiler.addInstruction(new CMP(literal0, resultRegister));
-            //, "Checking for overflow since "
-                                                            //+"the operation is between two floats ");                                            
+            compiler.addInstruction(new CMP(literal0, (GPRegister)(val) ));                                            
             compiler.addInstruction(new BEQ(new Label("div0_error")), "Checking for division by 0"
                                         +"the operation is between two ints ");
             compiler.getErrorManagementUnit().activeError("div0_error");

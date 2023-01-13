@@ -10,6 +10,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import org.apache.log4j.Logger;
 
 import java.io.PrintStream;
 
@@ -20,6 +21,7 @@ import java.io.PrintStream;
  */
 public class BooleanLiteral extends AbstractExpr {
 
+    private static final Logger LOG = Logger.getLogger(BooleanLiteral.class);
     private boolean value;
 
     public BooleanLiteral(boolean value) {
@@ -44,10 +46,9 @@ public class BooleanLiteral extends AbstractExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-            System.out.println("On est dans BooleanLiteral.java");
+            LOG.debug("[BooleanLiteral][verifyExpr]");
             setType(compiler.environmentType.BOOLEAN);
             return getType();
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
 

@@ -194,7 +194,7 @@ public class CompilerOptions {
                     if (args[i].equals("-r")){
                         //try catch pour traiter le cas : apres "-r", X est pas une value 
                         try {
-                            if (i+1==len||(Integer.parseInt(args[i+1])<=4 || Integer.parseInt(args[i+1])>=16)){
+                            if (i+1==len||(Integer.parseInt(args[i+1])<4 || Integer.parseInt(args[i+1])>16)){
                                 throw new NumberFormatException("[Please Retry]\n[Fault Detected!!] Must have a banalise register value with the range '4<=X<=16' after '-r'");
                             }
                         } catch (NumberFormatException e) { 

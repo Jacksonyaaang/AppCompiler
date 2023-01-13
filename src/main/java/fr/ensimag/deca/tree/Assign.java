@@ -29,7 +29,7 @@ public class Assign extends AbstractBinaryExpr {
         return (AbstractLValue)super.getLeftOperand();
     }
 
-    private static final Logger LOG = Logger.getLogger(IntLiteral.class);
+    private static final Logger LOG = Logger.getLogger(Assign.class);
 
     public Assign(AbstractLValue leftOperand, AbstractExpr rightOperand) {
         super(leftOperand, rightOperand);
@@ -37,8 +37,6 @@ public class Assign extends AbstractBinaryExpr {
 
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister){
         LOG.debug("[Assign][executeBinaryOperation] generating code for int literal value " );
-        // System.out.println("[Assign][executeBinaryOperation] generating code for assignement of: " 
-        //                 + val + " to " + resultRegister);
         LOG.debug("[Assign][executeBinaryOperation] generating code for assignement of: " 
                         + val + " to " + resultRegister);
         compiler.addInstruction(new LOAD(val, resultRegister));
@@ -48,7 +46,6 @@ public class Assign extends AbstractBinaryExpr {
     public void codeGenInst(DecacCompiler compiler) throws CodeGenError {
             this.getRightOperand().codeGenInst(compiler);
             assert( this.getRightOperand().getRegisterDeRetour() != null);
-            System.out.println("[Assign][codeGenInst] Left is being stored at " + ((Identifier) getLeftOperand()).getExpDefinition().getOperand());
             LOG.debug("[Assign][codeGenInst]Left is being stored at " + ((Identifier) getLeftOperand()).getExpDefinition().getOperand());
             assert(((Identifier) getLeftOperand()).getExpDefinition().getOperand() != null);
             assert(getLeftOperand() instanceof Identifier);
@@ -56,24 +53,25 @@ public class Assign extends AbstractBinaryExpr {
             compiler.addInstruction(new STORE(this.getRightOperand().getRegisterDeRetour(),
                                             ((Identifier) getLeftOperand()).getExpDefinition().getOperand()),                                          
                                             " Assiging a value to " + ((Identifier) getLeftOperand()).getName()); 
-    }
-    
+            getRightOperand().emptyRegisterToPop();
+        }
 
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
         LOG.debug("[Assign][verifyExpr] Verify left and right expression in assignment");
         Type typOpLeft = getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
+        //Si on n'utilise pas la méthode readInt ou readFloat lors de l'affectation, on vérifie l'expression de droite de l'affectation
         if (!(getRightOperand() instanceof AbstractReadExpr))
             setRightOperand(getRightOperand().verifyRValue(compiler, localEnv, currentClass, typOpLeft));
+        //Si on utilise la méthode readInt ou readFloat lors de l'affectation, on vérifie l'expression associée
         else{
             Type typOpRight = getRightOperand().verifyExpr(compiler, localEnv, currentClass);
             if (!typOpLeft.sameType(typOpRight))
-                throw new ContextualError("Impossible d'assigner read à cette variable", getLocation());
+                throw new ContextualError("Impossible d'assigner le résultat de la méthode read à cette variable", getLocation());
         }
         setType(typOpLeft);
         return getType();
-
     }
 
 

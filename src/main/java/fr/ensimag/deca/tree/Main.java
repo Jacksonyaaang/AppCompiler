@@ -9,6 +9,7 @@ import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.TSTO;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
@@ -53,10 +54,11 @@ public class Main extends AbstractMain {
         int sizeStack = compiler.getStackManagement().measureStacksizeNeededMain(compiler);
         //On reserve de l'espace dans le stack
         if (sizeStack != 0){
-            compiler.getProgram().addFirst(new TSTO(new ImmediateInteger(sizeStack)));
             compiler.getErrorManagementUnit().activeError("stack_overflow_error");
+            compiler.getProgram().addFirst(new ADDSP(new ImmediateInteger(sizeStack)));
             compiler.getProgram().addFirst(new BOV(new Label("stack_overflow_error")));
             compiler.getProgram().addFirst(new TSTO(new ImmediateInteger(sizeStack)));
+
         }
     }
     

@@ -39,15 +39,16 @@ public class IfThenElse extends AbstractInst {
         this.thenBranch = thenBranch;
         this.elseBranch = elseBranch;
     }
-    
+
+
     @Override
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass, Type returnType)
-            throws ContextualError {
-            System.out.println("On est dans IfThenElse.java");
-            condition.verifyCondition(compiler, localEnv, currentClass);
-            thenBranch.verifyListInst(compiler, localEnv, currentClass, returnType);
-            elseBranch.verifyListInst(compiler, localEnv, currentClass, returnType);
+        ClassDefinition currentClass, Type returnType)
+        throws ContextualError {
+        LOG.debug("[IfThenElse][verifyInst] Verify the condition and the instructions of the if then else");
+        condition.verifyCondition(compiler, localEnv, currentClass);
+        thenBranch.verifyListInst(compiler, localEnv, currentClass, returnType);
+        elseBranch.verifyListInst(compiler, localEnv, currentClass, returnType);
     }
 
     @Override
@@ -55,9 +56,13 @@ public class IfThenElse extends AbstractInst {
         identifier = compiler.getStackManagement().incrementIfIncrementer();
         LOG.debug("[IfThenElse][CodeGenInst] generating code for IfThenElse");
         this.condition.codeGenInst(compiler);
-        GPRegister Rret = this.condition.getRegisterDeRetour();
         Label elseLab = new Label("else"+identifier);
         Label endLab = new Label("end_ifthenelse_"+identifier);
+        compiler.addComment("---------Startif-----------"+ getLocation());
+        GPRegister Rret = this.condition.getRegisterDeRetour();
+        /*On élimine les regitres qu'on doit pop de l'expr de condition 
+        car elle ne seront pas utilisée plus tard*/
+        this.condition.emptyRegisterToPop();
         compiler.addInstruction(new CMP(1,Rret), "Comparing expr output in the ifthenelse");
         compiler.addInstruction(new BNE(elseLab));
         this.thenBranch.codeGenListInst(compiler);
@@ -65,6 +70,7 @@ public class IfThenElse extends AbstractInst {
         compiler.addLabel(elseLab);
         this.elseBranch.codeGenListInst(compiler);
         compiler.addLabel(endLab);
+        compiler.addComment("---------Endif-----------");
     }
 
     @Override

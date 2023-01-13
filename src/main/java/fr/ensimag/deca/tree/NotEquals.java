@@ -27,8 +27,6 @@ public class NotEquals extends AbstractOpExactCmp {
     @Override
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
         LOG.debug("[NotEquals][executeBinaryOperation] Running NotEquals operation " );
-        System.out.println("[NotEquals][executeBinaryOperation] generating code for NotEquals between: " 
-                                            +val + " and " + resultRegister);
         LOG.debug("[NotEquals][executeBinaryOperation] generating code for NotEquals between: " 
             +val + " and " + resultRegister);
 

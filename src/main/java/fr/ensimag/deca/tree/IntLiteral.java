@@ -50,19 +50,11 @@ public class IntLiteral extends AbstractExpr {
     
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass) throws ContextualError {
-            System.out.println("On est dans IntLiteral.java");
-            setType(compiler.environmentType.INT);
-            return getType();
-        //throw new UnsupportedOperationException("not yet implemented");
+        ClassDefinition currentClass) throws ContextualError {
+        LOG.debug("[IntLiteral][verifyExpr]");
+        setType(compiler.environmentType.INT);
+        return getType();
     }
-
-    // //victor
-    // @Override
-    // protected void codeGenPrint(DecacCompiler compiler) {
-    //     compiler.addInstruction(new LOAD(value,Register.getR(1)));
-    //     compiler.addInstruction(new WINT());
-    // }
 
 
     @Override

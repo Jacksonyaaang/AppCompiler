@@ -1,3 +1,20 @@
+// Description:
+//    Test de génération de "IfThenElse" et operation boolean, test de différent cas d'utilisation.
+//
+//    TEST SansObjet partie C
+//
+//    Retourne une série de 0 et de 1 donc chaques 1 indique le bon fonctionnement du teste
+//    dont le numéro correspond à la position de ce 1 en partant de la gauche.
+// Resultats:
+//true is true 
+//b1=true is true
+//b1&&b2[ 1111/1111 ]
+//b1||b2[ 1111/1111 ]
+//x(greater/lower)y[ 1111/1111 ]
+//comparaison plus complexes[ 111/111 ]
+// Historique:
+// 
+
 {
     boolean b1=true;
     boolean b2=false;
@@ -5,6 +22,8 @@
     int x=2;
     int y=1;
     int z=3;
+    
+    //test true et false
     if(true){
         println("true is true ");
     }
@@ -14,20 +33,24 @@
     if(b1){
         println("b1=true is true");
     }
+
+    //test "et", couverture de toute la table de vérité 
     if(b1&&b1){
         i = i + 1000;
     } 
-    if(!b1&&b2){
+    if(!(b1&&b2)){
         i = i + 100;
     }
-    if(!b2&&b1){
+    if(!(b2&&b1)){
         i = i + 10;
     }
-    if(!b2&&b2){
+    if(!(b2&&b2)){
         i = i + 1;
     }
     println("b1&&b2[ ",i,"/1111 ]");
     i=0;
+
+    //test "ou", couverture de toute la table de vérité
     if(b1||b1){
         i = i+ 1000;
     }
@@ -37,12 +60,13 @@
     if(b2||b1){
         i = i+ 10;
     }
-    if(!b2||b2){
+    if(!(b2||b2)){
         i = i+ 1;
     }
     println("b1||b2[ ",i,"/1111 ]");
     i=0;
 
+    //test innégalités 
     if(x>y){
         i = i+ 1000;
     }
@@ -50,13 +74,20 @@
         b1=true;
         i = i+ 100;
     }
-    y=2;
-    /*
-    if(b2>=b1){
+    y=0;
+    x=1;
+    if(x>=y){
         i = i+ 10;
     }
-    if(b2<=b2){
+    if(y<=x){
         i = i+ 1;
+    }
+    if (b1){
+        println("b1 is true");
+    }
+    else
+    {
+        println("b1 is false");
     }
     println("x(greater/lower)y[ ",i,"/1111 ]");
     i=0;
@@ -71,7 +102,6 @@
     else{
         i = i+ 1;
     }
-    println("comparaison plus complexes[ "+i+"/111 ]");
+    println("comparaison plus complexes[ ",i,"/111 ]");
     i=0;
-    */
 }
