@@ -8,13 +8,18 @@
 //    cree le 08/01/2023
 
 {
+    x = 5/4;
+ print(5);
+print(x,y);
     if (i == 5){
         print("hi");
-    }
+    
+}
     else {
         print("hi");
     }
 
+    x= a/b 
 }
 
 

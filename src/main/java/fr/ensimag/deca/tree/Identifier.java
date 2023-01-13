@@ -4,6 +4,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.TypeDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Definition;
@@ -15,9 +16,18 @@ import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
+
 import java.io.PrintStream;
+
+import javax.print.attribute.standard.Copies;
+
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
+import org.mockito.internal.verification.RegisteredInvocations;
 
 /**
  * Deca Identifier
@@ -26,7 +36,10 @@ import org.apache.log4j.Logger;
  * @date 01/01/2023
  */
 public class Identifier extends AbstractIdentifier {
-    
+
+    private static final Logger LOG = Logger.getLogger(Identifier.class);
+
+
     @Override
     protected void checkDecoration() {
         if (getDefinition() == null) {
@@ -38,6 +51,19 @@ public class Identifier extends AbstractIdentifier {
     public Definition getDefinition() {
         return definition;
     }
+    
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{   
+        this.setRegisterDeRetour(this.LoadGencode(compiler));
+    }
+
+    @Override
+    public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
+        assert( reg != null);
+        compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), reg),
+                                    "loading "+getName()+ " into memory");
+    }
+
 
     /**
      * Like {@link #getDefinition()}, but works only if the definition is a
@@ -168,11 +194,11 @@ public class Identifier extends AbstractIdentifier {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
                            ClassDefinition currentClass) throws ContextualError {
-        //System.out.println("On est dans Identifier.java");
+        LOG.debug("[Identifier][verifyExpr]");
+        //Envoie une ContextualError si l'identificateur n'est pas défini
         if(!localEnv.getExp().containsKey(getName())){
-            throw new ContextualError("L'identificateur n'est pas défini",getLocation());
+            throw new ContextualError("L'identificateur " + getName().getName() + " n'est pas défini",getLocation());
         }
-        System.out.println(getName().getName());
         Definition Defi = localEnv.get(name);
         setDefinition(Defi);
         return localEnv.get(name).getType();
@@ -184,21 +210,18 @@ public class Identifier extends AbstractIdentifier {
      */
     @Override
     public Type verifyType(DecacCompiler compiler) throws ContextualError {
-        //verifions que le type de definition n'est pas null
         System.out.println("On est dans Identifier.java");
+        LOG.debug("[Identifier][verifyType] Verify that declaration type is correct");
         TypeDefinition typeDefi = compiler.environmentType.defOfType(name);
-        //System.out.println();
+        //Envoie une ContextualError si le type de définition est null
         if (typeDefi == null){
             System.out.println("typeDefi est null");
-            throw new ContextualError("le type de l'ident n'est pas defini", getLocation());
-        }setDefinition(typeDefi);
-        if (getDefinition() == null)
-            System.out.println("getDefinition est  null");
+            throw new ContextualError("Le type de l'identificateur " + getName().getName() + " n'est pas defini", getLocation());
+        }
+        setDefinition(typeDefi);
         return getDefinition().getType();
-        //throw new UnsupportedOperationException("not yet implemented");
     }
-    
-    
+
     private Definition definition;
 
 
@@ -225,8 +248,6 @@ public class Identifier extends AbstractIdentifier {
     @Override
     protected void prettyPrintType(PrintStream s, String prefix) {
         Definition d = getDefinition();
-        if (d == null)
-            System.out.println("la definition est null mecs");
         if (d != null) {
             s.print(prefix);
             s.print("definition: ");

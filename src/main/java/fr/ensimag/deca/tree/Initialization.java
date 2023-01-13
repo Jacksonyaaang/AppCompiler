@@ -2,18 +2,30 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 /**
  * @author gl15
  * @date 01/01/2023
  */
 public class Initialization extends AbstractInitialization {
+
+    private static final Logger LOG = Logger.getLogger(Initialization.class);
+
+
+    @Override
+    public void codegenInitial(DecacCompiler compiler) throws CodeGenError {
+        expression.codeGenInst(compiler);
+        assert(expression.getRegisterDeRetour() != null);
+        super.setRegistreDeRetour(expression.getRegisterDeRetour());
+    }
 
     public AbstractExpr getExpression() {
         return expression;
@@ -35,8 +47,9 @@ public class Initialization extends AbstractInitialization {
     protected void verifyInitialization(DecacCompiler compiler, Type t,
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
-        System.out.println("On est dans Initialization.java");
-        expression.verifyRValue(compiler, localEnv, currentClass, t);
+        LOG.debug("[Initialization][verifyInitialization]");
+        //Vérification du membre de droite lors d'une initialisation
+        expression = expression.verifyRValue(compiler, localEnv, currentClass, t);
     }
 
 

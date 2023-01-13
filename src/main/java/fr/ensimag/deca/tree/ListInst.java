@@ -2,11 +2,13 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Label;
+import org.apache.log4j.Logger;
 
 /**
  * 
@@ -14,6 +16,9 @@ import fr.ensimag.ima.pseudocode.Label;
  * @date 01/01/2023
  */
 public class ListInst extends TreeList<AbstractInst> {
+
+    private static final Logger LOG = Logger.getLogger(ListInst.class);
+
 
     /**
      * Implements non-terminal "list_inst" of [SyntaxeContextuelle] in pass 3
@@ -27,15 +32,15 @@ public class ListInst extends TreeList<AbstractInst> {
     public void verifyListInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
-        System.out.println("On est dans ListInst.java");
-        //A FAIRE PROPREMENT
+        LOG.debug("[ListInst][verifyListInst]");
         for (AbstractInst inst : getList()) {
-            inst.verifyInst(compiler, localEnv, currentClass, returnType);;
-        }
+            inst.verifyInst(compiler, localEnv, currentClass, returnType);
+        }    
     }
 
-    public void codeGenListInst(DecacCompiler compiler) {
+    public void codeGenListInst(DecacCompiler compiler) throws CodeGenError {
         for (AbstractInst i : getList()) {
+            compiler.getRegisterManagement().freeAllRegisters();
             i.codeGenInst(compiler);
         }
     }

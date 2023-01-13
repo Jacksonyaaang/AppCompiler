@@ -2,12 +2,18 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateFloat;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 /**
  * Single precision, floating-point literal
@@ -16,6 +22,8 @@ import org.apache.commons.lang.Validate;
  * @date 01/01/2023
  */
 public class FloatLiteral extends AbstractExpr {
+
+    private static final Logger LOG = Logger.getLogger(FloatLiteral.class);
 
     public float getValue() {
         return value;
@@ -34,10 +42,21 @@ public class FloatLiteral extends AbstractExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-            System.out.println("On est dans FloatLiteral.java");
+            LOG.debug("[FloatLiteral][verifyExpr]");
             setType(compiler.environmentType.FLOAT);
             return getType();
-        //throw new UnsupportedOperationException("not yet implemented");        
+
+    }
+
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{   
+        this.setRegisterDeRetour(this.LoadGencode(compiler));
+    }
+
+    public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
+        assert(reg != null);
+        compiler.addInstruction(new LOAD(new ImmediateFloat(value) , reg),
+                                     "loading "+getValue()+ " into memory");
     }
 
 

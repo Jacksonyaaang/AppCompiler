@@ -1,5 +1,8 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
+import fr.ensimag.ima.pseudocode.GPRegister;
 
 /**
  * read...() statement.
@@ -13,5 +16,8 @@ public abstract class AbstractReadExpr extends AbstractExpr {
         super();
     }
 
+    @Override
+    public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
+    }
 
 }

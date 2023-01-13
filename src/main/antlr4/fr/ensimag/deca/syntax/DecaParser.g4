@@ -226,7 +226,7 @@ expr returns[AbstractExpr tree]
             assert($assign.tree != null);
             $tree = $assign.tree;
         }
-    ;
+    ; 
 
 assign_expr returns[AbstractExpr tree]
     : e=or_expr (
