@@ -1,0 +1,33 @@
+// Description:
+//    Comparaison if_then_else et while.
+//
+// Resultats:
+//    a <= b
+//    a < f
+//
+// Historique:
+//    cree le 13/01/2023
+{
+	int a = 0;
+	int b = 1;
+	float f = O.5;
+	boolean bool = true;
+	if (a == b){
+		println(" a == b ");
+	}
+	if (a >= b){
+		println("a >= b");
+	}
+	if (a <= b){
+		println("a <= b");
+	}
+	if (a < f){
+		println("a < f");
+	}
+	if (a > f){
+		println("a > f");
+	}
+	while(!bool){
+		println("truc");
+	}
+}

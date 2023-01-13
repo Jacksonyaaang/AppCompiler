@@ -1,0 +1,12 @@
+// Description:
+//    condition
+//
+// Resultats:
+//    Ligne 10: la condition doit être booléen.
+// 
+// Historique:
+//    cree le 13/01/2023
+{
+	if (5){
+	}
+}

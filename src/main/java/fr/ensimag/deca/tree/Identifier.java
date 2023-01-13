@@ -205,7 +205,6 @@ public class Identifier extends AbstractIdentifier {
         setDefinition(Defi);
         setType(localEnv.get(name).getType());
         return getType();
-        //return localEnv.get(name).getType();
     }
 
     /**
@@ -218,7 +217,7 @@ public class Identifier extends AbstractIdentifier {
         TypeDefinition typeDefi = compiler.environmentType.defOfType(name);
         //Envoie une ContextualError si le type de définition est null
         if (typeDefi == null){
-            throw new ContextualError("Le type de l'identificateur " + getName().getName() + " n'est pas defini", getLocation());
+            throw new ContextualError("Le type " + getName().getName() + " n'est pas defini", getLocation());
         }
         setDefinition(typeDefi);
         return getDefinition().getType();
