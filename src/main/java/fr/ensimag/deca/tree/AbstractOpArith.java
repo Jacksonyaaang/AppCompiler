@@ -42,9 +42,9 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         getRightOperand().setType(getRightOperand().verifyExpr(compiler, localEnv, currentClass));
         getLeftOperand().setType(getLeftOperand().verifyExpr(compiler, localEnv, currentClass));
         //Si le type des opérandes n'est pas approprié(ni int ni float), une ContextualError est envoyée
-        if(!getLeftOperand().getType().isFloat() && !((IntType)getLeftOperand().getType()).isInt() &&
-                !getRightOperand().getType().isFloat() && !((IntType)getRightOperand().getType()).isInt() &&
-                !(getLeftOperand() instanceof AbstractReadExpr) && !(getRightOperand() instanceof AbstractReadExpr)){
+        if(!getLeftOperand().getType().isFloat() && !(getLeftOperand().getType()).isInt() ||
+                (!getRightOperand().getType().isFloat() && !(getRightOperand().getType()).isInt()) ||
+                (!(getLeftOperand() instanceof AbstractReadExpr) && !(getRightOperand() instanceof AbstractReadExpr))){
             throw new ContextualError("Les opérations arithmétiques ne sont compatibles qu'avec des int et des float",getLocation());
         }
         // Conversion de l'opérande droite en float si elle est de tye int et que l'opérande gauche est de type float
