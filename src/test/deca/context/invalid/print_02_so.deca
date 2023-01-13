@@ -1,0 +1,14 @@
+// Description:
+//    Vérifie qu'on ne peut pas afficher de booléens
+//
+// Resultats:
+//    On ne peut pas print de booléens.
+//
+// Historique:
+//    cree le 13/01/2023
+
+{
+// Doit être refusé.
+boolean b = true;
+println(b);
+}

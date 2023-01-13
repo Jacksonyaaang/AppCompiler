@@ -1,0 +1,19 @@
+// Description:
+//    Teste l'affichage d'entiers, de flottants et de chaînes de caractère
+//
+// Resultats:
+//    5, 10.5
+//
+// Historique:
+//    cree le 13/01/2023
+
+{
+int a = 5;
+float f = 10.5;
+
+print(a, f, "test1", f, "test2");
+print();
+
+println(a, f, "test1", f, "test2");
+println();
+}
