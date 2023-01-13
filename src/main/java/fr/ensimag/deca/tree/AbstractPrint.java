@@ -47,6 +47,12 @@ public abstract class AbstractPrint extends AbstractInst {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
+        if (printHex){
+            compiler.setPrintHex(true);
+        }
+        else{
+            compiler.setPrintHex(false);
+        }
         for (AbstractExpr a : getArguments().getList()) {
             a.codeGenPrint(compiler);
         }

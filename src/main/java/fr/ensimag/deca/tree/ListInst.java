@@ -37,8 +37,8 @@ public class ListInst extends TreeList<AbstractInst> {
 
     public void codeGenListInst(DecacCompiler compiler) throws CodeGenError {
         for (AbstractInst i : getList()) {
-            i.codeGenInst(compiler);
             compiler.getRegisterManagement().freeAllRegisters();
+            i.codeGenInst(compiler);
         }
     }
 

@@ -47,9 +47,8 @@ import org.apache.log4j.Logger;
  * @date 01/01/2023
  */
 public class DecacCompiler {
-    private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
-    private ListError erreurs;
 
+    private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
 
     /**
      * Portable newline character.
@@ -144,6 +143,10 @@ public class DecacCompiler {
      */
     private final IMAProgram program = new IMAProgram();
 
+    public IMAProgram getProgram() {
+        return program;
+    }
+
     /**
      * Cette unité est utilisée pour associer des adresses à des variables,
      * et elle est aussi utilisée pour calculer le nombre de variable temporaire necessaire pour executer 
@@ -161,25 +164,14 @@ public class DecacCompiler {
     }
 
     /**
-     * Cette structure de donnée stocke la liste des registeurs dans un ordre temporel
-     * qui seront retournée
+     * Cette unité est utilisée pour associer des adresses à des variables,
+     * et elle est aussi utilisée pour calculer le nombre de variable temporaire necessaire pour executer 
+     * les blocs 
      */
-    private Stack<GPRegister> globalRegisterStack = new Stack<GPRegister>();
+    public final ListError errorManagementUnit = new ListError();  
 
-    public Stack<GPRegister> getGlobalRegisterStack() {
-        return globalRegisterStack;
-    }
-
-    public void pushGlobalRegisterStack(GPRegister register) {
-        globalRegisterStack.push(register);
-    }
-
-    public GPRegister popGlobalRegisterStack() {
-        return globalRegisterStack.pop();
-    }
-
-    public GPRegister peekGlobalRegisterStack() {
-        return globalRegisterStack.peek();
+    public ListError getErrorManagementUnit() {
+        return errorManagementUnit;
     }
 
     /** The global environment for types (and the symbolTable) */
@@ -190,7 +182,15 @@ public class DecacCompiler {
         return symbolTable.create(name);
     }
 
-    
+    private boolean printHex;
+
+    public boolean isPrintHex() {
+        return printHex;
+    }
+
+    public void setPrintHex(boolean printHex) {
+        this.printHex = printHex;
+    }
 
     /**
      * Run the compiler (parse source file, generate code)

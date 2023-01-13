@@ -1,8 +1,14 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
+
 
 /**
  * Unary expression.
@@ -11,6 +17,9 @@ import org.apache.commons.lang.Validate;
  * @date 01/01/2023
  */
 public abstract class AbstractUnaryExpr extends AbstractExpr {
+
+    private static final Logger LOG = Logger.getLogger(UnaryMinus.class);
+
 
     public AbstractExpr getOperand() {
         return operand;
@@ -34,6 +43,23 @@ public abstract class AbstractUnaryExpr extends AbstractExpr {
     protected void iterChildren(TreeFunction f) {
         operand.iter(f);
     }
+
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{    
+        LOG.debug("[AbstractUnaryExpr][codeGenInst] generating code for an UnaryOperation");
+        //System.out.println("[AbstractUnaryExpr][codeGenInst] Exploring operand");
+        LOG.debug("[AbstractUnaryExpr][codeGenInst] Exploring operand");
+        getOperand().codeGenInst(compiler);
+        this.addUnaryInstruction(compiler,getOperand().getRegisterDeRetour());
+        LOG.debug("[AbstractUnaryExpr]unary minus operand" + getOperand().getRegisterDeRetour());
+        //System.out.println("[AbstractUnaryExpr]unary minus operand" + getOperand().getRegisterDeRetour());
+        this.transferPopRegisters(getOperand().getRegisterToPop());
+    }
+
+    public void addUnaryInstruction(DecacCompiler compiler, GPRegister registerDeRetour) throws CodeGenError {
+        throw new CodeGenError("cette methode ne doit pas être invoqué à ce niveau");
+    }
+
 
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {

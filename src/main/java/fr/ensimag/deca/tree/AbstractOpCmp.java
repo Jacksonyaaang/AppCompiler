@@ -2,6 +2,11 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
+
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.deca.DecacCompiler;
 
 /**
  *
@@ -12,6 +17,11 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
 
     public AbstractOpCmp(AbstractExpr leftOperand, AbstractExpr rightOperand) {
         super(leftOperand, rightOperand);
+    }
+
+    @Override
+    public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
+        throw new CodeGenError("Cette fonction ne doit pas être appeller à ce niveau");
     }
 
     @Override
@@ -32,9 +42,10 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
 //                !(getLeftOperand() instanceof AbstractReadExpr) && !(getRightOperand() instanceof AbstractReadExpr)){
 //            throw new ContextualError("Incompatible pour la comparaison",getLocation());
 //        }
-        if(!getLeftOperand().getType().sameType(getRightOperand().getType()) ||
-                !(getLeftOperand().getType().isFloat() && (getLeftOperand().getType()).isInt()) ||
-                !(getLeftOperand().getType().isInt() && (getLeftOperand().getType()).isFloat())){
+        System.out.println(getLeftOperand().getType().getName().getName());
+        System.out.println(getRightOperand().getType().getName().getName());
+        if((!getLeftOperand().getType().isFloat() && !(getLeftOperand().getType()).isInt()) ||
+            (!getRightOperand().getType().isInt() && !(getLeftOperand().getType()).isFloat())){
             throw new ContextualError("Incompatible pour la comparaison",getLocation());
         }
         if (getLeftOperand().getType().isFloat() && getRightOperand().getType().isInt()){

@@ -11,11 +11,14 @@ import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.BNE;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
+import fr.ensimag.ima.pseudocode.instructions.BSR;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 
 import java.io.PrintStream;
 import org.apache.log4j.Logger;
 import org.apache.commons.lang.Validate;
+
 
 /**
  *
@@ -25,7 +28,10 @@ import org.apache.commons.lang.Validate;
 public class While extends AbstractInst {
     private AbstractExpr condition;
     private ListInst body;
-    private static final Logger LOG = Logger.getLogger(IfThenElse.class);
+    private int identifier;
+
+    private static final Logger LOG = Logger.getLogger(And.class);
+
     public AbstractExpr getCondition() {
         return condition;
     }
@@ -43,16 +49,19 @@ public class While extends AbstractInst {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
-        LOG.debug("[IfThenElse][CodeGenInst] generating code for IfThenElse");
-        System.out.println("[IfThenElse][codeGenInst] generating code for IfThenElse");
-        System.out.println(compiler.getRegisterManagement());
-        Label while_begin=new Label("while_begin");
-        compiler.addLabel(while_begin);
+        LOG.debug("[While][CodeGenInst] generating code for While");
+        //System.out.println("[While][codeGenInst] generating code for While");
+        //System.out.println(compiler.getRegisterManagement());
+        Label whileBegin = new Label("while_begin" + identifier);
+        Label whileEnd = new Label("while_end"+ identifier);
+        compiler.addLabel(whileBegin);
         this.condition.codeGenInst(compiler);
         GPRegister Rret = this.condition.getRegisterDeRetour();
-        this.body.codeGenListInst(compiler);
         compiler.addInstruction(new CMP(1,Rret));
-        compiler.addInstruction(new BEQ(while_begin));
+        compiler.addInstruction(new BNE(whileEnd));
+        this.body.codeGenListInst(compiler);
+        compiler.addInstruction(new BRA(whileBegin));
+        compiler.addLabel(whileEnd);
     }
 
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister regReserved) throws CodeGenError {
@@ -67,6 +76,8 @@ public class While extends AbstractInst {
             condition.verifyCondition(compiler, localEnv, currentClass);
             body.verifyListInst(compiler, localEnv, currentClass, returnType);
     }
+
+    
 
     @Override
     public void decompile(IndentPrintStream s) {

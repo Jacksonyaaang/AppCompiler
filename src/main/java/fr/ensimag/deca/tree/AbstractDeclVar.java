@@ -9,7 +9,6 @@ import fr.ensimag.deca.context.EnvironmentExp;
 
 /**
  * Variable declaration
- *
  * @author gl15
  * @date 01/01/2023
  */

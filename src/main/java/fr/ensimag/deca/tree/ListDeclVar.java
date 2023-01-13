@@ -26,8 +26,8 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
 
     public void codeGenListDecl(DecacCompiler compiler) throws CodeGenError {
         for (AbstractDeclVar i : getList()) {
-            i.codeGenDecl(compiler);
             compiler.getRegisterManagement().freeAllRegisters();
+            i.codeGenDecl(compiler);
         }
     }
 

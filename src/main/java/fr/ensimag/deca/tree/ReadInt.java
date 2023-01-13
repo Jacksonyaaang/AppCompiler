@@ -39,10 +39,11 @@ public class ReadInt extends AbstractReadExpr {
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError
      {
         LOG.debug("[ReadInt][CodeGenInst] generating code for ReadInt");
-        System.out.println("[ReadInt][codeGenInst] generating code for ReadInt");
-        System.out.println(compiler.getRegisterManagement());
+        //System.out.println("[ReadInt][codeGenInst] generating code for ReadInt");
+        //System.out.println(compiler.getRegisterManagement());
         this.setRegisterDeRetour(this.LoadGencode(compiler));
-        System.out.println("[ReadInt][codeGenInst] exiting method");
+        //System.out.println("[ReadInt][codeGenInst] exiting generation method method");
+        LOG.debug("[ReadInt][codeGenInst] exiting generation method method");
     }
 
     
@@ -51,7 +52,7 @@ public class ReadInt extends AbstractReadExpr {
         assert(reg != null);
         compiler.addInstruction(new RINT());
         compiler.addInstruction(new BOV(new Label("io_error")));
-        //compiler.addInstruction(new STORE(Register.getR(1),GB+nbGB));
+        compiler.getErrorManagementUnit().activeError("io_error");
         compiler.addInstruction(new LOAD(Register.getR(1),this.getRegisterDeRetour()));
     }
 

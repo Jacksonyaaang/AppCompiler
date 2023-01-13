@@ -1,0 +1,45 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:37) - verify program: start
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:30) - verify Main: start
+On est dans ListDeclVar.java
+On est dans Identifier.java
+On est dans Initialization.java
+On est dans AbstractExpr.java
+On est dans IntLiteral.java
+On est dans Identifier.java
+On est dans Initialization.java
+On est dans AbstractExpr.java
+On est dans IntLiteral.java
+On est dans Identifier.java
+On est dans Initialization.java
+On est dans AbstractExpr.java
+On est dans BooleanLiteral.java
+On est dans Identifier.java
+On est dans Initialization.java
+On est dans AbstractExpr.java
+On est dans AbstractOpArith.java
+y
+x
+int
+int
+FIN ARTH
+On est dans Identifier.java
+On est dans Initialization.java
+On est dans AbstractExpr.java
+On est dans AbstractOpArith.java
+y
+x
+int
+int
+FIN ARTH
+On est dans Identifier.java
+On est dans Initialization.java
+On est dans AbstractExpr.java
+Exception in thread "main" java.lang.UnsupportedOperationException: not yet implemented
+	at fr.ensimag.deca.tree.Modulo.verifyExpr(Modulo.java:23)
+	at fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:86)
+	at fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:39)
+	at fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:39)
+	at fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:42)
+	at fr.ensimag.deca.tree.Main.verifyMain(Main.java:37)
+	at fr.ensimag.deca.tree.Program.verifyProgram(Program.java:38)
+	at fr.ensimag.deca.context.ManualTestContext.main(ManualTestContext.java:35)

@@ -47,6 +47,7 @@ public class Program extends AbstractProgram {
         compiler.addComment("Main program");
         main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());
+        compiler.getErrorManagementUnit().writeListError(compiler);
     }
 
     @Override

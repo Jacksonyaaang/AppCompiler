@@ -22,22 +22,25 @@ public class Plus extends AbstractOpArith {
     private static final Logger LOG = Logger.getLogger(IntLiteral.class);
  
     @Override
-    public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultregister) throws CodeGenError {
+    public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
         LOG.debug("[Plus][executeBinaryOperation] generating code for int literal value " );
         System.out.println("[Plus][executeBinaryOperation] generating code for Plus between: " 
-                        +val + " and " + resultregister);
+                        +val + " and " + resultRegister);
+        LOG.debug("[Plus][executeBinaryOperation] generating code for Plus between: " 
+        +val + " and " + resultRegister);
         if (getConvNeeded()){
             addConvertInstructions(compiler);
         }
         if (!getWorkWithFloats()){
-            compiler.addInstruction(new ADD(val, resultregister));
+            compiler.addInstruction(new ADD(val, resultRegister));
         }
         else{
-            compiler.addInstruction(new ADD(val, resultregister));
+            compiler.addInstruction(new ADD(val, resultRegister));
             // A FAIRE CALL METHODE THAT WILL ADD OVERFLOW MUL AT THE END
             compiler.addInstruction(new BOV(new Label("overflow_error")), "Checking for overflow since "
                                                                         +"the operation is between two floats ");
-        }
+            compiler.getErrorManagementUnit().activeError("overflow_error");
+            }
     }
     
 
