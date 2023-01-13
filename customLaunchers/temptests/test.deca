@@ -1,3 +1,6 @@
 {
-    int x = (a*b)-(c*d);
+
+    boolean a = false;
+    boolean b = true;
+    int x = a+b;
 }   
