@@ -6,11 +6,13 @@
 //    Retourne une série de 0 et de 1 donc chaques 1 indique le bon fonctionnement du teste
 //    dont le numéro correspond à la position de ce 1 en partant de la gauche.
 // Resultats:
+//
 //true is true 
 //b1=true is true
 //b1&&b2[ 1111/1111 ]
 //b1||b2[ 1111/1111 ]
-//x(greater/lower)y[ 1111/1111 ]
+//x(int:greater/lower)y[ 111111/111111 ]
+//x(float:greater/lower)f2[ 111111/111111 ]
 //comparaison plus complexes[ 111/111 ]
 // Historique:
 // 
@@ -22,8 +24,10 @@
     int x=2;
     int y=1;
     int z=3;
+    float f1=5.0;
+    float f2=4.5;
     
-    //test true et false
+    //test true et false:
     if(true){
         println("true is true ");
     }
@@ -34,10 +38,11 @@
         println("b1=true is true");
     }
 
-    //test "et", couverture de toute la table de vérité 
+    //test "et", couverture de toute la table de vérité:
     if(b1&&b1){
         i = i + 1000;
     } 
+
     if(!(b1&&b2)){
         i = i + 100;
     }
@@ -50,7 +55,7 @@
     println("b1&&b2[ ",i,"/1111 ]");
     i=0;
 
-    //test "ou", couverture de toute la table de vérité
+    //test "ou", couverture de toute la table de vérité:
     if(b1||b1){
         i = i+ 1000;
     }
@@ -66,24 +71,59 @@
     println("b1||b2[ ",i,"/1111 ]");
     i=0;
 
-    //test innégalités 
+    //test innégalités entières
     if(x>y){
-        i = i+ 1000;
+        i = i+ 100000;
     }
     if(!(x<y)){   
         b1=true;
-        i = i+ 100;
+        i = i+ 10000;
     }
     y=0;
     x=1;
     if(x>=y){
+        i = i+ 1000;
+    }
+    if(!(x<=y)){
+        i = i+ 100;
+    }
+    y=1;
+    if(x<=y){
         i = i+ 10;
     }
-    if(y<=x){
+    if(x>=y){
         i = i+ 1;
     }
-    println("x(greater/lower)y[ ",i,"/1111 ]");
+
+    println("x(float:greater/lower)f2[ ",i,"/111111 ]");
     i=0;
+    //test innégalitées flotantes
+    if(f1>f2){
+        i = i+ 100000;
+    }
+    if(!(f1<f2)){   
+        b1=true;
+        i = i+ 10000;
+    }
+    f2=0;
+    f1=1;
+    if(f1>=f2){
+        i = i+ 1000;
+    }
+    if(!(f1<=f2)){
+        i = i+ 100;
+    }
+    f2=1;
+    if(f1<=f2){
+        i = i+ 10;
+    }
+    if(f1>=f2){
+        i = i+ 1;
+    }
+
+    println("f1(float:greater/lower)f2[ ",i,"/111111 ]");
+    i=0;
+    //tests plus complexes:
     if((x<(y+z))&&(b1||b2)||b2){
         i = i+ 100;
     }
