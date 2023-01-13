@@ -1,0 +1,13 @@
+// Description:
+//    Operations Booléens
+//
+// Resultats:
+//    Ligne 12: Les opérations booléennes ne sont compatibles qu'avec des booleans.
+// 
+// Historique:
+//    cree le 13/01/2023
+{
+	int a = 1;
+	boolean b = true;
+	b = b && a;
+}

@@ -1,0 +1,13 @@
+// Description:
+//    Not : operations booléens
+//
+// Resultats:
+//    Ligne 12: Not ne s'applique qu'au type boolean .
+// 
+// Historique:
+//    cree le 13/01/2023
+
+{
+	int a = 0;
+	a = !a;
+}
