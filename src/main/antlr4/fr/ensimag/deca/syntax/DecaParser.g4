@@ -40,7 +40,6 @@ options {
     protected Initialization tempInit = null;
     protected NoInitialization tempInitNoInit = null;
     protected StringBuilder sb = null;  
-
 }
 
 prog returns[AbstractProgram tree]

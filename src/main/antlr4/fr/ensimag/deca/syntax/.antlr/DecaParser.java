@@ -133,7 +133,6 @@ public class DecaParser extends AbstractDecaParser {
 	    protected NoInitialization tempInitNoInit = null;
 	    protected StringBuilder sb = null;  
 
-
 	public DecaParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
