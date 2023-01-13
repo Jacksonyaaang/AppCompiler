@@ -24,8 +24,6 @@ public class Minus extends AbstractOpArith {
     @Override
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
         LOG.debug("[Plus][executeBinaryOperation] generating code for int literal value " );
-        // System.out.println("[Plus][executeBinaryOperation] generating code for Plus between: " 
-        //                 +val + " and " + resultRegister);
         LOG.debug("[Plus][executeBinaryOperation] generating code for Plus between: " 
                             +val + " and " + resultRegister);
         LOG.debug("[Plus][executeBinaryOperation] generating code for Plus between: " 

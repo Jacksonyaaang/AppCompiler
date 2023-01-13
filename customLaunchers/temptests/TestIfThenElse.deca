@@ -1,9 +1,0 @@
-{
-if(true){
-printf("true");
-}
-else{
-print("not true");
-}
-print("fin");
-}

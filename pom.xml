@@ -134,7 +134,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.8</version>
+                <version>0.8.7</version>
                 <configuration>
                     <outputDirectory>${jacoco.report_dir}/</outputDirectory>
                     <excludes>
@@ -174,7 +174,7 @@
                                         <limit>
                                             <counter>INSTRUCTION</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.15</minimum>
+                                            <minimum>0.75</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
@@ -190,10 +190,15 @@
                 <executions>
                     <!-- One <execution> per executable to launch. Execution
                     failure (exit status != 0) will stop the tests. -->
-<!--                     <execution>
+                    <execution>
                         <id>basic-lex</id>
                         <configuration>
                             <executable>./src/test/script/basic-lex.sh</executable>
+                            <!-- If we need to pass arguments :
+                                 <arguments>
+                                 <argument>...</argument>
+                                 </arguments>
+                            -->
                         </configuration>
                         <phase>test</phase>
                         <goals>
@@ -211,6 +216,9 @@
                         </goals>
                     </execution>
                     <execution>
+                        <!-- run a unit test by defining our own class with a main
+                        function -->
+                        <!-- warning: java assertions are not enabled -->
                         <id>unit-test-symbol</id>
                         <configuration>
                             <mainClass>fr.ensimag.deca.tools.ManualTestSymbol</mainClass>
@@ -260,30 +268,8 @@
                         <goals>
                             <goal>exec</goal>
                         </goals>
-                    </execution> -->
-                    <!--/executions-->
-
-                    <!-- scripts automatique pour les tests unitaires -->
-                    <!--<executions>-->
-                    <!--mvn -Djacoco.skip=false verify -Dmaven.test.failure.ignore-->
-                    <execution>
-                        <id>Test-Contexuelle-Valide</id>
-                        <configuration>
-                            <executable>./customLaunchers/TestContexuelle/autoConValide.sh</executable>
-                        </configuration>
-                        <phase>test</phase>
-                        <goals><goal>exec</goal></goals>
-                    </execution>
-                    <execution>
-                        <id>Test-Contexuelle-Invalide</id>
-                        <configuration>
-                            <executable>./customLaunchers/TestContexuelle/autoConInvalide.sh</executable>
-                        </configuration>
-                        <phase>test</phase>
-                        <goals><goal>exec</goal></goals>
                     </execution>
                 </executions>
-
             </plugin>
 
             <plugin>

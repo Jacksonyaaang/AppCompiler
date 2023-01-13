@@ -37,8 +37,6 @@ public class Assign extends AbstractBinaryExpr {
 
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister){
         LOG.debug("[Assign][executeBinaryOperation] generating code for int literal value " );
-        // System.out.println("[Assign][executeBinaryOperation] generating code for assignement of: " 
-        //                 + val + " to " + resultRegister);
         LOG.debug("[Assign][executeBinaryOperation] generating code for assignement of: " 
                         + val + " to " + resultRegister);
         compiler.addInstruction(new LOAD(val, resultRegister));
@@ -48,7 +46,6 @@ public class Assign extends AbstractBinaryExpr {
     public void codeGenInst(DecacCompiler compiler) throws CodeGenError {
             this.getRightOperand().codeGenInst(compiler);
             assert( this.getRightOperand().getRegisterDeRetour() != null);
-            System.out.println("[Assign][codeGenInst] Left is being stored at " + ((Identifier) getLeftOperand()).getExpDefinition().getOperand());
             LOG.debug("[Assign][codeGenInst]Left is being stored at " + ((Identifier) getLeftOperand()).getExpDefinition().getOperand());
             assert(((Identifier) getLeftOperand()).getExpDefinition().getOperand() != null);
             assert(getLeftOperand() instanceof Identifier);

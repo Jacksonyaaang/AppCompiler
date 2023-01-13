@@ -97,11 +97,11 @@ while_end2:
 	BRA end_ifthenelse_2
 else2:
 end_ifthenelse_2:
-	WSTR "while[ "
+	WSTR """while[ """
 	LOAD 2(GB), R2	; loading valide into memory
 	LOAD R2, R1
 	WINT
-	WSTR "/11 ]"
+	WSTR """/11 ]"""
 	WNL
 	HALT
 stack_overflow_error:

@@ -26,8 +26,7 @@ public class Lower extends AbstractOpIneq {
     @Override
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
         LOG.debug("[Lower][executeBinaryOperation] Running Lower operation " );
-        // System.out.println("[Lower][executeBinaryOperation] generating code for Lower between: " 
-        //                                     +val + " and " + resultRegister);
+
         LOG.debug("[Lower][executeBinaryOperation] generating code for Lower between: " 
                     +val + " and " + resultRegister);
 

@@ -93,6 +93,8 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         //S'il s'agit d'un identificateur dans l'operand droit, on fait un traitement spécial 
         //qui exploite l'adresse de l'indentificateur
         if (rightOperandIdentifier(compiler, rightOperand) != null){
+            LOG.debug("[AbstractBinaryExpr][codeGenInst] Exploiting an identifier with the adresse" +
+                                     ((Identifier) getRightOperand()).getExpDefinition().getOperand());
             this.executeBinaryOperation( compiler, ((Identifier) getRightOperand()).getExpDefinition().getOperand(), 
                                     getLeftOperand().getRegisterDeRetour());
             this.transferPopRegisters(getLeftOperand().getRegisterToPop());
@@ -105,7 +107,7 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
                         getLeftOperand().getRegisterDeRetour());
             }
             else{
-                throw new CodeGenError(getLocation(), "Should never have equal registers with the new approch; this must never be called");
+                throw new CodeGenError(getLocation(), "Should never have equal registers with this algorithm; this must never be called");
             }
         }
         if (this.getRegisterDeRetour() == null) {
@@ -148,7 +150,12 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
     }
 
     private DAddr rightOperandIdentifier(DecacCompiler compiler,AbstractExpr expr) throws CodeGenError {
-        if (!convNeeded && !(this instanceof Divide) && expr instanceof Identifier) {
+        /*
+         * Si on travaille avec l'operation arithmétique divide avec des entiers il faut transformer
+         * l'identificateur de gauche en un registre afin de pourvoir le comparé avec 0
+         * car on n'a ne peux pas comparé une adresse avec literal
+         */
+        if ( !(this instanceof Divide && !workWithFloats) && expr instanceof Identifier) {
             return ((Identifier) expr).getExpDefinition().getOperand();
         }
         LOG.debug("[AbstractBinaryExpr][codeGenInst] Exploring Right");           
@@ -157,7 +164,6 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
                          getRightOperand().getRegisterDeRetour());
         return null;
     }
-
 
 
     @Override

@@ -25,8 +25,6 @@ public class LowerOrEqual extends AbstractOpIneq {
     @Override
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
         LOG.debug("[LowerOrEqual][executeBinaryOperation] Running LowerOrEqual operation " );
-        // System.out.println("[LowerOrEqual][executeBinaryOperation] generating code for LowerOrEqual between: " 
-        //                                     +val + " and " + resultRegister);
         LOG.debug("[LowerOrEqual][executeBinaryOperation] generating code for LowerOrEqual between: " 
         +val + " and " + resultRegister);
 

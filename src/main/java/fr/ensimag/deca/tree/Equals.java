@@ -25,8 +25,6 @@ public class Equals extends AbstractOpExactCmp {
     @Override
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
         LOG.debug("[Equals][executeBinaryOperation] Running Equals operation " );
-
-
         compiler.addInstruction(new CMP(val, resultRegister), "Comparing registers for Equals operation ");
         compiler.addInstruction(new SEQ(resultRegister), "Placing Equals result " +
                                                        "into the register  ");   

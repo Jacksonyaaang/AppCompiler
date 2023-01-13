@@ -1,19 +1,16 @@
 // Description:
-//    test ifthenelse et opérations binaires
-//
+//    Tester if then else et operation boolean
+//    Retourne une série de 0 et de 1 donc chaques 1 indique le bon fonctionnement du teste
+//    dont le numéro correspond à la position de ce 1 en partant de la gauche.
 // Resultats:
-//    true is true
-//    b1=true is true 
-//    b1&&b2[ 1111/1111 ]
-//    b1||b2[ 1111/1111 ]
-//    x(greater/lower)y[ 1111/1111 ]
-//    comparaison plus complexes[ 111/111 ]
+//true is true 
+//b1=true is true
+//b1&&b2[ 1111/1111 ]
+//b1||b2[ 1111/1111 ]
+//x(greater/lower)y[ 1111/1111 ]
+//comparaison plus complexes[ 111/111 ]
 // Historique:
-//    cree le 01/01/2023
 // 
-//
-//
-
 
 {
     boolean b1=true;
@@ -67,9 +64,8 @@
         b1=true;
         i = i+ 100;
     }
-    
-    x=1;
     y=0;
+    x=1;
     if(x>=y){
         i = i+ 10;
     }
@@ -91,5 +87,4 @@
     }
     println("comparaison plus complexes[ ",i,"/111 ]");
     i=0;
-    
 }
