@@ -1,6 +1,6 @@
-	TSTO #4
+	TSTO #5
 	BOV stack_overflow_error
-	ADDSP #4
+	ADDSP #5
 ; start main program
 ; Main program
 ; Beginning of main instructions:
@@ -38,6 +38,7 @@
 	LOAD R2, R1
 	WINT
 	WNL
+; --------BeginAssignOp--------[25, 1]-----
 ; --------StartBinaryOp--------[25, 5]-----
 ; --------StartBinaryOp--------[25, 6]-----
 ; --------StartBinaryOp--------[25, 7]-----
@@ -45,33 +46,50 @@
 ; --------StartBinaryOp--------[25, 9]-----
 ; --------StartBinaryOp--------[25, 11]-----
 ; --------StartBinaryOp--------[25, 11]-----
-	LOAD #5, R2	; loading 5 into memory
-	LOAD #4, R3	; loading 4 into memory
-	ADD R3, R2
+	LOAD #5, R3	; loading 5 into memory
+	PUSH R2
+	LOAD #4, R2	; loading 4 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[25, 11]-----
-	LOAD #3, R3	; loading 3 into memory
-	SUB R3, R2
+	PUSH R2
+	LOAD #3, R2	; loading 3 into memory
+	SUB R2, R3
+	POP R2
 ; --------EndBinaryOp--------[25, 11]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[25, 9]-----
-	LOAD #6, R3	; loading 6 into memory
-	ADD R3, R2
+	PUSH R2
+	LOAD #6, R2	; loading 6 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[25, 8]-----
-	LOAD #9, R3	; loading 9 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #9, R2	; loading 9 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[25, 7]-----
-	LOAD #7, R3	; loading 7 into memory
-	ADD R3, R2
+	PUSH R2
+	LOAD #7, R2	; loading 7 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[25, 6]-----
-	LOAD #60, R3	; loading 60 into memory
-	ADD R3, R2
+	PUSH R2
+	LOAD #60, R2	; loading 60 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[25, 5]-----
-	STORE R2, 1(GB)	;  Assiging a value to u
+	STORE R3, 1(GB)	;  Assiging a value to u
+	LOAD R3, R2	;  Return value of the assignement of =uand storing it into R2
+; --------EndAssignOp--------[25, 1]-----
 	LOAD 1(GB), R2	; loading u into memory
 	LOAD R2, R1
 	WINT
 	WNL
+; --------BeginAssignOp--------[27, 1]-----
 ; --------StartBinaryOp--------[27, 5]-----
 ; --------StartBinaryOp--------[27, 5]-----
 ; --------StartBinaryOp--------[27, 6]-----
@@ -80,44 +98,63 @@
 ; --------StartBinaryOp--------[27, 9]-----
 ; --------StartBinaryOp--------[27, 10]-----
 ; --------StartBinaryOp--------[27, 11]-----
-	LOAD #5, R2	; loading 5 into memory
-; --------StartBinaryOp--------[27, 13]-----
 	LOAD #5, R3	; loading 5 into memory
+; --------StartBinaryOp--------[27, 13]-----
 	PUSH R2
-	LOAD #3, R2	; loading 3 into memory
+	LOAD #5, R2	; loading 5 into memory
+	PUSH R3
+	LOAD #3, R3	; loading 3 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[27, 13]-----
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[27, 11]-----
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[27, 10]-----
+	PUSH R2
+	LOAD #6, R2	; loading 6 into memory
 	MUL R2, R3
 	POP R2
-; --------EndBinaryOp--------[27, 13]-----
-	ADD R3, R2
-; --------EndBinaryOp--------[27, 11]-----
-	LOAD #2, R3	; loading 2 into memory
-	ADD R3, R2
-; --------EndBinaryOp--------[27, 10]-----
-	LOAD #6, R3	; loading 6 into memory
-	MUL R3, R2
 ; --------EndBinaryOp--------[27, 9]-----
-	LOAD #9, R3	; loading 9 into memory
-	ADD R3, R2
+	PUSH R2
+	LOAD #9, R2	; loading 9 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[27, 8]-----
-	LOAD #7, R3	; loading 7 into memory
-	ADD R3, R2
+	PUSH R2
+	LOAD #7, R2	; loading 7 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[27, 7]-----
-	LOAD #60, R3	; loading 60 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #60, R2	; loading 60 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[27, 6]-----
-	LOAD #60, R3	; loading 60 into memory
-	OPP R3, R3	; Doing an unary minus
-	MUL R3, R2
+	PUSH R2
+	LOAD #60, R2	; loading 60 into memory
+	OPP R2, R2	; Doing an unary minus
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[27, 5]-----
-	LOAD #30, R3	; loading 30 into memory
-	OPP R3, R3	; Doing an unary minus
-	ADD R3, R2
+	PUSH R2
+	LOAD #30, R2	; loading 30 into memory
+	OPP R2, R2	; Doing an unary minus
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[27, 5]-----
-	STORE R2, 1(GB)	;  Assiging a value to u
+	STORE R3, 1(GB)	;  Assiging a value to u
+	LOAD R3, R2	;  Return value of the assignement of =uand storing it into R2
+; --------EndAssignOp--------[27, 1]-----
 	LOAD 1(GB), R2	; loading u into memory
 	LOAD R2, R1
 	WINT
 	WNL
+; --------BeginAssignOp--------[29, 1]-----
 ; --------StartBinaryOp--------[29, 4]-----
 ; --------StartBinaryOp--------[29, 5]-----
 ; --------StartBinaryOp--------[29, 6]-----
@@ -125,39 +162,55 @@
 ; --------StartBinaryOp--------[29, 8]-----
 ; --------StartBinaryOp--------[29, 9]-----
 ; --------StartBinaryOp--------[29, 11]-----
-	LOAD #5, R2	; loading 5 into memory
+	LOAD #5, R3	; loading 5 into memory
 ; --------StartBinaryOp--------[29, 13]-----
-	LOAD #4, R3	; loading 4 into memory
 	PUSH R2
-	LOAD #3, R2	; loading 3 into memory
+	LOAD #4, R2	; loading 4 into memory
+	PUSH R3
+	LOAD #3, R3	; loading 3 into memory
+	CMP #0, R3
+	BEQ div0_error	; Checking for division by 0the operation is between two ints 
+	QUO R3, R2
+	POP R3
+; --------EndBinaryOp--------[29, 13]-----
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[29, 11]-----
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[29, 9]-----
+	PUSH R2
+	LOAD #6, R2	; loading 6 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[29, 8]-----
+	PUSH R2
+	LOAD #9, R2	; loading 9 into memory
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[29, 7]-----
+	PUSH R2
+	LOAD #7, R2	; loading 7 into memory
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[29, 6]-----
+	PUSH R2
+	LOAD #60, R2	; loading 60 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[29, 5]-----
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
 	CMP #0, R2
 	BEQ div0_error	; Checking for division by 0the operation is between two ints 
 	QUO R2, R3
 	POP R2
-; --------EndBinaryOp--------[29, 13]-----
-	ADD R3, R2
-; --------EndBinaryOp--------[29, 11]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
-; --------EndBinaryOp--------[29, 9]-----
-	LOAD #6, R3	; loading 6 into memory
-	ADD R3, R2
-; --------EndBinaryOp--------[29, 8]-----
-	LOAD #9, R3	; loading 9 into memory
-	MUL R3, R2
-; --------EndBinaryOp--------[29, 7]-----
-	LOAD #7, R3	; loading 7 into memory
-	MUL R3, R2
-; --------EndBinaryOp--------[29, 6]-----
-	LOAD #60, R3	; loading 60 into memory
-	ADD R3, R2
-; --------EndBinaryOp--------[29, 5]-----
-	LOAD #2, R3	; loading 2 into memory
-	CMP #0, R3
-	BEQ div0_error	; Checking for division by 0the operation is between two ints 
-	QUO R3, R2
 ; --------EndBinaryOp--------[29, 4]-----
-	STORE R2, 1(GB)	;  Assiging a value to u
+	STORE R3, 1(GB)	;  Assiging a value to u
+	LOAD R3, R2	;  Return value of the assignement of =uand storing it into R2
+; --------EndAssignOp--------[29, 1]-----
 	LOAD 1(GB), R2	; loading u into memory
 	LOAD R2, R1
 	WINT
@@ -167,13 +220,17 @@
 	LOAD R2, R1
 	WINT
 	WNL
-	LOAD 1(GB), R2	; loading u into memory
-	OPP R2, R2	; Doing an unary minus
-	STORE R2, 1(GB)	;  Assiging a value to u
+; --------BeginAssignOp--------[32, 1]-----
+	LOAD 1(GB), R3	; loading u into memory
+	OPP R3, R3	; Doing an unary minus
+	STORE R3, 1(GB)	;  Assiging a value to u
+	LOAD R3, R2	;  Return value of the assignement of =uand storing it into R2
+; --------EndAssignOp--------[32, 1]-----
 	LOAD 1(GB), R2	; loading u into memory
 	LOAD R2, R1
 	WINT
 	WNL
+; --------BeginAssignOp--------[34, 1]-----
 ; --------StartBinaryOp--------[34, 5]-----
 ; --------StartBinaryOp--------[34, 6]-----
 ; --------StartBinaryOp--------[34, 7]-----
@@ -181,43 +238,60 @@
 ; --------StartBinaryOp--------[34, 9]-----
 ; --------StartBinaryOp--------[34, 10]-----
 ; --------StartBinaryOp--------[34, 12]-----
-	LOAD #5, R2	; loading 5 into memory
+	LOAD #5, R3	; loading 5 into memory
 ; --------StartBinaryOp--------[34, 14]-----
-	LOAD #4, R3	; loading 4 into memory
 	PUSH R2
-	LOAD #3, R2	; loading 3 into memory
-	CMP #0, R2
+	LOAD #4, R2	; loading 4 into memory
+	PUSH R3
+	LOAD #3, R3	; loading 3 into memory
+	CMP #0, R3
 	BEQ div0_error	; Checking for division by 0the operation is between two ints 
-	QUO R2, R3
-	POP R2
+	QUO R3, R2
+	POP R3
 ; --------EndBinaryOp--------[34, 14]-----
-	ADD R3, R2
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[34, 12]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[34, 10]-----
-	LOAD #6, R3	; loading 6 into memory
-	ADD R3, R2
+	PUSH R2
+	LOAD #6, R2	; loading 6 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[34, 9]-----
-	LOAD #9, R3	; loading 9 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #9, R2	; loading 9 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[34, 8]-----
-	LOAD #7, R3	; loading 7 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #7, R2	; loading 7 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[34, 7]-----
-	LOAD #60, R3	; loading 60 into memory
-	ADD R3, R2
+	PUSH R2
+	LOAD #60, R2	; loading 60 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[34, 6]-----
-	LOAD #2, R3	; loading 2 into memory
-	CMP #0, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	CMP #0, R3
 	BEQ div0_error	; Checking for modulo by 0 the operation is between two ints 
-	REM R3, R2
+	REM R2, R3
+	POP R2
 ; --------EndBinaryOp--------[34, 5]-----
-	STORE R2, 1(GB)	;  Assiging a value to u
+	STORE R3, 1(GB)	;  Assiging a value to u
+	LOAD R3, R2	;  Return value of the assignement of =uand storing it into R2
+; --------EndAssignOp--------[34, 1]-----
 	LOAD 1(GB), R2	; loading u into memory
 	LOAD R2, R1
 	WINT
 	WNL
+; --------BeginAssignOp--------[36, 1]-----
 ; --------StartBinaryOp--------[36, 5]-----
 ; --------StartBinaryOp--------[36, 6]-----
 ; --------StartBinaryOp--------[36, 7]-----
@@ -225,59 +299,76 @@
 ; --------StartBinaryOp--------[36, 9]-----
 ; --------StartBinaryOp--------[36, 10]-----
 ; --------StartBinaryOp--------[36, 12]-----
-	LOAD #5, R2	; loading 5 into memory
+	LOAD #5, R3	; loading 5 into memory
 ; --------StartBinaryOp--------[36, 14]-----
-	LOAD #4, R3	; loading 4 into memory
-	PUSH R2
-	LOAD #3, R2	; loading 3 into memory
-	CMP #0, R2
-	BEQ div0_error	; Checking for division by 0the operation is between two ints 
-	QUO R2, R3
-	POP R2
-; --------EndBinaryOp--------[36, 14]-----
-	ADD R3, R2
-; --------EndBinaryOp--------[36, 12]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
-; --------EndBinaryOp--------[36, 10]-----
-	LOAD #6, R3	; loading 6 into memory
-	ADD R3, R2
-; --------EndBinaryOp--------[36, 9]-----
-	LOAD #9, R3	; loading 9 into memory
-	MUL R3, R2
-; --------EndBinaryOp--------[36, 8]-----
-	LOAD #7, R3	; loading 7 into memory
-	MUL R3, R2
-; --------EndBinaryOp--------[36, 7]-----
-	LOAD #60, R3	; loading 60 into memory
-	ADD R3, R2
-; --------EndBinaryOp--------[36, 6]-----
-; --------StartBinaryOp--------[36, 37]-----
-	LOAD #2, R3	; loading 2 into memory
-; --------StartBinaryOp--------[36, 40]-----
 	PUSH R2
 	LOAD #4, R2	; loading 4 into memory
-; --------StartBinaryOp--------[36, 43]-----
 	PUSH R3
-	LOAD #5, R3	; loading 5 into memory
+	LOAD #3, R3	; loading 3 into memory
+	CMP #0, R3
+	BEQ div0_error	; Checking for division by 0the operation is between two ints 
+	QUO R3, R2
+	POP R3
+; --------EndBinaryOp--------[36, 14]-----
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[36, 12]-----
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[36, 10]-----
 	PUSH R2
 	LOAD #6, R2	; loading 6 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[36, 9]-----
+	PUSH R2
+	LOAD #9, R2	; loading 9 into memory
 	MUL R2, R3
 	POP R2
-; --------EndBinaryOp--------[36, 43]-----
+; --------EndBinaryOp--------[36, 8]-----
+	PUSH R2
+	LOAD #7, R2	; loading 7 into memory
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[36, 7]-----
+	PUSH R2
+	LOAD #60, R2	; loading 60 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[36, 6]-----
+; --------StartBinaryOp--------[36, 37]-----
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+; --------StartBinaryOp--------[36, 40]-----
+	PUSH R3
+	LOAD #4, R3	; loading 4 into memory
+; --------StartBinaryOp--------[36, 43]-----
+	PUSH R2
+	LOAD #5, R2	; loading 5 into memory
+	PUSH R3
+	LOAD #6, R3	; loading 6 into memory
 	MUL R3, R2
 	POP R3
-; --------EndBinaryOp--------[36, 40]-----
+; --------EndBinaryOp--------[36, 43]-----
 	MUL R2, R3
 	POP R2
-; --------EndBinaryOp--------[36, 37]-----
+; --------EndBinaryOp--------[36, 40]-----
 	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[36, 37]-----
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[36, 5]-----
-	STORE R2, 1(GB)	;  Assiging a value to u
+	STORE R3, 1(GB)	;  Assiging a value to u
+	LOAD R3, R2	;  Return value of the assignement of =uand storing it into R2
+; --------EndAssignOp--------[36, 1]-----
 	LOAD 1(GB), R2	; loading u into memory
 	LOAD R2, R1
 	WINT
 	WNL
+; --------BeginAssignOp--------[38, 1]-----
 ; --------StartBinaryOp--------[38, 5]-----
 ; --------StartBinaryOp--------[38, 7]-----
 ; --------StartBinaryOp--------[38, 8]-----
@@ -286,27 +377,41 @@
 ; --------StartBinaryOp--------[38, 11]-----
 ; --------StartBinaryOp--------[38, 12]-----
 ; --------StartBinaryOp--------[38, 13]-----
-	LOAD #1, R2	; loading 1 into memory
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	LOAD #1, R3	; loading 1 into memory
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[38, 13]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[38, 12]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[38, 11]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[38, 10]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[38, 9]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[38, 8]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[38, 7]-----
 ; --------StartBinaryOp--------[38, 38]-----
 ; --------StartBinaryOp--------[38, 39]-----
@@ -314,44 +419,49 @@
 ; --------StartBinaryOp--------[38, 41]-----
 ; --------StartBinaryOp--------[38, 42]-----
 ; --------StartBinaryOp--------[38, 43]-----
-	LOAD #1, R3	; loading 1 into memory
 	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[38, 43]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[38, 42]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[38, 41]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[38, 40]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[38, 39]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[38, 38]-----
+	LOAD #1, R2	; loading 1 into memory
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
 	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[38, 43]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[38, 42]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[38, 41]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[38, 40]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[38, 39]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[38, 38]-----
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[38, 5]-----
-	STORE R2, 1(GB)	;  Assiging a value to u
+	STORE R3, 1(GB)	;  Assiging a value to u
+	LOAD R3, R2	;  Return value of the assignement of =uand storing it into R2
+; --------EndAssignOp--------[38, 1]-----
 	LOAD 1(GB), R2	; loading u into memory
 	LOAD R2, R1
 	WINT
 	WNL
+; --------BeginAssignOp--------[40, 1]-----
 ; --------StartBinaryOp--------[40, 5]-----
 ; --------StartBinaryOp--------[40, 7]-----
 ; --------StartBinaryOp--------[40, 8]-----
@@ -368,27 +478,41 @@
 ; --------StartBinaryOp--------[40, 19]-----
 ; --------StartBinaryOp--------[40, 20]-----
 ; --------StartBinaryOp--------[40, 21]-----
-	LOAD #1, R2	; loading 1 into memory
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	LOAD #1, R3	; loading 1 into memory
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[40, 21]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[40, 20]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[40, 19]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[40, 18]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[40, 17]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[40, 16]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[40, 15]-----
 ; --------StartBinaryOp--------[40, 46]-----
 ; --------StartBinaryOp--------[40, 47]-----
@@ -396,59 +520,75 @@
 ; --------StartBinaryOp--------[40, 49]-----
 ; --------StartBinaryOp--------[40, 50]-----
 ; --------StartBinaryOp--------[40, 51]-----
-	LOAD #1, R3	; loading 1 into memory
 	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
+	LOAD #1, R2	; loading 1 into memory
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
 ; --------EndBinaryOp--------[40, 51]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
 ; --------EndBinaryOp--------[40, 50]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
 ; --------EndBinaryOp--------[40, 49]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
 ; --------EndBinaryOp--------[40, 48]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[40, 47]-----
+	PUSH R3
+	LOAD #3, R3	; loading 3 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[40, 46]-----
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[40, 13]-----
 	PUSH R2
 	LOAD #2, R2	; loading 2 into memory
 	MUL R2, R3
 	POP R2
-; --------EndBinaryOp--------[40, 47]-----
+; --------EndBinaryOp--------[40, 13]-----
 	PUSH R2
-	LOAD #3, R2	; loading 3 into memory
+	LOAD #2, R2	; loading 2 into memory
 	MUL R2, R3
 	POP R2
-; --------EndBinaryOp--------[40, 46]-----
-	MUL R3, R2
-; --------EndBinaryOp--------[40, 13]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
-; --------EndBinaryOp--------[40, 13]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
 ; --------EndBinaryOp--------[40, 12]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[40, 11]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[40, 10]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[40, 9]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[40, 8]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[40, 7]-----
 ; --------StartBinaryOp--------[40, 94]-----
 ; --------StartBinaryOp--------[40, 95]-----
@@ -456,44 +596,49 @@
 ; --------StartBinaryOp--------[40, 97]-----
 ; --------StartBinaryOp--------[40, 98]-----
 ; --------StartBinaryOp--------[40, 99]-----
-	LOAD #1, R3	; loading 1 into memory
 	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[40, 99]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[40, 98]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[40, 97]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[40, 96]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[40, 95]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[40, 94]-----
+	LOAD #1, R2	; loading 1 into memory
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
 	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[40, 99]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[40, 98]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[40, 97]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[40, 96]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[40, 95]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[40, 94]-----
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[40, 5]-----
-	STORE R2, 1(GB)	;  Assiging a value to u
+	STORE R3, 1(GB)	;  Assiging a value to u
+	LOAD R3, R2	;  Return value of the assignement of =uand storing it into R2
+; --------EndAssignOp--------[40, 1]-----
 	LOAD 1(GB), R2	; loading u into memory
 	LOAD R2, R1
 	WINT
 	WNL
+; --------BeginAssignOp--------[42, 1]-----
 ; --------StartBinaryOp--------[42, 5]-----
 ; --------StartBinaryOp--------[42, 7]-----
 ; --------StartBinaryOp--------[42, 8]-----
@@ -510,27 +655,41 @@
 ; --------StartBinaryOp--------[42, 19]-----
 ; --------StartBinaryOp--------[42, 20]-----
 ; --------StartBinaryOp--------[42, 21]-----
-	LOAD #1, R2	; loading 1 into memory
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	LOAD #1, R3	; loading 1 into memory
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[42, 21]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[42, 20]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[42, 19]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[42, 18]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[42, 17]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[42, 16]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[42, 15]-----
 ; --------StartBinaryOp--------[42, 46]-----
 ; --------StartBinaryOp--------[42, 47]-----
@@ -538,59 +697,75 @@
 ; --------StartBinaryOp--------[42, 49]-----
 ; --------StartBinaryOp--------[42, 50]-----
 ; --------StartBinaryOp--------[42, 51]-----
-	LOAD #1, R3	; loading 1 into memory
 	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
+	LOAD #1, R2	; loading 1 into memory
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
 ; --------EndBinaryOp--------[42, 51]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
 ; --------EndBinaryOp--------[42, 50]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
 ; --------EndBinaryOp--------[42, 49]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
 ; --------EndBinaryOp--------[42, 48]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[42, 47]-----
+	PUSH R3
+	LOAD #3, R3	; loading 3 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[42, 46]-----
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[42, 13]-----
 	PUSH R2
 	LOAD #2, R2	; loading 2 into memory
 	MUL R2, R3
 	POP R2
-; --------EndBinaryOp--------[42, 47]-----
+; --------EndBinaryOp--------[42, 13]-----
 	PUSH R2
-	LOAD #3, R2	; loading 3 into memory
+	LOAD #2, R2	; loading 2 into memory
 	MUL R2, R3
 	POP R2
-; --------EndBinaryOp--------[42, 46]-----
-	MUL R3, R2
-; --------EndBinaryOp--------[42, 13]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
-; --------EndBinaryOp--------[42, 13]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
 ; --------EndBinaryOp--------[42, 12]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[42, 11]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[42, 10]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[42, 9]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[42, 8]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[42, 7]-----
 ; --------StartBinaryOp--------[42, 94]-----
 ; --------StartBinaryOp--------[42, 95]-----
@@ -598,44 +773,49 @@
 ; --------StartBinaryOp--------[42, 97]-----
 ; --------StartBinaryOp--------[42, 98]-----
 ; --------StartBinaryOp--------[42, 99]-----
-	LOAD #1, R3	; loading 1 into memory
 	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[42, 99]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[42, 98]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[42, 97]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[42, 96]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[42, 95]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[42, 94]-----
+	LOAD #1, R2	; loading 1 into memory
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
 	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[42, 99]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[42, 98]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[42, 97]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[42, 96]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[42, 95]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[42, 94]-----
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[42, 5]-----
-	STORE R2, 1(GB)	;  Assiging a value to u
+	STORE R3, 1(GB)	;  Assiging a value to u
+	LOAD R3, R2	;  Return value of the assignement of =uand storing it into R2
+; --------EndAssignOp--------[42, 1]-----
 	LOAD 1(GB), R2	; loading u into memory
 	LOAD R2, R1
 	WINT
 	WNL
+; --------BeginAssignOp--------[44, 1]-----
 ; --------StartBinaryOp--------[44, 5]-----
 ; --------StartBinaryOp--------[44, 7]-----
 ; --------StartBinaryOp--------[44, 8]-----
@@ -652,27 +832,41 @@
 ; --------StartBinaryOp--------[44, 19]-----
 ; --------StartBinaryOp--------[44, 20]-----
 ; --------StartBinaryOp--------[44, 21]-----
-	LOAD #1, R2	; loading 1 into memory
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	LOAD #1, R3	; loading 1 into memory
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[44, 21]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[44, 20]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[44, 19]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[44, 18]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[44, 17]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[44, 16]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[44, 15]-----
 ; --------StartBinaryOp--------[44, 46]-----
 ; --------StartBinaryOp--------[44, 47]-----
@@ -680,59 +874,75 @@
 ; --------StartBinaryOp--------[44, 49]-----
 ; --------StartBinaryOp--------[44, 50]-----
 ; --------StartBinaryOp--------[44, 51]-----
-	LOAD #1, R3	; loading 1 into memory
 	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
+	LOAD #1, R2	; loading 1 into memory
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
 ; --------EndBinaryOp--------[44, 51]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
 ; --------EndBinaryOp--------[44, 50]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
 ; --------EndBinaryOp--------[44, 49]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
 ; --------EndBinaryOp--------[44, 48]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[44, 47]-----
+	PUSH R3
+	LOAD #3, R3	; loading 3 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[44, 46]-----
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[44, 13]-----
 	PUSH R2
 	LOAD #2, R2	; loading 2 into memory
 	MUL R2, R3
 	POP R2
-; --------EndBinaryOp--------[44, 47]-----
+; --------EndBinaryOp--------[44, 13]-----
 	PUSH R2
-	LOAD #3, R2	; loading 3 into memory
+	LOAD #2, R2	; loading 2 into memory
 	MUL R2, R3
 	POP R2
-; --------EndBinaryOp--------[44, 46]-----
-	MUL R3, R2
-; --------EndBinaryOp--------[44, 13]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
-; --------EndBinaryOp--------[44, 13]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
 ; --------EndBinaryOp--------[44, 12]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[44, 11]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[44, 10]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[44, 9]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[44, 8]-----
-	LOAD #2, R3	; loading 2 into memory
-	MUL R3, R2
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[44, 7]-----
 ; --------StartBinaryOp--------[44, 94]-----
 ; --------StartBinaryOp--------[44, 95]-----
@@ -740,40 +950,44 @@
 ; --------StartBinaryOp--------[44, 97]-----
 ; --------StartBinaryOp--------[44, 98]-----
 ; --------StartBinaryOp--------[44, 99]-----
-	LOAD #1, R3	; loading 1 into memory
 	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[44, 99]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[44, 98]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[44, 97]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[44, 96]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[44, 95]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
-; --------EndBinaryOp--------[44, 94]-----
+	LOAD #1, R2	; loading 1 into memory
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
 	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[44, 99]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[44, 98]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[44, 97]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[44, 96]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[44, 95]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[44, 94]-----
+	MUL R2, R3
+	POP R2
 ; --------EndBinaryOp--------[44, 5]-----
-	STORE R2, 1(GB)	;  Assiging a value to u
+	STORE R3, 1(GB)	;  Assiging a value to u
+	LOAD R3, R2	;  Return value of the assignement of =uand storing it into R2
+; --------EndAssignOp--------[44, 1]-----
 	LOAD 1(GB), R2	; loading u into memory
 	LOAD R2, R1
 	WINT

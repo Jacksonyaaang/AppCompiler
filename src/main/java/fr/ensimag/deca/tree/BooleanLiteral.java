@@ -34,7 +34,7 @@ public class BooleanLiteral extends AbstractExpr {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{   
-        this.setRegisterDeRetour(this.LoadGencode(compiler));
+        this.setRegisterDeRetour(this.LoadGencode(compiler, true));
     }
 
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{

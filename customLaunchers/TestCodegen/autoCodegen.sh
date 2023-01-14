@@ -19,10 +19,10 @@ test_codegen_valide (){
     # echo decac "$1"
     if decac -r "$2" "$1" 2>&1 | grep -q -e "$i:[0-9]*"
     then
-        echo -e "${RED}TEST NOT PASS!!  Issue file :${ENDCOLOR}${RED_BOLD} $(basename "$1") ${SCR}"
+        echo -e "${RED} TEST DID NOT PASS! FILE DID NOT COMPILE :${ENDCOLOR}${RED_BOLD} $(basename "$1") ${SCR}"
         #exit 1
     else
-        echo -e "${GREEN}[Codegen] TEST PASS!  ${ENDCOLOR} ${THUMBS_UP}"    
+        echo -e "${GREEN}[Codegen] TEST PASS! FILE COMPILED  ${ENDCOLOR} ${THUMBS_UP}"    
     fi
 }
 
@@ -46,7 +46,7 @@ compare_output(){
             echo -e "${RED}[output] Program output is NOT correct $1 for %s${ENDCOLOR} " 
         fi
     else 
-        echo  -e "${GREEN}[output] Compare file does not exists ${ENDCOLOR} " 
+        echo  -e "${GREEN}[output] Compare file does not exists for $i ${ENDCOLOR} " 
     fi
 }
 

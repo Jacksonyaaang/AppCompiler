@@ -139,7 +139,7 @@ DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:42) - [Ab
 DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - [DeclVar] Saving greaterOrEuqualThan into 17(GB)
 DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]
 DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:184) - [AbstractExpr][verifyInst] Verify the expression coming from the instruction
-DEBUG fr.ensimag.deca.tree.Assign.verifyExpr(Assign.java:62) - [Assign][verifyExpr] Verify left and right expression in assignment
+DEBUG fr.ensimag.deca.tree.Assign.verifyExpr(Assign.java:75) - [Assign][verifyExpr] Verify left and right expression in assignment
 DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:199) - [Identifier][verifyExpr]
 DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:162) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments
 DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:40) - [AbstractOpArith][verifyExpr] Verify the arithmetic expressions
@@ -152,7 +152,7 @@ DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:199) - [Identif
 DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:199) - [Identifier][verifyExpr]
 DEBUG fr.ensimag.deca.tree.IntLiteral.verifyExpr(IntLiteral.java:54) - [IntLiteral][verifyExpr]
 DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:184) - [AbstractExpr][verifyInst] Verify the expression coming from the instruction
-DEBUG fr.ensimag.deca.tree.Assign.verifyExpr(Assign.java:62) - [Assign][verifyExpr] Verify left and right expression in assignment
+DEBUG fr.ensimag.deca.tree.Assign.verifyExpr(Assign.java:75) - [Assign][verifyExpr] Verify left and right expression in assignment
 DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:199) - [Identifier][verifyExpr]
 DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:162) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments
 DEBUG fr.ensimag.deca.tree.AbstractOpBool.verifyExpr(AbstractOpBool.java:44) - [AbstractOpBool][verifyExpr] Verify the boolean expressions

@@ -58,12 +58,17 @@ QUIT_AND_Called_When_Fail_id1:
 ; ---------Startif-----------[42, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else3
+; --------BeginAssignOp--------[43, 8]-----
 ; --------StartBinaryOp--------[43, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #1000, R3	; loading 1000 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1000, R2	; loading 1000 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[43, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[43, 8]-----
 	BRA end_ifthenelse_3
 else3:
 end_ifthenelse_3:
@@ -86,12 +91,17 @@ QUIT_AND_Called_When_Fail_id2:
 ; ---------Startif-----------[46, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else4
+; --------BeginAssignOp--------[47, 8]-----
 ; --------StartBinaryOp--------[47, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #100, R3	; loading 100 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #100, R2	; loading 100 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[47, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[47, 8]-----
 	BRA end_ifthenelse_4
 else4:
 end_ifthenelse_4:
@@ -114,12 +124,17 @@ QUIT_AND_Called_When_Fail_id3:
 ; ---------Startif-----------[49, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else5
+; --------BeginAssignOp--------[50, 8]-----
 ; --------StartBinaryOp--------[50, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #10, R3	; loading 10 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #10, R2	; loading 10 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[50, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[50, 8]-----
 	BRA end_ifthenelse_5
 else5:
 end_ifthenelse_5:
@@ -142,12 +157,17 @@ QUIT_AND_Called_When_Fail_id4:
 ; ---------Startif-----------[52, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else6
+; --------BeginAssignOp--------[53, 8]-----
 ; --------StartBinaryOp--------[53, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #1, R3	; loading 1 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[53, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[53, 8]-----
 	BRA end_ifthenelse_6
 else6:
 end_ifthenelse_6:
@@ -158,8 +178,11 @@ end_ifthenelse_6:
 	WINT
 	WSTR "/1111 ]"
 	WNL
-	LOAD #0, R2	; loading 0 into memory
-	STORE R2, 3(GB)	;  Assiging a value to i
+; --------BeginAssignOp--------[56, 4]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[56, 4]-----
 ; --------StartOr--------[59, 7]-----
 	LOAD 1(GB), R2	; loading b1 into memory
 	CMP #1, R2	; [Or]Comparing in the left branch 
@@ -173,12 +196,17 @@ End_Or_Id_5:
 ; ---------Startif-----------[59, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else7
+; --------BeginAssignOp--------[60, 8]-----
 ; --------StartBinaryOp--------[60, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #1000, R3	; loading 1000 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1000, R2	; loading 1000 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[60, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[60, 8]-----
 	BRA end_ifthenelse_7
 else7:
 end_ifthenelse_7:
@@ -196,12 +224,17 @@ End_Or_Id_6:
 ; ---------Startif-----------[62, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else8
+; --------BeginAssignOp--------[63, 8]-----
 ; --------StartBinaryOp--------[63, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #100, R3	; loading 100 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #100, R2	; loading 100 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[63, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[63, 8]-----
 	BRA end_ifthenelse_8
 else8:
 end_ifthenelse_8:
@@ -219,12 +252,17 @@ End_Or_Id_7:
 ; ---------Startif-----------[65, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else9
+; --------BeginAssignOp--------[66, 8]-----
 ; --------StartBinaryOp--------[66, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #10, R3	; loading 10 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #10, R2	; loading 10 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[66, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[66, 8]-----
 	BRA end_ifthenelse_9
 else9:
 end_ifthenelse_9:
@@ -244,12 +282,17 @@ End_Or_Id_8:
 ; ---------Startif-----------[68, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else10
+; --------BeginAssignOp--------[69, 8]-----
 ; --------StartBinaryOp--------[69, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #1, R3	; loading 1 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[69, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[69, 8]-----
 	BRA end_ifthenelse_10
 else10:
 end_ifthenelse_10:
@@ -260,8 +303,11 @@ end_ifthenelse_10:
 	WINT
 	WSTR "/1111 ]"
 	WNL
-	LOAD #0, R2	; loading 0 into memory
-	STORE R2, 3(GB)	;  Assiging a value to i
+; --------BeginAssignOp--------[72, 4]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[72, 4]-----
 ; --------StartBinaryOp--------[75, 7]-----
 	LOAD 4(GB), R2	; loading x into memory
 	CMP 5(GB), R2	; Comparing registers for Greater operation 
@@ -270,12 +316,17 @@ end_ifthenelse_10:
 ; ---------Startif-----------[75, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else11
+; --------BeginAssignOp--------[76, 8]-----
 ; --------StartBinaryOp--------[76, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #100000, R3	; loading 100000 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #100000, R2	; loading 100000 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[76, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[76, 8]-----
 	BRA end_ifthenelse_11
 else11:
 end_ifthenelse_11:
@@ -290,22 +341,36 @@ end_ifthenelse_11:
 ; ---------Startif-----------[78, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else12
-	LOAD #1, R2	; loading true into memory
-	STORE R2, 1(GB)	;  Assiging a value to b1
+; --------BeginAssignOp--------[79, 8]-----
+	LOAD #1, R3	; loading true into memory
+	STORE R3, 1(GB)	;  Assiging a value to b1
+	LOAD R3, R2	;  Return value of the assignement of =b1and storing it into R2
+; --------EndAssignOp--------[79, 8]-----
+; --------BeginAssignOp--------[80, 8]-----
 ; --------StartBinaryOp--------[80, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #10000, R3	; loading 10000 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #10000, R2	; loading 10000 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[80, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[80, 8]-----
 	BRA end_ifthenelse_12
 else12:
 end_ifthenelse_12:
 ; ---------Endif-----------
-	LOAD #0, R2	; loading 0 into memory
-	STORE R2, 5(GB)	;  Assiging a value to y
-	LOAD #1, R2	; loading 1 into memory
-	STORE R2, 4(GB)	;  Assiging a value to x
+; --------BeginAssignOp--------[82, 4]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 5(GB)	;  Assiging a value to y
+	LOAD R3, R2	;  Return value of the assignement of =yand storing it into R2
+; --------EndAssignOp--------[82, 4]-----
+; --------BeginAssignOp--------[83, 4]-----
+	LOAD #1, R3	; loading 1 into memory
+	STORE R3, 4(GB)	;  Assiging a value to x
+	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
+; --------EndAssignOp--------[83, 4]-----
 ; --------StartBinaryOp--------[84, 7]-----
 	LOAD 4(GB), R2	; loading x into memory
 	CMP 5(GB), R2	; Comparing registers for GreaterOrEqual operation 
@@ -314,12 +379,17 @@ end_ifthenelse_12:
 ; ---------Startif-----------[84, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else13
+; --------BeginAssignOp--------[85, 8]-----
 ; --------StartBinaryOp--------[85, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #1000, R3	; loading 1000 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1000, R2	; loading 1000 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[85, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[85, 8]-----
 	BRA end_ifthenelse_13
 else13:
 end_ifthenelse_13:
@@ -334,18 +404,26 @@ end_ifthenelse_13:
 ; ---------Startif-----------[87, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else14
+; --------BeginAssignOp--------[88, 8]-----
 ; --------StartBinaryOp--------[88, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #100, R3	; loading 100 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #100, R2	; loading 100 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[88, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[88, 8]-----
 	BRA end_ifthenelse_14
 else14:
 end_ifthenelse_14:
 ; ---------Endif-----------
-	LOAD #1, R2	; loading 1 into memory
-	STORE R2, 5(GB)	;  Assiging a value to y
+; --------BeginAssignOp--------[90, 4]-----
+	LOAD #1, R3	; loading 1 into memory
+	STORE R3, 5(GB)	;  Assiging a value to y
+	LOAD R3, R2	;  Return value of the assignement of =yand storing it into R2
+; --------EndAssignOp--------[90, 4]-----
 ; --------StartBinaryOp--------[91, 7]-----
 	LOAD 4(GB), R2	; loading x into memory
 	CMP 5(GB), R2	; Comparing registers for LowerOrEqual operation 
@@ -354,12 +432,17 @@ end_ifthenelse_14:
 ; ---------Startif-----------[91, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else15
+; --------BeginAssignOp--------[92, 8]-----
 ; --------StartBinaryOp--------[92, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #10, R3	; loading 10 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #10, R2	; loading 10 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[92, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[92, 8]-----
 	BRA end_ifthenelse_15
 else15:
 end_ifthenelse_15:
@@ -372,12 +455,17 @@ end_ifthenelse_15:
 ; ---------Startif-----------[94, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else16
+; --------BeginAssignOp--------[95, 8]-----
 ; --------StartBinaryOp--------[95, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #1, R3	; loading 1 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[95, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[95, 8]-----
 	BRA end_ifthenelse_16
 else16:
 end_ifthenelse_16:
@@ -388,8 +476,11 @@ end_ifthenelse_16:
 	WINT
 	WSTR "/111111 ]"
 	WNL
-	LOAD #0, R2	; loading 0 into memory
-	STORE R2, 3(GB)	;  Assiging a value to i
+; --------BeginAssignOp--------[99, 4]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[99, 4]-----
 ; --------StartBinaryOp--------[101, 7]-----
 	LOAD 7(GB), R2	; loading f1 into memory
 	CMP 8(GB), R2	; Comparing registers for Greater operation 
@@ -398,12 +489,17 @@ end_ifthenelse_16:
 ; ---------Startif-----------[101, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else17
+; --------BeginAssignOp--------[102, 8]-----
 ; --------StartBinaryOp--------[102, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #100000, R3	; loading 100000 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #100000, R2	; loading 100000 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[102, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[102, 8]-----
 	BRA end_ifthenelse_17
 else17:
 end_ifthenelse_17:
@@ -418,24 +514,38 @@ end_ifthenelse_17:
 ; ---------Startif-----------[104, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else18
-	LOAD #1, R2	; loading true into memory
-	STORE R2, 1(GB)	;  Assiging a value to b1
+; --------BeginAssignOp--------[105, 8]-----
+	LOAD #1, R3	; loading true into memory
+	STORE R3, 1(GB)	;  Assiging a value to b1
+	LOAD R3, R2	;  Return value of the assignement of =b1and storing it into R2
+; --------EndAssignOp--------[105, 8]-----
+; --------BeginAssignOp--------[106, 8]-----
 ; --------StartBinaryOp--------[106, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #10000, R3	; loading 10000 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #10000, R2	; loading 10000 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[106, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[106, 8]-----
 	BRA end_ifthenelse_18
 else18:
 end_ifthenelse_18:
 ; ---------Endif-----------
-	LOAD #0, R2	; loading 0 into memory
-	FLOAT R2, R2	; Doing an unary minus
-	STORE R2, 8(GB)	;  Assiging a value to f2
-	LOAD #1, R2	; loading 1 into memory
-	FLOAT R2, R2	; Doing an unary minus
-	STORE R2, 7(GB)	;  Assiging a value to f1
+; --------BeginAssignOp--------[108, 4]-----
+	LOAD #0, R3	; loading 0 into memory
+	FLOAT R3, R3	; Doing an unary minus
+	STORE R3, 8(GB)	;  Assiging a value to f2
+	LOAD R3, R2	;  Return value of the assignement of =f2and storing it into R2
+; --------EndAssignOp--------[108, 4]-----
+; --------BeginAssignOp--------[109, 4]-----
+	LOAD #1, R3	; loading 1 into memory
+	FLOAT R3, R3	; Doing an unary minus
+	STORE R3, 7(GB)	;  Assiging a value to f1
+	LOAD R3, R2	;  Return value of the assignement of =f1and storing it into R2
+; --------EndAssignOp--------[109, 4]-----
 ; --------StartBinaryOp--------[110, 7]-----
 	LOAD 7(GB), R2	; loading f1 into memory
 	CMP 8(GB), R2	; Comparing registers for GreaterOrEqual operation 
@@ -444,12 +554,17 @@ end_ifthenelse_18:
 ; ---------Startif-----------[110, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else19
+; --------BeginAssignOp--------[111, 8]-----
 ; --------StartBinaryOp--------[111, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #1000, R3	; loading 1000 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1000, R2	; loading 1000 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[111, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[111, 8]-----
 	BRA end_ifthenelse_19
 else19:
 end_ifthenelse_19:
@@ -464,19 +579,27 @@ end_ifthenelse_19:
 ; ---------Startif-----------[113, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else20
+; --------BeginAssignOp--------[114, 8]-----
 ; --------StartBinaryOp--------[114, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #100, R3	; loading 100 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #100, R2	; loading 100 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[114, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[114, 8]-----
 	BRA end_ifthenelse_20
 else20:
 end_ifthenelse_20:
 ; ---------Endif-----------
-	LOAD #1, R2	; loading 1 into memory
-	FLOAT R2, R2	; Doing an unary minus
-	STORE R2, 8(GB)	;  Assiging a value to f2
+; --------BeginAssignOp--------[116, 4]-----
+	LOAD #1, R3	; loading 1 into memory
+	FLOAT R3, R3	; Doing an unary minus
+	STORE R3, 8(GB)	;  Assiging a value to f2
+	LOAD R3, R2	;  Return value of the assignement of =f2and storing it into R2
+; --------EndAssignOp--------[116, 4]-----
 ; --------StartBinaryOp--------[117, 7]-----
 	LOAD 7(GB), R2	; loading f1 into memory
 	CMP 8(GB), R2	; Comparing registers for LowerOrEqual operation 
@@ -485,12 +608,17 @@ end_ifthenelse_20:
 ; ---------Startif-----------[117, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else21
+; --------BeginAssignOp--------[118, 8]-----
 ; --------StartBinaryOp--------[118, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #10, R3	; loading 10 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #10, R2	; loading 10 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[118, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[118, 8]-----
 	BRA end_ifthenelse_21
 else21:
 end_ifthenelse_21:
@@ -503,12 +631,17 @@ end_ifthenelse_21:
 ; ---------Startif-----------[120, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else22
+; --------BeginAssignOp--------[121, 8]-----
 ; --------StartBinaryOp--------[121, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #1, R3	; loading 1 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[121, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[121, 8]-----
 	BRA end_ifthenelse_22
 else22:
 end_ifthenelse_22:
@@ -519,8 +652,11 @@ end_ifthenelse_22:
 	WINT
 	WSTR "/111111 ]"
 	WNL
-	LOAD #0, R2	; loading 0 into memory
-	STORE R2, 3(GB)	;  Assiging a value to i
+; --------BeginAssignOp--------[125, 4]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[125, 4]-----
 ; --------StartOr--------[127, 7]-----
 ; --------StartAND--------[127, 7]-----
 ; --------StartBinaryOp--------[127, 8]-----
@@ -565,12 +701,17 @@ End_Or_Id_9:
 ; ---------Startif-----------[127, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else23
+; --------BeginAssignOp--------[128, 8]-----
 ; --------StartBinaryOp--------[128, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #100, R3	; loading 100 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #100, R2	; loading 100 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[128, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[128, 8]-----
 	BRA end_ifthenelse_23
 else23:
 end_ifthenelse_23:
@@ -603,12 +744,17 @@ end_ifthenelse_23:
 ; ---------Startif-----------[130, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else24
+; --------BeginAssignOp--------[131, 8]-----
 ; --------StartBinaryOp--------[131, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #10, R3	; loading 10 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #10, R2	; loading 10 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[131, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[131, 8]-----
 	BRA end_ifthenelse_24
 else24:
 end_ifthenelse_24:
@@ -645,12 +791,17 @@ end_ifthenelse_24:
 	BNE else25
 	BRA end_ifthenelse_25
 else25:
+; --------BeginAssignOp--------[136, 8]-----
 ; --------StartBinaryOp--------[136, 12]-----
-	LOAD 3(GB), R2	; loading i into memory
-	LOAD #1, R3	; loading 1 into memory
-	ADD R3, R2
+	LOAD 3(GB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[136, 12]-----
-	STORE R2, 3(GB)	;  Assiging a value to i
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[136, 8]-----
 end_ifthenelse_25:
 ; ---------Endif-----------
 	WSTR "comparaison plus complexes[ "
@@ -659,8 +810,11 @@ end_ifthenelse_25:
 	WINT
 	WSTR "/111 ]"
 	WNL
-	LOAD #0, R2	; loading 0 into memory
-	STORE R2, 3(GB)	;  Assiging a value to i
+; --------BeginAssignOp--------[139, 4]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 3(GB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[139, 4]-----
 	HALT
 stack_overflow_error:
 	WSTR "Error: stack_overflow_error"

@@ -1,3 +1,5 @@
+// Generated from /home/frikha/ensimag/GL/Projet_GL/src/main/antlr4/fr/ensimag/deca/syntax/DecaParser.g4 by ANTLR 4.9.2
+
     import fr.ensimag.deca.tree.*;
     import fr.ensimag.deca.tools.*;
     import java.io.PrintStream;
@@ -2355,8 +2357,15 @@ public class DecaParser extends AbstractDecaParser {
 				setState(443);
 				((LiteralContext)_localctx).INT = match(INT);
 
+				        try{
+				            Integer.parseInt((((LiteralContext)_localctx).INT!=null?((LiteralContext)_localctx).INT.getText():null));
+				        }
+				        catch (Exception e){
+				            throw new ParseCancellationException("La valeur de l'entier donnée ne peux pas être codée sur 32 bits"); 
+				        }
 				        ((LiteralContext)_localctx).tree =  new IntLiteral(Integer.parseInt((((LiteralContext)_localctx).INT!=null?((LiteralContext)_localctx).INT.getText():null)));
 				        setLocation(_localctx.tree, ((LiteralContext)_localctx).INT);
+				        
 				        
 				}
 				break;
@@ -2366,6 +2375,12 @@ public class DecaParser extends AbstractDecaParser {
 				setState(445);
 				((LiteralContext)_localctx).fd = match(FLOAT);
 
+				        try{
+				            Float.parseFloat((((LiteralContext)_localctx).fd!=null?((LiteralContext)_localctx).fd.getText():null));
+				        }
+				        catch (Exception e){
+				            throw new ParseCancellationException("La valeur du float donnée ne peux pas être codée sur 32 bits");
+				        }
 				        ((LiteralContext)_localctx).tree =  new FloatLiteral(Float.parseFloat((((LiteralContext)_localctx).fd!=null?((LiteralContext)_localctx).fd.getText():null)));
 				        setLocation(_localctx.tree, ((LiteralContext)_localctx).fd);
 				        

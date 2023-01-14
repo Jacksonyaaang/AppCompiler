@@ -55,7 +55,7 @@ public class Identifier extends AbstractIdentifier {
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{   
         LOG.debug("[Identifier][codeGenInst] Loading identifier into memory with name = " + this.getName());
-        this.setRegisterDeRetour(this.LoadGencode(compiler));
+        this.setRegisterDeRetour(this.LoadGencode(compiler, true));
     }
 
     @Override

@@ -15,7 +15,7 @@ DEBUG fr.ensimag.deca.tree.FloatLiteral.verifyExpr(FloatLiteral.java:45) - [Floa
 DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - [DeclVar] Saving b into 2(GB)
 DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]
 DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:184) - [AbstractExpr][verifyInst] Verify the expression coming from the instruction
-DEBUG fr.ensimag.deca.tree.Assign.verifyExpr(Assign.java:62) - [Assign][verifyExpr] Verify left and right expression in assignment
+DEBUG fr.ensimag.deca.tree.Assign.verifyExpr(Assign.java:75) - [Assign][verifyExpr] Verify left and right expression in assignment
 DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:199) - [Identifier][verifyExpr]
 DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:162) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments
 DEBUG fr.ensimag.deca.tree.Modulo.verifyExpr(Modulo.java:37) - [Modulo][verifyExpr]

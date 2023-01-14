@@ -8,6 +8,8 @@
 // if correct IF 4
 // if correct IF 5
 // if correct IF 6
+// if correct IF 7
+// if correct IF 8
 // Historique:
 //    cree le 01/01/2023
 
@@ -86,6 +88,16 @@
     else
     {
         println("if correct IF 6");
+    }
+
+    if (b1=false){
+        println("Problem with if 7");
+    }
+    else{
+        println("if correct IF 7");
+    }
+    if (b3 = true){
+        println("if correct IF 8");
     }
 
 }

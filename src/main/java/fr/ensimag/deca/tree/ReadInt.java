@@ -38,7 +38,7 @@ public class ReadInt extends AbstractReadExpr {
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError
      {
         LOG.debug("[ReadInt][CodeGenInst] generating code for ReadInt");
-        this.setRegisterDeRetour(this.LoadGencode(compiler));
+        this.setRegisterDeRetour(this.LoadGencode(compiler, true));
         LOG.debug("[ReadInt][codeGenInst] exiting generation method method");
     }
 

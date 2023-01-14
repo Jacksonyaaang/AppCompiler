@@ -39,7 +39,7 @@ public class ReadFloat extends AbstractReadExpr {
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError
      {
         LOG.debug("[ReadFloat][CodeGenInst] generating code for ReadFloat");
-        this.setRegisterDeRetour(this.LoadGencode(compiler));
+        this.setRegisterDeRetour(this.LoadGencode(compiler, true));
         LOG.debug("[ReadFloat][codeGenInst] exiting generation method method");
     }
 

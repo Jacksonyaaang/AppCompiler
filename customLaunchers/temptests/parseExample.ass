@@ -1,0 +1,46 @@
+	TSTO #1
+	BOV stack_overflow_error
+	ADDSP #1
+; start main program
+; Main program
+; Beginning of main instructions:
+; --------StartBinaryOp--------[2, 9]-----
+; --------StartBinaryOp--------[2, 9]-----
+; --------StartBinaryOp--------[2, 9]-----
+; --------StartBinaryOp--------[2, 10]-----
+; --------StartBinaryOp--------[2, 10]-----
+; --------StartBinaryOp--------[2, 10]-----
+; --------StartBinaryOp--------[2, 10]-----
+	LOAD #5, R2	; loading 5 into memory
+	LOAD #4, R3	; loading 4 into memory
+	MUL R3, R2
+; --------EndBinaryOp--------[2, 10]-----
+	LOAD #3, R3	; loading 3 into memory
+	MUL R3, R2
+; --------EndBinaryOp--------[2, 10]-----
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+; --------EndBinaryOp--------[2, 10]-----
+	LOAD #1, R3	; loading 1 into memory
+	MUL R3, R2
+; --------EndBinaryOp--------[2, 10]-----
+	LOAD #7, R3	; loading 7 into memory
+	MUL R3, R2
+; --------EndBinaryOp--------[2, 9]-----
+	LOAD #8, R3	; loading 8 into memory
+	MUL R3, R2
+; --------EndBinaryOp--------[2, 9]-----
+	LOAD #9, R3	; loading 9 into memory
+	MUL R3, R2
+; --------EndBinaryOp--------[2, 9]-----
+	STORE R2, 1(GB)	; Initializing the variable i and loading it into memory
+	LOAD 1(GB), R2	; loading i into memory
+	LOAD R2, R1
+	WINT
+	WNL
+	HALT
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

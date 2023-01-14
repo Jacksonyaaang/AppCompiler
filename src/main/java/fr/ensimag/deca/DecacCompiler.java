@@ -246,7 +246,7 @@ public class DecacCompiler {
             PrintStream out, PrintStream err)
             throws DecacFatalError, LocationException, CodeGenError {
         AbstractProgram prog = doLexingAndParsing(sourceName, err);
-
+        
         if (prog == null) {
             LOG.info("Parsing failed");
             return true;

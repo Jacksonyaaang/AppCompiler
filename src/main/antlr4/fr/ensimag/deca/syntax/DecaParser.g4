@@ -461,12 +461,23 @@ type returns[AbstractIdentifier tree]
 
 literal returns[AbstractExpr tree]
     : INT {
+        try{
+            Integer.parseInt($INT.text);
+        }
+        catch (Exception e){
+            throw new ParseCancellationException("La valeur de l'entier donnée ne peux pas être codée sur 32 bits"); 
+        }
         $tree = new IntLiteral(Integer.parseInt($INT.text));
         setLocation($tree, $INT);
+        
         }
-    // A FAIRE, TRAITEMENT DES erreurs de parsing de int et float 
-    //VOIR POLY ET voir l'exemple present dans le fichier calc
     | fd=FLOAT {
+        try{
+            Float.parseFloat($fd.text);
+        }
+        catch (Exception e){
+            throw new ParseCancellationException("La valeur du float donnée ne peux pas être codée sur 32 bits");
+        }
         $tree = new FloatLiteral(Float.parseFloat($fd.text));
         setLocation($tree, $fd);
         }

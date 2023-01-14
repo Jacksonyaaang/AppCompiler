@@ -252,7 +252,7 @@ public abstract class AbstractExpr extends AbstractInst {
      * dans un registre, la méthode loadItemintoRegister est custom à chaque type par exemple pour les indentificateur 
      * ca cherche les adresses et pour le literaux ca prend leur valeur brute et la positionne dans un registre 
      */
-    protected GPRegister LoadGencode(DecacCompiler compiler) throws CodeGenError {
+    protected GPRegister LoadGencode(DecacCompiler compiler, boolean loadItemintoRegister) throws CodeGenError {
         GPRegister regReserved = null;
         if (compiler.getRegisterManagement().areThereAnAvaliableRegsiterSup2()){
             regReserved = compiler.getRegisterManagement().getAnEmptyStableRegisterAndReserveIt(); 
@@ -266,7 +266,9 @@ public abstract class AbstractExpr extends AbstractInst {
             compiler.addInstruction(new PUSH(regReserved));
             this.getRegisterToPop().push(regReserved);
         }
-        this.loadItemintoRegister(compiler, regReserved);
+        if (loadItemintoRegister){
+            this.loadItemintoRegister(compiler, regReserved);
+        }
         return regReserved;
     }
     
