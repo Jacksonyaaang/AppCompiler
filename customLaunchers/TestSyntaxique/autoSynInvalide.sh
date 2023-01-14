@@ -25,6 +25,7 @@ test_context_invalide (){
     fi
 }
 redirect_result(){
+    mkdir -p src/test/deca/syntax/invalid/result
     test_synt "$1" > src/test/deca/syntax/invalid/result/$(basename "${1%.deca}").lis 2>&1 &
 }
 

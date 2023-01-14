@@ -35,10 +35,12 @@ test_context_valide_decompile (){
 }
 
 redirect_result_decompile(){
+    mkdir -p src/test/deca/syntax/valid/result
     decac -p "$1" > src/test/deca/syntax/valid/result/$(basename "${1%.deca}")_decompile.lis 2>&1 &
 }
 
 redirect_result(){
+    mkdir -p src/test/deca/syntax/valid/result
     test_synt "$1" > src/test/deca/syntax/valid/result/$(basename "${1%.deca}").lis 2>&1 &
 }
 

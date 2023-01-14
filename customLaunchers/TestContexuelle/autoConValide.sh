@@ -28,6 +28,7 @@ test_context_valide (){
 }
 
 redirect_result(){
+    mkdir -p src/test/deca/context/valid/result
     test_context "$1" > src/test/deca/context/valid/result/$(basename "${1%.deca}").lis 2>&1 &
 }
 
