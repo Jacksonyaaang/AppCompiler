@@ -2361,11 +2361,10 @@ public class DecaParser extends AbstractDecaParser {
 				            Integer.parseInt((((LiteralContext)_localctx).INT!=null?((LiteralContext)_localctx).INT.getText():null));
 				        }
 				        catch (Exception e){
-				            throw new ParseCancellationException("La valeur de l'entier donnée ne peux pas être codée sur 32 bits"); 
+				            throw new DecaRecognitionException(this, ((LiteralContext)_localctx).INT); //"La valeur de l'entier donnée ne peux pas être codée sur 32 bits"); 
 				        }
 				        ((LiteralContext)_localctx).tree =  new IntLiteral(Integer.parseInt((((LiteralContext)_localctx).INT!=null?((LiteralContext)_localctx).INT.getText():null)));
 				        setLocation(_localctx.tree, ((LiteralContext)_localctx).INT);
-				        
 				        
 				}
 				break;
@@ -2379,7 +2378,7 @@ public class DecaParser extends AbstractDecaParser {
 				            Float.parseFloat((((LiteralContext)_localctx).fd!=null?((LiteralContext)_localctx).fd.getText():null));
 				        }
 				        catch (Exception e){
-				            throw new ParseCancellationException("La valeur du float donnée ne peux pas être codée sur 32 bits");
+				            throw new DecaRecognitionException(this, ((LiteralContext)_localctx).fd); //"La valeur du float donnée ne peux pas être codée sur 32 bits");
 				        }
 				        ((LiteralContext)_localctx).tree =  new FloatLiteral(Float.parseFloat((((LiteralContext)_localctx).fd!=null?((LiteralContext)_localctx).fd.getText():null)));
 				        setLocation(_localctx.tree, ((LiteralContext)_localctx).fd);

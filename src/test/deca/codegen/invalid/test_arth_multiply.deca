@@ -1,13 +1,12 @@
 // Description:
-//    Test la géneration du code assembleur, 
-//    pour les operation arithémtiques
-//    Plus/Multiply/Division/Minus/Modulo operation et le unary minus
-// 	  TEST PARTIE C / Sans objet
+//    Test overflow, division des entiers
 // Resultats:
-//
+// Erreur : overflow 
 // Historique:
 //    cree le 01/01/2023
 
 {
-
+    float x = 50000000000000000000000000.0;
+    float y = 50000000000000000000000000.0;
+    x = x*y;
 }

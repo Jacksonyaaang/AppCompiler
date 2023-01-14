@@ -27,8 +27,13 @@ test_codegen_valide (){
 }
 
 redirect_result(){
-    ima "$1" > src/test/deca/codegen/valid/result/$(basename "${1%.ass}")_output.res 
-    compare_output src/test/deca/codegen/valid/result/$(basename "${1%.ass}")_output.res
+    if grep "/test_Readoperation.ass"  <<< $1
+    then  
+        ima "$1" < src/test/deca/codegen/valid/Input_read_operation.txt > src/test/deca/codegen/valid/result/$(basename "${1%.ass}")_output.res 
+    else 
+        ima "$1" > src/test/deca/codegen/valid/result/$(basename "${1%.ass}")_output.res 
+        compare_output src/test/deca/codegen/valid/result/$(basename "${1%.ass}")_output.res
+    fi
 }
 
 compare_output(){

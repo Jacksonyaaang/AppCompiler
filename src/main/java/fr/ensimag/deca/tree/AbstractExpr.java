@@ -224,7 +224,7 @@ public abstract class AbstractExpr extends AbstractInst {
             compiler.addInstruction(new WINT());
         }
         else if(getType() == compiler.environmentType.FLOAT){
-            LOG.debug("[AbstractExpr][codeGenPrint] Priting an flaot");
+            LOG.debug("[AbstractExpr][codeGenPrint] Priting an float");
             compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
             if(!(compiler.isPrintHex()))
                 compiler.addInstruction(new WFLOAT());
@@ -233,7 +233,7 @@ public abstract class AbstractExpr extends AbstractInst {
             }
         }
         else if(getType() == compiler.environmentType.BOOLEAN){
-            //A faire: eliminated this part of the code since it we can not reach it 
+            //this code is useless since we can not reach it 
             //due to contextual errors
             LOG.debug("[AbstractExpr][codeGenPrint] Priting an ");
             compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));

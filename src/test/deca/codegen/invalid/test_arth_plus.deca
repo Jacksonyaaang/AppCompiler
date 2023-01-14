@@ -1,13 +1,12 @@
 // Description:
-//  Test overflow entre la somme de deux flaots 
-//
-//
+//    Test overflow, division des entiers
 // Resultats:
-//
+// Erreur : overflow 
 // Historique:
 //    cree le 01/01/2023
 
 {
-    float f = 50000000000;
-    float f = 55555555555;
+    float x = 200000000000000000000000000000000000000.0;
+    float y = 200000000000000000000000000000000000000.0;
+    x = x-(-y);
 }

@@ -56,9 +56,10 @@ public class Main extends AbstractMain {
         if (sizeStack != 0){
             compiler.getErrorManagementUnit().activeError("stack_overflow_error");
             compiler.getProgram().addFirst(new ADDSP(new ImmediateInteger(sizeStack)));
-            compiler.getProgram().addFirst(new BOV(new Label("stack_overflow_error")));
-            compiler.getProgram().addFirst(new TSTO(new ImmediateInteger(sizeStack)));
-
+            if (!(compiler.getCompilerOptions().isNoCheck())) {
+                compiler.getProgram().addFirst(new BOV(new Label("stack_overflow_error")));
+                compiler.getProgram().addFirst(new TSTO(new ImmediateInteger(sizeStack)));
+            }
         }
     }
     

@@ -63,7 +63,6 @@ public class DeclVar extends AbstractDeclVar {
 
     @Override
     public void codeGenDecl(DecacCompiler compiler) throws CodeGenError {
-        //A FAIRE, TRAITER LE CAS AU QUEL ON TRAVAIL AVEC UN FLOAT = INT
         if (initialization instanceof Initialization ){
             this.initialization.codegenInitial(compiler);
             compiler.addInstruction(new STORE(this.initialization.getRegistreDeRetour(),

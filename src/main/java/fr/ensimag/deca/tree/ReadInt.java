@@ -47,8 +47,10 @@ public class ReadInt extends AbstractReadExpr {
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
         assert(reg != null);
         compiler.addInstruction(new RINT());
-        compiler.addInstruction(new BOV(new Label("io_error")));
-        compiler.getErrorManagementUnit().activeError("io_error");
+        if (!(compiler.getCompilerOptions().isNoCheck())) {
+            compiler.addInstruction(new BOV(new Label("io_error")));
+            compiler.getErrorManagementUnit().activeError("io_error");
+        }
         compiler.addInstruction(new LOAD(Register.getR(1), reg));
     }
 

@@ -28,7 +28,6 @@ public class And extends AbstractOpBool {
     
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{ 
-        //A FAIRE, optimisation du code de la boucle if   
         super.setBoolOpIdentifier(compiler.getStackManagement().incrementOpBoolIncrementer());
         LOG.debug("[And][codeGenInst] Working on And boolean operation Location ="+ getLocation());
         LOG.debug("[And][codeGenInst] Exploring Left");

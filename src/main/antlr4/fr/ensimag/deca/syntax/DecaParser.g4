@@ -465,18 +465,17 @@ literal returns[AbstractExpr tree]
             Integer.parseInt($INT.text);
         }
         catch (Exception e){
-            throw new ParseCancellationException("La valeur de l'entier donnée ne peux pas être codée sur 32 bits"); 
+            throw new DecaRecognitionException(this, $INT); //"La valeur de l'entier donnée ne peux pas être codée sur 32 bits"); 
         }
         $tree = new IntLiteral(Integer.parseInt($INT.text));
         setLocation($tree, $INT);
-        
         }
     | fd=FLOAT {
         try{
             Float.parseFloat($fd.text);
         }
         catch (Exception e){
-            throw new ParseCancellationException("La valeur du float donnée ne peux pas être codée sur 32 bits");
+            throw new DecaRecognitionException(this, $fd); //"La valeur du float donnée ne peux pas être codée sur 32 bits");
         }
         $tree = new FloatLiteral(Float.parseFloat($fd.text));
         setLocation($tree, $fd);

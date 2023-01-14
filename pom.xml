@@ -302,7 +302,15 @@
                         <execution>
                         <id>Test-CodeGen-valide</id>
                         <configuration>
-                            <executable>./customLaunchers/TestCodegen/autoCodegen.sh</executable>
+                            <executable>./customLaunchers/TestCodegen/autoCodegenValid.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals><goal>exec</goal></goals>
+                    </execution>
+                     <execution>
+                        <id>Test-CodeGen-invalide</id>
+                        <configuration>
+                            <executable>./customLaunchers/TestCodegen/autoCodegenInvalid.sh</executable>
                         </configuration>
                         <phase>test</phase>
                         <goals><goal>exec</goal></goals>
