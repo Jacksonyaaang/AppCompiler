@@ -1,9 +1,16 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -31,16 +38,29 @@ public class Main extends AbstractMain {
         // A FAIRE: Appeler méthodes "verify*" de ListDeclVarSet et ListInst.
         // Vous avez le droit de changer le profil fourni pour ces méthodes
         // (mais ce n'est à priori pas nécessaire).
-        insts.verifyListInst(compiler, new EnvironmentExp(null), null, null);
+        /*On initialise d'abord l'environnement d'expression de parent null dans le cas
+        de sans Object */
+        EnvironmentExp EnvExpInit = new EnvironmentExp(null);
+        declVariables.verifyListDeclVariable(compiler, EnvExpInit, null);
+        insts.verifyListInst(compiler, EnvExpInit, null, null);
         LOG.debug("verify Main: end");
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
-    protected void codeGenMain(DecacCompiler compiler) {
-        // A FAIRE: traiter les déclarations de variables.
+    protected void codeGenMain(DecacCompiler compiler) throws CodeGenError{
         compiler.addComment("Beginning of main instructions:");
+        declVariables.codeGenListDecl(compiler);
         insts.codeGenListInst(compiler);
+        int sizeStack = compiler.getStackManagement().measureStacksizeNeededMain(compiler);
+        //On reserve de l'espace dans le stack
+        if (sizeStack != 0){
+            compiler.getErrorManagementUnit().activeError("stack_overflow_error");
+            compiler.getProgram().addFirst(new ADDSP(new ImmediateInteger(sizeStack)));
+            if (!(compiler.getCompilerOptions().isNoCheck())) {
+                compiler.getProgram().addFirst(new BOV(new Label("stack_overflow_error")));
+                compiler.getProgram().addFirst(new TSTO(new ImmediateInteger(sizeStack)));
+            }
+        }
     }
     
     @Override

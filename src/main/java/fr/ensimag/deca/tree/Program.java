@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.instructions.*;
@@ -36,16 +37,16 @@ public class Program extends AbstractProgram {
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify program: start");
         main.verifyMain(compiler);
-        //throw new UnsupportedOperationException("not yet implemented");
-        // LOG.debug("verify program: end");
+        LOG.debug("verify program: end");
     }
 
     @Override
-    public void codeGenProgram(DecacCompiler compiler) {
+    public void codeGenProgram(DecacCompiler compiler) throws CodeGenError{
         // A FAIRE: compléter ce squelette très rudimentaire de code
         compiler.addComment("Main program");
         main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());
+        compiler.getErrorManagementUnit().writeListError(compiler);
     }
 
     @Override

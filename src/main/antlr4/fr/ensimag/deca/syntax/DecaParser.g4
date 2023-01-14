@@ -39,6 +39,7 @@ options {
     protected IfThenElse temptree = null;
     protected Initialization tempInit = null;
     protected NoInitialization tempInitNoInit = null;
+    protected StringBuilder sb = null;  
 }
 
 prog returns[AbstractProgram tree]
@@ -226,7 +227,7 @@ expr returns[AbstractExpr tree]
             assert($assign.tree != null);
             $tree = $assign.tree;
         }
-    ;
+    ; 
 
 assign_expr returns[AbstractExpr tree]
     : e=or_expr (
@@ -460,17 +461,35 @@ type returns[AbstractIdentifier tree]
 
 literal returns[AbstractExpr tree]
     : INT {
+        try{
+            Integer.parseInt($INT.text);
+        }
+        catch (Exception e){
+            throw new DecaRecognitionException(this, $INT); //"La valeur de l'entier donnée ne peux pas être codée sur 32 bits"); 
+        }
         $tree = new IntLiteral(Integer.parseInt($INT.text));
         setLocation($tree, $INT);
         }
-    // A FAIRE, TRAITEMENT DES erreurs de parsing de int et float 
-    //VOIR POLY ET voir l'exemple present dans le fichier calc
     | fd=FLOAT {
+        try{
+            $tree = new FloatLiteral(Float.parseFloat($fd.text));
+            // System.out.println("---test---");
+            Float.parseFloat($fd.text);
+            // System.out.println("---test2---");
+        }
+        catch (Throwable e){
+            // System.out.println("---caught---");
+            throw new DecaRecognitionException(this, $fd); //"La valeur du float donnée ne peux pas être codée sur 32 bits");
+        }
         $tree = new FloatLiteral(Float.parseFloat($fd.text));
         setLocation($tree, $fd);
         }
     | STRING {
-        $tree = new StringLiteral($STRING.text);
+        this.sb = new StringBuilder();
+        this.sb.append($STRING.text); 
+        this.sb.deleteCharAt(0);
+        this.sb.deleteCharAt(sb.length()-1);
+        $tree = new StringLiteral(this.sb.toString());
         setLocation($tree, $STRING);
         }
     | TRUE {

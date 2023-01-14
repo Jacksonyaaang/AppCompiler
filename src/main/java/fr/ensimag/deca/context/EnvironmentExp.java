@@ -36,6 +36,9 @@ public class EnvironmentExp {
     }
 
     public static class DoubleDefException extends Exception {
+        public DoubleDefException (String message){
+            super(message);
+        }
         private static final long serialVersionUID = -2733379901827316441L;
     }
 
@@ -44,8 +47,13 @@ public class EnvironmentExp {
      * symbol is undefined.
      */
     public ExpDefinition get(Symbol key) {
-        return this.envExp.get(key);
+        //return this.envExp.get(key);
         //throw new UnsupportedOperationException("not yet implemented");
+        if (!envExp.containsKey(key)&&parentEnvironment==null)
+            return null;
+        if (envExp.containsKey(key))
+            return envExp.get(key);
+        return parentEnvironment.get(key);
     }
 
     /**
@@ -65,7 +73,12 @@ public class EnvironmentExp {
      */
     public void declare(Symbol name, ExpDefinition def) throws DoubleDefException {
         if (!envExp.containsKey(name)) envExp.put(name, def);
+        else {throw new DoubleDefException("La variable est déjà déclarée");}
         //throw new UnsupportedOperationException("not yet implemented");
+    }
+
+    public Map<Symbol, ExpDefinition> getExp(){
+        return envExp;
     }
 
 }

@@ -1,5 +1,8 @@
 package fr.ensimag.deca;
 
+import fr.ensimag.deca.codegen.CodeGenError;
+import fr.ensimag.deca.codegen.RegisterMangementUnit;
+import fr.ensimag.deca.codegen.StackManagementUnit;
 import fr.ensimag.deca.context.EnvironmentType;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
@@ -10,14 +13,20 @@ import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.tree.AbstractProgram;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.ima.pseudocode.AbstractLine;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.deca.codegen.ListError;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Stack;
+
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
@@ -38,8 +47,8 @@ import org.apache.log4j.Logger;
  * @date 01/01/2023
  */
 public class DecacCompiler {
+
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
-    
 
     /**
      * Portable newline character.
@@ -50,6 +59,15 @@ public class DecacCompiler {
         super();
         this.compilerOptions = compilerOptions;
         this.source = source;
+    }
+
+    /**
+     * Unité qui fait la gestion des registres utilsées dans la partie 
+     */
+    private RegisterMangementUnit registerManagement  ;
+
+    public RegisterMangementUnit getRegisterManagement() {
+        return registerManagement;
     }
 
     /**
@@ -117,11 +135,43 @@ public class DecacCompiler {
     
     private final CompilerOptions compilerOptions;
     private final File source;
+
+
     /**
      * The main program. Every instruction generated will eventually end up here.
      */
     private final IMAProgram program = new IMAProgram();
- 
+
+    public IMAProgram getProgram() {
+        return program;
+    }
+
+    /**
+     * Cette unité est utilisée pour associer des adresses à des variables,
+     * et elle est aussi utilisée pour calculer le nombre de variable temporaire necessaire pour executer 
+     * les blocs 
+     */
+    public final StackManagementUnit stackManagement = new StackManagementUnit();  
+
+
+    public StackManagementUnit getStackManagement() {
+        return stackManagement;
+    }
+
+    public int incrementGbCompiler() {
+        return stackManagement.incrementGbCounter();
+    }
+
+    /**
+     * Cette unité est utilisée pour associer des adresses à des variables,
+     * et elle est aussi utilisée pour calculer le nombre de variable temporaire necessaire pour executer 
+     * les blocs 
+     */
+    public final ListError errorManagementUnit = new ListError();  
+
+    public ListError getErrorManagementUnit() {
+        return errorManagementUnit;
+    }
 
     /** The global environment for types (and the symbolTable) */
     public final SymbolTable symbolTable = new SymbolTable();
@@ -129,6 +179,16 @@ public class DecacCompiler {
 
     public Symbol createSymbol(String name) {
         return symbolTable.create(name);
+    }
+
+    private boolean printHex;
+
+    public boolean isPrintHex() {
+        return printHex;
+    }
+
+    public void setPrintHex(boolean printHex) {
+        this.printHex = printHex;
     }
 
     /**
@@ -146,6 +206,7 @@ public class DecacCompiler {
         PrintStream out = System.out;
         LOG.debug("Compiling file " + sourceFile + " to assembly file " + destFile);
         try {
+            registerManagement = new RegisterMangementUnit(compilerOptions.getNumberOfRegisters());
             return doCompile(sourceFile, destFile, out, err);
         } catch (LocationException e) {
             e.display(err);
@@ -183,15 +244,15 @@ public class DecacCompiler {
      */
     private boolean doCompile(String sourceName, String destName,
             PrintStream out, PrintStream err)
-            throws DecacFatalError, LocationException {
+            throws DecacFatalError, LocationException, CodeGenError {
         AbstractProgram prog = doLexingAndParsing(sourceName, err);
-
+        
         if (prog == null) {
             LOG.info("Parsing failed");
             return true;
         }
         assert(prog.checkAllLocations());
-        if (compilerOptions.isDecompile()){
+        if (compilerOptions.isDecompile()) {
             prog.decompile(out);
             return false;
         }   

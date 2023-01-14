@@ -45,6 +45,11 @@ public class CompilerOptions {
     
     private boolean decompile;
     private boolean verfiryAndStop;
+    private boolean noCheck = false;
+
+    public boolean isNoCheck() {
+        return noCheck;
+    }
 
     /**
      * Cette fonction cree le tableau options Invoked et initiale tout les 
@@ -87,6 +92,11 @@ public class CompilerOptions {
         return numberOfRegisters;
     }
     
+    public void setNumberOfRegisters(int numberOfRegisters) {
+        this.numberOfRegisters = numberOfRegisters;
+    }
+
+
     private int debug = 0;
     private boolean parallel = false;
     private boolean printBanner = false;
@@ -130,7 +140,7 @@ public class CompilerOptions {
                 case "-n":
                     if (optionsInvoked[2]==true){break;}
                     optionsInvoked[2]=true;
-                    //A FAIRE par ceux qui font la partie B voir poly page 103 option : -n
+                    noCheck = true;
                     break;
                 case "-r":
                     if (optionsInvoked[3]==true){break;}
@@ -189,12 +199,14 @@ public class CompilerOptions {
                     if (args[i].equals("-r")){
                         //try catch pour traiter le cas : apres "-r", X est pas une value 
                         try {
-                            if (i+1==len||(Integer.parseInt(args[i+1])<=4 || Integer.parseInt(args[i+1])>=16)){
+                            if (i+1==len||(Integer.parseInt(args[i+1])<4 || Integer.parseInt(args[i+1])>16)){
                                 throw new NumberFormatException("[Please Retry]\n[Fault Detected!!] Must have a banalise register value with the range '4<=X<=16' after '-r'");
-                            }
-                        } catch (NumberFormatException e) { 
+                            }   
+                        } catch (Exception e) { 
                             if (optionPool.contains(args[i+1])){
                                 throw new CLIException("[Please Retry]\n[Fault Detected!!] The X after '-r' must with the range '4<=X<=16' VALUE ! ");
+                            }else{
+                                throw new CLIException("[Please Retry]\n[Fault Detected!!] The X after '-r' must with the range '4<=X<=16' VALUE !");
                             }
                         }
                         switchOptionCase(args[i], args[i+1]); //we extract the number of registers from args[i+1] 

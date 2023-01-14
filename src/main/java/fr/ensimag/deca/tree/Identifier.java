@@ -4,6 +4,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.TypeDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Definition;
@@ -15,9 +16,18 @@ import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
+
 import java.io.PrintStream;
+
+import javax.print.attribute.standard.Copies;
+
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
+import org.mockito.internal.verification.RegisteredInvocations;
 
 /**
  * Deca Identifier
@@ -26,7 +36,10 @@ import org.apache.log4j.Logger;
  * @date 01/01/2023
  */
 public class Identifier extends AbstractIdentifier {
-    
+
+    private static final Logger LOG = Logger.getLogger(Identifier.class);
+
+
     @Override
     protected void checkDecoration() {
         if (getDefinition() == null) {
@@ -38,6 +51,21 @@ public class Identifier extends AbstractIdentifier {
     public Definition getDefinition() {
         return definition;
     }
+    
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{   
+        LOG.debug("[Identifier][codeGenInst] Loading identifier into memory with name = " + this.getName());
+        this.setRegisterDeRetour(this.LoadGencode(compiler, true));
+    }
+
+    @Override
+    public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
+        assert( reg != null);
+        LOG.debug("[Identifier][loadItemintoRegister] Loading " + this.getName() + "into the register " + reg);
+        compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), reg),
+                                    "loading "+getName()+ " into memory");
+    }
+
 
     /**
      * Like {@link #getDefinition()}, but works only if the definition is a
@@ -167,8 +195,16 @@ public class Identifier extends AbstractIdentifier {
 
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+                           ClassDefinition currentClass) throws ContextualError {
+        LOG.debug("[Identifier][verifyExpr]");
+        //Envoie une ContextualError si l'identificateur n'est pas défini
+        if(!localEnv.getExp().containsKey(getName())){
+            throw new ContextualError("L'identificateur " + getName().getName() + " n'est pas défini",getLocation());
+        }
+        Definition Defi = localEnv.get(name);
+        setDefinition(Defi);
+        setType(localEnv.get(name).getType());
+        return getType();
     }
 
     /**
@@ -177,15 +213,16 @@ public class Identifier extends AbstractIdentifier {
      */
     @Override
     public Type verifyType(DecacCompiler compiler) throws ContextualError {
-        //verifions que le type de definition n'est pas null
+        LOG.debug("[Identifier][verifyType] Verify that declaration type is correct");
         TypeDefinition typeDefi = compiler.environmentType.defOfType(name);
+        //Envoie une ContextualError si le type de définition est null
         if (typeDefi == null){
-        throw new ContextualError("le type de l'ident n'est pas defini", getLocation());
-        }return typeDefi.getType();
-        //throw new UnsupportedOperationException("not yet implemented");
+            throw new ContextualError("Le type " + getName().getName() + " n'est pas defini", getLocation());
+        }
+        setDefinition(typeDefi);
+        return getDefinition().getType();
     }
-    
-    
+
     private Definition definition;
 
 

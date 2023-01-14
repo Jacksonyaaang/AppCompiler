@@ -131,6 +131,7 @@ public class DecaParser extends AbstractDecaParser {
 	    protected IfThenElse temptree = null;
 	    protected Initialization tempInit = null;
 	    protected NoInitialization tempInitNoInit = null;
+	    protected StringBuilder sb = null;  
 
 	public DecaParser(TokenStream input) {
 		super(input);
@@ -2356,6 +2357,12 @@ public class DecaParser extends AbstractDecaParser {
 				setState(443);
 				((LiteralContext)_localctx).INT = match(INT);
 
+				        try{
+				            Integer.parseInt((((LiteralContext)_localctx).INT!=null?((LiteralContext)_localctx).INT.getText():null));
+				        }
+				        catch (Exception e){
+				            throw new DecaRecognitionException(this, ((LiteralContext)_localctx).INT); //"La valeur de l'entier donnée ne peux pas être codée sur 32 bits"); 
+				        }
 				        ((LiteralContext)_localctx).tree =  new IntLiteral(Integer.parseInt((((LiteralContext)_localctx).INT!=null?((LiteralContext)_localctx).INT.getText():null)));
 				        setLocation(_localctx.tree, ((LiteralContext)_localctx).INT);
 				        
@@ -2367,6 +2374,16 @@ public class DecaParser extends AbstractDecaParser {
 				setState(445);
 				((LiteralContext)_localctx).fd = match(FLOAT);
 
+				        try{
+				            ((LiteralContext)_localctx).tree =  new FloatLiteral(Float.parseFloat((((LiteralContext)_localctx).fd!=null?((LiteralContext)_localctx).fd.getText():null)));
+				            // System.out.println("---test---");
+				            Float.parseFloat((((LiteralContext)_localctx).fd!=null?((LiteralContext)_localctx).fd.getText():null));
+				            // System.out.println("---test2---");
+				        }
+				        catch (Throwable e){
+				            // System.out.println("---caught---");
+				            throw new DecaRecognitionException(this, ((LiteralContext)_localctx).fd); //"La valeur du float donnée ne peux pas être codée sur 32 bits");
+				        }
 				        ((LiteralContext)_localctx).tree =  new FloatLiteral(Float.parseFloat((((LiteralContext)_localctx).fd!=null?((LiteralContext)_localctx).fd.getText():null)));
 				        setLocation(_localctx.tree, ((LiteralContext)_localctx).fd);
 				        
@@ -2378,7 +2395,11 @@ public class DecaParser extends AbstractDecaParser {
 				setState(447);
 				((LiteralContext)_localctx).STRING = match(STRING);
 
-				        ((LiteralContext)_localctx).tree =  new StringLiteral((((LiteralContext)_localctx).STRING!=null?((LiteralContext)_localctx).STRING.getText():null));
+				        this.sb = new StringBuilder();
+				        this.sb.append((((LiteralContext)_localctx).STRING!=null?((LiteralContext)_localctx).STRING.getText():null)); 
+				        this.sb.deleteCharAt(0);
+				        this.sb.deleteCharAt(sb.length()-1);
+				        ((LiteralContext)_localctx).tree =  new StringLiteral(this.sb.toString());
 				        setLocation(_localctx.tree, ((LiteralContext)_localctx).STRING);
 				        
 				}
