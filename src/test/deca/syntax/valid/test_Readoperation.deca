@@ -1,0 +1,16 @@
+// Description:
+// Test les deux read expr; readInt et radFloat
+// Resultats:
+// Pour le input : 1 /2.0/3 le output est 1/2.00000e+00/-19180
+// Historique:
+//    cree le 01/01/2023
+/* */ 
+
+{
+    int a = readInt();
+    float x = readFloat();
+    println(a);
+    println(x);
+    a = ((((10*readInt())*5*2)*(-7))*9)+20-30*10;
+    println(a);
+}

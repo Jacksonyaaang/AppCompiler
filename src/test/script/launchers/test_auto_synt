@@ -1,0 +1,8 @@
+#!/bin/sh
+for i in /home/ensimag/S7/projetGL/gl15/src/test/deca/syntax/invalid/personal/*.deca
+do
+echo "$i"
+# Remplacer <executable> par test_synt ou test_lex
+# ou test_context ou decac
+test_synt "$i"
+done

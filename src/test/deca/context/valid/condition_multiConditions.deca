@@ -1,0 +1,18 @@
+// Description:
+//    Tester la condition if  else if et else
+//
+// Resultats:
+//    TEST PASS
+//
+// Historique:
+//    cree le 01/01/2023
+{
+	int a=0;
+	int b,c=6,d=9;
+	float value=7.999;
+	boolean m  = true;
+	boolean p  = false;
+	if (a==d||m==true&& value!=8&&(c!=a||p==false)){
+
+	}
+}

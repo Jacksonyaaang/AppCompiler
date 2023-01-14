@@ -1,0 +1,12 @@
+// Description:
+//    float très large
+//
+// Resultats:
+//    Ligne 11 : Erreur de syntaxe.
+//
+// Historique:
+//    cree le 01/01/2023
+
+{
+    float a = 6666666666666666666666666666666666666666666666.0;
+}

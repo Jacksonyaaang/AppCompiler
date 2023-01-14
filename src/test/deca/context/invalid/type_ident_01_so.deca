@@ -1,0 +1,15 @@
+// Description:
+//    Tester la cohérence du type des idnetifier
+//
+// Resultats:
+//    type_ident_01_so.deca:13:10: Not expected type
+//
+// Historique:
+//    cree le 01/01/2023
+
+{
+        int a=0;
+        boolean b;
+        a=b;
+
+}

@@ -1,0 +1,22 @@
+	ADDSP #2
+; start main program
+; Main program
+; Beginning of main instructions:
+	LOAD #0x1.4adf4cp85, R2	; loading 5.0E25 into memory
+	STORE R2, 1(GB)	; Initializing the variable x and loading it into memory
+	LOAD #0x1.ef2d1p-84, R2	; loading 1.0E-25 into memory
+	STORE R2, 2(GB)	; Initializing the variable y and loading it into memory
+; --------BeginAssignOp--------[11, 4]-----
+; --------StartBinaryOp--------[11, 8]-----
+	LOAD 1(GB), R3	; loading x into memory
+	DIV 2(GB), R3
+; --------EndBinaryOp--------[11, 8]-----
+	STORE R3, 1(GB)	;  Assiging a value to x
+	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
+; --------EndAssignOp--------[11, 4]-----
+	HALT
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

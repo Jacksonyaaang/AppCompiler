@@ -1,0 +1,19 @@
+// Description:
+//    Tester les règles de 3.33 à 3.34 pour l'expression
+//
+// Resultats:
+//    TEST PASS
+//
+// Historique:
+//    cree le 01/01/2023
+
+{
+        int a=0;
+        float b;
+        a = readInt();
+        //a = (int)b;
+        //pas maintenant car ils ont pas fait le 'cast'
+        b = readFloat();
+        //boolean boo=true;
+
+}       
