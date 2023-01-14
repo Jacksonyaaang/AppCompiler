@@ -1,0 +1,12 @@
+{
+    int x=2;
+    float f1;
+    f1=x;
+
+    if(f1==2.0){
+        println("test de conversion d'un int en float est validé");
+    }
+    else{
+        println("test de conversion d'un int en float n'est pas validé");
+    }
+}
