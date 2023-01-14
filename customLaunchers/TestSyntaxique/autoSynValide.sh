@@ -20,9 +20,8 @@ test_context_valide (){
     if test_synt "$1" 2>&1 | grep -q -e "$i:[0-9]*"
     then
         echo -e "${RED}[Syntax] TEST NOT PASS!!  Issue file :${ENDCOLOR}${RED_BOLD} $(basename "$1") ${SCR}"
-        #exit 1
     else
-        echo -e "${GREEN}[Syntax]TEST PASS! ${ENDCOLOR} ${THUMBS_UP}"    
+        echo -e "${GREEN}[Syntax]TEST PASS! ${ENDCOLOR} ${GREEN_BOLD} $(basename "$i") ${THUMBS_UP}"    
     fi
 }
 
@@ -30,7 +29,6 @@ test_context_valide_decompile (){
     if decac -p "$1" 2>&1 | grep -q -e "$i:[0-9]*"
     then
         echo -e "${RED}[Decompile]TEST NOT PASS!!  Issue file :${ENDCOLOR}${RED_BOLD} $(basename "$1") ${SCR}"
-        #exit 1
     else
         echo -e "${GREEN}[Decompile] TEST PASS! ${ENDCOLOR} ${THUMBS_UP}"    
     fi

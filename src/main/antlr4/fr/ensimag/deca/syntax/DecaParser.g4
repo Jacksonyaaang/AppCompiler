@@ -472,9 +472,13 @@ literal returns[AbstractExpr tree]
         }
     | fd=FLOAT {
         try{
+            $tree = new FloatLiteral(Float.parseFloat($fd.text));
+            // System.out.println("---test---");
             Float.parseFloat($fd.text);
+            // System.out.println("---test2---");
         }
-        catch (Exception e){
+        catch (Throwable e){
+            // System.out.println("---caught---");
             throw new DecaRecognitionException(this, $fd); //"La valeur du float donnée ne peux pas être codée sur 32 bits");
         }
         $tree = new FloatLiteral(Float.parseFloat($fd.text));

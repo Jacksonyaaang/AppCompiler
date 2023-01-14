@@ -2375,9 +2375,13 @@ public class DecaParser extends AbstractDecaParser {
 				((LiteralContext)_localctx).fd = match(FLOAT);
 
 				        try{
+				            ((LiteralContext)_localctx).tree =  new FloatLiteral(Float.parseFloat((((LiteralContext)_localctx).fd!=null?((LiteralContext)_localctx).fd.getText():null)));
+				            // System.out.println("---test---");
 				            Float.parseFloat((((LiteralContext)_localctx).fd!=null?((LiteralContext)_localctx).fd.getText():null));
+				            // System.out.println("---test2---");
 				        }
-				        catch (Exception e){
+				        catch (Throwable e){
+				            // System.out.println("---caught---");
 				            throw new DecaRecognitionException(this, ((LiteralContext)_localctx).fd); //"La valeur du float donnée ne peux pas être codée sur 32 bits");
 				        }
 				        ((LiteralContext)_localctx).tree =  new FloatLiteral(Float.parseFloat((((LiteralContext)_localctx).fd!=null?((LiteralContext)_localctx).fd.getText():null)));

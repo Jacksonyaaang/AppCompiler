@@ -8,6 +8,7 @@ PATH=./src/test/script/launchers/:"$PATH"
 RED="\e[31m"
 RED_BOLD="\e[1;31m"
 GREEN="\e[32m"
+GREEN_BOLD="\e[1;32m"
 ENDCOLOR="\e[0m"
 
 THUMBS_UP='\U1F44D' 
@@ -21,9 +22,8 @@ test_context_valide (){
     if test_context "$1" 2>&1 | grep -q -e "$1:[0-9]*"
     then
         echo -e "${RED}TEST NOT PASS!!  Issue file :${ENDCOLOR} ${RED_BOLD} $(basename "$i") ${SCR}"
-        #exit 1
     else
-        echo -e "${GREEN}TEST PASS! ${ENDCOLOR} ${THUMBS_UP}"    
+        echo -e "${GREEN}TEST PASS! TestFile : ${ENDCOLOR}${GREEN_BOLD} $(basename "$i") ${THUMBS_UP}"    
     fi
 }
 

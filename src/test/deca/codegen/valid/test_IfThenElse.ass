@@ -1,6 +1,6 @@
-	TSTO #8
+	TSTO #9
 	BOV stack_overflow_error
-	ADDSP #8
+	ADDSP #9
 ; start main program
 ; Main program
 ; Beginning of main instructions:
@@ -61,8 +61,10 @@ QUIT_AND_Called_When_Fail_id1:
 ; --------BeginAssignOp--------[43, 8]-----
 ; --------StartBinaryOp--------[43, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #1000, R4	; loading 1000 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #1000, R2	; loading 1000 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[43, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -92,8 +94,10 @@ QUIT_AND_Called_When_Fail_id2:
 ; --------BeginAssignOp--------[47, 8]-----
 ; --------StartBinaryOp--------[47, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #100, R4	; loading 100 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #100, R2	; loading 100 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[47, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -123,8 +127,10 @@ QUIT_AND_Called_When_Fail_id3:
 ; --------BeginAssignOp--------[50, 8]-----
 ; --------StartBinaryOp--------[50, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #10, R4	; loading 10 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #10, R2	; loading 10 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[50, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -154,8 +160,10 @@ QUIT_AND_Called_When_Fail_id4:
 ; --------BeginAssignOp--------[53, 8]-----
 ; --------StartBinaryOp--------[53, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #1, R4	; loading 1 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[53, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -191,8 +199,10 @@ End_Or_Id_5:
 ; --------BeginAssignOp--------[60, 8]-----
 ; --------StartBinaryOp--------[60, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #1000, R4	; loading 1000 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #1000, R2	; loading 1000 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[60, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -217,8 +227,10 @@ End_Or_Id_6:
 ; --------BeginAssignOp--------[63, 8]-----
 ; --------StartBinaryOp--------[63, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #100, R4	; loading 100 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #100, R2	; loading 100 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[63, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -243,8 +255,10 @@ End_Or_Id_7:
 ; --------BeginAssignOp--------[66, 8]-----
 ; --------StartBinaryOp--------[66, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #10, R4	; loading 10 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #10, R2	; loading 10 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[66, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -271,8 +285,10 @@ End_Or_Id_8:
 ; --------BeginAssignOp--------[69, 8]-----
 ; --------StartBinaryOp--------[69, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #1, R4	; loading 1 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[69, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -303,8 +319,10 @@ end_ifthenelse_10:
 ; --------BeginAssignOp--------[76, 8]-----
 ; --------StartBinaryOp--------[76, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #100000, R4	; loading 100000 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #100000, R2	; loading 100000 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[76, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -331,8 +349,10 @@ end_ifthenelse_11:
 ; --------BeginAssignOp--------[80, 8]-----
 ; --------StartBinaryOp--------[80, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #10000, R4	; loading 10000 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #10000, R2	; loading 10000 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[80, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -362,8 +382,10 @@ end_ifthenelse_12:
 ; --------BeginAssignOp--------[85, 8]-----
 ; --------StartBinaryOp--------[85, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #1000, R4	; loading 1000 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #1000, R2	; loading 1000 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[85, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -385,8 +407,10 @@ end_ifthenelse_13:
 ; --------BeginAssignOp--------[88, 8]-----
 ; --------StartBinaryOp--------[88, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #100, R4	; loading 100 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #100, R2	; loading 100 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[88, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -411,8 +435,10 @@ end_ifthenelse_14:
 ; --------BeginAssignOp--------[92, 8]-----
 ; --------StartBinaryOp--------[92, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #10, R4	; loading 10 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #10, R2	; loading 10 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[92, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -432,8 +458,10 @@ end_ifthenelse_15:
 ; --------BeginAssignOp--------[95, 8]-----
 ; --------StartBinaryOp--------[95, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #1, R4	; loading 1 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[95, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -464,8 +492,10 @@ end_ifthenelse_16:
 ; --------BeginAssignOp--------[102, 8]-----
 ; --------StartBinaryOp--------[102, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #100000, R4	; loading 100000 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #100000, R2	; loading 100000 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[102, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -492,8 +522,10 @@ end_ifthenelse_17:
 ; --------BeginAssignOp--------[106, 8]-----
 ; --------StartBinaryOp--------[106, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #10000, R4	; loading 10000 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #10000, R2	; loading 10000 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[106, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -525,8 +557,10 @@ end_ifthenelse_18:
 ; --------BeginAssignOp--------[111, 8]-----
 ; --------StartBinaryOp--------[111, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #1000, R4	; loading 1000 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #1000, R2	; loading 1000 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[111, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -548,8 +582,10 @@ end_ifthenelse_19:
 ; --------BeginAssignOp--------[114, 8]-----
 ; --------StartBinaryOp--------[114, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #100, R4	; loading 100 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #100, R2	; loading 100 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[114, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -575,8 +611,10 @@ end_ifthenelse_20:
 ; --------BeginAssignOp--------[118, 8]-----
 ; --------StartBinaryOp--------[118, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #10, R4	; loading 10 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #10, R2	; loading 10 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[118, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -596,8 +634,10 @@ end_ifthenelse_21:
 ; --------BeginAssignOp--------[121, 8]-----
 ; --------StartBinaryOp--------[121, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #1, R4	; loading 1 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[121, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -634,10 +674,12 @@ end_ifthenelse_22:
 	LOAD 1(GB), R3	; loading b1 into memory
 	CMP #1, R3	; [Or]Comparing in the left branch 
 	BEQ End_Or_Id_11	; [Or] checking if the first element is false
-	LOAD 2(GB), R4	; loading b2 into memory
-	CMP #0, R4	; [Or]Comparing in the right branch 
+	PUSH R2
+	LOAD 2(GB), R2	; loading b2 into memory
+	CMP #0, R2	; [Or]Comparing in the right branch 
 	BEQ End_Or_Id_11	; [OR] checking if the second element is true 
 	LOAD #1, R3	; Or is true , We place the value 1 in the return Register
+	POP R2
 End_Or_Id_11:
 ; --------EndOr--------[127, 19]-----
 	CMP #0, R3	; [AND]Comparing in the right branch 
@@ -662,8 +704,10 @@ End_Or_Id_9:
 ; --------BeginAssignOp--------[128, 8]-----
 ; --------StartBinaryOp--------[128, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #100, R4	; loading 100 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #100, R2	; loading 100 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[128, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -703,8 +747,10 @@ end_ifthenelse_23:
 ; --------BeginAssignOp--------[131, 8]-----
 ; --------StartBinaryOp--------[131, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #10, R4	; loading 10 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #10, R2	; loading 10 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[131, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -748,8 +794,10 @@ else25:
 ; --------BeginAssignOp--------[136, 8]-----
 ; --------StartBinaryOp--------[136, 12]-----
 	LOAD 3(GB), R3	; loading i into memory
-	LOAD #1, R4	; loading 1 into memory
-	ADD R4, R3
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
 ; --------EndBinaryOp--------[136, 12]-----
 	STORE R3, 3(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2

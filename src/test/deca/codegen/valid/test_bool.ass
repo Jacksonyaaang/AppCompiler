@@ -1,6 +1,6 @@
-	TSTO #9
+	TSTO #12
 	BOV stack_overflow_error
-	ADDSP #9
+	ADDSP #12
 ; start main program
 ; Main program
 ; Beginning of main instructions:
@@ -41,13 +41,15 @@
 	CMP #1, R3	; [Or]Comparing in the left branch 
 	BEQ End_Or_Id_3	; [Or] checking if the first element is false
 ; --------StartBinaryOp--------[20, 27]-----
-	LOAD 4(GB), R4	; loading h into memory
-	CMP 5(GB), R4	; Comparing registers for Equals operation 
-	SEQ R4	; Placing Equals result into the register  
+	PUSH R2
+	LOAD 4(GB), R2	; loading h into memory
+	CMP 5(GB), R2	; Comparing registers for Equals operation 
+	SEQ R2	; Placing Equals result into the register  
 ; --------EndBinaryOp--------[20, 27]-----
-	CMP #0, R4	; [Or]Comparing in the right branch 
+	CMP #0, R2	; [Or]Comparing in the right branch 
 	BEQ End_Or_Id_3	; [OR] checking if the second element is true 
 	LOAD #1, R3	; Or is true , We place the value 1 in the return Register
+	POP R2
 End_Or_Id_3:
 ; --------EndOr--------[20, 17]-----
 	CMP #0, R3	; [AND]Comparing in the right branch 
@@ -74,99 +76,117 @@ QUIT_AND_Called_When_Fail_id2:
 	CMP #0, R3	; [AND]Comparing in the left branch 
 	BEQ End_And_False_Id_9	; [AND] checking if the first element is false
 ; --------StartBinaryOp--------[20, 44]-----
-	LOAD #0x1.4p1, R4	; loading 2.5 into memory
-	LOAD 2(GB), R5	; loading y into memory
-	FLOAT R5, R5	; Doing an unary minus
-	CMP R5, R4	; Comparing registers for Greater operation 
-	SGT R4	; Placing Greater result into the register  
+	PUSH R2
+	LOAD #0x1.4p1, R2	; loading 2.5 into memory
+	PUSH R3
+	LOAD 2(GB), R3	; loading y into memory
+	FLOAT R3, R3	; Doing an unary minus
+	CMP R3, R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+	POP R3
 ; --------EndBinaryOp--------[20, 44]-----
-	CMP #0, R4	; [AND]Comparing in the right branch 
+	CMP #0, R2	; [AND]Comparing in the right branch 
 	BNE AND_Success_id9	; [AND] checking if the first element is true
 End_And_False_Id_9:
 	LOAD #0, R3	; And is false, We place the value 0 in the return Register
 	BRA QUIT_AND_Called_When_Fail_id9	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
 AND_Success_id9:
+	POP R2
 QUIT_AND_Called_When_Fail_id9:
 ; --------EndAND--------[20, 37]-----
 	CMP #0, R3	; [AND]Comparing in the left branch 
 	BEQ End_And_False_Id_8	; [AND] checking if the first element is false
 ; --------StartAND--------[20, 56]-----
 ; --------StartBinaryOp--------[20, 56]-----
-	LOAD #0x1.0p1, R4	; loading 2.0 into memory
-	LOAD 2(GB), R5	; loading y into memory
-	FLOAT R5, R5	; Doing an unary minus
-	CMP R5, R4	; Comparing registers for Equals operation 
-	SEQ R4	; Placing Equals result into the register  
+	PUSH R2
+	LOAD #0x1.0p1, R2	; loading 2.0 into memory
+	PUSH R3
+	LOAD 2(GB), R3	; loading y into memory
+	FLOAT R3, R3	; Doing an unary minus
+	CMP R3, R2	; Comparing registers for Equals operation 
+	SEQ R2	; Placing Equals result into the register  
+	POP R3
 ; --------EndBinaryOp--------[20, 56]-----
-	CMP #0, R4	; [AND]Comparing in the left branch 
+	CMP #0, R2	; [AND]Comparing in the left branch 
 	BEQ End_And_False_Id_10	; [AND] checking if the first element is false
 ; --------StartBinaryOp--------[20, 66]-----
-	LOAD 5(GB), R5	; loading v into memory
-	CMP 4(GB), R5	; Comparing registers for Equals operation 
-	SEQ R5	; Placing Equals result into the register  
+	PUSH R3
+	LOAD 5(GB), R3	; loading v into memory
+	CMP 4(GB), R3	; Comparing registers for Equals operation 
+	SEQ R3	; Placing Equals result into the register  
 ; --------EndBinaryOp--------[20, 66]-----
-	CMP #0, R5	; [AND]Comparing in the right branch 
+	CMP #0, R3	; [AND]Comparing in the right branch 
 	BNE AND_Success_id10	; [AND] checking if the first element is true
 End_And_False_Id_10:
-	LOAD #0, R4	; And is false, We place the value 0 in the return Register
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
 	BRA QUIT_AND_Called_When_Fail_id10	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
 AND_Success_id10:
+	POP R3
 QUIT_AND_Called_When_Fail_id10:
 ; --------EndAND--------[20, 56]-----
-	CMP #0, R4	; [AND]Comparing in the right branch 
+	CMP #0, R2	; [AND]Comparing in the right branch 
 	BNE AND_Success_id8	; [AND] checking if the first element is true
 End_And_False_Id_8:
 	LOAD #0, R3	; And is false, We place the value 0 in the return Register
 	BRA QUIT_AND_Called_When_Fail_id8	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
 AND_Success_id8:
+	POP R2
 QUIT_AND_Called_When_Fail_id8:
 ; --------EndAND--------[20, 36]-----
 	CMP #0, R3	; [AND]Comparing in the left branch 
 	BEQ End_And_False_Id_7	; [AND] checking if the first element is false
-	LOAD 6(GB), R4	; loading b1 into memory
-	CMP #0, R4	; [AND]Comparing in the right branch 
+	PUSH R2
+	LOAD 6(GB), R2	; loading b1 into memory
+	CMP #0, R2	; [AND]Comparing in the right branch 
 	BNE AND_Success_id7	; [AND] checking if the first element is true
 End_And_False_Id_7:
 	LOAD #0, R3	; And is false, We place the value 0 in the return Register
 	BRA QUIT_AND_Called_When_Fail_id7	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
 AND_Success_id7:
+	POP R2
 QUIT_AND_Called_When_Fail_id7:
 ; --------EndAND--------[20, 36]-----
 	CMP #0, R3	; [AND]Comparing in the left branch 
 	BEQ End_And_False_Id_6	; [AND] checking if the first element is false
-	LOAD 7(GB), R4	; loading b2 into memory
-	CMP #0, R4	; [AND]Comparing in the right branch 
+	PUSH R2
+	LOAD 7(GB), R2	; loading b2 into memory
+	CMP #0, R2	; [AND]Comparing in the right branch 
 	BNE AND_Success_id6	; [AND] checking if the first element is true
 End_And_False_Id_6:
 	LOAD #0, R3	; And is false, We place the value 0 in the return Register
 	BRA QUIT_AND_Called_When_Fail_id6	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
 AND_Success_id6:
+	POP R2
 QUIT_AND_Called_When_Fail_id6:
 ; --------EndAND--------[20, 36]-----
 	CMP #0, R3	; [AND]Comparing in the left branch 
 	BEQ End_And_False_Id_5	; [AND] checking if the first element is false
-	LOAD 8(GB), R4	; loading b3 into memory
-	CMP #0, R4	; Applying not operand
-	SEQ R4	; Applying not operand
-	CMP #0, R4	; [AND]Comparing in the right branch 
+	PUSH R2
+	LOAD 8(GB), R2	; loading b3 into memory
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; [AND]Comparing in the right branch 
 	BNE AND_Success_id5	; [AND] checking if the first element is true
 End_And_False_Id_5:
 	LOAD #0, R3	; And is false, We place the value 0 in the return Register
 	BRA QUIT_AND_Called_When_Fail_id5	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
 AND_Success_id5:
+	POP R2
 QUIT_AND_Called_When_Fail_id5:
 ; --------EndAND--------[20, 36]-----
 	CMP #0, R3	; [AND]Comparing in the left branch 
 	BEQ End_And_False_Id_4	; [AND] checking if the first element is false
-	LOAD 9(GB), R4	; loading b4 into memory
-	CMP #0, R4	; Applying not operand
-	SEQ R4	; Applying not operand
-	CMP #0, R4	; [AND]Comparing in the right branch 
+	PUSH R2
+	LOAD 9(GB), R2	; loading b4 into memory
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; [AND]Comparing in the right branch 
 	BNE AND_Success_id4	; [AND] checking if the first element is true
 End_And_False_Id_4:
 	LOAD #0, R3	; And is false, We place the value 0 in the return Register
 	BRA QUIT_AND_Called_When_Fail_id4	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
 AND_Success_id4:
+	POP R2
 QUIT_AND_Called_When_Fail_id4:
 ; --------EndAND--------[20, 36]-----
 	CMP #0, R3	; [AND]Comparing in the right branch 
@@ -207,13 +227,15 @@ end_ifthenelse_1:
 	CMP #1, R3	; [Or]Comparing in the left branch 
 	BEQ End_Or_Id_13	; [Or] checking if the first element is false
 ; --------StartBinaryOp--------[26, 26]-----
-	LOAD 4(GB), R4	; loading h into memory
-	CMP 5(GB), R4	; Comparing registers for Equals operation 
-	SEQ R4	; Placing Equals result into the register  
+	PUSH R2
+	LOAD 4(GB), R2	; loading h into memory
+	CMP 5(GB), R2	; Comparing registers for Equals operation 
+	SEQ R2	; Placing Equals result into the register  
 ; --------EndBinaryOp--------[26, 26]-----
-	CMP #0, R4	; [Or]Comparing in the right branch 
+	CMP #0, R2	; [Or]Comparing in the right branch 
 	BEQ End_Or_Id_13	; [OR] checking if the second element is true 
 	LOAD #1, R3	; Or is true , We place the value 1 in the return Register
+	POP R2
 End_Or_Id_13:
 ; --------EndOr--------[26, 16]-----
 	CMP #0, R3	; [AND]Comparing in the right branch 
@@ -240,101 +262,121 @@ QUIT_AND_Called_When_Fail_id12:
 	CMP #0, R3	; [AND]Comparing in the left branch 
 	BEQ End_And_False_Id_19	; [AND] checking if the first element is false
 ; --------StartBinaryOp--------[26, 43]-----
-	LOAD #0x1.4p1, R4	; loading 2.5 into memory
-	LOAD 2(GB), R5	; loading y into memory
-	FLOAT R5, R5	; Doing an unary minus
-	CMP R5, R4	; Comparing registers for Greater operation 
-	SGT R4	; Placing Greater result into the register  
+	PUSH R2
+	LOAD #0x1.4p1, R2	; loading 2.5 into memory
+	PUSH R3
+	LOAD 2(GB), R3	; loading y into memory
+	FLOAT R3, R3	; Doing an unary minus
+	CMP R3, R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+	POP R3
 ; --------EndBinaryOp--------[26, 43]-----
-	CMP #0, R4	; [AND]Comparing in the right branch 
+	CMP #0, R2	; [AND]Comparing in the right branch 
 	BNE AND_Success_id19	; [AND] checking if the first element is true
 End_And_False_Id_19:
 	LOAD #0, R3	; And is false, We place the value 0 in the return Register
 	BRA QUIT_AND_Called_When_Fail_id19	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
 AND_Success_id19:
+	POP R2
 QUIT_AND_Called_When_Fail_id19:
 ; --------EndAND--------[26, 36]-----
 	CMP #0, R3	; [AND]Comparing in the left branch 
 	BEQ End_And_False_Id_18	; [AND] checking if the first element is false
 ; --------StartAND--------[26, 55]-----
 ; --------StartBinaryOp--------[26, 55]-----
-	LOAD #0x1.0p1, R4	; loading 2.0 into memory
-	LOAD 2(GB), R5	; loading y into memory
-	FLOAT R5, R5	; Doing an unary minus
-	CMP R5, R4	; Comparing registers for Equals operation 
-	SEQ R4	; Placing Equals result into the register  
+	PUSH R2
+	LOAD #0x1.0p1, R2	; loading 2.0 into memory
+	PUSH R3
+	LOAD 2(GB), R3	; loading y into memory
+	FLOAT R3, R3	; Doing an unary minus
+	CMP R3, R2	; Comparing registers for Equals operation 
+	SEQ R2	; Placing Equals result into the register  
+	POP R3
 ; --------EndBinaryOp--------[26, 55]-----
-	CMP #0, R4	; [AND]Comparing in the left branch 
+	CMP #0, R2	; [AND]Comparing in the left branch 
 	BEQ End_And_False_Id_20	; [AND] checking if the first element is false
 ; --------StartBinaryOp--------[26, 65]-----
-	LOAD 5(GB), R5	; loading v into memory
-	FLOAT R5, R5	; Doing an unary minus
-	LOAD #0x1.4p2, R6	; loading 5.0 into memory
-	CMP R6, R5	; Comparing registers for Lower operation 
-	SLT R5	; Placing Lower result into the register  
+	PUSH R3
+	LOAD 5(GB), R3	; loading v into memory
+	FLOAT R3, R3	; Doing an unary minus
+	PUSH R2
+	LOAD #0x1.4p2, R2	; loading 5.0 into memory
+	CMP R2, R3	; Comparing registers for Lower operation 
+	SLT R3	; Placing Lower result into the register  
+	POP R2
 ; --------EndBinaryOp--------[26, 65]-----
-	CMP #0, R5	; [AND]Comparing in the right branch 
+	CMP #0, R3	; [AND]Comparing in the right branch 
 	BNE AND_Success_id20	; [AND] checking if the first element is true
 End_And_False_Id_20:
-	LOAD #0, R4	; And is false, We place the value 0 in the return Register
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
 	BRA QUIT_AND_Called_When_Fail_id20	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
 AND_Success_id20:
+	POP R3
 QUIT_AND_Called_When_Fail_id20:
 ; --------EndAND--------[26, 55]-----
-	CMP #0, R4	; [AND]Comparing in the right branch 
+	CMP #0, R2	; [AND]Comparing in the right branch 
 	BNE AND_Success_id18	; [AND] checking if the first element is true
 End_And_False_Id_18:
 	LOAD #0, R3	; And is false, We place the value 0 in the return Register
 	BRA QUIT_AND_Called_When_Fail_id18	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
 AND_Success_id18:
+	POP R2
 QUIT_AND_Called_When_Fail_id18:
 ; --------EndAND--------[26, 35]-----
 	CMP #0, R3	; [AND]Comparing in the left branch 
 	BEQ End_And_False_Id_17	; [AND] checking if the first element is false
-	LOAD 6(GB), R4	; loading b1 into memory
-	CMP #0, R4	; [AND]Comparing in the right branch 
+	PUSH R2
+	LOAD 6(GB), R2	; loading b1 into memory
+	CMP #0, R2	; [AND]Comparing in the right branch 
 	BNE AND_Success_id17	; [AND] checking if the first element is true
 End_And_False_Id_17:
 	LOAD #0, R3	; And is false, We place the value 0 in the return Register
 	BRA QUIT_AND_Called_When_Fail_id17	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
 AND_Success_id17:
+	POP R2
 QUIT_AND_Called_When_Fail_id17:
 ; --------EndAND--------[26, 35]-----
 	CMP #0, R3	; [AND]Comparing in the left branch 
 	BEQ End_And_False_Id_16	; [AND] checking if the first element is false
-	LOAD 7(GB), R4	; loading b2 into memory
-	CMP #0, R4	; [AND]Comparing in the right branch 
+	PUSH R2
+	LOAD 7(GB), R2	; loading b2 into memory
+	CMP #0, R2	; [AND]Comparing in the right branch 
 	BNE AND_Success_id16	; [AND] checking if the first element is true
 End_And_False_Id_16:
 	LOAD #0, R3	; And is false, We place the value 0 in the return Register
 	BRA QUIT_AND_Called_When_Fail_id16	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
 AND_Success_id16:
+	POP R2
 QUIT_AND_Called_When_Fail_id16:
 ; --------EndAND--------[26, 35]-----
 	CMP #0, R3	; [AND]Comparing in the left branch 
 	BEQ End_And_False_Id_15	; [AND] checking if the first element is false
-	LOAD 8(GB), R4	; loading b3 into memory
-	CMP #0, R4	; Applying not operand
-	SEQ R4	; Applying not operand
-	CMP #0, R4	; [AND]Comparing in the right branch 
+	PUSH R2
+	LOAD 8(GB), R2	; loading b3 into memory
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; [AND]Comparing in the right branch 
 	BNE AND_Success_id15	; [AND] checking if the first element is true
 End_And_False_Id_15:
 	LOAD #0, R3	; And is false, We place the value 0 in the return Register
 	BRA QUIT_AND_Called_When_Fail_id15	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
 AND_Success_id15:
+	POP R2
 QUIT_AND_Called_When_Fail_id15:
 ; --------EndAND--------[26, 35]-----
 	CMP #0, R3	; [AND]Comparing in the left branch 
 	BEQ End_And_False_Id_14	; [AND] checking if the first element is false
-	LOAD 9(GB), R4	; loading b4 into memory
-	CMP #0, R4	; Applying not operand
-	SEQ R4	; Applying not operand
-	CMP #0, R4	; [AND]Comparing in the right branch 
+	PUSH R2
+	LOAD 9(GB), R2	; loading b4 into memory
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; [AND]Comparing in the right branch 
 	BNE AND_Success_id14	; [AND] checking if the first element is true
 End_And_False_Id_14:
 	LOAD #0, R3	; And is false, We place the value 0 in the return Register
 	BRA QUIT_AND_Called_When_Fail_id14	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
 AND_Success_id14:
+	POP R2
 QUIT_AND_Called_When_Fail_id14:
 ; --------EndAND--------[26, 35]-----
 	CMP #0, R3	; [AND]Comparing in the right branch 
