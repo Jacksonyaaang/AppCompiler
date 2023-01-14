@@ -19,19 +19,36 @@ echo -e "${GREENFOND} AUTO INVALIDE CONTEXT TEST START : ${ENDCOLOR} \n"
 test_context_valide (){
     if test_synt "$1" 2>&1 | grep -q -e "$i:[0-9]*"
     then
-        echo -e "${RED}TEST NOT PASS!!  Issue file :${ENDCOLOR}${RED_BOLD} $(basename "$1") ${SCR}"
+        echo -e "${RED}[Syntax] TEST NOT PASS!!  Issue file :${ENDCOLOR}${RED_BOLD} $(basename "$1") ${SCR}"
         #exit 1
     else
-        echo -e "${GREEN}TEST PASS! ${ENDCOLOR} ${THUMBS_UP}"    
+        echo -e "${GREEN}[Syntax]TEST PASS! ${ENDCOLOR} ${THUMBS_UP}"    
     fi
+}
+
+test_context_valide_decompile (){
+    if decac -p "$1" 2>&1 | grep -q -e "$i:[0-9]*"
+    then
+        echo -e "${RED}[Decompile]TEST NOT PASS!!  Issue file :${ENDCOLOR}${RED_BOLD} $(basename "$1") ${SCR}"
+        #exit 1
+    else
+        echo -e "${GREEN}[Decompile] TEST PASS! ${ENDCOLOR} ${THUMBS_UP}"    
+    fi
+}
+
+redirect_result_decompile(){
+    decac -p "$1" > src/test/deca/syntax/valid/result/$(basename "${1%.deca}")_decompile.lis 2>&1 &
 }
 
 redirect_result(){
     test_synt "$1" > src/test/deca/syntax/valid/result/$(basename "${1%.deca}").lis 2>&1 &
 }
 
+
 for i in src/test/deca/syntax/valid/*.deca
 do
     test_context_valide "$i"
     redirect_result "$i"
+    test_context_valide_decompile "$i"
+    redirect_result_decompile "$i"
 done

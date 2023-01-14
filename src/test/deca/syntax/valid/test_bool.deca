@@ -1,0 +1,33 @@
+// Description:
+// Test les booleans et les operations boolean
+// Resultats:
+// bool val = true
+// bool val = true
+// 
+// Historique:
+//    cree le 01/01/2023
+
+{
+    int x = 2;
+    int y = 2;
+    int z = 2;
+    int h = 2;
+    int v = 2;
+    boolean b1 = true;
+    boolean b2 = true;
+    boolean b3 = false;
+    boolean b4 = false;
+    if((x<=2 && (y != z || h==v))&&((3>x && 2.5 >y) && (2.0==y && v == h) && b1 && b2 && !b3 && !b4 )){
+        println("bool val = true");
+    }
+    else{
+        println("Problem with code");
+    }
+    if((x<5 && (y != z || h==v))&&((3>x && 2.5 >y) && (2.0==y && v < 5.0) && b1 && b2 && !b3 && !b4 )){
+         println("bool val = true");
+    }
+    else{
+        println("Problem with code");
+    }
+
+}

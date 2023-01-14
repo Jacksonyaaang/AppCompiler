@@ -295,21 +295,5 @@ public abstract class AbstractExpr extends AbstractInst {
         }
     }
 
-    public Boolean checkIfExprIsTerminal(AbstractExpr expr){
-        if (expr instanceof Identifier){
-            return true;
-        }
-        else if (expr instanceof BooleanLiteral ){
-            return true;
-        }
-        else if (expr instanceof FloatLiteral){
-            return true;
-        }
-        else if (expr instanceof IntLiteral){
-            return true;
-        }
-        return false;
-
-    }
     
 }

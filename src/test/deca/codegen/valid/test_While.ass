@@ -1,6 +1,6 @@
-	TSTO #8
+	TSTO #7
 	BOV stack_overflow_error
-	ADDSP #8
+	ADDSP #7
 ; start main program
 ; Main program
 ; Beginning of main instructions:
@@ -30,10 +30,8 @@ while_begin1:
 ; --------BeginAssignOp--------[22, 8]-----
 ; --------StartBinaryOp--------[22, 12]-----
 	LOAD 1(GB), R3	; loading i into memory
-	PUSH R2
-	LOAD #1, R2	; loading 1 into memory
-	ADD R2, R3
-	POP R2
+	LOAD #1, R4	; loading 1 into memory
+	ADD R4, R3
 ; --------EndBinaryOp--------[22, 12]-----
 	STORE R3, 1(GB)	;  Assiging a value to i
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -52,10 +50,8 @@ while_end1:
 ; --------BeginAssignOp--------[25, 8]-----
 ; --------StartBinaryOp--------[25, 17]-----
 	LOAD 2(GB), R3	; loading valide into memory
-	PUSH R2
-	LOAD #1, R2	; loading 1 into memory
-	ADD R2, R3
-	POP R2
+	LOAD #1, R4	; loading 1 into memory
+	ADD R4, R3
 ; --------EndBinaryOp--------[25, 17]-----
 	STORE R3, 2(GB)	;  Assiging a value to valide
 	LOAD R3, R2	;  Return value of the assignement of =valideand storing it into R2
@@ -82,12 +78,10 @@ while_begin2:
 	LOAD 3(GB), R3	; loading b1 into memory
 	CMP #1, R3	; [Or]Comparing in the left branch 
 	BEQ End_Or_Id_3	; [Or] checking if the first element is false
-	PUSH R2
-	LOAD 4(GB), R2	; loading b2 into memory
-	CMP #0, R2	; [Or]Comparing in the right branch 
+	LOAD 4(GB), R4	; loading b2 into memory
+	CMP #0, R4	; [Or]Comparing in the right branch 
 	BEQ End_Or_Id_3	; [OR] checking if the second element is true 
 	LOAD #1, R3	; Or is true , We place the value 1 in the return Register
-	POP R2
 End_Or_Id_3:
 ; --------EndOr--------[29, 22]-----
 	CMP #0, R3	; [AND]Comparing in the right branch 
@@ -111,10 +105,8 @@ End_Or_Id_1:
 ; --------BeginAssignOp--------[30, 8]-----
 ; --------StartBinaryOp--------[30, 12]-----
 	LOAD 5(GB), R3	; loading x into memory
-	PUSH R2
-	LOAD #1, R2	; loading 1 into memory
-	ADD R2, R3
-	POP R2
+	LOAD #1, R4	; loading 1 into memory
+	ADD R4, R3
 ; --------EndBinaryOp--------[30, 12]-----
 	STORE R3, 5(GB)	;  Assiging a value to x
 	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
@@ -133,10 +125,8 @@ while_end2:
 ; --------BeginAssignOp--------[33, 8]-----
 ; --------StartBinaryOp--------[33, 17]-----
 	LOAD 2(GB), R3	; loading valide into memory
-	PUSH R2
-	LOAD #10, R2	; loading 10 into memory
-	ADD R2, R3
-	POP R2
+	LOAD #10, R4	; loading 10 into memory
+	ADD R4, R3
 ; --------EndBinaryOp--------[33, 17]-----
 	STORE R3, 2(GB)	;  Assiging a value to valide
 	LOAD R3, R2	;  Return value of the assignement of =valideand storing it into R2
