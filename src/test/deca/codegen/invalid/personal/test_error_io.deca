@@ -1,4 +1,4 @@
 {
     float f;
-    f=readInt();
+    f=readFloat();
 }
