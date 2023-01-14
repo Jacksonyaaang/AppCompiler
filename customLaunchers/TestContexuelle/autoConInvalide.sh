@@ -22,7 +22,7 @@ test_context_invalide (){
         echo -e "${GREEN}TEST PASS! ${ENDCOLOR} ${GREEN_BOLD} $(basename "$i")  ${THUMBS_UP}"    
     else
         echo -e "${RED}TEST NOT PASS!!  Issue file :${ENDCOLOR}${RED_BOLD} $(basename "$1") ${SCR}"
-        #exit 1
+        exit 1
     fi
 }
 
