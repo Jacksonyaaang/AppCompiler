@@ -190,7 +190,7 @@
                 <executions>
                     <!-- One <execution> per executable to launch. Execution
                     failure (exit status != 0) will stop the tests. -->
-<!--                     <execution>
+                    <execution>
                         <id>basic-lex</id>
                         <configuration>
                             <executable>./src/test/script/basic-lex.sh</executable>
@@ -260,9 +260,8 @@
                         <goals>
                             <goal>exec</goal>
                         </goals>
-                    </execution> -->
+                    </execution>
                     <!--/executions-->
-
                     <!-- scripts automatique pour les tests unitaires -->
                     <!--<executions>-->
                     <!--mvn -Djacoco.skip=false verify -Dmaven.test.failure.ignore-->
