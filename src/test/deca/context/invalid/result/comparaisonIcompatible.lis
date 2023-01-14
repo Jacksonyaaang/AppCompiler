@@ -21,4 +21,4 @@ DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:197) - [Identif
 DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:197) - [Identifier][verifyExpr]
 DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:41) - [AbstractOpCmp][verifyExpr] verify type left operand:int
 DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:42) - [AbstractOpCmp][verifyExpr] verify type right operand:boolean
-src/test/deca/context/invalid/comparaisonIcompatible.deca:5:5: Comparaison incompatible entre boolean et int
+src/test/deca/context/invalid/comparaisonIcompatible.deca:12:5: Comparaison incompatible entre boolean et int
