@@ -1,0 +1,139 @@
+	TSTO #8
+	BOV stack_overflow_error
+	ADDSP #8
+; start main program
+; Main program
+; Beginning of main instructions:
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(GB)	; Initializing the variable i and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 2(GB)	; Initializing the variable valide and loading it into memory
+	LOAD #1, R2	; loading true into memory
+	STORE R2, 3(GB)	; Initializing the variable b1 and loading it into memory
+	LOAD #0, R2	; loading false into memory
+	STORE R2, 4(GB)	; Initializing the variable b2 and loading it into memory
+	LOAD #2, R2	; loading 2 into memory
+	STORE R2, 5(GB)	; Initializing the variable x and loading it into memory
+	LOAD 5(GB), R2	; loading x into memory
+	STORE R2, 6(GB)	; Initializing the variable y and loading it into memory
+	LOAD #3, R2	; loading 3 into memory
+	STORE R2, 7(GB)	; Initializing the variable z and loading it into memory
+while_begin1:
+; --------StartBinaryOp--------[21, 10]-----
+	LOAD 1(GB), R2	; loading i into memory
+	LOAD #4, R3	; loading 4 into memory
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[21, 10]-----
+	CMP #1, R2
+	BNE while_end1
+; --------StartBinaryOp--------[22, 12]-----
+	LOAD 1(GB), R2	; loading i into memory
+	LOAD #1, R3	; loading 1 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[22, 12]-----
+	STORE R2, 1(GB)	;  Assiging a value to i
+	BRA while_begin1
+while_end1:
+; --------StartBinaryOp--------[24, 7]-----
+	LOAD 1(GB), R2	; loading i into memory
+	LOAD #4, R3	; loading 4 into memory
+	CMP R3, R2	; Comparing registers for Equals operation 
+	SEQ R2	; Placing Equals result into the register  
+; --------EndBinaryOp--------[24, 7]-----
+; ---------Startif-----------[24, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else1
+; --------StartBinaryOp--------[25, 17]-----
+	LOAD 2(GB), R2	; loading valide into memory
+	LOAD #1, R3	; loading 1 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[25, 17]-----
+	STORE R2, 2(GB)	;  Assiging a value to valide
+	BRA end_ifthenelse_1
+else1:
+end_ifthenelse_1:
+; ---------Endif-----------
+while_begin2:
+; --------StartOr--------[29, 10]-----
+; --------StartAND--------[29, 10]-----
+; --------StartBinaryOp--------[29, 11]-----
+	LOAD 5(GB), R2	; loading x into memory
+; --------StartBinaryOp--------[29, 14]-----
+	LOAD 6(GB), R3	; loading y into memory
+	ADD 7(GB), R3
+; --------EndBinaryOp--------[29, 14]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[29, 11]-----
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_2	; [AND] checking if the first element is false
+; --------StartOr--------[29, 22]-----
+	LOAD 3(GB), R3	; loading b1 into memory
+	CMP #1, R3	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_3	; [Or] checking if the first element is false
+	PUSH R2
+	LOAD 4(GB), R2	; loading b2 into memory
+	CMP #0, R2	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_3	; [OR] checking if the second element is true 
+	LOAD #1, R3	; Or is true , We place the value 1 in the return Register
+	POP R2
+End_Or_Id_3:
+; --------EndOr--------[29, 22]-----
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id2	; [AND] checking if the first element is true
+End_And_False_Id_2:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id2	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id2:
+QUIT_AND_Called_When_Fail_id2:
+; --------EndAND--------[29, 10]-----
+	CMP #1, R2	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_1	; [Or] checking if the first element is false
+	LOAD 4(GB), R3	; loading b2 into memory
+	CMP #0, R3	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_1	; [OR] checking if the second element is true 
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
+End_Or_Id_1:
+; --------EndOr--------[29, 10]-----
+	CMP #1, R2
+	BNE while_end2
+; --------StartBinaryOp--------[30, 12]-----
+	LOAD 5(GB), R2	; loading x into memory
+	LOAD #1, R3	; loading 1 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[30, 12]-----
+	STORE R2, 5(GB)	;  Assiging a value to x
+	BRA while_begin2
+while_end2:
+; --------StartBinaryOp--------[32, 7]-----
+	LOAD 5(GB), R2	; loading x into memory
+	LOAD #5, R3	; loading 5 into memory
+	CMP R3, R2	; Comparing registers for Equals operation 
+	SEQ R2	; Placing Equals result into the register  
+; --------EndBinaryOp--------[32, 7]-----
+; ---------Startif-----------[32, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else2
+; --------StartBinaryOp--------[33, 17]-----
+	LOAD 2(GB), R2	; loading valide into memory
+	LOAD #10, R3	; loading 10 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[33, 17]-----
+	STORE R2, 2(GB)	;  Assiging a value to valide
+	BRA end_ifthenelse_2
+else2:
+end_ifthenelse_2:
+; ---------Endif-----------
+	WSTR "while[ "
+	LOAD 2(GB), R2	; loading valide into memory
+	LOAD R2, R1
+	WINT
+	WSTR "/11 ]"
+	WNL
+	HALT
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

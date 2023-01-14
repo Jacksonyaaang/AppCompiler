@@ -1,6 +1,4 @@
+/
 {
-
-    boolean a = false;
-    boolean b = true;
-    int x = a+b;
+	
 }   

@@ -1,0 +1,236 @@
+	TSTO #6
+	BOV stack_overflow_error
+	ADDSP #6
+; start main program
+; Main program
+; Beginning of main instructions:
+	LOAD #2, R2	; loading 2 into memory
+	STORE R2, 1(GB)	;  Assiging a value to x
+	LOAD #2, R2	; loading 2 into memory
+	STORE R2, 2(GB)	;  Assiging a value to y
+	LOAD 1(GB), R2	; loading x into memory
+	LOAD R2, R1
+	WINT
+	WNL
+; --------StartBinaryOp--------[35, 12]-----
+	LOAD 1(GB), R2	; loading x into memory
+	ADD 2(GB), R2
+; --------EndBinaryOp--------[35, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+; --------StartBinaryOp--------[36, 12]-----
+	LOAD 1(GB), R2	; loading x into memory
+	SUB 2(GB), R2
+; --------EndBinaryOp--------[36, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+	LOAD #4, R2	; loading 4 into memory
+	STORE R2, 2(GB)	;  Assiging a value to y
+; --------StartBinaryOp--------[38, 12]-----
+	LOAD 1(GB), R2	; loading x into memory
+	SUB 2(GB), R2
+; --------EndBinaryOp--------[38, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+; --------StartBinaryOp--------[40, 12]-----
+	LOAD 1(GB), R2	; loading x into memory
+	MUL 2(GB), R2
+; --------EndBinaryOp--------[40, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+; --------StartBinaryOp--------[41, 12]-----
+	LOAD 2(GB), R2	; loading y into memory
+	LOAD 1(GB), R3	; loading x into memory
+	CMP #0, R3
+	BEQ div0_error	; Checking for division by 0the operation is between two ints 
+	QUO R3, R2
+; --------EndBinaryOp--------[41, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+; --------StartBinaryOp--------[42, 12]-----
+	LOAD 1(GB), R2	; loading x into memory
+	LOAD 2(GB), R3	; loading y into memory
+	CMP #0, R3
+	BEQ div0_error	; Checking for division by 0the operation is between two ints 
+	QUO R3, R2
+; --------EndBinaryOp--------[42, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+; --------StartBinaryOp--------[43, 12]-----
+	LOAD 2(GB), R2	; loading y into memory
+	CMP #0, R2
+	BEQ div0_error	; Checking for modulo by 0 the operation is between two ints 
+	REM 1(GB), R2
+; --------EndBinaryOp--------[43, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+; --------StartBinaryOp--------[44, 12]-----
+	LOAD 1(GB), R2	; loading x into memory
+	CMP #0, R2
+	BEQ div0_error	; Checking for modulo by 0 the operation is between two ints 
+	REM 2(GB), R2
+; --------EndBinaryOp--------[44, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+	LOAD #5, R2	; loading 5 into memory
+	FLOAT R2, R2	; Doing an unary minus
+	STORE R2, 3(GB)	;  Assiging a value to f1
+	LOAD #0x1.2p2, R2	; loading 4.5 into memory
+	STORE R2, 4(GB)	;  Assiging a value to f2
+	LOAD 4(GB), R2	; loading f2 into memory
+	LOAD R2, R1
+	WFLOAT
+	WNL
+; --------StartBinaryOp--------[51, 12]-----
+	LOAD 3(GB), R2	; loading f1 into memory
+	SUB 4(GB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[51, 12]-----
+	LOAD R2, R1
+	WFLOAT
+	WNL
+; --------StartBinaryOp--------[52, 12]-----
+	LOAD 4(GB), R2	; loading f2 into memory
+	SUB 3(GB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[52, 12]-----
+	LOAD R2, R1
+	WFLOAT
+	WNL
+	LOAD #0x1.5p2, R2	; loading 5.25 into memory
+	STORE R2, 3(GB)	;  Assiging a value to f1
+; --------StartBinaryOp--------[54, 12]-----
+	LOAD 3(GB), R2	; loading f1 into memory
+	ADD 4(GB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[54, 12]-----
+	LOAD R2, R1
+	WFLOAT
+	WNL
+; --------StartBinaryOp--------[56, 12]-----
+	LOAD 3(GB), R2	; loading f1 into memory
+	MUL 4(GB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[56, 12]-----
+	LOAD R2, R1
+	WFLOAT
+	WNL
+; --------StartBinaryOp--------[57, 12]-----
+	LOAD 3(GB), R2	; loading f1 into memory
+	DIV 4(GB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[57, 12]-----
+	LOAD R2, R1
+	WFLOAT
+	WNL
+	LOAD #9, R2	; loading 9 into memory
+	FLOAT R2, R2	; Doing an unary minus
+	STORE R2, 3(GB)	;  Assiging a value to f1
+; --------StartBinaryOp--------[59, 12]-----
+	LOAD 3(GB), R2	; loading f1 into memory
+	DIV 4(GB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[59, 12]-----
+	LOAD R2, R1
+	WFLOAT
+	WNL
+; --------StartBinaryOp--------[60, 12]-----
+	LOAD 4(GB), R2	; loading f2 into memory
+	DIV 3(GB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[60, 12]-----
+	LOAD R2, R1
+	WFLOAT
+	WNL
+	LOAD #5, R2	; loading 5 into memory
+	FLOAT R2, R2	; Doing an unary minus
+	STORE R2, 3(GB)	;  Assiging a value to f1
+	LOAD #0x1.2p2, R2	; loading 4.5 into memory
+	STORE R2, 4(GB)	;  Assiging a value to f2
+	LOAD 4(GB), R2	; loading f2 into memory
+	LOAD R2, R1
+	WFLOATX
+	WNL
+; --------StartBinaryOp--------[67, 13]-----
+	LOAD 3(GB), R2	; loading f1 into memory
+	SUB 4(GB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[67, 13]-----
+	LOAD R2, R1
+	WFLOATX
+	WNL
+; --------StartBinaryOp--------[68, 13]-----
+	LOAD 4(GB), R2	; loading f2 into memory
+	SUB 3(GB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[68, 13]-----
+	LOAD R2, R1
+	WFLOATX
+	WNL
+	LOAD #0x1.5p2, R2	; loading 5.25 into memory
+	STORE R2, 3(GB)	;  Assiging a value to f1
+; --------StartBinaryOp--------[70, 13]-----
+	LOAD 3(GB), R2	; loading f1 into memory
+	ADD 4(GB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[70, 13]-----
+	LOAD R2, R1
+	WFLOATX
+	WNL
+; --------StartBinaryOp--------[72, 13]-----
+	LOAD 3(GB), R2	; loading f1 into memory
+	MUL 4(GB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[72, 13]-----
+	LOAD R2, R1
+	WFLOATX
+	WNL
+; --------StartBinaryOp--------[73, 13]-----
+	LOAD 3(GB), R2	; loading f1 into memory
+	DIV 4(GB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[73, 13]-----
+	LOAD R2, R1
+	WFLOATX
+	WNL
+	LOAD #9, R2	; loading 9 into memory
+	FLOAT R2, R2	; Doing an unary minus
+	STORE R2, 3(GB)	;  Assiging a value to f1
+; --------StartBinaryOp--------[75, 13]-----
+	LOAD 3(GB), R2	; loading f1 into memory
+	DIV 4(GB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[75, 13]-----
+	LOAD R2, R1
+	WFLOATX
+	WNL
+; --------StartBinaryOp--------[76, 13]-----
+	LOAD 4(GB), R2	; loading f2 into memory
+	DIV 3(GB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[76, 13]-----
+	LOAD R2, R1
+	WFLOATX
+	WNL
+	HALT
+div0_error:
+	WSTR "Error: div0_error"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error: overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

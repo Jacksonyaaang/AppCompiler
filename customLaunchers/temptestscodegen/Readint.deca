@@ -1,0 +1,10 @@
+// Description:
+
+// Resultats:
+
+{
+    int a = readint();
+    float x = readfloat();
+    x = readint();
+    a = ((((10*readint())*5*2)*(-7))*9)+20)-30)*10);
+}

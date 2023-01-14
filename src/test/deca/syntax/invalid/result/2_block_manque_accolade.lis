@@ -1,0 +1,3 @@
+src/test/deca/syntax/invalid/2_block_manque_accolade.deca:12:0: missing '}' at '<EOF>'
+Exception in thread "main" java.lang.NullPointerException: Cannot invoke "fr.ensimag.deca.tree.AbstractProgram.prettyPrint(java.io.PrintStream)" because "prog" is null
+	at fr.ensimag.deca.syntax.ManualTestSynt.main(ManualTestSynt.java:32)

@@ -1,0 +1,13 @@
+Exception in thread "main" java.nio.file.NoSuchFileException: src/test/deca/syntax/valid/*.deca
+	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:92)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:106)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
+	at java.base/sun.nio.fs.UnixFileAttributeViews$Basic.readAttributes(UnixFileAttributeViews.java:55)
+	at java.base/sun.nio.fs.UnixFileSystemProvider.readAttributes(UnixFileSystemProvider.java:148)
+	at java.base/sun.nio.fs.LinuxFileSystemProvider.readAttributes(LinuxFileSystemProvider.java:99)
+	at java.base/java.nio.file.Files.readAttributes(Files.java:1851)
+	at java.base/java.nio.file.Files.size(Files.java:2468)
+	at org.antlr.v4.runtime.CharStreams.fromPath(CharStreams.java:86)
+	at org.antlr.v4.runtime.CharStreams.fromFileName(CharStreams.java:105)
+	at fr.ensimag.deca.syntax.AbstractDecaLexer.createLexerFromArgs(AbstractDecaLexer.java:116)
+	at fr.ensimag.deca.syntax.ManualTestSynt.main(ManualTestSynt.java:21)

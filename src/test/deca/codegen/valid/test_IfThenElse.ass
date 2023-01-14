@@ -1,0 +1,669 @@
+	TSTO #9
+	BOV stack_overflow_error
+	ADDSP #9
+; start main program
+; Main program
+; Beginning of main instructions:
+	LOAD #1, R2	; loading true into memory
+	STORE R2, 1(GB)	; Initializing the variable b1 and loading it into memory
+	LOAD #0, R2	; loading false into memory
+	STORE R2, 2(GB)	; Initializing the variable b2 and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 3(GB)	; Initializing the variable i and loading it into memory
+	LOAD #2, R2	; loading 2 into memory
+	STORE R2, 4(GB)	; Initializing the variable x and loading it into memory
+	LOAD #1, R2	; loading 1 into memory
+	STORE R2, 5(GB)	; Initializing the variable y and loading it into memory
+	LOAD #3, R2	; loading 3 into memory
+	STORE R2, 6(GB)	; Initializing the variable z and loading it into memory
+	LOAD #0x1.4p2, R2	; loading 5.0 into memory
+	STORE R2, 7(GB)	; Initializing the variable f1 and loading it into memory
+	LOAD #0x1.2p2, R2	; loading 4.5 into memory
+	STORE R2, 8(GB)	; Initializing the variable f2 and loading it into memory
+	LOAD #1, R2	; loading true into memory
+; ---------Startif-----------[31, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else1
+	WSTR "true is true "
+	WNL
+	BRA end_ifthenelse_1
+else1:
+	WSTR "true is false "
+	WNL
+end_ifthenelse_1:
+; ---------Endif-----------
+	LOAD 1(GB), R2	; loading b1 into memory
+; ---------Startif-----------[37, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else2
+	WSTR "b1=true is true"
+	WNL
+	BRA end_ifthenelse_2
+else2:
+end_ifthenelse_2:
+; ---------Endif-----------
+; --------StartAND--------[42, 7]-----
+	LOAD 1(GB), R2	; loading b1 into memory
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_1	; [AND] checking if the first element is false
+	LOAD 1(GB), R3	; loading b1 into memory
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id1	; [AND] checking if the first element is true
+End_And_False_Id_1:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id1	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id1:
+QUIT_AND_Called_When_Fail_id1:
+; --------EndAND--------[42, 7]-----
+; ---------Startif-----------[42, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else3
+; --------StartBinaryOp--------[43, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #1000, R3	; loading 1000 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[43, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_3
+else3:
+end_ifthenelse_3:
+; ---------Endif-----------
+; --------StartAND--------[46, 9]-----
+	LOAD 1(GB), R2	; loading b1 into memory
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_2	; [AND] checking if the first element is false
+	LOAD 2(GB), R3	; loading b2 into memory
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id2	; [AND] checking if the first element is true
+End_And_False_Id_2:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id2	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id2:
+QUIT_AND_Called_When_Fail_id2:
+; --------EndAND--------[46, 9]-----
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+; ---------Startif-----------[46, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else4
+; --------StartBinaryOp--------[47, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #100, R3	; loading 100 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[47, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_4
+else4:
+end_ifthenelse_4:
+; ---------Endif-----------
+; --------StartAND--------[49, 9]-----
+	LOAD 2(GB), R2	; loading b2 into memory
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_3	; [AND] checking if the first element is false
+	LOAD 1(GB), R3	; loading b1 into memory
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id3	; [AND] checking if the first element is true
+End_And_False_Id_3:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id3	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id3:
+QUIT_AND_Called_When_Fail_id3:
+; --------EndAND--------[49, 9]-----
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+; ---------Startif-----------[49, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else5
+; --------StartBinaryOp--------[50, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #10, R3	; loading 10 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[50, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_5
+else5:
+end_ifthenelse_5:
+; ---------Endif-----------
+; --------StartAND--------[52, 9]-----
+	LOAD 2(GB), R2	; loading b2 into memory
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_4	; [AND] checking if the first element is false
+	LOAD 2(GB), R3	; loading b2 into memory
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id4	; [AND] checking if the first element is true
+End_And_False_Id_4:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id4	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id4:
+QUIT_AND_Called_When_Fail_id4:
+; --------EndAND--------[52, 9]-----
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+; ---------Startif-----------[52, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else6
+; --------StartBinaryOp--------[53, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #1, R3	; loading 1 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[53, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_6
+else6:
+end_ifthenelse_6:
+; ---------Endif-----------
+	WSTR "b1&&b2[ "
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD R2, R1
+	WINT
+	WSTR "/1111 ]"
+	WNL
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 3(GB)	;  Assiging a value to i
+; --------StartOr--------[59, 7]-----
+	LOAD 1(GB), R2	; loading b1 into memory
+	CMP #1, R2	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_5	; [Or] checking if the first element is false
+	LOAD 1(GB), R3	; loading b1 into memory
+	CMP #0, R3	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_5	; [OR] checking if the second element is true 
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
+End_Or_Id_5:
+; --------EndOr--------[59, 7]-----
+; ---------Startif-----------[59, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else7
+; --------StartBinaryOp--------[60, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #1000, R3	; loading 1000 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[60, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_7
+else7:
+end_ifthenelse_7:
+; ---------Endif-----------
+; --------StartOr--------[62, 7]-----
+	LOAD 1(GB), R2	; loading b1 into memory
+	CMP #1, R2	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_6	; [Or] checking if the first element is false
+	LOAD 2(GB), R3	; loading b2 into memory
+	CMP #0, R3	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_6	; [OR] checking if the second element is true 
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
+End_Or_Id_6:
+; --------EndOr--------[62, 7]-----
+; ---------Startif-----------[62, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else8
+; --------StartBinaryOp--------[63, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #100, R3	; loading 100 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[63, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_8
+else8:
+end_ifthenelse_8:
+; ---------Endif-----------
+; --------StartOr--------[65, 7]-----
+	LOAD 2(GB), R2	; loading b2 into memory
+	CMP #1, R2	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_7	; [Or] checking if the first element is false
+	LOAD 1(GB), R3	; loading b1 into memory
+	CMP #0, R3	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_7	; [OR] checking if the second element is true 
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
+End_Or_Id_7:
+; --------EndOr--------[65, 7]-----
+; ---------Startif-----------[65, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else9
+; --------StartBinaryOp--------[66, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #10, R3	; loading 10 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[66, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_9
+else9:
+end_ifthenelse_9:
+; ---------Endif-----------
+; --------StartOr--------[68, 9]-----
+	LOAD 2(GB), R2	; loading b2 into memory
+	CMP #1, R2	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_8	; [Or] checking if the first element is false
+	LOAD 2(GB), R3	; loading b2 into memory
+	CMP #0, R3	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_8	; [OR] checking if the second element is true 
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
+End_Or_Id_8:
+; --------EndOr--------[68, 9]-----
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+; ---------Startif-----------[68, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else10
+; --------StartBinaryOp--------[69, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #1, R3	; loading 1 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[69, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_10
+else10:
+end_ifthenelse_10:
+; ---------Endif-----------
+	WSTR "b1||b2[ "
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD R2, R1
+	WINT
+	WSTR "/1111 ]"
+	WNL
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 3(GB)	;  Assiging a value to i
+; --------StartBinaryOp--------[75, 7]-----
+	LOAD 4(GB), R2	; loading x into memory
+	CMP 5(GB), R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+; --------EndBinaryOp--------[75, 7]-----
+; ---------Startif-----------[75, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else11
+; --------StartBinaryOp--------[76, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #100000, R3	; loading 100000 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[76, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_11
+else11:
+end_ifthenelse_11:
+; ---------Endif-----------
+; --------StartBinaryOp--------[78, 9]-----
+	LOAD 4(GB), R2	; loading x into memory
+	CMP 5(GB), R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[78, 9]-----
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+; ---------Startif-----------[78, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else12
+	LOAD #1, R2	; loading true into memory
+	STORE R2, 1(GB)	;  Assiging a value to b1
+; --------StartBinaryOp--------[80, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #10000, R3	; loading 10000 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[80, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_12
+else12:
+end_ifthenelse_12:
+; ---------Endif-----------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 5(GB)	;  Assiging a value to y
+	LOAD #1, R2	; loading 1 into memory
+	STORE R2, 4(GB)	;  Assiging a value to x
+; --------StartBinaryOp--------[84, 7]-----
+	LOAD 4(GB), R2	; loading x into memory
+	CMP 5(GB), R2	; Comparing registers for GreaterOrEqual operation 
+	SGE R2	; Placing GreaterOrEqual result into the register  
+; --------EndBinaryOp--------[84, 7]-----
+; ---------Startif-----------[84, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else13
+; --------StartBinaryOp--------[85, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #1000, R3	; loading 1000 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[85, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_13
+else13:
+end_ifthenelse_13:
+; ---------Endif-----------
+; --------StartBinaryOp--------[87, 9]-----
+	LOAD 4(GB), R2	; loading x into memory
+	CMP 5(GB), R2	; Comparing registers for LowerOrEqual operation 
+	SLE R2	; Placing LowerOrEqual result into the register  
+; --------EndBinaryOp--------[87, 9]-----
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+; ---------Startif-----------[87, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else14
+; --------StartBinaryOp--------[88, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #100, R3	; loading 100 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[88, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_14
+else14:
+end_ifthenelse_14:
+; ---------Endif-----------
+	LOAD #1, R2	; loading 1 into memory
+	STORE R2, 5(GB)	;  Assiging a value to y
+; --------StartBinaryOp--------[91, 7]-----
+	LOAD 4(GB), R2	; loading x into memory
+	CMP 5(GB), R2	; Comparing registers for LowerOrEqual operation 
+	SLE R2	; Placing LowerOrEqual result into the register  
+; --------EndBinaryOp--------[91, 7]-----
+; ---------Startif-----------[91, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else15
+; --------StartBinaryOp--------[92, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #10, R3	; loading 10 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[92, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_15
+else15:
+end_ifthenelse_15:
+; ---------Endif-----------
+; --------StartBinaryOp--------[94, 7]-----
+	LOAD 4(GB), R2	; loading x into memory
+	CMP 5(GB), R2	; Comparing registers for GreaterOrEqual operation 
+	SGE R2	; Placing GreaterOrEqual result into the register  
+; --------EndBinaryOp--------[94, 7]-----
+; ---------Startif-----------[94, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else16
+; --------StartBinaryOp--------[95, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #1, R3	; loading 1 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[95, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_16
+else16:
+end_ifthenelse_16:
+; ---------Endif-----------
+	WSTR "x(float:greater/lower)f2[ "
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD R2, R1
+	WINT
+	WSTR "/111111 ]"
+	WNL
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 3(GB)	;  Assiging a value to i
+; --------StartBinaryOp--------[101, 7]-----
+	LOAD 7(GB), R2	; loading f1 into memory
+	CMP 8(GB), R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+; --------EndBinaryOp--------[101, 7]-----
+; ---------Startif-----------[101, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else17
+; --------StartBinaryOp--------[102, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #100000, R3	; loading 100000 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[102, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_17
+else17:
+end_ifthenelse_17:
+; ---------Endif-----------
+; --------StartBinaryOp--------[104, 9]-----
+	LOAD 7(GB), R2	; loading f1 into memory
+	CMP 8(GB), R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[104, 9]-----
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+; ---------Startif-----------[104, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else18
+	LOAD #1, R2	; loading true into memory
+	STORE R2, 1(GB)	;  Assiging a value to b1
+; --------StartBinaryOp--------[106, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #10000, R3	; loading 10000 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[106, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_18
+else18:
+end_ifthenelse_18:
+; ---------Endif-----------
+	LOAD #0, R2	; loading 0 into memory
+	FLOAT R2, R2	; Doing an unary minus
+	STORE R2, 8(GB)	;  Assiging a value to f2
+	LOAD #1, R2	; loading 1 into memory
+	FLOAT R2, R2	; Doing an unary minus
+	STORE R2, 7(GB)	;  Assiging a value to f1
+; --------StartBinaryOp--------[110, 7]-----
+	LOAD 7(GB), R2	; loading f1 into memory
+	CMP 8(GB), R2	; Comparing registers for GreaterOrEqual operation 
+	SGE R2	; Placing GreaterOrEqual result into the register  
+; --------EndBinaryOp--------[110, 7]-----
+; ---------Startif-----------[110, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else19
+; --------StartBinaryOp--------[111, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #1000, R3	; loading 1000 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[111, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_19
+else19:
+end_ifthenelse_19:
+; ---------Endif-----------
+; --------StartBinaryOp--------[113, 9]-----
+	LOAD 7(GB), R2	; loading f1 into memory
+	CMP 8(GB), R2	; Comparing registers for LowerOrEqual operation 
+	SLE R2	; Placing LowerOrEqual result into the register  
+; --------EndBinaryOp--------[113, 9]-----
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+; ---------Startif-----------[113, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else20
+; --------StartBinaryOp--------[114, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #100, R3	; loading 100 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[114, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_20
+else20:
+end_ifthenelse_20:
+; ---------Endif-----------
+	LOAD #1, R2	; loading 1 into memory
+	FLOAT R2, R2	; Doing an unary minus
+	STORE R2, 8(GB)	;  Assiging a value to f2
+; --------StartBinaryOp--------[117, 7]-----
+	LOAD 7(GB), R2	; loading f1 into memory
+	CMP 8(GB), R2	; Comparing registers for LowerOrEqual operation 
+	SLE R2	; Placing LowerOrEqual result into the register  
+; --------EndBinaryOp--------[117, 7]-----
+; ---------Startif-----------[117, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else21
+; --------StartBinaryOp--------[118, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #10, R3	; loading 10 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[118, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_21
+else21:
+end_ifthenelse_21:
+; ---------Endif-----------
+; --------StartBinaryOp--------[120, 7]-----
+	LOAD 7(GB), R2	; loading f1 into memory
+	CMP 8(GB), R2	; Comparing registers for GreaterOrEqual operation 
+	SGE R2	; Placing GreaterOrEqual result into the register  
+; --------EndBinaryOp--------[120, 7]-----
+; ---------Startif-----------[120, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else22
+; --------StartBinaryOp--------[121, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #1, R3	; loading 1 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[121, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_22
+else22:
+end_ifthenelse_22:
+; ---------Endif-----------
+	WSTR "f1(float:greater/lower)f2[ "
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD R2, R1
+	WINT
+	WSTR "/111111 ]"
+	WNL
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 3(GB)	;  Assiging a value to i
+; --------StartOr--------[127, 7]-----
+; --------StartAND--------[127, 7]-----
+; --------StartBinaryOp--------[127, 8]-----
+	LOAD 4(GB), R2	; loading x into memory
+; --------StartBinaryOp--------[127, 11]-----
+	LOAD 5(GB), R3	; loading y into memory
+	ADD 6(GB), R3
+; --------EndBinaryOp--------[127, 11]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[127, 8]-----
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_10	; [AND] checking if the first element is false
+; --------StartOr--------[127, 19]-----
+	LOAD 1(GB), R3	; loading b1 into memory
+	CMP #1, R3	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_11	; [Or] checking if the first element is false
+	PUSH R2
+	LOAD 2(GB), R2	; loading b2 into memory
+	CMP #0, R2	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_11	; [OR] checking if the second element is true 
+	LOAD #1, R3	; Or is true , We place the value 1 in the return Register
+	POP R2
+End_Or_Id_11:
+; --------EndOr--------[127, 19]-----
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id10	; [AND] checking if the first element is true
+End_And_False_Id_10:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id10	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id10:
+QUIT_AND_Called_When_Fail_id10:
+; --------EndAND--------[127, 7]-----
+	CMP #1, R2	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_9	; [Or] checking if the first element is false
+	LOAD 2(GB), R3	; loading b2 into memory
+	CMP #0, R3	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_9	; [OR] checking if the second element is true 
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
+End_Or_Id_9:
+; --------EndOr--------[127, 7]-----
+; ---------Startif-----------[127, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else23
+; --------StartBinaryOp--------[128, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #100, R3	; loading 100 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[128, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_23
+else23:
+end_ifthenelse_23:
+; ---------Endif-----------
+; --------StartBinaryOp--------[130, 18]-----
+	LOAD 4(GB), R2	; loading x into memory
+	CMP 6(GB), R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[130, 18]-----
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+; ---------Startif-----------[130, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else24
+; --------StartBinaryOp--------[131, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #10, R3	; loading 10 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[131, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_24
+else24:
+end_ifthenelse_24:
+; ---------Endif-----------
+; --------StartBinaryOp--------[133, 19]-----
+	LOAD 4(GB), R2	; loading x into memory
+	CMP 6(GB), R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[133, 19]-----
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+; ---------Startif-----------[133, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else25
+	BRA end_ifthenelse_25
+else25:
+; --------StartBinaryOp--------[136, 12]-----
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #1, R3	; loading 1 into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[136, 12]-----
+	STORE R2, 3(GB)	;  Assiging a value to i
+end_ifthenelse_25:
+; ---------Endif-----------
+	WSTR "comparaison plus complexes[ "
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD R2, R1
+	WINT
+	WSTR "/111 ]"
+	WNL
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 3(GB)	;  Assiging a value to i
+	HALT
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program
