@@ -28,6 +28,7 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
         LOG.debug("verify listClass: start");
         throw new UnsupportedOperationException("not yet implemented");
         // LOG.debug("verify listClass: end");
+
     }
 
     /**

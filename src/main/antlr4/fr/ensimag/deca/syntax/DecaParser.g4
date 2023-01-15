@@ -49,7 +49,7 @@ prog returns[AbstractProgram tree]
             assert($list_classes.tree != null);
             assert($main.tree != null);
             $tree = new Program($list_classes.tree, $main.tree);
-            setLocation($tree, $main.start);
+            setLocation($tree, $list_classes.start);
         }
     ;
 
@@ -173,6 +173,8 @@ inst returns[AbstractInst tree]
         }
     | RETURN expr SEMI {
             assert($expr.tree != null);
+            $tree = new Return($expr.tree);
+            setLocation($tree, $expr.start);
         }
     ;
 
@@ -325,8 +327,9 @@ inequality_expr returns[AbstractExpr tree]
     | e1=inequality_expr INSTANCEOF type {
             assert($e1.tree != null);
             assert($e2.tree != null);   
-            //$tree = new InstanceOf($e1.tree, $e2.tree); //A FAIRE
-        }   // A FAIRE LA CLASSE INSTANCE OF 
+            $tree = new InstanceOf($e1.tree, $type.tree); 
+            setLocation($tree, $e1.start);
+        }   
     ;
 
 
@@ -399,17 +402,15 @@ select_expr returns[AbstractExpr tree]
     | e1=select_expr DOT i=ident {
             assert($e1.tree != null);
             assert($i.tree != null);
-            //A FAIRE la fonction selection dans tree voir poly page 69
-            //$tree=Selection($e1.tree, $i.tree);
-
         }
         (o=OPARENT args=list_expr CPARENT {
-            // we matched "e1.i(args)"
-            //assert($args.tree != null);
-            //A FAIRE
+            assert($args.tree != null);
+            $tree=new MethodCall($e1.tree, $i.tree, $args.tree);
+            setLocation($tree, $e1.start);
         }
         | /* epsilon */ {
-            // we matched "e.i"
+            $tree=new Selection($e1.tree, $i.tree);
+            setLocation($tree, $e1.start);
         }
         )
     ;
@@ -438,13 +439,15 @@ primary_expr returns[AbstractExpr tree]
         }
     | NEW ident OPARENT CPARENT {
             assert($ident.tree != null);
+            $tree = new New($ident.tree);
+            setLocation($tree, $NEW);
         }
-        // A FAIRE LA CLASS NEW
     | cast=OPARENT type CPARENT OPARENT expr CPARENT {
             assert($type.tree != null);
             assert($expr.tree != null);
+            $tree = new Cast($type.tree, $expr.tree);
+            setLocation($tree, $OPARENT);
         }
-    // A FAIRE LA CLASS CAST
     | literal {
             assert($literal.tree != null);
             $tree=$literal.tree;
@@ -472,12 +475,9 @@ literal returns[AbstractExpr tree]
     | fd=FLOAT {
         try{
             $tree = new FloatLiteral(Float.parseFloat($fd.text));
-            // System.out.println("---test---");
             Float.parseFloat($fd.text);
-            // System.out.println("---test2---");
         }
         catch (Throwable e){
-            // System.out.println("---caught---");
             throw new DecaRecognitionException(this, $fd); //"La valeur du float donnée ne peux pas être codée sur 32 bits");
         }
         $tree = new FloatLiteral(Float.parseFloat($fd.text));
@@ -499,13 +499,13 @@ literal returns[AbstractExpr tree]
         $tree = new BooleanLiteral(false);  
         setLocation($tree, $FALSE);
         }
-    | THIS {
+    | THIS {        
+            $tree = new This(true);  
+            setLocation($tree, $THIS);
         }
-    // A FAIRE
-// Pour This, l’attribut est vrai si et seulement si le nœud a été ajouté pendant l’analyse
-// syntaxique sans que le programme source ne contienne le mot clé this (par exemple, m(); pour dire
-// this.m();). Cet attribut n’est pas strictement nécessaire, mais il est utilisé dans la décompilation
     | NULL {
+            $tree = new Null();  
+            setLocation($tree, $NULL);
         }
     ;
 
@@ -538,7 +538,7 @@ class_decl  returns[AbstractDeclClass tree]
                 assert($class_body.fields != null);
                 assert($class_body.methods != null);
                 $tree = new DeclClass($ident.tree, $superclass.tree, $class_body.fields, $class_body.methods );
-                setLocation($tree, $ident.start);
+                setLocation($tree, $CLASS);
         }
     ;
 
