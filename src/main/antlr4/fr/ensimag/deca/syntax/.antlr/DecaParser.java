@@ -133,7 +133,9 @@ public class DecaParser extends AbstractDecaParser {
 	    protected NoInitialization tempInitNoInit = null;
 	    protected StringBuilder sb = null;  
 	    protected AbstractMethodBody body = null;
-	    protected StringLiteral stringAsmBody = null;    
+	    protected StringLiteral stringAsmBody = null;
+	    protected This thisImplicite = null;        
+	    
 
 	public DecaParser(TokenStream input) {
 		super(input);
@@ -2107,6 +2109,7 @@ public class DecaParser extends AbstractDecaParser {
 		public IdentContext ident;
 		public IdentContext m;
 		public List_exprContext args;
+		public List_exprContext list_expr;
 		public ExprContext expr;
 		public Token READINT;
 		public Token READFLOAT;
@@ -2173,12 +2176,19 @@ public class DecaParser extends AbstractDecaParser {
 				setState(403);
 				match(OPARENT);
 				setState(404);
-				((Primary_exprContext)_localctx).args = list_expr();
+				((Primary_exprContext)_localctx).args = ((Primary_exprContext)_localctx).list_expr = list_expr();
 				setState(405);
 				match(CPARENT);
 
 				            assert(((Primary_exprContext)_localctx).args.tree != null);
 				            assert(((Primary_exprContext)_localctx).m.tree != null);
+				            // A FAIRE : TESTER CELA  dans la partie contexte et la partie codegen
+				            //On appelle le this d'une maniére implicte dans le cas ou nous 
+				            //sommes dans le bloc de la class
+				            thisImplicite = new This(true);
+				            setLocation(thisImplicite ,(((Primary_exprContext)_localctx).m!=null?(((Primary_exprContext)_localctx).m.start):null));
+				            ((Primary_exprContext)_localctx).tree = new MethodCall(thisImplicite, ((Primary_exprContext)_localctx).m.tree, ((Primary_exprContext)_localctx).list_expr.tree);
+				            setLocation(_localctx.tree, (((Primary_exprContext)_localctx).m!=null?(((Primary_exprContext)_localctx).m.start):null));
 				        
 				}
 				break;
@@ -2437,7 +2447,7 @@ public class DecaParser extends AbstractDecaParser {
 				setState(453);
 				((LiteralContext)_localctx).THIS = match(THIS);
 				        
-				            ((LiteralContext)_localctx).tree =  new This(true);  
+				            ((LiteralContext)_localctx).tree =  new This(false);  
 				            setLocation(_localctx.tree, ((LiteralContext)_localctx).THIS);
 				        
 				}
