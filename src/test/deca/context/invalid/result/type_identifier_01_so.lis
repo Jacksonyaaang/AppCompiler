@@ -1,6 +1,0 @@
-DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:38) - verify program: start
-DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:37) - verify Main: start
-DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:54) - [ListDeclVar][verifyListDeclVariable]
-DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
-DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:216) - [Identifier][verifyType] Verify that declaration type is correct
-src/test/deca/context/invalid/type_identifier_01_so.deca:13:0: Le type String n'est pas defini
