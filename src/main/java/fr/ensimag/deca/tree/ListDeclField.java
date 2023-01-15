@@ -37,6 +37,27 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
     //     }
     // }
 
+        /**
+     * Implements non-terminal "list_decl_var" of [SyntaxeContextuelle] in pass 3
+     * @param compiler contains the "env_types" attribute
+     * @param localEnv 
+     *   its "parentEnvironment" corresponds to "env_exp_sup" attribute
+     *   in precondition, its "current" dictionary corresponds to 
+     *      the "env_exp" attribute
+     *   in postcondition, its "current" dictionary corresponds to 
+     *      the "env_exp_r" attribute
+     * @param currentClass 
+     *          corresponds to "class" attribute (null in the main bloc).
+     */    
+    void verifyListDeclField(DecacCompiler compiler, EnvironmentExp localEnv,
+            ClassDefinition currentClass) throws ContextualError {
+            LOG.debug("[ListDeclVar][verifyListDeclVariable]");
+        for (AbstractDeclField declField : getList()){
+            //declField.verifyDeclVar(compiler, localEnv, currentClass);
+        }
+    }
+
+
 
 
 }

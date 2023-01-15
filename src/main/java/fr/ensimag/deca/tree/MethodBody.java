@@ -3,6 +3,8 @@ package fr.ensimag.deca.tree;
 import java.io.PrintStream;
 
 import fr.ensimag.deca.tools.IndentPrintStream;
+import org.apache.commons.lang.Validate;
+
 
 public class MethodBody extends AbstractMethodBody {
     
@@ -18,8 +20,9 @@ public class MethodBody extends AbstractMethodBody {
         return listInstructions;
     }
 
-
     public MethodBody(ListDeclVar listVar, ListInst listInstructions) {
+        Validate.notNull(listVar);
+        Validate.notNull(listInstructions);
         this.listVar = listVar;
         this.listInstructions = listInstructions;
     }
