@@ -58,7 +58,7 @@ public class DecaParser extends AbstractDecaParser {
 		return new String[] {
 			null, "'{'", "'}'", "'('", "')'", "';'", "','", "'print'", "'println'", 
 			"'printx'", "'printlnx'", "'while'", "'return'", "'if'", "'else'", "'&&'", 
-			"'||'", "'=='", "'!='", "'>='", "'<='", "'>'", "'<'", "'instaceof'", 
+			"'||'", "'=='", "'!='", "'>='", "'<='", "'>'", "'<'", "'instanceof'", 
 			"'+'", "'-'", "'*'", "'/'", "'='", "'%'", "'!'", "'.'", "'readInt'", 
 			"'readFloat'", "'new'", "'true'", "'false'", "'this'", "'null'", "'class'", 
 			"'extends'", "'protected'", "'asm'"
@@ -1616,7 +1616,7 @@ public class DecaParser extends AbstractDecaParser {
 						((Inequality_exprContext)_localctx).type = type();
 
 						                      assert(((Inequality_exprContext)_localctx).e1.tree != null);
-						                      assert(((Inequality_exprContext)_localctx).e2.tree != null);   
+						                      assert(((Inequality_exprContext)_localctx).type.tree != null);   
 						                      ((Inequality_exprContext)_localctx).tree =  new InstanceOf(((Inequality_exprContext)_localctx).e1.tree, ((Inequality_exprContext)_localctx).type.tree); 
 						                      setLocation(_localctx.tree, (((Inequality_exprContext)_localctx).e1!=null?(((Inequality_exprContext)_localctx).e1.start):null));
 						                  

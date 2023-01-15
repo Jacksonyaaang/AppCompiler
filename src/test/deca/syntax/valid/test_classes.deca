@@ -91,7 +91,9 @@ class B3 extends A3{
     b2 = (B3) (b) ;
     y=b2.x;
     println(b2.x);
-    A a = null;
-    boolean a = B instaceof A; 
+    a = null;
+    if (B instanceof A){
+        
+    } 
 }
 
