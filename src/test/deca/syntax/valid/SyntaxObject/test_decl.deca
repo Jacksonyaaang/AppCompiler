@@ -10,7 +10,7 @@
 
 
 //initialisaton de la classe mère et de ses attributs, test de visibilité dans la classe même
-class A{
+class A1{
     public String pubfield="attribut public valide pour";
     protected String protfield="attribut protected valide pour";
     private String privfield="attribut private valide pour";
@@ -25,7 +25,7 @@ class A{
 }
 
 //visibilité dans la classe fille
-class B extends A{
+class B1 extends A1{
     public void method1(){
         println(pubfield + "la classe fille\n");
         println(protfield + "la classe fille\n");
@@ -33,12 +33,12 @@ class B extends A{
     }
 }
 
-class C{}
+class C1{}
 
 
 {
-    A a;
-    B b;
+    A1 a;
+    B1 b;
     a.method1();
     b.method1();  
 }

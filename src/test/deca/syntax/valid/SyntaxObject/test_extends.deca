@@ -7,18 +7,18 @@
 // Historique:
 //    cree le 15/01/2023
 
-class A{
+class A2{
     public String field1="héritage d'attribut valide";
     public void printValide(){
         println("héritage de méthode valide");
     }
 }
 
-class B extends A{}
+class B2 extends A2{}
 
 
 {
-    B b;
+    B2 b;
     println(b.field1);
     b.method1();
 }
