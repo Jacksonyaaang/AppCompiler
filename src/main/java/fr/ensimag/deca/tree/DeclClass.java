@@ -25,9 +25,31 @@ public class DeclClass extends AbstractDeclClass {
         this.methods = methods;
     }
 
+    public ListDeclField getFields(){
+        return fields;
+    }
+    public ListDeclMethod getMethods() {
+        return methods;
+    }
+    public AbstractIdentifier getName() {
+        return name;
+    }
+    public AbstractIdentifier getSuperClass() {
+        return superClass;
+    }
+
     @Override
     public void decompile(IndentPrintStream s) {
-        s.print("class { ... A FAIRE ... }");
+        s.print("class ");
+        s.print(getName().getName().getName());
+        if(getSuperClass() != null){
+            s.print(" extends ");
+            s.print(getSuperClass().getName().getName());
+        }
+        s.println(" {");
+        getFields().decompile(s);
+        getMethods().decompile(s);
+
     }
 
     @Override

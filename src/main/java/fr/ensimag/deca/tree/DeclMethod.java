@@ -60,7 +60,14 @@ public class DeclMethod extends AbstractDeclMethod {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        //A FAIRE DECOMPILE 
+        getType().decompile(s);
+        s.print(" ");
+        getName().decompile(s);
+        s.print("(");
+        getParams().decompile(s);
+        s.print(")");
+        getBody().decompile(s);
+
     }
 
     @Override
