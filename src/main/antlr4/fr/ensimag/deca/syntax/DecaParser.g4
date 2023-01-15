@@ -240,7 +240,7 @@ assign_expr returns[AbstractExpr tree]
         EQUALS e2=assign_expr {
             assert($e.tree != null);
             assert($e2.tree != null);
-            $tree = new Assign( (Identifier )$e.tree, $e2.tree);
+            $tree = new Assign( (AbstractLValue) $e.tree, $e2.tree);
             setLocation($tree, $e.start);
         }
       | /* epsilon */ {
@@ -409,8 +409,8 @@ select_expr returns[AbstractExpr tree]
             setLocation($tree, $e1.start);
         }
         | /* epsilon */ {
-            $tree=new Selection($e1.tree, $i.tree);
-            setLocation($tree, $e1.start);
+                $tree=new Selection($e1.tree, $i.tree);
+                setLocation($tree, $e1.start);
         }
         )
     ;
@@ -527,6 +527,7 @@ list_classes returns[ListDeclClass tree]
       (c1=class_decl { 
             assert($c1.tree != null);
             $tree.add($c1.tree);
+            setLocation($tree, $c1.start);
         }
       )*
     ;
@@ -552,6 +553,7 @@ class_extension returns[AbstractIdentifier tree]
             // cette extention se fait par défaut 
             // sans input de l'utilisateur
             $tree = new Identifier(this.getDecacCompiler().createSymbol("object")); 
+            $tree.setLocation(Location.BUILTIN);
         }
     ;
 
@@ -658,6 +660,7 @@ list_params returns[ListDeclParam tree]
     : (p1=param {
         assert($p1.tree != null);
         $tree.add($p1.tree);
+        setLocation($tree,$p1.start);
         } (COMMA p2=param {
             assert($p2.tree != null);
             $tree.add($p2.tree);

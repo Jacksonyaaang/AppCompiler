@@ -1140,7 +1140,7 @@ public class DecaParser extends AbstractDecaParser {
 
 				            assert(((Assign_exprContext)_localctx).e.tree != null);
 				            assert(((Assign_exprContext)_localctx).e2.tree != null);
-				            ((Assign_exprContext)_localctx).tree =  new Assign( (Identifier )((Assign_exprContext)_localctx).e.tree, ((Assign_exprContext)_localctx).e2.tree);
+				            ((Assign_exprContext)_localctx).tree =  new Assign( (AbstractLValue) ((Assign_exprContext)_localctx).e.tree, ((Assign_exprContext)_localctx).e2.tree);
 				            setLocation(_localctx.tree, (((Assign_exprContext)_localctx).e!=null?(((Assign_exprContext)_localctx).e.start):null));
 				        
 				}
@@ -2076,8 +2076,8 @@ public class DecaParser extends AbstractDecaParser {
 					case 2:
 						{
 
-						                      ((Select_exprContext)_localctx).tree = new Selection(((Select_exprContext)_localctx).e1.tree, ((Select_exprContext)_localctx).i.tree);
-						                      setLocation(_localctx.tree, (((Select_exprContext)_localctx).e1!=null?(((Select_exprContext)_localctx).e1.start):null));
+						                          ((Select_exprContext)_localctx).tree = new Selection(((Select_exprContext)_localctx).e1.tree, ((Select_exprContext)_localctx).i.tree);
+						                          setLocation(_localctx.tree, (((Select_exprContext)_localctx).e1!=null?(((Select_exprContext)_localctx).e1.start):null));
 						                  
 						}
 						break;
@@ -2539,6 +2539,7 @@ public class DecaParser extends AbstractDecaParser {
 				 
 				            assert(((List_classesContext)_localctx).c1.tree != null);
 				            _localctx.tree.add(((List_classesContext)_localctx).c1.tree);
+				            setLocation(_localctx.tree, (((List_classesContext)_localctx).c1!=null?(((List_classesContext)_localctx).c1.start):null));
 				        
 				}
 				}
@@ -2664,6 +2665,7 @@ public class DecaParser extends AbstractDecaParser {
 				            // cette extention se fait par défaut 
 				            // sans input de l'utilisateur
 				            ((Class_extensionContext)_localctx).tree =  new Identifier(this.getDecacCompiler().createSymbol("object")); 
+				            _localctx.tree.setLocation(Location.BUILTIN);
 				        
 				}
 				break;
@@ -3173,6 +3175,7 @@ public class DecaParser extends AbstractDecaParser {
 
 				        assert(((List_paramsContext)_localctx).p1.tree != null);
 				        _localctx.tree.add(((List_paramsContext)_localctx).p1.tree);
+				        setLocation(_localctx.tree,(((List_paramsContext)_localctx).p1!=null?(((List_paramsContext)_localctx).p1.start):null));
 				        
 				setState(552);
 				_errHandler.sync(this);

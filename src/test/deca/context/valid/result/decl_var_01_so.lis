@@ -1,0 +1,98 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:38) - verify program: start
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:37) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:54) - [ListDeclVar][verifyListDeclVariable]
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:216) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:162) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments
+DEBUG fr.ensimag.deca.tree.IntLiteral.verifyExpr(IntLiteral.java:54) - [IntLiteral][verifyExpr]
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - [DeclVar] Saving a into 1(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:216) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - [DeclVar] Saving c into 2(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:216) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:162) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments
+DEBUG fr.ensimag.deca.tree.FloatLiteral.verifyExpr(FloatLiteral.java:45) - [FloatLiteral][verifyExpr]
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - [DeclVar] Saving f into 3(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:216) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:162) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments
+DEBUG fr.ensimag.deca.tree.BooleanLiteral.verifyExpr(BooleanLiteral.java:49) - [BooleanLiteral][verifyExpr]
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - [DeclVar] Saving b into 4(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:216) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - [DeclVar] Saving a2 into 5(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:216) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - [DeclVar] Saving f2 into 6(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:216) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - [DeclVar] Saving b2 into 7(GB)
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:46) - [AbstractPrint][verifyInst] Verify the expressions in the print instruction
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:199) - [Identifier][verifyExpr]
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:199) - [Identifier][verifyExpr]
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:46) - verify Main: end
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:40) - verify program: end
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 7 elements]
+      |  []> [11, 4] DeclVar
+      |  ||  +> [11, 0] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [11, 4] Identifier (a)
+      |  ||  |  definition: variable defined at [11, 4], type=int
+      |  ||  `> [11, 8] Initialization
+      |  ||     `> [11, 8] Int (5)
+      |  ||        type: int
+      |  []> [11, 11] DeclVar
+      |  ||  +> [11, 0] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [11, 11] Identifier (c)
+      |  ||  |  definition: variable defined at [11, 11], type=int
+      |  ||  `> NoInitialization
+      |  []> [12, 6] DeclVar
+      |  ||  +> [12, 0] Identifier (float)
+      |  ||  |  definition: type (builtin), type=float
+      |  ||  +> [12, 6] Identifier (f)
+      |  ||  |  definition: variable defined at [12, 6], type=float
+      |  ||  `> [12, 10] Initialization
+      |  ||     `> [12, 10] Float (10.5)
+      |  ||        type: float
+      |  []> [13, 8] DeclVar
+      |  ||  +> [13, 0] Identifier (boolean)
+      |  ||  |  definition: type (builtin), type=boolean
+      |  ||  +> [13, 8] Identifier (b)
+      |  ||  |  definition: variable defined at [13, 8], type=boolean
+      |  ||  `> [13, 12] Initialization
+      |  ||     `> [13, 12] BooleanLiteral (false)
+      |  ||        type: boolean
+      |  []> [15, 4] DeclVar
+      |  ||  +> [15, 0] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [15, 4] Identifier (a2)
+      |  ||  |  definition: variable defined at [15, 4], type=int
+      |  ||  `> NoInitialization
+      |  []> [16, 6] DeclVar
+      |  ||  +> [16, 0] Identifier (float)
+      |  ||  |  definition: type (builtin), type=float
+      |  ||  +> [16, 6] Identifier (f2)
+      |  ||  |  definition: variable defined at [16, 6], type=float
+      |  ||  `> NoInitialization
+      |  []> [17, 8] DeclVar
+      |      +> [17, 0] Identifier (boolean)
+      |      |  definition: type (builtin), type=boolean
+      |      +> [17, 8] Identifier (b2)
+      |      |  definition: variable defined at [17, 8], type=boolean
+      |      `> NoInitialization
+      `> ListInst [List with 1 elements]
+         []> [19, 6] Print
+             `> ListExpr [List with 2 elements]
+                []> [19, 6] Identifier (a)
+                ||  definition: variable defined at [11, 4], type=int
+                []> [19, 9] Identifier (f)
+                    definition: variable defined at [12, 6], type=float
