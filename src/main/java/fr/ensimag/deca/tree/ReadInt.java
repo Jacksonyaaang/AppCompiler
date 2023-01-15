@@ -29,20 +29,17 @@ public class ReadInt extends AbstractReadExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
         ClassDefinition currentClass) throws ContextualError {
-        System.out.println("On est dans ReadInt.java");
+        LOG.debug("[ReadInt][verifyExpr]");
         setType(compiler.environmentType.INT);
-        return getType();  
-        //throw new UnsupportedOperationException("not yet implemented");
+        return getType();
     }
     //victor
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError
      {
         LOG.debug("[ReadInt][CodeGenInst] generating code for ReadInt");
-        System.out.println("[ReadInt][codeGenInst] generating code for ReadInt");
-        System.out.println(compiler.getRegisterManagement());
         this.setRegisterDeRetour(this.LoadGencode(compiler));
-        System.out.println("[ReadInt][codeGenInst] exiting method");
+        LOG.debug("[ReadInt][codeGenInst] exiting generation method method");
     }
 
     
@@ -51,8 +48,8 @@ public class ReadInt extends AbstractReadExpr {
         assert(reg != null);
         compiler.addInstruction(new RINT());
         compiler.addInstruction(new BOV(new Label("io_error")));
-        //compiler.addInstruction(new STORE(Register.getR(1),GB+nbGB));
-        compiler.addInstruction(new LOAD(Register.getR(1),this.getRegisterDeRetour()));
+        compiler.getErrorManagementUnit().activeError("io_error");
+        compiler.addInstruction(new LOAD(Register.getR(1), reg));
     }
 
     @Override

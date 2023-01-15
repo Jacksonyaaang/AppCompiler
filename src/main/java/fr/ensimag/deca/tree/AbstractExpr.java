@@ -17,6 +17,7 @@ import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 //import fr.ensimag.ima.pseudocode.instructions.WBOOL;
+import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
 
 import java.io.PrintStream;
 import java.util.Stack;
@@ -38,7 +39,7 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     private static final Logger LOG = Logger.getLogger(AbstractExpr.class);
 
-    private GPRegister registerDeRetour;
+    private GPRegister registerDeRetour = null;
 
     public GPRegister getRegisterDeRetour() {
         return registerDeRetour;
@@ -55,6 +56,25 @@ public abstract class AbstractExpr extends AbstractInst {
 
     public Stack<GPRegister> getRegisterToPop() {
         return registerToPop;
+    }
+
+    public void transferPopRegisters(Stack<GPRegister> stackToCopy){
+        Stack<GPRegister> tempStack = new Stack<GPRegister>();
+        while(stackToCopy.size() != 0){
+            tempStack.push(stackToCopy.pop());
+        }
+        while(tempStack.size() != 0){
+            registerToPop.push(tempStack.pop());
+        }
+    }
+
+
+    public GPRegister getPeekRegisterToPop() {
+        if ( registerToPop.size() !=0 ){
+            return registerToPop.peek();
+        }
+        return null;
+
     }
 
     public void popRegisters(DecacCompiler compiler) {
@@ -123,16 +143,20 @@ public abstract class AbstractExpr extends AbstractInst {
             EnvironmentExp localEnv, ClassDefinition currentClass, 
             Type expectedType)
             throws ContextualError {
-        System.out.println("On est dans AbstractExpr.java");
-        try{
-            Type t = verifyExpr(compiler, localEnv, currentClass);
-            //if(!(expectedType.isFloat() && t.isInt()) || !expectedType.sameType(t)){
-            if (!expectedType.sameType(t))
-                throw new ContextualError("Not exepected type", getLocation());
-            //}
-        } catch (ContextualError e){
-            e.fillInStackTrace();
+        LOG.debug("[AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments" );
+        //Vérification du membre de droite d'une affectation
+        Type t = this.verifyExpr(compiler, localEnv, currentClass);
+
+        // Conversion du membre droit en float s'il est de tye int et que le membre de gauche est de type float
+        if (expectedType.isFloat() && t.isInt()){
+            ConvFloat cF = new ConvFloat(this);
+            cF.verifyExpr(compiler, localEnv, currentClass);
+            LOG.debug("[Assign][verifyExpr] Conv int -> float");
+            return cF;
         }
+        if (!expectedType.sameType(t))
+            throw new ContextualError("Not expected type", getLocation());
+        setType(expectedType);
         return this;
     }
     
@@ -141,9 +165,8 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
-        System.out.println("On est dans AbstractExpr.java");
-            verifyExpr(compiler, localEnv, currentClass);
-        //throw new UnsupportedOperationException("not yet implemented");
+        LOG.debug("[AbstractExpr][verifyInst] Verify the expression coming from the instruction");
+        verifyExpr(compiler, localEnv, currentClass);
     }
 
     /**
@@ -158,12 +181,14 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     void verifyCondition(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-            Type type_cond = verifyExpr(compiler, localEnv, currentClass);
-            if (type_cond != null && type_cond.isBoolean()) setType(type_cond);
-            else{
-                throw new ContextualError("la condition doit être booléan", getLocation());
-            }
-        //throw new UnsupportedOperationException("not yet implemented");
+        LOG.debug("[AbstractExpr][verifyInst] Verify the condition of a While or ifEhenElse");
+        Type type_cond = verifyExpr(compiler, localEnv, currentClass);
+        //Si le type de la condition est null ou n'est pas boolean, on jette une ContextualError
+        if (type_cond != null && type_cond.isBoolean()) setType(type_cond);
+        else{
+            throw new ContextualError("la condition doit être booléan", getLocation());
+        }
+        setType(compiler.environmentType.BOOLEAN);
     }
 
     /**
@@ -173,37 +198,52 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     protected void codeGenPrint(DecacCompiler compiler) throws CodeGenError {
         this.codeGenInst(compiler);
+        LOG.debug("[AbstractExpr][codeGenPrint]Method has been visited wity type " + this.getType());
         if(getType() == compiler.environmentType.INT){
+            LOG.debug("[AbstractExpr][codeGenPrint] Priting an int");
             compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
             compiler.addInstruction(new WINT());
         }
         else if(getType() == compiler.environmentType.FLOAT){
+            LOG.debug("[AbstractExpr][codeGenPrint] Priting an flaot");
             compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
-            compiler.addInstruction(new WFLOAT());
+            if(!(compiler.isPrintHex()))
+                compiler.addInstruction(new WFLOAT());
+            else{
+                compiler.addInstruction(new WFLOATX());
+            }
         }
-        // else if(getType() == compiler.environmentType.BOOLEAN){
-        //     compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
-        //     compiler.addInstruction(new WBOOLEAN());
-            
-        // }
+        else if(getType() == compiler.environmentType.BOOLEAN){
+            //A faire: eliminated this part of the code since it we can not reach it 
+            //due to contextual errors
+            LOG.debug("[AbstractExpr][codeGenPrint] Priting an ");
+            compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
+            compiler.addInstruction(new WINT());
+        }
     }
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
-        //A FAIRE
-        LOG.debug("i have visited abstract expr");
-        System.out.println("i have visited abstract expr");
-        
+        LOG.debug("[Abstractexpr][codeGenInst] I have visited abstract expr");
+        throw new CodeGenError(getLocation(), "[Abstractexpr][codeGenInst]Cette méthode ne doit jamais être appélée");
     }
 
+    /**
+     * Cette méthodes est utilisé par les literaux et les indentificateur à fin de mettre leur valeur 
+     * dans un registre, la méthode loadItemintoRegister est custom à chaque type par exemple pour les indentificateur 
+     * ca cherche les adresses et pour le literaux ca prend leur valeur brute et la positionne dans un registre 
+     */
     protected GPRegister LoadGencode(DecacCompiler compiler) throws CodeGenError {
         GPRegister regReserved = null;
-        if (compiler.getRegisterManagement().isThereAnAvaliableRegsiterSup2()){
+        if (compiler.getRegisterManagement().areThereAnAvaliableRegsiterSup2()){
             regReserved = compiler.getRegisterManagement().getAnEmptyStableRegisterAndReserveIt(); 
-            
+            assert(regReserved !=null );
+            LOG.debug("[Abstractexpr][LoadGencode]  Reserving an non empty register with the name " + regReserved);
         }
         else{
             regReserved = compiler.getRegisterManagement().getAUsedStableRegisterAndKeepItReserved(); 
+            assert(regReserved !=null );
+            LOG.debug("[Abstractexpr][LoadGencode]  Reserving an used register with the name " + regReserved);
             compiler.addInstruction(new PUSH(regReserved));
             this.getRegisterToPop().push(regReserved);
         }
@@ -212,7 +252,7 @@ public abstract class AbstractExpr extends AbstractInst {
     }
     
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister regReserved) throws CodeGenError {
-        throw new CodeGenError("This method should not be called at this level, loadItemintoRegister");
+        throw new CodeGenError(getLocation(), "[AbstractExpr] This method should not be called at this level, loadItemintoRegister");
     }
 
     

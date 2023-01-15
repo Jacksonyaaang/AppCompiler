@@ -17,16 +17,18 @@ import java.io.PrintStream;
  */
 public class NoOperation extends AbstractInst {
 
+
+
     @Override
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
-        throw new UnsupportedOperationException("not yet implemented");
+        //A FAIRE : investiger cette methode
+        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override

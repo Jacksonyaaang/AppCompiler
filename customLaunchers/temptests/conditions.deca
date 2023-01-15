@@ -1,23 +1,19 @@
-// Description:
-//    Programme minimaliste qui test la partie A du language sans object.
-//
-// Resultats:
-//    Programme syntaxiquement correct
-//
-// Historique:
-//    cree le 08/01/2023
 
 {
- print(5);
-print(x,y);
-    if (i == 5){
+    int i = 4 ;
+    if (i = 5){
         print("hi");
-    
-}
+    }
+    else if (5 <= 10) {
+        print("hi");
+    }
+    else if (7 <= 10){
+        print("hi");
+    }
     else {
         print("hi");
     }
-
 }
+
 
 

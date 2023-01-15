@@ -1,0 +1,380 @@
+	TSTO #6
+	BOV stack_overflow_error
+	TSTO #6
+; start main program
+; Main program
+; Beginning of main instructions:
+	LOAD #1, R2	; loading true into memory
+	STORE R2, 1(GB)	; Initializing the variable b1 and loading it into memory
+	LOAD #0, R2	; loading false into memory
+	STORE R2, 2(GB)	; Initializing the variable b2 and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 3(GB)	; Initializing the variable i and loading it into memory
+	LOAD #2, R2	; loading 2 into memory
+	STORE R2, 4(GB)	; Initializing the variable x and loading it into memory
+	LOAD #1, R2	; loading 1 into memory
+	STORE R2, 5(GB)	; Initializing the variable y and loading it into memory
+	LOAD #3, R2	; loading 3 into memory
+	STORE R2, 6(GB)	; Initializing the variable z and loading it into memory
+	LOAD #1, R2	; loading true into memory
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else1
+	WSTR "true is true "
+	WNL
+	BRA end_ifthenelse_1
+else1:
+	WSTR "true is false "
+	WNL
+end_ifthenelse_1:
+	LOAD 1(GB), R2	; loading b1 into memory
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else2
+	WSTR "b1=true is true"
+	WNL
+	BRA end_ifthenelse_2
+else2:
+end_ifthenelse_2:
+	LOAD 1(GB), R2	; loading b1 into memory
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_1	; [AND] checking if the first element is false
+	LOAD 1(GB), R3	; loading b1 into memory
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id1	; [AND] checking if the first element is true
+End_And_False_Id_1:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+AND_Success_id1:
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else3
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #1000, R3	; loading 1000 into memory
+	ADD R3, R2
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_3
+else3:
+end_ifthenelse_3:
+	LOAD 1(GB), R2	; loading b1 into memory
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_2	; [AND] checking if the first element is false
+	LOAD 2(GB), R3	; loading b2 into memory
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id2	; [AND] checking if the first element is true
+End_And_False_Id_2:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+AND_Success_id2:
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else4
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #100, R3	; loading 100 into memory
+	ADD R3, R2
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_4
+else4:
+end_ifthenelse_4:
+	LOAD 2(GB), R2	; loading b2 into memory
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_3	; [AND] checking if the first element is false
+	LOAD 1(GB), R3	; loading b1 into memory
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id3	; [AND] checking if the first element is true
+End_And_False_Id_3:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+AND_Success_id3:
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else5
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #10, R3	; loading 10 into memory
+	ADD R3, R2
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_5
+else5:
+end_ifthenelse_5:
+	LOAD 2(GB), R2	; loading b2 into memory
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_4	; [AND] checking if the first element is false
+	LOAD 2(GB), R3	; loading b2 into memory
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id4	; [AND] checking if the first element is true
+End_And_False_Id_4:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+AND_Success_id4:
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else6
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #1, R3	; loading 1 into memory
+	ADD R3, R2
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_6
+else6:
+end_ifthenelse_6:
+	WSTR "b1&&b2[ "
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD R2, R1
+	WINT
+	WSTR "/1111 ]"
+	WNL
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 3(GB)	;  Assiging a value to i
+	LOAD 1(GB), R2	; loading b1 into memory
+	CMP #1, R2	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_5	; [Or] checking if the first element is false
+	LOAD 1(GB), R3	; loading b1 into memory
+	CMP #0, R3	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_5	; [OR] checking if the second element is true 
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
+End_Or_Id_5:
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else7
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #1000, R3	; loading 1000 into memory
+	ADD R3, R2
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_7
+else7:
+end_ifthenelse_7:
+	LOAD 1(GB), R2	; loading b1 into memory
+	CMP #1, R2	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_6	; [Or] checking if the first element is false
+	LOAD 2(GB), R3	; loading b2 into memory
+	CMP #0, R3	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_6	; [OR] checking if the second element is true 
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
+End_Or_Id_6:
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else8
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #100, R3	; loading 100 into memory
+	ADD R3, R2
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_8
+else8:
+end_ifthenelse_8:
+	LOAD 2(GB), R2	; loading b2 into memory
+	CMP #1, R2	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_7	; [Or] checking if the first element is false
+	LOAD 1(GB), R3	; loading b1 into memory
+	CMP #0, R3	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_7	; [OR] checking if the second element is true 
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
+End_Or_Id_7:
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else9
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #10, R3	; loading 10 into memory
+	ADD R3, R2
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_9
+else9:
+end_ifthenelse_9:
+	LOAD 2(GB), R2	; loading b2 into memory
+	CMP #1, R2	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_8	; [Or] checking if the first element is false
+	LOAD 2(GB), R3	; loading b2 into memory
+	CMP #0, R3	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_8	; [OR] checking if the second element is true 
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
+End_Or_Id_8:
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else10
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #1, R3	; loading 1 into memory
+	ADD R3, R2
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_10
+else10:
+end_ifthenelse_10:
+	WSTR "b1||b2[ "
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD R2, R1
+	WINT
+	WSTR "/1111 ]"
+	WNL
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 3(GB)	;  Assiging a value to i
+	LOAD 4(GB), R2	; loading x into memory
+	CMP 5(GB), R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else11
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #1000, R3	; loading 1000 into memory
+	ADD R3, R2
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_11
+else11:
+end_ifthenelse_11:
+	LOAD 4(GB), R2	; loading x into memory
+	CMP 5(GB), R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else12
+	LOAD #1, R2	; loading true into memory
+	STORE R2, 1(GB)	;  Assiging a value to b1
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #100, R3	; loading 100 into memory
+	ADD R3, R2
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_12
+else12:
+end_ifthenelse_12:
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 5(GB)	;  Assiging a value to y
+	LOAD #1, R2	; loading 1 into memory
+	STORE R2, 4(GB)	;  Assiging a value to x
+	LOAD 4(GB), R2	; loading x into memory
+	CMP 5(GB), R2	; Comparing registers for GreaterOrEqual operation 
+	SGE R2	; Placing GreaterOrEqual result into the register  
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else13
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #10, R3	; loading 10 into memory
+	ADD R3, R2
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_13
+else13:
+end_ifthenelse_13:
+	LOAD 5(GB), R2	; loading y into memory
+	CMP 4(GB), R2	; Comparing registers for LowerOrEqual operation 
+	SLE R2	; Placing LowerOrEqual result into the register  
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else14
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #1, R3	; loading 1 into memory
+	ADD R3, R2
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_14
+else14:
+end_ifthenelse_14:
+	WSTR "x(greater/lower)y[ "
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD R2, R1
+	WINT
+	WSTR "/1111 ]"
+	WNL
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 3(GB)	;  Assiging a value to i
+	LOAD 4(GB), R2	; loading x into memory
+	LOAD 5(GB), R3	; loading y into memory
+	ADD 6(GB), R3
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_10	; [AND] checking if the first element is false
+	LOAD 1(GB), R3	; loading b1 into memory
+	CMP #1, R3	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_11	; [Or] checking if the first element is false
+	LOAD 2(GB), R4	; loading b2 into memory
+	CMP #0, R4	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_11	; [OR] checking if the second element is true 
+	LOAD #1, R3	; Or is true , We place the value 1 in the return Register
+End_Or_Id_11:
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id10	; [AND] checking if the first element is true
+End_And_False_Id_10:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+AND_Success_id10:
+	CMP #1, R2	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_9	; [Or] checking if the first element is false
+	LOAD 2(GB), R3	; loading b2 into memory
+	CMP #0, R3	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_9	; [OR] checking if the second element is true 
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
+End_Or_Id_9:
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else15
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #100, R3	; loading 100 into memory
+	ADD R3, R2
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_15
+else15:
+end_ifthenelse_15:
+	LOAD 4(GB), R2	; loading x into memory
+	CMP 6(GB), R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else16
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #10, R3	; loading 10 into memory
+	ADD R3, R2
+	STORE R2, 3(GB)	;  Assiging a value to i
+	BRA end_ifthenelse_16
+else16:
+end_ifthenelse_16:
+	LOAD 4(GB), R2	; loading x into memory
+	CMP 6(GB), R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else17
+	BRA end_ifthenelse_17
+else17:
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD #1, R3	; loading 1 into memory
+	ADD R3, R2
+	STORE R2, 3(GB)	;  Assiging a value to i
+end_ifthenelse_17:
+	WSTR "comparaison plus complexes[ "
+	LOAD 3(GB), R2	; loading i into memory
+	LOAD R2, R1
+	WINT
+	WSTR "/111 ]"
+	WNL
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 3(GB)	;  Assiging a value to i
+	HALT
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

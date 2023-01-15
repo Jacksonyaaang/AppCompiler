@@ -4,9 +4,14 @@ import java.util.HashMap;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import fr.ensimag.ima.pseudocode.instructions.WNL;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.ERROR;
+import org.apache.log4j.Logger;
+
 
 public class ListError {
+    private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
+
     //list[0]:statut de stack_overflow_error
     //list[1]:statut de overflow_error
     //list[2]:statut de io_error
@@ -31,20 +36,22 @@ public class ListError {
 
     }
 
-    public void Active_Stack_Overflow_Error(String err_name){
+    public void activeError(String err_name){
         if(!this.list.containsKey(err_name)){
             throw new IllegalArgumentException("le nom "+ err_name +" ne correspond à aucune erreur existante\n");
         }
         else{
+            LOG.debug("ERROR is being made to value true " + err_name );
             this.list.replace(err_name, true);
         }
     }
 
 
-    public void WriteListError(DecacCompiler compiler){
+    public void writeListError(DecacCompiler compiler){
         for(Map.Entry<String, Boolean> set : list.entrySet()){
             if(set.getValue()){
-                compiler.addInstruction(new WSTR(set.getKey()));
+                compiler.addLabel(new Label(set.getKey()));
+                compiler.addInstruction(new WSTR("Error: " +set.getKey()));
                 compiler.addInstruction(new WNL());
                 compiler.addInstruction(new ERROR());
             }

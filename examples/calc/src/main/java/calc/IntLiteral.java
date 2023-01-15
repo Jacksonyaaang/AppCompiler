@@ -8,7 +8,7 @@ public class IntLiteral extends AbstractExpr {
     }
 
     @Override
-    public int getValue() {
+    public int value() {
         return value;
     }
 

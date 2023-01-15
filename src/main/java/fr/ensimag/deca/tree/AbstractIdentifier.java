@@ -105,7 +105,7 @@ public abstract class AbstractIdentifier extends AbstractLValue {
 
     @Override
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister regReserved) throws CodeGenError {
-        throw new CodeGenError("This method should not be called at this level, loadItemintoRegister");
+        throw new CodeGenError(getLocation(), "This method should not be called at this level, loadItemintoRegister");
     }
 
 }
