@@ -28,15 +28,6 @@ import org.apache.log4j.Logger;
 public abstract class AbstractBinaryExpr extends AbstractExpr {
 
     private Boolean workWithFloats = false;
-    private Boolean convNeeded = false;
-
-    public Boolean getConvNeeded() {
-        return convNeeded;
-    }
-
-    public void setConvNeeded(Boolean convNeeded) {
-        this.convNeeded = convNeeded;
-    }
 
     public Boolean getWorkWithFloats() {
         return workWithFloats;

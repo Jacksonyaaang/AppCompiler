@@ -27,19 +27,18 @@ public class MethodBody extends AbstractMethodBody {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        // TODO Auto-generated method stub
         
     }
 
     @Override
-    protected void prettyPrintChildren(PrintStream s, String prefix) {
-        // TODO Auto-generated method stub
-        
+    protected void prettyPrintChildren(PrintStream s, String prefix) { 
+        listVar.prettyPrint(s, prefix, false);
+        listInstructions.prettyPrint(s, prefix, true);
     }
 
     @Override
     protected void iterChildren(TreeFunction f) {
-        // TODO Auto-generated method stub
-        
+        listVar.iter(f);
+        listInstructions.iter(f);
     }
 }

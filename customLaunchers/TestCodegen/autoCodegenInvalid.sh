@@ -13,7 +13,7 @@ THUMBS_UP='\U1F44D'
 SMILE='\U1F60E' 
 SCR='\U1F631'
 GREENFOND="\e[42m"
-echo -e "${GREENFOND} AUTO valide codegen TEST START : ${ENDCOLOR} \n" 
+echo -e "${GREENFOND} AUTO valide codegen invalide TEST START : ${ENDCOLOR} \n" 
 
 test_codegen_invalid (){
     # echo decac "$1"

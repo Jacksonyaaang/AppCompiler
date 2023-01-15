@@ -39,7 +39,7 @@ public class DeclField extends AbstractDeclField {
     }
 
     public Visibility getVisibility() { return visibility; }
-    
+
     public AbstractIdentifier getType() { return type; }
 
     public AbstractIdentifier getVarName() { return varName; }
@@ -67,6 +67,7 @@ public class DeclField extends AbstractDeclField {
     
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {
+        // A FAIRE, INTEGRATE VISIBILITY INTO THE OUTPUT
         type.prettyPrint(s, prefix, false);
         varName.prettyPrint(s, prefix, false);
         initialization.prettyPrint(s, prefix, true);

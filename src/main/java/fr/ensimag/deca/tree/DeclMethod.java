@@ -76,7 +76,7 @@ public class DeclMethod extends AbstractDeclMethod {
     protected void prettyPrintChildren(PrintStream s, String prefix) {
         type.prettyPrint(s, prefix, false);
         methodName.prettyPrint(s, prefix, false);
-        listParam.prettyPrint(s, prefix, true);
+        listParam.prettyPrint(s, prefix, false);
         methodBody.prettyPrint(s, prefix, true);
     }
 }

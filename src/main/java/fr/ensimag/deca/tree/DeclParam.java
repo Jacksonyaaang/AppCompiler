@@ -54,18 +54,14 @@ public class DeclParam extends AbstractDeclParam {
     @Override
     protected
     void iterChildren(TreeFunction f) {
-        // A FAIRE
-        // type.iter(f);
-        // varName.iter(f);
-        // initialization.iter(f);
+        type.iter(f);
+        paramName.iter(f);
     }
     
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {
-        //A FAIRE
-        // type.prettyPrint(s, prefix, false);
-        // varName.prettyPrint(s, prefix, false);
-        // initialization.prettyPrint(s, prefix, true);
+        type.prettyPrint(s, prefix, false);
+        paramName.prettyPrint(s, prefix, true);
     }
 }
 
