@@ -13,6 +13,17 @@ import java.io.PrintStream;
  * @date 01/01/2023
  */
 public class DeclClass extends AbstractDeclClass {
+    protected final AbstractIdentifier name ;
+    protected final AbstractIdentifier superClass; 
+    protected final ListDeclField fields;
+    protected final ListDeclMethod methods;
+
+    public DeclClass(AbstractIdentifier name, AbstractIdentifier superClass, ListDeclField fields, ListDeclMethod methods) {
+        this.name = name ;
+        this.superClass = superClass; 
+        this.fields = fields;
+        this.methods = methods;
+    }
 
     @Override
     public void decompile(IndentPrintStream s) {

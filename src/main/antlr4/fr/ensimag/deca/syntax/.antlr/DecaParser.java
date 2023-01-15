@@ -2527,7 +2527,7 @@ public class DecaParser extends AbstractDecaParser {
 				{
 				setState(462);
 				((List_classesContext)_localctx).c1 = class_decl();
-				 // A FAIRE, ajoute des classes declare
+				 
 				        
 				}
 				}

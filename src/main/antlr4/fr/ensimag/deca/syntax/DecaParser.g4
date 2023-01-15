@@ -525,7 +525,7 @@ list_classes returns[ListDeclClass tree]
             $tree = new ListDeclClass();
         }
     :
-      (c1=class_decl { // A FAIRE, ajoute des classes declare
+      (c1=class_decl { 
         }
       )*
     ;
