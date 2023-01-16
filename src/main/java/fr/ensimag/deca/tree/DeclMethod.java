@@ -82,7 +82,7 @@ public class DeclMethod extends AbstractDeclMethod {
         listParam.prettyPrint(s, prefix, false);
         methodBody.prettyPrint(s, prefix, true);
     }
-
+    /**for the seconde passe  */
     @Override
     protected void verifyDeclMethodSimple(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
@@ -93,8 +93,9 @@ public class DeclMethod extends AbstractDeclMethod {
 
         Signature signature=this.listParam.verifyListDeclParam(compiler, localEnv, currentClass);
         
-        //index : pas traité !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        MethodDefinition methodDef = new MethodDefinition(typeReturn, getLocation(), signature, 0);
+        currentClass.incNumberOfMethods();
+        int index = currentClass.getNumberOfMethods();  //already increase the number of methods
+        MethodDefinition methodDef = new MethodDefinition(typeReturn, getLocation(), signature, index);
         methodName.setDefinition(methodDef);
         //pour insérer le nom de méthode dans l'environement local
         try {
