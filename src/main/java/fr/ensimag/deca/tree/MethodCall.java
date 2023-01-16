@@ -45,12 +45,12 @@ public class MethodCall extends AbstractExpr {
     @Override
     public void decompile(IndentPrintStream s) {
         LOG.debug("[MethodCall][decompile] decompile entry");
-        String str = getObj().decompile();
-        s.print(str);
-        if(str == ""){
+
+        if(getObj().isImplicit()){
             LOG.debug("[MethodCall][decompile] ifthenelse condition entry");
         }
         else {
+            getObj().decompile(s);
             s.print(".");
         }
         getMethode().decompile(s);

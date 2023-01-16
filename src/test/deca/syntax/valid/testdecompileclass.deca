@@ -17,6 +17,11 @@ class B extends A{
         this.y = y;
         this.x = x;
     }
+    int getX() {
+        return 2*x ;
+        y = getX(x);
+        y = this.getX();
+    }
 }
 
 {
@@ -26,7 +31,7 @@ class B extends A{
     A a2 = (A) (b2);
 
     if(a2 instanceof A){print("true");}
-
+    b.getX();
     a.setX(1) ;
     b.setYAndX(5,2);
     println("a.getX() = ", a.getX()) ;

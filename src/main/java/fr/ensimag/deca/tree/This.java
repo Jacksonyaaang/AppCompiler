@@ -13,7 +13,13 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 
 public class This extends AbstractExpr{
 
-    protected boolean bool ; 
+    protected boolean bool ;
+
+    @Override
+    boolean isImplicit() {
+        return bool;
+    }
+
 
     public This(boolean bool){
         this.bool = bool;
