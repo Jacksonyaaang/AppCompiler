@@ -1,0 +1,15 @@
+// Description:
+//    tests de non-terminal 'inst' ne manque le 'equal'.
+//
+// Resultats:
+//    Ligne 10 : Erreur de syntaxe.
+//
+// Historique:
+//    cree le 01/01/2023
+
+// Un exemple de programme Deca
+{
+    int a =6;
+    printlnx(   ;
+
+}

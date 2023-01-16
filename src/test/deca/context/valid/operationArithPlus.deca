@@ -1,0 +1,19 @@
+// Description:
+//    operations arithmetiques addition.
+//
+// Historique:
+//    cree le 13/01/2023
+{
+	int aI = 0;
+	int bI = 1;
+	float aF = 1.5;
+	float bF = 2.5;
+	//operation entre deux entiers
+	aI = aI + bI;
+	//operation entre deux floats
+	aF = aF + bF;
+	//operations entre un int et un float
+	aF = aF + aI;
+	//operation entre un float et un int
+	aF = aI + aF;
+}

@@ -1,0 +1,13 @@
+// Description:
+//    Teste la déclaration de variable sans indiquer de nom de variable.
+//
+// Resultats:
+//    Ligne 12: L'identificateur int n'est pas défini.
+//
+// Historique:
+//    cree le 13/01/2023
+
+{
+// Doit être refusé.
+int  = 5;
+}

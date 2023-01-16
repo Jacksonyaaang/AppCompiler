@@ -1,0 +1,28 @@
+// Description:
+//    Test la géneration et l'éxecution du code assembleur 
+//    pour les instructions readInt et readFloat
+// 	  TEST PARTIE C / Sans objet
+// Resultats:
+
+// Historique:
+//    cree le 01/01/2023
+
+{
+    int x;
+    int y=3;
+    float f1;
+    float f2=3.0;
+    print("x = ");
+    x=readInt();
+    println();
+    print("y = ");
+    y=readInt();
+    print("f1 = ");
+    f1=readFloat();
+    print("f2 = ");
+    f2=readFloat();
+    println(x);
+    println(y);
+    println(f1);
+    println(f2);
+}
