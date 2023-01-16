@@ -66,9 +66,10 @@ public class DeclParam extends AbstractDeclParam {
 
 
     @Override
-    protected void verifyDeclParam(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
+    protected Type verifyDeclParam(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
         // TODO Auto-generated method stub
+        return null;  //il faut le 'type' comme la type de return pour charger la signature 
         
     }
 

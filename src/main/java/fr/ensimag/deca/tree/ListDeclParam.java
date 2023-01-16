@@ -5,6 +5,7 @@ import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import org.apache.log4j.Logger;
 
@@ -29,12 +30,14 @@ public class ListDeclParam extends TreeList<AbstractDeclParam> {
         }
     }
 
-    void verifyListDeclParam(DecacCompiler compiler, EnvironmentExp localEnv,
+    public Signature verifyListDeclParam(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
             LOG.debug("[ListDeclParam][verifyListDeclParam]");
+        Signature signature = new Signature();
         for (AbstractDeclParam declParam : getList()){
-            declParam.verifyDeclParam(compiler, localEnv, currentClass);
+            signature.add(declParam.verifyDeclParam(compiler, localEnv, currentClass));
         }
+        return signature;
     }
 }
 
