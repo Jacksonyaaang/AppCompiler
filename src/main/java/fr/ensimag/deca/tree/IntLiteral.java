@@ -37,7 +37,7 @@ public class IntLiteral extends AbstractExpr {
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{   
         LOG.debug("[IntLiteral][codeGenInst] generating code for int literal value " + getValue());
-        this.setRegisterDeRetour(this.LoadGencode(compiler));
+        this.setRegisterDeRetour(this.LoadGencode(compiler, true));
     }
 
     @Override
@@ -55,13 +55,6 @@ public class IntLiteral extends AbstractExpr {
         setType(compiler.environmentType.INT);
         return getType();
     }
-
-    // //victor
-    // @Override
-    // protected void codeGenPrint(DecacCompiler compiler) {
-    //     compiler.addInstruction(new LOAD(value,Register.getR(1)));
-    //     compiler.addInstruction(new WINT());
-    // }
 
 
     @Override

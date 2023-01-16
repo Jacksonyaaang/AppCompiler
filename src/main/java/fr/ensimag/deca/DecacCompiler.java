@@ -59,7 +59,6 @@ public class DecacCompiler {
         super();
         this.compilerOptions = compilerOptions;
         this.source = source;
-        registerManagement = new RegisterMangementUnit(compilerOptions.getNumberOfRegisters());
     }
 
     /**
@@ -207,6 +206,7 @@ public class DecacCompiler {
         PrintStream out = System.out;
         LOG.debug("Compiling file " + sourceFile + " to assembly file " + destFile);
         try {
+            registerManagement = new RegisterMangementUnit(compilerOptions.getNumberOfRegisters());
             return doCompile(sourceFile, destFile, out, err);
         } catch (LocationException e) {
             e.display(err);
@@ -246,7 +246,7 @@ public class DecacCompiler {
             PrintStream out, PrintStream err)
             throws DecacFatalError, LocationException, CodeGenError {
         AbstractProgram prog = doLexingAndParsing(sourceName, err);
-
+        
         if (prog == null) {
             LOG.info("Parsing failed");
             return true;

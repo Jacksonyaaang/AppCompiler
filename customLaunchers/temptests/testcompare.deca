@@ -1,5 +1,0 @@
-{
-int a = 0;
-boolean b = false;
-boolean c = b && a;
-}

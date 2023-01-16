@@ -9,6 +9,7 @@ import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.BNE;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
@@ -27,17 +28,16 @@ public class And extends AbstractOpBool {
     
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{ 
-        //A FAIRE, optimisation du code de la boucle if   
         super.setBoolOpIdentifier(compiler.getStackManagement().incrementOpBoolIncrementer());
-        LOG.debug("[And][codeGenInst] Working on And boolean operation ");
+        LOG.debug("[And][codeGenInst] Working on And boolean operation Location ="+ getLocation());
         LOG.debug("[And][codeGenInst] Exploring Left");
+        compiler.addComment("--------StartAND--------"+getLocation()+"-----");
         getLeftOperand().codeGenInst(compiler);
         LOG.debug("Left register " + getLeftOperand().getRegisterDeRetour());
         compiler.addInstruction(new CMP(new ImmediateInteger(0), getLeftOperand().getRegisterDeRetour()), 
                                         "[AND]Comparing in the left branch ");
         compiler.addInstruction(new BEQ(new Label("End_And_False_Id_" +super.getBoolOpIdentifier() )), 
                                         "[AND] checking if the first element is false");
-
         getRightOperand().codeGenInst(compiler);
         if (getRightOperand().getRegisterDeRetour() != getLeftOperand().getRegisterDeRetour()){
             LOG.debug("[And][codeGenInst] Exploring Right");
@@ -47,15 +47,20 @@ public class And extends AbstractOpBool {
                             "[AND] checking if the first element is true");
             compiler.addLabel(new Label("End_And_False_Id_" +super.getBoolOpIdentifier()));
             compiler.addInstruction(new LOAD(new ImmediateInteger(0), getLeftOperand().getRegisterDeRetour()), "And is false, We place the value 0 in the return Register");
+            compiler.addInstruction(new BRA(new Label("QUIT_AND_Called_When_Fail_id" +super.getBoolOpIdentifier())), 
+                                    "[AND] Branch will be used in the case when the left operand is false"+
+                                    "in order to avoir poping pushing operations relate to right operand");
             compiler.addLabel(new Label("AND_Success_id" +super.getBoolOpIdentifier()));
+            getRightOperand().popRegisters(compiler);
+            compiler.addLabel(new Label("QUIT_AND_Called_When_Fail_id" +super.getBoolOpIdentifier()));
         }
         else{
             throw new CodeGenError(getLocation(), "Should never have equal registers with this approch; this must never be called");
         }
         this.setRegisterDeRetour(getLeftOperand().getRegisterDeRetour());
-        getRightOperand().popRegisters(compiler);
         this.transferPopRegisters(getLeftOperand().getRegisterToPop());
         compiler.getRegisterManagement().decrementOccupationRegister(getRightOperand().getRegisterDeRetour());
+        compiler.addComment("--------EndAND--------"+getLocation()+"-----");
     }
 
 

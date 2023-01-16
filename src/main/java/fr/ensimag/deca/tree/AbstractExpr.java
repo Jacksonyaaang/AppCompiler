@@ -48,6 +48,9 @@ public abstract class AbstractExpr extends AbstractInst {
     public void setRegisterDeRetour(GPRegister registerDeRetour) {
         this.registerDeRetour = registerDeRetour;
     }
+
+
+
     /**
      * Cette structure de donnée stocke la liste des registeurs dans un ordre temporel
      * qui seront retournée
@@ -57,6 +60,13 @@ public abstract class AbstractExpr extends AbstractInst {
     public Stack<GPRegister> getRegisterToPop() {
         return registerToPop;
     }
+
+    public void emptyRegisterToPop() {
+        while(registerToPop.size() != 0){
+            registerToPop.pop();    
+        }    
+    }
+
 
     public void transferPopRegisters(Stack<GPRegister> stackToCopy){
         Stack<GPRegister> tempStack = new Stack<GPRegister>();
@@ -79,7 +89,13 @@ public abstract class AbstractExpr extends AbstractInst {
 
     public void popRegisters(DecacCompiler compiler) {
         while (registerToPop.size() != 0){
-            compiler.addInstruction(new POP(registerToPop.pop()));;
+            compiler.addInstruction(new POP(registerToPop.pop()));
+        }
+    }
+
+    public void printPopRegisters(DecacCompiler compiler) {
+        for (GPRegister register : registerToPop){
+            LOG.debug("[AbstractExpr][printPopRegisters] PopRegister contains "+ register);
         }
     }
 
@@ -198,6 +214,9 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     protected void codeGenPrint(DecacCompiler compiler) throws CodeGenError {
         this.codeGenInst(compiler);
+        /* this
+        */
+        this.emptyRegisterToPop();
         LOG.debug("[AbstractExpr][codeGenPrint]Method has been visited wity type " + this.getType());
         if(getType() == compiler.environmentType.INT){
             LOG.debug("[AbstractExpr][codeGenPrint] Priting an int");
@@ -205,7 +224,7 @@ public abstract class AbstractExpr extends AbstractInst {
             compiler.addInstruction(new WINT());
         }
         else if(getType() == compiler.environmentType.FLOAT){
-            LOG.debug("[AbstractExpr][codeGenPrint] Priting an flaot");
+            LOG.debug("[AbstractExpr][codeGenPrint] Priting an float");
             compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
             if(!(compiler.isPrintHex()))
                 compiler.addInstruction(new WFLOAT());
@@ -214,7 +233,7 @@ public abstract class AbstractExpr extends AbstractInst {
             }
         }
         else if(getType() == compiler.environmentType.BOOLEAN){
-            //A faire: eliminated this part of the code since it we can not reach it 
+            //this code is useless since we can not reach it 
             //due to contextual errors
             LOG.debug("[AbstractExpr][codeGenPrint] Priting an ");
             compiler.addInstruction(new LOAD(this.registerDeRetour, Register.getR(1)));
@@ -233,7 +252,7 @@ public abstract class AbstractExpr extends AbstractInst {
      * dans un registre, la méthode loadItemintoRegister est custom à chaque type par exemple pour les indentificateur 
      * ca cherche les adresses et pour le literaux ca prend leur valeur brute et la positionne dans un registre 
      */
-    protected GPRegister LoadGencode(DecacCompiler compiler) throws CodeGenError {
+    protected GPRegister LoadGencode(DecacCompiler compiler, boolean loadItemintoRegister) throws CodeGenError {
         GPRegister regReserved = null;
         if (compiler.getRegisterManagement().areThereAnAvaliableRegsiterSup2()){
             regReserved = compiler.getRegisterManagement().getAnEmptyStableRegisterAndReserveIt(); 
@@ -247,7 +266,9 @@ public abstract class AbstractExpr extends AbstractInst {
             compiler.addInstruction(new PUSH(regReserved));
             this.getRegisterToPop().push(regReserved);
         }
-        this.loadItemintoRegister(compiler, regReserved);
+        if (loadItemintoRegister){
+            this.loadItemintoRegister(compiler, regReserved);
+        }
         return regReserved;
     }
     
@@ -274,21 +295,5 @@ public abstract class AbstractExpr extends AbstractInst {
         }
     }
 
-    public Boolean checkIfExprIsTerminal(AbstractExpr expr){
-        if (expr instanceof Identifier){
-            return true;
-        }
-        else if (expr instanceof BooleanLiteral ){
-            return true;
-        }
-        else if (expr instanceof FloatLiteral){
-            return true;
-        }
-        else if (expr instanceof IntLiteral){
-            return true;
-        }
-        return false;
-
-    }
     
 }

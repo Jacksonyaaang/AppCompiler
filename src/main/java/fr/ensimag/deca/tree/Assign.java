@@ -7,6 +7,7 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
+import net.bytebuddy.description.type.TypeDescription.Generic.Visitor.Assigner;
 import fr.ensimag.deca.codegen.CodeGenError;
 import org.apache.log4j.Logger;
 import fr.ensimag.deca.DecacCompiler;
@@ -44,7 +45,14 @@ public class Assign extends AbstractBinaryExpr {
 
     @Override
     public void codeGenInst(DecacCompiler compiler) throws CodeGenError {
+            //Avec deux register il n'y a pas de risque que le compilateur
+            //avait fait un push de se registre 
+            GPRegister assignRegister = this.LoadGencode(compiler, false);
+            compiler.addComment("--------BeginAssignOp--------"+getLocation()+"-----");    
             this.getRightOperand().codeGenInst(compiler);
+                        LOG.debug("[Assign][codeGenInst]Left is being stored at " + ((Identifier) getLeftOperand()).getExpDefinition().getOperand());
+
+            getRightOperand().printPopRegisters(compiler);
             assert( this.getRightOperand().getRegisterDeRetour() != null);
             LOG.debug("[Assign][codeGenInst]Left is being stored at " + ((Identifier) getLeftOperand()).getExpDefinition().getOperand());
             assert(((Identifier) getLeftOperand()).getExpDefinition().getOperand() != null);
@@ -53,8 +61,13 @@ public class Assign extends AbstractBinaryExpr {
             compiler.addInstruction(new STORE(this.getRightOperand().getRegisterDeRetour(),
                                             ((Identifier) getLeftOperand()).getExpDefinition().getOperand()),                                          
                                             " Assiging a value to " + ((Identifier) getLeftOperand()).getName()); 
-    }
-    
+            compiler.addInstruction(new LOAD(this.getRightOperand().getRegisterDeRetour(),assignRegister),                                          
+                                " Return value of the assignement of ="+ ((Identifier) getLeftOperand()).getName()+ "and storing it into " + assignRegister ); 
+            this.setRegisterDeRetour(assignRegister);
+            getRightOperand().popRegisters(compiler);
+            compiler.getRegisterManagement().decrementOccupationRegister(getRightOperand().getRegisterDeRetour());
+            compiler.addComment("--------EndAssignOp--------"+getLocation()+"-----");
+        }
 
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,

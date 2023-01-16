@@ -38,7 +38,7 @@ public class ReadInt extends AbstractReadExpr {
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError
      {
         LOG.debug("[ReadInt][CodeGenInst] generating code for ReadInt");
-        this.setRegisterDeRetour(this.LoadGencode(compiler));
+        this.setRegisterDeRetour(this.LoadGencode(compiler, true));
         LOG.debug("[ReadInt][codeGenInst] exiting generation method method");
     }
 
@@ -47,8 +47,10 @@ public class ReadInt extends AbstractReadExpr {
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
         assert(reg != null);
         compiler.addInstruction(new RINT());
-        compiler.addInstruction(new BOV(new Label("io_error")));
-        compiler.getErrorManagementUnit().activeError("io_error");
+        if (!(compiler.getCompilerOptions().isNoCheck())) {
+            compiler.addInstruction(new BOV(new Label("io_error")));
+            compiler.getErrorManagementUnit().activeError("io_error");
+        }
         compiler.addInstruction(new LOAD(Register.getR(1), reg));
     }
 

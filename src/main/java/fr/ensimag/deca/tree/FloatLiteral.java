@@ -52,7 +52,7 @@ public class FloatLiteral extends AbstractExpr {
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{   
         LOG.debug("[FloatLiteral][codeGenInst] generating code for int literal value " + getValue());
-        this.setRegisterDeRetour(this.LoadGencode(compiler));
+        this.setRegisterDeRetour(this.LoadGencode(compiler, true));
     }
 
     @Override

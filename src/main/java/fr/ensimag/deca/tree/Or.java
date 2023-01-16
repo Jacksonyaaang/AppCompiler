@@ -26,9 +26,11 @@ public class Or extends AbstractOpBool {
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{    
         super.setBoolOpIdentifier(compiler.getStackManagement().incrementOpBoolIncrementer());
-        LOG.debug("[Or][codeGenInst] Working on Or boolean operation ");
+        LOG.debug("[Or][codeGenInst] Working on Or boolean operation // Location " +getLocation());
         LOG.debug("[Or][codeGenInst] Exploring Left");
         //A FAIRE, optimisation du code de la boucle if
+        compiler.addComment("--------StartOr--------"+getLocation()+"-----");
+        getRightOperand().printPopRegisters(compiler);
         getLeftOperand().codeGenInst(compiler);
         LOG.debug("[Or][codeGenInst] Left register " + getLeftOperand().getRegisterDeRetour());
         compiler.addInstruction(new CMP(new ImmediateInteger(1), getLeftOperand().getRegisterDeRetour()), 
@@ -37,7 +39,7 @@ public class Or extends AbstractOpBool {
                                         "[Or] checking if the first element is false");
         getRightOperand().codeGenInst(compiler);
         if (getRightOperand().getRegisterDeRetour() != getLeftOperand().getRegisterDeRetour()){
-            LOG.debug("[Or][codeGenInst] Exploring Right");
+            LOG.debug("[Or][codeGenInst] Exploring Right, : " +getLocation());
             compiler.addInstruction(new CMP(new ImmediateInteger(0), getRightOperand().getRegisterDeRetour()), 
                                     "[Or]Comparing in the right branch ");
 
@@ -46,16 +48,17 @@ public class Or extends AbstractOpBool {
 
             compiler.addInstruction(new LOAD(new ImmediateInteger(1), getLeftOperand().getRegisterDeRetour()), 
                                     "Or is true , We place the value 1 in the return Register");
-
+            getRightOperand().popRegisters(compiler);
             compiler.addLabel(new Label("End_Or_Id_" +super.getBoolOpIdentifier()));
         }
         else{
             throw new CodeGenError(getLocation(), "Should never have equal registers with this approch; this must never be called");
         }
         this.setRegisterDeRetour(getLeftOperand().getRegisterDeRetour());
-        getRightOperand().popRegisters(compiler);
+        getRightOperand().printPopRegisters(compiler);
         this.transferPopRegisters(getLeftOperand().getRegisterToPop());
         compiler.getRegisterManagement().decrementOccupationRegister(getRightOperand().getRegisterDeRetour());
+        compiler.addComment("--------EndOr--------"+getLocation()+"-----");
     }
 
     

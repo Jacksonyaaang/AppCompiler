@@ -58,7 +58,7 @@ public class DecaParser extends AbstractDecaParser {
 		return new String[] {
 			null, "'{'", "'}'", "'('", "')'", "';'", "','", "'print'", "'println'", 
 			"'printx'", "'printlnx'", "'while'", "'return'", "'if'", "'else'", "'&&'", 
-			"'||'", "'=='", "'!='", "'>='", "'<='", "'>'", "'<'", "'instaceof'", 
+			"'||'", "'=='", "'!='", "'>='", "'<='", "'>'", "'<'", "'instanceof'", 
 			"'+'", "'-'", "'*'", "'/'", "'='", "'%'", "'!'", "'.'", "'readInt'", 
 			"'readFloat'", "'new'", "'true'", "'false'", "'this'", "'null'", "'class'", 
 			"'extends'", "'protected'", "'asm'"
@@ -132,7 +132,10 @@ public class DecaParser extends AbstractDecaParser {
 	    protected Initialization tempInit = null;
 	    protected NoInitialization tempInitNoInit = null;
 	    protected StringBuilder sb = null;  
-
+	    protected AbstractMethodBody body = null;
+	    protected StringLiteral stringAsmBody = null;
+	    protected This thisImplicite = null;        
+	    
 
 	public DecaParser(TokenStream input) {
 		super(input);
@@ -172,7 +175,7 @@ public class DecaParser extends AbstractDecaParser {
 			            assert(((ProgContext)_localctx).list_classes.tree != null);
 			            assert(((ProgContext)_localctx).main.tree != null);
 			            ((ProgContext)_localctx).tree =  new Program(((ProgContext)_localctx).list_classes.tree, ((ProgContext)_localctx).main.tree);
-			            setLocation(_localctx.tree, (((ProgContext)_localctx).main!=null?(((ProgContext)_localctx).main.start):null));
+			            setLocation(_localctx.tree, (((ProgContext)_localctx).list_classes!=null?(((ProgContext)_localctx).list_classes.start):null));
 			        
 			}
 		}
@@ -394,7 +397,6 @@ public class DecaParser extends AbstractDecaParser {
 		public ListDeclVar l;
 		public AbstractIdentifier t;
 		public Decl_varContext dv1;
-		public Decl_varContext decl_var;
 		public Decl_varContext dv2;
 		public List<Decl_varContext> decl_var() {
 			return getRuleContexts(Decl_varContext.class);
@@ -423,11 +425,10 @@ public class DecaParser extends AbstractDecaParser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(101);
-			((List_decl_varContext)_localctx).dv1 = ((List_decl_varContext)_localctx).decl_var = decl_var(_localctx.t);
+			((List_decl_varContext)_localctx).dv1 = decl_var(_localctx.t);
 
-			        assert(((List_decl_varContext)_localctx).dv1.tree != null);
-			        _localctx.l.add(((List_decl_varContext)_localctx).dv1.tree);
-			        setLocation(_localctx.l, (((List_decl_varContext)_localctx).dv1!=null?(((List_decl_varContext)_localctx).dv1.start):null));
+			            assert(((List_decl_varContext)_localctx).dv1.tree != null);
+			            _localctx.l.add(((List_decl_varContext)_localctx).dv1.tree);
 			        
 			setState(109);
 			_errHandler.sync(this);
@@ -438,11 +439,10 @@ public class DecaParser extends AbstractDecaParser {
 				setState(103);
 				match(COMMA);
 				setState(104);
-				((List_decl_varContext)_localctx).dv2 = ((List_decl_varContext)_localctx).decl_var = decl_var(_localctx.t);
+				((List_decl_varContext)_localctx).dv2 = decl_var(_localctx.t);
 
 				            assert(((List_decl_varContext)_localctx).dv2.tree != null);
 				            _localctx.l.add(((List_decl_varContext)_localctx).dv2.tree);
-				            setLocation(_localctx.l, (((List_decl_varContext)_localctx).decl_var!=null?(((List_decl_varContext)_localctx).decl_var.start):null));
 				        
 				}
 				}
@@ -524,9 +524,8 @@ public class DecaParser extends AbstractDecaParser {
 
 			        if (_localctx.tree == null){
 			            tempInitNoInit = new NoInitialization();
-			            //tempInitNoInit.setLocation(((Decl_varContext)_localctx).ident.tree.getLocation());
 			            ((Decl_varContext)_localctx).tree =  new DeclVar(_localctx.t, ((Decl_varContext)_localctx).ident.tree, tempInitNoInit);  
-			        }
+			        }   
 			        setLocation(_localctx.tree, (((Decl_varContext)_localctx).ident!=null?(((Decl_varContext)_localctx).ident.start):null));
 			        
 			}
@@ -807,6 +806,8 @@ public class DecaParser extends AbstractDecaParser {
 				match(SEMI);
 
 				            assert(((InstContext)_localctx).expr.tree != null);
+				            ((InstContext)_localctx).tree =  new Return(((InstContext)_localctx).expr.tree);
+				            setLocation(_localctx.tree, (((InstContext)_localctx).expr!=null?(((InstContext)_localctx).expr.start):null));
 				        
 				}
 				break;
@@ -1141,7 +1142,7 @@ public class DecaParser extends AbstractDecaParser {
 
 				            assert(((Assign_exprContext)_localctx).e.tree != null);
 				            assert(((Assign_exprContext)_localctx).e2.tree != null);
-				            ((Assign_exprContext)_localctx).tree =  new Assign( (Identifier )((Assign_exprContext)_localctx).e.tree, ((Assign_exprContext)_localctx).e2.tree);
+				            ((Assign_exprContext)_localctx).tree =  new Assign( (AbstractLValue) ((Assign_exprContext)_localctx).e.tree, ((Assign_exprContext)_localctx).e2.tree);
 				            setLocation(_localctx.tree, (((Assign_exprContext)_localctx).e!=null?(((Assign_exprContext)_localctx).e.start):null));
 				        
 				}
@@ -1465,6 +1466,7 @@ public class DecaParser extends AbstractDecaParser {
 		public Inequality_exprContext e1;
 		public Sum_exprContext e;
 		public Sum_exprContext e2;
+		public TypeContext type;
 		public Sum_exprContext sum_expr() {
 			return getRuleContext(Sum_exprContext.class,0);
 		}
@@ -1611,11 +1613,12 @@ public class DecaParser extends AbstractDecaParser {
 						setState(313);
 						match(INSTANCEOF);
 						setState(314);
-						type();
+						((Inequality_exprContext)_localctx).type = type();
 
 						                      assert(((Inequality_exprContext)_localctx).e1.tree != null);
-						                      assert(((Inequality_exprContext)_localctx).e2.tree != null);   
-						                      //((Inequality_exprContext)_localctx).tree =  new InstanceOf(((Inequality_exprContext)_localctx).e1.tree, ((Inequality_exprContext)_localctx).e2.tree); //A FAIRE
+						                      assert(((Inequality_exprContext)_localctx).type.tree != null);   
+						                      ((Inequality_exprContext)_localctx).tree =  new InstanceOf(((Inequality_exprContext)_localctx).e1.tree, ((Inequality_exprContext)_localctx).type.tree); 
+						                      setLocation(_localctx.tree, (((Inequality_exprContext)_localctx).e1!=null?(((Inequality_exprContext)_localctx).e1.start):null));
 						                  
 						}
 						break;
@@ -2053,9 +2056,6 @@ public class DecaParser extends AbstractDecaParser {
 
 					                      assert(((Select_exprContext)_localctx).e1.tree != null);
 					                      assert(((Select_exprContext)_localctx).i.tree != null);
-					                      //A FAIRE la fonction selection dans tree voir poly page 69
-					                      //((Select_exprContext)_localctx).tree = Selection(((Select_exprContext)_localctx).e1.tree, ((Select_exprContext)_localctx).i.tree);
-
 					                  
 					setState(392);
 					_errHandler.sync(this);
@@ -2069,16 +2069,17 @@ public class DecaParser extends AbstractDecaParser {
 						setState(388);
 						match(CPARENT);
 
-						                      // we matched "e1.i(args)"
-						                      //assert(((Select_exprContext)_localctx).args.tree != null);
-						                      //A FAIRE
+						                      assert(((Select_exprContext)_localctx).args.tree != null);
+						                      ((Select_exprContext)_localctx).tree = new MethodCall(((Select_exprContext)_localctx).e1.tree, ((Select_exprContext)_localctx).i.tree, ((Select_exprContext)_localctx).args.tree);
+						                      setLocation(_localctx.tree, (((Select_exprContext)_localctx).e1!=null?(((Select_exprContext)_localctx).e1.start):null));
 						                  
 						}
 						break;
 					case 2:
 						{
 
-						                      // we matched "e.i"
+						                          ((Select_exprContext)_localctx).tree = new Selection(((Select_exprContext)_localctx).e1.tree, ((Select_exprContext)_localctx).i.tree);
+						                          setLocation(_localctx.tree, (((Select_exprContext)_localctx).e1!=null?(((Select_exprContext)_localctx).e1.start):null));
 						                  
 						}
 						break;
@@ -2108,11 +2109,14 @@ public class DecaParser extends AbstractDecaParser {
 		public IdentContext ident;
 		public IdentContext m;
 		public List_exprContext args;
+		public List_exprContext list_expr;
 		public ExprContext expr;
 		public Token READINT;
 		public Token READFLOAT;
+		public Token NEW;
 		public Token cast;
 		public TypeContext type;
+		public Token OPARENT;
 		public LiteralContext literal;
 		public IdentContext ident() {
 			return getRuleContext(IdentContext.class,0);
@@ -2172,12 +2176,19 @@ public class DecaParser extends AbstractDecaParser {
 				setState(403);
 				match(OPARENT);
 				setState(404);
-				((Primary_exprContext)_localctx).args = list_expr();
+				((Primary_exprContext)_localctx).args = ((Primary_exprContext)_localctx).list_expr = list_expr();
 				setState(405);
 				match(CPARENT);
 
 				            assert(((Primary_exprContext)_localctx).args.tree != null);
 				            assert(((Primary_exprContext)_localctx).m.tree != null);
+				            // A FAIRE : TESTER CELA  dans la partie contexte et la partie codegen
+				            //On appelle le this d'une maniére implicte dans le cas ou nous 
+				            //sommes dans le bloc de la class
+				            thisImplicite = new This(true);
+				            setLocation(thisImplicite ,(((Primary_exprContext)_localctx).m!=null?(((Primary_exprContext)_localctx).m.start):null));
+				            ((Primary_exprContext)_localctx).tree = new MethodCall(thisImplicite, ((Primary_exprContext)_localctx).m.tree, ((Primary_exprContext)_localctx).list_expr.tree);
+				            setLocation(_localctx.tree, (((Primary_exprContext)_localctx).m!=null?(((Primary_exprContext)_localctx).m.start):null));
 				        
 				}
 				break;
@@ -2231,7 +2242,7 @@ public class DecaParser extends AbstractDecaParser {
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(421);
-				match(NEW);
+				((Primary_exprContext)_localctx).NEW = match(NEW);
 				setState(422);
 				((Primary_exprContext)_localctx).ident = ident();
 				setState(423);
@@ -2240,6 +2251,8 @@ public class DecaParser extends AbstractDecaParser {
 				match(CPARENT);
 
 				            assert(((Primary_exprContext)_localctx).ident.tree != null);
+				            ((Primary_exprContext)_localctx).tree =  new New(((Primary_exprContext)_localctx).ident.tree);
+				            setLocation(_localctx.tree, ((Primary_exprContext)_localctx).NEW);
 				        
 				}
 				break;
@@ -2253,7 +2266,7 @@ public class DecaParser extends AbstractDecaParser {
 				setState(429);
 				match(CPARENT);
 				setState(430);
-				match(OPARENT);
+				((Primary_exprContext)_localctx).OPARENT = match(OPARENT);
 				setState(431);
 				((Primary_exprContext)_localctx).expr = expr();
 				setState(432);
@@ -2261,6 +2274,8 @@ public class DecaParser extends AbstractDecaParser {
 
 				            assert(((Primary_exprContext)_localctx).type.tree != null);
 				            assert(((Primary_exprContext)_localctx).expr.tree != null);
+				            ((Primary_exprContext)_localctx).tree =  new Cast(((Primary_exprContext)_localctx).type.tree, ((Primary_exprContext)_localctx).expr.tree);
+				            setLocation(_localctx.tree, ((Primary_exprContext)_localctx).OPARENT);
 				        
 				}
 				break;
@@ -2332,6 +2347,8 @@ public class DecaParser extends AbstractDecaParser {
 		public Token STRING;
 		public Token TRUE;
 		public Token FALSE;
+		public Token THIS;
+		public Token NULL;
 		public TerminalNode INT() { return getToken(DecaParser.INT, 0); }
 		public TerminalNode FLOAT() { return getToken(DecaParser.FLOAT, 0); }
 		public TerminalNode STRING() { return getToken(DecaParser.STRING, 0); }
@@ -2358,6 +2375,12 @@ public class DecaParser extends AbstractDecaParser {
 				setState(443);
 				((LiteralContext)_localctx).INT = match(INT);
 
+				        try{
+				            Integer.parseInt((((LiteralContext)_localctx).INT!=null?((LiteralContext)_localctx).INT.getText():null));
+				        }
+				        catch (Exception e){
+				            throw new DecaRecognitionException(this, ((LiteralContext)_localctx).INT); //"La valeur de l'entier donnée ne peux pas être codée sur 32 bits"); 
+				        }
 				        ((LiteralContext)_localctx).tree =  new IntLiteral(Integer.parseInt((((LiteralContext)_localctx).INT!=null?((LiteralContext)_localctx).INT.getText():null)));
 				        setLocation(_localctx.tree, ((LiteralContext)_localctx).INT);
 				        
@@ -2369,6 +2392,13 @@ public class DecaParser extends AbstractDecaParser {
 				setState(445);
 				((LiteralContext)_localctx).fd = match(FLOAT);
 
+				        try{
+				            ((LiteralContext)_localctx).tree =  new FloatLiteral(Float.parseFloat((((LiteralContext)_localctx).fd!=null?((LiteralContext)_localctx).fd.getText():null)));
+				            Float.parseFloat((((LiteralContext)_localctx).fd!=null?((LiteralContext)_localctx).fd.getText():null));
+				        }
+				        catch (Throwable e){
+				            throw new DecaRecognitionException(this, ((LiteralContext)_localctx).fd); //"La valeur du float donnée ne peux pas être codée sur 32 bits");
+				        }
 				        ((LiteralContext)_localctx).tree =  new FloatLiteral(Float.parseFloat((((LiteralContext)_localctx).fd!=null?((LiteralContext)_localctx).fd.getText():null)));
 				        setLocation(_localctx.tree, ((LiteralContext)_localctx).fd);
 				        
@@ -2415,8 +2445,10 @@ public class DecaParser extends AbstractDecaParser {
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(453);
-				match(THIS);
-
+				((LiteralContext)_localctx).THIS = match(THIS);
+				        
+				            ((LiteralContext)_localctx).tree =  new This(false);  
+				            setLocation(_localctx.tree, ((LiteralContext)_localctx).THIS);
 				        
 				}
 				break;
@@ -2424,8 +2456,10 @@ public class DecaParser extends AbstractDecaParser {
 				enterOuterAlt(_localctx, 7);
 				{
 				setState(455);
-				match(NULL);
+				((LiteralContext)_localctx).NULL = match(NULL);
 
+				            ((LiteralContext)_localctx).tree =  new Null();  
+				            setLocation(_localctx.tree, ((LiteralContext)_localctx).NULL);
 				        
 				}
 				break;
@@ -2512,7 +2546,10 @@ public class DecaParser extends AbstractDecaParser {
 				{
 				setState(462);
 				((List_classesContext)_localctx).c1 = class_decl();
-				 // A FAIRE, ajoute des classes declare
+				 
+				            assert(((List_classesContext)_localctx).c1.tree != null);
+				            _localctx.tree.add(((List_classesContext)_localctx).c1.tree);
+				            setLocation(_localctx.tree, (((List_classesContext)_localctx).c1!=null?(((List_classesContext)_localctx).c1.start):null));
 				        
 				}
 				}
@@ -2534,8 +2571,12 @@ public class DecaParser extends AbstractDecaParser {
 	}
 
 	public static class Class_declContext extends ParserRuleContext {
+		public AbstractDeclClass tree;
+		public Token CLASS;
 		public IdentContext name;
+		public IdentContext ident;
 		public Class_extensionContext superclass;
+		public Class_bodyContext class_body;
 		public TerminalNode CLASS() { return getToken(DecaParser.CLASS, 0); }
 		public TerminalNode OBRACE() { return getToken(DecaParser.OBRACE, 0); }
 		public Class_bodyContext class_body() {
@@ -2561,18 +2602,24 @@ public class DecaParser extends AbstractDecaParser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(470);
-			match(CLASS);
+			((Class_declContext)_localctx).CLASS = match(CLASS);
 			setState(471);
-			((Class_declContext)_localctx).name = ident();
+			((Class_declContext)_localctx).name = ((Class_declContext)_localctx).ident = ident();
 			setState(472);
 			((Class_declContext)_localctx).superclass = class_extension();
 			setState(473);
 			match(OBRACE);
 			setState(474);
-			class_body();
+			((Class_declContext)_localctx).class_body = class_body();
 			setState(475);
 			match(CBRACE);
 
+			                assert(((Class_declContext)_localctx).name.tree != null);
+			                assert(((Class_declContext)_localctx).superclass.tree != null);
+			                assert(((Class_declContext)_localctx).class_body.fields != null);
+			                assert(((Class_declContext)_localctx).class_body.methods != null);
+			                ((Class_declContext)_localctx).tree =  new DeclClass(((Class_declContext)_localctx).ident.tree, ((Class_declContext)_localctx).superclass.tree, ((Class_declContext)_localctx).class_body.fields, ((Class_declContext)_localctx).class_body.methods );
+			                setLocation(_localctx.tree, ((Class_declContext)_localctx).CLASS);
 			        
 			}
 		}
@@ -2589,6 +2636,7 @@ public class DecaParser extends AbstractDecaParser {
 
 	public static class Class_extensionContext extends ParserRuleContext {
 		public AbstractIdentifier tree;
+		public IdentContext ident;
 		public TerminalNode EXTENDS() { return getToken(DecaParser.EXTENDS, 0); }
 		public IdentContext ident() {
 			return getRuleContext(IdentContext.class,0);
@@ -2612,8 +2660,10 @@ public class DecaParser extends AbstractDecaParser {
 				setState(478);
 				match(EXTENDS);
 				setState(479);
-				ident();
-
+				((Class_extensionContext)_localctx).ident = ident();
+				 
+				            assert(((Class_extensionContext)_localctx).ident.tree != null);
+				            ((Class_extensionContext)_localctx).tree =  ((Class_extensionContext)_localctx).ident.tree;
 				        
 				}
 				break;
@@ -2621,6 +2671,11 @@ public class DecaParser extends AbstractDecaParser {
 				enterOuterAlt(_localctx, 2);
 				{
 
+				            // On n'a pas besoin d'ajouter une location car 
+				            // cette extention se fait par défaut 
+				            // sans input de l'utilisateur
+				            ((Class_extensionContext)_localctx).tree =  new Identifier(this.getDecacCompiler().createSymbol("object")); 
+				            _localctx.tree.setLocation(Location.BUILTIN);
 				        
 				}
 				break;
@@ -2640,6 +2695,8 @@ public class DecaParser extends AbstractDecaParser {
 	}
 
 	public static class Class_bodyContext extends ParserRuleContext {
+		public ListDeclField fields;
+		public ListDeclMethod methods;
 		public Decl_methodContext m;
 		public List<Decl_field_setContext> decl_field_set() {
 			return getRuleContexts(Decl_field_setContext.class);
@@ -2662,6 +2719,10 @@ public class DecaParser extends AbstractDecaParser {
 	public final Class_bodyContext class_body() throws RecognitionException {
 		Class_bodyContext _localctx = new Class_bodyContext(_ctx, getState());
 		enterRule(_localctx, 56, RULE_class_body);
+
+		        ((Class_bodyContext)_localctx).fields =  new ListDeclField();
+		        ((Class_bodyContext)_localctx).methods =  new ListDeclMethod();
+		    
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -2679,13 +2740,15 @@ public class DecaParser extends AbstractDecaParser {
 					setState(485);
 					((Class_bodyContext)_localctx).m = decl_method();
 
+					            assert(((Class_bodyContext)_localctx).m.tree != null);
+					            _localctx.methods.add(((Class_bodyContext)_localctx).m.tree);
 					        
 					}
 					break;
 				case 2:
 					{
 					setState(488);
-					decl_field_set();
+					decl_field_set(_localctx.fields);
 					}
 					break;
 				}
@@ -2708,8 +2771,10 @@ public class DecaParser extends AbstractDecaParser {
 	}
 
 	public static class Decl_field_setContext extends ParserRuleContext {
+		public ListDeclField fields;
 		public VisibilityContext v;
 		public TypeContext t;
+		public TypeContext type;
 		public List_decl_fieldContext list_decl_field() {
 			return getRuleContext(List_decl_fieldContext.class,0);
 		}
@@ -2720,14 +2785,16 @@ public class DecaParser extends AbstractDecaParser {
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
 		}
-		public Decl_field_setContext(ParserRuleContext parent, int invokingState) {
+		public Decl_field_setContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public Decl_field_setContext(ParserRuleContext parent, int invokingState, ListDeclField fields) {
 			super(parent, invokingState);
+			this.fields = fields;
 		}
 		@Override public int getRuleIndex() { return RULE_decl_field_set; }
 	}
 
-	public final Decl_field_setContext decl_field_set() throws RecognitionException {
-		Decl_field_setContext _localctx = new Decl_field_setContext(_ctx, getState());
+	public final Decl_field_setContext decl_field_set(ListDeclField fields) throws RecognitionException {
+		Decl_field_setContext _localctx = new Decl_field_setContext(_ctx, getState(), fields);
 		enterRule(_localctx, 58, RULE_decl_field_set);
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -2735,9 +2802,9 @@ public class DecaParser extends AbstractDecaParser {
 			setState(494);
 			((Decl_field_setContext)_localctx).v = visibility();
 			setState(495);
-			((Decl_field_setContext)_localctx).t = type();
+			((Decl_field_setContext)_localctx).t = ((Decl_field_setContext)_localctx).type = type();
 			setState(496);
-			list_decl_field();
+			list_decl_field(((Decl_field_setContext)_localctx).v.visi, ((Decl_field_setContext)_localctx).type.tree, _localctx.fields);
 			setState(497);
 			match(SEMI);
 			}
@@ -2754,6 +2821,7 @@ public class DecaParser extends AbstractDecaParser {
 	}
 
 	public static class VisibilityContext extends ParserRuleContext {
+		public Visibility visi;
 		public TerminalNode PROTECTED() { return getToken(DecaParser.PROTECTED, 0); }
 		public VisibilityContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2771,7 +2839,7 @@ public class DecaParser extends AbstractDecaParser {
 			case IDENT:
 				enterOuterAlt(_localctx, 1);
 				{
-
+				 ((VisibilityContext)_localctx).visi =   Visibility.PUBLIC;
 				        
 				}
 				break;
@@ -2780,7 +2848,7 @@ public class DecaParser extends AbstractDecaParser {
 				{
 				setState(500);
 				match(PROTECTED);
-
+				 ((VisibilityContext)_localctx).visi =   Visibility.PROTECTED;
 				        
 				}
 				break;
@@ -2800,6 +2868,9 @@ public class DecaParser extends AbstractDecaParser {
 	}
 
 	public static class List_decl_fieldContext extends ParserRuleContext {
+		public Visibility visi;
+		public AbstractIdentifier typ;
+		public ListDeclField fields;
 		public Decl_fieldContext dv1;
 		public Decl_fieldContext dv2;
 		public List<Decl_fieldContext> decl_field() {
@@ -2812,34 +2883,46 @@ public class DecaParser extends AbstractDecaParser {
 		public TerminalNode COMMA(int i) {
 			return getToken(DecaParser.COMMA, i);
 		}
-		public List_decl_fieldContext(ParserRuleContext parent, int invokingState) {
+		public List_decl_fieldContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public List_decl_fieldContext(ParserRuleContext parent, int invokingState, Visibility visi, AbstractIdentifier typ, ListDeclField fields) {
 			super(parent, invokingState);
+			this.visi = visi;
+			this.typ = typ;
+			this.fields = fields;
 		}
 		@Override public int getRuleIndex() { return RULE_list_decl_field; }
 	}
 
-	public final List_decl_fieldContext list_decl_field() throws RecognitionException {
-		List_decl_fieldContext _localctx = new List_decl_fieldContext(_ctx, getState());
+	public final List_decl_fieldContext list_decl_field(Visibility visi,AbstractIdentifier typ,ListDeclField fields) throws RecognitionException {
+		List_decl_fieldContext _localctx = new List_decl_fieldContext(_ctx, getState(), visi, typ, fields);
 		enterRule(_localctx, 62, RULE_list_decl_field);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(504);
-			((List_decl_fieldContext)_localctx).dv1 = decl_field();
-			setState(509);
+			((List_decl_fieldContext)_localctx).dv1 = decl_field(_localctx.visi, _localctx.typ);
+
+			        assert(((List_decl_fieldContext)_localctx).dv1.tree != null);
+			        _localctx.fields.add(((List_decl_fieldContext)_localctx).dv1.tree);
+			    
+			setState(512);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(505);
-				match(COMMA);
 				setState(506);
-				((List_decl_fieldContext)_localctx).dv2 = decl_field();
+				match(COMMA);
+				setState(507);
+				((List_decl_fieldContext)_localctx).dv2 = decl_field(_localctx.visi, _localctx.typ);
+
+				            assert(((List_decl_fieldContext)_localctx).dv2.tree != null);
+				            _localctx.fields.add(((List_decl_fieldContext)_localctx).dv2.tree);
+				        
 				}
 				}
-				setState(511);
+				setState(514);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -2857,8 +2940,13 @@ public class DecaParser extends AbstractDecaParser {
 	}
 
 	public static class Decl_fieldContext extends ParserRuleContext {
+		public Visibility visi;
+		public AbstractIdentifier typ;
+		public AbstractDeclField tree;
 		public IdentContext i;
+		public IdentContext ident;
 		public ExprContext e;
+		public ExprContext expr;
 		public IdentContext ident() {
 			return getRuleContext(IdentContext.class,0);
 		}
@@ -2866,38 +2954,61 @@ public class DecaParser extends AbstractDecaParser {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public Decl_fieldContext(ParserRuleContext parent, int invokingState) {
+		public Decl_fieldContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public Decl_fieldContext(ParserRuleContext parent, int invokingState, Visibility visi, AbstractIdentifier typ) {
 			super(parent, invokingState);
+			this.visi = visi;
+			this.typ = typ;
 		}
 		@Override public int getRuleIndex() { return RULE_decl_field; }
 	}
 
-	public final Decl_fieldContext decl_field() throws RecognitionException {
-		Decl_fieldContext _localctx = new Decl_fieldContext(_ctx, getState());
+	public final Decl_fieldContext decl_field(Visibility visi,AbstractIdentifier typ) throws RecognitionException {
+		Decl_fieldContext _localctx = new Decl_fieldContext(_ctx, getState(), visi, typ);
 		enterRule(_localctx, 64, RULE_decl_field);
+
+		        //Ces variables ont été défini et exploité afin de 
+		        // crée un distinction entre un field initialisé et un field
+		        // non initialisé
+		        assert(_localctx.typ != null);   
+		        assert(_localctx.visi != null);
+		        ((Decl_fieldContext)_localctx).tree =  null;
+		        tempInit = null; 
+		        tempInitNoInit = null;
+		    
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(512);
-			((Decl_fieldContext)_localctx).i = ident();
+			setState(515);
+			((Decl_fieldContext)_localctx).i = ((Decl_fieldContext)_localctx).ident = ident();
 
+			            assert(((Decl_fieldContext)_localctx).i.tree != null);
 			        
-			setState(518);
+			setState(521);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==EQUALS) {
 				{
-				setState(514);
+				setState(517);
 				match(EQUALS);
-				setState(515);
-				((Decl_fieldContext)_localctx).e = expr();
+				setState(518);
+				((Decl_fieldContext)_localctx).e = ((Decl_fieldContext)_localctx).expr = expr();
 
+				            assert(((Decl_fieldContext)_localctx).e.tree != null);
+				            tempInit = new Initialization(((Decl_fieldContext)_localctx).e.tree);
+				            tempInit.setLocation(((Decl_fieldContext)_localctx).expr.tree.getLocation());
+				            ((Decl_fieldContext)_localctx).tree =  new DeclField(_localctx.visi, _localctx.typ, ((Decl_fieldContext)_localctx).ident.tree, tempInit);  
 				        
 				}
 			}
 
-
+			      
+			            if (_localctx.tree == null){
+			                tempInitNoInit = new NoInitialization();
+			                ((Decl_fieldContext)_localctx).tree =  new DeclField(_localctx.visi, _localctx.typ, ((Decl_fieldContext)_localctx).ident.tree, tempInitNoInit);  
+			            }
+			            setLocation(_localctx.tree, (((Decl_fieldContext)_localctx).ident!=null?(((Decl_fieldContext)_localctx).ident.start):null));
 			        
 			}
 		}
@@ -2913,8 +3024,14 @@ public class DecaParser extends AbstractDecaParser {
 	}
 
 	public static class Decl_methodContext extends ParserRuleContext {
+		public AbstractDeclMethod tree;
+		public TypeContext type;
+		public IdentContext ident;
 		public List_paramsContext params;
+		public List_paramsContext list_params;
+		public BlockContext block;
 		public Multi_line_stringContext code;
+		public Multi_line_stringContext multi_line_string;
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
 		}
@@ -2950,44 +3067,58 @@ public class DecaParser extends AbstractDecaParser {
 		Decl_methodContext _localctx = new Decl_methodContext(_ctx, getState());
 		enterRule(_localctx, 66, RULE_decl_method);
 
+		        this.body = null;
+		        this.stringAsmBody = null;
 
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(522);
-			type();
-			setState(523);
-			ident();
-			setState(524);
-			match(OPARENT);
 			setState(525);
-			((Decl_methodContext)_localctx).params = list_params();
+			((Decl_methodContext)_localctx).type = type();
 			setState(526);
+			((Decl_methodContext)_localctx).ident = ident();
+			setState(527);
+			match(OPARENT);
+			setState(528);
+			((Decl_methodContext)_localctx).params = ((Decl_methodContext)_localctx).list_params = list_params();
+			setState(529);
 			match(CPARENT);
-			setState(537);
+			setState(540);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case OBRACE:
 				{
-				setState(527);
-				block();
+				setState(530);
+				((Decl_methodContext)_localctx).block = block();
 
+				            assert(((Decl_methodContext)_localctx).block.decls != null);
+				            assert(((Decl_methodContext)_localctx).block.insts != null);
+				            body = new MethodBody(((Decl_methodContext)_localctx).block.decls, ((Decl_methodContext)_localctx).block.insts);
+				            setLocation(body, (((Decl_methodContext)_localctx).block!=null?(((Decl_methodContext)_localctx).block.start):null));
 				        
 				}
 				break;
 			case ASM:
 				{
-				setState(530);
-				match(ASM);
-				setState(531);
-				match(OPARENT);
-				setState(532);
-				((Decl_methodContext)_localctx).code = multi_line_string();
 				setState(533);
-				match(CPARENT);
+				match(ASM);
 				setState(534);
+				match(OPARENT);
+				setState(535);
+				((Decl_methodContext)_localctx).code = ((Decl_methodContext)_localctx).multi_line_string = multi_line_string();
+				setState(536);
+				match(CPARENT);
+				setState(537);
 				match(SEMI);
 
+				            assert(((Decl_methodContext)_localctx).multi_line_string.text != null);
+				            assert(((Decl_methodContext)_localctx).multi_line_string.location != null);
+				            
+				            stringAsmBody = new StringLiteral(((Decl_methodContext)_localctx).multi_line_string.text);
+				            stringAsmBody.setLocation(((Decl_methodContext)_localctx).code.location);
+				            
+				            body = new MethodAsmBody(stringAsmBody);
+				            body.setLocation(((Decl_methodContext)_localctx).code.location);
 				        
 				}
 				break;
@@ -2995,6 +3126,11 @@ public class DecaParser extends AbstractDecaParser {
 				throw new NoViableAltException(this);
 			}
 
+			            assert(((Decl_methodContext)_localctx).type.tree != null);
+			            assert(((Decl_methodContext)_localctx).ident.tree != null);
+			            assert(((Decl_methodContext)_localctx).list_params.tree != null);
+			            ((Decl_methodContext)_localctx).tree =  new DeclMethod(((Decl_methodContext)_localctx).type.tree, ((Decl_methodContext)_localctx).ident.tree, ((Decl_methodContext)_localctx).params.tree, body);
+			            setLocation(_localctx.tree, (((Decl_methodContext)_localctx).type!=null?(((Decl_methodContext)_localctx).type.start):null));
 			        
 			}
 		}
@@ -3010,6 +3146,7 @@ public class DecaParser extends AbstractDecaParser {
 	}
 
 	public static class List_paramsContext extends ParserRuleContext {
+		public ListDeclParam tree;
 		public ParamContext p1;
 		public ParamContext p2;
 		public List<ParamContext> param() {
@@ -3031,34 +3168,42 @@ public class DecaParser extends AbstractDecaParser {
 	public final List_paramsContext list_params() throws RecognitionException {
 		List_paramsContext _localctx = new List_paramsContext(_ctx, getState());
 		enterRule(_localctx, 68, RULE_list_params);
+
+		    ((List_paramsContext)_localctx).tree =  new ListDeclParam();
+
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(552);
+			setState(555);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==IDENT) {
 				{
-				setState(541);
+				setState(544);
 				((List_paramsContext)_localctx).p1 = param();
 
+				        assert(((List_paramsContext)_localctx).p1.tree != null);
+				        _localctx.tree.add(((List_paramsContext)_localctx).p1.tree);
+				        setLocation(_localctx.tree,(((List_paramsContext)_localctx).p1!=null?(((List_paramsContext)_localctx).p1.start):null));
 				        
-				setState(549);
+				setState(552);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(543);
+					setState(546);
 					match(COMMA);
-					setState(544);
+					setState(547);
 					((List_paramsContext)_localctx).p2 = param();
 
+					            assert(((List_paramsContext)_localctx).p2.tree != null);
+					            _localctx.tree.add(((List_paramsContext)_localctx).p2.tree);
 					        
 					}
 					}
-					setState(551);
+					setState(554);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
@@ -3094,13 +3239,13 @@ public class DecaParser extends AbstractDecaParser {
 		Multi_line_stringContext _localctx = new Multi_line_stringContext(_ctx, getState());
 		enterRule(_localctx, 70, RULE_multi_line_string);
 		try {
-			setState(558);
+			setState(561);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case STRING:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(554);
+				setState(557);
 				((Multi_line_stringContext)_localctx).s = match(STRING);
 
 				            ((Multi_line_stringContext)_localctx).text =  (((Multi_line_stringContext)_localctx).s!=null?((Multi_line_stringContext)_localctx).s.getText():null);
@@ -3111,7 +3256,7 @@ public class DecaParser extends AbstractDecaParser {
 			case MULTI_LINE_STRING:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(556);
+				setState(559);
 				((Multi_line_stringContext)_localctx).s = match(MULTI_LINE_STRING);
 
 				            ((Multi_line_stringContext)_localctx).text =  (((Multi_line_stringContext)_localctx).s!=null?((Multi_line_stringContext)_localctx).s.getText():null);
@@ -3135,6 +3280,9 @@ public class DecaParser extends AbstractDecaParser {
 	}
 
 	public static class ParamContext extends ParserRuleContext {
+		public AbstractDeclParam tree;
+		public TypeContext type;
+		public IdentContext ident;
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
 		}
@@ -3153,11 +3301,15 @@ public class DecaParser extends AbstractDecaParser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(560);
-			type();
-			setState(561);
-			ident();
+			setState(563);
+			((ParamContext)_localctx).type = type();
+			setState(564);
+			((ParamContext)_localctx).ident = ident();
 
+			            assert(((ParamContext)_localctx).type.tree != null);
+			            assert(((ParamContext)_localctx).ident.tree != null);
+			            ((ParamContext)_localctx).tree =  new DeclParam(((ParamContext)_localctx).type.tree, ((ParamContext)_localctx).ident.tree);
+			            setLocation(_localctx.tree, (((ParamContext)_localctx).type!=null?(((ParamContext)_localctx).type.start):null));
 			        
 			}
 		}
@@ -3258,7 +3410,7 @@ public class DecaParser extends AbstractDecaParser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\65\u0237\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\65\u023a\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -3295,20 +3447,20 @@ public class DecaParser extends AbstractDecaParser {
 		"\u01cc\n\31\3\32\3\32\3\32\3\33\3\33\3\33\7\33\u01d4\n\33\f\33\16\33\u01d7"+
 		"\13\33\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\35\3\35\3\35\3\35\3\35"+
 		"\5\35\u01e6\n\35\3\36\3\36\3\36\3\36\7\36\u01ec\n\36\f\36\16\36\u01ef"+
-		"\13\36\3\37\3\37\3\37\3\37\3\37\3 \3 \3 \5 \u01f9\n \3!\3!\3!\7!\u01fe"+
-		"\n!\f!\16!\u0201\13!\3\"\3\"\3\"\3\"\3\"\3\"\5\"\u0209\n\"\3\"\3\"\3#"+
-		"\3#\3#\3#\3#\3#\3#\3#\3#\3#\3#\3#\3#\3#\3#\5#\u021c\n#\3#\3#\3$\3$\3$"+
-		"\3$\3$\3$\7$\u0226\n$\f$\16$\u0229\13$\5$\u022b\n$\3%\3%\3%\3%\5%\u0231"+
-		"\n%\3&\3&\3&\3&\3&\2\t\34\36 \"$&*\'\2\4\6\b\n\f\16\20\22\24\26\30\32"+
-		"\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJ\2\2\2\u024d\2L\3\2\2\2\4U\3\2\2"+
-		"\2\6W\3\2\2\2\b`\3\2\2\2\nc\3\2\2\2\fg\3\2\2\2\16r\3\2\2\2\20\u0081\3"+
-		"\2\2\2\22\u00b7\3\2\2\2\24\u00b9\3\2\2\2\26\u00e5\3\2\2\2\30\u00e7\3\2"+
-		"\2\2\32\u00ea\3\2\2\2\34\u00f3\3\2\2\2\36\u0101\3\2\2\2 \u010f\3\2\2\2"+
-		"\"\u0122\3\2\2\2$\u0144\3\2\2\2&\u0157\3\2\2\2(\u017a\3\2\2\2*\u017c\3"+
-		"\2\2\2,\u01b8\3\2\2\2.\u01ba\3\2\2\2\60\u01cb\3\2\2\2\62\u01cd\3\2\2\2"+
-		"\64\u01d5\3\2\2\2\66\u01d8\3\2\2\28\u01e5\3\2\2\2:\u01ed\3\2\2\2<\u01f0"+
-		"\3\2\2\2>\u01f8\3\2\2\2@\u01fa\3\2\2\2B\u0202\3\2\2\2D\u020c\3\2\2\2F"+
-		"\u022a\3\2\2\2H\u0230\3\2\2\2J\u0232\3\2\2\2LM\5\64\33\2MN\5\4\3\2NO\7"+
+		"\13\36\3\37\3\37\3\37\3\37\3\37\3 \3 \3 \5 \u01f9\n \3!\3!\3!\3!\3!\3"+
+		"!\7!\u0201\n!\f!\16!\u0204\13!\3\"\3\"\3\"\3\"\3\"\3\"\5\"\u020c\n\"\3"+
+		"\"\3\"\3#\3#\3#\3#\3#\3#\3#\3#\3#\3#\3#\3#\3#\3#\3#\5#\u021f\n#\3#\3#"+
+		"\3$\3$\3$\3$\3$\3$\7$\u0229\n$\f$\16$\u022c\13$\5$\u022e\n$\3%\3%\3%\3"+
+		"%\5%\u0234\n%\3&\3&\3&\3&\3&\2\t\34\36 \"$&*\'\2\4\6\b\n\f\16\20\22\24"+
+		"\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJ\2\2\2\u0250\2L\3\2\2\2"+
+		"\4U\3\2\2\2\6W\3\2\2\2\b`\3\2\2\2\nc\3\2\2\2\fg\3\2\2\2\16r\3\2\2\2\20"+
+		"\u0081\3\2\2\2\22\u00b7\3\2\2\2\24\u00b9\3\2\2\2\26\u00e5\3\2\2\2\30\u00e7"+
+		"\3\2\2\2\32\u00ea\3\2\2\2\34\u00f3\3\2\2\2\36\u0101\3\2\2\2 \u010f\3\2"+
+		"\2\2\"\u0122\3\2\2\2$\u0144\3\2\2\2&\u0157\3\2\2\2(\u017a\3\2\2\2*\u017c"+
+		"\3\2\2\2,\u01b8\3\2\2\2.\u01ba\3\2\2\2\60\u01cb\3\2\2\2\62\u01cd\3\2\2"+
+		"\2\64\u01d5\3\2\2\2\66\u01d8\3\2\2\28\u01e5\3\2\2\2:\u01ed\3\2\2\2<\u01f0"+
+		"\3\2\2\2>\u01f8\3\2\2\2@\u01fa\3\2\2\2B\u0205\3\2\2\2D\u020f\3\2\2\2F"+
+		"\u022d\3\2\2\2H\u0233\3\2\2\2J\u0235\3\2\2\2LM\5\64\33\2MN\5\4\3\2NO\7"+
 		"\2\2\3OP\b\2\1\2P\3\3\2\2\2QV\b\3\1\2RS\5\6\4\2ST\b\3\1\2TV\3\2\2\2UQ"+
 		"\3\2\2\2UR\3\2\2\2V\5\3\2\2\2WX\7\3\2\2XY\5\b\5\2YZ\5\20\t\2Z[\7\4\2\2"+
 		"[\\\b\4\1\2\\\7\3\2\2\2]_\5\n\6\2^]\3\2\2\2_b\3\2\2\2`^\3\2\2\2`a\3\2"+
@@ -3438,27 +3590,28 @@ public class DecaParser extends AbstractDecaParser {
 		"\3\2\2\2\u01f0\u01f1\5> \2\u01f1\u01f2\5.\30\2\u01f2\u01f3\5@!\2\u01f3"+
 		"\u01f4\7\7\2\2\u01f4=\3\2\2\2\u01f5\u01f9\b \1\2\u01f6\u01f7\7+\2\2\u01f7"+
 		"\u01f9\b \1\2\u01f8\u01f5\3\2\2\2\u01f8\u01f6\3\2\2\2\u01f9?\3\2\2\2\u01fa"+
-		"\u01ff\5B\"\2\u01fb\u01fc\7\b\2\2\u01fc\u01fe\5B\"\2\u01fd\u01fb\3\2\2"+
-		"\2\u01fe\u0201\3\2\2\2\u01ff\u01fd\3\2\2\2\u01ff\u0200\3\2\2\2\u0200A"+
-		"\3\2\2\2\u0201\u01ff\3\2\2\2\u0202\u0203\5\62\32\2\u0203\u0208\b\"\1\2"+
-		"\u0204\u0205\7\36\2\2\u0205\u0206\5\30\r\2\u0206\u0207\b\"\1\2\u0207\u0209"+
-		"\3\2\2\2\u0208\u0204\3\2\2\2\u0208\u0209\3\2\2\2\u0209\u020a\3\2\2\2\u020a"+
-		"\u020b\b\"\1\2\u020bC\3\2\2\2\u020c\u020d\5.\30\2\u020d\u020e\5\62\32"+
-		"\2\u020e\u020f\7\5\2\2\u020f\u0210\5F$\2\u0210\u021b\7\6\2\2\u0211\u0212"+
-		"\5\6\4\2\u0212\u0213\b#\1\2\u0213\u021c\3\2\2\2\u0214\u0215\7,\2\2\u0215"+
-		"\u0216\7\5\2\2\u0216\u0217\5H%\2\u0217\u0218\7\6\2\2\u0218\u0219\7\7\2"+
-		"\2\u0219\u021a\b#\1\2\u021a\u021c\3\2\2\2\u021b\u0211\3\2\2\2\u021b\u0214"+
-		"\3\2\2\2\u021c\u021d\3\2\2\2\u021d\u021e\b#\1\2\u021eE\3\2\2\2\u021f\u0220"+
-		"\5J&\2\u0220\u0227\b$\1\2\u0221\u0222\7\b\2\2\u0222\u0223\5J&\2\u0223"+
-		"\u0224\b$\1\2\u0224\u0226\3\2\2\2\u0225\u0221\3\2\2\2\u0226\u0229\3\2"+
-		"\2\2\u0227\u0225\3\2\2\2\u0227\u0228\3\2\2\2\u0228\u022b\3\2\2\2\u0229"+
-		"\u0227\3\2\2\2\u022a\u021f\3\2\2\2\u022a\u022b\3\2\2\2\u022bG\3\2\2\2"+
-		"\u022c\u022d\7\60\2\2\u022d\u0231\b%\1\2\u022e\u022f\7\61\2\2\u022f\u0231"+
-		"\b%\1\2\u0230\u022c\3\2\2\2\u0230\u022e\3\2\2\2\u0231I\3\2\2\2\u0232\u0233"+
-		"\5.\30\2\u0233\u0234\5\62\32\2\u0234\u0235\b&\1\2\u0235K\3\2\2\2\'U`o"+
-		"x\u0081\u00b7\u00cd\u00d6\u00e2\u00e5\u00f1\u00fe\u010c\u011d\u011f\u013f"+
-		"\u0141\u0152\u0154\u016a\u016c\u017a\u018a\u018e\u01b8\u01cb\u01d5\u01e5"+
-		"\u01eb\u01ed\u01f8\u01ff\u0208\u021b\u0227\u022a\u0230";
+		"\u01fb\5B\"\2\u01fb\u0202\b!\1\2\u01fc\u01fd\7\b\2\2\u01fd\u01fe\5B\""+
+		"\2\u01fe\u01ff\b!\1\2\u01ff\u0201\3\2\2\2\u0200\u01fc\3\2\2\2\u0201\u0204"+
+		"\3\2\2\2\u0202\u0200\3\2\2\2\u0202\u0203\3\2\2\2\u0203A\3\2\2\2\u0204"+
+		"\u0202\3\2\2\2\u0205\u0206\5\62\32\2\u0206\u020b\b\"\1\2\u0207\u0208\7"+
+		"\36\2\2\u0208\u0209\5\30\r\2\u0209\u020a\b\"\1\2\u020a\u020c\3\2\2\2\u020b"+
+		"\u0207\3\2\2\2\u020b\u020c\3\2\2\2\u020c\u020d\3\2\2\2\u020d\u020e\b\""+
+		"\1\2\u020eC\3\2\2\2\u020f\u0210\5.\30\2\u0210\u0211\5\62\32\2\u0211\u0212"+
+		"\7\5\2\2\u0212\u0213\5F$\2\u0213\u021e\7\6\2\2\u0214\u0215\5\6\4\2\u0215"+
+		"\u0216\b#\1\2\u0216\u021f\3\2\2\2\u0217\u0218\7,\2\2\u0218\u0219\7\5\2"+
+		"\2\u0219\u021a\5H%\2\u021a\u021b\7\6\2\2\u021b\u021c\7\7\2\2\u021c\u021d"+
+		"\b#\1\2\u021d\u021f\3\2\2\2\u021e\u0214\3\2\2\2\u021e\u0217\3\2\2\2\u021f"+
+		"\u0220\3\2\2\2\u0220\u0221\b#\1\2\u0221E\3\2\2\2\u0222\u0223\5J&\2\u0223"+
+		"\u022a\b$\1\2\u0224\u0225\7\b\2\2\u0225\u0226\5J&\2\u0226\u0227\b$\1\2"+
+		"\u0227\u0229\3\2\2\2\u0228\u0224\3\2\2\2\u0229\u022c\3\2\2\2\u022a\u0228"+
+		"\3\2\2\2\u022a\u022b\3\2\2\2\u022b\u022e\3\2\2\2\u022c\u022a\3\2\2\2\u022d"+
+		"\u0222\3\2\2\2\u022d\u022e\3\2\2\2\u022eG\3\2\2\2\u022f\u0230\7\60\2\2"+
+		"\u0230\u0234\b%\1\2\u0231\u0232\7\61\2\2\u0232\u0234\b%\1\2\u0233\u022f"+
+		"\3\2\2\2\u0233\u0231\3\2\2\2\u0234I\3\2\2\2\u0235\u0236\5.\30\2\u0236"+
+		"\u0237\5\62\32\2\u0237\u0238\b&\1\2\u0238K\3\2\2\2\'U`ox\u0081\u00b7\u00cd"+
+		"\u00d6\u00e2\u00e5\u00f1\u00fe\u010c\u011d\u011f\u013f\u0141\u0152\u0154"+
+		"\u016a\u016c\u017a\u018a\u018e\u01b8\u01cb\u01d5\u01e5\u01eb\u01ed\u01f8"+
+		"\u0202\u020b\u021e\u022a\u022d\u0233";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -33,7 +33,7 @@ GEQ : '>=';
 LEQ : '<=';
 GT : '>';
 LT : '<';
-INSTANCEOF: 'instaceof';
+INSTANCEOF: 'instanceof';
 PLUS : '+';
 MINUS : '-';
 TIMES : '*';
@@ -84,7 +84,7 @@ FLOAT : FLOATDEC | FLOATHEX;
 fragment EOL : '\n'; 
 fragment STRING_CAR : ~('"' | '\\' | '\n');
 STRING : '"' (STRING_CAR | '\\"' | '\\\\')* '"';
-MULTI_LINE_STRING : '"' (STRING_CAR | EOL | '\\"' | '\\\\')* '"';
+MULTI_LINE_STRING : '"' (STRING_CAR | '\n' | '\\"' | '\\\\')* '"';
 
 fragment FILENAME : (LETTER | DIGIT | '.' | '-' | '_')+;
 INCLUDE : '#include' (' ')* '"' FILENAME '"';

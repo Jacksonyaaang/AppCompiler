@@ -1,0 +1,13 @@
+// Description:
+//    Test d'une visibilité non existante
+//
+// Resultats:
+//    Ligne 11
+//
+// Historique:
+//    cree le 01/01/2023
+
+class A extends B {
+    private int x = 5;
+    
+}

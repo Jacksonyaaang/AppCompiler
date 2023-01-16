@@ -17,16 +17,16 @@ GREENFOND="\e[42m"
 echo -e "${GREENFOND} AUTO INVALIDE CONTEXT TEST START : ${ENDCOLOR} \n" 
 
 test_context_invalide (){
-    if test_context "$1" 2>&1 | grep -q -e "$i:[0-9]*"
+    if test_context "$1" 2>&1 | grep -q -e "$1:[0-9]*"
     then
-        echo -e "${GREEN}TEST PASS! ${ENDCOLOR} ${THUMBS_UP}"    
+        echo -e "${GREEN}TEST PASS! ${ENDCOLOR} ${GREEN_BOLD} $(basename "$i")  ${THUMBS_UP}"    
     else
-        echo -e "${RED}TEST NOT PASS!!  Issue file :${ENDCOLOR}${RED_BOLD} $(basename "$i") ${SCR}"
-        exit 1
+        echo -e "${RED}TEST NOT PASS!!  Issue file :${ENDCOLOR}${RED_BOLD} $(basename "$1") ${SCR}"
     fi
 }
 
 redirect_result(){
+    mkdir -p src/test/deca/context/invalid/result
     test_context "$1" > src/test/deca/context/invalid/result/$(basename "${1%.deca}").lis 2>&1 &
 }
 
