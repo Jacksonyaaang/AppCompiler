@@ -48,7 +48,6 @@ public class DeclParam extends AbstractDeclParam {
         // getVarName().decompile(s);
         // getInitialization().decompile(s);
         // s.print(";");
-
     }
 
     @Override

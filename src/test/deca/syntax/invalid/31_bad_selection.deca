@@ -1,0 +1,12 @@
+// Description:
+//    Test d'une mauvaise selection
+//
+// Resultats:
+//    Ligne 11
+//
+// Historique:
+//    cree le 01/01/2023
+
+{
+    A a = c.println();
+}

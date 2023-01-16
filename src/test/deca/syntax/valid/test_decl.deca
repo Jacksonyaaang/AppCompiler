@@ -1,0 +1,43 @@
+// Description:
+//  test visibilité pour une classe et sa classe fille                        
+//
+// Resultats:
+//  
+// 
+// Historique:
+//    cree le 15/01/2023
+
+
+
+//initialisaton de la classe mère et de ses attributs, test de visibilité dans la classe même
+class A1{
+    String pubfield="attribut public valide pour";
+    String protfield="attribut protected valide pour";
+    String privfield="attribut private valide pour";
+    String packfield="attribut package valide pour";
+    
+    void method1(){
+        println(pubfield , "la classe elle même");
+        println(protfield , "la classe elle même");
+        println(privfield , "la classe elle même");
+        println(packfield , "la classe elle même");
+    }
+}
+
+//visibilité dans la classe fille
+class B1 extends A1{
+    void method1(){
+        println(pubfield , "la classe fille");
+        println(protfield , "la classe fille");
+        println(packfield , "la classe fille");
+    }
+}
+
+class C1{}
+
+{
+    A1 a;
+    B1 b;
+    a.method1();
+    b.method1();  
+}

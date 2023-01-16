@@ -31,6 +31,7 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
         }
         //throw new UnsupportedOperationException("not yet implemented");
         // LOG.debug("verify listClass: end");
+
     }
 
     /**

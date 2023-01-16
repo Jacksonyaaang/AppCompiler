@@ -7,6 +7,8 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
 
+import org.apache.commons.lang.Validate;
+
 /**
  * Declaration of a class (<code>class name extends superClass {members}<code>).
  * 
@@ -20,6 +22,10 @@ public class DeclClass extends AbstractDeclClass {
     protected final ListDeclMethod methods;
 
     public DeclClass(AbstractIdentifier name, AbstractIdentifier superClass, ListDeclField fields, ListDeclMethod methods) {
+        Validate.notNull(name);
+        Validate.notNull(superClass);
+        Validate.notNull(fields);
+        Validate.notNull(methods);
         this.name = name ;
         this.superClass = superClass; 
         this.fields = fields;
@@ -51,7 +57,7 @@ public class DeclClass extends AbstractDeclClass {
             throws ContextualError {
         throw new UnsupportedOperationException("not yet implemented");
     }
-    
+
     @Override
     protected void verifyClassBody(DecacCompiler compiler) throws ContextualError {
         throw new UnsupportedOperationException("not yet implemented");

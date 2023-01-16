@@ -1,6 +1,8 @@
 package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
+import org.apache.commons.lang.Validate;
+
 
 import fr.ensimag.deca.tools.IndentPrintStream;
 
@@ -8,16 +10,13 @@ public class MethodAsmBody extends AbstractMethodBody {
     
     protected StringLiteral stringLiteral;
 
+    public StringLiteral getStringLiteral() {
+        return stringLiteral;
+    }
+
     public MethodAsmBody(StringLiteral stringLiteral) {
+        Validate.notNull(stringLiteral);
         this.stringLiteral = stringLiteral;
-    }
-
-    protected String getPrintName(){
-        return "println";
-    }
-
-    protected String getPrintxName(){
-        return "printlnx";
     }
 
     @Override
@@ -28,13 +27,11 @@ public class MethodAsmBody extends AbstractMethodBody {
 
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {
-        // TODO Auto-generated method stub
-        
+        stringLiteral.prettyPrint(s, prefix, true);        
     }
 
     @Override
     protected void iterChildren(TreeFunction f) {
-        // TODO Auto-generated method stub
-        
+        stringLiteral.iter(f);   
     }
 }
