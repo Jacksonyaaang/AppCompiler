@@ -79,5 +79,13 @@ public class DeclMethod extends AbstractDeclMethod {
         listParam.prettyPrint(s, prefix, false);
         methodBody.prettyPrint(s, prefix, true);
     }
+
+    @Override
+    protected void verifyDeclMethod(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
+            throws ContextualError {
+        // TODO Auto-generated method stub
+        
+    }
+
 }
 

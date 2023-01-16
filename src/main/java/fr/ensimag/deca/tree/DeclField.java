@@ -78,4 +78,11 @@ public class DeclField extends AbstractDeclField {
         String visibiltyOutput = visibility == Visibility.PROTECTED ? " [visibility=PROTECTED] " : " [visibility=PUBLIC] ";
         return visibiltyOutput + " DeclField" +  super.prettyPrintNode();
     }
+
+    @Override
+    protected void verifyDeclField(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
+            throws ContextualError {
+        // TODO Auto-generated method stub
+        
+    }
 }

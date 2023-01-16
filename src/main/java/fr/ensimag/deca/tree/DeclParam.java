@@ -62,5 +62,17 @@ public class DeclParam extends AbstractDeclParam {
         type.prettyPrint(s, prefix, false);
         paramName.prettyPrint(s, prefix, true);
     }
+
+
+
+    @Override
+    protected void verifyDeclParam(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
+            throws ContextualError {
+        // TODO Auto-generated method stub
+        
+    }
+
+
+
 }
 

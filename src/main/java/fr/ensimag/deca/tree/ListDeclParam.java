@@ -28,6 +28,14 @@ public class ListDeclParam extends TreeList<AbstractDeclParam> {
             s.println();
         }
     }
+
+    void verifyListDeclParam(DecacCompiler compiler, EnvironmentExp localEnv,
+            ClassDefinition currentClass) throws ContextualError {
+            LOG.debug("[ListDeclParam][verifyListDeclParam]");
+        for (AbstractDeclParam declParam : getList()){
+            declParam.verifyDeclParam(compiler, localEnv, currentClass);
+        }
+    }
 }
 
 
