@@ -41,7 +41,9 @@ options {
     protected NoInitialization tempInitNoInit = null;
     protected StringBuilder sb = null;  
     protected AbstractMethodBody body = null;
-    protected StringLiteral stringAsmBody = null;    
+    protected StringLiteral stringAsmBody = null;
+    protected This thisImplicite = null;        
+    
 }
 
 prog returns[AbstractProgram tree]
@@ -240,7 +242,7 @@ assign_expr returns[AbstractExpr tree]
         EQUALS e2=assign_expr {
             assert($e.tree != null);
             assert($e2.tree != null);
-            $tree = new Assign( (Identifier )$e.tree, $e2.tree);
+            $tree = new Assign( (AbstractLValue) $e.tree, $e2.tree);
             setLocation($tree, $e.start);
         }
       | /* epsilon */ {
@@ -326,7 +328,7 @@ inequality_expr returns[AbstractExpr tree]
         }
     | e1=inequality_expr INSTANCEOF type {
             assert($e1.tree != null);
-            assert($e2.tree != null);   
+            assert($type.tree != null);   
             $tree = new InstanceOf($e1.tree, $type.tree); 
             setLocation($tree, $e1.start);
         }   
@@ -409,8 +411,8 @@ select_expr returns[AbstractExpr tree]
             setLocation($tree, $e1.start);
         }
         | /* epsilon */ {
-            $tree=new Selection($e1.tree, $i.tree);
-            setLocation($tree, $e1.start);
+                $tree=new Selection($e1.tree, $i.tree);
+                setLocation($tree, $e1.start);
         }
         )
     ;
@@ -423,6 +425,13 @@ primary_expr returns[AbstractExpr tree]
     | m=ident OPARENT args=list_expr CPARENT {
             assert($args.tree != null);
             assert($m.tree != null);
+            // A FAIRE : TESTER CELA  dans la partie contexte et la partie codegen
+            //On appelle le this d'une maniére implicte dans le cas ou nous 
+            //sommes dans le bloc de la class
+            thisImplicite = new This(true);
+            setLocation(thisImplicite ,$m.start);
+            $tree=new MethodCall(thisImplicite, $m.tree, $list_expr.tree);
+            setLocation($tree, $m.start);
         }
     | OPARENT expr CPARENT {
             assert($expr.tree != null);
@@ -500,7 +509,7 @@ literal returns[AbstractExpr tree]
         setLocation($tree, $FALSE);
         }
     | THIS {        
-            $tree = new This(true);  
+            $tree = new This(false);  
             setLocation($tree, $THIS);
         }
     | NULL {
@@ -527,6 +536,7 @@ list_classes returns[ListDeclClass tree]
       (c1=class_decl { 
             assert($c1.tree != null);
             $tree.add($c1.tree);
+            setLocation($tree, $c1.start);
         }
       )*
     ;
@@ -552,6 +562,7 @@ class_extension returns[AbstractIdentifier tree]
             // cette extention se fait par défaut 
             // sans input de l'utilisateur
             $tree = new Identifier(this.getDecacCompiler().createSymbol("object")); 
+            $tree.setLocation(Location.BUILTIN);
         }
     ;
 
@@ -658,6 +669,7 @@ list_params returns[ListDeclParam tree]
     : (p1=param {
         assert($p1.tree != null);
         $tree.add($p1.tree);
+        setLocation($tree,$p1.start);
         } (COMMA p2=param {
             assert($p2.tree != null);
             $tree.add($p2.tree);

@@ -1,3 +1,4 @@
+
 class A {
     protected int x ;
     int getX() {
@@ -13,4 +14,3 @@ class A {
     a.setX(1) ;
     println("a.getX() = ", a.getX()) ;
 }
-

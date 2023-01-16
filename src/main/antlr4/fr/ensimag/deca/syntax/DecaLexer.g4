@@ -33,7 +33,7 @@ GEQ : '>=';
 LEQ : '<=';
 GT : '>';
 LT : '<';
-INSTANCEOF: 'instaceof';
+INSTANCEOF: 'instanceof';
 PLUS : '+';
 MINUS : '-';
 TIMES : '*';
