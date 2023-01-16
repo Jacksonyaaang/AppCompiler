@@ -31,9 +31,12 @@ public class MethodBody extends AbstractMethodBody {
     @Override
     public void decompile(IndentPrintStream s) {
         s.println("{");
+        s.indent();
+
         getListVar().decompile(s);
         getListInstructions().decompile(s);
-        s.println("}");
+        s.unindent();
+        s.print("}");
 
     }
 

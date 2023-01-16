@@ -62,11 +62,11 @@ public class DeclMethod extends AbstractDeclMethod {
     public void decompile(IndentPrintStream s) {
         getType().decompile(s);
         s.print(" ");
-        getName().decompile(s);
+        getMethodName().decompile(s);
         s.print("(");
-        getParams().decompile(s);
+        getListParam().decompile(s);
         s.print(")");
-        getBody().decompile(s);
+        getMethodBody().decompile(s);
 
     }
 

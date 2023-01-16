@@ -40,8 +40,11 @@ public class Cast extends AbstractExpr{
 
     @Override
     public void decompile(IndentPrintStream s) {
-        // TODO Auto-generated method stub
-        
+        s.print("(");
+        getTypeCast().decompile(s);
+        s.print(") (");
+        getExpr().decompile(s);
+        s.print(")");
     }
 
     @Override

@@ -20,8 +20,7 @@ public class Null extends AbstractExpr{
 
     @Override
     public void decompile(IndentPrintStream s) {
-        // TODO Auto-generated method stub
-        
+        s.print("null");
     }
 
     @Override
