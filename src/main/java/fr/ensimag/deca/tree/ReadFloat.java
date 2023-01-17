@@ -25,7 +25,7 @@ import org.apache.log4j.Logger;
  */
 public class ReadFloat extends AbstractReadExpr {
 
-    private static final Logger LOG = Logger.getLogger(And.class);
+    private static final Logger LOG = Logger.getLogger(ReadFloat.class);
 
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
