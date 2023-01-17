@@ -2,6 +2,10 @@ package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
 
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import org.apache.commons.lang.Validate;
 
@@ -43,5 +47,12 @@ public class MethodBody extends AbstractMethodBody {
     protected void iterChildren(TreeFunction f) {
         listVar.iter(f);
         listInstructions.iter(f);
+    }
+
+    @Override
+    protected void verifyDeclMethodBody(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
+            throws ContextualError {
+        // TODO Auto-generated method stub
+        
     }
 }

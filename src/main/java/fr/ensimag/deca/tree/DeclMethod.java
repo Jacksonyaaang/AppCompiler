@@ -177,7 +177,8 @@ public class DeclMethod extends AbstractDeclMethod {
      */
     @Override
     protected void verifyDeclMethod(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
-            throws ContextualError {
+        throws ContextualError {
+        methodBody.verifyDeclMethodBody(compiler, localEnv, currentClass);      
         // TODO Auto-generated method stub
         
     }
