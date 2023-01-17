@@ -51,6 +51,10 @@ public class EnvironmentType {
         return envTypes.get(s);
     }
 
+    public Map<Symbol, TypeDefinition> getEnvTypes(){
+        return envTypes;
+    }
+
     public final VoidType    VOID;
     public final IntType     INT;
     public final FloatType   FLOAT;
