@@ -88,7 +88,7 @@ public class DeclMethod extends AbstractDeclMethod {
     @Override
     protected void verifyDeclMethodSimple(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
-        LOG.debug("[DeclMethod][verifyDecleMethod] Verify a method of class declaration");
+        LOG.debug("[DeclMethod][verifyDecleMethod] Verify the declaration of a method in a class in pass B\n");
         //récupérer le type de return 
         Type typeReturn = this.type.verifyType(compiler);
         this.type.setType(typeReturn);
@@ -101,6 +101,7 @@ public class DeclMethod extends AbstractDeclMethod {
         methodName.setDefinition(methodDef);
         //pour insérer le nom de méthode dans l'environement local
         if (localEnv.get(methodName.getName())==null){
+            LOG.debug("\n enter the  if \n");
             //jamais le déclarer avant 
             try {
                 localEnv.declare(methodName.getName(), methodName.getExpDefinition());
@@ -109,6 +110,8 @@ public class DeclMethod extends AbstractDeclMethod {
             }
         }else{ //name is already declared, maybe in local maybe in the super-classes 
             //if it's in the local env:
+            LOG.info(" enter the else \n");
+
             Map<Symbol, ExpDefinition> tempoMap = localEnv.getExp();
             if (tempoMap.containsKey(this.methodName.getName())){
                 throw new ContextualError("[ERROR] We got the same method name in the current class bro!", getLocation());
