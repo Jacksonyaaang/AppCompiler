@@ -1,0 +1,76 @@
+	TSTO #2
+	BOV stack_overflow_error
+	ADDSP #2
+; start main program
+; Main program
+; Beginning of main instructions:
+	RINT
+	BOV io_error
+	LOAD R1, R2
+	STORE R2, 1(GB)	; Initializing the variable a and loading it into memory
+	RFLOAT
+	BOV io_error
+	LOAD R1, R2
+	STORE R2, 2(GB)	; Initializing the variable x and loading it into memory
+	LOAD 1(GB), R2	; loading a into memory
+	LOAD R2, R1
+	WINT
+	WNL
+	LOAD 2(GB), R2	; loading x into memory
+	LOAD R2, R1
+	WFLOAT
+	WNL
+; --------BeginAssignOp--------[6, 4]-----
+; --------StartBinaryOp--------[6, 8]-----
+; --------StartBinaryOp--------[6, 8]-----
+; --------StartBinaryOp--------[6, 9]-----
+; --------StartBinaryOp--------[6, 10]-----
+; --------StartBinaryOp--------[6, 11]-----
+; --------StartBinaryOp--------[6, 11]-----
+; --------StartBinaryOp--------[6, 12]-----
+	LOAD #10, R3	; loading 10 into memory
+	RINT
+	BOV io_error
+	LOAD R1, R4
+	MUL R4, R3
+; --------EndBinaryOp--------[6, 12]-----
+	LOAD #5, R4	; loading 5 into memory
+	MUL R4, R3
+; --------EndBinaryOp--------[6, 11]-----
+	LOAD #2, R4	; loading 2 into memory
+	MUL R4, R3
+; --------EndBinaryOp--------[6, 11]-----
+	LOAD #7, R4	; loading 7 into memory
+	OPP R4, R4	; Doing an unary minus
+	MUL R4, R3
+; --------EndBinaryOp--------[6, 10]-----
+	LOAD #9, R4	; loading 9 into memory
+	MUL R4, R3
+; --------EndBinaryOp--------[6, 9]-----
+	LOAD #20, R4	; loading 20 into memory
+	ADD R4, R3
+; --------EndBinaryOp--------[6, 8]-----
+; --------StartBinaryOp--------[6, 43]-----
+	LOAD #30, R4	; loading 30 into memory
+	LOAD #10, R5	; loading 10 into memory
+	MUL R5, R4
+; --------EndBinaryOp--------[6, 43]-----
+	SUB R4, R3
+; --------EndBinaryOp--------[6, 8]-----
+	STORE R3, 1(GB)	;  Assiging a value to a
+	LOAD R3, R2	;  Return value of the assignement of =aand storing it into R2
+; --------EndAssignOp--------[6, 4]-----
+	LOAD 1(GB), R2	; loading a into memory
+	LOAD R2, R1
+	WINT
+	WNL
+	HALT
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error: io_error"
+	WNL
+	ERROR
+; end main program

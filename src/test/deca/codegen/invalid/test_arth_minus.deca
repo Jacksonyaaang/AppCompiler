@@ -1,0 +1,12 @@
+// Description:
+//    Test overflow, division des entiers
+// Resultats:
+// Erreur : overflow 
+// Historique:
+//    cree le 01/01/2023
+
+{
+    float x = 200000000000000000000000000000000000000.0;
+    float y = 200000000000000000000000000000000000000.0;
+    x = x-(-y);
+}

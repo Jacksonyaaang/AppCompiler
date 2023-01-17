@@ -1,7 +1,9 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
@@ -14,6 +16,16 @@ import fr.ensimag.deca.context.EnvironmentExp;
  */
 public abstract class AbstractInitialization extends Tree {
     
+    private GPRegister registreDeRetour = null;
+
+    public GPRegister getRegistreDeRetour() {
+        return registreDeRetour;
+    }
+
+    public void setRegistreDeRetour(GPRegister registreDeRetour) {
+        this.registreDeRetour = registreDeRetour;
+    }
+
     /**
      * Implements non-terminal "initialization" of [SyntaxeContextuelle] in pass 3
      * @param compiler contains "env_types" attribute
@@ -26,4 +38,7 @@ public abstract class AbstractInitialization extends Tree {
             Type t, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError;
 
+        public void codegenInitial(DecacCompiler compiler) throws CodeGenError {
+            throw new CodeGenError(getLocation(), "[codegenInitial] Method should not be called at this level");
+        }
 }

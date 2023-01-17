@@ -1,0 +1,17 @@
+// Description:
+//    Tester l'affectation de variable avec un type différent
+//
+// Resultats:
+//    Not exepected type
+//
+// Historique:
+//    cree le 01/01/2023
+
+{
+        boolean bb="ddd";
+        //int a="good";
+        //int b = 5.7777;
+
+        float f = 65;
+        boolean bb= f;
+}

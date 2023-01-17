@@ -1,10 +1,14 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import org.apache.log4j.Logger;
+
+
 
 /**
  * List of declarations (e.g. int x; float y,z).
@@ -14,6 +18,9 @@ import fr.ensimag.deca.tools.IndentPrintStream;
  */
 public class ListDeclVar extends TreeList<AbstractDeclVar> {
 
+    private static final Logger LOG = Logger.getLogger(ListDeclVar.class);
+
+
     @Override
     public void decompile(IndentPrintStream s) {
         for (AbstractDeclVar v : getList()){
@@ -21,6 +28,13 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
             s.println();
         }
 
+    }
+
+    public void codeGenListDecl(DecacCompiler compiler) throws CodeGenError {
+        for (AbstractDeclVar i : getList()) {
+            compiler.getRegisterManagement().freeAllRegisters();
+            i.codeGenDecl(compiler);
+        }
     }
 
     /**
@@ -37,6 +51,10 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
      */    
     void verifyListDeclVariable(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
+            LOG.debug("[ListDeclVar][verifyListDeclVariable]");
+        for (AbstractDeclVar declVar : getList()){
+            declVar.verifyDeclVar(compiler, localEnv, currentClass);
+        }
     }
 
 

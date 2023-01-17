@@ -1,0 +1,14 @@
+	TSTO #1
+	BOV stack_overflow_error
+	ADDSP #1
+; start main program
+; Main program
+; Beginning of main instructions:
+	LOAD #5, R2	; loading 5 into memory
+	STORE R2, 1(GB)	; Initializing the variable x and loading it into memory
+	HALT
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

@@ -1,0 +1,78 @@
+// Description:
+//    Test Print 
+//
+//
+// Resultats:
+//  2
+//  4
+//  0
+// -2
+//  8
+//  2
+//  0
+//  2
+//  4.50000e+00
+//  5.00000e-01
+// -5.00000e-01
+//  9.75000e+00
+//  2.36250e+01
+//  1.16667e+00
+//  2.00000e+00
+//  5.00000e-01
+//
+// Historique:
+// 
+
+{
+    int x,y;
+    float f1,f2;
+    boolean b1,b2;
+
+    //test print op_arithm on integer    
+    x=2;
+    y=2;
+    println(x);
+    println(x+y);
+    println(x-y);
+    y=4;
+    println(x-y);
+
+    println(x*y);
+    println(y/x); 
+    println(x/y);   
+    println(y%x);
+    println(x%y);
+
+    //test print op_arithm on floats
+    f1=5;
+    f2=4.5;
+    println(f2);
+
+    println(f1-f2);
+    println(f2-f1);
+    f1=5.25;
+    println(f1+f2);
+
+    println(f1*f2);
+    println(f1/f2);
+    f1=9;
+    println(f1/f2);
+    println(f2/f1);
+
+    //test print op_arithm on floats in hexadecimal
+    f1=5;
+    f2=4.5;
+    printlnx(f2);
+
+    printlnx(f1-f2);
+    printlnx(f2-f1);
+    f1=5.25;
+    printlnx(f1+f2);
+
+    printlnx(f1*f2);
+    printlnx(f1/f2);
+    f1=9;
+    printlnx(f1/f2);
+    printlnx(f2/f1);
+
+}

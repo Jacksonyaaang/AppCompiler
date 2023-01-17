@@ -1,0 +1,23 @@
+	TSTO #1
+	BOV stack_overflow_error
+	ADDSP #1
+; start main program
+; Main program
+; Beginning of main instructions:
+; --------BeginAssignOp--------[3, 4]-----
+	RFLOAT
+	BOV io_error
+	LOAD R1, R3
+	STORE R3, 1(GB)	;  Assiging a value to f
+	LOAD R3, R2	;  Return value of the assignement of =fand storing it into R2
+; --------EndAssignOp--------[3, 4]-----
+	HALT
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error: io_error"
+	WNL
+	ERROR
+; end main program

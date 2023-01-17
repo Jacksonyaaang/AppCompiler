@@ -3,6 +3,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Definition;
@@ -11,6 +12,7 @@ import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.ima.pseudocode.GPRegister;
 
 /**
  *
@@ -93,4 +95,17 @@ public abstract class AbstractIdentifier extends AbstractLValue {
      *         (corresponds to the "type" attribute)
      */
     public abstract Type verifyType(DecacCompiler compiler) throws ContextualError;
+
+    /**
+     * Cette méthode est utilisée pour associé au identificateur un regirstre 
+     * au quelle on mettra l'adresse
+     * @param compiler 
+     * @param reg le registre auquelle on mettra l'adresse associé au identificateur 
+     */
+
+    @Override
+    public void loadItemintoRegister(DecacCompiler compiler, GPRegister regReserved) throws CodeGenError {
+        throw new CodeGenError(getLocation(), "This method should not be called at this level, loadItemintoRegister");
+    }
+
 }

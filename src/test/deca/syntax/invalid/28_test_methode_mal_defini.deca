@@ -1,0 +1,16 @@
+// Description:
+//    Test d'une méthode mal défni
+//
+// Resultats:
+//    Ligne 12
+//
+// Historique:
+//    cree le 01/01/2023
+
+class A extends B {
+    int x = 5;
+    void method(void void void){
+
+    }   
+
+}

@@ -1,0 +1,10 @@
+// Description:
+//    operations arithmetiques Modulo.
+//
+// Historique:
+//    cree le 13/01/2023
+{
+	int a = 3;
+	int b = 2;
+	a = a % b;
+}
