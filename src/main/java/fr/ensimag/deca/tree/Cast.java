@@ -34,6 +34,30 @@ public class Cast extends AbstractExpr{
         this.expr = expr;
     }
 
+    protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
+        GPRegister R;
+        if(this.typeCast.getName()==this.expr.getType().getName()){
+            this.expr.LoadGenInst(compiler,false);
+
+        }
+        else if((this.typeCast.getDefinition().getType().isFloat())&&(this.expr.getType().isInt())){
+            R=this.expr.LoadGenInst(compiler,true);
+            compiler.addInstruction(new FLOAT(R, R));
+        }
+        else if((this.typeCast.getDefinition().getType().isInt())&&(this.expr.getType().isFloat())){
+            R=this.expr.LoadGenInst(compiler,true);
+            compiler.addInstruction(new INT(R, R));
+        }
+        else if((this.typeCast.getDefinition().getType().isClass())&&(this.expr.getType().isClass())){
+            if((this.expr.instanceof(this.typeCast))||(this.expr.isNull())){
+                this.expr.LoadGenInst(compiler,false);
+            }
+            else{
+                throw new CodeGenError("Expression "+ this.expr+" is not of class "+this.typeCast );
+            }
+        }
+    }
+
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {

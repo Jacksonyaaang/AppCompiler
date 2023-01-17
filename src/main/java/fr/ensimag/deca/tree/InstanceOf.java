@@ -32,6 +32,10 @@ public class InstanceOf extends AbstractExpr {
         this.typeInstance = typeInstance;
     }
 
+    protected void codeGenInst(DecacCompiler compiler){
+        this.expr.
+    }
+
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
