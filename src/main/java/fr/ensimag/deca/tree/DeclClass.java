@@ -49,7 +49,7 @@ public class DeclClass extends AbstractDeclClass {
     public void decompile(IndentPrintStream s) {
         s.print("class ");
         s.print(getName().getName().getName());
-        if(getSuperClass() != null){
+        if(getSuperClass() != null && getSuperClass().getName().getName()!= "object"){
             s.print(" extends ");
             s.print(getSuperClass().getName().getName());
         }
