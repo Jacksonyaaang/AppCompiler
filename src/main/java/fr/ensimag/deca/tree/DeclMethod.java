@@ -99,29 +99,25 @@ public class DeclMethod extends AbstractDeclMethod {
         //récupérer le type de return 
         Type typeReturn = this.type.verifyType(compiler);
         this.type.setType(typeReturn);
-
         Signature signature=this.listParam.verifyListDeclParam(compiler);
         
         currentClass.incNumberOfMethods();
-        int index = currentClass.getNumberOfMethods();  //already increase the number of methods
-        MethodDefinition methodDef = new MethodDefinition(typeReturn, getLocation(), signature, index);
-        methodName.setDefinition(methodDef);
         //pour insérer le nom de méthode dans l'environement local
         if (localEnv.get(methodName.getName())==null){
             LOG.debug("\n enter the  if \n");
-            //jamais le déclarer avant 
+            MethodDefinition methodDef = new MethodDefinition(typeReturn, getLocation(), signature, currentClass.incNumberOfMethods());
+            methodName.setDefinition(methodDef); 
             try {
-                localEnv.declare(methodName.getName(), methodName.getExpDefinition());
+                localEnv.declare(methodName.getName(), methodName.getMethodDefinition());
             } catch (DoubleDefException e) {
                 //not possible
             }
         }else{ //name is already declared, maybe in local maybe in the super-classes 
             //if it's in the local env:
             LOG.info(" enter the else \n");
-
             Map<Symbol, ExpDefinition> tempoMap = localEnv.getExp();
             if (tempoMap.containsKey(this.methodName.getName())){
-                throw new ContextualError("[ERROR] We got the same method name in the current class bro!", getLocation());
+                throw new ContextualError("[ERROR] We got the same method name in the current class !", getLocation());
             }else{
                 //the same name is in the super class
                 //vérifier la condition de règle
@@ -129,17 +125,18 @@ public class DeclMethod extends AbstractDeclMethod {
                 Signature sigSuper=localEnv.get(this.methodName.getName()).asMethodDefinition("sorry it's not a method", getLocation()).getSignature();
                 Type typeSuperReturn=localEnv.get(this.methodName.getName()).asMethodDefinition("sorry it's not a method", getLocation()).getType();
                 doubleDeclNameMethod(compiler, localEnv, sigSuper, signature, typeReturn, typeSuperReturn);
+                int indexRecurringMethod =  ((MethodDefinition) (localEnv.get(methodName.getName()))).getIndex();
+                MethodDefinition methodDef = new MethodDefinition(typeReturn, getLocation(), signature, indexRecurringMethod);
+                methodName.setDefinition(methodDef); 
                 try {  
-                    localEnv.declare(methodName.getName(), methodName.getExpDefinition());
+                    localEnv.declare(methodName.getName(), methodName.getMethodDefinition());
                 } catch (DoubleDefException e) {
                     //forcément va marcher ici car on a déjà écorché le cas d'erreur 
                 }
             }
         }
-
-
-        
     }
+
     /**
      *  A funtion for verify the constraints when the same name of method detected 
      * @param compiler
