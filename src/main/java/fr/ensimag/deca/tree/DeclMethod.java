@@ -132,6 +132,7 @@ public class DeclMethod extends AbstractDeclMethod {
                     localEnv.declare(methodName.getName(), methodName.getMethodDefinition());
                 } catch (DoubleDefException e) {
                     //forcément va marcher ici car on a déjà écorché le cas d'erreur 
+                    throw new ContextualError("[DeclMethod][verifyDeclMethodSimple]Bug compilateur", getLocation());
                 }
             }
         }
