@@ -91,7 +91,7 @@ public class DeclMethod extends AbstractDeclMethod {
         Type typeReturn = this.type.verifyType(compiler);
         this.type.setType(typeReturn);
 
-        Signature signature=this.listParam.verifyListDeclParam(compiler, localEnv, currentClass);
+        Signature signature=this.listParam.verifyListDeclParam(compiler);
         
         currentClass.incNumberOfMethods();
         int index = currentClass.getNumberOfMethods();  //already increase the number of methods

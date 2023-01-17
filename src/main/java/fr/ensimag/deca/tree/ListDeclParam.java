@@ -30,12 +30,17 @@ public class ListDeclParam extends TreeList<AbstractDeclParam> {
         }
     }
 
-    public Signature verifyListDeclParam(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass) throws ContextualError {
+    /**
+     * verify the list of declaration of parameter and return a signature (list of type)
+     * @param compiler
+     * @return
+     * @throws ContextualError
+     */
+    public Signature verifyListDeclParam(DecacCompiler compiler) throws ContextualError {
             LOG.debug("[ListDeclParam][verifyListDeclParam]");
         Signature signature = new Signature();
         for (AbstractDeclParam declParam : getList()){
-            signature.add(declParam.verifyDeclParam(compiler, localEnv, currentClass));
+            signature.add(declParam.verifyDeclParam(compiler));
         }
         return signature;
     }
