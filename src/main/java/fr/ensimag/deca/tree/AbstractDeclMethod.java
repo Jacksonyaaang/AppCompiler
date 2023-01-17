@@ -21,6 +21,13 @@ public abstract class AbstractDeclMethod extends Tree {
      * @param currentClass 
      *          corresponds to the "class" attribute (null in the main bloc).
      */    
+
+     /**une version simple pour la passe deux  */
+    protected abstract void verifyDeclMethodSimple(DecacCompiler compiler,
+            EnvironmentExp localEnv, ClassDefinition currentClass)
+            throws ContextualError;
+
+    /** une version normal pour la troisième passe*/
     protected abstract void verifyDeclMethod(DecacCompiler compiler,
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError;
