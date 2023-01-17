@@ -8,6 +8,7 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import org.apache.commons.lang.Validate;
+import fr.ensimag.deca.context.*;
 
 
 public class MethodBody extends AbstractMethodBody {
@@ -50,8 +51,10 @@ public class MethodBody extends AbstractMethodBody {
     }
 
     @Override
-    protected void verifyDeclMethodBody(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
-            throws ContextualError {
+    protected void verifyDeclMethodBody(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass, Type retunType)
+        throws ContextualError {
+        listVar.verifyListDeclVariable(compiler, localEnv, currentClass);
+        listInstructions.verifyListInst(compiler, localEnv, currentClass, retunType); 
         // TODO Auto-generated method stub
         
     }

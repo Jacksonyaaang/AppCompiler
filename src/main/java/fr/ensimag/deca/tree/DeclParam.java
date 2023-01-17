@@ -72,7 +72,7 @@ public class DeclParam extends AbstractDeclParam {
      * the 'type' in return value is for construting the signature
      */
     @Override
-    protected Type verifyDeclParam(DecacCompiler compiler)
+    protected Type verifyDeclParam(DecacCompiler compiler, EnvironmentExp envParms)
             throws ContextualError {
             LOG.debug("[DeclParam][verifyDecleParam] Verify a paramère d'une méthode");
             Type typeParam = type.verifyType(compiler);
@@ -88,6 +88,11 @@ public class DeclParam extends AbstractDeclParam {
             }
             ParamDefinition paramDef = new ParamDefinition(typeParam, getLocation());
             paramName.setDefinition(paramDef);
+            try {
+                envParms.declare(paramName.getName(), paramDef);
+            } catch (EnvironmentExp.DoubleDefException e) {
+                throw new ContextualError("double declaration de paramétre", getLocation());
+            }
             
             return typeParam;  //il faut le 'type' comme la type de return pour charger la signature 
 

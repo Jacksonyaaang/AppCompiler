@@ -198,10 +198,14 @@ public class Identifier extends AbstractIdentifier {
                            ClassDefinition currentClass) throws ContextualError {
         LOG.debug("[Identifier][verifyExpr]");
         //Envoie une ContextualError si l'identificateur n'est pas défini
-        if(!localEnv.getExp().containsKey(getName())){
-            throw new ContextualError("L'identificateur " + getName().getName() + " n'est pas défini",getLocation());
+        EnvironmentExp tmpEnv;
+        for (tmpEnv = localEnv; tmpEnv != null; tmpEnv = tmpEnv.getParent()){
+            if (!tmpEnv.getExp().containsKey(name) && tmpEnv.getParent() == null)
+                throw new ContextualError("L'identificateur " + getName().getName() + " n'est pas défini",getLocation());
+            else if (tmpEnv.getExp().containsKey(name)) break;
+
         }
-        Definition Defi = localEnv.get(name);
+        Definition Defi = tmpEnv.get(name);
         setDefinition(Defi);
         setType(localEnv.get(name).getType());
         return getType();
