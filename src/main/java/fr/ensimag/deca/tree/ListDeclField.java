@@ -53,7 +53,7 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
             ClassDefinition currentClass) throws ContextualError {
             LOG.debug("[ListDeclField][verifyListDeclField]");
         for (AbstractDeclField declField : getList()){
-            //declField.verifyDeclVar(compiler, localEnv, currentClass);
+            declField.verifyDeclField(compiler, localEnv, currentClass);
         }
     }
 

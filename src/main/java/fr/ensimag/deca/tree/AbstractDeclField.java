@@ -29,6 +29,9 @@ public abstract class AbstractDeclField extends Tree {
     protected abstract void verifyDeclField(DecacCompiler compiler,
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError;
+    
+    protected abstract void initFieldPass3(DecacCompiler compiler, EnvironmentExp localEnv, 
+        ClassDefinition currentClass) throws ContextualError;
             
     public void codeGenDecl(DecacCompiler compiler) throws CodeGenError {
         throw new CodeGenError(getLocation(), "This method must not be called at this level");

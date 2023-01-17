@@ -81,8 +81,37 @@ public class DeclField extends AbstractDeclField {
 
     @Override
     protected void verifyDeclField(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
-            throws ContextualError {
-        // TODO Auto-generated method stub
+        throws ContextualError {
+        LOG.debug("[DeclField][verifyDecleField] Verify a Field declaration");
+        ClassDefinition tmpClass;
+        for (tmpClass = currentClass.getSuperClass(); tmpClass != null; tmpClass = tmpClass.getSuperClass()){
+            if (tmpClass.getMembers().getExp().containsKey(varName.getName()) && 
+                varName.getDefinition() instanceof MethodDefinition){
+                    throw new ContextualError(" il y'a une methode du même nom dans le super", getLocation());
+                }
+        }
+        Type t = type.verifyType(compiler);
+        type.setType(t);
+        //Vérification de la condition type =/= void de la règle 3.17
+        if(t.isVoid()) {
+            throw new ContextualError("Déclaraion de Field de type void impossible", getLocation());
+        }
+        //initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
+        int _index = currentClass.getNumberOfFields() + 1;
+        FieldDefinition fieldDf = new FieldDefinition(type.getType(), getLocation(), visibility, currentClass, _index);      //new FieldDefinition(type.getType(), varName.getLocation());
+        varName.setDefinition(fieldDf);
+        try{
+            localEnv.declare(varName.getName(), varName.getExpDefinition());
+        } 
+        catch (EnvironmentExp.DoubleDefException e) {
+            throw new ContextualError("y'a deja un field ou une methode du même nom", getLocation());
+        }
+        currentClass.setNumberOfFields(_index);
         
+    }
+    @Override
+    protected void initFieldPass3(DecacCompiler compiler, EnvironmentExp localEnv, 
+        ClassDefinition currentClass) throws ContextualError{
+        initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
     }
 }
