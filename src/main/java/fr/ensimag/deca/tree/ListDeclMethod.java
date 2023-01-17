@@ -26,6 +26,14 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
             ClassDefinition currentClass) throws ContextualError {
             LOG.debug("[ListDeclMethod][verifyListDeclMethod]");
         for (AbstractDeclMethod declMethod : getList()){
+            declMethod.verifyDeclMethodSimple(compiler, localEnv, currentClass);
+        }
+    }
+
+    void verifyListDeclMethodBody(DecacCompiler compiler, EnvironmentExp localEnv,
+            ClassDefinition currentClass) throws ContextualError {
+            LOG.debug("[ListDeclMethod][verifyListDeclMethod]");
+        for (AbstractDeclMethod declMethod : getList()){
             declMethod.verifyDeclMethod(compiler, localEnv, currentClass);
         }
     }

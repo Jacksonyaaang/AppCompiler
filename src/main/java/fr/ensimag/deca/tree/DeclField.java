@@ -110,7 +110,7 @@ public class DeclField extends AbstractDeclField {
         
     }
     @Override
-    protected void initFieldPass3(DecacCompiler compiler, EnvironmentExp localEnv, 
+    protected void verifyinitFieldPass3(DecacCompiler compiler, EnvironmentExp localEnv, 
         ClassDefinition currentClass) throws ContextualError{
         initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
     }

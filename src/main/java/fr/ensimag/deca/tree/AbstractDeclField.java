@@ -30,7 +30,7 @@ public abstract class AbstractDeclField extends Tree {
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError;
     
-    protected abstract void initFieldPass3(DecacCompiler compiler, EnvironmentExp localEnv, 
+    protected abstract void verifyinitFieldPass3(DecacCompiler compiler, EnvironmentExp localEnv, 
         ClassDefinition currentClass) throws ContextualError;
             
     public void codeGenDecl(DecacCompiler compiler) throws CodeGenError {
