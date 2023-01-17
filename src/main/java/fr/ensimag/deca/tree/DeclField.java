@@ -52,9 +52,6 @@ public class DeclField extends AbstractDeclField {
         if(getVisibility()==Visibility.PROTECTED){
             s.print("protected ");
         }
-        else {
-            s.print("public ");
-        }
         getType().decompile(s);
         s.print(" ");
         getVarName().decompile(s);
