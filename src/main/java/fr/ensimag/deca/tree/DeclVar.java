@@ -56,6 +56,7 @@ public class DeclVar extends AbstractDeclVar {
         catch (EnvironmentExp.DoubleDefException e) {
             throw new ContextualError(e.getMessage(), getLocation());
         }
+        //varName.verifyExpr(compiler, localEnv, currentClass);
         //On associe à la variable défini une adresse dans le stack avec une adresse X(Gb)
         this.varName.getExpDefinition().setOperand(new RegisterOffset(compiler.incrementGbCompiler(), Register.GB)); 
         LOG.debug("[DeclVar] Saving " + this.varName.getName() + " into " + this.varName.getExpDefinition().getOperand());
