@@ -10,10 +10,12 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import org.apache.log4j.Logger;
 
 public class This extends AbstractExpr{
 
     protected boolean bool ;
+    private static final Logger LOG = Logger.getLogger(This.class);
 
     @Override
     boolean isImplicit() {
@@ -28,8 +30,12 @@ public class This extends AbstractExpr{
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
-        // TODO Auto-generated method stub
-        return null;
+        LOG.debug("[This][verifyExpr]");
+        if(currentClass.getType().sameType(compiler.environmentType.OBJECT)){
+            throw new ContextualError("L'expression this. ne peut pas appeler un objet de type Object", getLocation());
+        }
+        setType(currentClass.getType());
+        return currentClass.getType();
     }
 
     @Override
