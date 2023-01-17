@@ -57,6 +57,14 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
         }
     }
 
+    void verifyInitFields(DecacCompiler compiler, EnvironmentExp localEnv,
+            ClassDefinition currentClass) throws ContextualError {
+            LOG.debug("[ListDeclField][verifyInitListDeclField]");
+        for (AbstractDeclField declField : getList()){
+            declField.verifyinitFieldPass3(compiler, localEnv, currentClass);
+        }
+    }
+
 
 
 
