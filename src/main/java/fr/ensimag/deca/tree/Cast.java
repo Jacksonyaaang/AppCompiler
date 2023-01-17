@@ -23,6 +23,9 @@ public class Cast extends AbstractExpr{
     public AbstractExpr getExpr() {
         return expr;
     }
+    protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
+        
+    }
 
     public Cast(AbstractIdentifier typeCast, AbstractExpr expr){
         Validate.notNull(typeCast);
@@ -52,7 +55,7 @@ public class Cast extends AbstractExpr{
     
     @Override
     protected void iterChildren(TreeFunction f) {
-        typeCast.iter(f) ;
+        typeCast.iter(f);
         expr.iter(f);         
     }
     
