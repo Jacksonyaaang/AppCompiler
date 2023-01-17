@@ -5,12 +5,14 @@ import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.RegisterMangementUnit;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.ima.pseudocode.*;
 import static org.mockito.Mockito.mockingDetails;
 import org.apache.log4j.Logger;
 import java.io.PrintStream;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.Validate;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
@@ -98,15 +100,34 @@ public class DeclMethod extends AbstractDeclMethod {
         MethodDefinition methodDef = new MethodDefinition(typeReturn, getLocation(), signature, index);
         methodName.setDefinition(methodDef);
         //pour insérer le nom de méthode dans l'environement local
-        try {
-            localEnv.declare(methodName.getName(), methodName.getExpDefinition());
-        } catch (DoubleDefException e) {
-            //vérifier la condition de règle
-            //get the parent's same-method-name signature:
-            Signature sigSuper=localEnv.get(this.methodName.getName()).asMethodDefinition("sorry it's not a method", getLocation()).getSignature();
-            Type typeSuperReturn=localEnv.get(this.methodName.getName()).asMethodDefinition("sorry it's not a method", getLocation()).getType();
-            doubleDeclNameMethod(compiler, localEnv, sigSuper, signature, typeReturn, typeSuperReturn);
+        if (localEnv.get(methodName.getName())==null){
+            //jamais le déclarer avant 
+            try {
+                localEnv.declare(methodName.getName(), methodName.getExpDefinition());
+            } catch (DoubleDefException e) {
+                //not possible
+            }
+        }else{ //name is already declared, maybe in local maybe in the super-classes 
+            //if it's in the local env:
+            Map<Symbol, ExpDefinition> tempoMap = localEnv.getExp();
+            if (tempoMap.containsKey(this.methodName.getName())){
+                throw new ContextualError("[ERROR] We got the same method name in the current class bro!", getLocation());
+            }else{
+                //the same name is in the super class
+                //vérifier la condition de règle
+                //get the parent's same-method-name signature:
+                Signature sigSuper=localEnv.get(this.methodName.getName()).asMethodDefinition("sorry it's not a method", getLocation()).getSignature();
+                Type typeSuperReturn=localEnv.get(this.methodName.getName()).asMethodDefinition("sorry it's not a method", getLocation()).getType();
+                doubleDeclNameMethod(compiler, localEnv, sigSuper, signature, typeReturn, typeSuperReturn);
+                try {  
+                    localEnv.declare(methodName.getName(), methodName.getExpDefinition());
+                } catch (DoubleDefException e) {
+                    //forcément va marcher ici car on a déjà écorché le cas d'erreur 
+                }
+            }
         }
+
+
         
     }
     /**
