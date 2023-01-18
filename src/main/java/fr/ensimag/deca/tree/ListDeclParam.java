@@ -26,9 +26,14 @@ public class ListDeclParam extends TreeList<AbstractDeclParam> {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        for (AbstractDeclParam v : getList()){
-            v.decompile(s);
-            s.println();
+        if (getList().size() != 0){
+            AbstractDeclParam p1 = getList().get(0);
+            p1.decompile(s);
+            for( int i = 1; i<getList().size(); i++){
+                s.print(", ");
+                AbstractDeclParam p = getList().get(i);
+                p.decompile(s);
+            }
         }
     }
 
@@ -39,7 +44,7 @@ public class ListDeclParam extends TreeList<AbstractDeclParam> {
      * @throws ContextualError
      */
     public Signature verifyListDeclParam(DecacCompiler compiler) throws ContextualError {
-            LOG.debug("[ListDeclParam][verifyListDeclParam]");
+        LOG.debug("[ListDeclParam][verifyListDeclParam] Start");
         Signature signature = new Signature();
         for (AbstractDeclParam declParam : getList()){
             signature.add(declParam.verifyDeclParam(compiler, envExpParams));

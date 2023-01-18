@@ -3,6 +3,7 @@ package fr.ensimag.deca;
 import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.codegen.RegisterMangementUnit;
 import fr.ensimag.deca.codegen.StackManagementUnit;
+import fr.ensimag.deca.codegen.TableDeMethode;
 import fr.ensimag.deca.context.EnvironmentType;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
@@ -173,9 +174,19 @@ public class DecacCompiler {
         return errorManagementUnit;
     }
 
+    /**
+     * Cette unité est utilisée pour associer à des table de méthode des adresses.
+     */
+    public final TableDeMethode tableDeMethodeCompiler = new TableDeMethode();  
+
+    public TableDeMethode getTableDeMethodeCompiler() {
+        return tableDeMethodeCompiler;
+    }
+
     /** The global environment for types (and the symbolTable) */
     public final SymbolTable symbolTable = new SymbolTable();
     public final EnvironmentType environmentType = new EnvironmentType(this);
+
 
     public Symbol createSymbol(String name) {
         return symbolTable.create(name);

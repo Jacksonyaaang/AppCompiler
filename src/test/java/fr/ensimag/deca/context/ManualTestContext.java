@@ -31,11 +31,18 @@ public class ManualTestContext {
             System.exit(1);
             return; // Unreachable, but silents a warning.
         }
+        // try {
+        //     prog.verifyProgram(compiler);
+        // } catch (LocationException e) {
+        //     prog.prettyPrint(System.out);
+        //     e.display(System.err);
+        //     System.exit(1);
+        // }
         try {
             prog.verifyProgram(compiler);
-        } catch (LocationException e) {
+        } catch (Exception e) {
             prog.prettyPrint(System.out);
-            e.display(System.err);
+            //e.display(System.err);
             System.exit(1);
         }
         prog.prettyPrint(System.out);

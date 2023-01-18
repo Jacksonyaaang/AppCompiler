@@ -1,0 +1,578 @@
+`> [17, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [17, 0] Main
+      +> ListDeclVar [List with 9 elements]
+      |  []> [18, 8] DeclVar
+      |  ||  +> [18, 4] Identifier (int)
+      |  ||  +> [18, 8] Identifier (x)
+      |  ||  `> [18, 12] Initialization
+      |  ||     `> [18, 12] Int (2)
+      |  []> [19, 8] DeclVar
+      |  ||  +> [19, 4] Identifier (int)
+      |  ||  +> [19, 8] Identifier (y)
+      |  ||  `> [19, 12] Initialization
+      |  ||     `> [19, 12] Int (2)
+      |  []> [20, 8] DeclVar
+      |  ||  +> [20, 4] Identifier (int)
+      |  ||  +> [20, 8] Identifier (z)
+      |  ||  `> [20, 12] Initialization
+      |  ||     `> [20, 12] Int (2)
+      |  []> [21, 8] DeclVar
+      |  ||  +> [21, 4] Identifier (int)
+      |  ||  +> [21, 8] Identifier (h)
+      |  ||  `> [21, 12] Initialization
+      |  ||     `> [21, 12] Int (2)
+      |  []> [22, 8] DeclVar
+      |  ||  +> [22, 4] Identifier (int)
+      |  ||  +> [22, 8] Identifier (v)
+      |  ||  `> [22, 12] Initialization
+      |  ||     `> [22, 12] Int (2)
+      |  []> [23, 12] DeclVar
+      |  ||  +> [23, 4] Identifier (boolean)
+      |  ||  +> [23, 12] Identifier (b1)
+      |  ||  `> [23, 17] Initialization
+      |  ||     `> [23, 17] BooleanLiteral (true)
+      |  []> [24, 12] DeclVar
+      |  ||  +> [24, 4] Identifier (boolean)
+      |  ||  +> [24, 12] Identifier (b2)
+      |  ||  `> [24, 17] Initialization
+      |  ||     `> [24, 17] BooleanLiteral (true)
+      |  []> [25, 12] DeclVar
+      |  ||  +> [25, 4] Identifier (boolean)
+      |  ||  +> [25, 12] Identifier (b3)
+      |  ||  `> [25, 17] Initialization
+      |  ||     `> [25, 17] BooleanLiteral (false)
+      |  []> [26, 12] DeclVar
+      |      +> [26, 4] Identifier (boolean)
+      |      +> [26, 12] Identifier (b4)
+      |      `> [26, 17] Initialization
+      |         `> [26, 17] BooleanLiteral (false)
+      `> ListInst [List with 8 elements]
+         []> [29, 4] IfThenElse
+         ||  +> [29, 10] Equals
+         ||  |  +> [29, 11] Minus
+         ||  |  |  +> [29, 11] Minus
+         ||  |  |  |  +> [29, 12] Plus
+         ||  |  |  |  |  +> [29, 12] Identifier (x)
+         ||  |  |  |  |  `> [29, 14] Identifier (y)
+         ||  |  |  |  `> [29, 18] Multiply
+         ||  |  |  |     +> [29, 20] Minus
+         ||  |  |  |     |  +> [29, 21] Multiply
+         ||  |  |  |     |  |  +> [29, 22] Minus
+         ||  |  |  |     |  |  |  +> [29, 23] Plus
+         ||  |  |  |     |  |  |  |  +> [29, 24] Minus
+         ||  |  |  |     |  |  |  |  |  +> [29, 25] Multiply
+         ||  |  |  |     |  |  |  |  |  |  +> [29, 26] Minus
+         ||  |  |  |     |  |  |  |  |  |  |  +> [29, 27] Plus
+         ||  |  |  |     |  |  |  |  |  |  |  |  +> [29, 27] Identifier (x)
+         ||  |  |  |     |  |  |  |  |  |  |  |  `> [29, 29] Identifier (y)
+         ||  |  |  |     |  |  |  |  |  |  |  `> [29, 32] Int (2)
+         ||  |  |  |     |  |  |  |  |  |  `> [29, 35] Int (7)
+         ||  |  |  |     |  |  |  |  |  `> [29, 38] Identifier (h)
+         ||  |  |  |     |  |  |  |  `> [29, 41] Identifier (y)
+         ||  |  |  |     |  |  |  `> [29, 44] Int (2)
+         ||  |  |  |     |  |  `> [29, 47] Int (7)
+         ||  |  |  |     |  `> [29, 50] Identifier (h)
+         ||  |  |  |     `> [29, 54] Int (7)
+         ||  |  |  `> [29, 57] Identifier (h)
+         ||  |  `> [29, 64] UnaryMinus
+         ||  |     `> [29, 64] Int (572)
+         ||  +> ListInst [List with 1 elements]
+         ||  |  []> [30, 16] Println
+         ||  |      `> ListExpr [List with 1 elements]
+         ||  |         []> [30, 16] StringLiteral (if correct IF 1)
+         ||  `> ListInst [List with 1 elements]
+         ||     []> [33, 16] Println
+         ||         `> ListExpr [List with 1 elements]
+         ||            []> [33, 16] StringLiteral (problem with code IF 1)
+         []> [36, 4] IfThenElse
+         ||  +> [36, 10] Equals
+         ||  |  +> [36, 11] Minus
+         ||  |  |  +> [36, 11] Minus
+         ||  |  |  |  +> [36, 12] Plus
+         ||  |  |  |  |  +> [36, 12] Identifier (x)
+         ||  |  |  |  |  `> [36, 14] Identifier (y)
+         ||  |  |  |  `> [36, 18] Multiply
+         ||  |  |  |     +> [36, 20] Minus
+         ||  |  |  |     |  +> [36, 21] Multiply
+         ||  |  |  |     |  |  +> [36, 22] Minus
+         ||  |  |  |     |  |  |  +> [36, 23] Plus
+         ||  |  |  |     |  |  |  |  +> [36, 24] Minus
+         ||  |  |  |     |  |  |  |  |  +> [36, 25] Multiply
+         ||  |  |  |     |  |  |  |  |  |  +> [36, 26] Minus
+         ||  |  |  |     |  |  |  |  |  |  |  +> [36, 27] Plus
+         ||  |  |  |     |  |  |  |  |  |  |  |  +> [36, 27] Identifier (x)
+         ||  |  |  |     |  |  |  |  |  |  |  |  `> [36, 29] Identifier (y)
+         ||  |  |  |     |  |  |  |  |  |  |  `> [36, 32] Int (2)
+         ||  |  |  |     |  |  |  |  |  |  `> [36, 35] Int (7)
+         ||  |  |  |     |  |  |  |  |  `> [36, 38] Identifier (h)
+         ||  |  |  |     |  |  |  |  `> [36, 41] Identifier (y)
+         ||  |  |  |     |  |  |  `> [36, 44] Int (2)
+         ||  |  |  |     |  |  `> [36, 47] Int (7)
+         ||  |  |  |     |  `> [36, 50] Identifier (h)
+         ||  |  |  |     `> [36, 54] Int (7)
+         ||  |  |  `> [36, 57] Identifier (h)
+         ||  |  `> [36, 64] UnaryMinus
+         ||  |     `> [36, 64] Int (571)
+         ||  +> ListInst [List with 1 elements]
+         ||  |  []> [37, 16] Println
+         ||  |      `> ListExpr [List with 1 elements]
+         ||  |         []> [37, 16] StringLiteral (problem with code IF 2)
+         ||  `> ListInst [List with 1 elements]
+         ||     []> [39, 4] IfThenElse
+         ||         +> [39, 15] Equals
+         ||         |  +> [39, 16] Minus
+         ||         |  |  +> [39, 16] Minus
+         ||         |  |  |  +> [39, 17] Plus
+         ||         |  |  |  |  +> [39, 17] Identifier (x)
+         ||         |  |  |  |  `> [39, 19] Identifier (y)
+         ||         |  |  |  `> [39, 23] Multiply
+         ||         |  |  |     +> [39, 25] Minus
+         ||         |  |  |     |  +> [39, 26] Multiply
+         ||         |  |  |     |  |  +> [39, 27] Minus
+         ||         |  |  |     |  |  |  +> [39, 28] Plus
+         ||         |  |  |     |  |  |  |  +> [39, 29] Minus
+         ||         |  |  |     |  |  |  |  |  +> [39, 30] Multiply
+         ||         |  |  |     |  |  |  |  |  |  +> [39, 31] Minus
+         ||         |  |  |     |  |  |  |  |  |  |  +> [39, 32] Plus
+         ||         |  |  |     |  |  |  |  |  |  |  |  +> [39, 32] Identifier (x)
+         ||         |  |  |     |  |  |  |  |  |  |  |  `> [39, 34] Identifier (y)
+         ||         |  |  |     |  |  |  |  |  |  |  `> [39, 37] Int (2)
+         ||         |  |  |     |  |  |  |  |  |  `> [39, 40] Int (7)
+         ||         |  |  |     |  |  |  |  |  `> [39, 43] Identifier (h)
+         ||         |  |  |     |  |  |  |  `> [39, 46] Identifier (y)
+         ||         |  |  |     |  |  |  `> [39, 49] Int (2)
+         ||         |  |  |     |  |  `> [39, 52] Int (7)
+         ||         |  |  |     |  `> [39, 55] Identifier (h)
+         ||         |  |  |     `> [39, 59] Int (7)
+         ||         |  |  `> [39, 62] Identifier (h)
+         ||         |  `> [39, 69] UnaryMinus
+         ||         |     `> [39, 69] Int (571)
+         ||         +> ListInst [List with 1 elements]
+         ||         |  []> [40, 16] Println
+         ||         |      `> ListExpr [List with 1 elements]
+         ||         |         []> [40, 16] StringLiteral (problem with code IF 2)
+         ||         `> ListInst [List with 1 elements]
+         ||            []> [42, 4] IfThenElse
+         ||                +> [42, 15] And
+         ||                |  +> [42, 15] Equals
+         ||                |  |  +> [42, 16] Minus
+         ||                |  |  |  +> [42, 16] Minus
+         ||                |  |  |  |  +> [42, 17] Plus
+         ||                |  |  |  |  |  +> [42, 17] Identifier (x)
+         ||                |  |  |  |  |  `> [42, 19] Identifier (y)
+         ||                |  |  |  |  `> [42, 23] Multiply
+         ||                |  |  |  |     +> [42, 25] Minus
+         ||                |  |  |  |     |  +> [42, 26] Multiply
+         ||                |  |  |  |     |  |  +> [42, 27] Minus
+         ||                |  |  |  |     |  |  |  +> [42, 28] Plus
+         ||                |  |  |  |     |  |  |  |  +> [42, 29] Minus
+         ||                |  |  |  |     |  |  |  |  |  +> [42, 30] Multiply
+         ||                |  |  |  |     |  |  |  |  |  |  +> [42, 31] Minus
+         ||                |  |  |  |     |  |  |  |  |  |  |  +> [42, 32] Plus
+         ||                |  |  |  |     |  |  |  |  |  |  |  |  +> [42, 32] Identifier (x)
+         ||                |  |  |  |     |  |  |  |  |  |  |  |  `> [42, 34] Identifier (y)
+         ||                |  |  |  |     |  |  |  |  |  |  |  `> [42, 37] Int (2)
+         ||                |  |  |  |     |  |  |  |  |  |  `> [42, 40] Int (7)
+         ||                |  |  |  |     |  |  |  |  |  `> [42, 43] Identifier (h)
+         ||                |  |  |  |     |  |  |  |  `> [42, 46] Identifier (y)
+         ||                |  |  |  |     |  |  |  `> [42, 49] Int (2)
+         ||                |  |  |  |     |  |  `> [42, 52] Int (7)
+         ||                |  |  |  |     |  `> [42, 55] Identifier (h)
+         ||                |  |  |  |     `> [42, 59] Int (7)
+         ||                |  |  |  `> [42, 62] Identifier (h)
+         ||                |  |  `> [42, 69] UnaryMinus
+         ||                |  |     `> [42, 69] Int (572)
+         ||                |  `> [42, 77] And
+         ||                |     +> [42, 78] And
+         ||                |     |  +> [42, 78] Equals
+         ||                |     |  |  +> [42, 78] Identifier (h)
+         ||                |     |  |  `> [42, 83] Identifier (v)
+         ||                |     |  `> [42, 89] Equals
+         ||                |     |     +> [42, 89] Identifier (v)
+         ||                |     |     `> [42, 94] Identifier (z)
+         ||                |     `> [42, 102] And
+         ||                |        +> [42, 102] Equals
+         ||                |        |  +> [42, 102] Identifier (h)
+         ||                |        |  `> [42, 107] Identifier (v)
+         ||                |        `> [42, 113] Equals
+         ||                |           +> [42, 113] Identifier (v)
+         ||                |           `> [42, 118] Identifier (z)
+         ||                +> ListInst [List with 1 elements]
+         ||                |  []> [43, 16] Println
+         ||                |      `> ListExpr [List with 1 elements]
+         ||                |         []> [43, 16] StringLiteral (if correct IF 2)
+         ||                `> ListInst [List with 1 elements]
+         ||                   []> [46, 16] Println
+         ||                       `> ListExpr [List with 1 elements]
+         ||                          []> [46, 16] StringLiteral (problem with code IF 2)
+         []> [49, 4] IfThenElse
+         ||  +> [49, 8] And
+         ||  |  +> [49, 8] And
+         ||  |  |  +> [49, 8] Identifier (b1)
+         ||  |  |  `> [49, 15] And
+         ||  |  |     +> [49, 15] Identifier (b1)
+         ||  |  |     `> [49, 22] And
+         ||  |  |        +> [49, 22] Identifier (b1)
+         ||  |  |        `> [49, 29] And
+         ||  |  |           +> [49, 29] Identifier (b1)
+         ||  |  |           `> [49, 36] And
+         ||  |  |              +> [49, 36] Identifier (b1)
+         ||  |  |              `> [49, 43] And
+         ||  |  |                 +> [49, 43] Identifier (b1)
+         ||  |  |                 `> [49, 49] Identifier (b2)
+         ||  |  `> [49, 65] And
+         ||  |     +> [49, 65] Identifier (b1)
+         ||  |     `> [49, 72] And
+         ||  |        +> [49, 72] Identifier (b1)
+         ||  |        `> [49, 79] And
+         ||  |           +> [49, 79] Identifier (b1)
+         ||  |           `> [49, 86] Or
+         ||  |              +> [49, 86] Identifier (b1)
+         ||  |              `> [49, 93] And
+         ||  |                 +> [49, 93] Identifier (b1)
+         ||  |                 `> [49, 99] Identifier (b3)
+         ||  +> ListInst [List with 1 elements]
+         ||  |  []> [50, 16] Println
+         ||  |      `> ListExpr [List with 1 elements]
+         ||  |         []> [50, 16] StringLiteral (if correct IF 3)
+         ||  `> ListInst [List with 1 elements]
+         ||     []> [54, 16] Println
+         ||         `> ListExpr [List with 1 elements]
+         ||            []> [54, 16] StringLiteral (problem with IF 3)
+         []> [57, 4] IfThenElse
+         ||  +> [57, 8] And
+         ||  |  +> [57, 8] And
+         ||  |  |  +> [57, 8] Identifier (b1)
+         ||  |  |  `> [57, 15] And
+         ||  |  |     +> [57, 15] Identifier (b1)
+         ||  |  |     `> [57, 22] And
+         ||  |  |        +> [57, 22] Identifier (b1)
+         ||  |  |        `> [57, 29] And
+         ||  |  |           +> [57, 29] Identifier (b1)
+         ||  |  |           `> [57, 36] And
+         ||  |  |              +> [57, 36] Identifier (b1)
+         ||  |  |              `> [57, 43] And
+         ||  |  |                 +> [57, 43] Identifier (b1)
+         ||  |  |                 `> [57, 49] Identifier (b2)
+         ||  |  `> [57, 65] And
+         ||  |     +> [57, 65] Identifier (b1)
+         ||  |     `> [57, 72] And
+         ||  |        +> [57, 72] Identifier (b1)
+         ||  |        `> [57, 79] And
+         ||  |           +> [57, 79] Identifier (b1)
+         ||  |           `> [57, 86] Or
+         ||  |              +> [57, 86] Identifier (b1)
+         ||  |              `> [57, 93] Or
+         ||  |                 +> [57, 93] Or
+         ||  |                 |  +> [57, 93] And
+         ||  |                 |  |  +> [57, 93] Identifier (b1)
+         ||  |                 |  |  `> [57, 99] Identifier (b3)
+         ||  |                 |  `> [57, 105] Identifier (b4)
+         ||  |                 `> [57, 112] And
+         ||  |                    +> [57, 112] And
+         ||  |                    |  +> [57, 112] Identifier (b2)
+         ||  |                    |  `> [57, 118] Identifier (b1)
+         ||  |                    `> [57, 125] Not
+         ||  |                       `> [57, 126] Or
+         ||  |                          +> [57, 126] Identifier (b3)
+         ||  |                          `> [57, 132] Identifier (b4)
+         ||  +> ListInst [List with 1 elements]
+         ||  |  []> [58, 16] Println
+         ||  |      `> ListExpr [List with 1 elements]
+         ||  |         []> [58, 16] StringLiteral (if correct IF 4)
+         ||  `> ListInst [List with 1 elements]
+         ||     []> [62, 16] Println
+         ||         `> ListExpr [List with 1 elements]
+         ||            []> [62, 16] StringLiteral (problem with IF 4)
+         []> [65, 4] IfThenElse
+         ||  +> [65, 8] And
+         ||  |  +> [65, 9] And
+         ||  |  |  +> [65, 9] And
+         ||  |  |  |  +> [65, 9] Identifier (b1)
+         ||  |  |  |  `> [65, 16] And
+         ||  |  |  |     +> [65, 16] Identifier (b1)
+         ||  |  |  |     `> [65, 23] And
+         ||  |  |  |        +> [65, 23] Identifier (b1)
+         ||  |  |  |        `> [65, 30] And
+         ||  |  |  |           +> [65, 30] Identifier (b1)
+         ||  |  |  |           `> [65, 37] And
+         ||  |  |  |              +> [65, 37] Identifier (b1)
+         ||  |  |  |              `> [65, 44] And
+         ||  |  |  |                 +> [65, 44] Identifier (b1)
+         ||  |  |  |                 `> [65, 50] Identifier (b2)
+         ||  |  |  `> [65, 66] And
+         ||  |  |     +> [65, 66] Identifier (b1)
+         ||  |  |     `> [65, 73] And
+         ||  |  |        +> [65, 73] Identifier (b1)
+         ||  |  |        `> [65, 80] And
+         ||  |  |           +> [65, 80] Identifier (b1)
+         ||  |  |           `> [65, 87] Or
+         ||  |  |              +> [65, 87] Identifier (b1)
+         ||  |  |              `> [65, 94] Or
+         ||  |  |                 +> [65, 94] Or
+         ||  |  |                 |  +> [65, 94] And
+         ||  |  |                 |  |  +> [65, 94] Identifier (b1)
+         ||  |  |                 |  |  `> [65, 100] Identifier (b3)
+         ||  |  |                 |  `> [65, 106] Identifier (b4)
+         ||  |  |                 `> [65, 113] And
+         ||  |  |                    +> [65, 113] And
+         ||  |  |                    |  +> [65, 113] Identifier (b2)
+         ||  |  |                    |  `> [65, 119] Identifier (b1)
+         ||  |  |                    `> [65, 126] Not
+         ||  |  |                       `> [65, 127] Or
+         ||  |  |                          +> [65, 127] Identifier (b3)
+         ||  |  |                          `> [65, 133] Identifier (b4)
+         ||  |  `> [65, 147] Identifier (b4)
+         ||  +> ListInst [List with 1 elements]
+         ||  |  []> [66, 16] Println
+         ||  |      `> ListExpr [List with 1 elements]
+         ||  |         []> [66, 16] StringLiteral (problem with IF 5)
+         ||  `> ListInst [List with 1 elements]
+         ||     []> [70, 16] Println
+         ||         `> ListExpr [List with 1 elements]
+         ||            []> [70, 16] StringLiteral (if correct IF 5)
+         []> [73, 4] IfThenElse
+         ||  +> [73, 8] And
+         ||  |  +> [73, 9] And
+         ||  |  |  +> [73, 9] And
+         ||  |  |  |  +> [73, 9] Identifier (b1)
+         ||  |  |  |  `> [73, 16] And
+         ||  |  |  |     +> [73, 16] Identifier (b1)
+         ||  |  |  |     `> [73, 23] And
+         ||  |  |  |        +> [73, 23] Identifier (b1)
+         ||  |  |  |        `> [73, 30] And
+         ||  |  |  |           +> [73, 30] Identifier (b1)
+         ||  |  |  |           `> [73, 37] And
+         ||  |  |  |              +> [73, 37] Identifier (b1)
+         ||  |  |  |              `> [73, 44] And
+         ||  |  |  |                 +> [73, 44] Identifier (b1)
+         ||  |  |  |                 `> [73, 50] Identifier (b2)
+         ||  |  |  `> [73, 66] And
+         ||  |  |     +> [73, 66] Identifier (b1)
+         ||  |  |     `> [73, 73] And
+         ||  |  |        +> [73, 73] Identifier (b1)
+         ||  |  |        `> [73, 80] And
+         ||  |  |           +> [73, 80] Identifier (b1)
+         ||  |  |           `> [73, 87] Or
+         ||  |  |              +> [73, 87] Identifier (b1)
+         ||  |  |              `> [73, 94] Or
+         ||  |  |                 +> [73, 94] Or
+         ||  |  |                 |  +> [73, 94] And
+         ||  |  |                 |  |  +> [73, 94] Identifier (b1)
+         ||  |  |                 |  |  `> [73, 100] Identifier (b3)
+         ||  |  |                 |  `> [73, 106] Identifier (b4)
+         ||  |  |                 `> [73, 113] And
+         ||  |  |                    +> [73, 113] And
+         ||  |  |                    |  +> [73, 113] Identifier (b2)
+         ||  |  |                    |  `> [73, 119] Identifier (b1)
+         ||  |  |                    `> [73, 126] Not
+         ||  |  |                       `> [73, 127] Or
+         ||  |  |                          +> [73, 127] Identifier (b3)
+         ||  |  |                          `> [73, 133] Identifier (b4)
+         ||  |  `> [73, 147] Identifier (b4)
+         ||  +> ListInst [List with 1 elements]
+         ||  |  []> [74, 16] Println
+         ||  |      `> ListExpr [List with 1 elements]
+         ||  |         []> [74, 16] StringLiteral (problem with IF 6)
+         ||  `> ListInst [List with 1 elements]
+         ||     []> [76, 4] IfThenElse
+         ||         +> [76, 13] And
+         ||         |  +> [76, 14] And
+         ||         |  |  +> [76, 14] And
+         ||         |  |  |  +> [76, 14] Identifier (b1)
+         ||         |  |  |  `> [76, 21] And
+         ||         |  |  |     +> [76, 21] Identifier (b1)
+         ||         |  |  |     `> [76, 28] And
+         ||         |  |  |        +> [76, 28] Identifier (b1)
+         ||         |  |  |        `> [76, 35] And
+         ||         |  |  |           +> [76, 35] Identifier (b1)
+         ||         |  |  |           `> [76, 42] And
+         ||         |  |  |              +> [76, 42] Identifier (b1)
+         ||         |  |  |              `> [76, 49] And
+         ||         |  |  |                 +> [76, 49] Identifier (b1)
+         ||         |  |  |                 `> [76, 55] Identifier (b2)
+         ||         |  |  `> [76, 71] And
+         ||         |  |     +> [76, 71] Identifier (b1)
+         ||         |  |     `> [76, 78] And
+         ||         |  |        +> [76, 78] Identifier (b1)
+         ||         |  |        `> [76, 85] And
+         ||         |  |           +> [76, 85] Identifier (b1)
+         ||         |  |           `> [76, 92] Or
+         ||         |  |              +> [76, 92] Identifier (b1)
+         ||         |  |              `> [76, 99] Or
+         ||         |  |                 +> [76, 99] Or
+         ||         |  |                 |  +> [76, 99] And
+         ||         |  |                 |  |  +> [76, 99] Identifier (b1)
+         ||         |  |                 |  |  `> [76, 105] Identifier (b3)
+         ||         |  |                 |  `> [76, 111] Identifier (b4)
+         ||         |  |                 `> [76, 118] And
+         ||         |  |                    +> [76, 118] And
+         ||         |  |                    |  +> [76, 118] Identifier (b2)
+         ||         |  |                    |  `> [76, 124] Identifier (b1)
+         ||         |  |                    `> [76, 131] Not
+         ||         |  |                       `> [76, 132] Or
+         ||         |  |                          +> [76, 132] Identifier (b3)
+         ||         |  |                          `> [76, 138] Identifier (b4)
+         ||         |  `> [76, 152] Identifier (b4)
+         ||         +> ListInst [List with 1 elements]
+         ||         |  []> [77, 16] Println
+         ||         |      `> ListExpr [List with 1 elements]
+         ||         |         []> [77, 16] StringLiteral (problem with IF 6 )
+         ||         `> ListInst [List with 1 elements]
+         ||            []> [79, 4] IfThenElse
+         ||                +> [79, 13] And
+         ||                |  +> [79, 14] And
+         ||                |  |  +> [79, 14] And
+         ||                |  |  |  +> [79, 14] Identifier (b1)
+         ||                |  |  |  `> [79, 21] And
+         ||                |  |  |     +> [79, 21] Identifier (b1)
+         ||                |  |  |     `> [79, 28] And
+         ||                |  |  |        +> [79, 28] Identifier (b1)
+         ||                |  |  |        `> [79, 35] And
+         ||                |  |  |           +> [79, 35] Identifier (b1)
+         ||                |  |  |           `> [79, 42] And
+         ||                |  |  |              +> [79, 42] Identifier (b1)
+         ||                |  |  |              `> [79, 49] And
+         ||                |  |  |                 +> [79, 49] Identifier (b1)
+         ||                |  |  |                 `> [79, 55] Identifier (b2)
+         ||                |  |  `> [79, 71] And
+         ||                |  |     +> [79, 71] Identifier (b1)
+         ||                |  |     `> [79, 78] And
+         ||                |  |        +> [79, 78] Identifier (b1)
+         ||                |  |        `> [79, 85] And
+         ||                |  |           +> [79, 85] Identifier (b1)
+         ||                |  |           `> [79, 92] Or
+         ||                |  |              +> [79, 92] Identifier (b1)
+         ||                |  |              `> [79, 99] Or
+         ||                |  |                 +> [79, 99] Or
+         ||                |  |                 |  +> [79, 99] And
+         ||                |  |                 |  |  +> [79, 99] Identifier (b1)
+         ||                |  |                 |  |  `> [79, 105] Identifier (b3)
+         ||                |  |                 |  `> [79, 111] Identifier (b4)
+         ||                |  |                 `> [79, 118] And
+         ||                |  |                    +> [79, 118] And
+         ||                |  |                    |  +> [79, 118] Identifier (b2)
+         ||                |  |                    |  `> [79, 124] Identifier (b1)
+         ||                |  |                    `> [79, 131] Not
+         ||                |  |                       `> [79, 132] Or
+         ||                |  |                          +> [79, 132] Identifier (b3)
+         ||                |  |                          `> [79, 138] Identifier (b4)
+         ||                |  `> [79, 152] Identifier (b4)
+         ||                +> ListInst [List with 1 elements]
+         ||                |  []> [80, 16] Println
+         ||                |      `> ListExpr [List with 1 elements]
+         ||                |         []> [80, 16] StringLiteral (problem with IF 6 )
+         ||                `> ListInst [List with 1 elements]
+         ||                   []> [82, 4] IfThenElse
+         ||                       +> [82, 13] And
+         ||                       |  +> [82, 14] And
+         ||                       |  |  +> [82, 14] And
+         ||                       |  |  |  +> [82, 14] Identifier (b1)
+         ||                       |  |  |  `> [82, 21] And
+         ||                       |  |  |     +> [82, 21] Identifier (b1)
+         ||                       |  |  |     `> [82, 28] And
+         ||                       |  |  |        +> [82, 28] Identifier (b1)
+         ||                       |  |  |        `> [82, 35] And
+         ||                       |  |  |           +> [82, 35] Identifier (b1)
+         ||                       |  |  |           `> [82, 42] And
+         ||                       |  |  |              +> [82, 42] Identifier (b1)
+         ||                       |  |  |              `> [82, 49] And
+         ||                       |  |  |                 +> [82, 49] Identifier (b1)
+         ||                       |  |  |                 `> [82, 55] Identifier (b2)
+         ||                       |  |  `> [82, 71] And
+         ||                       |  |     +> [82, 71] Identifier (b1)
+         ||                       |  |     `> [82, 78] And
+         ||                       |  |        +> [82, 78] Identifier (b1)
+         ||                       |  |        `> [82, 85] And
+         ||                       |  |           +> [82, 85] Identifier (b1)
+         ||                       |  |           `> [82, 92] Or
+         ||                       |  |              +> [82, 92] Identifier (b1)
+         ||                       |  |              `> [82, 99] Or
+         ||                       |  |                 +> [82, 99] Or
+         ||                       |  |                 |  +> [82, 99] And
+         ||                       |  |                 |  |  +> [82, 99] Identifier (b1)
+         ||                       |  |                 |  |  `> [82, 105] Identifier (b3)
+         ||                       |  |                 |  `> [82, 111] Identifier (b4)
+         ||                       |  |                 `> [82, 118] And
+         ||                       |  |                    +> [82, 118] And
+         ||                       |  |                    |  +> [82, 118] Identifier (b2)
+         ||                       |  |                    |  `> [82, 124] Identifier (b1)
+         ||                       |  |                    `> [82, 131] Not
+         ||                       |  |                       `> [82, 132] Or
+         ||                       |  |                          +> [82, 132] Identifier (b3)
+         ||                       |  |                          `> [82, 138] Identifier (b4)
+         ||                       |  `> [82, 152] Identifier (b4)
+         ||                       +> ListInst [List with 1 elements]
+         ||                       |  []> [83, 16] Println
+         ||                       |      `> ListExpr [List with 1 elements]
+         ||                       |         []> [83, 16] StringLiteral (problem with IF 6 )
+         ||                       `> ListInst [List with 1 elements]
+         ||                          []> [85, 4] IfThenElse
+         ||                              +> [85, 13] And
+         ||                              |  +> [85, 14] And
+         ||                              |  |  +> [85, 14] And
+         ||                              |  |  |  +> [85, 14] Identifier (b1)
+         ||                              |  |  |  `> [85, 21] And
+         ||                              |  |  |     +> [85, 21] Identifier (b1)
+         ||                              |  |  |     `> [85, 28] And
+         ||                              |  |  |        +> [85, 28] Identifier (b1)
+         ||                              |  |  |        `> [85, 35] And
+         ||                              |  |  |           +> [85, 35] Identifier (b1)
+         ||                              |  |  |           `> [85, 42] And
+         ||                              |  |  |              +> [85, 42] Identifier (b1)
+         ||                              |  |  |              `> [85, 49] And
+         ||                              |  |  |                 +> [85, 49] Identifier (b1)
+         ||                              |  |  |                 `> [85, 55] Identifier (b2)
+         ||                              |  |  `> [85, 71] And
+         ||                              |  |     +> [85, 71] Identifier (b1)
+         ||                              |  |     `> [85, 78] And
+         ||                              |  |        +> [85, 78] Identifier (b1)
+         ||                              |  |        `> [85, 85] And
+         ||                              |  |           +> [85, 85] Identifier (b1)
+         ||                              |  |           `> [85, 92] Or
+         ||                              |  |              +> [85, 92] Identifier (b1)
+         ||                              |  |              `> [85, 99] Or
+         ||                              |  |                 +> [85, 99] Or
+         ||                              |  |                 |  +> [85, 99] And
+         ||                              |  |                 |  |  +> [85, 99] Identifier (b1)
+         ||                              |  |                 |  |  `> [85, 105] Identifier (b3)
+         ||                              |  |                 |  `> [85, 111] Identifier (b4)
+         ||                              |  |                 `> [85, 118] And
+         ||                              |  |                    +> [85, 118] And
+         ||                              |  |                    |  +> [85, 118] Identifier (b2)
+         ||                              |  |                    |  `> [85, 124] Identifier (b1)
+         ||                              |  |                    `> [85, 131] Not
+         ||                              |  |                       `> [85, 132] Or
+         ||                              |  |                          +> [85, 132] Identifier (b3)
+         ||                              |  |                          `> [85, 138] Identifier (b4)
+         ||                              |  `> [85, 152] Identifier (b4)
+         ||                              +> ListInst [List with 1 elements]
+         ||                              |  []> [86, 16] Println
+         ||                              |      `> ListExpr [List with 1 elements]
+         ||                              |         []> [86, 16] StringLiteral (problem with IF 6 )
+         ||                              `> ListInst [List with 1 elements]
+         ||                                 []> [90, 16] Println
+         ||                                     `> ListExpr [List with 1 elements]
+         ||                                        []> [90, 16] StringLiteral (if correct IF 6)
+         []> [93, 4] IfThenElse
+         ||  +> [93, 8] Assign
+         ||  |  +> [93, 8] Identifier (b1)
+         ||  |  `> [93, 11] BooleanLiteral (false)
+         ||  +> ListInst [List with 1 elements]
+         ||  |  []> [94, 16] Println
+         ||  |      `> ListExpr [List with 1 elements]
+         ||  |         []> [94, 16] StringLiteral (Problem with if 7)
+         ||  `> ListInst [List with 1 elements]
+         ||     []> [97, 16] Println
+         ||         `> ListExpr [List with 1 elements]
+         ||            []> [97, 16] StringLiteral (if correct IF 7)
+         []> [99, 4] IfThenElse
+             +> [99, 8] Assign
+             |  +> [99, 8] Identifier (b3)
+             |  `> [99, 13] BooleanLiteral (true)
+             +> ListInst [List with 1 elements]
+             |  []> [100, 16] Println
+             |      `> ListExpr [List with 1 elements]
+             |         []> [100, 16] StringLiteral (if correct IF 8)
+             `> ListInst [List with 0 elements]

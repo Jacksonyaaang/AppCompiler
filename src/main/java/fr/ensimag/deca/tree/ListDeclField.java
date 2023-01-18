@@ -23,8 +23,8 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        for (AbstractDeclField v : getList()){
-            v.decompile(s);
+        for (AbstractDeclField f : getList()){
+            f.decompile(s);
             s.println();
         }
 

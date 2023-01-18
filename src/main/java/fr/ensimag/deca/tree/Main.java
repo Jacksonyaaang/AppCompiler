@@ -55,7 +55,8 @@ public class Main extends AbstractMain {
         //On reserve de l'espace dans le stack
         if (sizeStack != 0){
             compiler.getErrorManagementUnit().activeError("stack_overflow_error");
-            compiler.getProgram().addFirst(new ADDSP(new ImmediateInteger(sizeStack)));
+            //On reserve uniquement de l'espace dont on stock des valeurs de registres
+            compiler.getProgram().addFirst(new ADDSP(new ImmediateInteger(compiler.getStackManagement().getStacksizeNeededMain())));
             if (!(compiler.getCompilerOptions().isNoCheck())) {
                 compiler.getProgram().addFirst(new BOV(new Label("stack_overflow_error")));
                 compiler.getProgram().addFirst(new TSTO(new ImmediateInteger(sizeStack)));
