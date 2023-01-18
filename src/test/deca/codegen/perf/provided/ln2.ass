@@ -1,0 +1,202 @@
+	TSTO #6
+	BOV stack_overflow_error
+	ADDSP #6
+; start main program
+; Main program
+; Beginning of main instructions:
+	LOAD #0x0.0p0, R2	; loading 0.0 into memory
+	STORE R2, 1(GB)	; Initializing the variable g and loading it into memory
+	LOAD #0x1.0p0, R2	; loading 1.0 into memory
+	STORE R2, 2(GB)	; Initializing the variable d and loading it into memory
+	LOAD #0x1.0p0, R2	; loading 1.0 into memory
+	OPP R2, R2	; Doing an unary minus
+	STORE R2, 3(GB)	; Initializing the variable fg and loading it into memory
+	LOAD #0x1.6fc2ecp-1, R2	; loading 0.718284 into memory
+	STORE R2, 4(GB)	; Initializing the variable fd and loading it into memory
+while_begin1:
+; --------StartBinaryOp--------[17, 11]-----
+	LOAD 2(GB), R2	; loading d into memory
+; --------StartBinaryOp--------[17, 15]-----
+	LOAD 1(GB), R3	; loading g into memory
+	LOAD #0x1.0p-23, R4	; loading 1.1920929E-7 into memory
+	ADD R4, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[17, 15]-----
+	CMP R3, R2	; Comparing registers for GreaterOrEqual operation 
+	SGE R2	; Placing GreaterOrEqual result into the register  
+; --------EndBinaryOp--------[17, 11]-----
+	CMP #1, R2
+	BNE while_end1
+; --------BeginAssignOp--------[18, 1]-----
+; --------StartBinaryOp--------[18, 5]-----
+; --------StartBinaryOp--------[18, 6]-----
+	LOAD 1(GB), R3	; loading g into memory
+	ADD 2(GB), R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[18, 6]-----
+	LOAD #0x1.0p1, R4	; loading 2.0 into memory
+	DIV R4, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[18, 5]-----
+	STORE R3, 5(GB)	;  Assiging a value to m
+	LOAD R3, R2	;  Return value of the assignement of =mand storing it into R2
+; --------EndAssignOp--------[18, 1]-----
+; --------BeginAssignOp--------[19, 2]-----
+; --------StartBinaryOp--------[19, 7]-----
+; --------StartBinaryOp--------[19, 7]-----
+	LOAD 5(GB), R3	; loading m into memory
+; --------StartBinaryOp--------[19, 12]-----
+; --------StartBinaryOp--------[19, 12]-----
+	LOAD 5(GB), R4	; loading m into memory
+; --------StartBinaryOp--------[19, 17]-----
+; --------StartBinaryOp--------[19, 17]-----
+	LOAD 5(GB), R5	; loading m into memory
+; --------StartBinaryOp--------[19, 22]-----
+; --------StartBinaryOp--------[19, 22]-----
+	LOAD 5(GB), R6	; loading m into memory
+; --------StartBinaryOp--------[19, 27]-----
+; --------StartBinaryOp--------[19, 27]-----
+	LOAD 5(GB), R7	; loading m into memory
+; --------StartBinaryOp--------[19, 32]-----
+; --------StartBinaryOp--------[19, 32]-----
+	LOAD 5(GB), R8	; loading m into memory
+; --------StartBinaryOp--------[19, 38]-----
+; --------StartBinaryOp--------[19, 38]-----
+	LOAD 5(GB), R9	; loading m into memory
+; --------StartBinaryOp--------[19, 43]-----
+	LOAD #0x1.0p0, R10	; loading 1.0 into memory
+	LOAD #0x1.3bp12, R11	; loading 5040.0 into memory
+	DIV R11, R10
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 43]-----
+	MUL R10, R9
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 38]-----
+; --------StartBinaryOp--------[19, 57]-----
+	LOAD #0x1.0p0, R10	; loading 1.0 into memory
+	LOAD #0x1.68p9, R11	; loading 720.0 into memory
+	DIV R11, R10
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 57]-----
+	ADD R10, R9
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 38]-----
+	MUL R9, R8
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 32]-----
+; --------StartBinaryOp--------[19, 70]-----
+	LOAD #0x1.0p0, R9	; loading 1.0 into memory
+	LOAD #0x1.ep6, R10	; loading 120.0 into memory
+	DIV R10, R9
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 70]-----
+	ADD R9, R8
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 32]-----
+	MUL R8, R7
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 27]-----
+; --------StartBinaryOp--------[19, 83]-----
+	LOAD #0x1.0p0, R8	; loading 1.0 into memory
+	LOAD #0x1.8p4, R9	; loading 24.0 into memory
+	DIV R9, R8
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 83]-----
+	ADD R8, R7
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 27]-----
+	MUL R7, R6
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 22]-----
+; --------StartBinaryOp--------[19, 95]-----
+	LOAD #0x1.0p0, R7	; loading 1.0 into memory
+	LOAD #0x1.8p2, R8	; loading 6.0 into memory
+	DIV R8, R7
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 95]-----
+	ADD R7, R6
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 22]-----
+	MUL R6, R5
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 17]-----
+; --------StartBinaryOp--------[19, 106]-----
+	LOAD #0x1.0p0, R6	; loading 1.0 into memory
+	LOAD #0x1.0p1, R7	; loading 2.0 into memory
+	DIV R7, R6
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 106]-----
+	ADD R6, R5
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 17]-----
+	MUL R5, R4
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 12]-----
+	LOAD #0x1.0p0, R5	; loading 1.0 into memory
+	ADD R5, R4
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 12]-----
+	MUL R4, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 7]-----
+	LOAD #1, R4	; loading 1 into memory
+	FLOAT R4, R4	; Doing an unary minus
+	SUB R4, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[19, 7]-----
+	STORE R3, 6(GB)	;  Assiging a value to fm
+	LOAD R3, R2	;  Return value of the assignement of =fmand storing it into R2
+; --------EndAssignOp--------[19, 2]-----
+; --------StartBinaryOp--------[20, 5]-----
+	LOAD 6(GB), R2	; loading fm into memory
+	LOAD #0x0.0p0, R3	; loading 0.0 into memory
+	CMP R3, R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+; --------EndBinaryOp--------[20, 5]-----
+; ---------Startif-----------[20, 1]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else1
+; --------BeginAssignOp--------[21, 5]-----
+	LOAD 5(GB), R3	; loading m into memory
+	STORE R3, 2(GB)	;  Assiging a value to d
+	LOAD R3, R2	;  Return value of the assignement of =dand storing it into R2
+; --------EndAssignOp--------[21, 5]-----
+; --------BeginAssignOp--------[22, 5]-----
+	LOAD 6(GB), R3	; loading fm into memory
+	STORE R3, 4(GB)	;  Assiging a value to fd
+	LOAD R3, R2	;  Return value of the assignement of =fdand storing it into R2
+; --------EndAssignOp--------[22, 5]-----
+	BRA end_ifthenelse_1
+else1:
+; --------BeginAssignOp--------[24, 5]-----
+	LOAD 5(GB), R3	; loading m into memory
+	STORE R3, 1(GB)	;  Assiging a value to g
+	LOAD R3, R2	;  Return value of the assignement of =gand storing it into R2
+; --------EndAssignOp--------[24, 5]-----
+; --------BeginAssignOp--------[25, 5]-----
+	LOAD 6(GB), R3	; loading fm into memory
+	STORE R3, 3(GB)	;  Assiging a value to fg
+	LOAD R3, R2	;  Return value of the assignement of =fgand storing it into R2
+; --------EndAssignOp--------[25, 5]-----
+end_ifthenelse_1:
+; ---------Endif-----------
+	BRA while_begin1
+while_end1:
+	LOAD 1(GB), R2	; loading g into memory
+	LOAD R2, R1
+	WFLOAT
+	WSTR " = "
+	LOAD 1(GB), R2	; loading g into memory
+	LOAD R2, R1
+	WFLOATX
+	WNL
+	HALT
+overflow_error:
+	WSTR "Error: overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

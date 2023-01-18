@@ -29,6 +29,7 @@ public class ManualTestSynt {
         parser.setDecacCompiler(decacCompiler);
         AbstractProgram prog = parser.parseProgramAndManageErrors(System.err);
         if (prog == null) {
+            prog.prettyPrint(System.out);
             System.exit(1);
         } else {
             prog.prettyPrint(System.out);

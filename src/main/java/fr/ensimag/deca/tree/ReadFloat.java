@@ -2,11 +2,21 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.RFLOAT;
+
 import java.io.PrintStream;
+
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -15,11 +25,37 @@ import java.io.PrintStream;
  */
 public class ReadFloat extends AbstractReadExpr {
 
+    private static final Logger LOG = Logger.getLogger(ReadFloat.class);
+
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        ClassDefinition currentClass) throws ContextualError {
+        LOG.debug("[ReadFloat][verifyExpr]");
+        setType(compiler.environmentType.FLOAT);
+        return getType();  
     }
+
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) throws CodeGenError
+     {
+        LOG.debug("[ReadFloat][CodeGenInst] generating code for ReadFloat");
+        this.setRegisterDeRetour(this.LoadGencode(compiler, true));
+        LOG.debug("[ReadFloat][codeGenInst] exiting generation method method");
+    }
+
+    
+    @Override
+    public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
+        assert(reg != null);
+        LOG.debug("[ReadFloat][codeGenInst] Convering value stored in the reg" + reg + "register");
+        compiler.addInstruction(new RFLOAT());
+        if (!(compiler.getCompilerOptions().isNoCheck())) { 
+            compiler.addInstruction(new BOV(new Label("io_error")));
+            compiler.getErrorManagementUnit().activeError("io_error");
+        }
+        compiler.addInstruction(new LOAD(Register.getR(1), reg));
+    }
+    
 
 
     @Override

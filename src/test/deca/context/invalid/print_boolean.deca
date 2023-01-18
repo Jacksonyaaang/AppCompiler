@@ -1,0 +1,13 @@
+// Description:
+//    Tester quand deux print les booleans
+//
+// Resultats:
+//    mismatched input
+//
+// Historique:
+//    cree le 01/01/2023
+
+{
+         println(print());
+
+}

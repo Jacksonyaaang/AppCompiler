@@ -1,0 +1,24 @@
+// Description:
+//  test de classe mère/classe fille (initialisation, méthodes et attributs hérités)
+//
+// Resultats:
+//  
+// 
+// Historique:
+//    cree le 15/01/2023
+
+class A2{
+    string field1="héritage d'attribut valide";
+    void printValide(){
+        println("héritage de méthode valide");
+    }
+}
+
+class B2 extends A2{}
+
+
+{
+    B2 b;
+    println(b.field1);
+    b.method1();
+}

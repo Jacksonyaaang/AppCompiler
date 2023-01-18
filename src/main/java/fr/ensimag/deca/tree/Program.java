@@ -1,9 +1,18 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
+import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.LabelOperand;
+import fr.ensimag.ima.pseudocode.NullOperand;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.*;
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -35,17 +44,50 @@ public class Program extends AbstractProgram {
     @Override
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify program: start");
-        throw new UnsupportedOperationException("not yet implemented");
-        // LOG.debug("verify program: end");
+        compiler.saveMainProgramState();
+        classes.verifyListClass(compiler);
+        classes.verifyListClassMembers(compiler);
+        //classes.verifyListClassBody(compiler);
+        compiler.setMainProgramState();
+        main.verifyMain(compiler);
+        LOG.debug("verify program: end");
     }
 
     @Override
-    public void codeGenProgram(DecacCompiler compiler) {
-        // A FAIRE: compléter ce squelette très rudimentaire de code
-        compiler.addComment("Main program");
-        main.codeGenMain(compiler);
+    public void codeGenProgram(DecacCompiler compiler) throws CodeGenError{
+        compiler.addComment("-------------------------------------");
+        compiler.addComment("       Method Table");
+        compiler.addComment("-------------------------------------");
+        generateMethodTableForObjectClass(compiler);
+        compiler.setMainProgramState();
+        classes.codeGenListClassTableau(compiler);
+        classes.codeGenListClassMethod(compiler);
+        compiler.setMainProgramState();
+        compiler.addComment("-------------------------------------");
+        compiler.addComment("       Main program");
+        compiler.addComment("-------------------------------------");
+        //main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());
+        compiler.addComment("-------------------------------------");
+        compiler.addComment("       Classes");
+        compiler.addComment("-------------------------------------");
+        compiler.getProgram().append(classes.getClassesProgram());
+        compiler.addComment("-------------------------------------");
+        compiler.addComment("       Liste Erreur");
+        compiler.addComment("-------------------------------------");
+        compiler.getErrorManagementUnit().writeListError(compiler);
     }
+
+    public void generateMethodTableForObjectClass(DecacCompiler compiler) throws CodeGenError{
+        ClassDefinition objectClassDefinition = (ClassDefinition) compiler.environmentType.getEnvTypes().get(compiler.createSymbol("object"));
+        compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().put(objectClassDefinition, new RegisterOffset(compiler.incrementGbCompiler(), Register.GB));
+        compiler.addInstruction(new LOAD(new NullOperand(), Register.getR(0)));
+        compiler.addInstruction(new STORE(Register.getR(0), compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(objectClassDefinition)));
+        compiler.addInstruction(new LOAD((DVal) new LabelOperand(new Label("code."+objectClassDefinition.getType().getName().getName()+".equals")),
+                                                 Register.getR(0)));
+        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.incrementGbCompiler(), Register.GB)));
+    }
+
 
     @Override
     public void decompile(IndentPrintStream s) {
@@ -58,6 +100,7 @@ public class Program extends AbstractProgram {
         classes.iter(f);
         main.iter(f);
     }
+    
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {
         classes.prettyPrint(s, prefix, false);

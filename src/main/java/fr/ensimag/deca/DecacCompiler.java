@@ -1,28 +1,40 @@
 package fr.ensimag.deca;
 
+import fr.ensimag.deca.codegen.CodeGenError;
+import fr.ensimag.deca.codegen.RegisterManagementUnit;
+import fr.ensimag.deca.codegen.StackManagementUnit;
+import fr.ensimag.deca.codegen.TableDeMethode;
 import fr.ensimag.deca.context.EnvironmentType;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
+import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.tree.AbstractProgram;
 import fr.ensimag.deca.tree.LocationException;
+import fr.ensimag.deca.tree.Program;
 import fr.ensimag.ima.pseudocode.AbstractLine;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.deca.codegen.ListError;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Stack;
+
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
 
 /**
- * Decac compiler instance.
+ * Decac compiler instance.Symbol
  *
  * This class is to be instantiated once per source file to be compiled. It
  * contains the meta-data used for compiling (source file name, compilation
@@ -37,17 +49,108 @@ import org.apache.log4j.Logger;
  * @date 01/01/2023
  */
 public class DecacCompiler {
+
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
-    
+
     /**
      * Portable newline character.
      */
     private static final String nl = System.getProperty("line.separator", "\n");
 
+    private int opBoolIncrementer = 0;
+    private int ifIncrementer = 0;
+    private int whileIncrementer = 0;
+
+    public int getOpBoolIncrementer() {
+        return opBoolIncrementer;
+    }
+    public int incrementOpBoolIncrementer() {
+        opBoolIncrementer++;
+        return opBoolIncrementer;
+    }
+
+    public int getIfIncrementer() {
+        return ifIncrementer;
+    }
+    public int incrementIfIncrementer() {
+        ifIncrementer++;
+        return ifIncrementer;
+    }
+    
+    public int getWhileIncrementer() {
+        return whileIncrementer;
+    }
+    public int incrementWhileIncrementer() {
+        whileIncrementer++;
+        return whileIncrementer;
+    }
+
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
         this.compilerOptions = compilerOptions;
         this.source = source;
+    }
+
+    public void setMainProgramState(){
+        if (mainManagementUnitsSaved){
+            registerManagement = registerManagementPlaceHolder;
+            stackManagement = stackManagementPlaceHolder;
+            program = programPlaceHolder;
+            InMainOrMethod = true;
+        }
+        else{
+            LOG.fatal("[DecacCompiler][saveMainProgramState] Trying to return to mainManagementWhile they are not saved !!!");
+        }
+    }
+
+    public void saveMainProgramState(){
+        if (InMainOrMethod){
+            registerManagementPlaceHolder = registerManagement;
+            stackManagementPlaceHolder = stackManagement;
+            programPlaceHolder = program;
+            mainManagementUnitsSaved = true;
+        }
+        else{
+            LOG.fatal("[DecacCompiler][saveMainProgramState] Tying to save main program state while in a method !!!");
+        }
+    }
+
+    public void setMethodProgramState(RegisterManagementUnit methodManagementUnit, StackManagementUnit methodStackManagementUnit, IMAProgram methodProgram){
+        if (mainManagementUnitsSaved){
+            registerManagement = methodManagementUnit;
+            stackManagement = methodStackManagementUnit;
+            program = methodProgram;
+            InMainOrMethod = false;
+        }
+        else{
+            LOG.fatal("[DecacCompiler][saveMainProgramState] Trying to switch to a method while the main program is not saved !!!");
+        }
+    }
+
+    /**
+     * InMainOrMethod indique si le compilateur est en train d'écrire dans une methode ou dans un main
+     * True: main; False:method
+     */
+    boolean InMainOrMethod = true;
+    
+    /**
+     * mainManagementUnitsSaved indique si les unit de management de register/stack/program
+     * sont sauvée ou non
+     */
+    boolean mainManagementUnitsSaved = false;
+
+    /**
+     * Unité qui fait la gestion des registres utilsées dans la partie 
+     */
+    private RegisterManagementUnit registerManagement  ;
+    private RegisterManagementUnit registerManagementPlaceHolder  ;
+
+    public void setRegisterManagement(RegisterManagementUnit registerManagement) {
+        this.registerManagement = registerManagement;
+    }
+
+    public RegisterManagementUnit getRegisterManagement() {
+        return registerManagement;
     }
 
     /**
@@ -115,19 +218,87 @@ public class DecacCompiler {
     
     private final CompilerOptions compilerOptions;
     private final File source;
+
+
     /**
      * The main program. Every instruction generated will eventually end up here.
      */
-    private final IMAProgram program = new IMAProgram();
- 
+    private IMAProgram program = new IMAProgram();
+    private IMAProgram programPlaceHolder = program;
+
+    public void setProgram(IMAProgram program) {
+        this.program = program;
+    }
+
+    public IMAProgram getProgram() {
+        return program;
+    }
+
+    /**
+     * Cette unité est utilisée pour associer des adresses à des variables,
+     * et elle est aussi utilisée pour calculer le nombre de variable temporaire necessaire pour executer 
+     * les blocs 
+     */
+    public StackManagementUnit stackManagement = new StackManagementUnit();  
+    public StackManagementUnit stackManagementPlaceHolder = stackManagement;  
+
+    public void setStackManagement(StackManagementUnit stackManagement) {
+        this.stackManagement = stackManagement;
+    }
+
+    public StackManagementUnit getStackManagement() {
+        return stackManagement;
+    }
+
+    public int incrementGbCompiler() {
+        return stackManagement.incrementGbCounter();
+    }
+
+    public int incrementLbCompiler() {
+        return stackManagement.incrementLbCounter();
+    }
+
+    public int decrementParamCounterCompiler() {
+        return stackManagement.decrementParamCounter();
+    }
+
+    /**
+     * Cette unité est utilisée pour associer des adresses à des variables,
+     * et elle est aussi utilisée pour calculer le nombre de variable temporaire necessaire pour executer 
+     * les blocs 
+     */
+    public final ListError errorManagementUnit = new ListError();  
+
+    public ListError getErrorManagementUnit() {
+        return errorManagementUnit;
+    }
+
+    /**
+     * Cette unité est utilisée pour associer à des table de méthode des adresses.
+     */
+    public final TableDeMethode tableDeMethodeCompiler = new TableDeMethode();  
+
+    public TableDeMethode getTableDeMethodeCompiler() {
+        return tableDeMethodeCompiler;
+    }
 
     /** The global environment for types (and the symbolTable) */
-    public final EnvironmentType environmentType = new EnvironmentType(this);
     public final SymbolTable symbolTable = new SymbolTable();
+    public final EnvironmentType environmentType = new EnvironmentType(this);
+
 
     public Symbol createSymbol(String name) {
-        return null; // A FAIRE: remplacer par la ligne en commentaire ci-dessous
-        // return symbolTable.create(name);
+        return symbolTable.create(name);
+    }
+
+    private boolean printHex;
+
+    public boolean isPrintHex() {
+        return printHex;
+    }
+
+    public void setPrintHex(boolean printHex) {
+        this.printHex = printHex;
     }
 
     /**
@@ -137,13 +308,15 @@ public class DecacCompiler {
      */
     public boolean compile() {
         String sourceFile = source.getAbsolutePath();
-        String destFile = null;
-        // A FAIRE: calculer le nom du fichier .ass à partir du nom du
-        // A FAIRE: fichier .deca.
+        StringBuilder destination = new StringBuilder();
+        destination.append(sourceFile);
+        destination.replace(sourceFile.length()-4, sourceFile.length(), "ass");
+        String destFile = destination.toString() ;
         PrintStream err = System.err;
         PrintStream out = System.out;
         LOG.debug("Compiling file " + sourceFile + " to assembly file " + destFile);
         try {
+            registerManagement = new RegisterManagementUnit(compilerOptions.getNumberOfRegisters());
             return doCompile(sourceFile, destFile, out, err);
         } catch (LocationException e) {
             e.display(err);
@@ -181,18 +354,25 @@ public class DecacCompiler {
      */
     private boolean doCompile(String sourceName, String destName,
             PrintStream out, PrintStream err)
-            throws DecacFatalError, LocationException {
+            throws DecacFatalError, LocationException, CodeGenError {
         AbstractProgram prog = doLexingAndParsing(sourceName, err);
-
+        
         if (prog == null) {
             LOG.info("Parsing failed");
             return true;
         }
         assert(prog.checkAllLocations());
-
+        if (compilerOptions.isDecompile()) {
+            prog.decompile(out);
+            return false;
+        }   
 
         prog.verifyProgram(this);
         assert(prog.checkAllDecorations());
+
+        if (compilerOptions.isVerfiryAndStop()){
+            return false;
+        }
 
         addComment("start main program");
         prog.codeGenProgram(this);

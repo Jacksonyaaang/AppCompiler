@@ -1,0 +1,9 @@
+class A extends object {
+	protected int x;
+	public int test_attribut;
+	int getX(int alpha, float beta, boolean teta){
+		(x = 5);
+		(a = getx());
+	}
+}
+

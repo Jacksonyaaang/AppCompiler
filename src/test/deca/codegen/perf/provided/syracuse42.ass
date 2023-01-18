@@ -1,0 +1,91 @@
+	TSTO #2
+	BOV stack_overflow_error
+	ADDSP #2
+; start main program
+; Main program
+; Beginning of main instructions:
+	LOAD #42, R2	; loading 42 into memory
+	STORE R2, 1(GB)	; Initializing the variable u and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 2(GB)	; Initializing the variable v and loading it into memory
+while_begin1:
+; --------StartBinaryOp--------[13, 13]-----
+	LOAD 1(GB), R2	; loading u into memory
+	LOAD #1, R3	; loading 1 into memory
+	CMP R3, R2	; Comparing registers for Equals operation 
+	SEQ R2	; Placing Equals result into the register  
+; --------EndBinaryOp--------[13, 13]-----
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #1, R2
+	BNE while_end1
+; --------StartBinaryOp--------[14, 5]-----
+; --------StartBinaryOp--------[14, 5]-----
+	LOAD 1(GB), R2	; loading u into memory
+	LOAD #2, R3	; loading 2 into memory
+	CMP #0, R2
+	BEQ div0_error	; Checking for modulo by 0 the operation is between two ints 
+	REM R3, R2
+; --------EndBinaryOp--------[14, 5]-----
+	LOAD #0, R3	; loading 0 into memory
+	CMP R3, R2	; Comparing registers for Equals operation 
+	SEQ R2	; Placing Equals result into the register  
+; --------EndBinaryOp--------[14, 5]-----
+; ---------Startif-----------[14, 1]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else1
+; --------BeginAssignOp--------[15, 5]-----
+; --------StartBinaryOp--------[15, 9]-----
+	LOAD 1(GB), R3	; loading u into memory
+	LOAD #2, R4	; loading 2 into memory
+	CMP #0, R4
+	BEQ div0_error	; Checking for division by 0the operation is between two ints 
+	QUO R4, R3
+; --------EndBinaryOp--------[15, 9]-----
+	STORE R3, 1(GB)	;  Assiging a value to u
+	LOAD R3, R2	;  Return value of the assignement of =uand storing it into R2
+; --------EndAssignOp--------[15, 5]-----
+	BRA end_ifthenelse_1
+else1:
+; --------BeginAssignOp--------[17, 5]-----
+; --------StartBinaryOp--------[17, 9]-----
+; --------StartBinaryOp--------[17, 9]-----
+; --------StartBinaryOp--------[17, 9]-----
+	LOAD #2, R3	; loading 2 into memory
+	MUL 1(GB), R3
+; --------EndBinaryOp--------[17, 9]-----
+	ADD 1(GB), R3
+; --------EndBinaryOp--------[17, 9]-----
+	LOAD #1, R4	; loading 1 into memory
+	ADD R4, R3
+; --------EndBinaryOp--------[17, 9]-----
+	STORE R3, 1(GB)	;  Assiging a value to u
+	LOAD R3, R2	;  Return value of the assignement of =uand storing it into R2
+; --------EndAssignOp--------[17, 5]-----
+end_ifthenelse_1:
+; ---------Endif-----------
+; --------BeginAssignOp--------[19, 1]-----
+; --------StartBinaryOp--------[19, 5]-----
+	LOAD 2(GB), R3	; loading v into memory
+	LOAD #1, R4	; loading 1 into memory
+	ADD R4, R3
+; --------EndBinaryOp--------[19, 5]-----
+	STORE R3, 2(GB)	;  Assiging a value to v
+	LOAD R3, R2	;  Return value of the assignement of =vand storing it into R2
+; --------EndAssignOp--------[19, 1]-----
+	BRA while_begin1
+while_end1:
+	LOAD 2(GB), R2	; loading v into memory
+	LOAD R2, R1
+	WINT
+	WNL
+	HALT
+div0_error:
+	WSTR "Error: div0_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

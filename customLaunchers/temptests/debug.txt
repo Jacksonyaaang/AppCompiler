@@ -1,0 +1,322 @@
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:38) - [MethodDefinition][setLabel] Initialising label value 
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with code.object.equals
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:46) - verify program: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:36) - [ListDeclClass][verifyListClass] verify listClass pass 1: START
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:40) - [ListDeclClass][verifyListClass] verify listClass pass 1: END
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:48) - [ListDeclClass][verifyListClassMembers] verify listClass pass 2: START
+DEBUG fr.ensimag.deca.tree.ListDeclField.verifyListDeclField(ListDeclField.java:54) - [ListDeclField][verifyListDeclField]
+DEBUG fr.ensimag.deca.tree.DeclField.verifyDeclField(DeclField.java:91) - [DeclField][verifyDecleField] Verify a Field declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:229) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.DeclField.verifyDeclField(DeclField.java:91) - [DeclField][verifyDecleField] Verify a Field declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:229) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.ListDeclMethod.verifyListDeclMethod(ListDeclMethod.java:27) - [ListDeclMethod][verifyListDeclMethod]
+INFO  fr.ensimag.deca.tree.ListDeclMethod.verifyListDeclMethod(ListDeclMethod.java:29) - [ListDeclMethod][verifyListDeclMethod] Verifing the method : diag
+DEBUG fr.ensimag.deca.tree.DeclMethod.verifyDeclMethodSimple(DeclMethod.java:106) - [DeclMethod][verifyDecleMethod] Verifing the declaration of a method in pass 2 || MethodName =  diag
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:229) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.ListDeclParam.verifyListDeclParam(ListDeclParam.java:47) - [ListDeclParam][verifyListDeclParam] Start
+DEBUG fr.ensimag.deca.tree.DeclParam.verifyDeclParam(DeclParam.java:76) - [DeclParam][verifyDecleParam] Verifing method parameter : a
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:229) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.DeclParam.verifyDeclParam(DeclParam.java:96) - [DeclParam][verifyDecleParam] Saving method parameter a into -3(LB)
+INFO  fr.ensimag.deca.tree.DeclMethod.verifyDeclMethodSimple(DeclMethod.java:122) - [DeclMethod][verifyDecleMethod] Method = diag does not exists, adding a new one to the local env with index 2
+DEBUG fr.ensimag.deca.tree.ListDeclField.verifyListDeclField(ListDeclField.java:54) - [ListDeclField][verifyListDeclField]
+DEBUG fr.ensimag.deca.tree.DeclField.verifyDeclField(DeclField.java:91) - [DeclField][verifyDecleField] Verify a Field declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:229) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.ListDeclMethod.verifyListDeclMethod(ListDeclMethod.java:27) - [ListDeclMethod][verifyListDeclMethod]
+INFO  fr.ensimag.deca.tree.ListDeclMethod.verifyListDeclMethod(ListDeclMethod.java:29) - [ListDeclMethod][verifyListDeclMethod] Verifing the method : diag
+DEBUG fr.ensimag.deca.tree.DeclMethod.verifyDeclMethodSimple(DeclMethod.java:106) - [DeclMethod][verifyDecleMethod] Verifing the declaration of a method in pass 2 || MethodName =  diag
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:229) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.ListDeclParam.verifyListDeclParam(ListDeclParam.java:47) - [ListDeclParam][verifyListDeclParam] Start
+DEBUG fr.ensimag.deca.tree.DeclParam.verifyDeclParam(DeclParam.java:76) - [DeclParam][verifyDecleParam] Verifing method parameter : a
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:229) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.DeclParam.verifyDeclParam(DeclParam.java:96) - [DeclParam][verifyDecleParam] Saving method parameter a into -3(LB)
+INFO  fr.ensimag.deca.tree.DeclMethod.verifyDeclMethodSimple(DeclMethod.java:134) - [DeclMethod][verifyDecleMethod] Method = diag exists in the localenv, checking if it is a method that belongs to the current class
+INFO  fr.ensimag.deca.tree.DeclMethod.verifyDeclMethodSimple(DeclMethod.java:140) - [DeclMethod][verifyDecleMethod] Method = diag exists in the parent class,checking if our method matchs the one that is in the parent
+INFO  fr.ensimag.deca.tree.DeclMethod.verifyDeclMethodSimple(DeclMethod.java:153) - [DeclMethod][verifyDecleMethod] Method = diag exists in the parent class,and it was redefined exactly the way it was in the parent method, we used the index the index =2
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:52) - [ListDeclClass][verifyListClassMembers] verify listClass pass 2: END
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:53) - verify program: end
+DEBUG fr.ensimag.deca.tree.ListDeclClass.codeGenListClassTableau(ListDeclClass.java:67) - [ListDeclClass][codeGenListClassTableau] Code generation pass 1: START
+DEBUG fr.ensimag.deca.tree.DeclClass.codeGenTableauDeMethod(DeclClass.java:68) - [DeclClass][codeGenTableauDeMethod] Generating the table method || ClassName =  Point2D // Super class  = object
+DEBUG fr.ensimag.deca.tree.DeclClass.codeGenTableauDeMethod(DeclClass.java:70) - [DeclClass][codeGenTableauDeMethod] Class definitions are : 
+ Main class =  type defined at [3, 0], type=Point2D 
+ Super class  = type (builtin), type=object
+DEBUG fr.ensimag.deca.tree.DeclClass.codeGenTableauDeMethod(DeclClass.java:77) - [DeclClass][codeGenTableauDeMethod] Current methode table adresses 
+-----Start table Method Table----
+type (builtin), type=object -> 1(GB)
+-----End table Method Table  ----
+
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with code.object.equals
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:38) - [MethodDefinition][setLabel] Initialising label value 
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with code.Point2D.diag
+DEBUG fr.ensimag.deca.tree.DeclClass.codeGenTableauDeMethod(DeclClass.java:68) - [DeclClass][codeGenTableauDeMethod] Generating the table method || ClassName =  Point3D // Super class  = Point2D
+DEBUG fr.ensimag.deca.tree.DeclClass.codeGenTableauDeMethod(DeclClass.java:70) - [DeclClass][codeGenTableauDeMethod] Class definitions are : 
+ Main class =  type defined at [14, 0], type=Point3D 
+ Super class  = type defined at [3, 0], type=Point2D
+DEBUG fr.ensimag.deca.tree.DeclClass.codeGenTableauDeMethod(DeclClass.java:77) - [DeclClass][codeGenTableauDeMethod] Current methode table adresses 
+-----Start table Method Table----
+type defined at [3, 0], type=Point2D -> 3(GB)
+type (builtin), type=object -> 1(GB)
+-----End table Method Table  ----
+
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with code.object.equals
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:38) - [MethodDefinition][setLabel] Initialising label value 
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with code.Point3D.diag
+DEBUG fr.ensimag.deca.tree.ListDeclClass.codeGenListClassTableau(ListDeclClass.java:71) - [ListDeclClass][codeGenListClassTableau] Code generation pass 1: END
+DEBUG fr.ensimag.deca.tree.ListDeclClass.codeGenListClassMethod(ListDeclClass.java:75) - [ListDeclClass][codeGenListClassMethod] Code generation pass 2 classes: START
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:38) - [MethodDefinition][setLabel] Initialising label value 
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with init.Point2D
+INFO  fr.ensimag.deca.tree.DeclClass.codeGenMethodInitialisation(DeclClass.java:112) - [DeclClass][codeGenMethodInitialisation] Defining code initilization method
+DEBUG fr.ensimag.deca.tree.ListDeclField.CodeGenListPlaceZeroInField(ListDeclField.java:69) - [ListDeclField][CodeGenListPlaceZeroInField] Placing Zero In All fields
+DEBUG fr.ensimag.deca.tree.ListDeclField.CodeGenListInitializeField(ListDeclField.java:77) - [ListDeclField][CodeGenListInitializeField] Initializing the fields
+DEBUG fr.ensimag.deca.tree.DeclField.LoadAndReserveARegister(DeclField.java:162) - [DeclField][LoadAndReserveARegister]  Reserving an non empty register with the name R2
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:78) - [AbstractBinaryExpr][codeGenInst] generating code for abstact binary expression 
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:81) - [AbstractBinaryExpr][codeGenInst] Exploring Left
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.checkIfWeWorkWithFloatAndIfConvIsNeeded(AbstractBinaryExpr.java:116) - [AbstractBinaryExpr][checkIfWeWorkWithFloatAndIfConvIsNeeded] Checking if i am working with floats
+DEBUG fr.ensimag.deca.tree.IntLiteral.codeGenInst(IntLiteral.java:39) - [IntLiteral][codeGenInst] generating code for int literal value 1
+DEBUG fr.ensimag.deca.tree.AbstractExpr.LoadGencode(AbstractExpr.java:260) - [Abstractexpr][LoadGencode]  Reserving an non empty register with the name R3
+DEBUG fr.ensimag.deca.tree.IntLiteral.loadItemintoRegister(IntLiteral.java:46) - [IntLiteral][loadItemintoRegister] loading 1 into memory at register R3
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:84) -  [AbstractBinaryExpr][codeGenInst] Left register R3
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:155) - [AbstractBinaryExpr][codeGenInst] Exploring Right
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:78) - [AbstractBinaryExpr][codeGenInst] generating code for abstact binary expression 
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:81) - [AbstractBinaryExpr][codeGenInst] Exploring Left
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.checkIfWeWorkWithFloatAndIfConvIsNeeded(AbstractBinaryExpr.java:116) - [AbstractBinaryExpr][checkIfWeWorkWithFloatAndIfConvIsNeeded] Checking if i am working with floats
+DEBUG fr.ensimag.deca.tree.IntLiteral.codeGenInst(IntLiteral.java:39) - [IntLiteral][codeGenInst] generating code for int literal value 1
+DEBUG fr.ensimag.deca.tree.AbstractExpr.LoadGencode(AbstractExpr.java:265) - [Abstractexpr][LoadGencode]  Reserving an used register with the name R2
+DEBUG fr.ensimag.deca.tree.IntLiteral.loadItemintoRegister(IntLiteral.java:46) - [IntLiteral][loadItemintoRegister] loading 1 into memory at register R2
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:84) -  [AbstractBinaryExpr][codeGenInst] Left register R2
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:155) - [AbstractBinaryExpr][codeGenInst] Exploring Right
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:78) - [AbstractBinaryExpr][codeGenInst] generating code for abstact binary expression 
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:81) - [AbstractBinaryExpr][codeGenInst] Exploring Left
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.checkIfWeWorkWithFloatAndIfConvIsNeeded(AbstractBinaryExpr.java:116) - [AbstractBinaryExpr][checkIfWeWorkWithFloatAndIfConvIsNeeded] Checking if i am working with floats
+DEBUG fr.ensimag.deca.tree.IntLiteral.codeGenInst(IntLiteral.java:39) - [IntLiteral][codeGenInst] generating code for int literal value 1
+DEBUG fr.ensimag.deca.tree.AbstractExpr.LoadGencode(AbstractExpr.java:265) - [Abstractexpr][LoadGencode]  Reserving an used register with the name R3
+DEBUG fr.ensimag.deca.tree.IntLiteral.loadItemintoRegister(IntLiteral.java:46) - [IntLiteral][loadItemintoRegister] loading 1 into memory at register R3
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:84) -  [AbstractBinaryExpr][codeGenInst] Left register R3
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:155) - [AbstractBinaryExpr][codeGenInst] Exploring Right
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:78) - [AbstractBinaryExpr][codeGenInst] generating code for abstact binary expression 
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:81) - [AbstractBinaryExpr][codeGenInst] Exploring Left
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.checkIfWeWorkWithFloatAndIfConvIsNeeded(AbstractBinaryExpr.java:116) - [AbstractBinaryExpr][checkIfWeWorkWithFloatAndIfConvIsNeeded] Checking if i am working with floats
+DEBUG fr.ensimag.deca.tree.IntLiteral.codeGenInst(IntLiteral.java:39) - [IntLiteral][codeGenInst] generating code for int literal value 1
+DEBUG fr.ensimag.deca.tree.AbstractExpr.LoadGencode(AbstractExpr.java:265) - [Abstractexpr][LoadGencode]  Reserving an used register with the name R2
+DEBUG fr.ensimag.deca.tree.IntLiteral.loadItemintoRegister(IntLiteral.java:46) - [IntLiteral][loadItemintoRegister] loading 1 into memory at register R2
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:84) -  [AbstractBinaryExpr][codeGenInst] Left register R2
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:155) - [AbstractBinaryExpr][codeGenInst] Exploring Right
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:78) - [AbstractBinaryExpr][codeGenInst] generating code for abstact binary expression 
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:81) - [AbstractBinaryExpr][codeGenInst] Exploring Left
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.checkIfWeWorkWithFloatAndIfConvIsNeeded(AbstractBinaryExpr.java:116) - [AbstractBinaryExpr][checkIfWeWorkWithFloatAndIfConvIsNeeded] Checking if i am working with floats
+DEBUG fr.ensimag.deca.tree.IntLiteral.codeGenInst(IntLiteral.java:39) - [IntLiteral][codeGenInst] generating code for int literal value 1
+DEBUG fr.ensimag.deca.tree.AbstractExpr.LoadGencode(AbstractExpr.java:265) - [Abstractexpr][LoadGencode]  Reserving an used register with the name R3
+DEBUG fr.ensimag.deca.tree.IntLiteral.loadItemintoRegister(IntLiteral.java:46) - [IntLiteral][loadItemintoRegister] loading 1 into memory at register R3
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:84) -  [AbstractBinaryExpr][codeGenInst] Left register R3
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:155) - [AbstractBinaryExpr][codeGenInst] Exploring Right
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:78) - [AbstractBinaryExpr][codeGenInst] generating code for abstact binary expression 
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:81) - [AbstractBinaryExpr][codeGenInst] Exploring Left
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.checkIfWeWorkWithFloatAndIfConvIsNeeded(AbstractBinaryExpr.java:116) - [AbstractBinaryExpr][checkIfWeWorkWithFloatAndIfConvIsNeeded] Checking if i am working with floats
+DEBUG fr.ensimag.deca.tree.IntLiteral.codeGenInst(IntLiteral.java:39) - [IntLiteral][codeGenInst] generating code for int literal value 1
+DEBUG fr.ensimag.deca.tree.AbstractExpr.LoadGencode(AbstractExpr.java:265) - [Abstractexpr][LoadGencode]  Reserving an used register with the name R2
+DEBUG fr.ensimag.deca.tree.IntLiteral.loadItemintoRegister(IntLiteral.java:46) - [IntLiteral][loadItemintoRegister] loading 1 into memory at register R2
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:84) -  [AbstractBinaryExpr][codeGenInst] Left register R2
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:155) - [AbstractBinaryExpr][codeGenInst] Exploring Right
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:78) - [AbstractBinaryExpr][codeGenInst] generating code for abstact binary expression 
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:81) - [AbstractBinaryExpr][codeGenInst] Exploring Left
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.checkIfWeWorkWithFloatAndIfConvIsNeeded(AbstractBinaryExpr.java:116) - [AbstractBinaryExpr][checkIfWeWorkWithFloatAndIfConvIsNeeded] Checking if i am working with floats
+DEBUG fr.ensimag.deca.tree.IntLiteral.codeGenInst(IntLiteral.java:39) - [IntLiteral][codeGenInst] generating code for int literal value 1
+DEBUG fr.ensimag.deca.tree.AbstractExpr.LoadGencode(AbstractExpr.java:265) - [Abstractexpr][LoadGencode]  Reserving an used register with the name R3
+DEBUG fr.ensimag.deca.tree.IntLiteral.loadItemintoRegister(IntLiteral.java:46) - [IntLiteral][loadItemintoRegister] loading 1 into memory at register R3
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:84) -  [AbstractBinaryExpr][codeGenInst] Left register R3
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:155) - [AbstractBinaryExpr][codeGenInst] Exploring Right
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:78) - [AbstractBinaryExpr][codeGenInst] generating code for abstact binary expression 
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:81) - [AbstractBinaryExpr][codeGenInst] Exploring Left
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.checkIfWeWorkWithFloatAndIfConvIsNeeded(AbstractBinaryExpr.java:116) - [AbstractBinaryExpr][checkIfWeWorkWithFloatAndIfConvIsNeeded] Checking if i am working with floats
+DEBUG fr.ensimag.deca.tree.IntLiteral.codeGenInst(IntLiteral.java:39) - [IntLiteral][codeGenInst] generating code for int literal value 1
+DEBUG fr.ensimag.deca.tree.AbstractExpr.LoadGencode(AbstractExpr.java:265) - [Abstractexpr][LoadGencode]  Reserving an used register with the name R2
+DEBUG fr.ensimag.deca.tree.IntLiteral.loadItemintoRegister(IntLiteral.java:46) - [IntLiteral][loadItemintoRegister] loading 1 into memory at register R2
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:84) -  [AbstractBinaryExpr][codeGenInst] Left register R2
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:155) - [AbstractBinaryExpr][codeGenInst] Exploring Right
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:78) - [AbstractBinaryExpr][codeGenInst] generating code for abstact binary expression 
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:81) - [AbstractBinaryExpr][codeGenInst] Exploring Left
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.checkIfWeWorkWithFloatAndIfConvIsNeeded(AbstractBinaryExpr.java:116) - [AbstractBinaryExpr][checkIfWeWorkWithFloatAndIfConvIsNeeded] Checking if i am working with floats
+DEBUG fr.ensimag.deca.tree.IntLiteral.codeGenInst(IntLiteral.java:39) - [IntLiteral][codeGenInst] generating code for int literal value 1
+DEBUG fr.ensimag.deca.tree.AbstractExpr.LoadGencode(AbstractExpr.java:265) - [Abstractexpr][LoadGencode]  Reserving an used register with the name R3
+DEBUG fr.ensimag.deca.tree.IntLiteral.loadItemintoRegister(IntLiteral.java:46) - [IntLiteral][loadItemintoRegister] loading 1 into memory at register R3
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:84) -  [AbstractBinaryExpr][codeGenInst] Left register R3
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:155) - [AbstractBinaryExpr][codeGenInst] Exploring Right
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:78) - [AbstractBinaryExpr][codeGenInst] generating code for abstact binary expression 
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:81) - [AbstractBinaryExpr][codeGenInst] Exploring Left
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.checkIfWeWorkWithFloatAndIfConvIsNeeded(AbstractBinaryExpr.java:116) - [AbstractBinaryExpr][checkIfWeWorkWithFloatAndIfConvIsNeeded] Checking if i am working with floats
+DEBUG fr.ensimag.deca.tree.IntLiteral.codeGenInst(class programntLiteral.java:39) - [IntLiteral][codeGenInst] generating code for int literal value 1
+DEBUG fr.ensimag.deca.tree.AbstractExpr.LoadGencode(AbstractExpr.java:265) - [Abstractexpr][LoadGencode]  Reserving an used register with the name R2
+DEBUG fr.ensimag.deca.tree.IntLiteral.loadItemintoRegister(IntLiteral.java:46) - [IntLiteral][loadItemintoRegister] loading 1 into memory at register R2
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.codeGenInst(AbstractBinaryExpr.java:84) -  [AbstractBinaryExpr][codeGenInst] Left register R2
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:155) - [AbstractBinaryExpr][codeGenInst] Exploring Right
+DEBUG fr.ensimag.deca.tree.IntLiteral.codeGenInst(IntLiteral.java:39) - [IntLiteral][codeGenInst] generating code for int literal value 2
+DEBUG fr.ensimag.deca.tree.AbstractExpr.LoadGencode(AbstractExpr.java:265) - [Abstractexpr][LoadGencode]  Reserving an used register with the name R3
+DEBUG fr.ensimag.deca.tree.IntLiteral.loadItemintoRegister(IntLiteral.java:46) - [IntLiteral][loadItemintoRegister] loading 2 into memory at register R3
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:157) - [AbstractBinaryExpr][rightOperandIdentifier] Right operation is placed in the following register  R3
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:27) - [Multiply][executeBinaryOperation] generating code for multiply between: R3 and R2
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:29) - [Multiply][executeBinaryOperation] generating code for multiply between: R3 and R2
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:157) - [AbstractBinaryExpr][rightOperandIdentifier] Right operation is placed in the following register  R2
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:27) - [Multiply][executeBinaryOperation] generating code for multiply between: R2 and R3
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:29) - [Multiply][executeBinaryOperation] generating code for multiply between: R2 and R3
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:157) - [AbstractBinaryExpr][rightOperandIdentifier] Right operation is placed in the following register  R3
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:27) - [Multiply][executeBinaryOperation] generating code for multiply between: R3 and R2
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:29) - [Multiply][executeBinaryOperation] generating code for multiply between: R3 and R2
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:157) - [AbstractBinaryExpr][rightOperandIdentifier] Right operation is placed in the following register  R2
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:27) - [Multiply][executeBinaryOperation] generating code for multiply between: R2 and R3
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:29) - [Multiply][executeBinaryOperation] generating code for multiply between: R2 and R3
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:157) - [AbstractBinaryExpr][rightOperandIdentifier] Right operation is placed in the following register  R3
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:27) - [Multiply][executeBinaryOperation] generating code for multiply between: R3 and R2
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:29) - [Multiply][executeBinaryOperation] generating code for multiply between: R3 and R2
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:157) - [AbstractBinaryExpr][rightOperandIdentifier] Right operation is placed in the following register  R2
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:27) - [Multiply][executeBinaryOperation] generating code for multiply between: R2 and R3
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:29) - [Multiply][executeBinaryOperation] generating code for multiply between: R2 and R3
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:157) - [AbstractBinaryExpr][rightOperandIdentifier] Right operation is placed in the following register  R3
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:27) - [Multiply][executeBinaryOperation] generating code for multiply between: R3 and R2
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:29) - [Multiply][executeBinaryOperation] generating code for multiply between: R3 and R2
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:157) - [AbstractBinaryExpr][rightOperandIdentifier] Right operation is placed in the following register  R2
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:27) - [Multiply][executeBinaryOperation] generating code for multiply between: R2 and R3
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:29) - [Multiply][executeBinaryOperation] generating code for multiply between: R2 and R3
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:157) - [AbstractBinaryExpr][rightOperandIdentifier] Right operation is placed in the following register  R3
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:27) - [Multiply][executeBinaryOperation] generating code for multiply between: R3 and R2
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:29) - [Multiply][executeBinaryOperation] generating code for multiply between: R3 and R2
+DEBUG fr.ensimag.deca.tree.AbstractBinaryExpr.rightOperandIdentifier(AbstractBinaryExpr.java:157) - [AbstractBinaryExpr][rightOperandIdentifier] Right operation is placed in the following register  R2
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:27) - [Multiply][executeBinaryOperation] generating code for multiply between: R2 and R3
+DEBUG fr.ensimag.deca.tree.Multiply.executeBinaryOperation(Multiply.java:29) - [Multiply][executeBinaryOperation] generating code for multiply between: R2 and R3
+DEBUG fr.ensimag.deca.tree.DeclClass.codeGenMethodInitialisation(DeclClass.java:137) - [DeclClass][codeGenMethodInitialisation] sizeStackMax = 12
+DEBUG fr.ensimag.deca.codegen.ListError.activeError(ListError.java:44) - ERROR is being made to value true stack_overflow_error
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:38) - [MethodDefinition][setLabel] Initialising label value 
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with init.Point3D
+INFO  fr.ensimag.deca.tree.DeclClass.codeGenMethodInitialisation(DeclClass.java:112) - [DeclClass][codeGenMethodInitialisation] Defining code initilization method
+DEBUG fr.ensimag.deca.tree.ListDeclField.CodeGenListPlaceZeroInField(ListDeclField.java:69) - [ListDeclField][CodeGenListPlaceZeroInField] Placing Zero In All fields
+DEBUG fr.ensimag.deca.tree.ListDeclField.CodeGenListInitializeField(ListDeclField.java:77) - [ListDeclField][CodeGenListInitializeField] Initializing the fields
+DEBUG fr.ensimag.deca.tree.DeclClass.codeGenMethodInitialisation(DeclClass.java:137) - [DeclClass][codeGenMethodInitialisation] sizeStackMax = 3
+DEBUG fr.ensimag.deca.codegen.ListError.activeError(ListError.java:44) - ERROR is being made to value true stack_overflow_error
+DEBUG fr.ensimag.deca.tree.ListDeclClass.codeGenListClassMethod(ListDeclClass.java:80) - [ListDeclClass][codeGenListClassMethod] Code generation pass 2 classes: END
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.object.equals, R0
+	STORE R0, 2(GB)
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.Point2D.diag, R0
+	STORE R0, 5(GB)
+	LEA 3(GB), R0
+	STORE R0, 6(GB)
+	LOAD code.object.equals, R0
+	STORE R0, 7(GB)
+	LOAD code.Point3D.diag, R0
+	STORE R0, 8(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : Point2D -------------------
+; ---------------------------------------------------
+; ------------Init method for class = Point2D--------
+init.Point2D:
+	TSTO #12
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field x
+	STORE R0, 1(R1)	; Saving field  x into memory
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field y
+	STORE R0, 2(R1)	; Saving field  y into memory
+; --------StartBinaryOp--------[4, 16]-----
+	LOAD #1, R3	; loading 1 into memory
+; --------StartBinaryOp--------[4, 19]-----
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+; --------StartBinaryOp--------[4, 22]-----
+	PUSH R3
+	LOAD #1, R3	; loading 1 into memory
+; --------StartBinaryOp--------[4, 25]-----
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+; --------StartBinaryOp--------[4, 28]-----
+	PUSH R3
+	LOAD #1, R3	; loading 1 into memory
+; --------StartBinaryOp--------[4, 31]-----
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+; --------StartBinaryOp--------[4, 34]-----
+	PUSH R3
+	LOAD #1, R3	; loading 1 into memory
+; --------StartBinaryOp--------[4, 37]-----
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+; --------StartBinaryOp--------[4, 40]-----
+	PUSH R3
+	LOAD #1, R3	; loading 1 into memory
+; --------StartBinaryOp--------[4, 43]-----
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[4, 43]-----
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[4, 40]-----
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[4, 37]-----
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[4, 34]-----
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[4, 31]-----
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[4, 28]-----
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[4, 25]-----
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[4, 22]-----
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[4, 19]-----
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[4, 16]-----
+	STORE R3, 1(R2)	; Initializing the field x and loading it into memory
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ---------------------------------------------------
+; ----------------- class : Point3D -------------------
+; ---------------------------------------------------
+; ------------Init method for class = Point3D--------
+init.Point3D:
+	TSTO #3
+	BOV stack_overflow_error
+	LOAD -2(LB), R0	; Placing the current class = Point3D adresse in the the stack before calling parent 
+	PUSH R0	; Placing this = Point3D into the stack
+	BSR init.Point2D	; Calling the initialisation method of parent classPoint2D
+	SUBSP #1
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field z
+	STORE R0, 3(R1)	; Saving field  z into memory
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+
