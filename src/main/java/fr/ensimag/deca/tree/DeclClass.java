@@ -36,7 +36,6 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
-
 /**
  * Declaration of a class (<code>class name extends superClass {members}<code>).
  * 
