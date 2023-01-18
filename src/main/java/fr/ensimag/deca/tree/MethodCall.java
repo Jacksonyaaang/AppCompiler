@@ -1,13 +1,17 @@
 package fr.ensimag.deca.tree;
 
+import static org.mockito.Mockito.never;
+
 import java.io.PrintStream;
 
 import org.apache.commons.lang.Validate;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import org.apache.log4j.Logger;
@@ -37,9 +41,41 @@ public class MethodCall extends AbstractExpr {
 
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
-            throws ContextualError {
-        // TODO Auto-generated method stub
-        return null;
+        throws ContextualError {
+        ExpDefinition Defi;
+        Type t = obj.verifyExpr(compiler, localEnv, currentClass);
+        if (t.isClass()){
+            EnvironmentExp tmpEnv = ((ClassType)t).getDefinition().getMembers();
+            Identifier methodIdent = (Identifier) methode;
+            for (; tmpEnv != null; tmpEnv = tmpEnv.getParent()){
+                if (!tmpEnv.getExp().containsKey(methodIdent.getName()) && tmpEnv.getParent() == null)
+                    throw new ContextualError("L'identificateur " + methodIdent.getName().getName() + " n'est pas défini",getLocation());
+                else if (tmpEnv.getExp().containsKey(methodIdent.getName())) break;
+            }
+            Defi = tmpEnv.get(methodIdent.getName());
+            methodIdent.setDefinition(Defi);
+            if (Defi.isMethod()){
+                //verification des signatures
+                if (listParam.getList().size() == ((MethodDefinition)Defi).getSignature().size()){
+                    int compteur = 0;
+                    while (compteur++ < listParam.getList().size()){
+                        Type tPramCall = listParam.getList().get(compteur).verifyExpr(compiler, localEnv, currentClass);
+                        Type tPramMeth = ((MethodDefinition)Defi).getSignature().paramNumber(compteur);
+                        if (!tPramCall.sameType(tPramMeth)){
+                            throw new ContextualError("Signature de methode non prévu", getLocation());
+                        }
+                    }
+                }else{
+                    throw new ContextualError("Signature de methode non prévu", getLocation());
+                }
+            }else{
+                throw new ContextualError("ce identificateur n'est pas defini comme methode", getLocation());
+            }
+        }else{
+            throw new ContextualError("l'appelant de cette methode n'est pas une classe", getLocation());
+        }
+        setType(Defi.getType());
+        return Defi.getType();
     }
 
     @Override
