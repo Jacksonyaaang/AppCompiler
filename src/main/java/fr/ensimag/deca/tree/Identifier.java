@@ -18,6 +18,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.PUSH;
 
@@ -62,8 +63,17 @@ public class Identifier extends AbstractIdentifier {
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
         assert( reg != null);
         LOG.debug("[Identifier][loadItemintoRegister] Loading " + this.getName() + "into the register " + reg);
-        compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), reg),
+        if (this.getExpDefinition().isField()){
+            LOG.debug("[Identifier][loadItemintoRegister] Working with fields ");
+            compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), reg),
+                                    "loading field"+getName()+ "into memory");
+            compiler.addInstruction(new LOAD(new RegisterOffset( ((FieldDefinition) (this.getExpDefinition())).getIndex(), reg), reg),
+            "loading "+getName()+ " into memory");
+        }
+        else{
+            compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), reg),
                                     "loading "+getName()+ " into memory");
+        }
     }
 
 
@@ -196,12 +206,15 @@ public class Identifier extends AbstractIdentifier {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
                            ClassDefinition currentClass) throws ContextualError {
-        LOG.debug("[Identifier][verifyExpr]");
+        LOG.debug("[Identifier][verifyExpr] Verifying the exp of an identifier ");
         //Envoie une ContextualError si l'identificateur n'est pas défini
-        if(!localEnv.getExp().containsKey(getName())){
-            throw new ContextualError("L'identificateur " + getName().getName() + " n'est pas défini",getLocation());
+        EnvironmentExp tmpEnv;
+        for (tmpEnv = localEnv; tmpEnv != null; tmpEnv = tmpEnv.getParent()){
+            if (!tmpEnv.getExp().containsKey(name) && tmpEnv.getParent() == null)
+                throw new ContextualError("L'identificateur " + getName().getName() + " n'est pas défini",getLocation());
+            else if (tmpEnv.getExp().containsKey(name)) break;
         }
-        Definition Defi = localEnv.get(name);
+        Definition Defi = tmpEnv.get(name);
         setDefinition(Defi);
         setType(localEnv.get(name).getType());
         return getType();

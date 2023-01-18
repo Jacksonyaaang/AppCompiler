@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ContextualError;
 
 /**
@@ -31,5 +32,14 @@ public abstract class AbstractDeclClass extends Tree {
      */
     protected abstract void verifyClassBody(DecacCompiler compiler)
             throws ContextualError;
+
+     /**
+      * Cette méthode est utilisée pour génenerer la tableau de méthode d'une classe spécfique
+      Cette méthode est uniquement invoquée dans le pass 1 de la géneration du code 
+      * @param compiler 
+      * @throws CodeGenError cette erreur est interne aux compilateur et elle est lancée 
+      quand le compilateur génere une erreur dans les algorithmes de création de code assembleur 
+      */
+     protected abstract void codeGenTableauDeMethod(DecacCompiler compiler) throws CodeGenError;
 
 }

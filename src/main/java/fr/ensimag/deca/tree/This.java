@@ -14,8 +14,14 @@ import org.apache.log4j.Logger;
 
 public class This extends AbstractExpr{
 
+    protected boolean bool ;
     private static final Logger LOG = Logger.getLogger(This.class);
-    protected boolean bool ; 
+
+    @Override
+    boolean isImplicit() {
+        return bool;
+    }
+
 
     public This(boolean bool){
         this.bool = bool;
@@ -34,8 +40,10 @@ public class This extends AbstractExpr{
 
     @Override
     public void decompile(IndentPrintStream s) {
-        // TODO Auto-generated method stub
-        
+        if(isBool()){
+            return;
+        }
+        s.print("this");
     }
 
     @Override

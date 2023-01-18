@@ -1,9 +1,9 @@
 
 /**
- * Utilities used for IMA code generation.
- *
- * The code generation itself is implement as methods of the {@link fr.ensimag.deca.tree.Tree}
- * class.
+ * .
+ * Cette classe fait la gestion des registres et stocke l'occupation 
+ * acutuelle des registers et et calcule le nombre de variable temporaires maximal
+ * suivant l'usage des registre
  *
  * @author gl15
  * @date 01/01/2023

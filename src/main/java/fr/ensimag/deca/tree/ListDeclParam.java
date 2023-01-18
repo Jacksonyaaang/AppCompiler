@@ -19,14 +19,21 @@ import org.apache.log4j.Logger;
  * @date 01/01/2023
  */
 public class ListDeclParam extends TreeList<AbstractDeclParam> {
+
+    private EnvironmentExp envExpParams = new EnvironmentExp(null);
     
     private static final Logger LOG = Logger.getLogger(ListDeclParam.class);
 
     @Override
     public void decompile(IndentPrintStream s) {
-        for (AbstractDeclParam v : getList()){
-            v.decompile(s);
-            s.println();
+        if (getList().size() != 0){
+            AbstractDeclParam p1 = getList().get(0);
+            p1.decompile(s);
+            for( int i = 1; i<getList().size(); i++){
+                s.print(", ");
+                AbstractDeclParam p = getList().get(i);
+                p.decompile(s);
+            }
         }
     }
 
@@ -37,12 +44,16 @@ public class ListDeclParam extends TreeList<AbstractDeclParam> {
      * @throws ContextualError
      */
     public Signature verifyListDeclParam(DecacCompiler compiler) throws ContextualError {
-            LOG.debug("[ListDeclParam][verifyListDeclParam]");
+        LOG.debug("[ListDeclParam][verifyListDeclParam] Start");
         Signature signature = new Signature();
         for (AbstractDeclParam declParam : getList()){
-            signature.add(declParam.verifyDeclParam(compiler));
-        }
+            signature.add(declParam.verifyDeclParam(compiler, envExpParams));
+            }
         return signature;
+    }
+
+    public EnvironmentExp getenvParm(){
+        return envExpParams;
     }
 }
 

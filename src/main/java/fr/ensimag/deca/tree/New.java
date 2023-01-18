@@ -37,8 +37,10 @@ public class New  extends AbstractExpr{
 
     @Override
     public void decompile(IndentPrintStream s) {
-        // TODO Auto-generated method stub
-        
+        s.print("new ");
+        getClassName().decompile(s);
+        s.print("()");
+
     }
 
     @Override

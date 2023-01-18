@@ -15,8 +15,8 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        for (AbstractDeclMethod v : getList()){
-            v.decompile(s);
+        for (AbstractDeclMethod m : getList()){
+            m.decompile(s);
             s.println();
         }
 
@@ -26,6 +26,7 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
             ClassDefinition currentClass) throws ContextualError {
             LOG.debug("[ListDeclMethod][verifyListDeclMethod]");
         for (AbstractDeclMethod declMethod : getList()){
+            LOG.info("[ListDeclMethod][verifyListDeclMethod] Verifing the method : "+((DeclMethod)declMethod).getMethodName().getName().getName());
             declMethod.verifyDeclMethodSimple(compiler, localEnv, currentClass);
         }
     }

@@ -2,9 +2,17 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CodeGenError;
+import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.LabelOperand;
+import fr.ensimag.ima.pseudocode.NullOperand;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.*;
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -39,18 +47,30 @@ public class Program extends AbstractProgram {
         classes.verifyListClass(compiler);
         classes.verifyListClassMembers(compiler);
         classes.verifyListClassBody(compiler);
-        main.verifyMain(compiler);
+        //main.verifyMain(compiler);
         LOG.debug("verify program: end");
     }
 
     @Override
     public void codeGenProgram(DecacCompiler compiler) throws CodeGenError{
-        // A FAIRE: compléter ce squelette très rudimentaire de code
+        generateMethodTableForObjectClass(compiler);
+        classes.codeGenListClassTableau(compiler);
         compiler.addComment("Main program");
         main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());
         compiler.getErrorManagementUnit().writeListError(compiler);
     }
+
+    public void generateMethodTableForObjectClass(DecacCompiler compiler) throws CodeGenError{
+        ClassDefinition objectClassDefinition = (ClassDefinition) compiler.environmentType.getEnvTypes().get(compiler.createSymbol("object"));
+        compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().put(objectClassDefinition, new RegisterOffset(compiler.incrementGbCompiler(), Register.GB));
+        compiler.addInstruction(new LOAD(new NullOperand(), Register.getR(0)));
+        compiler.addInstruction(new STORE(Register.getR(0), compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(objectClassDefinition)));
+        compiler.addInstruction(new LOAD((DVal) new LabelOperand(new Label("code."+objectClassDefinition.getType().getName().getName()+".equals")),
+                                                 Register.getR(0)));
+        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.incrementGbCompiler(), Register.GB)));
+    }
+
 
     @Override
     public void decompile(IndentPrintStream s) {

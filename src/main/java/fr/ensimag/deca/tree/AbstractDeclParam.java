@@ -16,7 +16,7 @@ public abstract class AbstractDeclParam extends Tree {
      * @return
      * @throws ContextualError
      */
-    protected abstract Type verifyDeclParam(DecacCompiler compiler)
+    protected abstract Type verifyDeclParam(DecacCompiler compiler, EnvironmentExp envParms)
             throws ContextualError;
             
     public void codeGenDecl(DecacCompiler compiler) throws CodeGenError {

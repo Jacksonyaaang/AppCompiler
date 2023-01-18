@@ -1,0 +1,142 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 9 elements]
+      |  []> [11, 8] DeclVar
+      |  ||  +> [11, 4] Identifier (int)
+      |  ||  +> [11, 8] Identifier (x)
+      |  ||  `> [11, 12] Initialization
+      |  ||     `> [11, 12] Int (2)
+      |  []> [12, 8] DeclVar
+      |  ||  +> [12, 4] Identifier (int)
+      |  ||  +> [12, 8] Identifier (y)
+      |  ||  `> [12, 12] Initialization
+      |  ||     `> [12, 12] Int (2)
+      |  []> [13, 8] DeclVar
+      |  ||  +> [13, 4] Identifier (int)
+      |  ||  +> [13, 8] Identifier (z)
+      |  ||  `> [13, 12] Initialization
+      |  ||     `> [13, 12] Int (2)
+      |  []> [14, 8] DeclVar
+      |  ||  +> [14, 4] Identifier (int)
+      |  ||  +> [14, 8] Identifier (h)
+      |  ||  `> [14, 12] Initialization
+      |  ||     `> [14, 12] Int (2)
+      |  []> [15, 8] DeclVar
+      |  ||  +> [15, 4] Identifier (int)
+      |  ||  +> [15, 8] Identifier (v)
+      |  ||  `> [15, 12] Initialization
+      |  ||     `> [15, 12] Int (2)
+      |  []> [16, 12] DeclVar
+      |  ||  +> [16, 4] Identifier (boolean)
+      |  ||  +> [16, 12] Identifier (b1)
+      |  ||  `> [16, 17] Initialization
+      |  ||     `> [16, 17] BooleanLiteral (true)
+      |  []> [17, 12] DeclVar
+      |  ||  +> [17, 4] Identifier (boolean)
+      |  ||  +> [17, 12] Identifier (b2)
+      |  ||  `> [17, 17] Initialization
+      |  ||     `> [17, 17] BooleanLiteral (true)
+      |  []> [18, 12] DeclVar
+      |  ||  +> [18, 4] Identifier (boolean)
+      |  ||  +> [18, 12] Identifier (b3)
+      |  ||  `> [18, 17] Initialization
+      |  ||     `> [18, 17] BooleanLiteral (false)
+      |  []> [19, 12] DeclVar
+      |      +> [19, 4] Identifier (boolean)
+      |      +> [19, 12] Identifier (b4)
+      |      `> [19, 17] Initialization
+      |         `> [19, 17] BooleanLiteral (false)
+      `> ListInst [List with 2 elements]
+         []> [20, 4] IfThenElse
+         ||  +> [20, 7] And
+         ||  |  +> [20, 8] And
+         ||  |  |  +> [20, 8] LowerOrEqual
+         ||  |  |  |  +> [20, 8] Identifier (x)
+         ||  |  |  |  `> [20, 11] Int (2)
+         ||  |  |  `> [20, 17] Or
+         ||  |  |     +> [20, 17] NotEquals
+         ||  |  |     |  +> [20, 17] Identifier (y)
+         ||  |  |     |  `> [20, 22] Identifier (z)
+         ||  |  |     `> [20, 27] Equals
+         ||  |  |        +> [20, 27] Identifier (h)
+         ||  |  |        `> [20, 30] Identifier (v)
+         ||  |  `> [20, 36] And
+         ||  |     +> [20, 36] And
+         ||  |     |  +> [20, 36] And
+         ||  |     |  |  +> [20, 36] And
+         ||  |     |  |  |  +> [20, 36] And
+         ||  |     |  |  |  |  +> [20, 37] And
+         ||  |     |  |  |  |  |  +> [20, 37] Greater
+         ||  |     |  |  |  |  |  |  +> [20, 37] Int (3)
+         ||  |     |  |  |  |  |  |  `> [20, 39] Identifier (x)
+         ||  |     |  |  |  |  |  `> [20, 44] Greater
+         ||  |     |  |  |  |  |     +> [20, 44] Float (2.5)
+         ||  |     |  |  |  |  |     `> [20, 49] Identifier (y)
+         ||  |     |  |  |  |  `> [20, 56] And
+         ||  |     |  |  |  |     +> [20, 56] Equals
+         ||  |     |  |  |  |     |  +> [20, 56] Float (2.0)
+         ||  |     |  |  |  |     |  `> [20, 61] Identifier (y)
+         ||  |     |  |  |  |     `> [20, 66] Equals
+         ||  |     |  |  |  |        +> [20, 66] Identifier (v)
+         ||  |     |  |  |  |        `> [20, 71] Identifier (h)
+         ||  |     |  |  |  `> [20, 77] Identifier (b1)
+         ||  |     |  |  `> [20, 83] Identifier (b2)
+         ||  |     |  `> [20, 90] Not
+         ||  |     |     `> [20, 90] Identifier (b3)
+         ||  |     `> [20, 97] Not
+         ||  |        `> [20, 97] Identifier (b4)
+         ||  +> ListInst [List with 1 elements]
+         ||  |  []> [21, 16] Println
+         ||  |      `> ListExpr [List with 1 elements]
+         ||  |         []> [21, 16] StringLiteral (bool val = true)
+         ||  `> ListInst [List with 1 elements]
+         ||     []> [24, 16] Println
+         ||         `> ListExpr [List with 1 elements]
+         ||            []> [24, 16] StringLiteral (Problem with code)
+         []> [26, 4] IfThenElse
+             +> [26, 7] And
+             |  +> [26, 8] And
+             |  |  +> [26, 8] Lower
+             |  |  |  +> [26, 8] Identifier (x)
+             |  |  |  `> [26, 10] Int (5)
+             |  |  `> [26, 16] Or
+             |  |     +> [26, 16] NotEquals
+             |  |     |  +> [26, 16] Identifier (y)
+             |  |     |  `> [26, 21] Identifier (z)
+             |  |     `> [26, 26] Equals
+             |  |        +> [26, 26] Identifier (h)
+             |  |        `> [26, 29] Identifier (v)
+             |  `> [26, 35] And
+             |     +> [26, 35] And
+             |     |  +> [26, 35] And
+             |     |  |  +> [26, 35] And
+             |     |  |  |  +> [26, 35] And
+             |     |  |  |  |  +> [26, 36] And
+             |     |  |  |  |  |  +> [26, 36] Greater
+             |     |  |  |  |  |  |  +> [26, 36] Int (3)
+             |     |  |  |  |  |  |  `> [26, 38] Identifier (x)
+             |     |  |  |  |  |  `> [26, 43] Greater
+             |     |  |  |  |  |     +> [26, 43] Float (2.5)
+             |     |  |  |  |  |     `> [26, 48] Identifier (y)
+             |     |  |  |  |  `> [26, 55] And
+             |     |  |  |  |     +> [26, 55] Equals
+             |     |  |  |  |     |  +> [26, 55] Float (2.0)
+             |     |  |  |  |     |  `> [26, 60] Identifier (y)
+             |     |  |  |  |     `> [26, 65] Lower
+             |     |  |  |  |        +> [26, 65] Identifier (v)
+             |     |  |  |  |        `> [26, 69] Float (5.0)
+             |     |  |  |  `> [26, 77] Identifier (b1)
+             |     |  |  `> [26, 83] Identifier (b2)
+             |     |  `> [26, 90] Not
+             |     |     `> [26, 90] Identifier (b3)
+             |     `> [26, 97] Not
+             |        `> [26, 97] Identifier (b4)
+             +> ListInst [List with 1 elements]
+             |  []> [27, 17] Println
+             |      `> ListExpr [List with 1 elements]
+             |         []> [27, 17] StringLiteral (bool val = true)
+             `> ListInst [List with 1 elements]
+                []> [30, 16] Println
+                    `> ListExpr [List with 1 elements]
+                       []> [30, 16] StringLiteral (Problem with code)

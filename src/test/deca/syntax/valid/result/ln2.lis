@@ -1,0 +1,116 @@
+`> [12, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [12, 0] Main
+      +> ListDeclVar [List with 6 elements]
+      |  []> [13, 10] DeclVar
+      |  ||  +> [13, 4] Identifier (float)
+      |  ||  +> [13, 10] Identifier (g)
+      |  ||  `> [13, 14] Initialization
+      |  ||     `> [13, 14] Float (0.0)
+      |  []> [13, 20] DeclVar
+      |  ||  +> [13, 4] Identifier (float)
+      |  ||  +> [13, 20] Identifier (d)
+      |  ||  `> [13, 24] Initialization
+      |  ||     `> [13, 24] Float (1.0)
+      |  []> [14, 10] DeclVar
+      |  ||  +> [14, 4] Identifier (float)
+      |  ||  +> [14, 10] Identifier (fg)
+      |  ||  `> [14, 16] Initialization
+      |  ||     `> [14, 16] UnaryMinus
+      |  ||        `> [14, 16] Float (1.0)
+      |  []> [14, 28] DeclVar
+      |  ||  +> [14, 22] Identifier (float)
+      |  ||  +> [14, 28] Identifier (fd)
+      |  ||  `> [14, 33] Initialization
+      |  ||     `> [14, 33] Float (0.718284)
+      |  []> [15, 10] DeclVar
+      |  ||  +> [15, 4] Identifier (float)
+      |  ||  +> [15, 10] Identifier (m)
+      |  ||  `> NoInitialization
+      |  []> [15, 13] DeclVar
+      |      +> [15, 4] Identifier (float)
+      |      +> [15, 13] Identifier (fm)
+      |      `> NoInitialization
+      `> ListInst [List with 3 elements]
+         []> [17, 11] While
+         ||  +> [17, 11] GreaterOrEqual
+         ||  |  +> [17, 11] Identifier (d)
+         ||  |  `> [17, 15] Plus
+         ||  |     +> [17, 15] Identifier (g)
+         ||  |     `> [17, 17] Float (1.1920929E-7)
+         ||  `> ListInst [List with 3 elements]
+         ||     []> [18, 1] Assign
+         ||     ||  +> [18, 1] Identifier (m)
+         ||     ||  `> [18, 5] Divide
+         ||     ||     +> [18, 6] Plus
+         ||     ||     |  +> [18, 6] Identifier (g)
+         ||     ||     |  `> [18, 8] Identifier (d)
+         ||     ||     `> [18, 13] Float (2.0)
+         ||     []> [19, 2] Assign
+         ||     ||  +> [19, 2] Identifier (fm)
+         ||     ||  `> [19, 7] Minus
+         ||     ||     +> [19, 7] Multiply
+         ||     ||     |  +> [19, 7] Identifier (m)
+         ||     ||     |  `> [19, 12] Plus
+         ||     ||     |     +> [19, 12] Multiply
+         ||     ||     |     |  +> [19, 12] Identifier (m)
+         ||     ||     |     |  `> [19, 17] Plus
+         ||     ||     |     |     +> [19, 17] Multiply
+         ||     ||     |     |     |  +> [19, 17] Identifier (m)
+         ||     ||     |     |     |  `> [19, 22] Plus
+         ||     ||     |     |     |     +> [19, 22] Multiply
+         ||     ||     |     |     |     |  +> [19, 22] Identifier (m)
+         ||     ||     |     |     |     |  `> [19, 27] Plus
+         ||     ||     |     |     |     |     +> [19, 27] Multiply
+         ||     ||     |     |     |     |     |  +> [19, 27] Identifier (m)
+         ||     ||     |     |     |     |     |  `> [19, 32] Plus
+         ||     ||     |     |     |     |     |     +> [19, 32] Multiply
+         ||     ||     |     |     |     |     |     |  +> [19, 32] Identifier (m)
+         ||     ||     |     |     |     |     |     |  `> [19, 38] Plus
+         ||     ||     |     |     |     |     |     |     +> [19, 38] Multiply
+         ||     ||     |     |     |     |     |     |     |  +> [19, 38] Identifier (m)
+         ||     ||     |     |     |     |     |     |     |  `> [19, 43] Divide
+         ||     ||     |     |     |     |     |     |     |     +> [19, 43] Float (1.0)
+         ||     ||     |     |     |     |     |     |     |     `> [19, 47] Float (5040.0)
+         ||     ||     |     |     |     |     |     |     `> [19, 57] Divide
+         ||     ||     |     |     |     |     |     |        +> [19, 57] Float (1.0)
+         ||     ||     |     |     |     |     |     |        `> [19, 61] Float (720.0)
+         ||     ||     |     |     |     |     |     `> [19, 70] Divide
+         ||     ||     |     |     |     |     |        +> [19, 70] Float (1.0)
+         ||     ||     |     |     |     |     |        `> [19, 74] Float (120.0)
+         ||     ||     |     |     |     |     `> [19, 83] Divide
+         ||     ||     |     |     |     |        +> [19, 83] Float (1.0)
+         ||     ||     |     |     |     |        `> [19, 87] Float (24.0)
+         ||     ||     |     |     |     `> [19, 95] Divide
+         ||     ||     |     |     |        +> [19, 95] Float (1.0)
+         ||     ||     |     |     |        `> [19, 99] Float (6.0)
+         ||     ||     |     |     `> [19, 106] Divide
+         ||     ||     |     |        +> [19, 106] Float (1.0)
+         ||     ||     |     |        `> [19, 110] Float (2.0)
+         ||     ||     |     `> [19, 117] Float (1.0)
+         ||     ||     `> [19, 123] Int (1)
+         ||     []> [20, 1] IfThenElse
+         ||         +> [20, 5] Greater
+         ||         |  +> [20, 5] Identifier (fm)
+         ||         |  `> [20, 10] Float (0.0)
+         ||         +> ListInst [List with 2 elements]
+         ||         |  []> [21, 5] Assign
+         ||         |  ||  +> [21, 5] Identifier (d)
+         ||         |  ||  `> [21, 9] Identifier (m)
+         ||         |  []> [22, 5] Assign
+         ||         |      +> [22, 5] Identifier (fd)
+         ||         |      `> [22, 10] Identifier (fm)
+         ||         `> ListInst [List with 2 elements]
+         ||            []> [24, 5] Assign
+         ||            ||  +> [24, 5] Identifier (g)
+         ||            ||  `> [24, 7] Identifier (m)
+         ||            []> [25, 5] Assign
+         ||                +> [25, 5] Identifier (fg)
+         ||                `> [25, 10] Identifier (fm)
+         []> [28, 11] Print
+         ||  `> ListExpr [List with 2 elements]
+         ||     []> [28, 11] Identifier (g)
+         ||     []> [28, 14] StringLiteral ( = )
+         []> [28, 31] Println
+             `> ListExpr [List with 1 elements]
+                []> [28, 31] Identifier (g)

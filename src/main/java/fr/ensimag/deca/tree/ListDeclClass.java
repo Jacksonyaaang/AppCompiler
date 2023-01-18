@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import org.apache.log4j.Logger;
@@ -25,12 +26,11 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
      * Pass 1 of [SyntaxeContextuelle]
      */
     void verifyListClass(DecacCompiler compiler) throws ContextualError {
-        LOG.debug("verify listClass: start");
+        LOG.debug("[ListDeclClass][verifyListClass] verify listClass pass 1: START");
         for (AbstractDeclClass DeclClass : getList()) {
             DeclClass.verifyClass(compiler);    
         }
-        //throw new UnsupportedOperationException("not yet implemented");
-        // LOG.debug("verify listClass: end");
+        LOG.debug("[ListDeclClass][verifyListClass] verify listClass pass 1: END");
 
     }
 
@@ -38,20 +38,30 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
      * Pass 2 of [SyntaxeContextuelle]
      */
     public void verifyListClassMembers(DecacCompiler compiler) throws ContextualError {
+        LOG.debug("[ListDeclClass][verifyListClassMembers] verify listClass pass 2: START");
         for (AbstractDeclClass DeclClass : getList()) {
             DeclClass.verifyClassMembers(compiler);
         }
-        //throw new UnsupportedOperationException("not yet implemented");
+        LOG.debug("[ListDeclClass][verifyListClassMembers] verify listClass pass 2: END");
     }
     
     /**
      * Pass 3 of [SyntaxeContextuelle]
      */
     public void verifyListClassBody(DecacCompiler compiler) throws ContextualError {
+        LOG.debug("[ListDeclClass][verifyListClassBody] verify listClass pass 3: START");
         for (AbstractDeclClass DeclClass : getList()) {
             DeclClass.verifyClassBody(compiler);
         }
-        //throw new UnsupportedOperationException("not yet implemented");
+        LOG.debug("[ListDeclClass][verifyListClassBody] verify listClass pass 3: END");
+    }
+
+    public void  codeGenListClassTableau(DecacCompiler compiler) throws CodeGenError{
+        LOG.debug("[ListDeclClass][codeGenListClassTableau] Code generation pass 1: START");
+        for (AbstractDeclClass DeclClass : getList()) {
+            DeclClass.codeGenTableauDeMethod(compiler); 
+        }
+        LOG.debug("[ListDeclClass][codeGenListClassTableau] Code generation pass 1: END");
     }
 
 
