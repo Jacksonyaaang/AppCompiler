@@ -1,0 +1,21 @@
+// Description:
+//    Test méthode et attribut simple
+//    TEST Essentiel partie C
+
+// Resultats:
+//
+// Historique:
+// 
+
+
+class A{
+    private int i;
+    public int m1(){}
+}
+
+{
+    A a=new A();
+    A.i=1;
+    println(A.i);
+    a.m1;
+}
