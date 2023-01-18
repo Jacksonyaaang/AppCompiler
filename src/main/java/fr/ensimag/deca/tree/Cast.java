@@ -1,4 +1,4 @@
-package fr.ensimag.deca.tree;
+    package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
 

@@ -41,6 +41,24 @@ public class MethodDefinition extends ExpDefinition {
         LOG.debug("[MethodDefinition][setLabel] Trying to modify label with " + label.toString());
     }
 
+    public Label getEndLabel() {
+        if (endLabel == null){
+            LOG.debug("[MethodDefinition][getendLabel] endLabel is null");
+        }
+        Validate.isTrue(endLabel != null,
+                "setendLabel() should have been called before");
+        return endLabel;
+    }
+
+    public void setEndLabel(Label endLabel) {
+        if (this.endLabel == null){
+            LOG.debug("[MethodDefinition][setendLabel] Initialising endLabel value ");
+            this.endLabel = endLabel;
+        }
+        LOG.debug("[MethodDefinition][setendLabel] Trying to modify endLabel with " + endLabel.toString());
+    }
+
+
     public int getIndex() {
         return index;
     }
@@ -55,7 +73,10 @@ public class MethodDefinition extends ExpDefinition {
 
     private final Signature signature;
     private Label label = null;
+    private Label endLabel = null;
     
+
+
     /**
      * 
      * @param type Return type of the method

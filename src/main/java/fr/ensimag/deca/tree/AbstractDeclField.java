@@ -35,7 +35,12 @@ public abstract class AbstractDeclField extends Tree {
 
     public void codeGenDelField(DecacCompiler compiler) throws CodeGenError {
         throw new CodeGenError(getLocation(), "[AbstractDeclField][codeGenField]This method must not be called at this level");
-    }        
+    }   
+
+    public void CodeGenPlaceZeroInField(DecacCompiler compiler) throws CodeGenError {
+        throw new CodeGenError(getLocation(), "[AbstractDeclField][CodeGenPlaceZeroInField]This method must not be called at this level");
+    }
+
             
 }
 
