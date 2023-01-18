@@ -76,7 +76,7 @@ public class DeclParam extends AbstractDeclParam {
             type.setType(typeParam);
             //make sure this type isn't Void
             if (typeParam.isVoid()){
-                throw new ContextualError("You don't want to declare a void type parameter", getLocation());
+                throw new ContextualError("Déclaration de paramètres de type void impossible", getLocation());
             }
             //verify environmentTypes has the type of Paramname 
             Map<Symbol, TypeDefinition> envTypes = compiler.environmentType.getEnvTypes();
@@ -88,7 +88,7 @@ public class DeclParam extends AbstractDeclParam {
             try {
                 envParms.declare(paramName.getName(), paramDef);
             } catch (EnvironmentExp.DoubleDefException e) {
-                throw new ContextualError("double declaration de paramétre", getLocation());
+                throw new ContextualError("Le paramètre " + paramName.getName().getName() + " est déjà déclaré", getLocation());
             }
             
             return typeParam;  //il faut le 'type' comme la type de return pour charger la signature 

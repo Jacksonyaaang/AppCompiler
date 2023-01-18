@@ -137,10 +137,10 @@ public class DeclClass extends AbstractDeclClass {
                 name.setDefinition((ClassDefinition) classType.getDefinition());
             }
             else
-                throw new ContextualError("le super Class n'est pas déclaré", getLocation());   
+                throw new ContextualError("La super classe n'est pas déclareé", getLocation());
         }
         else 
-            throw new ContextualError("Double Déclaration de la class  " + name.getName().getName(), getLocation());
+            throw new ContextualError("Double déclaration de la classe  " + name.getName().getName(), getLocation());
     }
 
     @Override

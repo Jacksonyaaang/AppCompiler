@@ -105,8 +105,7 @@ public class EnvironmentExp {
      */
     public void declare(Symbol name, ExpDefinition def) throws DoubleDefException {
         if (!envExp.containsKey(name)) envExp.put(name, def);
-        else {throw new DoubleDefException("La variable est déjà déclarée");}
-        //throw new UnsupportedOperationException("not yet implemented");
+        else {throw new DoubleDefException("La variable " + name.getName() + " est déjà déclarée");}
     }
 
     public Map<Symbol, ExpDefinition> getExp(){

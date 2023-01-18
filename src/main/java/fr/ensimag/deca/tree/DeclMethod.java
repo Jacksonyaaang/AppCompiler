@@ -120,7 +120,7 @@ public class DeclMethod extends AbstractDeclMethod {
                                     +"checking if it is a method that belongs to the current class");
             Map<Symbol, ExpDefinition> tempoMap = localEnv.getExp();
             if (tempoMap.containsKey(this.methodName.getName())){
-                throw new ContextualError("[ERROR] We got the same method name in the current class !", getLocation());
+                throw new ContextualError("Il existe déjà une méthode de même nom "+methodName.getName().getName() + " dans la classe" + currentClass.getType().getName().getName(), getLocation());
             }else{
                 LOG.info("[DeclMethod][verifyDecleMethod] Method = "+ methodName.getName().getName()+ " exists in the parent class,"+
                          "checking if our method matchs the one that is in the parent");
@@ -141,7 +141,7 @@ public class DeclMethod extends AbstractDeclMethod {
                     localEnv.declare(methodName.getName(), methodName.getMethodDefinition());
                 } catch (DoubleDefException e) {
                     //forcément va marcher ici car on a déjà écorché le cas d'erreur 
-                    throw new ContextualError("[DeclMethod][verifyDeclMethodSimple]Bug compilateur", getLocation());
+                    throw new ContextualError("Bug compilateur", getLocation());
                 }
             }
         }
@@ -164,17 +164,17 @@ public class DeclMethod extends AbstractDeclMethod {
         //first verify they have the same signature
         int sizeSigSuper=sigSuper.size();
         if (sizeSigSuper != sigCurrMethod.size()){
-            throw new ContextualError("Sorry the current signature is not the same of the super class's correspond signature", getLocation());
+            throw new ContextualError("La signature de la méthode " + methodName.getName().getName() + "  dans la classe actuelle n'est pas identique à celle de la super classe", getLocation());
         }
         for (int i=0;i<sizeSigSuper; ++i){
             if (!sigSuper.paramNumber(i).sameType(sigCurrMethod.paramNumber(i))){
-                throw new ContextualError("Sorry the current signature is not the same of the super class's correspond signature", getLocation());
+                throw new ContextualError("La signature de la méthode "  + methodName.getName().getName() + " dans la classe actuelle n'est pas identique à celle de la super classe", getLocation());
             }
         }
         //then verify the type return is the sub-type of corresponding super-class's types
         if (!currTypeReturen.isClass()){  //the primitif type
             if (!superTypeReturn.sameType(currTypeReturen))
-            throw new ContextualError("[ERROR] The current method don't have a proper type", getLocation());
+                throw new ContextualError("[ERROR] The current method don't have a proper type", getLocation());
         }else{
             //the current return type is a type of class 
             if (superTypeReturn.isClass()){

@@ -40,16 +40,16 @@ public class Cast extends AbstractExpr{
         Type t2 = expr.verifyExpr(compiler, localEnv, currentClass);
         expr.setType(t2);
         if (t2.isVoid()){
-            throw new ContextualError("on peut pas caster un void", getLocation());
+            throw new ContextualError("On ne peut pas convertir le type d'une expression de type void", getLocation());
         }
         else if ((t1.isFloat() && !t2.isInt()) || (t1.isInt() && !t2.isFloat()) ||
                 (t2.isFloat() && !t1.isInt()) || (t2.isInt() && !t1.isFloat())){
-                    throw new ContextualError("on peut caster un Int que par un Float et vis-versa", getLocation());
+                    throw new ContextualError("On ne peut convertir le type d'une expression de type int qu'en Float et vice-versa", getLocation());
         }
         else if ((t1.isClass() && t2.isClass() && !((ClassType)t1).isSubClassOf((ClassType)t2) &&
                  !((ClassType)t2).isSubClassOf((ClassType)t1)) || t2.isNull() ||
                  (t1.isNull() && !t2.isClass())){
-                throw new ContextualError("cast impossible", getLocation());
+                throw new ContextualError("Cast impossible", getLocation());
         }
         return typeCast.getType();
     }

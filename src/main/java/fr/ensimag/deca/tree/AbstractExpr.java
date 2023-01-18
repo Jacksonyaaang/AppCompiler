@@ -171,7 +171,7 @@ public abstract class AbstractExpr extends AbstractInst {
             return cF;
         }
         if (!expectedType.sameType(t))
-            throw new ContextualError("Not expected type", getLocation());
+            throw new ContextualError("Le type de l'expression de droite est " + t + " alors que le type attendu est " + expectedType, getLocation());
         setType(expectedType);
         return this;
     }
@@ -202,7 +202,7 @@ public abstract class AbstractExpr extends AbstractInst {
         //Si le type de la condition est null ou n'est pas boolean, on jette une ContextualError
         if (type_cond != null && type_cond.isBoolean()) setType(type_cond);
         else{
-            throw new ContextualError("la condition doit être booléan", getLocation());
+            throw new ContextualError("la condition doit être de type boolean", getLocation());
         }
         setType(compiler.environmentType.BOOLEAN);
     }

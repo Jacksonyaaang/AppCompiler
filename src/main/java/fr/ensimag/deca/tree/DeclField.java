@@ -93,14 +93,14 @@ public class DeclField extends AbstractDeclField {
         for (tmpClass = currentClass.getSuperClass(); tmpClass != null; tmpClass = tmpClass.getSuperClass()){
             if (tmpClass.getMembers().getExp().containsKey(varName.getName()) && 
                 varName.getDefinition() instanceof MethodDefinition){
-                    throw new ContextualError(" Il existe une  methode qui posséde le même nom que le field =  "+ varName.getName().getName(), getLocation());
+                    throw new ContextualError(" Il existe une methode qui possède le même nom que le field =  "+ varName.getName().getName(), getLocation());
                 }
         }
         Type t = type.verifyType(compiler);
         type.setType(t);
         //Vérification de la condition type =/= void de la règle 3.17
         if(t.isVoid()) {
-            throw new ContextualError("Déclaraion de Field de type void impossible", getLocation());
+            throw new ContextualError("Déclaration de champs de type void impossible", getLocation());
         }
         //initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
         int _index = currentClass.getNumberOfFields() + 1;
@@ -110,7 +110,7 @@ public class DeclField extends AbstractDeclField {
             localEnv.declare(varName.getName(), varName.getExpDefinition()); 
         } 
         catch (EnvironmentExp.DoubleDefException e) {
-            throw new ContextualError("y'a deja un field ou une methode du même nom", getLocation());
+            throw new ContextualError("Il y a déjà un field ou une methode de même nom", getLocation());
         }
         currentClass.setNumberOfFields(_index);    
     }
