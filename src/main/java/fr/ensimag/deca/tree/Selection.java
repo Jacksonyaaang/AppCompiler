@@ -31,7 +31,7 @@ public class Selection extends AbstractLValue {
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
         // TODO Auto-generated method stub
-        return null;
+        return compiler.environmentType.INT;
     }
 
     @Override
