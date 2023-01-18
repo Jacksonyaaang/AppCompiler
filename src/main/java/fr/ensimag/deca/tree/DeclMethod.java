@@ -25,7 +25,7 @@ import fr.ensimag.ima.pseudocode.Register;
  */
 public class DeclMethod extends AbstractDeclMethod {
 
-    private static final Logger LOG = Logger.getLogger(IntLiteral.class);
+    private static final Logger LOG = Logger.getLogger(DeclMethod.class);
 
     final private AbstractIdentifier type;
     final private AbstractIdentifier methodName;
@@ -95,17 +95,19 @@ public class DeclMethod extends AbstractDeclMethod {
     @Override
     protected void verifyDeclMethodSimple(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
-        LOG.debug("[DeclMethod][verifyDecleMethod] Verify the declaration of a method in a class in pass B\n");
+        LOG.debug("[DeclMethod][verifyDecleMethod] Verifing the declaration of a method in pass 2 || MethodName =  " + 
+                                                    methodName.getName().getName());
         //récupérer le type de return 
         Type typeReturn = this.type.verifyType(compiler);
         this.type.setType(typeReturn);
         Signature signature=this.listParam.verifyListDeclParam(compiler);
         
-        currentClass.incNumberOfMethods();
         //pour insérer le nom de méthode dans l'environement local
         if (localEnv.get(methodName.getName())==null){
-            LOG.debug("\n enter the  if \n");
+            LOG.info("[DeclMethod][verifyDecleMethod] Method = "+ methodName.getName().getName()+ " does not exists,"
+                        +" adding a new one to the local env with index "+ (currentClass.getNumberOfMethods()+1));
             MethodDefinition methodDef = new MethodDefinition(typeReturn, getLocation(), signature, currentClass.incNumberOfMethods());
+            methodDef.setMethodname(methodName.getName().getName());
             methodName.setDefinition(methodDef); 
             try {
                 localEnv.declare(methodName.getName(), methodName.getMethodDefinition());
@@ -114,20 +116,27 @@ public class DeclMethod extends AbstractDeclMethod {
             }
         }else{ //name is already declared, maybe in local maybe in the super-classes 
             //if it's in the local env:
-            LOG.info(" enter the else \n");
+            LOG.info("[DeclMethod][verifyDecleMethod] Method = "+ methodName.getName().getName()+ " exists in the localenv, "
+                                    +"checking if it is a method that belongs to the current class");
             Map<Symbol, ExpDefinition> tempoMap = localEnv.getExp();
             if (tempoMap.containsKey(this.methodName.getName())){
                 throw new ContextualError("[ERROR] We got the same method name in the current class !", getLocation());
             }else{
+                LOG.info("[DeclMethod][verifyDecleMethod] Method = "+ methodName.getName().getName()+ " exists in the parent class,"+
+                         "checking if our method matchs the one that is in the parent");
                 //the same name is in the super class
                 //vérifier la condition de règle
                 //get the parent's same-method-name signature:
                 Signature sigSuper=localEnv.get(this.methodName.getName()).asMethodDefinition("sorry it's not a method", getLocation()).getSignature();
                 Type typeSuperReturn=localEnv.get(this.methodName.getName()).asMethodDefinition("sorry it's not a method", getLocation()).getType();
                 doubleDeclNameMethod(compiler, localEnv, sigSuper, signature, typeReturn, typeSuperReturn);
+
                 int indexRecurringMethod =  ((MethodDefinition) (localEnv.get(methodName.getName()))).getIndex();
                 MethodDefinition methodDef = new MethodDefinition(typeReturn, getLocation(), signature, indexRecurringMethod);
+                methodDef.setMethodname(methodName.getName().getName());
                 methodName.setDefinition(methodDef); 
+                LOG.info("[DeclMethod][verifyDecleMethod] Method = "+ methodName.getName().getName()+" exists in the parent class,"+
+                            "and it was redefined exactly the way it was in the parent method, we used the index the index =" + indexRecurringMethod);
                 try {  
                     localEnv.declare(methodName.getName(), methodName.getMethodDefinition());
                 } catch (DoubleDefException e) {
@@ -186,7 +195,8 @@ public class DeclMethod extends AbstractDeclMethod {
     @Override
     protected void verifyDeclMethod(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
         throws ContextualError {
-        methodBody.verifyDeclMethodBody(compiler, localEnv, currentClass);      
+        listParam.getenvParm().setParentEnvironment(localEnv);
+        methodBody.verifyDeclMethodBody(compiler, listParam.getenvParm(), currentClass, type.getType());      
         // TODO Auto-generated method stub
         
     }

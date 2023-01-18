@@ -23,9 +23,9 @@ public abstract class AbstractMethodBody extends Tree{
      */    
 
 /** une version normal pour la troisième passe*/
-protected abstract void verifyDeclMethodBody(DecacCompiler compiler,
-     EnvironmentExp localEnv, ClassDefinition currentClass)
-     throws ContextualError;
+protected abstract void verifyDeclMethodBody(DecacCompiler compiler, EnvironmentExp localEnv, 
+                                             ClassDefinition currentClass, Type retunType)
+                                             throws ContextualError;
      
 public void codeGenDecl(DecacCompiler compiler) throws CodeGenError {
  throw new CodeGenError(getLocation(), "This method must not be called at this level");

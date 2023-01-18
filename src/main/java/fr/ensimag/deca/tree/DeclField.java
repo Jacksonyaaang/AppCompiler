@@ -10,9 +10,9 @@ import static org.mockito.Mockito.mockingDetails;
 import org.apache.log4j.Logger;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
-import fr.ensimag.ima.pseudocode.RegisterOffset;
+
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
-import fr.ensimag.ima.pseudocode.Register;
 
 /**
  * @author gl15
@@ -93,7 +93,7 @@ public class DeclField extends AbstractDeclField {
         for (tmpClass = currentClass.getSuperClass(); tmpClass != null; tmpClass = tmpClass.getSuperClass()){
             if (tmpClass.getMembers().getExp().containsKey(varName.getName()) && 
                 varName.getDefinition() instanceof MethodDefinition){
-                    throw new ContextualError(" il y'a une methode du même nom dans le super", getLocation());
+                    throw new ContextualError(" Il existe une  methode qui posséde le même nom que le field =  "+ varName.getName().getName(), getLocation());
                 }
         }
         Type t = type.verifyType(compiler);
@@ -107,17 +107,38 @@ public class DeclField extends AbstractDeclField {
         FieldDefinition fieldDf = new FieldDefinition(type.getType(), getLocation(), visibility, currentClass, _index);      //new FieldDefinition(type.getType(), varName.getLocation());
         varName.setDefinition(fieldDf);
         try{
-            localEnv.declare(varName.getName(), varName.getExpDefinition());
+            localEnv.declare(varName.getName(), varName.getExpDefinition()); 
         } 
         catch (EnvironmentExp.DoubleDefException e) {
             throw new ContextualError("y'a deja un field ou une methode du même nom", getLocation());
         }
-        currentClass.setNumberOfFields(_index);
-        
+        currentClass.setNumberOfFields(_index);    
     }
+
     @Override
     protected void verifyinitFieldPass3(DecacCompiler compiler, EnvironmentExp localEnv, 
         ClassDefinition currentClass) throws ContextualError{
         initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
     }
+
+    @Override
+    public void codeGenDelField(DecacCompiler compiler) throws CodeGenError {
+        if (initialization instanceof Initialization ){
+            this.initialization.codegenInitial(compiler);
+            compiler.addInstruction(new STORE(this.initialization.getRegistreDeRetour(),
+                                        varName.getExpDefinition().getOperand()), "Initializing the field "+ getVarName().getName()
+                                                                +" and loading it into memory"); 
+        }
+        else{
+                compiler.addInstruction(new LOAD(new ImmediateInteger(0), Register.getR(0)),
+                        "loading 0  into memory to initialize field to 0");
+                compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(1)),
+                "loading class(this) into memory"+getVarName()+ "into memory");
+                compiler.addInstruction(new STORE(Register.getR(0),new RegisterOffset(((FieldDefinition) (varName.getExpDefinition())).getIndex(), Register.getR(1))),
+                            "Saving field  "+getVarName()+ " into memory");
+        }
+    }
+
 }
+
+

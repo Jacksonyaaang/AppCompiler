@@ -36,7 +36,7 @@ public class TableDeMethode {
         StringBuilder output = new StringBuilder();
         output.append("-----Start table Method Table----\n");
         for (Map.Entry<ClassDefinition, RegisterOffset> entry : adresseTableDeMethod.entrySet()) {
-            output.append(entry.getKey().toString() + " -> " +  entry.getValue());
+            output.append(entry.getKey().toString() + " -> " +  entry.getValue() +"\n");
         }
         output.append("-----End table Method Table  ----\n");
         return output.toString();        

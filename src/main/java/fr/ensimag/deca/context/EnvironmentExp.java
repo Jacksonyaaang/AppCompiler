@@ -113,4 +113,18 @@ public class EnvironmentExp {
         return envExp;
     }
 
+    public void setParentEnvironment(EnvironmentExp parentEnvironment) {
+        this.parentEnvironment = parentEnvironment;
+    }
+    public EnvironmentExp getParent(){
+        return parentEnvironment;
+    }
+
+    // public void setEnvExp(Map<Symbol, ExpDefinition> envExp) {
+    //     this.envExp = envExp;
+    // }
+
+    // public void setP
+    // kjhùijpm
+
 }

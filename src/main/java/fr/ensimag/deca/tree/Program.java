@@ -47,13 +47,14 @@ public class Program extends AbstractProgram {
         classes.verifyListClass(compiler);
         classes.verifyListClassMembers(compiler);
         classes.verifyListClassBody(compiler);
-        main.verifyMain(compiler);
+        //main.verifyMain(compiler);
         LOG.debug("verify program: end");
     }
 
     @Override
     public void codeGenProgram(DecacCompiler compiler) throws CodeGenError{
         generateMethodTableForObjectClass(compiler);
+        classes.codeGenListClassTableau(compiler);
         compiler.addComment("Main program");
         main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());

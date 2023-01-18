@@ -21,6 +21,7 @@ import java.io.PrintStream;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 /**
  * Declaration of a class (<code>class name extends superClass {members}<code>).
@@ -29,6 +30,9 @@ import org.apache.commons.lang.Validate;
  * @date 01/01/2023
  */
 public class DeclClass extends AbstractDeclClass {
+    private static final Logger LOG = Logger.getLogger(DeclClass.class);
+
+
     protected final AbstractIdentifier name ;
     protected final AbstractIdentifier superClass; 
     protected final ListDeclField fields;
@@ -36,10 +40,16 @@ public class DeclClass extends AbstractDeclClass {
 
 
     public void codeGenTableauDeMethod(DecacCompiler compiler) throws CodeGenError {
+        LOG.debug("[DeclClass][codeGenTableauDeMethod] Generating the table method || ClassName =  " + 
+                name.getName().getName()  + " // Super class  = " + superClass.getName().getName());
+        LOG.debug("[DeclClass][codeGenTableauDeMethod] Class definitions are : \n Main class name =  " + 
+                    name.getClassDefinition().toString()  + " \n Super class   = " + superClass.getClassDefinition().toString());
+
         ClassDefinition classDefinition = name.getClassDefinition();
         // LEA 1 (GB), R0 
         ClassDefinition classDefinitionSuper = superClass.getClassDefinition();
         //On met l'adresse du debut de la table de méthode du parent dans le registre R0
+        LOG.debug("[DeclClass][codeGenTableauDeMethod] Current methode table adresses \n" + compiler.getTableDeMethodeCompiler().toString()); 
         compiler.addInstruction(new LEA( compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(classDefinitionSuper),
                                          Register.getR(0)));
         compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().put(classDefinition, new RegisterOffset(compiler.incrementGbCompiler(), Register.GB));
@@ -52,10 +62,10 @@ public class DeclClass extends AbstractDeclClass {
             methodDefinitionIter = classDefinition.getMembers().getMethodIndex(methodIndex);
             currentMethodDefinition = getClassdefinition(compiler, classDefinition.getMembers().getMethodEnvioremnent(
                                         methodDefinitionIter));
-            compiler.addInstruction(new LOAD((DVal) new LabelOperand(new Label("code."+
-                                                            currentMethodDefinition.getType().getName().getName()+"."+
-                                                            methodDefinitionIter.getType().getName().getName())),
-                                                            Register.getR(0)));
+            methodDefinitionIter.setLabel(new Label("code."+
+                                        currentMethodDefinition.getType().getName().getName()+"."+
+                                        methodDefinitionIter.getMethodname()));
+            compiler.addInstruction(new LOAD((DVal) new LabelOperand(methodDefinitionIter.getLabel()), Register.getR(0)));
             compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.incrementGbCompiler(), Register.GB)));
         }
     }
@@ -117,21 +127,20 @@ public class DeclClass extends AbstractDeclClass {
     protected void verifyClass(DecacCompiler compiler) throws ContextualError {
         if (!compiler.environmentType.getEnvTypes().containsKey(name.getName())){
             if (compiler.environmentType.getEnvTypes().containsKey(superClass.getName())){
-                //Ce traitement associe à l'indetificateur object, la class definition,
-                // ceci sera utile pour le méthode de generation de code 
-                if (superClass.getName() == compiler.createSymbol("object")){
-                     superClass.setDefinition(compiler.environmentType.getEnvTypes().get(
-                                                compiler.createSymbol("object")));
-                }
+                //Ce traitement associe à l'indetificateur la class super sa classe definition de object
+                // Ceci sera utile pour le méthode de generation de code 
+                superClass.setDefinition((ClassDefinition) compiler.environmentType.getEnvTypes().get(
+                                                compiler.createSymbol(superClass.getName().getName())));
                 ClassType classType = new ClassType(name.getName(), getLocation(), 
                                                     (ClassDefinition)compiler.environmentType.defOfType(superClass.getName()));
                 compiler.environmentType.getEnvTypes().put(name.getName(), (ClassDefinition) classType.getDefinition());
-            }else
-                throw new ContextualError("le super Class n'est pas déclaré", getLocation());
-            
-        }else 
+                name.setDefinition((ClassDefinition) classType.getDefinition());
+            }
+            else
+                throw new ContextualError("le super Class n'est pas déclaré", getLocation());   
+        }
+        else 
             throw new ContextualError("Double Déclaration de la class  " + name.getName().getName(), getLocation());
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
@@ -142,7 +151,6 @@ public class DeclClass extends AbstractDeclClass {
                classDefi.setNumberOfMethods(classDefi.getSuperClass().getNumberOfMethods());
                fields.verifyListDeclField(compiler, classDefi.getMembers(), classDefi);
                methods.verifyListDeclMethod(compiler, classDefi.getMembers(), classDefi);
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
@@ -150,7 +158,6 @@ public class DeclClass extends AbstractDeclClass {
         ClassDefinition classDefi = (ClassDefinition) compiler.environmentType.defOfType(name.getName());
         fields.verifyInitFields(compiler, classDefi.getMembers(), classDefi);
         methods.verifyListDeclMethodBody(compiler, classDefi.getMembers(), classDefi);
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
 
