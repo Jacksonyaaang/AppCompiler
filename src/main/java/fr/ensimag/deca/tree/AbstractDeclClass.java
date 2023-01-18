@@ -1,7 +1,9 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.ima.pseudocode.IMAProgram;
 
 /**
  * Class declaration.
@@ -32,4 +34,32 @@ public abstract class AbstractDeclClass extends Tree {
     protected abstract void verifyClassBody(DecacCompiler compiler)
             throws ContextualError;
 
+     /**
+      * Cette méthode est utilisée pour génenerer la tableau de méthode d'une classe spécfique
+      Cette méthode est uniquement invoquée dans le pass 1 de la géneration du code 
+      * @param compiler 
+      * @throws CodeGenError cette erreur est interne aux compilateur et elle est lancée 
+      quand le compilateur génere une erreur dans les algorithmes de création de code assembleur 
+      */
+     protected abstract void codeGenTableauDeMethod(DecacCompiler compiler) throws CodeGenError;
+
+
+     /**
+      * Cette méthode est utilisée pour génenerer le codes de tout les methodes d'une fonctions et la 
+      * sa initialisation.
+      * @param compiler 
+      * @throws CodeGenError cette erreur est interne aux compilateur et elle est lancée 
+      quand le compilateur génere une erreur dans les algorithmes de création de code assembleur 
+      */
+      protected abstract void codeGenClassMethod(DecacCompiler compiler) throws CodeGenError;
+
+
+      /**
+       * getClassProgram retourne le programme de classe qui contient la méthode d'initialisation
+       * et les methodes de la classe
+       * @return le program de la classe
+       */  
+      public IMAProgram getClassProgram() {
+        return null;
+        }
 }

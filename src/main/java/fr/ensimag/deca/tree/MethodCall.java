@@ -27,7 +27,7 @@ public class MethodCall extends AbstractExpr {
     protected AbstractIdentifier methode;
     protected ListExpr listParam;
 
-
+    private static final Logger LOG = Logger.getLogger(Modulo.class);
 
     public  MethodCall(AbstractExpr obj, AbstractIdentifier methode, ListExpr listParam){
         Validate.notNull(obj); 
@@ -76,8 +76,19 @@ public class MethodCall extends AbstractExpr {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        // TODO Auto-generated method stub
-        
+        LOG.debug("[MethodCall][decompile] decompile entry");
+
+        if(getObj().isImplicit()){
+            LOG.debug("[MethodCall][decompile] ifthenelse condition entry");
+        }
+        else {
+            getObj().decompile(s);
+            s.print(".");
+        }
+        getMethode().decompile(s);
+        s.print("(");
+        getListParam().decompile(s);
+        s.print(")");
     }
 
     @Override

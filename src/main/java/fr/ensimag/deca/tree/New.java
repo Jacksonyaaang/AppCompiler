@@ -38,15 +38,21 @@ public class New  extends AbstractExpr{
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
-        // TODO Auto-generated method stub
-        return null;
+            Type t = className.verifyType(compiler);
+            if(!t.isClass()){
+                throw new ContextualError("L'expression new est utilisée uniquement pour créer des objets dont le type est un type de classe", getLocation());
+            }
+            setType(t);
+        return t;
     }
 
     @Override
     public void decompile(IndentPrintStream s) {
-        // TODO Auto-generated method stub
-        
+        s.print("new ");
+        getClassName().decompile(s);
+        s.print("()");
     }
+
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
         int nbattributs = className.getClassDefinition().getNumberOfFields();
@@ -63,8 +69,6 @@ public class New  extends AbstractExpr{
         // on stocke l’adresse de a dans l’espace de la pile dédié aux variables        
         // globales, indice l: premier registre libre dans cette partie de la pile
         compiler.addInstruction(new STORE(Rm, l(GB)));
-        
-
     }
 
     @Override

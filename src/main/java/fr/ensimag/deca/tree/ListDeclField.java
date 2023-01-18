@@ -23,8 +23,8 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        for (AbstractDeclField v : getList()){
-            v.decompile(s);
+        for (AbstractDeclField f : getList()){
+            f.decompile(s);
             s.println();
         }
 
@@ -51,14 +51,41 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
      */    
     void verifyListDeclField(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-            LOG.debug("[ListDeclVar][verifyListDeclVariable]");
+            LOG.debug("[ListDeclField][verifyListDeclField]");
         for (AbstractDeclField declField : getList()){
-            //declField.verifyDeclVar(compiler, localEnv, currentClass);
+            declField.verifyDeclField(compiler, localEnv, currentClass);
         }
     }
 
+    void verifyInitFields(DecacCompiler compiler, EnvironmentExp localEnv,
+            ClassDefinition currentClass) throws ContextualError {
+            LOG.debug("[ListDeclField][verifyInitListDeclField]");
+        for (AbstractDeclField declField : getList()){
+            declField.verifyinitFieldPass3(compiler, localEnv, currentClass);
+        }
+    }
 
+    public void CodeGenListPlaceZeroInField(DecacCompiler compiler) throws CodeGenError {
+        LOG.debug("[ListDeclField][CodeGenListPlaceZeroInField] Placing Zero In All fields");
+        for (AbstractDeclField declField : getList()){
+            compiler.getRegisterManagement().freeAllRegisters();
+            declField.CodeGenPlaceZeroInField(compiler);
+        }
+    }
 
+    public void CodeGenListInitializeField(DecacCompiler compiler) throws CodeGenError {
+        LOG.debug("[ListDeclField][CodeGenListInitializeField] Initializing the fields");
+        for (AbstractDeclField declField : getList()){
+            compiler.getRegisterManagement().freeAllRegisters();
+            declField.codeGenDelField(compiler);
+        }
+    }
 
 }
+
+
+
+
+
+
 

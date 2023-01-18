@@ -47,6 +47,7 @@ public class Assign extends AbstractBinaryExpr {
     public void codeGenInst(DecacCompiler compiler) throws CodeGenError {
             //Avec deux register il n'y a pas de risque que le compilateur
             //avait fait un push de se registre 
+            //On commence par reserver un registre, que sera utilisée pour le retourner la valeur de assign
             GPRegister assignRegister = this.LoadGencode(compiler, false);
             compiler.addComment("--------BeginAssignOp--------"+getLocation()+"-----");    
             this.getRightOperand().codeGenInst(compiler);

@@ -14,17 +14,22 @@ import fr.ensimag.deca.DecacCompiler;
 public class StackManagementUnit {
     
     /**
-     * @gbCounter conteur sur la valeur qu'on a atteint pour le offset du registre gb
+     * @gbCounter save la valeur qu'on a atteint pour le offset du registre gb
+     * @lbCounter stocke la valeur qu'on a atteint pour les variables de methodes
      * @stacksizeNeededMain determine la taille maximal du stack dont on aure besoin pour le main program
      * @opBoolIncrementer associe à chaque operation boolean de type AND Ou OR un identifiant spécifque 
      * @ifIncrementer associe à chaque ifthenelse bloc un identifiant spécifque 
      * @whileIncrementer associe à chaque boule un identifiant spécifque 
      */
     private int gbCounter = 0;
-    private int stacksizeNeededMain = 0;
-    private int opBoolIncrementer = 0;
-    private int ifIncrementer = 0;
-    private int whileIncrementer = 0;
+    private int lbCounter = 0; 
+    // Valeur de paramCounter mis à 2 car le lb counter sera utilisée dans les methodes
+    //et les deux premier espaces dnas le lb counter seront utilisées pour stocker l'adresse de retour
+    //et l'adresse de la class actuel   
+    private int paramCounter = -2; 
+    private int stackSizeNeededMain = 0;
+    private int stackSizeNeededMethod = 0;
+    
 
     public int getGbCounter() {
         return gbCounter;
@@ -34,38 +39,42 @@ public class StackManagementUnit {
         return gbCounter;
     }
 
-    public int getOpBoolIncrementer() {
-        return opBoolIncrementer;
-    }
-    public int incrementOpBoolIncrementer() {
-        opBoolIncrementer++;
-        return opBoolIncrementer;
-    }
-
-    public int getIfIncrementer() {
-        return ifIncrementer;
-    }
-    public int incrementIfIncrementer() {
-        ifIncrementer++;
-        return ifIncrementer;
-    }
-    
-    public int getWhileIncrementer() {
-        return whileIncrementer;
-    }
-    public int incrementWhileIncrementer() {
-        whileIncrementer++;
-        return whileIncrementer;
-    }
 
     public int getStacksizeNeededMain() {
-        return stacksizeNeededMain;
+        return stackSizeNeededMain;
     }
 
     public int measureStacksizeNeededMain(DecacCompiler compiler) {
-        stacksizeNeededMain =  gbCounter + compiler.getRegisterManagement().getMaxTempVariables();
-        return stacksizeNeededMain;
+        stackSizeNeededMain =  gbCounter + compiler.getRegisterManagement().getMaxTempVariables();
+        return stackSizeNeededMain;
     }
 
+    public int measureStacksizeNeededMethod(DecacCompiler compiler) {
+        stackSizeNeededMethod =  lbCounter + compiler.getRegisterManagement().getMaxTempVariables() + compiler.getRegisterManagement().numberOfRegisterUsedInMethod();
+        return stackSizeNeededMethod;
+    }
 
+    public int getLbCounter() {
+        return lbCounter;
+    }
+    public void setLbCounter(int lbCounter) {
+        this.lbCounter = lbCounter;
+    }
+    
+    public int incrementLbCounter() {
+        lbCounter++;
+        return lbCounter;
+    }
+
+    public int getParamCounter() {
+        return paramCounter;
+    }
+    public void setParamCounter(int paramCounter) {
+        this.paramCounter = paramCounter;
+    }
+    
+    public int decrementParamCounter() {
+        paramCounter--;
+        return paramCounter;
+    }
 }
