@@ -14,6 +14,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.NEW;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
@@ -59,16 +60,15 @@ public class New  extends AbstractExpr{
         GPRegister Rm=this.LoadGencode(compiler, false);
         compiler.addInstruction(new NEW(nbattributs+1, Rm));
         compiler.addInstruction(new BOV(new Label("heap_overflow_error")));
-        compiler.addInstruction(new LEA(className.getClassDefinition().getMethodTableBase(), Register.getR(0)));
-        compiler.addInstruction(new STORE(Register.getR(0), 0(Rm)));
-        compiler.addInstruction(new PUSH(Rm));
-        compiler.addInstruction(new BSR(init.A));
+        compiler.addInstruction(new LEA(compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(className.getClassDefinition()), Register.getR(0)));
+        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(0, Rm)));
+        // compiler.addInstruction(new PUSH(Rm));
+        compiler.addInstruction(new BSR(new Label("init."+className.getType().getName().getName())));
         //traiter se problème
-        compiler.addInstruction(new POP(Rm));
+        // compiler.addInstruction(new POP(Rm));
         
         // on stocke l’adresse de a dans l’espace de la pile dédié aux variables        
         // globales, indice l: premier registre libre dans cette partie de la pile
-        compiler.addInstruction(new STORE(Rm, l(GB)));
     }
 
     @Override

@@ -154,15 +154,6 @@ public class DecacCompiler {
     }
 
     /**
-     * Unité qui fait la gestion des registres utilsées dans la partie 
-     */
-    private RegisterMangementUnit registerManagement  ;
-
-    public RegisterMangementUnit getRegisterManagement() {
-        return registerManagement;
-    }
-
-    /**
      * Source file associated with this compiler instance.
      */
     public File getSource() {
