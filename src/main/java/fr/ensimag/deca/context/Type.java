@@ -68,6 +68,10 @@ public abstract class Type {
         return false;
     }
 
+    public boolean isTable() {
+        return false;
+    }
+
     /**
      * Returns the same object, as type ClassType, if possible. Throws
      * ContextualError(errorMessage, l) otherwise.

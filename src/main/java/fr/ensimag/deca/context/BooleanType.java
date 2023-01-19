@@ -25,7 +25,6 @@ public class BooleanType extends Type {
     public boolean sameType(Type otherType) {
         if (otherType instanceof BooleanType) return true;
         return false;
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
 

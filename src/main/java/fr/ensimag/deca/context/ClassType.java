@@ -57,7 +57,6 @@ public class ClassType extends Type {
             if (this.getName().getName().equals(((ClassType)otherType).getName().getName()))
             return true;
         }return false;
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     /**
@@ -73,8 +72,6 @@ public class ClassType extends Type {
             CurClassDef = CurClassDef.getSuperClass();    
         }
         return false;
-        
-        //throw new UnsupportedOperationException("not yet implemented"); 
     }
 
 

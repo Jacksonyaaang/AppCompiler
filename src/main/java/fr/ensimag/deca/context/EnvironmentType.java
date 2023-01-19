@@ -62,11 +62,14 @@ public class EnvironmentType {
         try {
             defintionClassObject.getMembers().declare(equalsMethodObject, defintionMethodEquals);
         } catch (DoubleDefException e) {
-            //C'est impossible d'être dans cette position car la méthode equals ne peux par 
-            // être défini deux fois
+            //C'est impossible d'être dans cette position car la méthode equals ne peux pas 
+            //être défini deux fois
             e.printStackTrace();
             System.exit(1);
         }
+
+        
+
     }
 
     private final Map<Symbol, TypeDefinition> envTypes;
