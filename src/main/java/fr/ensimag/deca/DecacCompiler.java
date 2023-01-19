@@ -61,6 +61,24 @@ public class DecacCompiler {
     private int opBoolIncrementer = 0;
     private int ifIncrementer = 0;
     private int whileIncrementer = 0;
+    private int instanceOfIncrementer = 0;
+    private int castIncrement = 0;
+
+    public int getInstanceOfIncrementer() {
+        return instanceOfIncrementer;
+    }
+    public int incrementInstanceOfIncrementer() {
+        instanceOfIncrementer++;
+        return instanceOfIncrementer;
+    }
+
+    public int getCastIncrement() {
+        return castIncrement;
+    }
+    public int incrementCastIncrement() {
+        castIncrement++;
+        return castIncrement;
+    }
 
     public int getOpBoolIncrementer() {
         return opBoolIncrementer;

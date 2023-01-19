@@ -53,10 +53,10 @@ public class InstanceOf extends AbstractExpr {
         this.expr.codeGenInst(compiler);
         GPRegister reg = expr.getRegisterDeRetour();
         GPRegister RType=this.LoadGencode(compiler, false);;
-        Label loopbegin = new Label("loopbegin");
-        Label endtrue = new Label("endtrue");
-        Label endfalse = new Label("endfalse");
-        Label instanceOfObject = new Label("instanceOf_Object");
+        Label loopbegin = new Label("loopbegin"+compiler.incrementInstanceOfIncrementer());
+        Label endtrue = new Label("endtrue"+compiler.incrementInstanceOfIncrementer());
+        Label endfalse = new Label("endfalse"+compiler.incrementInstanceOfIncrementer());
+        Label instanceOfObject = new Label("instanceOf_Object"+compiler.incrementInstanceOfIncrementer());
         compiler.addInstruction(new LOAD(compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(typeInstance.getClassDefinition()), RType), "loading method table of " + typeInstance.getName());
         compiler.addInstruction(new CMP(new NullOperand(), RType));
         compiler.addInstruction(new BEQ(instanceOfObject), "si"+typeInstance+"est Object, on retourne immédiatement true");
@@ -75,6 +75,7 @@ public class InstanceOf extends AbstractExpr {
         expr.popRegisters(compiler);
         compiler.getRegisterManagement().decrementOccupationRegister(expr.getRegisterDeRetour());
         this.setRegisterDeRetour(RType);
+        //On n'a pas besoin de transporter les registre à poper car, on reserve le registre dans cette classe
         compiler.addComment("--------------EndInstanceof----------"+getLocation()+"-----");    
     }
 
