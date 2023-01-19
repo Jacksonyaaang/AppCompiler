@@ -51,19 +51,21 @@ public class InstanceOf extends AbstractExpr {
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
         this.expr.codeGenInst(compiler);
         GPRegister reg = expr.getRegisterDeRetour();
-        GPRegister RType = this.LoadGencode(compiler, false);
+        GPRegister RType=this.LoadGencode(compiler, false);;
         Label loopbegin = new Label("loopbegin");
         Label endtrue = new Label("endtrue");
         Label endfalse = new Label("endfalse");
-        compiler.addInstruction(new LOAD(compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(typeInstance.getClassDefinition()), RType), 
-                                "loading method table of " + typeInstance.getName());
-        // ^=on récupère la position de la classe de typeInstance dans RType
-        compiler.addLabel(loopbegin);  //
+        Label instanceOfObject = new Label("instanceOf_Object");
+        compiler.addInstruction(new LOAD(compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(typeInstance.getClassDefinition()), RType), "loading method table of " + typeInstance.getName());
+        compiler.addInstruction(new CMP(new NullOperand(), RType));
+        compiler.addInstruction(new BEQ(instanceOfObject), "si"+typeInstance+"est Object, on retourne immédiatement true");
+        compiler.addLabel(loopbegin);  
         compiler.addInstruction(new LOAD(new RegisterOffset(0, reg), reg));
         compiler.addInstruction(new CMP(new NullOperand(), reg));
         compiler.addInstruction(new BEQ(endfalse));
         compiler.addInstruction(new CMP(reg,RType));
-        compiler.addInstruction(new BNE(loopbegin));
+        compiler.addInstruction(new BNE(loopbegin), "loopend");
+        compiler.addLabel(instanceOfObject);
         compiler.addInstruction(new LOAD(1, RType));
         compiler.addInstruction(new BRA(endtrue));
         compiler.addLabel(endfalse);
