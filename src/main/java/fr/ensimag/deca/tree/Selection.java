@@ -73,28 +73,24 @@ public class Selection extends AbstractLValue {
             if (!t.isClass()){
                 throw new ContextualError("[Using Error] The first selection must be a class or this ", getLocation());
             }
-            //if (currentClass.getMembers().get(((Identifier)this.field).getName())==null){
-            if (((ClassType)t).getDefinition().getMembers().get(((Identifier)this.field).getName())==null){
-                //we should verify the de definition exists from the first expression class insatead of the current class
+            FieldDefinition fieldDefi = (FieldDefinition)currentClass.getMembers().get(((Identifier)this.field).getName());
+            field.setDefinition(fieldDefi);
+            if (fieldDefi==null){
                 throw new ContextualError("[Using Error] Can't find the field in the prevous declarations ", getLocation());
                 
             }else{
-                FieldDefinition envField =(FieldDefinition) currentClass.getMembers().get(((Identifier)this.field).getName());
-                Visibility visiField = envField.asFieldDefinition("it's not a field type", getLocation()).getVisibility();
-                field.setDefinition(envField);
-                if (visiField==Visibility.PROTECTED){
-                    //if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
-                    LOG.info("i'm entering the  protected field !!!");
+                if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
                     ClassDefinition classDes = ((FieldDefinition)this.field.getDefinition()).getContainingClass();
+                     if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType)t).isSubClassOf(classDes.getType())) {
 
-                    if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType)t).isSubClassOf(classDes.getType())) {
                         throw new ContextualError("[Using Error] Obey the second condition, the current class must be the sub class of the field class", getLocation());
                     } 
                     
                 }
             }
-
-           return currentClass.getMembers().get(((Identifier)this.field).getName()).getType();
+            //return compiler.environmentType.INT;
+            setType(fieldDefi.getType());
+            return getType();
         }
         //this.obj1.obj2.untrucprimitif=8;
     //     Type typeReturn = null;

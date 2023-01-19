@@ -31,4 +31,5 @@ class Point3D extends Point2D {
     p3.diag(2);
     p2 = p3;
     p2.diag(3);
+    println("p3.z = ", p3.z); // p3.z = 5
 }

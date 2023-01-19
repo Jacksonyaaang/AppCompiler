@@ -2,7 +2,7 @@ class A {
     protected int x ;
     int test_attribut;
 	
-    int getX( int test2) {
+    int getX( boolean test2) {
         x = 5 ;
     }
     void setX(int x) {
