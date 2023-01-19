@@ -194,10 +194,10 @@ public class Selection extends AbstractLValue {
     // }
     // //method not finished 
 
-
+/* 
         // TODO Auto-generated method stub
         return compiler.environmentType.INT;
-    }
+    } */
 
     @Override
     public void decompile(IndentPrintStream s) {
