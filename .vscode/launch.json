@@ -1,0 +1,63 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch DecacMain",
+            "request": "launch",
+            "mainClass": "fr.ensimag.deca.DecacMain",
+            "projectName": "Deca"
+        },
+        {
+            "type": "java",
+            "name": "Launch ManualTestContext",
+            "request": "launch",
+            "mainClass": "fr.ensimag.deca.context.ManualTestContext",
+            "projectName": "Deca"
+        },
+        {
+            "type": "java",
+            "name": "Launch ManualTestLex",
+            "request": "launch",
+            "mainClass": "fr.ensimag.deca.syntax.ManualTestLex",
+            "projectName": "Deca"
+        },
+        {
+            "type": "java",
+            "name": "Launch ManualTestSynt",
+            "request": "launch",
+            "mainClass": "fr.ensimag.deca.syntax.ManualTestSynt",
+            "projectName": "Deca"
+        },
+        {
+            "type": "java",
+            "name": "Launch ManualTestSymbol",
+            "request": "launch",
+            "mainClass": "fr.ensimag.deca.tools.ManualTestSymbol",
+            "projectName": "Deca"
+        },
+        {
+            "type": "java",
+            "name": "Launch ManualTestCodeGen",
+            "request": "launch",
+            "mainClass": "fr.ensimag.deca.tree.ManualTestCodeGen",
+            "projectName": "Deca"
+        },
+        {
+            "type": "java",
+            "name": "Launch ManualTestInitialGencode",
+            "request": "launch",
+            "mainClass": "fr.ensimag.deca.tree.ManualTestInitialGencode",
+            "projectName": "Deca"
+        }
+    ]
+}

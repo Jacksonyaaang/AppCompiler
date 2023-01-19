@@ -1,0 +1,37 @@
+// Description:
+//    Teste l'affectation et la conversion int -> float.
+//
+// Resultats:
+//    5.0
+//
+// Historique:
+//    cree le 13/01/2023
+
+class Animal{
+   int food=0;
+}
+
+class Cow extends Animal{
+   
+}
+
+class A {
+   Animal testMethod(){
+
+   }
+}
+
+class B extends A{
+   //int testMethod(int i){  //problem : don't get the same signature
+
+   //}
+  // Cow testMethod(){
+  //test le return type is the sub class of the super class which has the same namme : prevu : pass
+  // }
+}
+
+
+//main
+{
+
+}
