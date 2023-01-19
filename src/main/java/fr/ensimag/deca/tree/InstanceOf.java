@@ -11,6 +11,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.BNE;
@@ -49,18 +50,19 @@ public class InstanceOf extends AbstractExpr {
 
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
         this.expr.codeGenInst(compiler);
-        GPRegister R = expr.getRegisterDeRetour();
+        GPRegister reg = expr.getRegisterDeRetour();
         GPRegister RType = this.LoadGencode(compiler, false);
         Label loopbegin = new Label("loopbegin");
         Label endtrue = new Label("endtrue");
         Label endfalse = new Label("endfalse");
-        compiler.addInstruction(new LOAD(compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(typeInstance.getClassDefinition()), RType));
-        // ^=on récupère la position de la classe de typeInstance dans R2
+        compiler.addInstruction(new LOAD(compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(typeInstance.getClassDefinition()), RType), 
+                                "loading method table of " + typeInstance.getName());
+        // ^=on récupère la position de la classe de typeInstance dans RType
         compiler.addLabel(loopbegin);  //
-        compiler.addInstruction(new LOAD(new RegisterOffset(0, R), R));
-        compiler.addInstruction(new CMP(R,null));
+        compiler.addInstruction(new LOAD(new RegisterOffset(0, reg), reg));
+        compiler.addInstruction(new CMP(new NullOperand(), reg));
         compiler.addInstruction(new BEQ(endfalse));
-        compiler.addInstruction(new CMP(R,RType));
+        compiler.addInstruction(new CMP(reg,RType));
         compiler.addInstruction(new BNE(loopbegin));
         compiler.addInstruction(new LOAD(1, RType));
         compiler.addInstruction(new BRA(endtrue));

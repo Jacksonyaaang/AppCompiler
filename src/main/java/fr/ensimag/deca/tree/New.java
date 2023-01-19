@@ -77,7 +77,7 @@ public class New  extends AbstractExpr{
         //les instructions de Push and pop ne sont pas necessaires car dans la méthode de init 
         // on push et pop tout les registres qui ne sont pas stables
         // compiler.addInstruction(new PUSH(reg));
-        compiler.addInstruction(new BSR(new Label("init."+className.getType().getName().getName())));
+        compiler.addInstruction(new BSR(new Label("init."+((Identifier) className).getName())));
         // compiler.addInstruction(new POP(reg));
         // on stocke l’adresse de a dans l’espace de la pile dédié aux variables        
         // globales ou locales , indice l: premier registre libre dans cette partie de la pile

@@ -62,7 +62,7 @@ public class Identifier extends AbstractIdentifier {
     @Override
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
         assert( reg != null);
-        LOG.debug("[Identifier][loadItemintoRegister] Loading " + this.getName() + "into the register " + reg);
+        LOG.debug("[Identifier][loadItemintoRegister] Loading " + this.getName() + " into the register " + reg);
         if (this.getExpDefinition().isField()){
             //Quand on travaille avec les champs, pour acceder leur position en mémoire
             // on doit se positionner relativement à la classe qui stocke leur valeur
@@ -76,7 +76,7 @@ public class Identifier extends AbstractIdentifier {
             //Quand on travaille avec les variables, on a access directement à leur adresse 
             compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), reg),
                                     "loading "+getName()+ " into memory");
-        }
+        }           
     }
 
 

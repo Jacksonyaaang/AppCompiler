@@ -15,5 +15,7 @@ class B extends A{}
 
 {
     B b=new B();
-    println(b instanceof A);
+    if(b instanceof A){
+        println("instanceof fonctionne");
+    }
 }
