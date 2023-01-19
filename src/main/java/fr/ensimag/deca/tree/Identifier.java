@@ -209,16 +209,16 @@ public class Identifier extends AbstractIdentifier {
         LOG.debug("[Identifier][verifyExpr] Verifying the exp of an identifier ");
         //Envoie une ContextualError si l'identificateur n'est pas défini
         EnvironmentExp tmpEnv;
-        EnvironmentExp precTempEnv = null;
+        //EnvironmentExp precTempEnv = null;
         for (tmpEnv = localEnv; tmpEnv != null; tmpEnv = tmpEnv.getParent()){
-            precTempEnv = localEnv;
+            //precTempEnv = localEnv;
             if (!tmpEnv.getExp().containsKey(name) && tmpEnv.getParent() == null)
                 throw new ContextualError("L'identificateur " + getName().getName() + " n'est pas défini",getLocation());
             else if (tmpEnv.getExp().containsKey(name)) break;
         }
-        Definition Defi = localEnv.get(name);
+        Definition Defi = tmpEnv.get(name);
         setDefinition(Defi);
-        setType(localEnv.get(name).getType());
+        setType(tmpEnv.get(name).getType());
         return getType();
     }
 

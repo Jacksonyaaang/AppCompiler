@@ -66,7 +66,8 @@ public class Selection extends AbstractLValue {
                 }
             }
             //return compiler.environmentType.INT;
-            return fieldDefi.getType();
+            setType(fieldDefi.getType());
+            return getType();
         }
         //this.obj1.obj2.untrucprimitif=8;
     //     Type typeReturn = null;
