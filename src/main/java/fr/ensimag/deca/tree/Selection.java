@@ -12,6 +12,7 @@ import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.ExpDefinition;
+import fr.ensimag.deca.context.FieldDefinition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
@@ -54,12 +55,14 @@ public class Selection extends AbstractLValue {
                 throw new ContextualError("[Using Error] Can't find the field in the prevous declarations ", getLocation());
                 
             }else{
-                ExpDefinition envField = currentClass.getMembers().get(((Identifier)this.field).getName());
+                FieldDefinition envField =(FieldDefinition) currentClass.getMembers().get(((Identifier)this.field).getName());
                 Visibility visiField = envField.asFieldDefinition("it's not a field type", getLocation()).getVisibility();
+                field.setDefinition(envField);
                 if (visiField==Visibility.PROTECTED){
                     //if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
-                    LOG.info("i'm entering the fucking protected field !!!");
-                    ClassDefinition classDes = this.field.getClassDefinition();
+                    LOG.info("i'm entering the  protected field !!!");
+                    ClassDefinition classDes = ((FieldDefinition)this.field.getDefinition()).getContainingClass();
+
                     if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType)t).isSubClassOf(classDes.getType())) {
                         throw new ContextualError("[Using Error] Obey the second condition, the current class must be the sub class of the field class", getLocation());
                     } 
