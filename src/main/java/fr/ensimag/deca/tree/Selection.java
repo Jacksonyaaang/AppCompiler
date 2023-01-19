@@ -38,131 +38,161 @@ public class Selection extends AbstractLValue {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
-
-            Type typeReturn = null;
-        if (this.obj instanceof This){
-            Map<Symbol, ExpDefinition> envCurrent = currentClass.getMembers().getExp();
-            if (!envCurrent.containsKey(((Identifier)this.field).getName())){
-                throw new ContextualError("[Using Error] the content after 'this' for selection must be previously declared", getLocation());
+            Type t = obj.verifyExpr(compiler, localEnv, currentClass);
+            setType(t);
+            if (!t.isClass()){
+                throw new ContextualError("[Using Error] The first selection must be a class or this ", getLocation());
+            }
+            if (currentClass.getMembers().get(((Identifier)this.field).getName())==null){
+                throw new ContextualError("[Using Error] Can't find the field in the prevous declarations ", getLocation());
             }else{
-                //verify the field 
-                typeReturn=helperPublic(currentClass.getMembers(), this.field);
-            }   
-        }else if (this.obj instanceof AbstractLValue&&this.obj.getType().isClass()){
-            //for the class 
-            EnvironmentExp local = currentClass.getMembers();
-            if (local.get(((Identifier)this.obj).getName()) == null){ 
-                 //not found the declaration of class even though in the super-classs
-                 throw new ContextualError("[Using Error] The class that you entered never has been declared before", getLocation());
+                if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
+                    ClassDefinition classDes = this.field.getClassDefinition();
+                    if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType)t).isSubClassOf(classDes.getType())) {
+                        throw new ContextualError("[Using Error] Obey the second condition, the current class must be the sub class of the field class", getLocation());
+                    } 
+                    
+                }
             }
-            // 2 cases , one for public, one for protected 
-            if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PUBLIC){
-                //get that field's env , useful in the helper public 
-                EnvironmentExp distanceEnvExp = local.getCurrentExp();  //cuz we already set it in last "if"
-                typeReturn = helperPublic(distanceEnvExp, field);
-            }
-            if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
-                EnvironmentExp distanceEnvExp = local.getCurrentExp();
-                ClassDefinition classDestine = this.field.getClassDefinition();
-                typeReturn = helperProtected(localEnv, distanceEnvExp, currentClass, classDestine, field);
-            }
-            
-        }else if (this.obj instanceof Cast){
 
-
-        }else {
-            throw new ContextualError("[Using Error] the variable type in a selection must be a class or keyword 'this'", getLocation());
+           return currentClass.getMembers().get(((Identifier)this.field).getName()).getType();
         }
+        //this.obj1.obj2.untrucprimitif=8;
+    //     Type typeReturn = null;
+    // if (this.obj instanceof This){
+    //     Map<Symbol, ExpDefinition> envCurrent = currentClass.getMembers().getExp();
+    //     if (!envCurrent.containsKey(((Identifier)this.field).getName())){
+    //         throw new ContextualError("[Using Error] the content after 'this' for selection must be previously declared", getLocation());
+    //     }else{
+    //         //verify the field 
+    //         typeReturn=helperPublic(currentClass.getMembers(), this.field);
+    //     }   
+    // }else if (this.obj instanceof AbstractLValue&&this.obj.getType().isClass()){
+    //     //for the class 
+    //     EnvironmentExp local = currentClass.getMembers();
+    //    // if (local.get(((Identifier)this.obj).getName()) == null){ 
+    //     if (compiler.environmentType.getEnvTypes().containsKey(((Identifier)this.obj).getName())){ 
+    //          //not found the declaration of class even though in the super-classs
+    //          throw new ContextualError("[Using Error] The class that you entered never has been declared before", getLocation());
+    //     }
+    //     // 2 cases , one for public, one for protected 
+    //     if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PUBLIC){
+    //         //get that field's env , useful in the helper public 
+    //         EnvironmentExp distanceEnvExp = local.getCurrentExp();  //cuz we already set it in last "if"
+    //         typeReturn = helperPublic(distanceEnvExp, field);
+    //     }
+    //     if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
+    //         EnvironmentExp distanceEnvExp = local.getCurrentExp();
+    //         ClassDefinition classDestine = this.field.getClassDefinition();
+    //         typeReturn = helperProtected(localEnv, distanceEnvExp, currentClass, classDestine, field);
+    //     }
         
-        //obj1.obj2.obj3.field3="";  this.th
-        
-        return typeReturn;
-    }
+    // }else if (this.obj instanceof Cast){
+
+
+    // }else {
+    //     throw new ContextualError("[Using Error] the variable type in a selection must be a class or keyword 'this'", getLocation());
+    // }
+    
+    // //obj1.obj2.obj3.field3="";  this.th
+    
+    // return typeReturn;
 
     /*
      * when the visibility of the field is public  
      */
-    private Type helperPublic(EnvironmentExp envClass2, AbstractIdentifier fld) throws ContextualError{
-        Type typeReturn = null;
-        if (((Identifier)this.field).getType().isClass()){
-            //verify this field can be found in the current (or super-classes) env-expression
-            if (envClass2.get(((Identifier)this.field).getName())==null){
-                throw new ContextualError("[Using Error] the field (class) haven't been declared before", getLocation());
-            }
-            typeReturn = verifyExpUlterieure(null, envClass2, null);   //the parameters are not charged yet !!!!!!!!!!!!!!!!!
+//     private Type helperPublic(EnvironmentExp envClass2, AbstractIdentifier fld) throws ContextualError{
+//         Type typeReturn = null;
+//         if (((Identifier)fld).getType().isClass()){
+//             //verify this field can be found in the current (or super-classes) env-expression
+//             if (envClass2.get(((Identifier)fld).getName())==null){
+//                 throw new ContextualError("[Using Error] the field (class) haven't been declared before", getLocation());
+//             }
+//             typeReturn = verifyExpUlterieure(null, envClass2, null);   //the parameters are not charged yet !!!!!!!!!!!!!!!!!
 
-        }else{ 
-            //if it's not a class, then should be found in the current (its) env exp (not in the super-classes)
-            if (!envClass2.getExp().containsKey(((Identifier)this.field).getName())){
-                throw new ContextualError("[Using Error] the field haven't been declared before", getLocation());
-            }
-            //the others elm (except class) in the current field
-            typeReturn = ((Identifier)this.field).getType();
-        }
-        return typeReturn;
-    }
-    /*
-     * when the visibility of the field is protected  
-     */
-    private Type helperProtected(EnvironmentExp envCurrent, EnvironmentExp envClass2,
-                                ClassDefinition currClassDefinition, ClassDefinition desClassDefinition ,
-                                AbstractIdentifier fld) throws ContextualError{
-            Type typeReturn=null;
+//         }else{ 
+//             //if it's not a class, then should be found in the current (its) env exp (not in the super-classes)
+//             if (!envClass2.getExp().containsKey(((Identifier)fld).getName())){
+//                 throw new ContextualError("[Using Error] the field haven't been declared before", getLocation());
+//             }
+//             //the others elm (except class) in the current field
+//             typeReturn = ((Identifier)fld).getType();
+//         }
+//         return typeReturn;
+//     }
+//     /*
+//      * when the visibility of the field is protected  
+//      */
+//     private Type helperProtected(EnvironmentExp envCurrent, EnvironmentExp envClass2,
+//                                 ClassDefinition currClassDefinition, ClassDefinition desClassDefinition ,
+//                                 AbstractIdentifier fld) throws ContextualError{
+//             Type typeReturn=null;
             
-            //verify the condition 1;
-            ClassType currClass = currClassDefinition.getType();
-            ClassType desClass = desClassDefinition.getType();
-            if (!currClass.isSubClassOf(desClass)){
-                throw new ContextualError("[Using Error] the destine field is protected, should use a subclass to have an access ", getLocation());
-            }
-
+//             //verify the condition 1;
+//             ClassType currClass = currClassDefinition.getType();
+//             ClassType desClass = desClassDefinition.getType();
+//             if (!currClass.isSubClassOf(desClass)){
+//                 throw new ContextualError("[Using Error] the destine field is protected, should use a subclass to have an access ", getLocation());
+//             }
+//             if (((Identifier)fld).getType().isClass()){
+//                 if (envClass2.get(((Identifier)fld).getName())==null){
+//                     //can't find the name of the class on the empilement 
+//                     throw new ContextualError("[Using Error] the field (class) haven't been declared before", getLocation());
+//                 }
+//                 typeReturn = verifyExpUlterieure(null, envClass2, desClassDefinition)
+//             }else{
+//                 if (!envClass2.getExp().containsKey(((Identifier)fld).getName())){
+//                     throw new ContextualError("[Using Error] the field haven't been declared before", getLocation());
+//                 }
+//                 typeReturn = ((Identifier)fld).getType();
+//             }
+            
                                     
-            return typeReturn;
-    }
+//             return typeReturn;
+//     }
 
-    
-
-
+// }
 
 
 
-    /**
-     * use this method to complete the first verifyExp, reason : solve the 'this isn't on the first position' problem 
-     * @param compiler
-     * @param localEnv
-     * @param currentClass
-     * @return
-     * @throws ContextualError
-     */
-    private Type verifyExpUlterieure(DecacCompiler compiler, EnvironmentExp localEnv, 
-                                    ClassDefinition currentClass) 
-                                    throws ContextualError{
+
+    // /**
+    //  * use this method to complete the first verifyExp, reason : solve the 'this isn't on the first position' problem 
+    //  * @param compiler
+    //  * @param localEnv
+    //  * @param currentClass
+    //  * @return
+    //  * @throws ContextualError
+    //  */
+    // private Type verifyExpUlterieure(DecacCompiler compiler, EnvironmentExp localEnv, 
+    //                                 ClassDefinition currentClass) 
+    //                                 throws ContextualError{
         
 
-                this.field=
-                if (this.obj instanceof AbstractLValue){
-                    //for the class
-                    if (currentClass.getMembers().get(((Identifier)this.obj).getName()) == null){ 
-                        //not found the declaration of class even though in the super-classs
-                        throw new ContextualError("[Using Error] The class that you entered never has been declared before", getLocation());
-                    }
-                    //pass
+    //             this.field=
+    //             if (this.obj instanceof AbstractLValue){
+    //                 //for the class
+    //                 if (currentClass.getMembers().get(((Identifier)this.obj).getName()) == null){ 
+    //                     //not found the declaration of class even though in the super-classs
+    //                     throw new ContextualError("[Using Error] The class that you entered never has been declared before", getLocation());
+    //                 }
+    //                 //pass
                     
                     
-                }else if (this.obj instanceof Cast){
+    //             }else if (this.obj instanceof Cast){
 
 
-                }else {
-                    throw new ContextualError("[Using Error] the variable type in a selection must be a class or keyword 'this'", getLocation());
-                }
-                //now the field :
-                Type typeField = this.field.getType();
+    //             }else {
+    //                 throw new ContextualError("[Using Error] the variable type in a selection must be a class or keyword 'this'", getLocation());
+    //             }
+    //             //now the field :
+    //             Type typeField = this.field.getType();
                 
-                //obj1.obj2.obj3.field3="";
+    //             //obj1.obj2.obj3.field3="";
                 
-                return null;
-    }
-    //method not finished 
+    //             return null;
+    // }
+    // //method not finished 
 
 
 
