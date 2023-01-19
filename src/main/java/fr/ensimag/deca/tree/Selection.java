@@ -13,6 +13,9 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.NullOperand;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
@@ -31,17 +34,21 @@ public class Selection extends AbstractLValue {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError {
-        GPRegister R=compiler.getRegisterManagement().getAnEmptyStableRegisterAndReserveIt();
-        int indiceObjDansStack;
-        this.setRegisterDeRetour(R);
-
-        compiler.addInstruction(new LOAD(indiceObjDansStack(LB),R)); 
-        compiler.addInstruction(new CMP(null, R)); 
-        compiler.addInstruction(new BEQ(new Label("deref_null_error"))); 
+        obj.codeGenInst(compiler);
+        if (!compiler.getCompilerOptions().isNoCheck()){
+            compiler.addInstruction(new CMP(new NullOperand(), obj.getRegisterDeRetour()), null);
+            compiler.addInstruction(new BEQ(new Label("deref_null_error")), 
+                                    "Checking if the class identifier is null");
+            compiler.getErrorManagementUnit().activeError("deref_null_error");
+        }
+        compiler.addInstruction(new LOAD(
+                        new RegisterOffset( ((Identifier)field).getFieldDefinition().getIndex(), obj.getRegisterDeRetour()), obj.getRegisterDeRetour()),
+                         "Loading the field " + field.getName() +" into a register "); 
+        this.setRegisterDeRetour(obj.getRegisterDeRetour());
+        this.transferPopRegisters(obj.getRegisterToPop());
     }
 
-        
-    }
+
 
     public AbstractIdentifier getField() {return field;}
     public AbstractExpr getObj() {return obj;}

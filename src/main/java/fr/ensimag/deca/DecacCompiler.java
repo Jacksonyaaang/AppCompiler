@@ -5,6 +5,7 @@ import fr.ensimag.deca.codegen.RegisterManagementUnit;
 import fr.ensimag.deca.codegen.StackManagementUnit;
 import fr.ensimag.deca.codegen.TableDeMethode;
 import fr.ensimag.deca.context.EnvironmentType;
+import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
@@ -131,13 +132,27 @@ public class DecacCompiler {
      * InMainOrMethod indique si le compilateur est en train d'écrire dans une methode ou dans un main
      * True: main; False:method
      */
-    boolean InMainOrMethod = true;
+    protected boolean InMainOrMethod = true;
     
     /**
      * mainManagementUnitsSaved indique si les unit de management de register/stack/program
      * sont sauvée ou non
      */
-    boolean mainManagementUnitsSaved = false;
+    protected boolean mainManagementUnitsSaved = false;
+
+    /**
+     * currentMethodCodeGen stocke la definition de la méthode au quel on manipule.
+     * cette valeur sera utilisée pour generer le retour de la fonction
+     */
+    protected MethodDefinition currentMethodCodeGen = null;
+
+
+    public MethodDefinition getCurrentMethodCodeGen() {
+        return currentMethodCodeGen;
+    }
+    public void setCurrentMethodCodeGen(MethodDefinition currentMethodCodeGen) {
+        this.currentMethodCodeGen = currentMethodCodeGen;
+    }
 
     /**
      * Unité qui fait la gestion des registres utilsées dans la partie 

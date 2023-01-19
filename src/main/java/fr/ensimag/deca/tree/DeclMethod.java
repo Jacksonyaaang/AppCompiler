@@ -19,9 +19,12 @@ import org.apache.commons.lang.Validate;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.ERROR;
 import fr.ensimag.ima.pseudocode.instructions.RTS;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 import fr.ensimag.ima.pseudocode.instructions.TSTO;
+import fr.ensimag.ima.pseudocode.instructions.WNL;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import fr.ensimag.ima.pseudocode.Register;
 
 /**
@@ -226,9 +229,10 @@ public class DeclMethod extends AbstractDeclMethod {
         methodBody.verifyDeclMethodBody(compiler, listParam.getenvParm(), currentClass, type.getType());              
     }
 
+
+
     public void codeGenDeclMethod(DecacCompiler compiler) throws CodeGenError {
         compiler.setMethodProgramState(methodRegisterManagementUnit, methodStackManagementUnit, methodProgram);   
-        methodBody.codeGenMethodBody(compiler);
         /*
          * Ajout du label de la forme fin.<classname>.<methodname>
          */
@@ -237,8 +241,14 @@ public class DeclMethod extends AbstractDeclMethod {
         endMethod.replace(0, 4, "fin");
         String destFile = endMethod.toString() ;
         methodName.getMethodDefinition().setEndLabel(new Label(destFile));
+        compiler.setCurrentMethodCodeGen(methodName.getMethodDefinition());
+        /**
+         * Generating ainstruction for the method
+         */
+        methodBody.codeGenMethodBody(compiler);
         compiler.getRegisterManagement().pushUsedRegistersMethod(compiler);
         compiler.addLabel(methodName.getMethodDefinition().getEndLabel());
+        addReturnError(compiler);
         compiler.getRegisterManagement().popUsedRegistersMethod(compiler);
         compiler.addInstruction(new RTS()); 
         /**
@@ -264,6 +274,14 @@ public class DeclMethod extends AbstractDeclMethod {
     }  
 
 
+    protected void addReturnError(DecacCompiler compiler){
+        if (methodName.getMethodDefinition().getType() != compiler.environmentType.VOID ){
+            compiler.addInstruction(new WSTR("Error: La méthode "+ methodName.getMethodDefinition().getLabel().toString() + " doit retourner un element"));
+            compiler.addInstruction(new WNL());
+            compiler.addInstruction(new ERROR());
+
+        }
+    }
 
 }
 
