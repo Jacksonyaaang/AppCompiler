@@ -101,7 +101,17 @@ public class Program extends AbstractProgram {
                                                  Register.getR(0)));
         compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.incrementGbCompiler(), Register.GB)));
     }
-
+    public void generateCodeForObjectEquals(DecacCompiler compiler){
+        compiler.addComment("------------------Start generateCodeForObjectEquals location:"+getLocation()+"-----------------");
+        Label fin_equals=new Label("FIN_equals");
+        compiler.addLabel(new Label("code.Object.equals"));
+        compiler.addInstruction(new TSTO(1),"TEST de débordement de Pile");
+        compiler.addInstruction(new BOV(new Label("stack_overflow_error")));
+        compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(0)));// (@this -> R2)
+        compiler.addInstruction(new CMP(new RegisterOffset(-3, Register.LB), Register.getR(0)));
+        compiler.addInstruction(new SEQ(Register.getR(0)),"Comparaison this et paramètre d'equals");
+        compiler.addLabel(fin_equals);
+    }
 
     @Override
     public void decompile(IndentPrintStream s) {
