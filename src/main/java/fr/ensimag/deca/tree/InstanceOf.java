@@ -76,10 +76,18 @@ public class InstanceOf extends AbstractExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
-        // TODO Auto-generated method stub
-        return null;
+        Type t1 = expr.verifyExpr(compiler, localEnv, currentClass);
+        expr.setType(t1);
+        if (!t1.isClassOrNull()){
+            throw new ContextualError("instanceof doit être avec des classes", getLocation());
+        }
+        Type t2 = typeInstance.verifyType(compiler);
+        typeInstance.setType(t2);
+        if (!t2.isClass() || t2.isNull()){
+            throw new ContextualError("l' identificateur à droite de instanceof doit être une classe non null", getLocation());
+        }
+        return compiler.environmentType.BOOLEAN;
     }
-
     @Override
     public void decompile(IndentPrintStream s) {
         s.print("(");
