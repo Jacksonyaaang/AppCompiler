@@ -35,7 +35,7 @@ public class InstanceOf extends AbstractExpr {
     }
 
     protected void codeGenInst(DecacCompiler compiler){
-        this.expr.
+        //  this.expr.
     }
 
     @Override

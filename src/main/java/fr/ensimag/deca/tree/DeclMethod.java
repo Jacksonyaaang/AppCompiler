@@ -275,11 +275,12 @@ public class DeclMethod extends AbstractDeclMethod {
 
 
     protected void addReturnError(DecacCompiler compiler){
-        if (methodName.getMethodDefinition().getType() != compiler.environmentType.VOID ){
-            compiler.addInstruction(new WSTR("Error: La méthode "+ methodName.getMethodDefinition().getLabel().toString() + " doit retourner un element"));
-            compiler.addInstruction(new WNL());
-            compiler.addInstruction(new ERROR());
-
+        if (!(compiler.getCompilerOptions().isNoCheck())){
+            if (methodName.getMethodDefinition().getType() != compiler.environmentType.VOID ){
+                compiler.addInstruction(new WSTR("Error: La méthode "+ methodName.getMethodDefinition().getLabel().toString() + " doit retourner un element"));
+                compiler.addInstruction(new WNL());
+                compiler.addInstruction(new ERROR());
+            }
         }
     }
 

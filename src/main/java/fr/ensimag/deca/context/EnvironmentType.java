@@ -45,10 +45,15 @@ public class EnvironmentType {
         STRING = new StringType(stringSymb);
         // not added to envTypes, it's not visible for the user.
         
+
+        /*
+         * Ajoute de la classe object avec sa méthode equals
+         */
         Symbol objectSymb = compiler.createSymbol("object");
         OBJECT = new ClassType(objectSymb);
         ClassDefinition defintionClassObject = new ClassDefinition(OBJECT, Location.BUILTIN, null);
         envTypes.put(objectSymb, defintionClassObject);
+        
         //On défnit ici la méthode interne à la class object : la méthode equals qui 
         // compare deux instances de Object 
         Symbol equalsMethodObject = compiler.createSymbol("equals");

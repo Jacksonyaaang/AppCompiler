@@ -37,28 +37,28 @@ public class Cast extends AbstractExpr{
     }
 
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
-        GPRegister R;
-        if(this.typeCast.getName()==this.expr.getType().getName()){
-            this.expr.LoadGencode(compiler,false);
+        // GPRegister R;
+        // if(this.typeCast.getName()==this.expr.getType().getName()){
+        //     this.expr.LoadGencode(compiler,false);
 
-        }
-        else if((this.typeCast.getDefinition().getType().isFloat())&&(this.expr.getType().isInt())){
-            R=this.expr.LoadGencode(compiler,true);
-            compiler.addInstruction(new FLOAT(R, R));
-        }
-        else if((this.typeCast.getDefinition().getType().isInt())&&(this.expr.getType().isFloat())){
-            R=this.expr.LoadGencode(compiler,true);
-            compiler.addInstruction(new INT(R, R));
-        }
-        else if((this.typeCast.getDefinition().getType().isClass())&&(this.expr.getType().isClass())){
-            if((this.expr instanceof this.typeCast)||(this.expr==null)){
-                //pas sûr pour la comparaison avec null
-                this.expr.LoadGencode(compiler,false);
-            }
-            else{
-                throw new CodeGenError(getLocation(),"Expression "+ this.expr+" is not of class "+this.typeCast);
-            }
-        }
+        // }
+        // else if((this.typeCast.getDefinition().getType().isFloat())&&(this.expr.getType().isInt())){
+        //     R=this.expr.LoadGencode(compiler,true);
+        //     compiler.addInstruction(new FLOAT(R, R));
+        // }
+        // else if((this.typeCast.getDefinition().getType().isInt())&&(this.expr.getType().isFloat())){
+        //     R=this.expr.LoadGencode(compiler,true);
+        //     compiler.addInstruction(new INT(R, R));
+        // }
+        // else if((this.typeCast.getDefinition().getType().isClass())&&(this.expr.getType().isClass())){
+        //     if((this.expr instanceof this.typeCast)||(this.expr==null)){
+        //         //pas sûr pour la comparaison avec null
+        //         this.expr.LoadGencode(compiler,false);
+        //     }
+        //     else{
+        //         throw new CodeGenError(getLocation(),"Expression "+ this.expr+" is not of class "+this.typeCast);
+        //     }
+        // }
     }
 
     @Override
@@ -101,4 +101,5 @@ public class Cast extends AbstractExpr{
     @Override
     protected void iterChildren(TreeFunction f) {
         typeCast.iter(f) ;
+    }
 }

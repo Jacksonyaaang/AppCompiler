@@ -61,12 +61,12 @@ public class Program extends AbstractProgram {
         generateMethodTableForObjectClass(compiler);
         compiler.setMainProgramState();
         classes.codeGenListClassTableau(compiler);
-        classes.codeGenListClassMethod(compiler);
         compiler.setMainProgramState();
         compiler.addComment("-------------------------------------");
         compiler.addComment("       Main program");
         compiler.addComment("-------------------------------------");
-        //main.codeGenMain(compiler);
+        classes.codeGenListClassMethod(compiler);
+        main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());
         compiler.addComment("-------------------------------------");
         compiler.addComment("       Classes");
