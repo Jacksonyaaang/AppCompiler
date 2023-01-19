@@ -1,2 +1,2 @@
-bool val = true
-bool val = true
+LIGNE  1 -- 
+   Erreur : caractere  non permis

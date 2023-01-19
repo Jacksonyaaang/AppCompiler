@@ -1,3 +1,2 @@
-1
-2.00000e+00
--19180
+LIGNE  1 -- 
+   Erreur : caractere  non permis

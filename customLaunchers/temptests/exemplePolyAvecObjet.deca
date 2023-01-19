@@ -5,9 +5,9 @@ class Point2D {
     int y ; // Ordonnee
     // Deplace ce point
     // de a en diagonale.
-    void diag(int a) {
+    int diag(int a) {
         x = x + a;
-        //y = y + a;
+        y = y + a;
     }
 }
 
@@ -15,15 +15,20 @@ class Point3D extends Point2D {
     int z; // Hauteur
     // On redefinit la methode diag,
     // pour tenir compte de z
-    void diag(int a) {
+    int diag(int a) {
         x = x + a;
-        //y = y + a;
-        //z = z + a;
+        y = y + a;
+        z = z + a;
     }
 }
 
 {
-
-    int x= 5;
-    int y = 6;
+    Point2D p1, p2;
+    Point3D p3;
+    p1 = new Point2D();
+    p1.diag(1);
+    p3 = new Point3D();
+    p3.diag(2);
+    p2 = p3;
+    p2.diag(3);
 }
