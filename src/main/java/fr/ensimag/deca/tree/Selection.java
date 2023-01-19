@@ -7,6 +7,7 @@ import org.apache.commons.lang.Validate;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.ExpDefinition;
@@ -17,17 +18,17 @@ import fr.ensimag.deca.tools.SymbolTable.Symbol;
 public class Selection extends AbstractLValue {
 
     protected AbstractExpr obj;
-    //protected AbstractIdentifier field;
-    protected AbstractDeclField field;
+    protected AbstractIdentifier field;
+    //protected AbstractDeclField field;
 
-    public Selection(AbstractExpr obj, AbstractDeclField field){
+    public Selection(AbstractExpr obj, AbstractIdentifier field){
         Validate.notNull(obj);
         Validate.notNull(field);
         this.obj = obj;
         this.field = field;
     }
 
-    public AbstractDeclField getField() {return field;}
+    public AbstractIdentifier getField() {return field;}
     public AbstractExpr getObj() {return obj;}
 
     /**
@@ -41,29 +42,30 @@ public class Selection extends AbstractLValue {
             Type typeReturn = null;
         if (this.obj instanceof This){
             Map<Symbol, ExpDefinition> envCurrent = currentClass.getMembers().getExp();
-            if (!envCurrent.containsKey(((DeclField)this.field).getVarName().getName())){
+            if (!envCurrent.containsKey(((Identifier)this.field).getName())){
                 throw new ContextualError("[Using Error] the content after 'this' for selection must be previously declared", getLocation());
             }else{
                 //verify the field 
                 typeReturn=helperPublic(currentClass.getMembers(), this.field);
             }   
-        }else if (this.obj instanceof AbstractLValue){
-            //for the class
+        }else if (this.obj instanceof AbstractLValue&&this.obj.getType().isClass()){
+            //for the class 
             EnvironmentExp local = currentClass.getMembers();
             if (local.get(((Identifier)this.obj).getName()) == null){ 
                  //not found the declaration of class even though in the super-classs
                  throw new ContextualError("[Using Error] The class that you entered never has been declared before", getLocation());
             }
             // 2 cases , one for public, one for protected 
-            if (((DeclField)this.field).getVisibility()==Visibility.PUBLIC){
+            if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PUBLIC){
                 //get that field's env , useful in the helper public 
-                EnvironmentExp distanceEnvExp = local.getCurrentExp();
+                EnvironmentExp distanceEnvExp = local.getCurrentExp();  //cuz we already set it in last "if"
                 typeReturn = helperPublic(distanceEnvExp, field);
             }
-            if (((DeclField)this.field).getVisibility()==Visibility.PROTECTED){
-
+            if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
+                EnvironmentExp distanceEnvExp = local.getCurrentExp();
+                ClassDefinition classDestine = this.field.getClassDefinition();
+                typeReturn = helperProtected(localEnv, distanceEnvExp, currentClass, classDestine, field);
             }
-            
             
         }else if (this.obj instanceof Cast){
 
@@ -72,32 +74,50 @@ public class Selection extends AbstractLValue {
             throw new ContextualError("[Using Error] the variable type in a selection must be a class or keyword 'this'", getLocation());
         }
         
-        //obj1.obj2.obj3.field3="";
+        //obj1.obj2.obj3.field3="";  this.th
         
-        return null;
+        return typeReturn;
     }
 
     /*
      * when the visibility of the field is public  
      */
-    private Type helperPublic(EnvironmentExp envClass2, AbstractDeclField fld) throws ContextualError{
+    private Type helperPublic(EnvironmentExp envClass2, AbstractIdentifier fld) throws ContextualError{
         Type typeReturn = null;
-        if (((DeclField)fld).getVarName().getType().isClass()){
+        if (((Identifier)this.field).getType().isClass()){
             //verify this field can be found in the current (or super-classes) env-expression
-            if (envClass2.get(((DeclField)fld).getVarName().getName())==null){
+            if (envClass2.get(((Identifier)this.field).getName())==null){
                 throw new ContextualError("[Using Error] the field (class) haven't been declared before", getLocation());
             }
             typeReturn = verifyExpUlterieure(null, envClass2, null);   //the parameters are not charged yet !!!!!!!!!!!!!!!!!
 
         }else{ 
             //if it's not a class, then should be found in the current (its) env exp (not in the super-classes)
-            if (!envClass2.getExp().containsKey(((DeclField)fld).getVarName().getName())){
+            if (!envClass2.getExp().containsKey(((Identifier)this.field).getName())){
                 throw new ContextualError("[Using Error] the field haven't been declared before", getLocation());
             }
             //the others elm (except class) in the current field
-            typeReturn = ((DeclField)fld).getVarName().getType();
+            typeReturn = ((Identifier)this.field).getType();
         }
         return typeReturn;
+    }
+    /*
+     * when the visibility of the field is protected  
+     */
+    private Type helperProtected(EnvironmentExp envCurrent, EnvironmentExp envClass2,
+                                ClassDefinition currClassDefinition, ClassDefinition desClassDefinition ,
+                                AbstractIdentifier fld) throws ContextualError{
+            Type typeReturn=null;
+            
+            //verify the condition 1;
+            ClassType currClass = currClassDefinition.getType();
+            ClassType desClass = desClassDefinition.getType();
+            if (!currClass.isSubClassOf(desClass)){
+                throw new ContextualError("[Using Error] the destine field is protected, should use a subclass to have an access ", getLocation());
+            }
+
+                                    
+            return typeReturn;
     }
 
     
