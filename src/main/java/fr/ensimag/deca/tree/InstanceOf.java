@@ -62,11 +62,15 @@ public class InstanceOf extends AbstractExpr {
         compiler.addInstruction(new BEQ(endfalse));
         compiler.addInstruction(new CMP(R,RType));
         compiler.addInstruction(new BNE(loopbegin));
-        compiler.addInstruction(new LOAD(1, R));
+        compiler.addInstruction(new LOAD(1, RType));
         compiler.addInstruction(new BRA(endtrue));
         compiler.addLabel(endfalse);
-        compiler.addInstruction(new LOAD(0, R));
+        compiler.addInstruction(new LOAD(0, RType));
         compiler.addLabel(endtrue);
+        expr.popRegisters(compiler);
+        compiler.getRegisterManagement().decrementOccupationRegister(expr.getRegisterDeRetour());
+        this.setRegisterDeRetour(RType);
+    
     }
 
     @Override
