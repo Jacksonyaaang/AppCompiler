@@ -10,14 +10,19 @@
  */
 
 package fr.ensimag.deca.codegen;
+import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.POP;
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 
-public class RegisterMangementUnit {
+public class RegisterManagementUnit {
     
     public int numberOfRegister;
     /**
@@ -26,6 +31,7 @@ public class RegisterMangementUnit {
      */
     public Map<GPRegister, Boolean> registerOccupation =  new HashMap<GPRegister, Boolean>();
     public Map<GPRegister, Integer> registerUsage =  new HashMap<GPRegister, Integer>();
+    public HashSet<GPRegister> usedRegistersInProgram =  new HashSet<GPRegister>();
     /**
      * @maxTempVariables
      * maxTempVariables calcule le nombre de variable
@@ -34,13 +40,7 @@ public class RegisterMangementUnit {
      */
     public int maxTempVariables = 0;
     
-    /**
-     * @tempVariables
-     * tempVariables  calcul le nombre variable temporaire actuel
-     *  dans une instruction donnée
-     */
-    public int tempVariables = 0;
-
+        
     public int getMaxTempVariables() {
         return maxTempVariables;
     }
@@ -49,13 +49,45 @@ public class RegisterMangementUnit {
         this.maxTempVariables = maxTempVariables;
     }
 
+
     /**
-     * RegisterMangementUnit initalize les deux structures de données qu'on utilisera pour la manipulation 
+     * @tempVariables
+     * tempVariables  calcul le nombre variable temporaire actuel
+     *  dans une instruction donnée
+     */
+    public int tempVariables = 0;
+
+    /**
+     * increaseTempVariables augemente tempVariables par 
+     * spaceNeeded, cette méthode sera appelée lors de la manipualtion des methodes
+     * ou on ajoutera le nombre d'empilenement necessaire
+     * @param spaceNeeded
+     */
+    public void increaseTempVariables(int spaceNeeded){
+        tempVariables = tempVariables + spaceNeeded;
+        if (tempVariables >= maxTempVariables){
+            maxTempVariables = tempVariables;
+        }
+    }
+
+
+    /**
+     * decreaseTempVariables dimunie tempVariables par 
+     * spaceNeeded, cette méthode sera appelée quand on quitte on méthode
+     * pour libere l'espace necessaire
+     * @param spaceNeeded
+     */
+    public void decreaseTempVariables(int spaceNoLongerNeeded){
+        tempVariables = tempVariables - spaceNoLongerNeeded;
+    }
+
+    /**
+     * RegisterManagementUnit initalize les deux structures de données qu'on utilisera pour la manipulation 
      * des registres
      * @param numberOfRegister le nombre de registre qu'on peut utiliser, par défaut égal à 16 mais 
      * varie entre 4 et 16
      */
-    public RegisterMangementUnit(int numberOfRegister){
+    public RegisterManagementUnit(int numberOfRegister){
         assert(numberOfRegister <= 16 && numberOfRegister >=4 );
         for (int reg = 0; reg < numberOfRegister; reg++ ){
             registerOccupation.put(Register.getR(reg), false);
@@ -117,6 +149,7 @@ public class RegisterMangementUnit {
             GPRegister registre = entry.getKey();
             if(value == false){
                 if (verifyRegisterIsStable(registre)){
+                    usedRegistersInProgram.add(registre);
                     registerOccupation.replace(registre, true);
                     registerUsage.replace(registre, 1);
                     return entry.getKey();
@@ -181,6 +214,7 @@ public class RegisterMangementUnit {
      */
     public void freeAllRegisters(){
         for (Map.Entry<GPRegister, Boolean> entry : registerOccupation.entrySet()) {
+            tempVariables = 0;
             registerOccupation.replace(entry.getKey(), false);
             registerUsage.replace(entry.getKey(),0);
         }
@@ -194,6 +228,15 @@ public class RegisterMangementUnit {
         registerOccupation.replace(register, false);
         registerUsage.replace(register,0);
     }
+    
+    /**
+     * Donne le nombre de registre utilisée dans une méthode qui sont 
+     * different des registres non stable R0/R1
+    */
+    public int numberOfRegisterUsedInMethod(){
+        return usedRegistersInProgram.size();   
+    }
+
 
     /**
      * decrementOccupationRegister décremente l'usage d'un registre
@@ -213,6 +256,19 @@ public class RegisterMangementUnit {
             }
         }
     }
+    
+    public void pushUsedRegistersMethod(DecacCompiler compiler){
+        for (GPRegister register :  usedRegistersInProgram){
+            compiler.getProgram().addFirst(new PUSH(register), "Pushing and poping registers used in the method");
+        }
+    }
+
+    public void popUsedRegistersMethod(DecacCompiler compiler){
+        for (GPRegister register :  usedRegistersInProgram){
+            compiler.addInstruction(new POP(register), "Pushing and poping registers used in the method");
+        }
+    }
+
 
     @Override
     public String toString() {

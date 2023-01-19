@@ -4,6 +4,10 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.IMAProgram;
+
+import java.util.ArrayList;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -12,8 +16,11 @@ import org.apache.log4j.Logger;
  * @date 01/01/2023
  */
 public class ListDeclClass extends TreeList<AbstractDeclClass> {
+    
     private static final Logger LOG = Logger.getLogger(ListDeclClass.class);
     
+    protected  IMAProgram classesProgram = new IMAProgram();
+
     @Override
     public void decompile(IndentPrintStream s) {
         for (AbstractDeclClass c : getList()) {
@@ -62,6 +69,23 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
             DeclClass.codeGenTableauDeMethod(compiler); 
         }
         LOG.debug("[ListDeclClass][codeGenListClassTableau] Code generation pass 1: END");
+    }
+
+    public void  codeGenListClassMethod(DecacCompiler compiler) throws CodeGenError{
+        LOG.debug("[ListDeclClass][codeGenListClassMethod] Code generation pass 2 classes: START");
+        for (AbstractDeclClass declClass : getList()) {
+            declClass.codeGenClassMethod(compiler); 
+            classesProgram.append(declClass.getClassProgram());
+        }
+        LOG.debug("[ListDeclClass][codeGenListClassMethod] Code generation pass 2 classes: END");
+    }
+
+    public IMAProgram getClassesProgram() {
+        return classesProgram;
+    }
+
+    public void setClassesProgram(IMAProgram classesProgram) {
+        this.classesProgram = classesProgram;
     }
 
 

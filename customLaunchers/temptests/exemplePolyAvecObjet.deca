@@ -1,16 +1,23 @@
-class A {
-    protected int x ;
-    int getX() {
-        return x ;
-    }
-    void setX(int x) {
-        this.x = x ;
+
+
+class Point2D {
+    int x =     1*(1*(1*(1*(1*(1*(1*(1*(1*(1*2))))))))); // Abscisse
+    int y; // Ordonnee
+    // Deplace ce point
+    // de a en diagonale.
+    void diag(int a) {
+        x = x + a;
+        y = y + a;
     }
 }
 
-{
-    A a = new A() ;
-    a.setX(1) ;
-    println("a.getX() = ", a.getX()) ;
+class Point3D extends Point2D {
+    int z; // Hauteur
+    // On redefinit la methode diag,
+    // pour tenir compte de z
+    void diag(int a) {
+        x = x + a;
+        y = y + a;
+        z = z + a;
+    }
 }
-

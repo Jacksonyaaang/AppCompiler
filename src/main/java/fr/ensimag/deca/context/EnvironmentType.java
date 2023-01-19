@@ -82,6 +82,5 @@ public class EnvironmentType {
     public final FloatType   FLOAT;
     public final StringType  STRING;
     public final BooleanType BOOLEAN;
-    public final NullType NULL;
     public final ClassType OBJECT;
 }

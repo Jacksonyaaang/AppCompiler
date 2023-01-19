@@ -1,0 +1,42 @@
+// Description:
+//    Test initialisation d'attributs pour classe mère et héritage d'attribut classe fille
+//    TEST Essentiel partie C
+
+// Resultats attendu:
+// 9
+// 8.9
+// 1
+// 18
+// 17.8
+// 0
+// 9
+// 8.9
+// 1
+// Historique:
+// 18/01/2023
+
+
+class A{
+    public int x=9;
+    public float f=8.9;
+    public bool b=1;
+}
+class B extends A{
+    public int x=18;
+    public float f=17.8;
+    public bool b=0;
+}
+
+{
+    A a=new A();
+    B b=new B();
+    println(a.x);
+    println(a.f);
+    println(a.b);
+    println(b.x);
+    println(b.f);
+    println(b.b);
+    println((A)b.x);
+    println((A)b.f);
+    println((A)b.b);
+}

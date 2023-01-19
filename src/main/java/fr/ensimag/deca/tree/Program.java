@@ -44,20 +44,37 @@ public class Program extends AbstractProgram {
     @Override
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify program: start");
+        compiler.saveMainProgramState();
         classes.verifyListClass(compiler);
         classes.verifyListClassMembers(compiler);
         classes.verifyListClassBody(compiler);
-        //main.verifyMain(compiler);
+        compiler.setMainProgramState();
+        main.verifyMain(compiler);
         LOG.debug("verify program: end");
     }
 
     @Override
     public void codeGenProgram(DecacCompiler compiler) throws CodeGenError{
+        compiler.addComment("-------------------------------------");
+        compiler.addComment("       Method Table");
+        compiler.addComment("-------------------------------------");
         generateMethodTableForObjectClass(compiler);
+        compiler.setMainProgramState();
         classes.codeGenListClassTableau(compiler);
-        compiler.addComment("Main program");
-        main.codeGenMain(compiler);
+        classes.codeGenListClassMethod(compiler);
+        compiler.setMainProgramState();
+        compiler.addComment("-------------------------------------");
+        compiler.addComment("       Main program");
+        compiler.addComment("-------------------------------------");
+        //main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());
+        compiler.addComment("-------------------------------------");
+        compiler.addComment("       Classes");
+        compiler.addComment("-------------------------------------");
+        compiler.getProgram().append(classes.getClassesProgram());
+        compiler.addComment("-------------------------------------");
+        compiler.addComment("       Liste Erreur");
+        compiler.addComment("-------------------------------------");
         compiler.getErrorManagementUnit().writeListError(compiler);
     }
 

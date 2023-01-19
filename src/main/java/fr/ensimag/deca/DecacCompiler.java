@@ -1,10 +1,11 @@
 package fr.ensimag.deca;
 
 import fr.ensimag.deca.codegen.CodeGenError;
-import fr.ensimag.deca.codegen.RegisterMangementUnit;
+import fr.ensimag.deca.codegen.RegisterManagementUnit;
 import fr.ensimag.deca.codegen.StackManagementUnit;
 import fr.ensimag.deca.codegen.TableDeMethode;
 import fr.ensimag.deca.context.EnvironmentType;
+import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
@@ -13,6 +14,7 @@ import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.tree.AbstractProgram;
 import fr.ensimag.deca.tree.LocationException;
+import fr.ensimag.deca.tree.Program;
 import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.IMAProgram;
@@ -56,18 +58,113 @@ public class DecacCompiler {
      */
     private static final String nl = System.getProperty("line.separator", "\n");
 
+    private int opBoolIncrementer = 0;
+    private int ifIncrementer = 0;
+    private int whileIncrementer = 0;
+
+    public int getOpBoolIncrementer() {
+        return opBoolIncrementer;
+    }
+    public int incrementOpBoolIncrementer() {
+        opBoolIncrementer++;
+        return opBoolIncrementer;
+    }
+
+    public int getIfIncrementer() {
+        return ifIncrementer;
+    }
+    public int incrementIfIncrementer() {
+        ifIncrementer++;
+        return ifIncrementer;
+    }
+    
+    public int getWhileIncrementer() {
+        return whileIncrementer;
+    }
+    public int incrementWhileIncrementer() {
+        whileIncrementer++;
+        return whileIncrementer;
+    }
+
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
         this.compilerOptions = compilerOptions;
         this.source = source;
     }
 
+    public void setMainProgramState(){
+        if (mainManagementUnitsSaved){
+            registerManagement = registerManagementPlaceHolder;
+            stackManagement = stackManagementPlaceHolder;
+            program = programPlaceHolder;
+            InMainOrMethod = true;
+        }
+        else{
+            LOG.fatal("[DecacCompiler][saveMainProgramState] Trying to return to mainManagementWhile they are not saved !!!");
+        }
+    }
+
+    public void saveMainProgramState(){
+        if (InMainOrMethod){
+            registerManagementPlaceHolder = registerManagement;
+            stackManagementPlaceHolder = stackManagement;
+            programPlaceHolder = program;
+            mainManagementUnitsSaved = true;
+        }
+        else{
+            LOG.fatal("[DecacCompiler][saveMainProgramState] Tying to save main program state while in a method !!!");
+        }
+    }
+
+    public void setMethodProgramState(RegisterManagementUnit methodManagementUnit, StackManagementUnit methodStackManagementUnit, IMAProgram methodProgram){
+        if (mainManagementUnitsSaved){
+            registerManagement = methodManagementUnit;
+            stackManagement = methodStackManagementUnit;
+            program = methodProgram;
+            InMainOrMethod = false;
+        }
+        else{
+            LOG.fatal("[DecacCompiler][saveMainProgramState] Trying to switch to a method while the main program is not saved !!!");
+        }
+    }
+
+    /**
+     * InMainOrMethod indique si le compilateur est en train d'écrire dans une methode ou dans un main
+     * True: main; False:method
+     */
+    protected boolean InMainOrMethod = true;
+    
+    /**
+     * mainManagementUnitsSaved indique si les unit de management de register/stack/program
+     * sont sauvée ou non
+     */
+    protected boolean mainManagementUnitsSaved = false;
+
+    /**
+     * currentMethodCodeGen stocke la definition de la méthode au quel on manipule.
+     * cette valeur sera utilisée pour generer le retour de la fonction
+     */
+    protected MethodDefinition currentMethodCodeGen = null;
+
+
+    public MethodDefinition getCurrentMethodCodeGen() {
+        return currentMethodCodeGen;
+    }
+    public void setCurrentMethodCodeGen(MethodDefinition currentMethodCodeGen) {
+        this.currentMethodCodeGen = currentMethodCodeGen;
+    }
+
     /**
      * Unité qui fait la gestion des registres utilsées dans la partie 
      */
-    private RegisterMangementUnit registerManagement  ;
+    private RegisterManagementUnit registerManagement  ;
+    private RegisterManagementUnit registerManagementPlaceHolder  ;
 
-    public RegisterMangementUnit getRegisterManagement() {
+    public void setRegisterManagement(RegisterManagementUnit registerManagement) {
+        this.registerManagement = registerManagement;
+    }
+
+    public RegisterManagementUnit getRegisterManagement() {
         return registerManagement;
     }
 
@@ -141,7 +238,12 @@ public class DecacCompiler {
     /**
      * The main program. Every instruction generated will eventually end up here.
      */
-    private final IMAProgram program = new IMAProgram();
+    private IMAProgram program = new IMAProgram();
+    private IMAProgram programPlaceHolder = program;
+
+    public void setProgram(IMAProgram program) {
+        this.program = program;
+    }
 
     public IMAProgram getProgram() {
         return program;
@@ -152,8 +254,12 @@ public class DecacCompiler {
      * et elle est aussi utilisée pour calculer le nombre de variable temporaire necessaire pour executer 
      * les blocs 
      */
-    public final StackManagementUnit stackManagement = new StackManagementUnit();  
+    public StackManagementUnit stackManagement = new StackManagementUnit();  
+    public StackManagementUnit stackManagementPlaceHolder = stackManagement;  
 
+    public void setStackManagement(StackManagementUnit stackManagement) {
+        this.stackManagement = stackManagement;
+    }
 
     public StackManagementUnit getStackManagement() {
         return stackManagement;
@@ -161,6 +267,14 @@ public class DecacCompiler {
 
     public int incrementGbCompiler() {
         return stackManagement.incrementGbCounter();
+    }
+
+    public int incrementLbCompiler() {
+        return stackManagement.incrementLbCounter();
+    }
+
+    public int decrementParamCounterCompiler() {
+        return stackManagement.decrementParamCounter();
     }
 
     /**
@@ -217,7 +331,7 @@ public class DecacCompiler {
         PrintStream out = System.out;
         LOG.debug("Compiling file " + sourceFile + " to assembly file " + destFile);
         try {
-            registerManagement = new RegisterMangementUnit(compilerOptions.getNumberOfRegisters());
+            registerManagement = new RegisterManagementUnit(compilerOptions.getNumberOfRegisters());
             return doCompile(sourceFile, destFile, out, err);
         } catch (LocationException e) {
             e.display(err);

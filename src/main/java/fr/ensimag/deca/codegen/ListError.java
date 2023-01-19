@@ -33,7 +33,7 @@ public class ListError {
         this.list.put("div0_error", false);
         this.list.put("missing_return_error", false);
         this.list.put("deref_null_error", false);
-
+        this.list.put("heap_overflow_error", false);
     }
 
     public void activeError(String err_name){

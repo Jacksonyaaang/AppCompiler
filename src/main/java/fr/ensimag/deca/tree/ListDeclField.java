@@ -65,8 +65,27 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
         }
     }
 
+    public void CodeGenListPlaceZeroInField(DecacCompiler compiler) throws CodeGenError {
+        LOG.debug("[ListDeclField][CodeGenListPlaceZeroInField] Placing Zero In All fields");
+        for (AbstractDeclField declField : getList()){
+            compiler.getRegisterManagement().freeAllRegisters();
+            declField.CodeGenPlaceZeroInField(compiler);
+        }
+    }
 
-
+    public void CodeGenListInitializeField(DecacCompiler compiler) throws CodeGenError {
+        LOG.debug("[ListDeclField][CodeGenListInitializeField] Initializing the fields");
+        for (AbstractDeclField declField : getList()){
+            compiler.getRegisterManagement().freeAllRegisters();
+            declField.codeGenDelField(compiler);
+        }
+    }
 
 }
+
+
+
+
+
+
 

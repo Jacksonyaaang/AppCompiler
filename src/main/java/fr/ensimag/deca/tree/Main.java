@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
  * @date 01/01/2023
  */
 public class Main extends AbstractMain {
+    
     private static final Logger LOG = Logger.getLogger(Main.class);
     
     private ListDeclVar declVariables;
@@ -56,7 +57,9 @@ public class Main extends AbstractMain {
         if (sizeStack != 0){
             compiler.getErrorManagementUnit().activeError("stack_overflow_error");
             //On reserve uniquement de l'espace dont on stock des valeurs de registres
-            compiler.getProgram().addFirst(new ADDSP(new ImmediateInteger(compiler.getStackManagement().getStacksizeNeededMain())));
+            if (compiler.getStackManagement().getGbCounter() != 0){
+                compiler.getProgram().addFirst(new ADDSP(new ImmediateInteger(compiler.getStackManagement().getGbCounter())));
+            }
             if (!(compiler.getCompilerOptions().isNoCheck())) {
                 compiler.getProgram().addFirst(new BOV(new Label("stack_overflow_error")));
                 compiler.getProgram().addFirst(new TSTO(new ImmediateInteger(sizeStack)));
