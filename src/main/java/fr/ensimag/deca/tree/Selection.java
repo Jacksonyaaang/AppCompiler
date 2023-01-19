@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.util.Map;
 
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
@@ -16,6 +17,9 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
 public class Selection extends AbstractLValue {
+
+    private static final Logger LOG = Logger.getLogger(IntLiteral.class);
+
 
     protected AbstractExpr obj;
     protected AbstractIdentifier field;
@@ -39,14 +43,22 @@ public class Selection extends AbstractLValue {
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
             Type t = obj.verifyExpr(compiler, localEnv, currentClass);
-            setType(t);
+            this.obj.setType(t);
+            //setType(t);  //error, miss 'this.type'
             if (!t.isClass()){
                 throw new ContextualError("[Using Error] The first selection must be a class or this ", getLocation());
             }
-            if (currentClass.getMembers().get(((Identifier)this.field).getName())==null){
+            //if (currentClass.getMembers().get(((Identifier)this.field).getName())==null){
+            if (((ClassType)t).getDefinition().getMembers().get(((Identifier)this.field).getName())==null){
+                //we should verify the de definition exists from the first expression class insatead of the current class
                 throw new ContextualError("[Using Error] Can't find the field in the prevous declarations ", getLocation());
+                
             }else{
-                if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
+                ExpDefinition envField = currentClass.getMembers().get(((Identifier)this.field).getName());
+                Visibility visiField = envField.asFieldDefinition("it's not a field type", getLocation()).getVisibility();
+                if (visiField==Visibility.PROTECTED){
+                    //if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
+                    LOG.info("i'm entering the fucking protected field !!!");
                     ClassDefinition classDes = this.field.getClassDefinition();
                     if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType)t).isSubClassOf(classDes.getType())) {
                         throw new ContextualError("[Using Error] Obey the second condition, the current class must be the sub class of the field class", getLocation());
