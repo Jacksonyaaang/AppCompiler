@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.util.Map;
 
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
@@ -17,6 +18,9 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
 public class Selection extends AbstractLValue {
+
+    private static final Logger LOG = Logger.getLogger(IntLiteral.class);
+
 
     protected AbstractExpr obj;
     protected AbstractIdentifier field;
@@ -41,7 +45,8 @@ public class Selection extends AbstractLValue {
             throws ContextualError {
             FieldDefinition fieldDefi;
             Type t = obj.verifyExpr(compiler, localEnv, currentClass);
-            setType(t);
+            this.obj.setType(t);
+            //setType(t);  //error, miss 'this.type'
             if (!t.isClass()){
                 throw new ContextualError("[Using Error] The first selection must be a class or this ", getLocation());
             }
@@ -49,10 +54,12 @@ public class Selection extends AbstractLValue {
             field.setDefinition(fieldDefi);
             if (fieldDefi==null){
                 throw new ContextualError("[Using Error] Can't find the field in the prevous declarations ", getLocation());
+                
             }else{
                 if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
                     ClassDefinition classDes = ((FieldDefinition)this.field.getDefinition()).getContainingClass();
                      if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType)t).isSubClassOf(classDes.getType())) {
+
                         throw new ContextualError("[Using Error] Obey the second condition, the current class must be the sub class of the field class", getLocation());
                     } 
                     
