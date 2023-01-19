@@ -21,60 +21,73 @@
 ;        Main program
 ; -------------------------------------
 ; Beginning of main instructions:
+; --------StartNew--------[16, 8]-----
 	NEW #1, R2
 	BOV heap_overflow_error
 	LEA 11(GB), R0
 	STORE R0, 0(R2)
 	BSR init.B
+; --------EndNew--------[16, 8]-----
 	STORE R2, 1(GB)	; Initializing the variable b and loading it into memory
+; --------StartNew--------[17, 8]-----
 	NEW #1, R2
 	BOV heap_overflow_error
 	LEA 11(GB), R0
 	STORE R0, 0(R2)
 	BSR init.B
+; --------EndNew--------[17, 8]-----
 	STORE R2, 2(GB)	; Initializing the variable x and loading it into memory
+; --------StartNew--------[18, 8]-----
 	NEW #1, R2
 	BOV heap_overflow_error
 	LEA 11(GB), R0
 	STORE R0, 0(R2)
 	BSR init.B
+; --------EndNew--------[18, 8]-----
 	STORE R2, 3(GB)	; Initializing the variable y and loading it into memory
+; --------StartNew--------[19, 8]-----
 	NEW #1, R2
 	BOV heap_overflow_error
 	LEA 11(GB), R0
 	STORE R0, 0(R2)
 	BSR init.B
+; --------EndNew--------[19, 8]-----
 	STORE R2, 4(GB)	; Initializing the variable u and loading it into memory
+; --------StartNew--------[20, 8]-----
 	NEW #1, R2
 	BOV heap_overflow_error
 	LEA 11(GB), R0
 	STORE R0, 0(R2)
 	BSR init.B
+; --------EndNew--------[20, 8]-----
 	STORE R2, 5(GB)	; Initializing the variable l and loading it into memory
+; --------StartNew--------[21, 8]-----
 	NEW #1, R2
 	BOV heap_overflow_error
 	LEA 11(GB), R0
 	STORE R0, 0(R2)
 	BSR init.B
+; --------EndNew--------[21, 8]-----
 	STORE R2, 6(GB)	; Initializing the variable p and loading it into memory
-; --------------BeginInstanceof----------
+; --------------BeginInstanceof----------[23, 7]+-----
 	LOAD 1(GB), R2	; loading b into memory
 	LOAD 9(GB), R3	; loading method table of A
+	CMP #null, R3
+	BEQ instanceOf_Object	; sifr.ensimag.deca.tree.Identifier@1593948dest Object, on retourne immédiatement true
 loopbegin:
 	LOAD 0(R2), R2
 	CMP #null, R2
 	BEQ endfalse
 	CMP R2, R3
-	BNE loopbegin
+	BNE loopbegin	; loopend
+instanceOf_Object:
 	LOAD #1, R3
 	BRA endtrue
 endfalse:
 	LOAD #0, R3
 endtrue:
-; --------------EndInstanceof----------
-	CMP #0, R3	; Applying not operand
-	SEQ R3	; Applying not operand
-; ---------Startif-----------[24, 4]
+; --------------EndInstanceof----------[23, 7]-----
+; ---------Startif-----------[23, 4]
 	CMP #1, R3	; Comparing expr output in the ifthenelse
 	BNE else1
 	WSTR "instanceof fonctionne"
@@ -106,6 +119,16 @@ init.B:
 	SUBSP #1
 	RTS
 ; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
 ;        Liste Erreur
 ; -------------------------------------
 heap_overflow_error:
@@ -116,6 +139,4 @@ stack_overflow_error:
 	WSTR "Error: stack_overflow_error"
 	WNL
 	ERROR
-code.object.equals:
-	RTS
 ; end main program

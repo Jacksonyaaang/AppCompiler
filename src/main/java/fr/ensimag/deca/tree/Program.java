@@ -66,6 +66,7 @@ public class Program extends AbstractProgram {
         compiler.addComment("       Method Table");
         compiler.addComment("-------------------------------------");
         compiler.setMainProgramState();
+        //Generating methode table for object and the other elements
         generateMethodTableForObjectClass(compiler);
         //Generation de code class
         classes.codeGenListClassTableau(compiler);
@@ -85,11 +86,13 @@ public class Program extends AbstractProgram {
         compiler.addComment("-------------------------------------");
         compiler.getProgram().append(classes.getClassesProgram());
         compiler.addComment("-------------------------------------");
+        compiler.addComment("       Method equal");
+        compiler.addComment("-------------------------------------");
+        generateCodeForObjectEquals(compiler);
+        compiler.addComment("-------------------------------------");
         compiler.addComment("       Liste Erreur");
         compiler.addComment("-------------------------------------");
         compiler.getErrorManagementUnit().writeListError(compiler);
-        compiler.addLabel(new Label("code.object.equals"));
-        compiler.addInstruction(new RTS()); 
     }
 
     public void generateMethodTableForObjectClass(DecacCompiler compiler) throws CodeGenError{
@@ -101,16 +104,16 @@ public class Program extends AbstractProgram {
                                                  Register.getR(0)));
         compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.incrementGbCompiler(), Register.GB)));
     }
-    public void generateCodeForObjectEquals(DecacCompiler compiler){
-        compiler.addComment("------------------Start generateCodeForObjectEquals location:"+getLocation()+"-----------------");
-        Label fin_equals=new Label("FIN_equals");
+
+    public void generateCodeForObjectEquals(DecacCompiler compiler) throws CodeGenError{
+        compiler.addComment("------------------Start generateCodeForObjectEquals location:");
+        Label fin_equals=new Label("fin.Object.equals");
         compiler.addLabel(new Label("code.Object.equals"));
-        compiler.addInstruction(new TSTO(1),"TEST de débordement de Pile");
-        compiler.addInstruction(new BOV(new Label("stack_overflow_error")));
         compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(0)));// (@this -> R2)
         compiler.addInstruction(new CMP(new RegisterOffset(-3, Register.LB), Register.getR(0)));
         compiler.addInstruction(new SEQ(Register.getR(0)),"Comparaison this et paramètre d'equals");
         compiler.addLabel(fin_equals);
+        compiler.addInstruction(new RTS()); 
     }
 
     @Override
