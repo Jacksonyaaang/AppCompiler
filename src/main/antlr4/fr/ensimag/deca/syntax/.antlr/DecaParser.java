@@ -2674,7 +2674,7 @@ public class DecaParser extends AbstractDecaParser {
 				            // On n'a pas besoin d'ajouter une location car 
 				            // cette extention se fait par défaut 
 				            // sans input de l'utilisateur
-				            ((Class_extensionContext)_localctx).tree =  new Identifier(this.getDecacCompiler().createSymbol("object")); 
+				            ((Class_extensionContext)_localctx).tree =  new Identifier(this.getDecacCompiler().createSymbol("Object")); 
 				            _localctx.tree.setLocation(Location.BUILTIN);
 				        
 				}

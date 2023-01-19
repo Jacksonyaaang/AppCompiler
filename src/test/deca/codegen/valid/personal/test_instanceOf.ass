@@ -1,0 +1,121 @@
+	TSTO #12
+	BOV stack_overflow_error
+	ADDSP #12
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 7(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 8(GB)
+	LEA 7(GB), R0
+	STORE R0, 9(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 10(GB)
+	LEA 9(GB), R0
+	STORE R0, 11(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 12(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+	STORE R2, 1(GB)	; Initializing the variable b and loading it into memory
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+	STORE R2, 2(GB)	; Initializing the variable x and loading it into memory
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+	STORE R2, 3(GB)	; Initializing the variable y and loading it into memory
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+	STORE R2, 4(GB)	; Initializing the variable u and loading it into memory
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+	STORE R2, 5(GB)	; Initializing the variable l and loading it into memory
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+	STORE R2, 6(GB)	; Initializing the variable p and loading it into memory
+; --------------BeginInstanceof----------
+	LOAD 1(GB), R2	; loading b into memory
+	LOAD 9(GB), R3	; loading method table of A
+loopbegin:
+	LOAD 0(R2), R2
+	CMP #null, R2
+	BEQ endfalse
+	CMP R2, R3
+	BNE loopbegin
+	LOAD #1, R3
+	BRA endtrue
+endfalse:
+	LOAD #0, R3
+endtrue:
+; --------------EndInstanceof----------
+	CMP #0, R3	; Applying not operand
+	SEQ R3	; Applying not operand
+; ---------Startif-----------[24, 4]
+	CMP #1, R3	; Comparing expr output in the ifthenelse
+	BNE else1
+	WSTR "instanceof fonctionne"
+	WNL
+	BRA end_ifthenelse_1
+else1:
+end_ifthenelse_1:
+; ---------Endif-----------
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : A -------------------
+; ---------------------------------------------------
+; ------------Init method for class = A--------
+init.A:
+	RTS
+; ---------------------------------------------------
+; ----------------- class : B -------------------
+; ---------------------------------------------------
+; ------------Init method for class = B--------
+init.B:
+	TSTO #3
+	BOV stack_overflow_error
+	LOAD -2(LB), R0	; Placing the current class = B adresse in the the stack before calling parent 
+	PUSH R0	; Placing this = B into the stack
+	BSR init.A	; Calling the initialisation method of parent classA
+	SUBSP #1
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+code.object.equals:
+	RTS
+; end main program

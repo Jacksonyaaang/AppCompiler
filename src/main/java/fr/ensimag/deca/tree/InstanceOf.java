@@ -49,6 +49,7 @@ public class InstanceOf extends AbstractExpr {
     }
 
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
+        compiler.addComment("--------------BeginInstanceof----------"+getLocation()+"+-----");
         this.expr.codeGenInst(compiler);
         GPRegister reg = expr.getRegisterDeRetour();
         GPRegister RType = this.LoadGencode(compiler, false);
@@ -68,11 +69,11 @@ public class InstanceOf extends AbstractExpr {
         compiler.addInstruction(new BRA(endtrue));
         compiler.addLabel(endfalse);
         compiler.addInstruction(new LOAD(0, RType));
-        compiler.addLabel(endtrue);
+        compiler.addLabel(endtrue);             
         expr.popRegisters(compiler);
         compiler.getRegisterManagement().decrementOccupationRegister(expr.getRegisterDeRetour());
         this.setRegisterDeRetour(RType);
-    
+        compiler.addComment("--------------EndInstanceof----------"+getLocation()+"-----");    
     }
 
     @Override

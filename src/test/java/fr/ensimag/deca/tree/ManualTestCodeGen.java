@@ -6,6 +6,7 @@ import fr.ensimag.deca.syntax.*;
 import fr.ensimag.deca.CompilerOptions;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CodeGenError;
+import fr.ensimag.deca.codegen.RegisterManagementUnit;
 import fr.ensimag.deca.tree.AbstractProgram;
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +45,7 @@ public class ManualTestCodeGen {
         DecacCompiler decacCompiler = new DecacCompiler(options, file);
         parser.setDecacCompiler(decacCompiler);
         AbstractProgram prog = parser.parseProgramAndManageErrors(System.err);
+        decacCompiler.setRegisterManagement(new RegisterManagementUnit(options.getNumberOfRegisters()));
         if (prog == null) {
             System.exit(1);
         } else {

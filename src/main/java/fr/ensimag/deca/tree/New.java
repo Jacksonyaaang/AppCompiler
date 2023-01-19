@@ -67,11 +67,15 @@ public class New  extends AbstractExpr{
     @Override
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
         assert(reg != null);
+        compiler.addComment("--------StartNew--------"+getLocation()+"-----");
         LOG.debug("[New][loadItemintoRegister] loading new of calss =  "+ className.getName()+ " into memory at register " + reg);
         int nbattributs = className.getClassDefinition().getNumberOfFields();
         //On reserve suffisament d'espace pour les registers et l'adresse de la table de method
         compiler.addInstruction(new NEW(nbattributs+1, reg));
-        compiler.addInstruction(new BOV(new Label("heap_overflow_error")));
+        if (!(compiler.getCompilerOptions().isNoCheck())){
+            compiler.addInstruction(new BOV(new Label("heap_overflow_error")));
+            compiler.getErrorManagementUnit().activeError("heap_overflow_error");
+        }
         compiler.addInstruction(new LEA(compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(className.getClassDefinition()), Register.getR(0)));
         compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(0, reg)));
         //les instructions de Push and pop ne sont pas necessaires car dans la méthode de init 
@@ -81,6 +85,7 @@ public class New  extends AbstractExpr{
         // compiler.addInstruction(new POP(reg));
         // on stocke l’adresse de a dans l’espace de la pile dédié aux variables        
         // globales ou locales , indice l: premier registre libre dans cette partie de la pile
+        compiler.addComment("--------EndNew--------"+getLocation()+"-----");
     }
 
 

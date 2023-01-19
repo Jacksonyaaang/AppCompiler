@@ -1,0 +1,21 @@
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.object.equals, R0
+	STORE R0, 2(GB)
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.Point2D.diag, R0
+	STORE R0, 5(GB)
+	LEA 3(GB), R0
+	STORE R0, 6(GB)
+	LOAD code.object.equals, R0
+	STORE R0, 7(GB)
+	LOAD code.Point3D.diag, R0
+	STORE R0, 8(GB)
+; end main program
