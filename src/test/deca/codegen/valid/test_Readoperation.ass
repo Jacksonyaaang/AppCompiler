@@ -2,7 +2,16 @@
 	BOV stack_overflow_error
 	ADDSP #4
 ; start main program
-; Main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
 ; Beginning of main instructions:
 	RINT
 	BOV io_error
@@ -29,49 +38,33 @@
 ; --------StartBinaryOp--------[14, 11]-----
 ; --------StartBinaryOp--------[14, 12]-----
 	LOAD #10, R3	; loading 10 into memory
-	PUSH R2
 	RINT
 	BOV io_error
-	LOAD R1, R2
-	MUL R2, R3
-	POP R2
+	LOAD R1, R4
+	MUL R4, R3
 ; --------EndBinaryOp--------[14, 12]-----
-	PUSH R2
-	LOAD #5, R2	; loading 5 into memory
-	MUL R2, R3
-	POP R2
+	LOAD #5, R4	; loading 5 into memory
+	MUL R4, R3
 ; --------EndBinaryOp--------[14, 11]-----
-	PUSH R2
-	LOAD #2, R2	; loading 2 into memory
-	MUL R2, R3
-	POP R2
+	LOAD #2, R4	; loading 2 into memory
+	MUL R4, R3
 ; --------EndBinaryOp--------[14, 11]-----
-	PUSH R2
-	LOAD #7, R2	; loading 7 into memory
-	OPP R2, R2	; Doing an unary minus
-	MUL R2, R3
-	POP R2
+	LOAD #7, R4	; loading 7 into memory
+	OPP R4, R4	; Doing an unary minus
+	MUL R4, R3
 ; --------EndBinaryOp--------[14, 10]-----
-	PUSH R2
-	LOAD #9, R2	; loading 9 into memory
-	MUL R2, R3
-	POP R2
+	LOAD #9, R4	; loading 9 into memory
+	MUL R4, R3
 ; --------EndBinaryOp--------[14, 9]-----
-	PUSH R2
-	LOAD #20, R2	; loading 20 into memory
-	ADD R2, R3
-	POP R2
+	LOAD #20, R4	; loading 20 into memory
+	ADD R4, R3
 ; --------EndBinaryOp--------[14, 8]-----
 ; --------StartBinaryOp--------[14, 43]-----
-	PUSH R2
-	LOAD #30, R2	; loading 30 into memory
-	PUSH R3
-	LOAD #10, R3	; loading 10 into memory
-	MUL R3, R2
-	POP R3
+	LOAD #30, R4	; loading 30 into memory
+	LOAD #10, R5	; loading 10 into memory
+	MUL R5, R4
 ; --------EndBinaryOp--------[14, 43]-----
-	SUB R2, R3
-	POP R2
+	SUB R4, R3
 ; --------EndBinaryOp--------[14, 8]-----
 	STORE R3, 1(GB)	;  Assiging a value to a
 	LOAD R3, R2	;  Return value of the assignement of =aand storing it into R2
@@ -81,6 +74,22 @@
 	WINT
 	WNL
 	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
 stack_overflow_error:
 	WSTR "Error: stack_overflow_error"
 	WNL

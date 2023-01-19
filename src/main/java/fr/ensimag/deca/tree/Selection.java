@@ -66,8 +66,7 @@ public class Selection extends AbstractLValue {
      *    expression found : this, Lvalue (for class),  Cast
      */
     @Override
-    public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
-            throws ContextualError {
+    public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)  throws ContextualError {
             Type t = obj.verifyExpr(compiler, localEnv, currentClass);
             this.obj.setType(t);
             //setType(t);  //error, miss 'this.type'

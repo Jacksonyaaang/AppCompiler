@@ -1,2 +1,1 @@
-LIGNE  1 -- 
-   Erreur : caractere  non permis
+while[ 11/11 ]

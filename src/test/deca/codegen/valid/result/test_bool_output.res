@@ -1,2 +1,2 @@
-LIGNE  1 -- 
-   Erreur : caractere  non permis
+bool val = true
+bool val = true
