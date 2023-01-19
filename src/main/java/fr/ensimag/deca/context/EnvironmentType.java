@@ -39,7 +39,7 @@ public class EnvironmentType {
         envTypes.put(booleanSymb, new TypeDefinition(BOOLEAN, Location.BUILTIN));
         Symbol nullSymb = compiler.createSymbol("null");
         NULL = new NullType(nullSymb);
-        envTypes.put(booleanSymb, new TypeDefinition(NULL, Location.BUILTIN));
+        envTypes.put(nullSymb, new TypeDefinition(NULL, Location.BUILTIN));
 
         Symbol stringSymb = compiler.createSymbol("string");
         STRING = new StringType(stringSymb);

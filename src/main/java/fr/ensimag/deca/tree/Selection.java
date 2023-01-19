@@ -11,6 +11,7 @@ import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.ExpDefinition;
+import fr.ensimag.deca.context.FieldDefinition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
@@ -38,24 +39,27 @@ public class Selection extends AbstractLValue {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
+            FieldDefinition fieldDefi;
             Type t = obj.verifyExpr(compiler, localEnv, currentClass);
             setType(t);
             if (!t.isClass()){
                 throw new ContextualError("[Using Error] The first selection must be a class or this ", getLocation());
             }
-            if (currentClass.getMembers().get(((Identifier)this.field).getName())==null){
+            fieldDefi = (FieldDefinition)currentClass.getMembers().get(((Identifier)this.field).getName());
+            field.setDefinition(fieldDefi);
+            if (fieldDefi==null){
                 throw new ContextualError("[Using Error] Can't find the field in the prevous declarations ", getLocation());
             }else{
                 if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
-                    ClassDefinition classDes = this.field.getClassDefinition();
-                    if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType)t).isSubClassOf(classDes.getType())) {
+                    ClassDefinition classDes = ((FieldDefinition)this.field.getDefinition()).getContainingClass();
+                     if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType)t).isSubClassOf(classDes.getType())) {
                         throw new ContextualError("[Using Error] Obey the second condition, the current class must be the sub class of the field class", getLocation());
                     } 
                     
                 }
             }
-
-           return currentClass.getMembers().get(((Identifier)this.field).getName()).getType();
+            //return compiler.environmentType.INT;
+            return fieldDefi.getType();
         }
         //this.obj1.obj2.untrucprimitif=8;
     //     Type typeReturn = null;

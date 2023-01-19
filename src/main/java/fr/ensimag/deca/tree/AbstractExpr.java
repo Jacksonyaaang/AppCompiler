@@ -163,6 +163,8 @@ public abstract class AbstractExpr extends AbstractInst {
         LOG.debug("[AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments" );
         //Vérification du membre de droite d'une affectation
         Type t = this.verifyExpr(compiler, localEnv, currentClass);
+        // System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&& " + t.getName().getName());
+        // System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&& " + expectedType.getName().getName());
 
         // Conversion du membre droit en float s'il est de tye int et que le membre de gauche est de type float
         if (expectedType.isFloat() && t.isInt()){
@@ -176,8 +178,10 @@ public abstract class AbstractExpr extends AbstractInst {
                 throw new ContextualError("Not expected type", getLocation());
             }else return this;
         }
-        if (!expectedType.sameType(t))
+        if (!expectedType.sameType(t)){
+            //System.out.println("***************************************************");
             throw new ContextualError("Not expected type", getLocation());
+        }
         setType(expectedType);
         return this;
     }

@@ -11,6 +11,7 @@ import java.io.IOException;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+//import fr.ensimag.deca.tree.LocationException;
 
 /**
  * Driver to test the contextual analysis (together with lexer/parser)
@@ -40,9 +41,9 @@ public class ManualTestContext {
         // }
         try {
             prog.verifyProgram(compiler);
-        } catch (Exception e) {
-            prog.prettyPrint(System.out);
-            //e.display(System.err);
+        } catch (LocationException e) {
+            //prog.prettyPrint(System.out);
+            e.display(System.err);
             System.exit(1);
         }
         prog.prettyPrint(System.out);
