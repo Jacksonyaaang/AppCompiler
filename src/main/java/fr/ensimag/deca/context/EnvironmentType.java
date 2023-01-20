@@ -87,10 +87,6 @@ public class EnvironmentType {
     public final FloatType   FLOAT;
     public final StringType  STRING;
     public final BooleanType BOOLEAN;
-<<<<<<<<< Temporary merge branch 1
     public final ClassType   OBJECT;
-=========
     public final NullType NULL;
-    public final ClassType OBJECT;
->>>>>>>>> Temporary merge branch 2
 }
