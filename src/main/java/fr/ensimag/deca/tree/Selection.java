@@ -73,23 +73,23 @@ public class Selection extends AbstractLValue {
             FieldDefinition fieldDefi;
             Type type = obj.verifyExpr(compiler, localEnv, currentClass);
             this.obj.setType(type);
-            //setType(t);  //error, miss 'this.type'
             if (!type.isClass()){
-                throw new ContextualError("[Using Error] The first selection must be a class or this ", getLocation());
+                throw new ContextualError(" Le type de l'expression utilisé pour une sélection doit être un type de classe ou \"this\"", getLocation());
             }
             LOG.debug("[Selection][verifyExpr] Class type is  " + ((ClassType)((obj).getType())).getDefinition().getType().getName());
             fieldDefi = (FieldDefinition)(((ClassType)((obj).getType())).getDefinition().getMembers().get(((Identifier)this.field).getName()));
             field.setDefinition(fieldDefi);
             if (fieldDefi==null){
-                throw new ContextualError("[Using Error] Can't find the field in the prevous declarations ", getLocation());
+                throw new ContextualError("Le champs " + field.getName().getName() + " n'est pas défini", getLocation());
+
 
             }else{
                 if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
                     ClassDefinition classDes = ((FieldDefinition)this.field.getDefinition()).getContainingClass();
                      if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType) type).isSubClassOf(classDes.getType())) {
 
-                        throw new ContextualError("[Using Error] Obey the second condition, the current class must be the sub class of the field class", getLocation());
-                    } 
+                        throw new ContextualError(" La classe "+ currentClass.getType().getName().getName()+" doit être une sous-classe de " + currentClass.getSuperClass().getType().getName().getName() + "où est défini le champs" + getField().getName().getName(), getLocation());
+                    }
                     
                 }
             }

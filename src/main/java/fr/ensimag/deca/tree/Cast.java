@@ -45,12 +45,12 @@ public class Cast extends AbstractExpr{
 
         else if ((t1.isFloat() && !t2.isInt() && !t2.isFloat()) || (t1.isInt() && !t2.isFloat() && !t2.isInt()) ||
                 (t2.isFloat() && !t1.isInt() && !t1.isFloat()) || (t2.isInt() && !t1.isFloat() && !t1.isInt())){
-                    throw new ContextualError("on peut caster un Int que par un Float et vis-versa", getLocation());
+                    throw new ContextualError("On ne peut que convertir un Int en Float et vice-versa", getLocation());
         }
         else if ((t1.isClass() && t2.isClass() && !((ClassType)t1).isSubClassOf((ClassType)t2) &&
                  !((ClassType)t2).isSubClassOf((ClassType)t1)) || t2.isNull() ||
                  (t1.isNull() && !t2.isClass())){
-                throw new ContextualError("Cast impossible", getLocation());
+                throw new ContextualError("Cast impossible entre ces deux types", getLocation());
         }
         //return compiler.environmentType.FLOAT;
         setType(typeCast.getType());

@@ -149,7 +149,7 @@ public class DeclMethod extends AbstractDeclMethod {
                                     +"checking if it is a method that belongs to the current class");
             Map<Symbol, ExpDefinition> tempoMap = localEnv.getExp();
             if (tempoMap.containsKey(this.methodName.getName())){
-                throw new ContextualError("Il existe déjà une méthode de même nom "+methodName.getName().getName() + " dans la classe " + currentClass.getType().getName().getName(), getLocation());
+                throw new ContextualError("Il existe déjà une méthode de nom "+methodName.getName().getName() + " dans la classe " + currentClass.getType().getName().getName(), getLocation());
             }else{
                 LOG.info("[DeclMethod][verifyDecleMethod] Method = "+ methodName.getName().getName()+ " exists in the parent class,"+
                          "checking if our method matchs the one that is in the parent");

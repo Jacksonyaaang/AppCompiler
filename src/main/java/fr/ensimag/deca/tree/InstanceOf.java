@@ -95,7 +95,7 @@ public class InstanceOf extends AbstractExpr {
         Type t2 = typeInstance.verifyType(compiler);
         typeInstance.setType(t2);
         if (!t2.isClass() || t2.isNull()){
-            throw new ContextualError("l' identificateur à droite de instanceof doit être une classe non null", getLocation());
+            throw new ContextualError("L' identificateur à droite de instanceof doit être une classe non null", getLocation());
         }
         return compiler.environmentType.BOOLEAN;
     }

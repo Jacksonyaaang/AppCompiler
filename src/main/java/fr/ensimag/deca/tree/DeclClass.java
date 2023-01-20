@@ -245,9 +245,9 @@ public class DeclClass extends AbstractDeclClass {
                     name.setDefinition((ClassDefinition) classType.getDefinition());
                 }
                 else{
-                    throw new ContextualError("le d'une class pére doit être de type class", getLocation());
+                    throw new ContextualError("Une super classe doit avoir un type de classe", getLocation());
                 }
-                
+
             }
             else
                 throw new ContextualError("La super classe " + getSuperClass().getName() + " n'est pas définie", getLocation());

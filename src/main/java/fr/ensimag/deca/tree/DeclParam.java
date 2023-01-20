@@ -78,12 +78,12 @@ public class DeclParam extends AbstractDeclParam {
             type.setType(typeParam);
             //make sure this type isn't Void
             if (typeParam.isVoid()){
-                throw new ContextualError("Le type void ne peut être un type d'une méthode", getLocation());
+                throw new ContextualError("Un paramètre de méthode ne peut être de type void", getLocation());
             }
             //verify environmentTypes has the type of Paramname 
             Map<Symbol, TypeDefinition> envTypes = compiler.environmentType.getEnvTypes();
             if (!envTypes.containsKey(typeParam.getName())){
-                throw new ContextualError("[NOT A PROPER TYPE ISSUE]Sorry we don't have this type of type", getLocation());
+                throw new ContextualError("Le type " + getType().getName() + " n'est pas defini", getLocation());
             }
             ParamDefinition paramDef = new ParamDefinition(typeParam, getLocation());
             paramName.setDefinition(paramDef);
