@@ -42,7 +42,7 @@ public class ManualTestContext {
         try {
             prog.verifyProgram(compiler);
         } catch (LocationException e) {
-            //prog.prettyPrint(System.out);
+            prog.prettyPrint(System.out);
             e.display(System.err);
             System.exit(1);
         }

@@ -162,23 +162,25 @@ public abstract class AbstractExpr extends AbstractInst {
             throws ContextualError {
         LOG.debug("[AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments" );
         //Vérification du membre de droite d'une affectation
-        Type t = this.verifyExpr(compiler, localEnv, currentClass);
+        Type typeR = this.verifyExpr(compiler, localEnv, currentClass);
+        LOG.debug("[AbstractExpr][verifyRValue] right type is  = " + typeR.getName() + " expected type is " + expectedType.getName());
         // Conversion du membre droit en float s'il est de tye int et que le membre de gauche est de type float
-        if (expectedType.isFloat() && t.isInt()){
+        if (expectedType.isFloat() && typeR.isInt()){
             ConvFloat cF = new ConvFloat(this);
             cF.verifyExpr(compiler, localEnv, currentClass);
             LOG.debug("[Assign][verifyExpr] Conv int -> float");
             return cF;
         }
-        else if (expectedType.isClass() && t.isClassOrNull()){
-            if (!((ClassType)t).isSubClassOf((ClassType)expectedType)){
+        else if (expectedType.isClass() && typeR.isClassOrNull()){
+            if (!((ClassType)typeR).isSubClassOf((ClassType)expectedType)){
                 throw new ContextualError("Not expected type", getLocation());
             }else return this;
         }
-        if (!expectedType.sameType(t)){
+        if (!expectedType.sameType(typeR)){
             throw new ContextualError("Not expected type", getLocation());
         }
         setType(expectedType);
+        LOG.debug("[AbstractExpr][verifyRValue] We found the type = " + typeR.getName() + " expected type is " + expectedType.getName());
         return this;
     }
         

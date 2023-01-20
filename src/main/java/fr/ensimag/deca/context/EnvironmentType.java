@@ -40,12 +40,12 @@ public class EnvironmentType {
         envTypes.put(floatSymb, new TypeDefinition(FLOAT, Location.BUILTIN));
 
         Symbol flaotTableSymb1D = compiler.createSymbol("flaot[]");
-        TABLEflaot1D = new TableType(flaotTableSymb1D, flaot, 1);
-        envTypes.put(flaotTableSymb1D, new TableDefinition(TABLEflaot1D, Location.BUILTIN));
+        TABLEFLAOT1D = new TableType(flaotTableSymb1D, FLOAT, 1);
+        envTypes.put(flaotTableSymb1D, new TableDefinition(TABLEFLAOT1D, Location.BUILTIN));
 
         Symbol flaotTableSymb2D = compiler.createSymbol("flaot[][]");
-        TABLEflaot2D = new TableType(flaotTableSymb2D, flaot, 2);
-        envTypes.put(flaotTableSymb2D, new TableDefinition(TABLEflaot2D, Location.BUILTIN));
+        TABLEFLAOT2D = new TableType(flaotTableSymb2D, FLOAT, 2);
+        envTypes.put(flaotTableSymb2D, new TableDefinition(TABLEFLAOT2D, Location.BUILTIN));
         
 
         Symbol voidSymb = compiler.createSymbol("void");
@@ -105,6 +105,8 @@ public class EnvironmentType {
     public final IntType     INT;
     public final TableType    TABLEINT1D;
     public final TableType    TABLEINT2D;
+    public final TableType    TABLEFLAOT1D;
+    public final TableType    TABLEFLAOT2D;
     public final FloatType   FLOAT;
     public final StringType  STRING;
     public final BooleanType BOOLEAN;

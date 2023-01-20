@@ -48,6 +48,7 @@ class A {
 }
 
 {
+    int[] a = 5;
     A a = new A() ;
     a.setX(1) ;
     println("a.getX() = ", a.getX()) ;

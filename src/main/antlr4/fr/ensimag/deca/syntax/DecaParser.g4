@@ -45,7 +45,9 @@ options {
     protected This thisImplicite = null;  
     protected StringBuilder sbTable = null;  
     protected String symbolString = null;     
-    
+    protected ListExpr arguementTableau;
+    protected Identifier tempIdentifier;
+
 }
 
 prog returns[AbstractProgram tree]
@@ -420,6 +422,10 @@ select_expr returns[AbstractExpr tree]
     ;
 
 primary_expr returns[AbstractExpr tree]
+    @init   {
+        arguementTableau = new ListExpr();
+        sbTable = null;
+    }
     : ident {
             assert($ident.tree != null);
             $tree=$ident.tree;
@@ -453,6 +459,36 @@ primary_expr returns[AbstractExpr tree]
             $tree = new New($ident.tree);
             setLocation($tree, $NEW);
         }
+    | NEW ident OBRACKET  e1=expr CBRACKET {
+            assert($e1.tree != null);
+            assert($ident.tree != null);
+            arguementTableau.add($e1.tree);
+            sbTable = new StringBuilder();
+            sbTable.append($ident.text); 
+            sbTable.append("[]");
+            tempIdentifier = new Identifier(this.getDecacCompiler().createSymbol(sbTable.toString()));
+            setLocation(tempIdentifier, $NEW);
+            $tree = new NewTable(tempIdentifier, arguementTableau);
+            setLocation($tree, $NEW);
+        }
+    | NEW ident OBRACKET e1=expr CBRACKET OBRACKET  e2=expr CBRACKET {
+        assert($ident.tree != null);
+        assert($e1.tree != null);
+        assert($e2.tree != null);
+        //On ajoute les expr dans le tableau, 
+        //qui sont utlisées comme argument
+        arguementTableau.add($e1.tree);
+        arguementTableau.add($e2.tree);
+        //On ajoute les [][], pour que le type peut être identifée dans la partie 
+        //Contextuelle
+        sbTable = new StringBuilder();
+        sbTable.append($ident.text); 
+        sbTable.append("[][]");
+        tempIdentifier = new Identifier(this.getDecacCompiler().createSymbol(sbTable.toString()));
+        setLocation(tempIdentifier, $NEW);
+        $tree = new NewTable(tempIdentifier, arguementTableau);
+        setLocation($tree, $NEW);
+    }
     | cast=OPARENT type CPARENT OPARENT expr CPARENT {
             assert($type.tree != null);
             assert($expr.tree != null);

@@ -35,8 +35,8 @@ public class  TableGetElement extends AbstractExpr{
     protected AbstractIdentifier tableIdentifier;
     protected ListExpr initializers;
 
-    public TableGetElement(AbstractIdentifier tableType, ListExpr initializers){
-        Validate.notNull(tableType);
+    public TableGetElement(AbstractIdentifier tableIdentifier, ListExpr initializers){
+        Validate.notNull(tableIdentifier);
         Validate.notNull(initializers);
         this.tableIdentifier = tableIdentifier;
         this.initializers  = initializers; 
@@ -68,55 +68,58 @@ public class  TableGetElement extends AbstractExpr{
 
     @Override
     public void decompile(IndentPrintStream s) {
-        s.print("new ");
-        // getClassName().decompile(s);
-        // s.print("()");
+        getTableIdentifier().decompile(s);
+        for (AbstractExpr  expr : initializers.getList()){
+            s.print("[");
+            expr.decompile();
+            s.print("]");
+        }  
     }
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
-        LOG.debug("[New][codeGenInst] generating new for the class = " + className.getName());
-        this.setRegisterDeRetour(this.LoadGencode(compiler, true));
+        // LOG.debug("[New][codeGenInst] generating new for the class = " + className.getName());
+        // this.setRegisterDeRetour(this.LoadGencode(compiler, true));
     }
 
     @Override
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
-        assert(reg != null);
-        compiler.getRegisterManagement().increaseTempVariables(3);
-        compiler.addComment("--------StartNew--------"+getLocation()+"-----");
-        LOG.debug("[New][loadItemintoRegister] loading new of calss =  "+ className.getName()+ " into memory at register " + reg);
-        compiler.addComment("[New][loadItemintoRegister] loading new of calss =  "+ className.getName()+ " into memory at register " + reg);
-        int nbattributs = className.getClassDefinition().getNumberOfFields();
-        //On reserve suffisament d'espace pour les registers et l'adresse de la table de method
-        compiler.addInstruction(new NEW(nbattributs+1, reg));
-        if (!(compiler.getCompilerOptions().isNoCheck())){
-            compiler.addInstruction(new BOV(new Label("heap_overflow_error")));
-            compiler.getErrorManagementUnit().activeError("heap_overflow_error");
-        }
-        compiler.addInstruction(new LEA(compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(className.getClassDefinition()), Register.getR(0)));
-        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(0, reg)));
-        //les instructions de Push and pop ne sont pas necessaires car dans la méthode de init 
-        // on push et pop tout les registres qui ne sont pas stables
-        compiler.addInstruction(new PUSH(reg));
-        compiler.addInstruction(new BSR(new Label("init."+((Identifier) className).getName())));
-        compiler.addInstruction(new POP(reg));
-        compiler.getRegisterManagement().decreaseTempVariables(3); 
-        // on stocke l’adresse de a dans l’espace de la pile dédié aux variables        
-        // globales ou locales , indice l: premier registre libre dans cette partie de la pile
-        compiler.addComment("--------EndNew--------"+getLocation()+"-----");
+        // assert(reg != null);
+        // compiler.getRegisterManagement().increaseTempVariables(3);
+        // compiler.addComment("--------StartNew--------"+getLocation()+"-----");
+        // LOG.debug("[New][loadItemintoRegister] loading new of calss =  "+ className.getName()+ " into memory at register " + reg);
+        // compiler.addComment("[New][loadItemintoRegister] loading new of calss =  "+ className.getName()+ " into memory at register " + reg);
+        // int nbattributs = className.getClassDefinition().getNumberOfFields();
+        // //On reserve suffisament d'espace pour les registers et l'adresse de la table de method
+        // compiler.addInstruction(new NEW(nbattributs+1, reg));
+        // if (!(compiler.getCompilerOptions().isNoCheck())){
+        //     compiler.addInstruction(new BOV(new Label("heap_overflow_error")));
+        //     compiler.getErrorManagementUnit().activeError("heap_overflow_error");
+        // }
+        // compiler.addInstruction(new LEA(compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(className.getClassDefinition()), Register.getR(0)));
+        // compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(0, reg)));
+        // //les instructions de Push and pop ne sont pas necessaires car dans la méthode de init 
+        // // on push et pop tout les registres qui ne sont pas stables
+        // compiler.addInstruction(new PUSH(reg));
+        // compiler.addInstruction(new BSR(new Label("init."+((Identifier) className).getName())));
+        // compiler.addInstruction(new POP(reg));
+        // compiler.getRegisterManagement().decreaseTempVariables(3); 
+        // // on stocke l’adresse de a dans l’espace de la pile dédié aux variables        
+        // // globales ou locales , indice l: premier registre libre dans cette partie de la pile
+        // compiler.addComment("--------EndNew--------"+getLocation()+"-----");
     }
 
 
 
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {
-        tableType.prettyPrint(s, prefix, false);
-        initializers.prettyPrint(s, prefix, false);
+        tableIdentifier.prettyPrint(s, prefix, false);
+        initializers.prettyPrint(s, prefix, true);
     }
 
     @Override
     protected void iterChildren(TreeFunction f) {
-        tableType.iter(f);   
+        tableIdentifier.iter(f);   
         initializers.iter(f);              
     }
     
