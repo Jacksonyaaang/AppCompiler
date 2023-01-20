@@ -3,7 +3,10 @@ package fr.ensimag.deca.tree;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
-
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 public class MethodAsmBody extends AbstractMethodBody {
@@ -33,5 +36,12 @@ public class MethodAsmBody extends AbstractMethodBody {
     @Override
     protected void iterChildren(TreeFunction f) {
         stringLiteral.iter(f);   
+    }
+
+    @Override
+    protected void verifyDeclMethodBody(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
+            throws ContextualError {
+        // TODO Auto-generated method stub
+        
     }
 }

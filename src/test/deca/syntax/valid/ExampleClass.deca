@@ -1,0 +1,13 @@
+// Description:
+//    Programme minimaliste utilisant une classe.
+//
+// Resultats:
+//    rien
+//
+// Historique:
+//    cree le 14/01/2023
+
+class A{
+   int x;
+   float y;
+}

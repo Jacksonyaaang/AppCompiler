@@ -14,6 +14,8 @@ import org.apache.commons.lang.Validate;
 public class InstanceOf extends AbstractExpr {
 
 
+
+    
     protected AbstractExpr expr;
     protected AbstractIdentifier typeInstance;
 
@@ -45,8 +47,11 @@ public class InstanceOf extends AbstractExpr {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        // TODO Auto-generated method stub
-        
+        s.print("(");
+        getExpr().decompile(s);
+        s.print(" instanceof ");
+        getTypeInstance().decompile(s);
+        s.print(")");
     }
 
     @Override

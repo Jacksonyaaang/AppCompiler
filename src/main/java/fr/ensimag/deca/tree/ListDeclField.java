@@ -23,8 +23,8 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        for (AbstractDeclField v : getList()){
-            v.decompile(s);
+        for (AbstractDeclField f : getList()){
+            f.decompile(s);
             s.println();
         }
 
@@ -54,6 +54,14 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
             LOG.debug("[ListDeclVar][verifyListDeclVariable]");
         for (AbstractDeclField declField : getList()){
             //declField.verifyDeclVar(compiler, localEnv, currentClass);
+        }
+    }
+
+    void verifyInitFields(DecacCompiler compiler, EnvironmentExp localEnv,
+            ClassDefinition currentClass) throws ContextualError {
+            LOG.debug("[ListDeclField][verifyInitListDeclField]");
+        for (AbstractDeclField declField : getList()){
+            declField.verifyinitFieldPass3(compiler, localEnv, currentClass);
         }
     }
 

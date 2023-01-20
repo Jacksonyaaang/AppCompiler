@@ -4,11 +4,14 @@ import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.RegisterMangementUnit;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.ima.pseudocode.*;
 import static org.mockito.Mockito.mockingDetails;
 import org.apache.log4j.Logger;
 import java.io.PrintStream;
+import java.util.Map;
+
 import org.apache.commons.lang.Validate;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
@@ -42,12 +45,9 @@ public class DeclParam extends AbstractDeclParam {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        // A FAIRE
-        // getType().decompile(s);
-        // s.print(" ");
-        // getVarName().decompile(s);
-        // getInitialization().decompile(s);
-        // s.print(";");
+        getType().decompile(s);
+        s.print(" ");
+        getParamName().decompile(s);
     }
 
     @Override
@@ -62,5 +62,37 @@ public class DeclParam extends AbstractDeclParam {
         type.prettyPrint(s, prefix, false);
         paramName.prettyPrint(s, prefix, true);
     }
+
+
+    /**
+     * for the pass 2 of partie B
+     * the 'type' in return value is for construting the signature
+     */
+    @Override
+    protected Type verifyDeclParam(DecacCompiler compiler)
+            throws ContextualError {
+            LOG.debug("[DeclParam][verifyDecleParam] Verify a paramère d'une méthode");
+            Type typeParam = type.verifyType(compiler);
+            type.setType(typeParam);
+            //make sure this type isn't Void
+            if (typeParam.isVoid()){
+                throw new ContextualError("You don't want to declare a void type parameter", getLocation());
+            }
+            //verify environmentTypes has the type of Paramname 
+            Map<Symbol, TypeDefinition> envTypes = compiler.environmentType.getEnvTypes();
+            if (!envTypes.containsKey(typeParam.getName())){
+                throw new ContextualError("[NOT A PROPER TYPE ISSUE]Sorry we don't have this type of type", getLocation());
+            }
+            ParamDefinition paramDef = new ParamDefinition(typeParam, getLocation());
+            paramName.setDefinition(paramDef);
+            
+            return typeParam;  //il faut le 'type' comme la type de return pour charger la signature 
+
+        }
+
 }
+
+
+
+
 

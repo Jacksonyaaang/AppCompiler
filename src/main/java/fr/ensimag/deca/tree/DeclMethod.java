@@ -1,14 +1,19 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.*;
+import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.RegisterMangementUnit;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.ima.pseudocode.*;
 import static org.mockito.Mockito.mockingDetails;
 import org.apache.log4j.Logger;
 import java.io.PrintStream;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang.Validate;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
@@ -60,7 +65,14 @@ public class DeclMethod extends AbstractDeclMethod {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        //A FAIRE DECOMPILE 
+        getType().decompile(s);
+        s.print(" ");
+        getMethodName().decompile(s);
+        s.print("(");
+        getListParam().decompile(s);
+        s.print(")");
+        getMethodBody().decompile(s);
+
     }
 
     @Override
@@ -79,5 +91,104 @@ public class DeclMethod extends AbstractDeclMethod {
         listParam.prettyPrint(s, prefix, false);
         methodBody.prettyPrint(s, prefix, true);
     }
+    /**for the seconde passe  */
+    @Override
+    protected void verifyDeclMethodSimple(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
+            throws ContextualError {
+        LOG.debug("[DeclMethod][verifyDecleMethod] Verify the declaration of a method in a class in pass B\n");
+        //récupérer le type de return 
+        Type typeReturn = this.type.verifyType(compiler);
+        this.type.setType(typeReturn);
+        Signature signature=this.listParam.verifyListDeclParam(compiler);
+        
+        currentClass.incNumberOfMethods();
+        //pour insérer le nom de méthode dans l'environement local
+        if (localEnv.get(methodName.getName())==null){
+            LOG.debug("\n enter the  if \n");
+            MethodDefinition methodDef = new MethodDefinition(typeReturn, getLocation(), signature, currentClass.incNumberOfMethods());
+            methodName.setDefinition(methodDef); 
+            try {
+                localEnv.declare(methodName.getName(), methodName.getMethodDefinition());
+            } catch (DoubleDefException e) {
+                //not possible
+            }
+        }else{ //name is already declared, maybe in local maybe in the super-classes 
+            //if it's in the local env:
+            LOG.info(" enter the else \n");
+            Map<Symbol, ExpDefinition> tempoMap = localEnv.getExp();
+            if (tempoMap.containsKey(this.methodName.getName())){
+                throw new ContextualError("[ERROR] We got the same method name in the current class !", getLocation());
+            }else{
+                //the same name is in the super class
+                //vérifier la condition de règle
+                //get the parent's same-method-name signature:
+                Signature sigSuper=localEnv.get(this.methodName.getName()).asMethodDefinition("sorry it's not a method", getLocation()).getSignature();
+                Type typeSuperReturn=localEnv.get(this.methodName.getName()).asMethodDefinition("sorry it's not a method", getLocation()).getType();
+                doubleDeclNameMethod(compiler, localEnv, sigSuper, signature, typeReturn, typeSuperReturn);
+                int indexRecurringMethod =  ((MethodDefinition) (localEnv.get(methodName.getName()))).getIndex();
+                MethodDefinition methodDef = new MethodDefinition(typeReturn, getLocation(), signature, indexRecurringMethod);
+                methodName.setDefinition(methodDef); 
+                try {  
+                    localEnv.declare(methodName.getName(), methodName.getMethodDefinition());
+                } catch (DoubleDefException e) {
+                    //forcément va marcher ici car on a déjà écorché le cas d'erreur 
+                }
+            }
+        }
+    }
+
+    /**
+     *  A funtion for verify the constraints when the same name of method detected 
+     * @param compiler
+     * @param localEnv
+     * @param sigSuper
+     * @param sigCurrMethod
+     * @param currTypeReturen
+     * @param superTypeReturn
+     * @throws ContextualError
+     */
+    private void doubleDeclNameMethod(DecacCompiler compiler, EnvironmentExp localEnv, 
+                                        Signature sigSuper, Signature sigCurrMethod, 
+                                        Type currTypeReturen , Type superTypeReturn) 
+                                        throws ContextualError{
+        //first verify they have the same signature
+        int sizeSigSuper=sigSuper.size();
+        if (sizeSigSuper != sigCurrMethod.size()){
+            throw new ContextualError("Sorry the current signature is not the same of the super class's correspond signature", getLocation());
+        }
+        for (int i=0;i<sizeSigSuper; ++i){
+            if (!sigSuper.paramNumber(i).sameType(sigCurrMethod.paramNumber(i))){
+                throw new ContextualError("Sorry the current signature is not the same of the super class's correspond signature", getLocation());
+            }
+        }
+        //then verify the type return is the sub-type of corresponding super-class's types
+        if (!currTypeReturen.isClass()){  //the primitif type
+            if (!superTypeReturn.sameType(currTypeReturen))
+            throw new ContextualError("[ERROR] The current method don't have a proper type", getLocation());
+        }else{
+            //the current return type is a type of class 
+            if (superTypeReturn.isClass()){
+                if (((ClassType)currTypeReturen).isSubClassOf(((ClassType)superTypeReturn))){
+                    return ;  // get out this fucntion without any exception 
+                }else{
+                    throw new ContextualError("[ERROR] The current method don't have a proper type", getLocation());
+                }
+            }else{  //one classType one primitif type
+                throw new ContextualError("[ERROR] The current method don't have a proper type", getLocation());
+            }
+        }
+    }
+
+    /**
+     * for the passe 3 with the body something
+     */
+    @Override
+    protected void verifyDeclMethod(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
+        throws ContextualError {
+        methodBody.verifyDeclMethodBody(compiler, localEnv, currentClass);      
+        // TODO Auto-generated method stub
+        
+    }
+
 }
 

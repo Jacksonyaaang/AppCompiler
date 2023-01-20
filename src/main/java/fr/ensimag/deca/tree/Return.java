@@ -20,8 +20,11 @@ import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 
+import org.apache.log4j.Logger;
 
 public class Return extends AbstractInst {
+
+    private static final Logger LOG = Logger.getLogger(Return.class);
 
     protected AbstractExpr exprReturn;
 
@@ -33,8 +36,11 @@ public class Return extends AbstractInst {
     @Override
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass,
             Type returnType) throws ContextualError {
-        // TODO Auto-generated method stub
-        
+        LOG.debug("[Return][verifyInst]");
+        if(returnType.isVoid()){
+            throw new ContextualError("Le type de retour de la méthode ne peut être void", getLocation());
+        }
+        getExprReturn().verifyRValue(compiler, localEnv, currentClass, returnType);
     }
 
     @Override
@@ -52,7 +58,9 @@ public class Return extends AbstractInst {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        // TODO Auto-generated method stub
+        s.print("return ");
+        getExprReturn().decompile(s);
+        s.print(";");
     }
 
     @Override
