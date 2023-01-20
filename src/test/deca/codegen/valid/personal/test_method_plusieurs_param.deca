@@ -17,17 +17,17 @@ class Param3{
 }
 
 class A{
-    void m1(int a, float f, Param3 p, boolean b ){
+//    void m1(int a, float f, Param3 p, boolean b ){
+    void m1(int a, float f){
         if(a==99){
             print(a);
         }
         if(f==7889.9876){
             print(f);
         }
-        if(b==1){
-            print(1);
-        }
-        p.QuiSuisJe();
+//        if(b==1){
+//            print(1);
+//        }
     }
 }
 

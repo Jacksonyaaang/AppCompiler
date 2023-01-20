@@ -2,16 +2,16 @@ class A {
     protected int x ;
     int test_attribut;
 	
-    int getX(int alpha, float beta, boolean teta) {
+    int getX( boolean test2) {
         x = 5 ;
     }
     void setX(int x) {
-	int alpha = tesing ;
-	println("hello world");
+	    int alpha = 5 ;
+	    println("hello world");
     }
-    test_type method(int x)
-	asm ("testing assembleur    
-            code");	    
-
+    void method(int x)
+	asm (" LOAD #2, R1
+     WINT ");	    
 
 }
+

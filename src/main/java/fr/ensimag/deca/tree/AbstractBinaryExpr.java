@@ -149,7 +149,7 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
          * l'identificateur de gauche en un registre afin de pourvoir le comparé avec 0
          * car on n'a ne peux pas comparé une adresse avec literal
          */
-        if ( !(this instanceof Divide && !workWithFloats) && expr instanceof Identifier) {
+        if ( !(this instanceof Divide && !workWithFloats) && expr instanceof Identifier && !((Identifier)expr).getExpDefinition().isField()) {
             return ((Identifier) expr).getExpDefinition().getOperand();
         }
         LOG.debug("[AbstractBinaryExpr][codeGenInst] Exploring Right");           

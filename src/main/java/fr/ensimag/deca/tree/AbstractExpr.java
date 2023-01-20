@@ -163,7 +163,6 @@ public abstract class AbstractExpr extends AbstractInst {
         LOG.debug("[AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments" );
         //Vérification du membre de droite d'une affectation
         Type t = this.verifyExpr(compiler, localEnv, currentClass);
-
         // Conversion du membre droit en float s'il est de tye int et que le membre de gauche est de type float
         if (expectedType.isFloat() && t.isInt()){
             ConvFloat cF = new ConvFloat(this);

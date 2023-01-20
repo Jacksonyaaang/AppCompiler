@@ -1,0 +1,131 @@
+	TSTO #10
+	BOV stack_overflow_error
+	ADDSP #7
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 2(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 3(GB)
+	LEA 2(GB), R0
+	STORE R0, 4(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 5(GB)
+	LOAD code.A.getX, R0
+	STORE R0, 6(GB)
+	LOAD code.A.setX, R0
+	STORE R0, 7(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[51, 10]-----
+	NEW #2, R2
+	BOV heap_overflow_error
+	LEA 4(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+; --------EndNew--------[51, 10]-----
+	STORE R2, 1(GB)	; Initializing the variable a and loading it into memory
+	ADDSP #2
+	LOAD 1(GB), R2	; loading a into memory
+	STORE R2, 0(SP)
+	LOAD #1, R2	; loading 1 into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #2
+	LOAD R0, R2
+	WSTR "a.getX() = "
+	ADDSP #1
+	LOAD 1(GB), R2	; loading a into memory
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #1
+	LOAD R0, R2
+	LOAD R2, R1
+	WINT
+	WNL
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : A -------------------
+; ---------------------------------------------------
+; ------------Init method for class = A--------
+init.A:
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field x
+	STORE R0, 1(R1)	; Saving field  x into memory
+	RTS
+; ------------Code for method : getX with label =  code.A.getX--------
+code.A.getX:
+	TSTO #1
+	BOV stack_overflow_error
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD -2(LB), R2	; loading the class of the field x into memory
+	LOAD 1(R2), R2	; loading x into memory
+	LOAD R2, R0
+	BRA fin.A.getX
+	WSTR "Error: La méthode code.A.getX doit retourner un element"
+	WNL
+	ERROR
+fin.A.getX:
+	POP R2	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : setX with label =  code.A.setX--------
+code.A.setX:
+	TSTO #2
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------BeginAssignOp--------[46, 8]-----
+	LOAD -3(LB), R3	; loading x into memory
+	LOAD -2(LB), R2	; loading parent class =  A into memory when working with field x
+	STORE R3, 1(R2)	; Saving field  x into memory
+	LOAD R3, R2	;  Return value of the assignement of this . =xand storing it into R2
+; --------EndAssignOp--------[46, 8]-----
+fin.A.setX:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

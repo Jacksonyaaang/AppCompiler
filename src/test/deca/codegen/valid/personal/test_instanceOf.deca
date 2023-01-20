@@ -1,0 +1,20 @@
+// Description:
+//    Test d'utilisation simple de Instance of
+//    TEST langage complet partie C
+// Resultats attendu:
+
+// Historique:
+// 18/01/2023
+
+
+
+class A{}
+
+class B extends A{}
+
+{
+    B b=new B();
+    if(b instanceof A){
+        println("instanceof fonctionne");
+    }
+}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:38) - [MethodDefinition][setLabel] Initialising label value 
 DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with code.object.equals
 DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:46) - verify program: start
@@ -108,6 +109,84 @@ init.B:
 	LOAD 4(GB), R3	; loading method table of A
 	CMP #null, R3
 	BEQ instanceOf_Object	; sifr.ensimag.deca.tree.Identifier@482f8f11est Object, on retourne immédiatement true
+=======
+	TSTO #12
+	BOV stack_overflow_error
+	ADDSP #12
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 7(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 8(GB)
+	LEA 7(GB), R0
+	STORE R0, 9(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 10(GB)
+	LEA 9(GB), R0
+	STORE R0, 11(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 12(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[16, 8]-----
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+; --------EndNew--------[16, 8]-----
+	STORE R2, 1(GB)	; Initializing the variable b and loading it into memory
+; --------StartNew--------[17, 8]-----
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+; --------EndNew--------[17, 8]-----
+	STORE R2, 2(GB)	; Initializing the variable x and loading it into memory
+; --------StartNew--------[18, 8]-----
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+; --------EndNew--------[18, 8]-----
+	STORE R2, 3(GB)	; Initializing the variable y and loading it into memory
+; --------StartNew--------[19, 8]-----
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+; --------EndNew--------[19, 8]-----
+	STORE R2, 4(GB)	; Initializing the variable u and loading it into memory
+; --------StartNew--------[20, 8]-----
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+; --------EndNew--------[20, 8]-----
+	STORE R2, 5(GB)	; Initializing the variable l and loading it into memory
+; --------StartNew--------[21, 8]-----
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+; --------EndNew--------[21, 8]-----
+	STORE R2, 6(GB)	; Initializing the variable p and loading it into memory
+; --------------BeginInstanceof----------[23, 7]+-----
+	LOAD 1(GB), R2	; loading b into memory
+	LOAD 9(GB), R3	; loading method table of A
+	CMP #null, R3
+	BEQ instanceOf_Object	; sifr.ensimag.deca.tree.Identifier@1593948dest Object, on retourne immédiatement true
+>>>>>>> origin/PartieCclass
 loopbegin:
 	LOAD 0(R2), R2
 	CMP #null, R2
@@ -120,7 +199,12 @@ instanceOf_Object:
 endfalse:
 	LOAD #0, R3
 endtrue:
+<<<<<<< HEAD
 ; ---------Startif-----------[18, 4]
+=======
+; --------------EndInstanceof----------[23, 7]-----
+; ---------Startif-----------[23, 4]
+>>>>>>> origin/PartieCclass
 	CMP #1, R3	; Comparing expr output in the ifthenelse
 	BNE else1
 	WSTR "instanceof fonctionne"
@@ -152,10 +236,33 @@ init.B:
 	SUBSP #1
 	RTS
 ; -------------------------------------
+<<<<<<< HEAD
 ;        Liste Erreur
 ; -------------------------------------
+=======
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+>>>>>>> origin/PartieCclass
 stack_overflow_error:
 	WSTR "Error: stack_overflow_error"
 	WNL
 	ERROR
+<<<<<<< HEAD
 
+=======
+; end main program
+>>>>>>> origin/PartieCclass

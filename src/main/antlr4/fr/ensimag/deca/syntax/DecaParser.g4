@@ -561,7 +561,7 @@ class_extension returns[AbstractIdentifier tree]
             // On n'a pas besoin d'ajouter une location car 
             // cette extention se fait par défaut 
             // sans input de l'utilisateur
-            $tree = new Identifier(this.getDecacCompiler().createSymbol("object")); 
+            $tree = new Identifier(this.getDecacCompiler().createSymbol("Object")); 
             $tree.setLocation(Location.BUILTIN);
         }
     ;

@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.util.Map;
 
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CodeGenError;
@@ -12,8 +13,10 @@ import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.ExpDefinition;
+import fr.ensimag.deca.context.FieldDefinition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.NullOperand;
@@ -24,6 +27,9 @@ import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 public class Selection extends AbstractLValue {
+
+    private static final Logger LOG = Logger.getLogger(Selection.class);
+
 
     protected AbstractExpr obj;
     protected AbstractIdentifier field;
@@ -36,8 +42,12 @@ public class Selection extends AbstractLValue {
         this.field = field;
     }
 
+    public AbstractIdentifier getField() {return field;}
+    public AbstractExpr getObj() {return obj;}
+
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError {
+        compiler.addComment("--------BeginSelection--------"+getLocation()+"-----");    
         obj.codeGenInst(compiler);
         if (!compiler.getCompilerOptions().isNoCheck()){
             compiler.addInstruction(new CMP(new NullOperand(), obj.getRegisterDeRetour()), null);
@@ -50,13 +60,9 @@ public class Selection extends AbstractLValue {
                          "Loading the field " + field.getName() +" into a register "); 
         this.setRegisterDeRetour(obj.getRegisterDeRetour());
         this.transferPopRegisters(obj.getRegisterToPop());
+        compiler.addComment("--------BeginSelection--------"+getLocation()+"-----");    
     }
-
-
-
-    public AbstractIdentifier getField() {return field;}
-    public AbstractExpr getObj() {return obj;}
-
+    
     /**
      * the return type is obvously a "class"
      *    expression found : this, Lvalue (for class),  Cast
@@ -64,25 +70,34 @@ public class Selection extends AbstractLValue {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
-            Type t = obj.verifyExpr(compiler, localEnv, currentClass);
-            setType(t);
-            if (!t.isClass()){
+            FieldDefinition fieldDefi;
+            Type type = obj.verifyExpr(compiler, localEnv, currentClass);
+            this.obj.setType(type);
+            //setType(t);  //error, miss 'this.type'
+            if (!type.isClass()){
                 throw new ContextualError("[Using Error] The first selection must be a class or this ", getLocation());
             }
-            if (currentClass.getMembers().get(((Identifier)this.field).getName())==null){
+            LOG.debug("[Selection][verifyExpr] Class type is  " + ((ClassType)((obj).getType())).getDefinition().getType().getName());
+            fieldDefi = (FieldDefinition)(((ClassType)((obj).getType())).getDefinition().getMembers().get(((Identifier)this.field).getName()));
+            field.setDefinition(fieldDefi);
+            if (fieldDefi==null){
                 throw new ContextualError("[Using Error] Can't find the field in the prevous declarations ", getLocation());
+                
             }else{
                 if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
-                    ClassDefinition classDes = this.field.getClassDefinition();
-                    if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType)t).isSubClassOf(classDes.getType())) {
+                    ClassDefinition classDes = ((FieldDefinition)this.field.getDefinition()).getContainingClass();
+                     if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType) type).isSubClassOf(classDes.getType())) {
+
                         throw new ContextualError("[Using Error] Obey the second condition, the current class must be the sub class of the field class", getLocation());
                     } 
                     
                 }
             }
-
-           return currentClass.getMembers().get(((Identifier)this.field).getName()).getType();
+            //return compiler.environmentType.INT;
+            setType(fieldDefi.getType());
+            return getType();
         }
+
         //this.obj1.obj2.untrucprimitif=8;
     //     Type typeReturn = null;
     // if (this.obj instanceof This){

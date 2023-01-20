@@ -1,8 +1,17 @@
-	TSTO #6
+	TSTO #8
 	BOV stack_overflow_error
-	ADDSP #6
+	ADDSP #8
 ; start main program
-; Main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 7(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 8(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
 ; Beginning of main instructions:
 ; --------BeginAssignOp--------[32, 4]-----
 	LOAD #2, R3	; loading 2 into memory
@@ -254,6 +263,22 @@
 	WFLOATX
 	WNL
 	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
 div0_error:
 	WSTR "Error: div0_error"
 	WNL

@@ -1,0 +1,17 @@
+// Description:
+//    Test method devant avoir return n'en ayant pas
+//    TEST Essentiel partie C
+// resultat attendu:
+// missing_return_error
+
+// Resultats attendu:
+// Historique:
+// 18/01/2023
+
+class A{
+    public int m(){}
+}
+{
+    A a=new A();
+    a.m;
+}

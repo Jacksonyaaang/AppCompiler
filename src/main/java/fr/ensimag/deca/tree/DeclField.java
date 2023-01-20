@@ -20,7 +20,7 @@ import fr.ensimag.ima.pseudocode.instructions.STORE;
  */
 public class DeclField extends AbstractDeclField {
 
-    private static final Logger LOG = Logger.getLogger(DeclField.class);
+    private static final Logger LOG = Logger.getLogger(IntLiteral.class);
 
     final private Visibility visibility;
     final private AbstractIdentifier type;
@@ -88,32 +88,29 @@ public class DeclField extends AbstractDeclField {
     @Override
     protected void verifyDeclField(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
         throws ContextualError {
-        assert(currentClass != null);
         LOG.debug("[DeclField][verifyDecleField] Verify a Field declaration");
         ClassDefinition tmpClass;
         for (tmpClass = currentClass.getSuperClass(); tmpClass != null; tmpClass = tmpClass.getSuperClass()){
             if (tmpClass.getMembers().getExp().containsKey(varName.getName()) && 
                 varName.getDefinition() instanceof MethodDefinition){
-                    throw new ContextualError(" Il existe une methode qui possède le même nom que le field =  "+ varName.getName().getName(), getLocation());
+                    throw new ContextualError(" Il existe une  methode qui posséde le même nom que le field =  "+ varName.getName().getName(), getLocation());
                 }
         }
         Type t = type.verifyType(compiler);
         type.setType(t);
         //Vérification de la condition type =/= void de la règle 3.17
         if(t.isVoid()) {
-            throw new ContextualError("Déclaration de champs de type void impossible", getLocation());
+            throw new ContextualError("Déclaraion de Field de type void impossible", getLocation());
         }
         //initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
         int _index = currentClass.getNumberOfFields() + 1;
-        LOG.debug("[DeclField][verifyDecleField]  Declaration d'une field avec le nom = "  + varName.getName() + 
-                    "  / avec l'index = "+ _index+ " / dans la classe " + currentClass.getType().getName().getName() );
         FieldDefinition fieldDf = new FieldDefinition(type.getType(), getLocation(), visibility, currentClass, _index);      //new FieldDefinition(type.getType(), varName.getLocation());
         varName.setDefinition(fieldDf);
         try{
             localEnv.declare(varName.getName(), varName.getExpDefinition()); 
         } 
         catch (EnvironmentExp.DoubleDefException e) {
-            throw new ContextualError("Il y a déjà un field ou une methode de même nom", getLocation());
+            throw new ContextualError("y'a deja un field ou une methode du même nom", getLocation());
         }
         currentClass.setNumberOfFields(_index);    
     }
@@ -147,6 +144,8 @@ public class DeclField extends AbstractDeclField {
         //assigned to field, and place it in the memory location that holds the field
         if (initialization instanceof Initialization ){ 
             GPRegister assignRegister = this.LoadAndReserveARegister(compiler);
+            compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), assignRegister),
+                    "[codeGenDelField][initialization] loading class (this) into memory when working with field "+getVarName().getName());
             this.initialization.codegenInitial(compiler);
             compiler.addInstruction(new STORE(this.initialization.getRegistreDeRetour(),
                                         new RegisterOffset(this.varName.getFieldDefinition().getIndex(), assignRegister)), "Initializing the field "+ getVarName().getName()
@@ -176,5 +175,4 @@ public class DeclField extends AbstractDeclField {
 
 
 }
-
 

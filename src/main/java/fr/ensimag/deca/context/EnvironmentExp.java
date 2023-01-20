@@ -1,3 +1,5 @@
+
+
 package fr.ensimag.deca.context;
 
 import java.util.HashMap;
@@ -127,11 +129,5 @@ public class EnvironmentExp {
         return parentEnvironment;
     }
 
-    // public void setEnvExp(Map<Symbol, ExpDefinition> envExp) {
-    //     this.envExp = envExp;
-    // }
-
-    // public void setP
-    // kjhùijpm
 
 }
