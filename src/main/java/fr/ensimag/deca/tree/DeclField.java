@@ -89,13 +89,16 @@ public class DeclField extends AbstractDeclField {
     protected void verifyDeclField(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
         throws ContextualError {
         LOG.debug("[DeclField][verifyDecleField] Verify a Field declaration");
-        ClassDefinition tmpClass;
-        for (tmpClass = currentClass.getSuperClass(); tmpClass != null; tmpClass = tmpClass.getSuperClass()){
-            if (tmpClass.getMembers().getExp().containsKey(varName.getName()) && 
-                varName.getDefinition() instanceof MethodDefinition){
-                    throw new ContextualError(" Il existe une  methode qui posséde le même nom que le field =  "+ varName.getName().getName(), getLocation());
-                }
-        }
+        // ClassDefinition tmpClass;
+        // for (tmpClass = currentClass.getSuperClass(); tmpClass != null; tmpClass = tmpClass.getSuperClass()){
+        //     if (tmpClass.getMembers().getExp().containsKey(varName.getName()) && 
+        //         varName.getDefinition() instanceof MethodDefinition){
+        //             throw new ContextualError(" Il existe une  methode qui posséde le même nom que le field =  "+ varName.getName().getName(), getLocation());
+        //         }
+        // }
+        // if (currentClass.getMembers().getExp().containsKey(varName.getName())){
+        //     throw new ContextualError(" Il existe une  methode qui posséde le même nom que le field =  "+ varName.getName().getName(), getLocation());
+        // }
         Type t = type.verifyType(compiler);
         type.setType(t);
         //Vérification de la condition type =/= void de la règle 3.17
