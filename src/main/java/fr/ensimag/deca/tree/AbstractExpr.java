@@ -4,6 +4,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.DecacInternalError;
@@ -169,6 +170,11 @@ public abstract class AbstractExpr extends AbstractInst {
             cF.verifyExpr(compiler, localEnv, currentClass);
             LOG.debug("[Assign][verifyExpr] Conv int -> float");
             return cF;
+        }
+        else if (expectedType.isClass() && t.isClassOrNull()){
+            if (!((ClassType)t).isSubClassOf((ClassType)expectedType)){
+                throw new ContextualError("Not expected type", getLocation());
+            }else return this;
         }
         if (!expectedType.sameType(t))
             throw new ContextualError("Le type de l'expression de droite est " + t + " alors que le type attendu est " + expectedType, getLocation());
