@@ -1,0 +1,10 @@
+class A{
+}
+
+{
+	
+   A a = new A();
+   A b = new A();
+   a = (A) (b);
+}
+// Description: // Teste l'affectation et la conversion int -> float. // // Resultats: // Ligne 12: Not expected type // // Historique: // cree le 13/01/2023

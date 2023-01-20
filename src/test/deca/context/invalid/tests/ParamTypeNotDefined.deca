@@ -1,0 +1,15 @@
+// Description:
+//       type de paramétre non defini.
+//
+// Resultats: 
+//      Ligne 11: Il Le type randomtype n'est pas defini 
+// 
+// Historique:
+//      cree le 20/01/2023
+
+Class A{
+  void f(randomtype x){
+
+  }
+}
+

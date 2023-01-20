@@ -1,0 +1,4 @@
+class A{
+    int x;
+    float x;
+}// Description: // Teste l'affectation et la conversion int -> float. // // Resultats: // Ligne 12: Not expected type // // Historique: // cree le 13/01/2023

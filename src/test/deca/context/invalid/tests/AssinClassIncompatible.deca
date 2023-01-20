@@ -1,0 +1,19 @@
+// Description:
+//       Teste l'affectation incompatible entre les classes.
+// 	 au moment d'initialisation des fields
+// Resultats: 
+//      Ligne 18: Le type de l'expression de droite est A alors que le type attendu est B
+// 
+// Historique:
+//      cree le 20/01/2023
+
+class A{
+}
+
+class B{
+}
+
+class C{
+  A a = new A();
+  B b = a;
+ }

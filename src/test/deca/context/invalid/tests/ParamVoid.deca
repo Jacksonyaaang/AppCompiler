@@ -1,0 +1,15 @@
+// Description:
+//       paramétre de type void.
+//
+// Resultats: 
+//      Ligne 11: Un paramètre de méthode ne peut être de type void
+// 
+// Historique:
+//      cree le 20/01/2023
+
+class A{
+  void f(void x){
+
+  }
+}
+

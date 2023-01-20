@@ -1,0 +1,13 @@
+// Description:
+//       Double declaration de paramétre.
+//
+// Resultats: 
+//      Ligne 11: Il existe déjà un paramètre de nom x 
+// 
+// Historique:
+//      cree le 20/01/2023
+
+class A{
+  void f(int x, int x){
+  }
+}
