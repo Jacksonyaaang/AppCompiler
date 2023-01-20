@@ -67,6 +67,7 @@ public class New  extends AbstractExpr{
     @Override
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
         assert(reg != null);
+        compiler.getRegisterManagement().increaseTempVariables(3);
         compiler.addComment("--------StartNew--------"+getLocation()+"-----");
         LOG.debug("[New][loadItemintoRegister] loading new of calss =  "+ className.getName()+ " into memory at register " + reg);
         int nbattributs = className.getClassDefinition().getNumberOfFields();
@@ -80,9 +81,10 @@ public class New  extends AbstractExpr{
         compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(0, reg)));
         //les instructions de Push and pop ne sont pas necessaires car dans la méthode de init 
         // on push et pop tout les registres qui ne sont pas stables
-        // compiler.addInstruction(new PUSH(reg));
+        compiler.addInstruction(new PUSH(reg));
         compiler.addInstruction(new BSR(new Label("init."+((Identifier) className).getName())));
-        // compiler.addInstruction(new POP(reg));
+        compiler.addInstruction(new POP(reg));
+        compiler.getRegisterManagement().decreaseTempVariables(3); 
         // on stocke l’adresse de a dans l’espace de la pile dédié aux variables        
         // globales ou locales , indice l: premier registre libre dans cette partie de la pile
         compiler.addComment("--------EndNew--------"+getLocation()+"-----");
@@ -102,3 +104,5 @@ public class New  extends AbstractExpr{
     }
     
 }
+
+

@@ -12,6 +12,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.NullOperand;
+import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.BNE;
@@ -52,14 +53,15 @@ public class InstanceOf extends AbstractExpr {
         compiler.addComment("--------------BeginInstanceof----------"+getLocation()+"+-----");
         this.expr.codeGenInst(compiler);
         GPRegister reg = expr.getRegisterDeRetour();
-        GPRegister RType=this.LoadGencode(compiler, false);;
+        GPRegister RType=Register.getR(0);
+        //this.LoadGencode(compiler, false);;
         Label loopbegin = new Label("loopbegin"+compiler.incrementInstanceOfIncrementer());
         Label endtrue = new Label("endtrue"+compiler.incrementInstanceOfIncrementer());
         Label endfalse = new Label("endfalse"+compiler.incrementInstanceOfIncrementer());
         Label instanceOfObject = new Label("instanceOf_Object"+compiler.incrementInstanceOfIncrementer());
         compiler.addInstruction(new LOAD(compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(typeInstance.getClassDefinition()), RType), "loading method table of " + typeInstance.getName());
         compiler.addInstruction(new CMP(new NullOperand(), RType));
-        compiler.addInstruction(new BEQ(instanceOfObject), "si"+typeInstance+"est Object, on retourne immédiatement true");
+        compiler.addInstruction(new BEQ(instanceOfObject), "si"+typeInstance.getName()+"est Object, on retourne immédiatement true");
         compiler.addLabel(loopbegin);  
         compiler.addInstruction(new LOAD(new RegisterOffset(0, reg), reg));
         compiler.addInstruction(new CMP(new NullOperand(), reg));
@@ -71,10 +73,13 @@ public class InstanceOf extends AbstractExpr {
         compiler.addInstruction(new BRA(endtrue));
         compiler.addLabel(endfalse);
         compiler.addInstruction(new LOAD(0, RType));
-        compiler.addLabel(endtrue);             
-        expr.popRegisters(compiler);
-        compiler.getRegisterManagement().decrementOccupationRegister(expr.getRegisterDeRetour());
-        this.setRegisterDeRetour(RType);
+        compiler.addLabel(endtrue); 
+        compiler.addInstruction(new LOAD(RType, reg));
+
+        // expr.popRegisters(compiler);
+        // compiler.getRegisterManagement().decrementOccupationRegister(expr.getRegisterDeRetour());
+        this.setRegisterDeRetour(reg);
+        this.transferPopRegisters(expr.getRegisterToPop());
         //On n'a pas besoin de transporter les registre à poper car, on reserve le registre dans cette classe
         compiler.addComment("--------------EndInstanceof----------"+getLocation()+"-----");    
     }

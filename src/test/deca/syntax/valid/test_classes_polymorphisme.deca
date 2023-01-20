@@ -24,52 +24,57 @@
 
 
 class A{
-    private int x;
-    public A(int i){
+    int x;
+    void methodA(int i){
         this.x=i;
     }
-    public int getX(){
+    int getX(){
         return this.x;
     }
-    public void setX(int i){
+    void setX(int i){
         this.x=i;
     }
-    public int setgetX(int i){
+    int setgetX(int i){
         this.setX(i);
         return this.getX();
     }
-    public void QuiSuisJe(){
+    void QuiSuisJe(){
         println("Je suis une instance de la classe A");
     }
 }
+
 class B extends A{
-    private float z;
-    pulic B successeur;
-    public B(int i, float f){
+    float z;
+    B successeur;
+    void constructeurB(int i, float f){
         this.x=i;
         this.z=f;
     }
-    public void QuiSuisJe(){
+    void QuiSuisJe(){
         println("Je suis une instance de la classe B");
     }
-    public void QuiSuisJe(String nom){
+    void QuiSuisJe(String nom){
         QuiSuisJe();
         println("je suis ",nom);
-        }
-    public float getZ(){
+    }
+    
+    float getZ(){
         return this.z;
     }
-    public void setZ(return z){
+    
+    void setZ(return z){
         this.x=i;
     }
 }
 
 {
-    A a=new A(4);
+    A a=new A();
+    a.methodA(5);
     float z1;
     B b;
     int y=a.x;
-    B b2=new(5, 5.5);
+    B b2=new();
+    b2.constructeurB(5, 5.5);   
     println(a.getX());
     println(y);
     a.setX(2);
@@ -83,18 +88,18 @@ class B extends A{
     b.successeur=b2;
     z1=b.successeur.z;
     println(z1);
-//    if(a.instanceOf(A)){
-//        println("instanceOf reconnait l'appartenance");
-//    }
-//    else{
-//        println("instanceOf ne reconnait pas l'appartenance");
-//    }
-//    if(b.instanceOf(A)){
-//        println("instanceOf reconnait la non appartenance");
-//    }
-//    else{
-//        println("instanceOf ne reconnait pas la non appartenance");
-//    }
+    if(a instanceOf A){
+        println("instanceOf reconnait l'appartenance");
+    }
+    else{
+        println("instanceOf ne reconnait pas l'appartenance");
+    }
+    if(b instanceOf A){
+        println("instanceOf reconnait la non appartenance");
+    }
+    else{
+        println("instanceOf ne reconnait pas la non appartenance");
+    }
     b=(B)b2;
     y=b.x;
     println(y);

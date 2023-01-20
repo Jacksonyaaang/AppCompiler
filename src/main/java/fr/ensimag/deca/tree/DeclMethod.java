@@ -247,8 +247,8 @@ public class DeclMethod extends AbstractDeclMethod {
          */
         methodBody.codeGenMethodBody(compiler);
         compiler.getRegisterManagement().pushUsedRegistersMethod(compiler);
+        addReturnError(compiler);   
         compiler.addLabel(methodName.getMethodDefinition().getEndLabel());
-        addReturnError(compiler);
         compiler.getRegisterManagement().popUsedRegistersMethod(compiler);
         compiler.addInstruction(new RTS()); 
         /**

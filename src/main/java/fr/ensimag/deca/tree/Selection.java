@@ -28,7 +28,7 @@ import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 public class Selection extends AbstractLValue {
 
-    private static final Logger LOG = Logger.getLogger(IntLiteral.class);
+    private static final Logger LOG = Logger.getLogger(Selection.class);
 
 
     protected AbstractExpr obj;
@@ -66,14 +66,17 @@ public class Selection extends AbstractLValue {
      *    expression found : this, Lvalue (for class),  Cast
      */
     @Override
-    public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)  throws ContextualError {
-            Type t = obj.verifyExpr(compiler, localEnv, currentClass);
-            this.obj.setType(t);
+    public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
+            throws ContextualError {
+            FieldDefinition fieldDefi;
+            Type type = obj.verifyExpr(compiler, localEnv, currentClass);
+            this.obj.setType(type);
             //setType(t);  //error, miss 'this.type'
-            if (!t.isClass()){
+            if (!type.isClass()){
                 throw new ContextualError("[Using Error] The first selection must be a class or this ", getLocation());
             }
-            FieldDefinition fieldDefi = (FieldDefinition)currentClass.getMembers().get(((Identifier)this.field).getName());
+            LOG.debug("[Selection][verifyExpr] Class type is  " + ((ClassType)((obj).getType())).getDefinition().getType().getName());
+            fieldDefi = (FieldDefinition)(((ClassType)((obj).getType())).getDefinition().getMembers().get(((Identifier)this.field).getName()));
             field.setDefinition(fieldDefi);
             if (fieldDefi==null){
                 throw new ContextualError("[Using Error] Can't find the field in the prevous declarations ", getLocation());
@@ -81,7 +84,7 @@ public class Selection extends AbstractLValue {
             }else{
                 if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
                     ClassDefinition classDes = ((FieldDefinition)this.field.getDefinition()).getContainingClass();
-                     if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType)t).isSubClassOf(classDes.getType())) {
+                     if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType) type).isSubClassOf(classDes.getType())) {
 
                         throw new ContextualError("[Using Error] Obey the second condition, the current class must be the sub class of the field class", getLocation());
                     } 
@@ -92,6 +95,7 @@ public class Selection extends AbstractLValue {
             setType(fieldDefi.getType());
             return getType();
         }
+
         //this.obj1.obj2.untrucprimitif=8;
     //     Type typeReturn = null;
     // if (this.obj instanceof This){

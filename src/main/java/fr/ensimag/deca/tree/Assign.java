@@ -47,15 +47,19 @@ public class Assign extends AbstractBinaryExpr {
 
     @Override
     public void codeGenInst(DecacCompiler compiler) throws CodeGenError {
-            //Avec deux register il n'y a pas de risque que le compilateur
-            //avait fait un push de se registre 
-            //On commence par reserver un registre, que sera utilisée pour le retourner la valeur de assign
             GPRegister assignRegister = this.LoadGencode(compiler, false);
             compiler.addComment("--------BeginAssignOp--------"+getLocation()+"-----");    
             this.getRightOperand().codeGenInst(compiler);
             getRightOperand().printPopRegisters(compiler);
             assert( this.getRightOperand().getRegisterDeRetour() != null);
-            if (getLeftOperand() instanceof Identifier && !(((Identifier)getLeftOperand()).getExpDefinition().isField())){//&& !((Identifier) getLeftOperand()).){
+
+            /*
+             * Le prémier if traite le cas ou on fait l'assign d'une valeur qui n'est pas un field d'une class
+             * et dans ce cas le traitement est basique: on calcule l'operand de droite
+             * ensuite on reserve un registre, on stocke la valeur calculé dans l'adresse 
+             * et enfin on retourne la valeur calculé dans le registre reservée 
+             */
+            if (getLeftOperand() instanceof Identifier && !(((Identifier)getLeftOperand()).getExpDefinition().isField())){
                 LOG.debug("[Assign][codeGenInst]Left operand is =  " + ((Identifier) getLeftOperand()).getName());    
                 LOG.debug("[Assign][codeGenInst]Left is being stored at " + ((Identifier) getLeftOperand()).getExpDefinition().getOperand());
                 assert(((Identifier) getLeftOperand()).getExpDefinition().getOperand() != null);
@@ -64,11 +68,15 @@ public class Assign extends AbstractBinaryExpr {
                 compiler.addInstruction(new STORE(this.getRightOperand().getRegisterDeRetour(),
                                                 ((Identifier) getLeftOperand()).getExpDefinition().getOperand()),                                          
                                                 " Assiging a value to " + ((Identifier) getLeftOperand()).getName()); 
-                compiler.addInstruction(new LOAD(this.getRightOperand().getRegisterDeRetour(),assignRegister),                                          
+                compiler.addInstruction(new LOAD(this.getRightOperand().getRegisterDeRetour(), assignRegister),                                          
                                     " Return value of the assignement of ="+ ((Identifier) getLeftOperand()).getName()+ "and storing it into " + assignRegister );
             }
-            else if (((Identifier)getLeftOperand()).getExpDefinition().isField()) {
-                //Cette assgin ne peut ếtre appelée quand dans une classe car on peut pas acceder au field directement 
+            /*
+             * Ce else if traite le cas ou on travail avec field d'une classe qui est acceder directement
+             * et ceci ne peut être possible que dans la classe elle même 
+             */
+            else if (getLeftOperand() instanceof Identifier && ((Identifier)getLeftOperand()).getExpDefinition().isField()) {
+                //Cette assign ne peut ếtre appelée quand dans une classe car on peut pas acceder au field directement 
                 //sans passer par la section hors de la classe elle même
                 LOG.debug("[Assign][codeGenInst]Left operand in assign operation is field");
                 compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), assignRegister),
@@ -77,6 +85,35 @@ public class Assign extends AbstractBinaryExpr {
                 compiler.addInstruction(new STORE(this.getRightOperand().getRegisterDeRetour(),new RegisterOffset(((((Identifier )getLeftOperand()).getFieldDefinition())).getIndex(), assignRegister)),
                             "Saving field  "+  ((Identifier)getLeftOperand()).getName() + " into memory");
 
+                compiler.addInstruction(new LOAD(this.getRightOperand().getRegisterDeRetour(), assignRegister),                                          
+                " Return value of the assignement of ="+ ((Identifier) getLeftOperand()).getName()+ "and storing it into " + assignRegister );
+            }
+            /*
+             * Ce else if traite le cas ou on travail avec une selection dans l'operand gauche de assign
+             * qui peut être de deux types: this, ou une instance de classe
+             * dans le cas ou c'est un this, cela est similaire à un accées à un field directement 
+             * à partie de classe comme le precedant e  
+             */
+            else if (getLeftOperand() instanceof Selection ){
+                if ( ((Selection)getLeftOperand()).getObj() instanceof This){
+                    LOG.debug("[Assign][codeGenInst]Left operand in assign operation is this.field");
+                    compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), assignRegister),
+                                "loading parent class =  "+ ((Identifier)(((Selection)getLeftOperand()).getField())).getFieldDefinition().getContainingClass().getType().getName() 
+                                +" into memory when working with field " + ((Identifier)(((Selection)getLeftOperand()).getField())).getName() );
+                    compiler.addInstruction(new STORE(this.getRightOperand().getRegisterDeRetour(),new RegisterOffset(((((Identifier)(((Selection)getLeftOperand()).getField())).getFieldDefinition())).getIndex(), assignRegister)),
+                                "Saving field  "+  (((Identifier)(((Selection)getLeftOperand()).getField()))).getName() + " into memory");
+                    compiler.addInstruction(new LOAD(this.getRightOperand().getRegisterDeRetour(), assignRegister),                                          
+                        " Return value of the assignement of this . ="+ (((Identifier)(((Selection)getLeftOperand()).getField()))).getName()+ "and storing it into " + assignRegister );
+                }
+                else{
+                    ((Selection)getLeftOperand()).getObj().codeGenInst(compiler);
+                    compiler.addInstruction(new STORE(this.getRightOperand().getRegisterDeRetour(),new RegisterOffset(((((Identifier)(((Selection)getLeftOperand()).getField())).getFieldDefinition())).getIndex(), ((Selection)getLeftOperand()).getObj().getRegisterDeRetour())),
+                    "Saving field  "+  (((Identifier)(((Selection)getLeftOperand()).getField()))).getName() + " into memory");
+                    ((Selection)getLeftOperand()).getObj().popRegisters(compiler);
+                    compiler.getRegisterManagement().decrementOccupationRegister(((Selection)getLeftOperand()).getObj().getRegisterDeRetour());
+                    compiler.addInstruction(new LOAD(this.getRightOperand().getRegisterDeRetour(), assignRegister),                                          
+                        " Return value of the assignement of ="+ ((Identifier) getLeftOperand()).getName()+ "and storing it into " + assignRegister );
+                }
             }
             this.setRegisterDeRetour(assignRegister);
             getRightOperand().popRegisters(compiler);

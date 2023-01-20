@@ -95,6 +95,7 @@ public class MethodCall extends AbstractExpr {
         if (!compiler.getCompilerOptions().isNoCheck()){
             compiler.addInstruction(new CMP(new NullOperand(), returnRegister));
             compiler.addInstruction(new BEQ(new Label("deref_null_error")));
+            compiler.getErrorManagementUnit().activeError("deref_null_error");
         }
         compiler.addInstruction(new LOAD(new RegisterOffset(0, returnRegister), returnRegister));
         compiler.addInstruction(new BSR(new RegisterOffset(methodIndex, returnRegister)));   

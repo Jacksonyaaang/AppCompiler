@@ -1,0 +1,231 @@
+	TSTO #14
+	BOV stack_overflow_error
+	ADDSP #11
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 4(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 5(GB)
+	LEA 4(GB), R0
+	STORE R0, 6(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 7(GB)
+	LOAD code.Point2D.diag, R0
+	STORE R0, 8(GB)
+	LEA 6(GB), R0
+	STORE R0, 9(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 10(GB)
+	LOAD code.Point3D.diag, R0
+	STORE R0, 11(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------BeginAssignOp--------[35, 4]-----
+; --------StartNew--------[35, 9]-----
+	NEW #3, R3
+	BOV heap_overflow_error
+	LEA 6(GB), R0
+	STORE R0, 0(R3)
+	PUSH R3
+	BSR init.Point2D
+	POP R3
+; --------EndNew--------[35, 9]-----
+	STORE R3, 1(GB)	;  Assiging a value to p1
+	LOAD R3, R2	;  Return value of the assignement of =p1and storing it into R2
+; --------EndAssignOp--------[35, 4]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading p1 into memory
+	STORE R2, 0(SP)
+	LOAD #1, R2	; loading 1 into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #2
+	LOAD R0, R2
+; --------BeginAssignOp--------[37, 4]-----
+; --------StartNew--------[37, 9]-----
+	NEW #4, R3
+	BOV heap_overflow_error
+	LEA 9(GB), R0
+	STORE R0, 0(R3)
+	PUSH R3
+	BSR init.Point3D
+	POP R3
+; --------EndNew--------[37, 9]-----
+	STORE R3, 3(GB)	;  Assiging a value to p3
+	LOAD R3, R2	;  Return value of the assignement of =p3and storing it into R2
+; --------EndAssignOp--------[37, 4]-----
+	ADDSP #2
+	LOAD 3(GB), R2	; loading p3 into memory
+	STORE R2, 0(SP)
+	LOAD #2, R2	; loading 2 into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #2
+	LOAD R0, R2
+; --------BeginAssignOp--------[39, 4]-----
+	LOAD 3(GB), R3	; loading p3 into memory
+	STORE R3, 2(GB)	;  Assiging a value to p2
+	LOAD R3, R2	;  Return value of the assignement of =p2and storing it into R2
+; --------EndAssignOp--------[39, 4]-----
+	ADDSP #2
+	LOAD 2(GB), R2	; loading p2 into memory
+	STORE R2, 0(SP)
+	LOAD #3, R2	; loading 3 into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #2
+	LOAD R0, R2
+	WSTR "p3.z = "
+	LOAD 3(GB), R2	; loading p3 into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 3(R2), R2	; Loading the field z into a register 
+	LOAD R2, R1
+	WINT
+	WNL
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : Point2D -------------------
+; ---------------------------------------------------
+; ------------Init method for class = Point2D--------
+init.Point2D:
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field x
+	STORE R0, 1(R1)	; Saving field  x into memory
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field y
+	STORE R0, 2(R1)	; Saving field  y into memory
+	RTS
+; ------------Code for method : diag with label =  code.Point2D.diag--------
+code.Point2D.diag:
+	TSTO #2
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------BeginAssignOp--------[16, 8]-----
+; --------StartBinaryOp--------[16, 12]-----
+	LOAD -2(LB), R3	; loading the class of the field x into memory
+	LOAD 1(R3), R3	; loading x into memory
+	ADD -3(LB), R3
+; --------EndBinaryOp--------[16, 12]-----
+	LOAD -2(LB), R2	; loading parent class =  Point2D into memory when working with field x
+	STORE R3, 1(R2)	; Saving field  x into memory
+	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
+; --------EndAssignOp--------[16, 8]-----
+; --------BeginAssignOp--------[17, 8]-----
+; --------StartBinaryOp--------[17, 12]-----
+	LOAD -2(LB), R3	; loading the class of the field y into memory
+	LOAD 2(R3), R3	; loading y into memory
+	ADD -3(LB), R3
+; --------EndBinaryOp--------[17, 12]-----
+	LOAD -2(LB), R2	; loading parent class =  Point2D into memory when working with field y
+	STORE R3, 2(R2)	; Saving field  y into memory
+	LOAD R3, R2	;  Return value of the assignement of =yand storing it into R2
+; --------EndAssignOp--------[17, 8]-----
+fin.Point2D.diag:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ---------------------------------------------------
+; ----------------- class : Point3D -------------------
+; ---------------------------------------------------
+; ------------Init method for class = Point3D--------
+init.Point3D:
+	TSTO #3
+	BOV stack_overflow_error
+	LOAD -2(LB), R0	; Placing the current class = Point3D adresse in the the stack before calling parent 
+	PUSH R0	; Placing this = Point3D into the stack
+	BSR init.Point2D	; Calling the initialisation method of parent classPoint2D
+	SUBSP #1
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field z
+	STORE R0, 3(R1)	; Saving field  z into memory
+	RTS
+; ------------Code for method : diag with label =  code.Point3D.diag--------
+code.Point3D.diag:
+	TSTO #2
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------BeginAssignOp--------[26, 8]-----
+; --------StartBinaryOp--------[26, 12]-----
+	LOAD -2(LB), R3	; loading the class of the field x into memory
+	LOAD 1(R3), R3	; loading x into memory
+	ADD -3(LB), R3
+; --------EndBinaryOp--------[26, 12]-----
+	LOAD -2(LB), R2	; loading parent class =  Point2D into memory when working with field x
+	STORE R3, 1(R2)	; Saving field  x into memory
+	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
+; --------EndAssignOp--------[26, 8]-----
+; --------BeginAssignOp--------[27, 8]-----
+; --------StartBinaryOp--------[27, 12]-----
+	LOAD -2(LB), R3	; loading the class of the field y into memory
+	LOAD 2(R3), R3	; loading y into memory
+	ADD -3(LB), R3
+; --------EndBinaryOp--------[27, 12]-----
+	LOAD -2(LB), R2	; loading parent class =  Point2D into memory when working with field y
+	STORE R3, 2(R2)	; Saving field  y into memory
+	LOAD R3, R2	;  Return value of the assignement of =yand storing it into R2
+; --------EndAssignOp--------[27, 8]-----
+; --------BeginAssignOp--------[28, 8]-----
+; --------StartBinaryOp--------[28, 12]-----
+	LOAD -2(LB), R3	; loading the class of the field z into memory
+	LOAD 3(R3), R3	; loading z into memory
+	ADD -3(LB), R3
+; --------EndBinaryOp--------[28, 12]-----
+	LOAD -2(LB), R2	; loading parent class =  Point3D into memory when working with field z
+	STORE R3, 3(R2)	; Saving field  z into memory
+	LOAD R3, R2	;  Return value of the assignement of =zand storing it into R2
+; --------EndAssignOp--------[28, 8]-----
+fin.Point3D.diag:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

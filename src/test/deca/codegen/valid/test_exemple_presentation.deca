@@ -1,5 +1,12 @@
+// Description:
+// Test la fonctionalité de selection,
+// l'appel de methode, 
+// le typage dynamique
+// Resultats
+// Le program doit affichier
+// Historique:
+//    cree le 19/01/2023
 
-/*
 class Point2D {
     int x ; // Abscisse
     int y ; // Ordonnee
@@ -33,22 +40,3 @@ class Point3D extends Point2D {
     p2.diag(3);
     println("p3.z = ", p3.z); // p3.z = 5
 }
-*/
-
-
-// Un exemple de programme Deca
-class A {
-    protected int x ;
-    int getX() {
-        return x ;
-    }
-    void setX(int x) {
-        this.x = x ;
-    }
-}
-
-{
-    A a = new A() ;
-    a.setX(1) ;
-    println("a.getX() = ", a.getX()) ;
-} 
