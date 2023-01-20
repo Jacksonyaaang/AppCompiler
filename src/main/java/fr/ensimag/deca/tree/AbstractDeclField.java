@@ -32,11 +32,15 @@ public abstract class AbstractDeclField extends Tree {
     
     protected abstract void verifyinitFieldPass3(DecacCompiler compiler, EnvironmentExp localEnv, 
         ClassDefinition currentClass) throws ContextualError;
-            
-    public void codeGenDecl(DecacCompiler compiler) throws CodeGenError {
-        throw new CodeGenError(getLocation(), "This method must not be called at this level");
+
+    public void codeGenDelField(DecacCompiler compiler) throws CodeGenError {
+        throw new CodeGenError(getLocation(), "[AbstractDeclField][codeGenField]This method must not be called at this level");
+    }   
+
+    public void CodeGenPlaceZeroInField(DecacCompiler compiler) throws CodeGenError {
+        throw new CodeGenError(getLocation(), "[AbstractDeclField][CodeGenPlaceZeroInField]This method must not be called at this level");
     }
-        
+
             
 }
 

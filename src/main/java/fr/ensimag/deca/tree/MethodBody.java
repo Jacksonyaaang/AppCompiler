@@ -3,11 +3,19 @@ package fr.ensimag.deca.tree;
 import java.io.PrintStream;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
+import net.bytebuddy.jar.asm.Label;
+
 import org.apache.commons.lang.Validate;
+import fr.ensimag.deca.context.*;
 
 
 public class MethodBody extends AbstractMethodBody {
@@ -36,7 +44,6 @@ public class MethodBody extends AbstractMethodBody {
     public void decompile(IndentPrintStream s) {
         s.println("{");
         s.indent();
-
         getListVar().decompile(s);
         getListInstructions().decompile(s);
         s.unindent();
@@ -57,9 +64,18 @@ public class MethodBody extends AbstractMethodBody {
     }
 
     @Override
-    protected void verifyDeclMethodBody(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
-            throws ContextualError {
-        // TODO Auto-generated method stub
-        
+    protected void verifyDeclMethodBody(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass, Type retunType)
+        throws ContextualError {
+        listVar.verifyListDeclVariable(compiler, localEnv, currentClass);
+        listInstructions.verifyListInst(compiler, localEnv, currentClass, retunType);    
     }
+
+    @Override
+    public void codeGenMethodBody(DecacCompiler compiler) throws CodeGenError {
+        compiler.addComment(" ---------ClassBodyCodeGeneration------");
+        listVar.codeGenListDecl(compiler);
+        listInstructions.codeGenListInst(compiler);
+    }
+
+
 }

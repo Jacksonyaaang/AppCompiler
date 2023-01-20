@@ -18,6 +18,7 @@ import fr.ensimag.ima.pseudocode.instructions.ERROR;
 import fr.ensimag.ima.pseudocode.instructions.WNL;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import org.apache.log4j.Logger;
 
 
 import org.apache.log4j.Logger;
@@ -45,15 +46,13 @@ public class Return extends AbstractInst {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError {
-        GPRegister R;
-        exprReturn.LoadGencode(compiler, true);
-        R=exprReturn.getRegisterDeRetour();
-        compiler.addInstruction(new LOAD(R, Register.getR(0)));
-        compiler.addInstruction(new BRA(fin....));
-        compiler.addInstruction(new WSTR("Erreur : sortie de la methode A.getX sans return"));
-        compiler.addInstruction(new WNL());
-        compiler.addInstruction(new ERROR());
-        
+        GPRegister registreExpr;
+        exprReturn.codeGenInst(compiler);
+        registreExpr = exprReturn.getRegisterDeRetour();
+        compiler.addInstruction(new LOAD(registreExpr, Register.getR(0)));
+        exprReturn.popRegisters(compiler);
+        compiler.addInstruction(new BRA(compiler.getCurrentMethodCodeGen().getEndLabel()));
+        compiler.getRegisterManagement().decrementOccupationRegister(exprReturn.getRegisterDeRetour());
     }
 
     @Override

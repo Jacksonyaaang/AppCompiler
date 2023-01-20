@@ -19,6 +19,8 @@ import org.apache.log4j.Logger;
  * @date 01/01/2023
  */
 public class ListDeclParam extends TreeList<AbstractDeclParam> {
+
+    private EnvironmentExp envExpParams = new EnvironmentExp(null);
     
     private static final Logger LOG = Logger.getLogger(ListDeclParam.class);
 
@@ -42,14 +44,17 @@ public class ListDeclParam extends TreeList<AbstractDeclParam> {
      * @throws ContextualError
      */
     public Signature verifyListDeclParam(DecacCompiler compiler) throws ContextualError {
-            LOG.debug("[ListDeclParam][verifyListDeclParam]");
+        LOG.debug("[ListDeclParam][verifyListDeclParam] Start");
         Signature signature = new Signature();
         for (AbstractDeclParam declParam : getList()){
-            signature.add(declParam.verifyDeclParam(compiler));
-        }
+            signature.add(declParam.verifyDeclParam(compiler, envExpParams));
+            }
         return signature;
     }
 
+    public EnvironmentExp getenvParm(){
+        return envExpParams;
+    }
 }
 
 

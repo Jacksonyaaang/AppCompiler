@@ -47,11 +47,11 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
             if (!(typeOpRight.isBoolean() && typeOpLeft.isBoolean()))
                 throw  new ContextualError("Comparaison incompatible entre " + typeOpRight.getName().getName() + " et " + typeOpLeft.getName().getName(), getLocation());
         }
-        if((!typeOpLeft.isFloat() && !(typeOpLeft).isInt() && !typeOpLeft.isBoolean()) ||
-            (!typeOpRight.isInt() && !(typeOpRight).isFloat() && !typeOpLeft.isBoolean())
-            ){
-            throw new ContextualError("Les opérations de comparaison ne sont compatibles qu'avec des int, des float et des boolean",getLocation());
-        }
+        // if((!typeOpLeft.isFloat() && !(typeOpLeft).isInt() && !typeOpLeft.isBoolean()) ||
+        //     (!typeOpRight.isInt() && !(typeOpRight).isFloat() && !typeOpLeft.isBoolean())
+        //     ){
+        //     throw new ContextualError("Les opérations de comparaison ne sont compatibles qu'avec des int, des float et des boolean",getLocation());
+        // }
         // Conversion de l'opérande droite en float si elle est de tye int et que l'opérande gauche est de type float
         if (typeOpLeft.isFloat() && typeOpRight.isInt()){
             ConvFloat cF = new ConvFloat(getRightOperand());
@@ -63,6 +63,11 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
             ConvFloat cF = new ConvFloat(getLeftOperand());
             cF.verifyExpr(compiler, localEnv, currentClass);
             setLeftOperand(cF);
+        }
+        else if (typeOpLeft.isClassOrNull() && typeOpRight.isClassOrNull()){
+            if (!getOperatorName().equals("==") && !getOperatorName().equals("!=")){
+                throw new ContextualError("comparaison Incompatible", getLocation());
+            }
         }
         //si les deux opérandes sont des booléens on passe 
         setType(compiler.environmentType.BOOLEAN);

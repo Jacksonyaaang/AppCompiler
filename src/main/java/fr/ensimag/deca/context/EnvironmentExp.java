@@ -47,14 +47,46 @@ public class EnvironmentExp {
      * symbol is undefined.
      */
     public ExpDefinition get(Symbol key) {
-        //return this.envExp.get(key);
-        //throw new UnsupportedOperationException("not yet implemented");
         if (!envExp.containsKey(key)&&parentEnvironment==null)
             return null;
         if (envExp.containsKey(key))
             return envExp.get(key);
         return parentEnvironment.get(key);
     }
+
+    /**
+     * Cette methode retourne la premier methode qu'elle rencontre 
+     * qui a un index égal à celui donnée en paramétre 
+     */
+    public MethodDefinition getMethodIndex(int index) {
+        for(Map.Entry<Symbol, ExpDefinition> entry : envExp.entrySet()){
+            if (entry.getValue() instanceof MethodDefinition){
+                if ( ((MethodDefinition) entry.getValue()).getIndex() == index){
+                    return (MethodDefinition) entry.getValue();
+                }
+            }
+        }
+        if (parentEnvironment == null){
+            return null;
+        }
+        return parentEnvironment.getMethodIndex(index);
+    }
+
+    /**
+     * Retourne l'environement qui contient la methode donnée en paramétre  
+     */
+    public EnvironmentExp getMethodEnvioremnent(MethodDefinition methodDefinition) {
+        for(Map.Entry<Symbol, ExpDefinition> entry : envExp.entrySet()){
+            if (entry.getValue() ==  methodDefinition){
+                return this;
+            }
+        }
+        if (parentEnvironment == null){
+            return null;
+        }
+        return parentEnvironment.getMethodEnvioremnent(methodDefinition);
+    }
+
 
     /**
      * Add the definition def associated to the symbol name in the environment.
@@ -80,5 +112,19 @@ public class EnvironmentExp {
     public Map<Symbol, ExpDefinition> getExp(){
         return envExp;
     }
+
+    public void setParentEnvironment(EnvironmentExp parentEnvironment) {
+        this.parentEnvironment = parentEnvironment;
+    }
+    public EnvironmentExp getParent(){
+        return parentEnvironment;
+    }
+
+    // public void setEnvExp(Map<Symbol, ExpDefinition> envExp) {
+    //     this.envExp = envExp;
+    // }
+
+    // public void setP
+    // kjhùijpm
 
 }

@@ -53,7 +53,7 @@ public class IfThenElse extends AbstractInst {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
-        identifier = compiler.getStackManagement().incrementIfIncrementer();
+        identifier = compiler.incrementIfIncrementer();
         LOG.debug("[IfThenElse][CodeGenInst] generating code for IfThenElse");
         this.condition.codeGenInst(compiler);
         Label elseLab = new Label("else"+identifier);

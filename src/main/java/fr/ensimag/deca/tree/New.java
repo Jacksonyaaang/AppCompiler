@@ -3,8 +3,10 @@ package fr.ensimag.deca.tree;
 import java.io.PrintStream;
 
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
@@ -14,6 +16,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.NEW;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
@@ -23,6 +26,8 @@ import fr.ensimag.ima.pseudocode.instructions.BSR;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 
 public class New  extends AbstractExpr{
+    
+    private static final Logger LOG = Logger.getLogger(DeclField.class);
 
     protected AbstractIdentifier className;
 
@@ -51,27 +56,34 @@ public class New  extends AbstractExpr{
         s.print("new ");
         getClassName().decompile(s);
         s.print("()");
-
     }
+
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
-        int nbattributs = className.getClassDefinition().getNumberOfFields();
-        GPRegister Rm=this.LoadGencode(compiler, false);
-        compiler.addInstruction(new NEW(nbattributs+1, Rm));
-        compiler.addInstruction(new BOV(new Label("heap_overflow_error")));
-        compiler.addInstruction(new LEA(className.getClassDefinition().getMethodTableBase(), Register.getR(0)));
-        compiler.addInstruction(new STORE(Register.getR(0), 0(Rm)));
-        compiler.addInstruction(new PUSH(Rm));
-        compiler.addInstruction(new BSR(init.A));
-        //traiter se problème
-        compiler.addInstruction(new POP(Rm));
-        
-        // on stocke l’adresse de a dans l’espace de la pile dédié aux variables        
-        // globales, indice l: premier registre libre dans cette partie de la pile
-        compiler.addInstruction(new STORE(Rm, l(GB)));
-        
-
+        LOG.debug("[New][codeGenInst] generating new for the class = " + className.getName());
+        this.setRegisterDeRetour(this.LoadGencode(compiler, true));
     }
+
+    @Override
+    public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
+        assert(reg != null);
+        LOG.debug("[New][loadItemintoRegister] loading new of calss =  "+ className.getName()+ " into memory at register " + reg);
+        int nbattributs = className.getClassDefinition().getNumberOfFields();
+        //On reserve suffisament d'espace pour les registers et l'adresse de la table de method
+        compiler.addInstruction(new NEW(nbattributs+1, reg));
+        compiler.addInstruction(new BOV(new Label("heap_overflow_error")));
+        compiler.addInstruction(new LEA(compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(className.getClassDefinition()), Register.getR(0)));
+        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(0, reg)));
+        //les instructions de Push and pop ne sont pas necessaires car dans la méthode de init 
+        // on push et pop tout les registres qui ne sont pas stables
+        // compiler.addInstruction(new PUSH(reg));
+        compiler.addInstruction(new BSR(new Label("init."+((Identifier) className).getName())));
+        // compiler.addInstruction(new POP(reg));
+        // on stocke l’adresse de a dans l’espace de la pile dédié aux variables        
+        // globales ou locales , indice l: premier registre libre dans cette partie de la pile
+    }
+
+
 
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {

@@ -1,5 +1,5 @@
 // Description:
-// Test les deux read expr; readInt et radFloat
+// Test les deux read expr; readInt et readfloat
 // Resultats:
 // Pour le input : 1 /2.0/3 le output est 1/2.00000e+00/-19180
 // Historique:

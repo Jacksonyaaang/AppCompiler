@@ -175,8 +175,7 @@ public abstract class AbstractExpr extends AbstractInst {
         setType(expectedType);
         return this;
     }
-    
-    
+        
     @Override
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)

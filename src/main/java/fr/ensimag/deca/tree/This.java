@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package fr.ensimag.deca.tree;
 
 import static org.mockito.ArgumentMatchers.booleanThat;
@@ -79,3 +80,4 @@ public class This extends AbstractExpr{
 
 
 }
+

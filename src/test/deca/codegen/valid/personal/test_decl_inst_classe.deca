@@ -1,0 +1,17 @@
+// Description:
+//    Test définition et instanciation de classe simple + sélection
+//
+//    TEST Essentiel partie C
+
+// Resultats attendu:
+// 1
+// Historique:
+// 
+
+
+class A{}
+
+{
+    //instanciation
+    A a=new A();
+}

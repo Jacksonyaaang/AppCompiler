@@ -7,6 +7,7 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.IMAProgram;
 
 public abstract class AbstractDeclMethod extends Tree {
 
@@ -54,8 +55,18 @@ public abstract class AbstractDeclMethod extends Tree {
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError;
             
-    public void codeGenDecl(DecacCompiler compiler) throws CodeGenError {
+    public void codeGenDeclMethod(DecacCompiler compiler) throws CodeGenError {
         throw new CodeGenError(getLocation(), "This method must not be called at this level");
     }
     
+
+    /**
+     * Retourne le program associé à la méthode
+     * @return
+     */
+    public IMAProgram getMethodProgram() {
+        return null;
+    }
+
+
 }

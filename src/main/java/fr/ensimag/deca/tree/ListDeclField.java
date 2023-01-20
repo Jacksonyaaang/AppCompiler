@@ -51,9 +51,9 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
      */    
     void verifyListDeclField(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-            LOG.debug("[ListDeclVar][verifyListDeclVariable]");
+            LOG.debug("[ListDeclField][verifyListDeclField]");
         for (AbstractDeclField declField : getList()){
-            //declField.verifyDeclVar(compiler, localEnv, currentClass);
+            declField.verifyDeclField(compiler, localEnv, currentClass);
         }
     }
 
@@ -65,8 +65,27 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
         }
     }
 
+    public void CodeGenListPlaceZeroInField(DecacCompiler compiler) throws CodeGenError {
+        LOG.debug("[ListDeclField][CodeGenListPlaceZeroInField] Placing Zero In All fields");
+        for (AbstractDeclField declField : getList()){
+            compiler.getRegisterManagement().freeAllRegisters();
+            declField.CodeGenPlaceZeroInField(compiler);
+        }
+    }
 
-
+    public void CodeGenListInitializeField(DecacCompiler compiler) throws CodeGenError {
+        LOG.debug("[ListDeclField][CodeGenListInitializeField] Initializing the fields");
+        for (AbstractDeclField declField : getList()){
+            compiler.getRegisterManagement().freeAllRegisters();
+            declField.codeGenDelField(compiler);
+        }
+    }
 
 }
+
+
+
+
+
+
 

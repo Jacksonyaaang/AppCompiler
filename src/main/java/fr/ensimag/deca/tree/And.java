@@ -28,7 +28,7 @@ public class And extends AbstractOpBool {
     
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{ 
-        super.setBoolOpIdentifier(compiler.getStackManagement().incrementOpBoolIncrementer());
+        super.setBoolOpIdentifier(compiler.incrementOpBoolIncrementer());
         LOG.debug("[And][codeGenInst] Working on And boolean operation Location ="+ getLocation());
         LOG.debug("[And][codeGenInst] Exploring Left");
         compiler.addComment("--------StartAND--------"+getLocation()+"-----");
