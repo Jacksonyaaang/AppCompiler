@@ -144,6 +144,8 @@ public class DeclField extends AbstractDeclField {
         //assigned to field, and place it in the memory location that holds the field
         if (initialization instanceof Initialization ){ 
             GPRegister assignRegister = this.LoadAndReserveARegister(compiler);
+            compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), assignRegister),
+                    "[codeGenDelField][initialization] loading class (this) into memory when working with field "+getVarName().getName());
             this.initialization.codegenInitial(compiler);
             compiler.addInstruction(new STORE(this.initialization.getRegistreDeRetour(),
                                         new RegisterOffset(this.varName.getFieldDefinition().getIndex(), assignRegister)), "Initializing the field "+ getVarName().getName()

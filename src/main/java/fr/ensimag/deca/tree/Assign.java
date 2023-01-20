@@ -103,7 +103,7 @@ public class Assign extends AbstractBinaryExpr {
                     compiler.addInstruction(new STORE(this.getRightOperand().getRegisterDeRetour(),new RegisterOffset(((((Identifier)(((Selection)getLeftOperand()).getField())).getFieldDefinition())).getIndex(), assignRegister)),
                                 "Saving field  "+  (((Identifier)(((Selection)getLeftOperand()).getField()))).getName() + " into memory");
                     compiler.addInstruction(new LOAD(this.getRightOperand().getRegisterDeRetour(), assignRegister),                                          
-                        " Return value of the assignement of this . ="+ (((Identifier)(((Selection)getLeftOperand()).getField()))).getName()+ "and storing it into " + assignRegister );
+                        " Return value of the assignement of this . = "+ (((Identifier)(((Selection)getLeftOperand()).getField()))).getName()+ " and storing it into " + assignRegister );
                 }
                 else{
                     ((Selection)getLeftOperand()).getObj().codeGenInst(compiler);
@@ -112,7 +112,7 @@ public class Assign extends AbstractBinaryExpr {
                     ((Selection)getLeftOperand()).getObj().popRegisters(compiler);
                     compiler.getRegisterManagement().decrementOccupationRegister(((Selection)getLeftOperand()).getObj().getRegisterDeRetour());
                     compiler.addInstruction(new LOAD(this.getRightOperand().getRegisterDeRetour(), assignRegister),                                          
-                        " Return value of the assignement of ="+ ((Identifier) getLeftOperand()).getName()+ "and storing it into " + assignRegister );
+                        " Return value of the assignement of ="+ (((Identifier)(((Selection)getLeftOperand()).getField()))).getName()+ "and storing it into " + assignRegister );
                 }
             }
             this.setRegisterDeRetour(assignRegister);

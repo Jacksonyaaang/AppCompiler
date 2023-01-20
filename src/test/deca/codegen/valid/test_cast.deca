@@ -27,8 +27,7 @@ class A{
     b.i=2;
     a=(A) (b);
     println(a.i);
-    j=(int) (i);
-    
+    j=(int) (i)
     println(j);
     j=(int) (f);
     println(j);

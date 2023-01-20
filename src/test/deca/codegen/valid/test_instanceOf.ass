@@ -52,6 +52,7 @@
 	LOAD #0, R2	; loading false into memory
 	STORE R2, 9(GB)	; Initializing the variable b4 and loading it into memory
 ; --------StartNew--------[31, 10]-----
+; [New][loadItemintoRegister] loading new of calss =  A into memory at register R2
 	NEW #1, R2
 	BOV heap_overflow_error
 	LEA 17(GB), R0
@@ -62,6 +63,7 @@
 ; --------EndNew--------[31, 10]-----
 	STORE R2, 10(GB)	; Initializing the variable a and loading it into memory
 ; --------StartNew--------[32, 9]-----
+; [New][loadItemintoRegister] loading new of calss =  B into memory at register R2
 	NEW #1, R2
 	BOV heap_overflow_error
 	LEA 19(GB), R0
@@ -72,6 +74,7 @@
 ; --------EndNew--------[32, 9]-----
 	STORE R2, 11(GB)	; Initializing the variable b and loading it into memory
 ; --------StartNew--------[33, 10]-----
+; [New][loadItemintoRegister] loading new of calss =  C into memory at register R2
 	NEW #1, R2
 	BOV heap_overflow_error
 	LEA 21(GB), R0
@@ -82,6 +85,7 @@
 ; --------EndNew--------[33, 10]-----
 	STORE R2, 12(GB)	; Initializing the variable c and loading it into memory
 ; --------StartNew--------[34, 9]-----
+; [New][loadItemintoRegister] loading new of calss =  D into memory at register R2
 	NEW #1, R2
 	BOV heap_overflow_error
 	LEA 23(GB), R0
@@ -92,6 +96,7 @@
 ; --------EndNew--------[34, 9]-----
 	STORE R2, 13(GB)	; Initializing the variable d and loading it into memory
 ; --------StartNew--------[35, 10]-----
+; [New][loadItemintoRegister] loading new of calss =  H into memory at register R2
 	NEW #1, R2
 	BOV heap_overflow_error
 	LEA 25(GB), R0

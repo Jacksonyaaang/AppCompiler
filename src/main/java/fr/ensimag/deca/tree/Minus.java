@@ -15,7 +15,7 @@ import fr.ensimag.ima.pseudocode.instructions.SUB;
  * @date 01/01/2023
  */
 public class Minus extends AbstractOpArith {
-    private static final Logger LOG = Logger.getLogger(IntLiteral.class);
+    private static final Logger LOG = Logger.getLogger(Minus.class);
 
     public Minus(AbstractExpr leftOperand, AbstractExpr rightOperand) {
         super(leftOperand, rightOperand);
@@ -23,10 +23,10 @@ public class Minus extends AbstractOpArith {
 
     @Override
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
-        LOG.debug("[Plus][executeBinaryOperation] generating code for int literal value " );
-        LOG.debug("[Plus][executeBinaryOperation] generating code for Plus between: " 
+        LOG.debug("[Minus][executeBinaryOperation] generating code for int literal value " );
+        LOG.debug("[Minus][executeBinaryOperation] generating code for Minus between: " 
                             +val + " and " + resultRegister);
-        LOG.debug("[Plus][executeBinaryOperation] generating code for Plus between: " 
+        LOG.debug("[Minus][executeBinaryOperation] generating code for Minus between: " 
         +val + " and " + resultRegister);
 
         if (!getWorkWithFloats()){

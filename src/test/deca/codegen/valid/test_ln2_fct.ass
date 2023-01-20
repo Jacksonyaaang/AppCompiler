@@ -20,6 +20,7 @@
 ; -------------------------------------
 ; Beginning of main instructions:
 ; --------StartNew--------[19, 16]-----
+; [New][loadItemintoRegister] loading new of calss =  Polyexp into memory at register R2
 	NEW #1, R2
 	BOV heap_overflow_error
 	LEA 10(GB), R0
@@ -56,6 +57,7 @@ while_begin1:
 	BNE while_end1
 ; --------StartBinaryOp--------[27, 6]-----
 ; --------BeginAssignOp--------[27, 7]-----
+; --------BeginMethodCall--------[27, 12]-----
 	ADDSP #2
 	LOAD 1(GB), R3	; loading p into memory
 	STORE R3, 0(SP)
@@ -79,12 +81,13 @@ while_begin1:
 ; --------EndAssignOp--------[27, 19]-----
 	STORE R3, -1(SP)
 	LOAD 0(SP), R3
-	CMP #null, R3
+	CMP #null, R3	; checking that class adresse is not null
 	BEQ deref_null_error
 	LOAD 0(R3), R3
 	BSR 2(R3)
-	SUBSP #2
 	LOAD R0, R3
+	SUBSP #2
+; --------EndMethodCall--------[27, 12]-----
 	STORE R3, 7(GB)	;  Assiging a value to fm
 	LOAD R3, R2	;  Return value of the assignement of =fmand storing it into R2
 ; --------EndAssignOp--------[27, 7]-----

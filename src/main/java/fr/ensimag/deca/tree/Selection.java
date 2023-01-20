@@ -47,6 +47,7 @@ public class Selection extends AbstractLValue {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError {
+        compiler.addComment("--------BeginSelection--------"+getLocation()+"-----");    
         obj.codeGenInst(compiler);
         if (!compiler.getCompilerOptions().isNoCheck()){
             compiler.addInstruction(new CMP(new NullOperand(), obj.getRegisterDeRetour()), null);
@@ -59,6 +60,7 @@ public class Selection extends AbstractLValue {
                          "Loading the field " + field.getName() +" into a register "); 
         this.setRegisterDeRetour(obj.getRegisterDeRetour());
         this.transferPopRegisters(obj.getRegisterToPop());
+        compiler.addComment("--------BeginSelection--------"+getLocation()+"-----");    
     }
     
     /**

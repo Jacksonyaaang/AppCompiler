@@ -70,6 +70,7 @@ public class New  extends AbstractExpr{
         compiler.getRegisterManagement().increaseTempVariables(3);
         compiler.addComment("--------StartNew--------"+getLocation()+"-----");
         LOG.debug("[New][loadItemintoRegister] loading new of calss =  "+ className.getName()+ " into memory at register " + reg);
+        compiler.addComment("[New][loadItemintoRegister] loading new of calss =  "+ className.getName()+ " into memory at register " + reg);
         int nbattributs = className.getClassDefinition().getNumberOfFields();
         //On reserve suffisament d'espace pour les registers et l'adresse de la table de method
         compiler.addInstruction(new NEW(nbattributs+1, reg));
