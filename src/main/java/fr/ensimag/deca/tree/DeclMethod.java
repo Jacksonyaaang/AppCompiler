@@ -193,7 +193,7 @@ public class DeclMethod extends AbstractDeclMethod {
         //first verify they have the same signature
         int sizeSigSuper=sigSuper.size();
         if (sizeSigSuper != sigCurrMethod.size()){
-            throw new ContextualError("La signature de la méthode " + methodName.getName().getName() + "  dans la classe actuelle n'est pas identique à celle de la super classe", getLocation());
+            throw new ContextualError("Le nombre de l'arguments de la signature de la méthode " + methodName.getName().getName() + "  dans la classe actuelle n'est pas identique à celle de la super classe", getLocation());
         }
         for (int i=0;i<sizeSigSuper; ++i){
             if (!sigSuper.paramNumber(i).sameType(sigCurrMethod.paramNumber(i))){
@@ -203,17 +203,17 @@ public class DeclMethod extends AbstractDeclMethod {
         //then verify the type return is the sub-type of corresponding super-class's types
         if (!currTypeReturen.isClass()){  //the primitif type
             if (!superTypeReturn.sameType(currTypeReturen))
-                throw new ContextualError("[ERROR] The current method don't have a proper type", getLocation());
+                throw new ContextualError("Le type de retour methode déclarée n'a pas la meme type que celle de super-classe dont leurs noms sont pareils  ", getLocation());
         }else{
             //the current return type is a type of class 
             if (superTypeReturn.isClass()){
                 if (((ClassType)currTypeReturen).isSubClassOf(((ClassType)superTypeReturn))){
                     return ;  // get out this fucntion without any exception 
                 }else{
-                    throw new ContextualError("[ERROR] The current method don't have a proper type", getLocation());
+                    throw new ContextualError("Le type de retour de la methode déclarée n'est pas le sub-class de la méthode nom-pareil en provenence de sa super-class ", getLocation());
                 }
             }else{  //one classType one primitif type
-                throw new ContextualError("[ERROR] The current method don't have a proper type", getLocation());
+                throw new ContextualError("Le type de retour de la methode déclarée est un type primitif mais sa méthode nom-pareil de sa super-class est un type de classe", getLocation());
             }
         }
     }
