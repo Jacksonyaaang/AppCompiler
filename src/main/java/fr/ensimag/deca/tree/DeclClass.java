@@ -4,25 +4,38 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CodeGenError;
+import fr.ensimag.deca.codegen.RegisterManagementUnit;
+import fr.ensimag.deca.codegen.StackManagementUnit;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.MethodDefinition;
+import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.IMAProgram;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.LabelOperand;
+import fr.ensimag.ima.pseudocode.Line;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.BSR;
 import fr.ensimag.ima.pseudocode.instructions.LEA;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.NEW;
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
+import fr.ensimag.ima.pseudocode.instructions.RTS;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.SUBSP;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
-
 /**
  * Declaration of a class (<code>class name extends superClass {members}<code>).
  * 
@@ -38,12 +51,23 @@ public class DeclClass extends AbstractDeclClass {
     protected final ListDeclField fields;
     protected final ListDeclMethod methods;
 
+    protected MethodDefinition defintionMethodInitClass;
+    protected  IMAProgram classProgram = new IMAProgram();
+    
+    /**
+     * Ces elements sont utilisées pour géneré le bloc 
+     * de la méthode init
+     */
+    RegisterManagementUnit initMethodRegisterManagementUnit = null; 
+    StackManagementUnit initMethodStackManagementUnit = new StackManagementUnit();
+    IMAProgram initMethodProgram = new IMAProgram();
+
 
     public void codeGenTableauDeMethod(DecacCompiler compiler) throws CodeGenError {
         LOG.debug("[DeclClass][codeGenTableauDeMethod] Generating the table method || ClassName =  " + 
                 name.getName().getName()  + " // Super class  = " + superClass.getName().getName());
-        LOG.debug("[DeclClass][codeGenTableauDeMethod] Class definitions are : \n Main class name =  " + 
-                    name.getClassDefinition().toString()  + " \n Super class   = " + superClass.getClassDefinition().toString());
+        LOG.debug("[DeclClass][codeGenTableauDeMethod] Class definitions are : \n Main class =  " + 
+                    name.getClassDefinition().toString()  + " \n Super class  = " + superClass.getClassDefinition().toString());
 
         ClassDefinition classDefinition = name.getClassDefinition();
         // LEA 1 (GB), R0 
@@ -54,6 +78,8 @@ public class DeclClass extends AbstractDeclClass {
                                          Register.getR(0)));
         compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().put(classDefinition, new RegisterOffset(compiler.incrementGbCompiler(), Register.GB));
         compiler.addInstruction(new STORE(Register.getR(0), compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(classDefinition)));
+        
+
         MethodDefinition methodDefinitionIter;
         ClassDefinition currentMethodDefinition;
         for (int methodIndex = 1; methodIndex <= classDefinition.getNumberOfMethods(); methodIndex++){
@@ -69,7 +95,81 @@ public class DeclClass extends AbstractDeclClass {
             compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.incrementGbCompiler(), Register.GB)));
         }
     }
- 
+
+    @Override
+    public void codeGenClassMethod(DecacCompiler compiler) throws CodeGenError {
+        codeGenMethodInitialisation(compiler);
+        methods.codeGenListMethod(compiler);
+        classProgram.append(methods.getMethodsPrograms());
+    }
+
+    public void codeGenMethodInitialisation(DecacCompiler compiler) throws CodeGenError {
+        setUpMethodDefinition(compiler);
+        //We set the value of the stack to 0, and if we ever do function calls we add 2 to this field. In this case
+        //we can only call one method directly which is the initialization of the parent, if other methods are called 
+        // in the initialisation of the field, they will be added in an other part of the code   
+        if (initMethodRegisterManagementUnit == null){
+            LOG.info("[DeclClass][codeGenMethodInitialisation] Defining code initilization method");
+            initMethodRegisterManagementUnit = new RegisterManagementUnit(compiler.getCompilerOptions().getNumberOfRegisters());
+        }
+        else{
+            LOG.fatal("[DeclClass][codeGenMethodInitialisation] Trying to initialise the register management unit for the init method");
+        }
+        compiler.setMethodProgramState(initMethodRegisterManagementUnit, initMethodStackManagementUnit, initMethodProgram);
+        //Si la classe parenet n'est pas object, on doit appeler sa méthode d'initialisation
+
+        if (superClass.getName() != compiler.createSymbol("object")){
+            //On donne ajouter 3 à tempvariables car la méthode prend un paramétre et bsr a besoin de deux espaces
+            //mémoire
+            compiler.getRegisterManagement().increaseTempVariables(3);
+            compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(0)), "Placing the current class = " + name.getName() +" adresse in the the stack before calling parent ");
+            compiler.addInstruction(new PUSH(Register.getR(0)), "Placing this = " +name.getName()+" into the stack");
+            compiler.addInstruction(new BSR(new Label("init." +superClass.getName().getName())), "Calling the initialisation method of parent class" + superClass.getName());
+            compiler.addInstruction(new SUBSP(1)); //A FAIRE SChange value if needed
+            compiler.getRegisterManagement().decreaseTempVariables(3);
+        }   
+        fields.CodeGenListPlaceZeroInField(compiler);
+        fields.CodeGenListInitializeField(compiler);
+        compiler.getRegisterManagement().pushUsedRegistersMethod(compiler);
+        compiler.getRegisterManagement().popUsedRegistersMethod(compiler);
+        compiler.addInstruction(new RTS()); 
+
+        /**
+         * Stack management
+         */
+        int sizeStackMax = compiler.getStackManagement().measureStacksizeNeededMethod(compiler);
+        LOG.debug("[DeclClass][codeGenMethodInitialisation] sizeStackMax = " + sizeStackMax);
+        if  (sizeStackMax !=0){
+            compiler.getErrorManagementUnit().activeError("stack_overflow_error");
+            if (!(compiler.getCompilerOptions().isNoCheck())) {
+                compiler.getProgram().addFirst(new BOV(new Label("stack_overflow_error")));
+                compiler.getProgram().addFirst(new TSTO(new ImmediateInteger(sizeStackMax)));
+            }
+        }
+
+        //Adding function label  and comments for debugging purposes
+        compiler.getProgram().addFirst(new Line(new Label("init."+name.getName() )));
+        compiler.getProgram().addFirst(new Line("------------Init method for class = " + name.getName() +"--------"));
+        compiler.getProgram().addFirst(new Line("---------------------------------------------------"));
+        compiler.getProgram().addFirst(new Line("----------------- class : " + name.getName() +  " -------------------"));
+        compiler.getProgram().addFirst(new Line("---------------------------------------------------"));
+        classProgram.append(initMethodProgram);
+    }   
+
+
+    public void setUpMethodDefinition(DecacCompiler compiler) throws CodeGenError{
+        MethodDefinition defintionMethodInitClass = new MethodDefinition(compiler.environmentType.VOID, Location.BUILTIN, 
+                            new Signature(), name.getClassDefinition().getNumberOfMethods()+1);
+        defintionMethodInitClass.setLabel(new Label("init."+name.getClassDefinition().getType().getName().getName()));
+        
+    }
+
+    /**
+     * Retourne la ClassDefinition associé au envExpr donnée en paramétre
+     * @param compiler 
+     * @param envExpr 
+     * @return
+     */
     public ClassDefinition getClassdefinition(DecacCompiler compiler, EnvironmentExp envExpr){
         for(ClassDefinition classDefinitionIter: compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().keySet()){
             if (classDefinitionIter.getMembers() == envExpr){
@@ -77,6 +177,11 @@ public class DeclClass extends AbstractDeclClass {
             }
         }
         return null;
+    }
+
+    @Override
+    public IMAProgram getClassProgram() {
+        return classProgram;
     }
 
 
@@ -137,10 +242,10 @@ public class DeclClass extends AbstractDeclClass {
                 name.setDefinition((ClassDefinition) classType.getDefinition());
             }
             else
-                throw new ContextualError("le super Class n'est pas déclaré", getLocation());   
+                throw new ContextualError("La super classe n'est pas déclareé", getLocation());
         }
         else 
-            throw new ContextualError("Double Déclaration de la class  " + name.getName().getName(), getLocation());
+            throw new ContextualError("Double déclaration de la classe  " + name.getName().getName(), getLocation());
     }
 
     @Override
@@ -176,5 +281,6 @@ public class DeclClass extends AbstractDeclClass {
         fields.iter(f);
         methods.iter(f);
     }
+
 
 }

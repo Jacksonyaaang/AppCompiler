@@ -64,13 +64,16 @@ public class Identifier extends AbstractIdentifier {
         assert( reg != null);
         LOG.debug("[Identifier][loadItemintoRegister] Loading " + this.getName() + "into the register " + reg);
         if (this.getExpDefinition().isField()){
-            LOG.debug("[Identifier][loadItemintoRegister] Working with fields ");
+            //Quand on travaille avec les champs, pour acceder leur position en mémoire
+            // on doit se positionner relativement à la classe qui stocke leur valeur
+            LOG.debug("[Identifier][loadItemintoRegister] Working with field " + this.getName());
             compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), reg),
-                                    "loading field"+getName()+ "into memory");
+                                    "loading the class of the field "+getName()+ " into memory");
             compiler.addInstruction(new LOAD(new RegisterOffset( ((FieldDefinition) (this.getExpDefinition())).getIndex(), reg), reg),
             "loading "+getName()+ " into memory");
         }
         else{
+            //Quand on travaille avec les variables, on a access directement à leur adresse 
             compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), reg),
                                     "loading "+getName()+ " into memory");
         }

@@ -2,7 +2,7 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.codegen.RegisterMangementUnit;
+import fr.ensimag.deca.codegen.RegisterManagementUnit;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.ima.pseudocode.*;
@@ -45,7 +45,7 @@ public class DeclVar extends AbstractDeclVar {
         type.setType(t);
         //Vérification de la condition type =/= void de la règle 3.17
         if(t.isVoid()) {
-            throw new ContextualError("Déclaraion de variables de type void impossible", getLocation());
+            throw new ContextualError("Déclaration de variables de type void impossible", getLocation());
         }
         initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
         VariableDefinition VDf = new VariableDefinition(type.getType(), varName.getLocation());
@@ -58,8 +58,14 @@ public class DeclVar extends AbstractDeclVar {
         }
         //varName.verifyExpr(compiler, localEnv, currentClass);
         //On associe à la variable défini une adresse dans le stack avec une adresse X(Gb)
-        this.varName.getExpDefinition().setOperand(new RegisterOffset(compiler.incrementGbCompiler(), Register.GB)); 
-        LOG.debug("[DeclVar] Saving " + this.varName.getName() + " into " + this.varName.getExpDefinition().getOperand());
+        if (currentClass == null){
+            this.varName.getExpDefinition().setOperand(new RegisterOffset(compiler.incrementGbCompiler(), Register.GB)); 
+            LOG.debug("[DeclVar] Saving " + this.varName.getName() + " into " + this.varName.getExpDefinition().getOperand());
+        }
+        else{
+            this.varName.getExpDefinition().setOperand(new RegisterOffset(compiler.incrementLbCompiler(), Register.LB)); 
+            LOG.debug("[DeclVar] Saving method variable " + this.varName.getName() + " into " + this.varName.getExpDefinition().getOperand());
+        }
     }
 
     @Override

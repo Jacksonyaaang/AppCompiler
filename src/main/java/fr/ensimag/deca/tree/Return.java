@@ -11,7 +11,15 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
+import fr.ensimag.ima.pseudocode.instructions.ERROR;
+import fr.ensimag.ima.pseudocode.instructions.WNL;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import org.apache.log4j.Logger;
+
 
 public class Return extends AbstractInst {
 
@@ -36,8 +44,13 @@ public class Return extends AbstractInst {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError {
-        // TODO Auto-generated method stub
-        
+        GPRegister registreExpr;
+        exprReturn.codeGenInst(compiler);
+        registreExpr = exprReturn.getRegisterDeRetour();
+        compiler.addInstruction(new LOAD(registreExpr, Register.getR(0)));
+        exprReturn.popRegisters(compiler);
+        compiler.addInstruction(new BRA(compiler.getCurrentMethodCodeGen().getEndLabel()));
+        compiler.getRegisterManagement().decrementOccupationRegister(exprReturn.getRegisterDeRetour());
     }
 
     @Override

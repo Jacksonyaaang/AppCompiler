@@ -37,7 +37,7 @@ public class UnaryMinus extends AbstractUnaryExpr {
             ClassDefinition currentClass) throws ContextualError {
             getOperand().setType(getOperand().verifyExpr(compiler, localEnv, currentClass));
             if (!getOperand().getType().isInt() && !getOperand().getType().isFloat())
-                throw new ContextualError("Not ne s'applique qu'au boolean ", getLocation());
+                throw new ContextualError("L'opérateur moins unaire ne s'applique qu'aux entiers et aux flottants ", getLocation());
             setType(getOperand().getType());
             return getType();
     }
