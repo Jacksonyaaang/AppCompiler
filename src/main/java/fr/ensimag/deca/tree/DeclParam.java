@@ -24,6 +24,8 @@ import fr.ensimag.ima.pseudocode.Register;
  */
 public class DeclParam extends AbstractDeclParam {
 
+
+
     private static final Logger LOG = Logger.getLogger(IntLiteral.class);
 
     final private AbstractIdentifier type;
@@ -71,12 +73,12 @@ public class DeclParam extends AbstractDeclParam {
     @Override
     protected Type verifyDeclParam(DecacCompiler compiler, EnvironmentExp envParms)
             throws ContextualError {
-            LOG.debug("[DeclParam][verifyDecleParam] Verify a paramère d'une méthode");
+            LOG.debug("[DeclParam][verifyDecleParam] Verifing method parameter : "+paramName.getName());
             Type typeParam = type.verifyType(compiler);
             type.setType(typeParam);
             //make sure this type isn't Void
             if (typeParam.isVoid()){
-                throw new ContextualError("You don't want to declare a void type parameter", getLocation());
+                throw new ContextualError("Le type void ne peut être un type d'une méthode", getLocation());
             }
             //verify environmentTypes has the type of Paramname 
             Map<Symbol, TypeDefinition> envTypes = compiler.environmentType.getEnvTypes();
@@ -90,7 +92,8 @@ public class DeclParam extends AbstractDeclParam {
             } catch (EnvironmentExp.DoubleDefException e) {
                 throw new ContextualError("double declaration de paramétre", getLocation());
             }
-            
+            this.paramName.getExpDefinition().setOperand(new RegisterOffset(compiler.decrementParamCounterCompiler(), Register.LB)); 
+            LOG.debug("[DeclParam][verifyDecleParam] Saving method parameter " + this.paramName.getName() + " into " + this.paramName.getExpDefinition().getOperand());
             return typeParam;  //il faut le 'type' comme la type de return pour charger la signature 
 
         }

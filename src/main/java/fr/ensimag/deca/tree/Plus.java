@@ -23,8 +23,11 @@ public class Plus extends AbstractOpArith {
  
     @Override
     public void executeBinaryOperation(DecacCompiler compiler, DVal val, GPRegister resultRegister) throws CodeGenError {
-        LOG.debug("[Plus][executeBinaryOperation] generating code for int literal value " );
-        LOG.debug("[Plus][executeBinaryOperation] generating code for Plus between: " 
+        LOG.debug("[Plus][executeBinaryOperation] generating code for int literal value " + getLocation());
+        if ( getLeftOperand() instanceof Identifier ){
+            LOG.debug("[Plus][executeBinaryOperation] generating code for identifier " + getLocation() +" ---"+ ((Identifier)getLeftOperand()).getName());
+        }
+            LOG.debug("[Plus][executeBinaryOperation] generating code for Plus between: " 
         +val + " and " + resultRegister);
 
         if (!getWorkWithFloats()){

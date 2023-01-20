@@ -76,7 +76,9 @@ public class DeclClass extends AbstractDeclClass {
         LOG.debug("[DeclClass][codeGenTableauDeMethod] Current methode table adresses \n" + compiler.getTableDeMethodeCompiler().toString()); 
         compiler.addInstruction(new LEA( compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(classDefinitionSuper),
                                          Register.getR(0)));
+
         compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().put(classDefinition, new RegisterOffset(compiler.incrementGbCompiler(), Register.GB));
+
         compiler.addInstruction(new STORE(Register.getR(0), compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(classDefinition)));
         
 
@@ -118,7 +120,7 @@ public class DeclClass extends AbstractDeclClass {
         compiler.setMethodProgramState(initMethodRegisterManagementUnit, initMethodStackManagementUnit, initMethodProgram);
         //Si la classe parenet n'est pas object, on doit appeler sa méthode d'initialisation
 
-        if (superClass.getName() != compiler.createSymbol("object")){
+        if (superClass.getName() != compiler.createSymbol("Object")){
             //On donne ajouter 3 à tempvariables car la méthode prend un paramétre et bsr a besoin de deux espaces
             //mémoire
             compiler.getRegisterManagement().increaseTempVariables(3);
@@ -214,7 +216,7 @@ public class DeclClass extends AbstractDeclClass {
     public void decompile(IndentPrintStream s) {
         s.print("class ");
         s.print(getName().getName().getName());
-        if(getSuperClass() != null && getSuperClass().getName().getName()!= "object"){
+        if(getSuperClass() != null && getSuperClass().getName().getName()!= "Object"){
             s.print(" extends ");
             s.print(getSuperClass().getName().getName());
         }

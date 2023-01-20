@@ -1,8 +1,8 @@
 
-
+/*
 class Point2D {
-    int x =     1*(1*(1*(1*(1*(1*(1*(1*(1*(1*2))))))))); // Abscisse
-    int y; // Ordonnee
+    int x ; // Abscisse
+    int y ; // Ordonnee
     // Deplace ce point
     // de a en diagonale.
     void diag(int a) {
@@ -21,3 +21,34 @@ class Point3D extends Point2D {
         z = z + a;
     }
 }
+
+{
+    Point2D p1, p2;
+    Point3D p3;
+    p1 = new Point2D();
+    p1.diag(1);
+    p3 = new Point3D();
+    p3.diag(2);
+    p2 = p3;
+    p2.diag(3);
+    println("p3.z = ", p3.z); // p3.z = 5
+}
+*/
+
+
+// Un exemple de programme Deca
+class A {
+    protected int x ;
+    int getX() {
+        return x ;
+    }
+    void setX(int x) {
+        this.x = x ;
+    }
+}
+
+{
+    A a = new A() ;
+    a.setX(1) ;
+    println("a.getX() = ", a.getX()) ;
+} 

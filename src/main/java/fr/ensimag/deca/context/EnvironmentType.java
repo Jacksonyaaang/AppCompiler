@@ -39,7 +39,7 @@ public class EnvironmentType {
         envTypes.put(booleanSymb, new TypeDefinition(BOOLEAN, Location.BUILTIN));
         Symbol nullSymb = compiler.createSymbol("null");
         NULL = new NullType(nullSymb);
-        envTypes.put(booleanSymb, new TypeDefinition(NULL, Location.BUILTIN));
+        envTypes.put(nullSymb, new TypeDefinition(NULL, Location.BUILTIN));
 
         Symbol stringSymb = compiler.createSymbol("string");
         STRING = new StringType(stringSymb);
@@ -49,7 +49,7 @@ public class EnvironmentType {
         /*
          * Ajoute de la classe object avec sa méthode equals
          */
-        Symbol objectSymb = compiler.createSymbol("object");
+        Symbol objectSymb = compiler.createSymbol("Object");
         OBJECT = new ClassType(objectSymb);
         ClassDefinition defintionClassObject = new ClassDefinition(OBJECT, Location.BUILTIN, null);
         envTypes.put(objectSymb, defintionClassObject);
@@ -61,7 +61,7 @@ public class EnvironmentType {
         signature.add(OBJECT);
         MethodDefinition defintionMethodEquals = new MethodDefinition(VOID, Location.BUILTIN, signature, defintionClassObject.incNumberOfMethods());
         defintionMethodEquals.setMethodname("equals");
-        defintionMethodEquals.setLabel(new Label("code.object.equals"));
+        defintionMethodEquals.setLabel(new Label("code.Object.equals"));
         try {
             defintionClassObject.getMembers().declare(equalsMethodObject, defintionMethodEquals);
         } catch (DoubleDefException e) {
@@ -87,6 +87,10 @@ public class EnvironmentType {
     public final FloatType   FLOAT;
     public final StringType  STRING;
     public final BooleanType BOOLEAN;
-    public final ClassType OBJECT;
+<<<<<<<<< Temporary merge branch 1
+    public final ClassType   OBJECT;
+=========
     public final NullType NULL;
+    public final ClassType OBJECT;
+>>>>>>>>> Temporary merge branch 2
 }

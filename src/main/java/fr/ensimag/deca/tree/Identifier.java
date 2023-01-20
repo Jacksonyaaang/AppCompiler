@@ -62,7 +62,7 @@ public class Identifier extends AbstractIdentifier {
     @Override
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
         assert( reg != null);
-        LOG.debug("[Identifier][loadItemintoRegister] Loading " + this.getName() + "into the register " + reg);
+        LOG.debug("[Identifier][loadItemintoRegister] Loading " + this.getName() + " into the register " + reg);
         if (this.getExpDefinition().isField()){
             //Quand on travaille avec les champs, pour acceder leur position en mémoire
             // on doit se positionner relativement à la classe qui stocke leur valeur
@@ -76,7 +76,7 @@ public class Identifier extends AbstractIdentifier {
             //Quand on travaille avec les variables, on a access directement à leur adresse 
             compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), reg),
                                     "loading "+getName()+ " into memory");
-        }
+        }           
     }
 
 
@@ -212,14 +212,16 @@ public class Identifier extends AbstractIdentifier {
         LOG.debug("[Identifier][verifyExpr] Verifying the exp of an identifier ");
         //Envoie une ContextualError si l'identificateur n'est pas défini
         EnvironmentExp tmpEnv;
+        //EnvironmentExp precTempEnv = null;
         for (tmpEnv = localEnv; tmpEnv != null; tmpEnv = tmpEnv.getParent()){
+            //precTempEnv = localEnv;
             if (!tmpEnv.getExp().containsKey(name) && tmpEnv.getParent() == null)
                 throw new ContextualError("L'identificateur " + getName().getName() + " n'est pas défini",getLocation());
             else if (tmpEnv.getExp().containsKey(name)) break;
         }
         Definition Defi = tmpEnv.get(name);
         setDefinition(Defi);
-        setType(localEnv.get(name).getType());
+        setType(tmpEnv.get(name).getType());
         return getType();
     }
 
@@ -274,3 +276,4 @@ public class Identifier extends AbstractIdentifier {
     }
 
 }
+

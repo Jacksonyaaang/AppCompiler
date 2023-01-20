@@ -176,8 +176,10 @@ public abstract class AbstractExpr extends AbstractInst {
                 throw new ContextualError("Not expected type", getLocation());
             }else return this;
         }
-        if (!expectedType.sameType(t))
-            throw new ContextualError("Le type de l'expression de droite est " + t + " alors que le type attendu est " + expectedType, getLocation());
+        if (!expectedType.sameType(t)){
+            //System.out.println("***************************************************");
+            throw new ContextualError("Not expected type", getLocation());
+        }
         setType(expectedType);
         return this;
     }

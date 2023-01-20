@@ -61,6 +61,24 @@ public class DecacCompiler {
     private int opBoolIncrementer = 0;
     private int ifIncrementer = 0;
     private int whileIncrementer = 0;
+    private int instanceOfIncrementer = 0;
+    private int castIncrement = 0;
+
+    public int getInstanceOfIncrementer() {
+        return instanceOfIncrementer;
+    }
+    public int incrementInstanceOfIncrementer() {
+        instanceOfIncrementer++;
+        return instanceOfIncrementer;
+    }
+
+    public int getCastIncrement() {
+        return castIncrement;
+    }
+    public int incrementCastIncrement() {
+        castIncrement++;
+        return castIncrement;
+    }
 
     public int getOpBoolIncrementer() {
         return opBoolIncrementer;
@@ -94,18 +112,20 @@ public class DecacCompiler {
 
     public void setMainProgramState(){
         if (mainManagementUnitsSaved){
+            LOG.debug("[DecacCompiler][setMainProgramState] Seeting main state program");
             registerManagement = registerManagementPlaceHolder;
             stackManagement = stackManagementPlaceHolder;
             program = programPlaceHolder;
             InMainOrMethod = true;
         }
         else{
-            LOG.fatal("[DecacCompiler][saveMainProgramState] Trying to return to mainManagementWhile they are not saved !!!");
+            LOG.fatal("[DecacCompiler][setMainProgramState] Trying to return to mainManagementWhile they are not saved !!!");
         }
     }
 
     public void saveMainProgramState(){
         if (InMainOrMethod){
+            LOG.debug("[DecacCompiler][saveMainProgramState] Saving state main program");
             registerManagementPlaceHolder = registerManagement;
             stackManagementPlaceHolder = stackManagement;
             programPlaceHolder = program;
@@ -118,13 +138,14 @@ public class DecacCompiler {
 
     public void setMethodProgramState(RegisterManagementUnit methodManagementUnit, StackManagementUnit methodStackManagementUnit, IMAProgram methodProgram){
         if (mainManagementUnitsSaved){
+            LOG.debug("[DecacCompiler][setMethodProgramState] Entring a method program");
             registerManagement = methodManagementUnit;
             stackManagement = methodStackManagementUnit;
             program = methodProgram;
             InMainOrMethod = false;
         }
         else{
-            LOG.fatal("[DecacCompiler][saveMainProgramState] Trying to switch to a method while the main program is not saved !!!");
+            LOG.fatal("[DecacCompiler][setMethodProgramState] Trying to switch to a method while the main program is not saved !!!");
         }
     }
 

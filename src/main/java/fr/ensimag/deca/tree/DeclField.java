@@ -82,7 +82,7 @@ public class DeclField extends AbstractDeclField {
     @Override 
     String prettyPrintNode() {
         String visibiltyOutput = visibility == Visibility.PROTECTED ? " [visibility=PROTECTED] " : " [visibility=PUBLIC] ";
-        return visibiltyOutput + " DeclField" +  super.prettyPrintNode();
+        return visibiltyOutput + " DeclField" ;//+  super.prettyPrintNode();
     }
 
     @Override

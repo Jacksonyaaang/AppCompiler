@@ -1,0 +1,14 @@
+// Description:
+//  test d'une classe vide
+//
+// test compilation et exécution du fichier assembleur
+// Resultats attendu (pas encore confirmé):
+// 
+// Historique:
+//    cree le 19/01/2023
+
+class A{}
+
+{
+    A a = new A();
+}

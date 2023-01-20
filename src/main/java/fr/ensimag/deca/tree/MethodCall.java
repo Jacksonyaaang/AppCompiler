@@ -49,6 +49,7 @@ public class MethodCall extends AbstractExpr {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
+        compiler.addComment("--------BeginMethodCall--------"+getLocation()+"-----");    
         /*
          * Configuration initial : reservation de l'espace dans le stack, et modification des paramétre 
          *  qui verifie que le stack a suffisament d'espace 
@@ -66,12 +67,6 @@ public class MethodCall extends AbstractExpr {
         obj.popRegisters(compiler);
         compiler.getRegisterManagement().decrementOccupationRegister(obj.getRegisterDeRetour());
 
-        /*
-         * ajout des paramètres via l'usage
-         * LOAD val, R2
-         * STORE R2, -i (SP)
-         * i: numéro du paramètre
-         */
         /*
          * Ce paramétre sera utilisée pour associer des adresses aux paramétre de la méthode
          */
@@ -93,18 +88,20 @@ public class MethodCall extends AbstractExpr {
         GPRegister returnRegister = this.LoadGencode(compiler, false);
         compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.SP), returnRegister));
         if (!compiler.getCompilerOptions().isNoCheck()){
-            compiler.addInstruction(new CMP(new NullOperand(), returnRegister));
+            compiler.addInstruction(new CMP(new NullOperand(), returnRegister), "checking that class adresse is not null");
             compiler.addInstruction(new BEQ(new Label("deref_null_error")));
+            compiler.getErrorManagementUnit().activeError("deref_null_error");
         }
         compiler.addInstruction(new LOAD(new RegisterOffset(0, returnRegister), returnRegister));
         compiler.addInstruction(new BSR(new RegisterOffset(methodIndex, returnRegister)));   
+        compiler.addInstruction(new LOAD(Register.getR(0), returnRegister));
         compiler.addInstruction(new SUBSP(nbParamTotal));
         compiler.getRegisterManagement().decreaseTempVariables(nbParamTotal);    
         
         /*
          * Stockage du resulat de la méthode, et l'associer à un registre
          */
-        compiler.addInstruction(new LOAD(Register.getR(0), returnRegister));
+        compiler.addComment("--------EndMethodCall--------"+getLocation()+"-----");    
         this.setRegisterDeRetour(returnRegister);
     }
 
@@ -133,12 +130,13 @@ public class MethodCall extends AbstractExpr {
                 //verification des signatures
                 if (listParam.getList().size() == ((MethodDefinition)Defi).getSignature().size()){
                     int compteur = 0;
-                    while (compteur++ < listParam.getList().size()){
+                    while (compteur < listParam.getList().size()){
                         Type tPramCall = listParam.getList().get(compteur).verifyExpr(compiler, localEnv, currentClass);
                         Type tPramMeth = ((MethodDefinition)Defi).getSignature().paramNumber(compteur);
                         if (!tPramCall.sameType(tPramMeth)){
                             throw new ContextualError("Signature de methode non prévu", getLocation());
                         }
+                        compteur++;
                     }
                 }else{
                     throw new ContextualError("Signature de methode non prévu", getLocation());

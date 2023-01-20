@@ -1,8 +1,17 @@
-	TSTO #8
+	TSTO #10
 	BOV stack_overflow_error
-	ADDSP #8
+	ADDSP #9
 ; start main program
-; Main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 8(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 9(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
 ; Beginning of main instructions:
 	LOAD #0, R2	; loading 0 into memory
 	STORE R2, 1(GB)	; Initializing the variable i and loading it into memory
@@ -152,6 +161,22 @@ end_ifthenelse_2:
 	WSTR "/11 ]"
 	WNL
 	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
 stack_overflow_error:
 	WSTR "Error: stack_overflow_error"
 	WNL
