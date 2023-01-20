@@ -196,8 +196,7 @@ public class DeclMethod extends AbstractDeclMethod {
     protected void verifyDeclMethod(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
         throws ContextualError {
         listParam.getenvParm().setParentEnvironment(localEnv);
-        methodBody.verifyDeclMethodBody(compiler, listParam.getenvParm(), currentClass, type.getType());      
-        // TODO Auto-generated method stub
+        methodBody.verifyDeclMethodBody(compiler, listParam.getenvParm(), currentClass, type.getType());
         
     }
 
