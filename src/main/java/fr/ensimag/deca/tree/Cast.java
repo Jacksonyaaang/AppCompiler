@@ -52,6 +52,8 @@ public class Cast extends AbstractExpr{
                  (t1.isNull() && !t2.isClass())){
                 throw new ContextualError("Cast impossible", getLocation());
         }
+        //return compiler.environmentType.FLOAT;
+        setType(typeCast.getType());
         return typeCast.getType();
     }
 
