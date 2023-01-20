@@ -89,13 +89,13 @@ public class DeclField extends AbstractDeclField {
     protected void verifyDeclField(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
         throws ContextualError {
         LOG.debug("[DeclField][verifyDecleField] Verify a Field declaration");
-        ClassDefinition tmpClass;
-        for (tmpClass = currentClass.getSuperClass(); tmpClass != null; tmpClass = tmpClass.getSuperClass()){
-            if (tmpClass.getMembers().getExp().containsKey(varName.getName()) && 
-                varName.getDefinition() instanceof MethodDefinition){
-                    throw new ContextualError(" Il existe une methode qui posséde le même nom que le field =  "+ varName.getName().getName(), getLocation());
-                }
-        }
+        // ClassDefinition tmpClass;
+        // for (tmpClass = currentClass.getSuperClass(); tmpClass != null; tmpClass = tmpClass.getSuperClass()){
+        //     if (tmpClass.getMembers().getExp().containsKey(varName.getName()) && 
+        //         varName.getDefinition() instanceof MethodDefinition){
+        //             throw new ContextualError(" Il existe une methode qui posséde le même nom que le field =  "+ varName.getName().getName(), getLocation());
+        //         }
+        // }
         Type t = type.verifyType(compiler);
         type.setType(t);
         //Vérification de la condition type =/= void de la règle 3.17
@@ -110,7 +110,7 @@ public class DeclField extends AbstractDeclField {
             localEnv.declare(varName.getName(), varName.getExpDefinition()); 
         } 
         catch (EnvironmentExp.DoubleDefException e) {
-            throw new ContextualError("Il existe déjà un champs de même nom " + varName.getName().getName() + " dans la classe " + currentClass.getType().getName().getName(), getLocation());
+            throw new ContextualError("Il existe déjà un champs ou une méthode de même nom " + varName.getName().getName() + " dans la classe " + currentClass.getType().getName().getName(), getLocation());
         }
         currentClass.setNumberOfFields(_index);    
     }
