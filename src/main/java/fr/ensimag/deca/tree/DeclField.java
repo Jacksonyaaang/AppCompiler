@@ -113,7 +113,7 @@ public class DeclField extends AbstractDeclField {
             localEnv.declare(varName.getName(), varName.getExpDefinition()); 
         } 
         catch (EnvironmentExp.DoubleDefException e) {
-            throw new ContextualError("Il y a déjà un field ou une methode de même nom", getLocation());
+            throw new ContextualError("Il existe déjà un champs de nom " + varName.getName().getName() + " dans la classe " + currentClass.getType().getName().getName(), getLocation());
         }
         currentClass.setNumberOfFields(_index);    
     }

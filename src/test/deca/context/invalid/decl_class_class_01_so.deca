@@ -1,0 +1,10 @@
+// Description:
+//    Tester l'héritage d'une classe non définie
+//
+// Resultats:
+//    Ligne 9: La super classe A n'est pas définie
+//
+// Historique:
+//    cree le 20/01/2023
+class B extends A{
+}
