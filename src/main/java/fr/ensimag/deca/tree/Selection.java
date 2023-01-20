@@ -14,6 +14,7 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.FieldDefinition;
+import fr.ensimag.deca.context.TableType;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
@@ -73,6 +74,10 @@ public class Selection extends AbstractLValue {
             FieldDefinition fieldDefi;
             Type type = obj.verifyExpr(compiler, localEnv, currentClass);
             this.obj.setType(type);
+            if (type.isTable()){
+                traitementAcessDimension(compiler, localEnv, currentClass);
+                return compiler.environmentType.INT;
+            }
             //setType(t);  //error, miss 'this.type'
             if (!type.isClass()){
                 throw new ContextualError("[Using Error] The first selection must be a class or this ", getLocation());
@@ -97,6 +102,21 @@ public class Selection extends AbstractLValue {
             setType(fieldDefi.getType());
             return getType();
         }
+
+    public void traitementAcessDimension(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
+        if (field.getName() == compiler.createSymbol("size1D") || field.getName() == compiler.createSymbol("size2D")){
+            if (field.getName() == compiler.createSymbol("size2D")){
+                if (((TableType)(obj.getType())).getDimension() == 1){
+                    throw new ContextualError("Le tableau est 1D", getLocation());
+                }
+            }
+        }
+        else{
+            throw new ContextualError("Pour accéder au caratéristique du tableau, il faut mettre size1D, size2D", getLocation());
+        }
+
+    }
+
 
         //this.obj1.obj2.untrucprimitif=8;
     //     Type typeReturn = null;

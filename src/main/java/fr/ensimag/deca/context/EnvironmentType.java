@@ -39,6 +39,15 @@ public class EnvironmentType {
         FLOAT = new FloatType(floatSymb);
         envTypes.put(floatSymb, new TypeDefinition(FLOAT, Location.BUILTIN));
 
+        Symbol flaotTableSymb1D = compiler.createSymbol("flaot[]");
+        TABLEflaot1D = new TableType(flaotTableSymb1D, flaot, 1);
+        envTypes.put(flaotTableSymb1D, new TableDefinition(TABLEflaot1D, Location.BUILTIN));
+
+        Symbol flaotTableSymb2D = compiler.createSymbol("flaot[][]");
+        TABLEflaot2D = new TableType(flaotTableSymb2D, flaot, 2);
+        envTypes.put(flaotTableSymb2D, new TableDefinition(TABLEflaot2D, Location.BUILTIN));
+        
+
         Symbol voidSymb = compiler.createSymbol("void");
         VOID = new VoidType(voidSymb);
         envTypes.put(voidSymb, new TypeDefinition(VOID, Location.BUILTIN));
