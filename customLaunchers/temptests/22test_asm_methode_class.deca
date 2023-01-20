@@ -9,5 +9,10 @@ class A {
 	    int h = 5 ;
 	    println("hello world");
     }
+    void setX(int x) {
+	    int h = 5 ;
+	    println("hello world");
+    }
+    
 
 }

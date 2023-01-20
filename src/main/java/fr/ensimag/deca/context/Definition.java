@@ -60,6 +60,10 @@ public abstract class Definition {
     public boolean isParam() {
         return false;
     }
+    
+    public boolean isTable() {
+        return false;
+    }
 
     /**
      * Return the same object, as type MethodDefinition, if possible. Throws

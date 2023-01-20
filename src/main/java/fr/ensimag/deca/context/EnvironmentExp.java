@@ -1,3 +1,5 @@
+
+
 package fr.ensimag.deca.context;
 
 import java.util.HashMap;
@@ -42,6 +44,12 @@ public class EnvironmentExp {
         private static final long serialVersionUID = -2733379901827316441L;
     }
 
+    private EnvironmentExp currentExp = null;  // used to get the current environement expression when "get(symbol)"
+
+    public EnvironmentExp getCurrentExp() {
+        return currentExp;
+    }
+
     /**
      * Return the definition of the symbol in the environment, or null if the
      * symbol is undefined.
@@ -49,8 +57,10 @@ public class EnvironmentExp {
     public ExpDefinition get(Symbol key) {
         if (!envExp.containsKey(key)&&parentEnvironment==null)
             return null;
-        if (envExp.containsKey(key))
+        if (envExp.containsKey(key)){
+            currentExp=this;
             return envExp.get(key);
+        }
         return parentEnvironment.get(key);
     }
 
@@ -120,11 +130,5 @@ public class EnvironmentExp {
         return parentEnvironment;
     }
 
-    // public void setEnvExp(Map<Symbol, ExpDefinition> envExp) {
-    //     this.envExp = envExp;
-    // }
-
-    // public void setP
-    // kjhùijpm
 
 }

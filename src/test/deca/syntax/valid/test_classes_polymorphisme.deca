@@ -1,0 +1,106 @@
+// Description:
+//  test de features variées: classe fille, usage de méthode dans une méthode, attribut du type de sa propre classe
+//  , polymorphisme, réécriture et redéfinitions ect...
+//
+// test compilation et exécution du fichier assembleur
+// Resultats attendu (pas encore confirmé):
+// 4
+// 4
+// 2
+// 2
+// 18
+// Je suis une instance de la classe A
+// Je suis une instance de la classe B
+// Je suis une instance de la classe B
+// je suis b
+// 5.5
+// instanceOf reconnait l'appartenance
+// instanceOf reconnait la non appartenance
+// 5
+
+// 
+// Historique:
+//    cree le 15/01/2023
+
+
+class A{
+    int x;
+    void methodA(int i){
+        this.x=i;
+    }
+    int getX(){
+        return this.x;
+    }
+    void setX(int i){
+        this.x=i;
+    }
+    int setgetX(int i){
+        this.setX(i);
+        return this.getX();
+    }
+    void QuiSuisJe(){
+        println("Je suis une instance de la classe A");
+    }
+}
+
+class B extends A{
+    float z;
+    B successeur;
+    void constructeurB(int i, float f){
+        this.x=i;
+        this.z=f;
+    }
+    void QuiSuisJe(){
+        println("Je suis une instance de la classe B");
+    }
+    void QuiSuisJe(String nom){
+        QuiSuisJe();
+        println("je suis ",nom);
+    }
+    
+    float getZ(){
+        return this.z;
+    }
+    
+    void setZ(return z){
+        this.x=i;
+    }
+}
+
+{
+    A a=new A();
+    a.methodA(5);
+    float z1;
+    B b;
+    int y=a.x;
+    B b2=new();
+    b2.constructeurB(5, 5.5);   
+    println(a.getX());
+    println(y);
+    a.setX(2);
+    println(a.getX());
+    println(y);
+    println(a.setgetX(18));
+    a.QuiSuisJe();
+    b.QuiSuisJe();
+    b.QuiSuisJe("b");
+    b2.successeur=null;
+    b.successeur=b2;
+    z1=b.successeur.z;
+    println(z1);
+    if(a instanceOf A){
+        println("instanceOf reconnait l'appartenance");
+    }
+    else{
+        println("instanceOf ne reconnait pas l'appartenance");
+    }
+    if(b instanceOf A){
+        println("instanceOf reconnait la non appartenance");
+    }
+    else{
+        println("instanceOf ne reconnait pas la non appartenance");
+    }
+    b=(B)b2;
+    y=b.x;
+    println(y);
+}

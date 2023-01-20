@@ -4,6 +4,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.DecacInternalError;
@@ -162,7 +163,6 @@ public abstract class AbstractExpr extends AbstractInst {
         LOG.debug("[AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments" );
         //Vérification du membre de droite d'une affectation
         Type t = this.verifyExpr(compiler, localEnv, currentClass);
-
         // Conversion du membre droit en float s'il est de tye int et que le membre de gauche est de type float
         if (expectedType.isFloat() && t.isInt()){
             ConvFloat cF = new ConvFloat(this);
@@ -170,13 +170,18 @@ public abstract class AbstractExpr extends AbstractInst {
             LOG.debug("[Assign][verifyExpr] Conv int -> float");
             return cF;
         }
-        if (!expectedType.sameType(t))
+        else if (expectedType.isClass() && t.isClassOrNull()){
+            if (!((ClassType)t).isSubClassOf((ClassType)expectedType)){
+                throw new ContextualError("Not expected type", getLocation());
+            }else return this;
+        }
+        if (!expectedType.sameType(t)){
             throw new ContextualError("Not expected type", getLocation());
+        }
         setType(expectedType);
         return this;
     }
-    
-    
+        
     @Override
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)

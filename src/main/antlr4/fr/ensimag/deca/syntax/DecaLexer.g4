@@ -15,6 +15,8 @@ OBRACE : '{';
 CBRACE : '}';
 OPARENT : '(';
 CPARENT : ')';
+OBRACKET : '[';
+CBRACKET : ']';
 SEMI : ';';
 COMMA : ',';
 PRINT : 'print';
@@ -85,6 +87,7 @@ fragment EOL : '\n';
 fragment STRING_CAR : ~('"' | '\\' | '\n');
 STRING : '"' (STRING_CAR | '\\"' | '\\\\')* '"';
 MULTI_LINE_STRING : '"' (STRING_CAR | '\n' | '\\"' | '\\\\')* '"';
+
 
 fragment FILENAME : (LETTER | DIGIT | '.' | '-' | '_')+;
 INCLUDE : '#include' (' ')* '"' FILENAME '"';

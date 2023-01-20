@@ -42,7 +42,9 @@ options {
     protected StringBuilder sb = null;  
     protected AbstractMethodBody body = null;
     protected StringLiteral stringAsmBody = null;
-    protected This thisImplicite = null;        
+    protected This thisImplicite = null;  
+    protected StringBuilder sbTable = null;  
+    protected String symbolString = null;     
     
 }
 
@@ -519,11 +521,32 @@ literal returns[AbstractExpr tree]
     ;
 
 ident returns[AbstractIdentifier tree]
+    @init   {
+            symbolString = null;
+            sbTable = null;
+    }
     :
      IDENT {
         $tree = new Identifier(this.getDecacCompiler().createSymbol($IDENT.text));
         setLocation($tree, $IDENT);
         }
+    |
+        IDENT OBRACKET CBRACKET {
+            sbTable = new StringBuilder();
+            sbTable.append($IDENT.text); 
+            sbTable.append("[]");
+            $tree = new Identifier(this.getDecacCompiler().createSymbol(sbTable.toString()));
+            setLocation($tree, $IDENT);
+        }
+    |    
+        IDENT OBRACKET CBRACKET OBRACKET CBRACKET  {
+            sbTable = new StringBuilder();
+            sbTable.append($IDENT.text); 
+            sbTable.append("[][]");
+            $tree = new Identifier(this.getDecacCompiler().createSymbol(sbTable.toString()));
+            setLocation($tree, $IDENT);
+        }
+
     ;
 
 /****     Class related rules     ****/
@@ -561,7 +584,7 @@ class_extension returns[AbstractIdentifier tree]
             // On n'a pas besoin d'ajouter une location car 
             // cette extention se fait par défaut 
             // sans input de l'utilisateur
-            $tree = new Identifier(this.getDecacCompiler().createSymbol("object")); 
+            $tree = new Identifier(this.getDecacCompiler().createSymbol("Object")); 
             $tree.setLocation(Location.BUILTIN);
         }
     ;

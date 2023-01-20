@@ -82,8 +82,8 @@ public class DeclParam extends AbstractDeclParam {
             }
             //verify environmentTypes has the type of Paramname 
             Map<Symbol, TypeDefinition> envTypes = compiler.environmentType.getEnvTypes();
-            if (!envTypes.containsKey(typeParam.getName())){
-                throw new ContextualError("[NOT A PROPER TYPE ISSUE]Sorry we don't have this type of type", getLocation());
+            if (!(envTypes.containsKey(typeParam.getName()))){
+                throw new ContextualError("Le type " + typeParam.getName() + " ne peut être utilisée comme paramétre de fonction", getLocation());
             }
             ParamDefinition paramDef = new ParamDefinition(typeParam, getLocation());
             paramName.setDefinition(paramDef);

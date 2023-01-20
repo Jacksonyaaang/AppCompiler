@@ -1,0 +1,328 @@
+	TSTO #16
+	BOV stack_overflow_error
+	ADDSP #12
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 8(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 9(GB)
+	LEA 8(GB), R0
+	STORE R0, 10(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 11(GB)
+	LOAD code.Polyexp.pexp, R0
+	STORE R0, 12(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[19, 16]-----
+; [New][loadItemintoRegister] loading new of calss =  Polyexp into memory at register R2
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 10(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Polyexp
+	POP R2
+; --------EndNew--------[19, 16]-----
+	STORE R2, 1(GB)	; Initializing the variable p and loading it into memory
+	LOAD #0x0.0p0, R2	; loading 0.0 into memory
+	STORE R2, 2(GB)	; Initializing the variable g and loading it into memory
+	LOAD #0x1.0p0, R2	; loading 1.0 into memory
+	STORE R2, 3(GB)	; Initializing the variable d and loading it into memory
+	LOAD #0x1.0p0, R2	; loading 1.0 into memory
+	OPP R2, R2	; Doing an unary minus
+	STORE R2, 4(GB)	; Initializing the variable fg and loading it into memory
+	LOAD #0x1.6fc2ecp-1, R2	; loading 0.718284 into memory
+	STORE R2, 5(GB)	; Initializing the variable fd and loading it into memory
+while_begin1:
+; --------StartBinaryOp--------[24, 11]-----
+	LOAD 3(GB), R2	; loading d into memory
+; --------StartBinaryOp--------[24, 15]-----
+	LOAD 2(GB), R3	; loading g into memory
+	PUSH R2
+	LOAD #0x1.0p-23, R2	; loading 1.1920929E-7 into memory
+	ADD R2, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R2
+; --------EndBinaryOp--------[24, 15]-----
+	CMP R3, R2	; Comparing registers for GreaterOrEqual operation 
+	SGE R2	; Placing GreaterOrEqual result into the register  
+; --------EndBinaryOp--------[24, 11]-----
+	CMP #1, R2
+	BNE while_end1
+; --------StartBinaryOp--------[27, 6]-----
+; --------BeginAssignOp--------[27, 7]-----
+; --------BeginMethodCall--------[27, 12]-----
+	ADDSP #2
+	LOAD 1(GB), R3	; loading p into memory
+	STORE R3, 0(SP)
+; --------BeginAssignOp--------[27, 19]-----
+; --------StartBinaryOp--------[27, 23]-----
+; --------StartBinaryOp--------[27, 24]-----
+	PUSH R2
+	LOAD 2(GB), R2	; loading g into memory
+	ADD 3(GB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[27, 24]-----
+	PUSH R3
+	LOAD #0x1.0p1, R3	; loading 2.0 into memory
+	DIV R3, R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R3
+; --------EndBinaryOp--------[27, 23]-----
+	STORE R2, 6(GB)	;  Assiging a value to m
+	LOAD R2, R3	;  Return value of the assignement of =mand storing it into R3
+	POP R2
+; --------EndAssignOp--------[27, 19]-----
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	LOAD R0, R3
+	SUBSP #2
+; --------EndMethodCall--------[27, 12]-----
+	STORE R3, 7(GB)	;  Assiging a value to fm
+	LOAD R3, R2	;  Return value of the assignement of =fmand storing it into R2
+; --------EndAssignOp--------[27, 7]-----
+	LOAD #0x0.0p0, R3	; loading 0.0 into memory
+	CMP R3, R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+; --------EndBinaryOp--------[27, 6]-----
+; ---------Startif-----------[27, 1]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else1
+; --------BeginAssignOp--------[28, 5]-----
+	LOAD 6(GB), R3	; loading m into memory
+	STORE R3, 3(GB)	;  Assiging a value to d
+	LOAD R3, R2	;  Return value of the assignement of =dand storing it into R2
+; --------EndAssignOp--------[28, 5]-----
+; --------BeginAssignOp--------[29, 5]-----
+	LOAD 7(GB), R3	; loading fm into memory
+	STORE R3, 5(GB)	;  Assiging a value to fd
+	LOAD R3, R2	;  Return value of the assignement of =fdand storing it into R2
+; --------EndAssignOp--------[29, 5]-----
+	BRA end_ifthenelse_1
+else1:
+; --------BeginAssignOp--------[31, 5]-----
+	LOAD 6(GB), R3	; loading m into memory
+	STORE R3, 2(GB)	;  Assiging a value to g
+	LOAD R3, R2	;  Return value of the assignement of =gand storing it into R2
+; --------EndAssignOp--------[31, 5]-----
+; --------BeginAssignOp--------[32, 5]-----
+	LOAD 7(GB), R3	; loading fm into memory
+	STORE R3, 4(GB)	;  Assiging a value to fg
+	LOAD R3, R2	;  Return value of the assignement of =fgand storing it into R2
+; --------EndAssignOp--------[32, 5]-----
+end_ifthenelse_1:
+; ---------Endif-----------
+	BRA while_begin1
+while_end1:
+	LOAD 2(GB), R2	; loading g into memory
+	LOAD R2, R1
+	WFLOAT
+	WSTR " = "
+	LOAD 2(GB), R2	; loading g into memory
+	LOAD R2, R1
+	WFLOATX
+	WNL
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : Polyexp -------------------
+; ---------------------------------------------------
+; ------------Init method for class = Polyexp--------
+init.Polyexp:
+	RTS
+; ------------Code for method : pexp with label =  code.Polyexp.pexp--------
+code.Polyexp.pexp:
+	TSTO #9
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------StartBinaryOp--------[14, 8]-----
+; --------StartBinaryOp--------[14, 8]-----
+	LOAD -3(LB), R2	; loading m into memory
+; --------StartBinaryOp--------[14, 13]-----
+; --------StartBinaryOp--------[14, 13]-----
+	LOAD -3(LB), R3	; loading m into memory
+; --------StartBinaryOp--------[14, 18]-----
+; --------StartBinaryOp--------[14, 18]-----
+	PUSH R2
+	LOAD -3(LB), R2	; loading m into memory
+; --------StartBinaryOp--------[14, 23]-----
+; --------StartBinaryOp--------[14, 23]-----
+	PUSH R3
+	LOAD -3(LB), R3	; loading m into memory
+; --------StartBinaryOp--------[14, 28]-----
+; --------StartBinaryOp--------[14, 28]-----
+	PUSH R2
+	LOAD -3(LB), R2	; loading m into memory
+; --------StartBinaryOp--------[14, 33]-----
+; --------StartBinaryOp--------[14, 33]-----
+	PUSH R3
+	LOAD -3(LB), R3	; loading m into memory
+; --------StartBinaryOp--------[14, 39]-----
+; --------StartBinaryOp--------[14, 39]-----
+	PUSH R2
+	LOAD -3(LB), R2	; loading m into memory
+; --------StartBinaryOp--------[14, 44]-----
+	PUSH R3
+	LOAD #0x1.0p0, R3	; loading 1.0 into memory
+	PUSH R2
+	LOAD #0x1.3bp12, R2	; loading 5040.0 into memory
+	DIV R2, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R2
+; --------EndBinaryOp--------[14, 44]-----
+	MUL R3, R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R3
+; --------EndBinaryOp--------[14, 39]-----
+; --------StartBinaryOp--------[14, 58]-----
+	PUSH R3
+	LOAD #0x1.0p0, R3	; loading 1.0 into memory
+	PUSH R2
+	LOAD #0x1.68p9, R2	; loading 720.0 into memory
+	DIV R2, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R2
+; --------EndBinaryOp--------[14, 58]-----
+	ADD R3, R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R3
+; --------EndBinaryOp--------[14, 39]-----
+	MUL R2, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R2
+; --------EndBinaryOp--------[14, 33]-----
+; --------StartBinaryOp--------[14, 71]-----
+	PUSH R2
+	LOAD #0x1.0p0, R2	; loading 1.0 into memory
+	PUSH R3
+	LOAD #0x1.ep6, R3	; loading 120.0 into memory
+	DIV R3, R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R3
+; --------EndBinaryOp--------[14, 71]-----
+	ADD R2, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R2
+; --------EndBinaryOp--------[14, 33]-----
+	MUL R3, R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R3
+; --------EndBinaryOp--------[14, 28]-----
+; --------StartBinaryOp--------[14, 84]-----
+	PUSH R3
+	LOAD #0x1.0p0, R3	; loading 1.0 into memory
+	PUSH R2
+	LOAD #0x1.8p4, R2	; loading 24.0 into memory
+	DIV R2, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R2
+; --------EndBinaryOp--------[14, 84]-----
+	ADD R3, R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R3
+; --------EndBinaryOp--------[14, 28]-----
+	MUL R2, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R2
+; --------EndBinaryOp--------[14, 23]-----
+; --------StartBinaryOp--------[14, 96]-----
+	PUSH R2
+	LOAD #0x1.0p0, R2	; loading 1.0 into memory
+	PUSH R3
+	LOAD #0x1.8p2, R3	; loading 6.0 into memory
+	DIV R3, R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R3
+; --------EndBinaryOp--------[14, 96]-----
+	ADD R2, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R2
+; --------EndBinaryOp--------[14, 23]-----
+	MUL R3, R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R3
+; --------EndBinaryOp--------[14, 18]-----
+; --------StartBinaryOp--------[14, 107]-----
+	PUSH R3
+	LOAD #0x1.0p0, R3	; loading 1.0 into memory
+	PUSH R2
+	LOAD #0x1.0p1, R2	; loading 2.0 into memory
+	DIV R2, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R2
+; --------EndBinaryOp--------[14, 107]-----
+	ADD R3, R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R3
+; --------EndBinaryOp--------[14, 18]-----
+	MUL R2, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R2
+; --------EndBinaryOp--------[14, 13]-----
+	PUSH R2
+	LOAD #0x1.0p0, R2	; loading 1.0 into memory
+	ADD R2, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R2
+; --------EndBinaryOp--------[14, 13]-----
+	MUL R3, R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[14, 8]-----
+	LOAD #1, R3	; loading 1 into memory
+	FLOAT R3, R3	; Doing an unary minus
+	SUB R3, R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[14, 8]-----
+	LOAD R2, R0
+	BRA fin.Polyexp.pexp
+	WSTR "Error: La méthode code.Polyexp.pexp doit retourner un element"
+	WNL
+	ERROR
+fin.Polyexp.pexp:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error: overflow_error"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

@@ -25,6 +25,15 @@ public class EnvironmentType {
         Symbol intSymb = compiler.createSymbol("int");
         INT = new IntType(intSymb);
         envTypes.put(intSymb, new TypeDefinition(INT, Location.BUILTIN));
+                
+        Symbol intTableSymb1D = compiler.createSymbol("int[]");
+        TABLEINT1D = new TableType(intTableSymb1D, INT, 1);
+        envTypes.put(intTableSymb1D, new TableDefinition(TABLEINT1D, Location.BUILTIN));
+
+        Symbol intTableSymb2D = compiler.createSymbol("int[][]");
+        TABLEINT2D = new TableType(intTableSymb2D, INT, 2);
+        envTypes.put(intTableSymb2D, new TableDefinition(TABLEINT2D, Location.BUILTIN));
+
 
         Symbol floatSymb = compiler.createSymbol("float");
         FLOAT = new FloatType(floatSymb);
@@ -38,6 +47,10 @@ public class EnvironmentType {
         BOOLEAN = new BooleanType(booleanSymb);
         envTypes.put(booleanSymb, new TypeDefinition(BOOLEAN, Location.BUILTIN));
 
+        Symbol nullSymb = compiler.createSymbol("null");
+        NULL = new NullType(nullSymb);
+        envTypes.put(nullSymb, new TypeDefinition(NULL, Location.BUILTIN));
+
         Symbol stringSymb = compiler.createSymbol("string");
         STRING = new StringType(stringSymb);
         // not added to envTypes, it's not visible for the user.
@@ -46,7 +59,7 @@ public class EnvironmentType {
         /*
          * Ajoute de la classe object avec sa méthode equals
          */
-        Symbol objectSymb = compiler.createSymbol("object");
+        Symbol objectSymb = compiler.createSymbol("Object");
         OBJECT = new ClassType(objectSymb);
         ClassDefinition defintionClassObject = new ClassDefinition(OBJECT, Location.BUILTIN, null);
         envTypes.put(objectSymb, defintionClassObject);
@@ -58,18 +71,15 @@ public class EnvironmentType {
         signature.add(OBJECT);
         MethodDefinition defintionMethodEquals = new MethodDefinition(VOID, Location.BUILTIN, signature, defintionClassObject.incNumberOfMethods());
         defintionMethodEquals.setMethodname("equals");
-        defintionMethodEquals.setLabel(new Label("code.object.equals"));
+        defintionMethodEquals.setLabel(new Label("code.Object.equals"));
         try {
             defintionClassObject.getMembers().declare(equalsMethodObject, defintionMethodEquals);
         } catch (DoubleDefException e) {
-            //C'est impossible d'être dans cette position car la méthode equals ne peux pas 
-            //être défini deux fois
+            //C'est impossible d'être dans cette position car la méthode equals ne peux par 
+            // être défini deux fois
             e.printStackTrace();
             System.exit(1);
         }
-
-        
-
     }
 
     private final Map<Symbol, TypeDefinition> envTypes;
@@ -84,8 +94,11 @@ public class EnvironmentType {
 
     public final VoidType    VOID;
     public final IntType     INT;
+    public final TableType    TABLEINT1D;
+    public final TableType    TABLEINT2D;
     public final FloatType   FLOAT;
     public final StringType  STRING;
     public final BooleanType BOOLEAN;
-    public final ClassType   OBJECT;
+    public final NullType NULL;
+    public final ClassType OBJECT;
 }

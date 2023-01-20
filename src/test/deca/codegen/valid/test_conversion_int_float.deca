@@ -1,9 +1,16 @@
+// Description:
+// Test la conversion des float
+// Resultats:
+// test de conversion d'un int en float est validé
+// 
+// Historique:
+//    cree le 01/01/2023
 {
     int x=2;
     float f1;
     f1=x;
 
-    if(f1==2.0){
+    if(f1==2){
         println("test de conversion d'un int en float est validé");
     }
     else{

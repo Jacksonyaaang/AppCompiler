@@ -11,6 +11,14 @@ public class TableType extends Type{
     public final Type elementsType;
     public final int dimension;
 
+    public Type getElementsType() {
+        return elementsType;
+    }
+
+    public int getDimension() {
+        return dimension;
+    }
+
     /**
      * TableType initialise un tableau qui est caractérise par son nom
      * par exemple float[] ou int[] / le type de ses elements
@@ -21,7 +29,7 @@ public class TableType extends Type{
      */
     public TableType(Symbol name, Type elementsType, int dimension) {
         super(name);
-        assert(dimension >=0);
+        assert(dimension >=0 && dimension <= 2);
         assert(!(elementsType instanceof VoidType));
         this.elementsType = elementsType;
         this.dimension = dimension;

@@ -20,7 +20,7 @@ import fr.ensimag.ima.pseudocode.instructions.STORE;
  */
 public class DeclField extends AbstractDeclField {
 
-    private static final Logger LOG = Logger.getLogger(DeclField.class);
+    private static final Logger LOG = Logger.getLogger(IntLiteral.class);
 
     final private Visibility visibility;
     final private AbstractIdentifier type;
@@ -82,13 +82,12 @@ public class DeclField extends AbstractDeclField {
     @Override 
     String prettyPrintNode() {
         String visibiltyOutput = visibility == Visibility.PROTECTED ? " [visibility=PROTECTED] " : " [visibility=PUBLIC] ";
-        return visibiltyOutput + " DeclField" +  super.prettyPrintNode();
+        return visibiltyOutput + " DeclField" ;//+  super.prettyPrintNode();
     }
 
     @Override
     protected void verifyDeclField(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
         throws ContextualError {
-        assert(currentClass != null);
         LOG.debug("[DeclField][verifyDecleField] Verify a Field declaration");
         ClassDefinition tmpClass;
         for (tmpClass = currentClass.getSuperClass(); tmpClass != null; tmpClass = tmpClass.getSuperClass()){
@@ -105,8 +104,6 @@ public class DeclField extends AbstractDeclField {
         }
         //initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
         int _index = currentClass.getNumberOfFields() + 1;
-        LOG.debug("[DeclField][verifyDecleField]  Declaration d'une field avec le nom = "  + varName.getName() + 
-                    "  / avec l'index = "+ _index+ " / dans la classe " + currentClass.getType().getName().getName() );
         FieldDefinition fieldDf = new FieldDefinition(type.getType(), getLocation(), visibility, currentClass, _index);      //new FieldDefinition(type.getType(), varName.getLocation());
         varName.setDefinition(fieldDf);
         try{
@@ -147,6 +144,8 @@ public class DeclField extends AbstractDeclField {
         //assigned to field, and place it in the memory location that holds the field
         if (initialization instanceof Initialization ){ 
             GPRegister assignRegister = this.LoadAndReserveARegister(compiler);
+            compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), assignRegister),
+                    "[codeGenDelField][initialization] loading class (this) into memory when working with field "+getVarName().getName());
             this.initialization.codegenInitial(compiler);
             compiler.addInstruction(new STORE(this.initialization.getRegistreDeRetour(),
                                         new RegisterOffset(this.varName.getFieldDefinition().getIndex(), assignRegister)), "Initializing the field "+ getVarName().getName()
@@ -176,5 +175,4 @@ public class DeclField extends AbstractDeclField {
 
 
 }
-
 
