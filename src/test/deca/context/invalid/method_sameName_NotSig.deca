@@ -1,0 +1,23 @@
+// Description:
+//    Teste method declaration when the same name and same return type but different signiture occured.
+//
+// Resultats:
+//   method_obj_test.deca:18:3: [ERROR] The current method don't have a proper type
+
+class Animal{
+   int food=0;
+   void eat(){
+
+   }
+} 
+
+class Cow extends Animal{
+   int eat(int a){
+
+   }
+}
+
+//main   
+{
+
+}
