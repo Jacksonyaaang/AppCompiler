@@ -45,8 +45,13 @@ public class CompilerOptions {
     
     private boolean decompile;
     private boolean verfiryAndStop;
+    /**
+     * Si la valeur de nocheck est vrai, 
+     * on n'ajoute pas le traitement d'erreur en runtime
+     */
     private boolean noCheck = false;
 
+    
     public boolean isNoCheck() {
         return noCheck;
     }

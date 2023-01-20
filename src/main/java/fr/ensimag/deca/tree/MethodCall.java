@@ -23,6 +23,9 @@ import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.NullOperand;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.instructions.SUBSP;
 
@@ -46,25 +49,63 @@ public class MethodCall extends AbstractExpr {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
-        // int nbparam = this.listParam.size();
-        // GPRegister Rm=this.LoadGencode(compiler, false);
-        // int indice_method=method.getMethodDefinition().        
-        // compiler.addInstruction(new ADDSP(nbparam+1));
-        // compiler.addInstruction(new LOAD(i(GB),Rm));
-        // compiler.addInstruction(new STORE(Rm, 0(SP)));
-        // /*
-        //  * ajout des paramètres via l'usage
-        //  * LOAD val, R2
-        //  * STORE R2, -i (SP)
-        //  * i: numéro du paramètre
-        //  */
-        // compiler.addInstruction(new LOAD(0(SP), Rm));
-        // compiler.addInstruction(new CMP(null, Rm));
-        // compiler.addInstruction(new BEQ(new Label("deref_null_error")));
-        // compiler.addInstruction(new LOAD(0(Rm), Rm));
-        // compiler.addInstruction(new BSR(indice_method+(Rm)));   
-        // //comment utiliser BSR?         
-        // compiler.addInstruction(new SUBSP(nbparam));
+        /*
+         * Configuration initial : reservation de l'espace dans le stack, et modification des paramétre 
+         *  qui verifie que le stack a suffisament d'espace 
+         */
+        int nbParamTotal = this.listParam.size()+1;
+        int methodIndex = ((Identifier)methode).getMethodDefinition().getIndex(); 
+        compiler.getRegisterManagement().increaseTempVariables(nbParamTotal);    
+        compiler.addInstruction(new ADDSP(nbParamTotal));
+
+        /*
+         * Emplacement de l'adresse de la class dans un registre
+         */
+        obj.codeGenInst(compiler);
+        compiler.addInstruction(new STORE(obj.getRegisterDeRetour(), new RegisterOffset(0, Register.SP)));
+        obj.popRegisters(compiler);
+        compiler.getRegisterManagement().decrementOccupationRegister(obj.getRegisterDeRetour());
+
+        /*
+         * ajout des paramètres via l'usage
+         * LOAD val, R2
+         * STORE R2, -i (SP)
+         * i: numéro du paramètre
+         */
+        /*
+         * Ce paramétre sera utilisée pour associer des adresses aux paramétre de la méthode
+         */
+        int positionInStack = -1;
+        /*
+         * Ajout des paramétre dans le stack
+         */
+        for  (AbstractExpr expr : listParam.getList()){
+            expr.codeGenInst(compiler);
+            compiler.addInstruction(new STORE(expr.getRegisterDeRetour(), new RegisterOffset(positionInStack, Register.SP)));
+            obj.popRegisters(compiler);
+            compiler.getRegisterManagement().decrementOccupationRegister(obj.getRegisterDeRetour());
+            positionInStack--;
+        }
+
+        /*
+         * Appel de method
+         */
+        GPRegister returnRegister = this.LoadGencode(compiler, false);
+        compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.SP), returnRegister));
+        if (!compiler.getCompilerOptions().isNoCheck()){
+            compiler.addInstruction(new CMP(new NullOperand(), returnRegister));
+            compiler.addInstruction(new BEQ(new Label("deref_null_error")));
+        }
+        compiler.addInstruction(new LOAD(new RegisterOffset(0, returnRegister), returnRegister));
+        compiler.addInstruction(new BSR(new RegisterOffset(methodIndex, returnRegister)));   
+        compiler.addInstruction(new SUBSP(nbParamTotal));
+        compiler.getRegisterManagement().decreaseTempVariables(nbParamTotal);    
+        
+        /*
+         * Stockage du resulat de la méthode, et l'associer à un registre
+         */
+        compiler.addInstruction(new LOAD(Register.getR(0), returnRegister));
+        this.setRegisterDeRetour(returnRegister);
     }
 
     public AbstractIdentifier getMethode() { return methode;}
