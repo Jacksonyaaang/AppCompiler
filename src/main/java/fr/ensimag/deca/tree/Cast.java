@@ -1,4 +1,4 @@
-    package fr.ensimag.deca.tree;
+package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
 
@@ -86,8 +86,9 @@ public class Cast extends AbstractExpr{
         if (t2.isVoid()){
             throw new ContextualError("on peut pas caster un void", getLocation());
         }
-        else if ((t1.isFloat() && !t2.isInt()) || (t1.isInt() && !t2.isFloat()) ||
-                (t2.isFloat() && !t1.isInt()) || (t2.isInt() && !t1.isFloat())){
+
+        else if ((t1.isFloat() && !t2.isInt() && !t2.isFloat()) || (t1.isInt() && !t2.isFloat() && !t2.isInt()) ||
+                (t2.isFloat() && !t1.isInt() && !t1.isFloat()) || (t2.isInt() && !t1.isFloat() && !t1.isInt())){
                     throw new ContextualError("on peut caster un Int que par un Float et vis-versa", getLocation());
         }
         else if ((t1.isClass() && t2.isClass() && !((ClassType)t1).isSubClassOf((ClassType)t2) &&
