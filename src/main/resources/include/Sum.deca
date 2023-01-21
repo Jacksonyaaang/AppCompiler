@@ -11,11 +11,12 @@ class Math {
     void setInt2DTable(int[][] table, int value){
         int tableIteratorX = 0;
         int tableIteratorY = 0;
-        while (tableIteratorY < table.size1D ){
+        while (tableIteratorY < table.size2D ){
             while (tableIteratorX < table.size1D ){
                 table[tableIteratorX][tableIteratorY] = value;
                 tableIteratorX = tableIteratorX + 1;
             }
+            tableIteratorX = 0;
             tableIteratorY = tableIteratorY + 1;
         }
     }
@@ -25,6 +26,35 @@ class Math {
     }
 
     void set2DTableIntValue(int[][] table, int value, int indexX, int indexY){
+        table[indexX][indexY] = value;
+    }
+
+    void setFloat1DTable(float[] table, float value){
+        int tableIterator = 0;
+        while (tableIterator < table.size1D ){
+            table[tableIterator] = value;
+            tableIterator = tableIterator + 1;
+        }
+    }
+
+    void setFloat2DTable(float[][] table, float value){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
+                table[tableIteratorX][tableIteratorY] = value;
+                tableIteratorX = tableIteratorX + 1;
+            }
+            tableIteratorX = 0;
+            tableIteratorY = tableIteratorY + 1;
+        }
+    }
+
+    void set1DTableFloatValue(float[] table, float value, int index){
+        table[index] = value;
+    }
+
+    void set2DTableFloatValue(float[][] table, float value, int indexX, int indexY){
         table[indexX][indexY] = value;
     }
 
@@ -45,12 +75,43 @@ class Math {
         int tableIteratorY = 0;
         println("--------------");
         print("Tableau2D = [");
-        while (tableIteratorY < table.size1D ){
-            while (tableIteratorX < table.size1D-1 ){
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
                 print(table[tableIteratorX][tableIteratorY]," ,");
                 tableIteratorX = tableIteratorX + 1;
             }
-            println(table[tableIteratorY][tableIteratorX]);
+            println("");
+            tableIteratorX = 0;
+            tableIteratorY = tableIteratorY + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+
+    void printFloat1DTable(float[] table){
+        int tableIterator = 0;
+        println("--------------");
+        print("Tableau1D = [");
+        while (tableIterator < table.size1D ){
+            print(table[tableIterator]," ,");
+            tableIterator = tableIterator + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+
+    void printFloat2DTable(float[][] table){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        println("--------------");
+        print("Tableau2D = [");
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
+                print(table[tableIteratorX][tableIteratorY]," ,");
+                tableIteratorX = tableIteratorX + 1;
+            }
+            println("");
+            tableIteratorX = 0;
             tableIteratorY = tableIteratorY + 1;
         }
         print("]");
@@ -76,11 +137,12 @@ class Sum extends Math{
         int tableIteratorY = 0;
         int tableIteratorX = 0;
         if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
-            while (tableIteratorY < table1.size1D ){
-                while (tableIteratorX < table1.size2D ){
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
                     table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] + table2[tableIteratorY][tableIteratorX];
                     tableIteratorX = tableIteratorX + 1;
                 }
+                tableIteratorX = 0;
                 tableIteratorY = tableIteratorY + 1;
             }
         }
@@ -102,15 +164,16 @@ class Sum extends Math{
         }
     }
 
-    void sommeFloatInt2D(int[][] table1, int[][] table2){
+    void sommeFloatInt2D(float[][] table1, int[][] table2){
         int tableIteratorY = 0;
         int tableIteratorX = 0;
         if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
-            while (tableIteratorY < table1.size1D ){
-                while (tableIteratorX < table1.size2D ){
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
                     table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] + (float)(table2[tableIteratorY][tableIteratorX]);
                     tableIteratorX = tableIteratorX + 1;
                 }
+                tableIteratorX = 0;
                 tableIteratorY = tableIteratorY + 1;
             }
         }
@@ -119,7 +182,7 @@ class Sum extends Math{
         }
     }
 
-    void sommeIntFloat1D(float[] table1, int[] table2){
+    void sommeIntFloat1D(int[] table1, float[] table2){
         int tableIterator = 0;
         if (table1.size1D == table2.size1D){
             while (tableIterator < table1.size1D ){
@@ -132,15 +195,16 @@ class Sum extends Math{
         }
     }
 
-    void sommeIntFloat2D(int[][] table1, int[][] table2){
+    void sommeIntFloat2D(int[][] table1, float[][] table2){
         int tableIteratorY = 0;
         int tableIteratorX = 0;
         if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
-            while (tableIteratorY < table1.size1D ){
-                while (tableIteratorX < table1.size2D ){
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
                     table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] + (int)(table2[tableIteratorY][tableIteratorX]);
                     tableIteratorX = tableIteratorX + 1;
                 }
+                tableIteratorX = 0;
                 tableIteratorY = tableIteratorY + 1;
             }
         }
@@ -149,7 +213,7 @@ class Sum extends Math{
         }
     }
 
-    void sommeFloatFloat1D(float[] table1, int[] table2){
+    void sommeFloatFloat1D(float[] table1, float[] table2){
         int tableIterator = 0;
         if (table1.size1D == table2.size1D){
             while (tableIterator < table1.size1D ){
@@ -162,15 +226,16 @@ class Sum extends Math{
         }
     }
 
-    void sommeFloatFloat2D(int[][] table1, int[][] table2){
+    void sommeFloatFloat2D(float[][] table1, float[][] table2){
         int tableIteratorY = 0;
         int tableIteratorX = 0;
         if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
-            while (tableIteratorY < table1.size1D ){
-                while (tableIteratorX < table1.size2D ){
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
                     table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] + table2[tableIteratorY][tableIteratorX];
                     tableIteratorX = tableIteratorX + 1;
                 }
+                tableIteratorX = 0;
                 tableIteratorY = tableIteratorY + 1;
             }
         }
@@ -181,58 +246,60 @@ class Sum extends Math{
 
     void dimensionIncompatible(){
         println("Erreur de dimension");
-        throwError();
     }
 
 }
 
 {
-    int[] x = new int[7];
-    float[] y = new float[7];
-    matrixManipulation.setInt1DTable(x,5);
-    matrixManipulation.setInt1DTable(y,6.0);
-    matrixManipulation.printInt1DTable(x);
-    matrixManipulation.printInt1DTable(y);
-    matrixManipulation.sommeIntFloat1D(x,y);
-    matrixManipulation.printInt1DTable(x);
-    /*
-    //int z;
 
-        int[] y = new int[3];
-        y[1] = 2;
-        y[0] = 2*2*2*2*y[1];
-        println("STEP 2 DONE");
-        println(y[0] );
-        println("STEP 3 DONE");
+        Sum matrixsum1D = new Sum();
+        int[] x = new int[7];
+        float[] y = new float[7];
+        Sum matrixsum2D = new Sum();
+        int[][] a = new int[3][3];
+        int[][] d = new int[3][3];
+        float[][] b = new float[3][3];
+        float[][] c = new float[3][3];
 
-    int[][] x = new int[3][2];
+        println("Test somme tableau 1D");
+        matrixsum1D.setInt1DTable(x,5);
+        matrixsum1D.setFloat1DTable(y,6.0);
+        matrixsum1D.printInt1DTable(x);
+        matrixsum1D.printFloat1DTable(y);
+        matrixsum1D.sommeIntFloat1D(x,y);
+        matrixsum1D.printInt1DTable(x);
 
-    println("STEP 1 DONE");
-    println(x.size1D);
-    println("STEP size 1 DONE");
+        println("Test somme tableau 2D a");
+        matrixsum2D.setInt2DTable(a,5);
+        matrixsum2D.setFloat2DTable(b,6.0);
+        matrixsum2D.printInt2DTable(a);
+        matrixsum2D.printFloat2DTable(b);
+        matrixsum2D.sommeIntFloat2D(a,b);
+        matrixsum2D.printInt2DTable(a);
 
-    x.size2D = 5;
-    println(z);
+        println("somme float int b");
+        matrixsum2D.sommeFloatInt2D(b,a);
+        matrixsum2D.printFloat2DTable(b);
 
-    println(x.size2D);
-    println("STEP size 2 DONE");
+        println("somme float float b");
+        matrixsum2D.setFloat2DTable(c,10.5);
+        matrixsum2D.sommeFloatFloat2D(b,c);
+        matrixsum2D.printFloat2DTable(b);
 
-   A a = new A();
-    a.x = 2;
-    x.size1D = 5;
+        println("somme int int a");
+        matrixsum2D.setInt2DTable(d,2);
+        matrixsum2D.sommeIntInt2D(a,d);
+        matrixsum2D.printInt2DTable(a);
 
+        matrixsum2D.set2DTableIntValue(a,5,0,0);
+        matrixsum2D.set2DTableIntValue(a,3,2,2);
+        matrixsum2D.printInt2DTable(a);
 
-    x[0][0] = 1;
-    x[0][0] = 2*x[0][0];
-    println("STEP 1 prime DONE");
-    println(x[0][0]);
+        matrixsum2D.set2DTableFloatValue(b,3.2,0,0);
+        matrixsum2D.set2DTableFloatValue(b,5.9,2,2);
+        matrixsum2D.printFloat2DTable(b);
 
+        b[0][1] = 3*b[0][0];
+        matrixsum2D.printFloat2DTable(b);
 
-    x[1][1] = 2*2*2*2*x[0][0];
-    println("STEP 2 DONE");
-    println(x[1][1]);
-    println("STEP 3 DONE");
-    */
-
-
-}
+        }

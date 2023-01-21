@@ -68,8 +68,9 @@ public class Selection extends AbstractLValue {
         }
         else {
             compiler.addInstruction(new LOAD(
-                        new RegisterOffset( ((Identifier)field).getFieldDefinition().getIndex(), obj.getRegisterDeRetour()), obj.getRegisterDeRetour()),
-                         "Loading the field " + field.getName() +" into a register ");
+                            new RegisterOffset(((Identifier) field).getFieldDefinition().getIndex(), obj.getRegisterDeRetour()), obj.getRegisterDeRetour()),
+                    "Loading the field " + field.getName() + " into a register ");
+        }
         this.setRegisterDeRetour(obj.getRegisterDeRetour());
         this.transferPopRegisters(obj.getRegisterToPop());
         compiler.addComment("--------BeginSelection--------"+getLocation()+"-----");
@@ -91,7 +92,6 @@ public class Selection extends AbstractLValue {
                 return compiler.environmentType.INT;
             }
 
-            //setType(t);  //error, miss 'this.type'
             if (!type.isClass()){
                 throw new ContextualError(" Le type de l'expression utilisé pour une sélection doit être un type de classe ou \"this\"", getLocation());
             }

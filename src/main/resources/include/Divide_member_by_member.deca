@@ -119,12 +119,12 @@ class Math {
     }
 }
 
-class Difference extends Math{
-    void diffIntInt1D(int[] table1, int[] table2){
+class DivMember extends Math{
+    void divMbIntInt1D(int[] table1, int[] table2){
         int tableIterator = 0;
         if (table1.size1D == table2.size1D){
             while (tableIterator < table1.size1D ){
-                table1[tableIterator] = table1[tableIterator] - table2[tableIterator];
+                table1[tableIterator] = table1[tableIterator] / table2[tableIterator];
                 tableIterator = tableIterator + 1;
             }
         }
@@ -133,13 +133,13 @@ class Difference extends Math{
         }
     }
 
-    void diffIntInt2D(int[][] table1, int[][] table2){
+    void divMbIntInt2D(int[][] table1, int[][] table2){
         int tableIteratorY = 0;
         int tableIteratorX = 0;
         if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
             while (tableIteratorY < table1.size2D ){
                 while (tableIteratorX < table1.size1D ){
-                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] - table2[tableIteratorY][tableIteratorX];
+                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] / table2[tableIteratorY][tableIteratorX];
                     tableIteratorX = tableIteratorX + 1;
                 }
                 tableIteratorX = 0;
@@ -151,11 +151,11 @@ class Difference extends Math{
         }
     }
 
-    void diffFloatInt1D(float[] table1, int[] table2){
+    void divMbFloatInt1D(float[] table1, int[] table2){
         int tableIterator = 0;
         if (table1.size1D == table2.size1D){
             while (tableIterator < table1.size1D ){
-                table1[tableIterator] = table1[tableIterator] - (float)(table2[tableIterator]);
+                table1[tableIterator] = table1[tableIterator] / (float)(table2[tableIterator]);
                 tableIterator = tableIterator + 1;
             }
         }
@@ -164,13 +164,13 @@ class Difference extends Math{
         }
     }
 
-    void diffFloatInt2D(float[][] table1, int[][] table2){
+    void divMbFloatInt2D(float[][] table1, int[][] table2){
         int tableIteratorY = 0;
         int tableIteratorX = 0;
         if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
             while (tableIteratorY < table1.size2D ){
                 while (tableIteratorX < table1.size1D ){
-                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] - (float)(table2[tableIteratorY][tableIteratorX]);
+                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] / (float)(table2[tableIteratorY][tableIteratorX]);
                     tableIteratorX = tableIteratorX + 1;
                 }
                 tableIteratorX = 0;
@@ -182,11 +182,11 @@ class Difference extends Math{
         }
     }
 
-    void diffIntFloat1D(int[] table1, float[] table2){
+    void divMbIntFloat1D(int[] table1, float[] table2){
         int tableIterator = 0;
         if (table1.size1D == table2.size1D){
             while (tableIterator < table1.size1D ){
-                table1[tableIterator] = table1[tableIterator] - (int)(table2[tableIterator]);
+                table1[tableIterator] = table1[tableIterator] / (int)(table2[tableIterator]);
                 tableIterator = tableIterator + 1;
             }
         }
@@ -195,13 +195,13 @@ class Difference extends Math{
         }
     }
 
-    void diffIntFloat2D(int[][] table1, float[][] table2){
+    void divMbIntFloat2D(int[][] table1, float[][] table2){
         int tableIteratorY = 0;
         int tableIteratorX = 0;
         if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
             while (tableIteratorY < table1.size2D ){
                 while (tableIteratorX < table1.size1D ){
-                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] - (int)(table2[tableIteratorY][tableIteratorX]);
+                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] / (int)(table2[tableIteratorY][tableIteratorX]);
                     tableIteratorX = tableIteratorX + 1;
                 }
                 tableIteratorX = 0;
@@ -213,11 +213,11 @@ class Difference extends Math{
         }
     }
 
-    void diffFloatFloat1D(float[] table1, float[] table2){
+    void divMbFloatFloat1D(float[] table1, float[] table2){
         int tableIterator = 0;
         if (table1.size1D == table2.size1D){
             while (tableIterator < table1.size1D ){
-                table1[tableIterator] = table1[tableIterator] - table2[tableIterator];
+                table1[tableIterator] = table1[tableIterator] / table2[tableIterator];
                 tableIterator = tableIterator + 1;
             }
         }
@@ -226,13 +226,13 @@ class Difference extends Math{
         }
     }
 
-    void diffFloatFloat2D(float[][] table1, float[][] table2){
+    void divMbFloatFloat2D(float[][] table1, float[][] table2){
         int tableIteratorY = 0;
         int tableIteratorX = 0;
         if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
             while (tableIteratorY < table1.size2D ){
                 while (tableIteratorX < table1.size1D ){
-                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] - table2[tableIteratorY][tableIteratorX];
+                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] / table2[tableIteratorY][tableIteratorX];
                     tableIteratorX = tableIteratorX + 1;
                 }
                 tableIteratorX = 0;
@@ -252,54 +252,54 @@ class Difference extends Math{
 
 {
 
-        Difference matrixdiff1D = new Difference();
+        DivMember matrixDivMb1D = new DivMember();
         int[] x = new int[7];
         float[] y = new float[7];
-        Difference matrixdiff2D = new Difference();
+        DivMember matrixDivMb2D = new DivMember();
         int[][] a = new int[3][3];
         int[][] d = new int[3][3];
         float[][] b = new float[3][3];
         float[][] c = new float[3][3];
 
-        matrixdiff1D.setInt1DTable(x,5);
-        matrixdiff1D.setFloat1DTable(y,6.0);
-        matrixdiff1D.printInt1DTable(x);
-        matrixdiff1D.printFloat1DTable(y);
-        println("Test diff tableau 1D");
-        matrixdiff1D.diffIntFloat1D(x,y);
-        matrixdiff1D.printInt1DTable(x);
+        matrixDivMb1D.setInt1DTable(x,6);
+        matrixDivMb1D.setFloat1DTable(y,5.0);
+        matrixDivMb1D.printInt1DTable(x);
+        matrixDivMb1D.printFloat1DTable(y);
+        println("Test divMb tableau 1D");
+        matrixDivMb1D.divMbIntFloat1D(x,y);
+        matrixDivMb1D.printInt1DTable(x);
 
-        println("Test diff tableau 2D a");
-        matrixdiff2D.setInt2DTable(a,5);
-        matrixdiff2D.setFloat2DTable(b,6.0);
-        matrixdiff2D.printInt2DTable(a);
-        matrixdiff2D.printFloat2DTable(b);
-        matrixdiff2D.diffIntFloat2D(a,b);
-        matrixdiff2D.printInt2DTable(a);
+        println("Test Division member by member tableau 2D a");
+        matrixDivMb2D.setInt2DTable(a,6);
+        matrixDivMb2D.setFloat2DTable(b,2.0);
+        matrixDivMb2D.printInt2DTable(a);
+        matrixDivMb2D.printFloat2DTable(b);
+        matrixDivMb2D.divMbIntFloat2D(a,b);
+        matrixDivMb2D.printInt2DTable(a);
 
-        println("diff float int b");
-        matrixdiff2D.diffFloatInt2D(b,a);
-        matrixdiff2D.printFloat2DTable(b);
+        println("Division member by member float int b");
+        matrixDivMb2D.divMbFloatInt2D(b,a);
+        matrixDivMb2D.printFloat2DTable(b);
 
-        println("diff float float b");
-        matrixdiff2D.setFloat2DTable(c,10.5);
-        matrixdiff2D.diffFloatFloat2D(b,c);
-        matrixdiff2D.printFloat2DTable(b);
+        println("Division member by member float float b");
+        matrixDivMb2D.setFloat2DTable(c,10.5);
+        matrixDivMb2D.divMbFloatFloat2D(b,c);
+        matrixDivMb2D.printFloat2DTable(b);
 
-        println("diff int int a");
-        matrixdiff2D.setInt2DTable(d,2);
-        matrixdiff2D.diffIntInt2D(a,d);
-        matrixdiff2D.printInt2DTable(a);
+        println("Division member by member int int a");
+        matrixDivMb2D.setInt2DTable(d,2);
+        matrixDivMb2D.divMbIntInt2D(a,d);
+        matrixDivMb2D.printInt2DTable(a);
 
-        matrixdiff2D.set2DTableIntValue(a,5,0,0);
-        matrixdiff2D.set2DTableIntValue(a,3,2,2);
-        matrixdiff2D.printInt2DTable(a);
+        matrixDivMb2D.set2DTableIntValue(a,5,0,0);
+        matrixDivMb2D.set2DTableIntValue(a,3,2,2);
+        matrixDivMb2D.printInt2DTable(a);
 
-        matrixdiff2D.set2DTableFloatValue(b,3.2,0,0);
-        matrixdiff2D.set2DTableFloatValue(b,5.9,2,2);
-        matrixdiff2D.printFloat2DTable(b);
+        matrixDivMb2D.set2DTableFloatValue(b,3.2,0,0);
+        matrixDivMb2D.set2DTableFloatValue(b,5.9,2,2);
+        matrixDivMb2D.printFloat2DTable(b);
 
         b[0][1] = 3*b[0][0];
-        matrixdiff2D.printFloat2DTable(b);
+        matrixDivMb2D.printFloat2DTable(b);
 
         }
