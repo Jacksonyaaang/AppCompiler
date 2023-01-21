@@ -80,7 +80,7 @@ public class Selection extends AbstractLValue {
             fieldDefi = (FieldDefinition)(((ClassType)((obj).getType())).getDefinition().getMembers().get(((Identifier)this.field).getName()));
             field.setDefinition(fieldDefi);
             if (fieldDefi==null){
-                throw new ContextualError("Le champs " + field.getName().getName() + " n'est pas défini", getLocation());
+                throw new ContextualError("Le champs n'est pas défini", getLocation());
 
 
             }else{
@@ -88,7 +88,7 @@ public class Selection extends AbstractLValue {
                     ClassDefinition classDes = ((FieldDefinition)this.field.getDefinition()).getContainingClass();
                      if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType) type).isSubClassOf(classDes.getType())) {
 
-                        throw new ContextualError(" La classe "+ currentClass.getType().getName().getName()+" doit être une sous-classe de " + currentClass.getSuperClass().getType().getName().getName() + "où est défini le champs" + getField().getName().getName(), getLocation());
+                        throw new ContextualError(" La classe "+ currentClass.getType().getName().getName()+ " et " + ((ClassType)type).getName().getName() + " doivent être des sous-classes de " + classDes.getType().getName().getName() + "où est défini le champs" + getField().getName().getName(), getLocation());
                     }
                     
                 }

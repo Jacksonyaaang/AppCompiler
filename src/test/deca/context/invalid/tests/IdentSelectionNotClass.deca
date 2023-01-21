@@ -1,0 +1,17 @@
+// Description:
+//       Teste de selection avec un objet qui n'est pas de type classe .
+// 
+// Resultats: 
+//      Ligne 16:" Le type de l'expression utilisé pour une sélection doit être un type de classe ou this.
+// 
+// Historique:
+//      cree le 21/01/2023
+
+class A{
+  int x;
+}
+
+{
+  int y;
+  y.x = 2;
+}

@@ -1,0 +1,23 @@
+// Description:
+//       Teste de selection d'un Field protected .
+// 
+// Resultats: 
+//      Ligne 18:La classe C et B doivent être des sous-classes de A où est défini le champs x
+// 
+// Historique:
+//      cree le 21/01/2023
+
+class A{
+  int x;
+}
+
+class B{
+}
+
+class C extends A{
+    B b = new B();
+    b.x = 3;
+}
+
+  
+  

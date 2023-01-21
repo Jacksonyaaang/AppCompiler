@@ -54,7 +54,7 @@ public class DeclVar extends AbstractDeclVar {
             localEnv.declare(varName.getName(), varName.getExpDefinition());
         } 
         catch (EnvironmentExp.DoubleDefException e) {
-            throw new ContextualError(e.getMessage(), getLocation());
+            throw new ContextualError("Double déclaration", getLocation());
         }
         //varName.verifyExpr(compiler, localEnv, currentClass);
         //On associe à la variable défini une adresse dans le stack avec une adresse X(Gb)

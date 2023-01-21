@@ -1,0 +1,17 @@
+// Description:
+//       Teste de assign dans le corps d'une method.
+// 
+// Resultats: 
+//      Ligne 15: Le type de l'expression de droite est A alors que le type attendu est int
+// 
+// Historique:
+//      cree le 21/01/2023
+class A{
+}
+
+class B{
+  void f(){
+    A a = new A();
+    int x = a;
+  }
+}

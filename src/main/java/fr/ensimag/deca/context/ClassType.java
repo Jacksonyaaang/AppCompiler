@@ -65,7 +65,7 @@ public class ClassType extends Type {
      */
     public boolean isSubClassOf(ClassType potentialSuperClass) {
         ClassDefinition CurClassDef = this.getDefinition();
-        //if (CurClassDef == null) return false;
+        if (this.isNull()) return true;
         while (CurClassDef != null){
             ClassType CurClass = CurClassDef.getType();
             if (CurClass.sameType(potentialSuperClass)) {
