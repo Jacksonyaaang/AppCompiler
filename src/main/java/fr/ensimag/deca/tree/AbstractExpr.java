@@ -106,16 +106,34 @@ public abstract class AbstractExpr extends AbstractInst {
     
     /**
      * verifyExprIsPositive ajoute des instruction pour vérifier que le registre de retour 
-     * d'une expression est strictement positive. Si l'élement inférieur au égal à 0 on quitte
+     * d'une expression est positive. Si l'élement inférieur au égal à 0 on quitte
+     * et lance une erreur
+     * @param compiler
+     * @param expr
+     */
+    protected void verifyExprIsStrictlyPositive(DecacCompiler compiler, AbstractExpr expr){
+        if (!(compiler.getCompilerOptions().isNoCheck())){
+            compiler.addInstruction(new CMP(new ImmediateInteger(1), expr.getRegisterDeRetour()));
+            compiler.addInstruction(new BLT(new Label("int_allocation_table_must_be_strictly_positive")));
+            compiler.getErrorManagementUnit().activeError("int_allocation_table_must_be_strictly_positive");
+        }
+    }
+
+    /**
+     * verifyExprIsPositive ajoute des instruction pour vérifier que le registre de retour 
+     * d'une expression est  positive. Si l'élement inférieur à 0 on quitte
      * et lance une erreur
      * @param compiler
      * @param expr
      */
     protected void verifyExprIsPositive(DecacCompiler compiler, AbstractExpr expr){
-        compiler.addInstruction(new CMP(new ImmediateInteger(0), expr.getRegisterDeRetour()));
-        compiler.addInstruction(new BLT(new Label("int_allocation_table_must_be_positive")));
-        compiler.getErrorManagementUnit().activeError("int_allocation_table_must_be_positive");
+        if (!(compiler.getCompilerOptions().isNoCheck())){
+            compiler.addInstruction(new CMP(new ImmediateInteger(0), expr.getRegisterDeRetour()));
+            compiler.addInstruction(new BLT(new Label("int_selection_table_must_be_positive")));
+            compiler.getErrorManagementUnit().activeError("int_selection_table_must_be_positive");
+        }
     }
+
 
     /**
      * verifyExprIsLowerThenRegister ajoute des instruction pour vérifier que le registre de retour 
@@ -124,10 +142,14 @@ public abstract class AbstractExpr extends AbstractInst {
      * @param expr
      */
     protected void verifyExprIsLowerThenRegister(DecacCompiler compiler, AbstractExpr expr, GPRegister registreComparaison){
-        compiler.addInstruction(new CMP(expr.getRegisterDeRetour(), registreComparaison));
-        compiler.addInstruction(new BLE(new Label("table_dimension_are_not_respected")));
-        compiler.getErrorManagementUnit().activeError("table_dimension_are_not_respected");
+        if (!(compiler.getCompilerOptions().isNoCheck())){
+            compiler.addInstruction(new CMP(expr.getRegisterDeRetour(), registreComparaison));
+            compiler.addInstruction(new BLE(new Label("table_dimension_are_not_respected")));
+            compiler.getErrorManagementUnit().activeError("table_dimension_are_not_respected");
+        }
     }
+
+
 
     
 

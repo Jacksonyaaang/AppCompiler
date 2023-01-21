@@ -1,8 +1,118 @@
-class Point2D {
-    int x ; // Abscisse
-    int y ; // Ordonnee
-    // Deplace ce point
-    // de a en diagonale.
-    void diag(int a) {
+class MathOperation{
+    void sommeIntInt1D(int[] table1, int[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] + table2[tableIterator];
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
     }
-}	
+
+    void sommeFloatInt1D(float[] table1, int[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] + table2[tableIterator];
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+
+    void dimensionIncompatible(){
+        println("Erreur de dimension");
+        throwError();
+    }
+    
+    void throwError()
+	    asm ("ERROR ");
+    	
+    void setInt1DTable(int[] table, int value){
+        int tableIterator = 0;
+        while (tableIterator < table.size1D ){
+            table[tableIterator] = value;
+            tableIterator = tableIterator + 1;
+        }
+    }
+    void printInt1DTable(int[] table){
+        int tableIterator = 0;
+        println("--------------");
+        print("Tableau1D = [");
+        while (tableIterator < table.size1D ){
+            print(table[tableIterator]," ,");
+            tableIterator = tableIterator + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+}
+
+
+
+
+{
+    int[] int[][] 
+    float[] float[][]
+
+    MathOperation matrixManipulation = new MathOperation(); 
+    int[] x = new int[4]; 
+    int[] y = new int[7];
+    float[] y = new float[7];
+    sommeflaotInt1D(float[])
+    sommeIntFloat1D
+    tableau_int[] =   tableau_int;{} + (int) tableau_float
+
+    matrixManipulation.setInt1DTable(x,5);
+    matrixManipulation.setInt1DTable(y,6);
+    matrixManipulation.printInt1DTable(x);  
+    matrixManipulation.printInt1DTable(y);
+    matrixManipulation.sommeIntInt1D(x,y);
+    matrixManipulation.printInt1DTable(x);
+    /*
+    //int z;
+   
+        int[] y = new int[3];
+        y[1] = 2;
+        y[0] = 2*2*2*2*y[1];
+        println("STEP 2 DONE");
+        println(y[0] );
+        println("STEP 3 DONE");
+    
+    int[][] x = new int[3][2];
+   
+    println("STEP 1 DONE");
+    println(x.size1D);
+    println("STEP size 1 DONE");
+    
+    x.size2D = 5;
+    println(z);
+   
+    println(x.size2D);
+    println("STEP size 2 DONE");
+    
+   A a = new A();
+    a.x = 2;
+    x.size1D = 5;
+    
+
+    x[0][0] = 1;
+    x[0][0] = 2*x[0][0];
+    println("STEP 1 prime DONE");
+    println(x[0][0]);
+    
+   
+    x[1][1] = 2*2*2*2*x[0][0];
+    println("STEP 2 DONE");
+    println(x[1][1]);
+    println("STEP 3 DONE");
+    */
+    
+    
+}

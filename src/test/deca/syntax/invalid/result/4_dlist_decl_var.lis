@@ -1,3 +1,0 @@
-src/test/deca/syntax/invalid/4_dlist_decl_var.deca:12:12: no viable alternative at input 'b'
-Exception in thread "main" java.lang.NullPointerException: Cannot invoke "fr.ensimag.deca.tree.AbstractProgram.prettyPrint(java.io.PrintStream)" because "prog" is null
-	at fr.ensimag.deca.syntax.ManualTestSynt.main(ManualTestSynt.java:32)

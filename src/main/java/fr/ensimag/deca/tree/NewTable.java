@@ -26,6 +26,7 @@ import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.NEW;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 import fr.ensimag.ima.pseudocode.instructions.LEA;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.MUL;
 import fr.ensimag.ima.pseudocode.instructions.PUSH;
 import fr.ensimag.ima.pseudocode.instructions.BSR;
@@ -97,32 +98,54 @@ public class NewTable  extends AbstractExpr{
         for (AbstractExpr  expr : initializers.getList()){
             listExprInit.add(expr);
             expr.codeGenInst(compiler);
-            verifyExprIsPositive(compiler, expr);
-        }   
+            verifyExprIsStrictlyPositive(compiler, expr);
+        }
+
         if (initializers.size() == 1){
-            compiler.addInstruction(new ADD(new ImmediateInteger(1), listExprInit.get(0).getRegisterDeRetour()));
-            compiler.addInstruction(new NEW(listExprInit.get(0).getRegisterDeRetour(), Register.getR(0)));
+            /**
+             * On calcule l'espace necessaire pour stocker la matrice qui est taille du tableau plus une case au quel on
+             * stocke la taille de ce tableau
+             */
+            compiler.addInstruction(new LOAD(listExprInit.get(0).getRegisterDeRetour(), Register.getR(1)));
+            compiler.addInstruction(new ADD(new ImmediateInteger(1), Register.getR(1)));
+            compiler.addInstruction(new NEW(Register.getR(1), Register.getR(0)));
+            checkOverflowError(compiler);
+            compiler.addInstruction(new STORE(listExprInit.get(0).getRegisterDeRetour(), new RegisterOffset(0, Register.getR(0))));
         }
         else if(initializers.size() == 2){
-            compiler.addInstruction(new MUL(listExprInit.get(1).getRegisterDeRetour(), listExprInit.get(0).getRegisterDeRetour()));
-            compiler.addInstruction(new ADD(new ImmediateInteger(2), listExprInit.get(0).getRegisterDeRetour()));
-            compiler.addInstruction(new NEW(listExprInit.get(0).getRegisterDeRetour(), Register.getR(0)));
+            /**
+             * On calcule l'espace necessaire pour stocker la matrice qui est taille de matrice plus l'espace necessaires 
+             * pour stocker les dimension
+             */
+            compiler.addInstruction(new LOAD(listExprInit.get(0).getRegisterDeRetour(), Register.getR(1)));
+            compiler.addInstruction(new MUL(listExprInit.get(1).getRegisterDeRetour(), Register.getR(1)));
+            compiler.addInstruction(new ADD(new ImmediateInteger(2), Register.getR(1)));
+            compiler.addInstruction(new NEW(Register.getR(1), Register.getR(0)));
+            checkOverflowError(compiler);
+            /**
+             * On stocke la dimension de la matrice, 
+             */
+            compiler.addInstruction(new STORE(listExprInit.get(0).getRegisterDeRetour(), new RegisterOffset(0, Register.getR(0))));
+            compiler.addInstruction(new STORE(listExprInit.get(1).getRegisterDeRetour(), new RegisterOffset(1, Register.getR(0))));
         }
 
         //On reserve suffisament d'espace pour les registers et l'adresse de la table de method
-        if (!(compiler.getCompilerOptions().isNoCheck())){
-            compiler.addInstruction(new BOV(new Label("heap_overflow_error")));
-            compiler.getErrorManagementUnit().activeError("heap_overflow_error");
-        }
+
         for (AbstractExpr  expr : initializers.getList()){
             expr.popRegisters(compiler);
             compiler.getRegisterManagement().decrementOccupationRegister(expr.getRegisterDeRetour());
         }   
-        compiler.addInstruction(new NEW(Register.getR(0), reg));
+        compiler.addInstruction(new LOAD(Register.getR(0), reg));
         compiler.addComment("--------EndNewTable--------"+getLocation()+"-----");
     }
 
 
+    public void checkOverflowError(DecacCompiler compiler) throws CodeGenError{
+        if (!(compiler.getCompilerOptions().isNoCheck())){
+            compiler.addInstruction(new BOV(new Label("heap_overflow_error")));
+            compiler.getErrorManagementUnit().activeError("heap_overflow_error");
+        }
+    }
 
 
 

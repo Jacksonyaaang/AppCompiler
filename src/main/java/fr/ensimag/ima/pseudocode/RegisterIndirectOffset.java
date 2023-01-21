@@ -1,3 +1,5 @@
+package fr.ensimag.ima.pseudocode;
+
 /**
  * Operand representing a register indirection with offset and relative movement
  * , e.g. 42(R3, R4). which will lead to the adresse R3+R4+42
@@ -20,7 +22,7 @@ public class RegisterIndirectOffset extends DAddr {
     private final Register adressRegister;
 
 
-    public RegisterIndirectOffset(int offset, Register register, Register adressRegister) {
+    public RegisterIndirectOffset(int offset, Register adressRegister, Register register) {
         super();
         this.offset = offset;
         this.register = register;

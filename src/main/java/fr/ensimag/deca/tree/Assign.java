@@ -14,8 +14,10 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.DVal;
 import org.apache.log4j.Logger;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 /**
  * Assignment, i.e. lvalue = expr.
@@ -88,11 +90,25 @@ public class Assign extends AbstractBinaryExpr {
                 compiler.addInstruction(new LOAD(this.getRightOperand().getRegisterDeRetour(), assignRegister),                                          
                 " Return value of the assignement of ="+ ((Identifier) getLeftOperand()).getName()+ "and storing it into " + assignRegister );
             }
+            else if (getLeftOperand() instanceof Identifier && ((Identifier)getLeftOperand()).getExpDefinition().isTable()) {
+                //Cette assign ne peut ếtre appelée quand dans une classe car on peut pas acceder au field directement 
+                //sans passer par la section hors de la classe elle même
+                LOG.debug("[Assign][codeGenInst]Left operand in assign operation is a table");
+                compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), assignRegister),
+                            "loading parent class =  "+ ((Identifier)getLeftOperand()).getFieldDefinition().getContainingClass().getType().getName() 
+                            +" into memory when working with field " + ((Identifier)getLeftOperand()).getName() );
+                compiler.addInstruction(new STORE(this.getRightOperand().getRegisterDeRetour(),new RegisterOffset(((((Identifier )getLeftOperand()).getFieldDefinition())).getIndex(), assignRegister)),
+                            "Saving field  "+  ((Identifier)getLeftOperand()).getName() + " into memory");
+
+                compiler.addInstruction(new LOAD(this.getRightOperand().getRegisterDeRetour(), assignRegister),                                          
+                " Return value of the assignement of ="+ ((Identifier) getLeftOperand()).getName()+ "and storing it into " + assignRegister );
+            }
             /*
              * Ce else if traite le cas ou on travail avec une selection dans l'operand gauche de assign
-             * qui peut être de deux types: this, ou une instance de classe
+             * qui peut être de deux types: this, ou une instance de classe ou un tableau
              * dans le cas ou c'est un this, cela est similaire à un accées à un field directement 
-             * à partie de classe comme le precedant e  
+             * à partie de classe comme le code plus haut
+             * Dans le cas d'un tableau, on doit lancer une erreur car les dimensions du tableau ne peuvent pas être changé
              */
             else if (getLeftOperand() instanceof Selection ){
                 if ( ((Selection)getLeftOperand()).getObj() instanceof This){
@@ -100,21 +116,36 @@ public class Assign extends AbstractBinaryExpr {
                     compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), assignRegister),
                                 "loading parent class =  "+ ((Identifier)(((Selection)getLeftOperand()).getField())).getFieldDefinition().getContainingClass().getType().getName() 
                                 +" into memory when working with field " + ((Identifier)(((Selection)getLeftOperand()).getField())).getName() );
+                    
                     compiler.addInstruction(new STORE(this.getRightOperand().getRegisterDeRetour(),new RegisterOffset(((((Identifier)(((Selection)getLeftOperand()).getField())).getFieldDefinition())).getIndex(), assignRegister)),
                                 "Saving field  "+  (((Identifier)(((Selection)getLeftOperand()).getField()))).getName() + " into memory");
+                    
                     compiler.addInstruction(new LOAD(this.getRightOperand().getRegisterDeRetour(), assignRegister),                                          
                         " Return value of the assignement of this . = "+ (((Identifier)(((Selection)getLeftOperand()).getField()))).getName()+ " and storing it into " + assignRegister );
                 }
-                else{
+                else if ( !((Selection)getLeftOperand()).getObj().getType().isTable()) {
                     ((Selection)getLeftOperand()).getObj().codeGenInst(compiler);
                     compiler.addInstruction(new STORE(this.getRightOperand().getRegisterDeRetour(),new RegisterOffset(((((Identifier)(((Selection)getLeftOperand()).getField())).getFieldDefinition())).getIndex(), ((Selection)getLeftOperand()).getObj().getRegisterDeRetour())),
                     "Saving field  "+  (((Identifier)(((Selection)getLeftOperand()).getField()))).getName() + " into memory");
                     ((Selection)getLeftOperand()).getObj().popRegisters(compiler);
+                    
                     compiler.getRegisterManagement().decrementOccupationRegister(((Selection)getLeftOperand()).getObj().getRegisterDeRetour());
+                    
                     compiler.addInstruction(new LOAD(this.getRightOperand().getRegisterDeRetour(), assignRegister),                                          
                         " Return value of the assignement of ="+ (((Identifier)(((Selection)getLeftOperand()).getField()))).getName()+ "and storing it into " + assignRegister );
                 }
+                else if (((Selection)getLeftOperand()).getObj().getType().isTable()) {
+                    //Les dimensons d'un tableau ne peuvent pas être changé, on lance une erreur dans ce cas 
+                    if (!(compiler.getCompilerOptions().isNoCheck())){
+                        compiler.addInstruction(new BRA(new Label("table_dimension_can_not_be_changed")));
+                        compiler.getErrorManagementUnit().activeError("table_dimension_can_not_be_changed");
+                    }
+                }
             }
+            else if (getLeftOperand() instanceof TableGetElement ){
+                    ( (TableGetElement) getLeftOperand()).saveRegsiterIntoAdress(compiler, getRightOperand());
+            }
+
             this.setRegisterDeRetour(assignRegister);
             getRightOperand().popRegisters(compiler);
             compiler.getRegisterManagement().decrementOccupationRegister(getRightOperand().getRegisterDeRetour());
@@ -127,7 +158,6 @@ public class Assign extends AbstractBinaryExpr {
                 ClassDefinition currentClass) throws ContextualError {
             LOG.debug("[Assign][verifyExpr] Verify left and right expression in assignment");
             Type typOpLeft = getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
-            if (typOpLeft == null) System.out.println("********typeOpLeft est null mec***********************************************");
             //Si on n'utilise pas la méthode readInt ou readFloat lors de l'affectation, on vérifie l'expression de droite de l'affectation
             if (!(getRightOperand() instanceof AbstractReadExpr))
                 setRightOperand(getRightOperand().verifyRValue(compiler, localEnv, currentClass, typOpLeft));

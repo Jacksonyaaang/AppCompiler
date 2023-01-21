@@ -31,10 +31,15 @@ public class Selection extends AbstractLValue {
 
     private static final Logger LOG = Logger.getLogger(Selection.class);
 
-
     protected AbstractExpr obj;
     protected AbstractIdentifier field;
-    //protected AbstractDeclField field;
+    /*
+     * Cette element sera utilisé pour accéder au caratéristique d'un tableau    
+     * qui sont size1D et size2D 
+     */
+
+    protected int tableIndex = 0;
+
 
     public Selection(AbstractExpr obj, AbstractIdentifier field){
         Validate.notNull(obj);
@@ -56,9 +61,16 @@ public class Selection extends AbstractLValue {
                                     "Checking if the class identifier is null");
             compiler.getErrorManagementUnit().activeError("deref_null_error");
         }
-        compiler.addInstruction(new LOAD(
+        if (obj.getType().isTable()){
+            compiler.addInstruction(new LOAD(
+                new RegisterOffset( tableIndex, obj.getRegisterDeRetour()), obj.getRegisterDeRetour()),
+                 "Loading the field " + field.getName() +" into a register "); 
+        }
+        else {
+            compiler.addInstruction(new LOAD(
                         new RegisterOffset( ((Identifier)field).getFieldDefinition().getIndex(), obj.getRegisterDeRetour()), obj.getRegisterDeRetour()),
                          "Loading the field " + field.getName() +" into a register "); 
+        }
         this.setRegisterDeRetour(obj.getRegisterDeRetour());
         this.transferPopRegisters(obj.getRegisterToPop());
         compiler.addComment("--------BeginSelection--------"+getLocation()+"-----");    
@@ -76,8 +88,10 @@ public class Selection extends AbstractLValue {
             this.obj.setType(type);
             if (type.isTable()){
                 traitementAcessDimension(compiler, localEnv, currentClass);
+                setType(compiler.environmentType.INT);
                 return compiler.environmentType.INT;
             }
+            
             //setType(t);  //error, miss 'this.type'
             if (!type.isClass()){
                 throw new ContextualError("[Using Error] The first selection must be a class or this ", getLocation());
@@ -105,160 +119,23 @@ public class Selection extends AbstractLValue {
 
     public void traitementAcessDimension(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
         if (field.getName() == compiler.createSymbol("size1D") || field.getName() == compiler.createSymbol("size2D")){
+            field.setType(compiler.environmentType.INT);
+            field.setDefinition(new FieldDefinition( compiler.environmentType.INT, Location.BUILTIN, Visibility.PUBLIC, 0));
             if (field.getName() == compiler.createSymbol("size2D")){
+                field.setDefinition(new FieldDefinition( compiler.environmentType.INT, Location.BUILTIN, Visibility.PUBLIC, 2));
                 if (((TableType)(obj.getType())).getDimension() == 1){
                     throw new ContextualError("Le tableau est 1D", getLocation());
                 }
-            }
+                tableIndex = 1;
+            }   
         }
         else{
-            throw new ContextualError("Pour accéder au caratéristique du tableau, il faut mettre size1D, size2D", getLocation());
+            throw new ContextualError("Pour accéder au caratéristique du tableau, il utiliser les identificateurs suivants mettre size1D, size2D", getLocation());
         }
 
     }
 
 
-        //this.obj1.obj2.untrucprimitif=8;
-    //     Type typeReturn = null;
-    // if (this.obj instanceof This){
-    //     Map<Symbol, ExpDefinition> envCurrent = currentClass.getMembers().getExp();
-    //     if (!envCurrent.containsKey(((Identifier)this.field).getName())){
-    //         throw new ContextualError("[Using Error] the content after 'this' for selection must be previously declared", getLocation());
-    //     }else{
-    //         //verify the field 
-    //         typeReturn=helperPublic(currentClass.getMembers(), this.field);
-    //     }   
-    // }else if (this.obj instanceof AbstractLValue&&this.obj.getType().isClass()){
-    //     //for the class 
-    //     EnvironmentExp local = currentClass.getMembers();
-    //    // if (local.get(((Identifier)this.obj).getName()) == null){ 
-    //     if (compiler.environmentType.getEnvTypes().containsKey(((Identifier)this.obj).getName())){ 
-    //          //not found the declaration of class even though in the super-classs
-    //          throw new ContextualError("[Using Error] The class that you entered never has been declared before", getLocation());
-    //     }
-    //     // 2 cases , one for public, one for protected 
-    //     if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PUBLIC){
-    //         //get that field's env , useful in the helper public 
-    //         EnvironmentExp distanceEnvExp = local.getCurrentExp();  //cuz we already set it in last "if"
-    //         typeReturn = helperPublic(distanceEnvExp, field);
-    //     }
-    //     if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
-    //         EnvironmentExp distanceEnvExp = local.getCurrentExp();
-    //         ClassDefinition classDestine = this.field.getClassDefinition();
-    //         typeReturn = helperProtected(localEnv, distanceEnvExp, currentClass, classDestine, field);
-    //     }
-        
-    // }else if (this.obj instanceof Cast){
-
-
-    // }else {
-    //     throw new ContextualError("[Using Error] the variable type in a selection must be a class or keyword 'this'", getLocation());
-    // }
-    
-    // //obj1.obj2.obj3.field3="";  this.th
-    
-    // return typeReturn;
-
-    /*
-     * when the visibility of the field is public  
-     */
-//     private Type helperPublic(EnvironmentExp envClass2, AbstractIdentifier fld) throws ContextualError{
-//         Type typeReturn = null;
-//         if (((Identifier)fld).getType().isClass()){
-//             //verify this field can be found in the current (or super-classes) env-expression
-//             if (envClass2.get(((Identifier)fld).getName())==null){
-//                 throw new ContextualError("[Using Error] the field (class) haven't been declared before", getLocation());
-//             }
-//             typeReturn = verifyExpUlterieure(null, envClass2, null);   //the parameters are not charged yet !!!!!!!!!!!!!!!!!
-
-//         }else{ 
-//             //if it's not a class, then should be found in the current (its) env exp (not in the super-classes)
-//             if (!envClass2.getExp().containsKey(((Identifier)fld).getName())){
-//                 throw new ContextualError("[Using Error] the field haven't been declared before", getLocation());
-//             }
-//             //the others elm (except class) in the current field
-//             typeReturn = ((Identifier)fld).getType();
-//         }
-//         return typeReturn;
-//     }
-//     /*
-//      * when the visibility of the field is protected  
-//      */
-//     private Type helperProtected(EnvironmentExp envCurrent, EnvironmentExp envClass2,
-//                                 ClassDefinition currClassDefinition, ClassDefinition desClassDefinition ,
-//                                 AbstractIdentifier fld) throws ContextualError{
-//             Type typeReturn=null;
-            
-//             //verify the condition 1;
-//             ClassType currClass = currClassDefinition.getType();
-//             ClassType desClass = desClassDefinition.getType();
-//             if (!currClass.isSubClassOf(desClass)){
-//                 throw new ContextualError("[Using Error] the destine field is protected, should use a subclass to have an access ", getLocation());
-//             }
-//             if (((Identifier)fld).getType().isClass()){
-//                 if (envClass2.get(((Identifier)fld).getName())==null){
-//                     //can't find the name of the class on the empilement 
-//                     throw new ContextualError("[Using Error] the field (class) haven't been declared before", getLocation());
-//                 }
-//                 typeReturn = verifyExpUlterieure(null, envClass2, desClassDefinition)
-//             }else{
-//                 if (!envClass2.getExp().containsKey(((Identifier)fld).getName())){
-//                     throw new ContextualError("[Using Error] the field haven't been declared before", getLocation());
-//                 }
-//                 typeReturn = ((Identifier)fld).getType();
-//             }
-            
-                                    
-//             return typeReturn;
-//     }
-
-// }
-
-
-
-
-    // /**
-    //  * use this method to complete the first verifyExp, reason : solve the 'this isn't on the first position' problem 
-    //  * @param compiler
-    //  * @param localEnv
-    //  * @param currentClass
-    //  * @return
-    //  * @throws ContextualError
-    //  */
-    // private Type verifyExpUlterieure(DecacCompiler compiler, EnvironmentExp localEnv, 
-    //                                 ClassDefinition currentClass) 
-    //                                 throws ContextualError{
-        
-
-    //             this.field=
-    //             if (this.obj instanceof AbstractLValue){
-    //                 //for the class
-    //                 if (currentClass.getMembers().get(((Identifier)this.obj).getName()) == null){ 
-    //                     //not found the declaration of class even though in the super-classs
-    //                     throw new ContextualError("[Using Error] The class that you entered never has been declared before", getLocation());
-    //                 }
-    //                 //pass
-                    
-                    
-    //             }else if (this.obj instanceof Cast){
-
-
-    //             }else {
-    //                 throw new ContextualError("[Using Error] the variable type in a selection must be a class or keyword 'this'", getLocation());
-    //             }
-    //             //now the field :
-    //             Type typeField = this.field.getType();
-                
-    //             //obj1.obj2.obj3.field3="";
-                
-    //             return null;
-    // }
-    // //method not finished 
-
-/* 
-        // TODO Auto-generated method stub
-        return compiler.environmentType.INT;
-    } */
 
     @Override
     public void decompile(IndentPrintStream s) {

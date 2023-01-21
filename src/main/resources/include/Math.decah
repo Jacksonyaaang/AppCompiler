@@ -2,6 +2,7 @@
 // Library for class Math of Deca, coded in Deca
 
 class Math {
+    MathOperation a = new MathOperation();
     float sin(float f) {
         println("sin(f) not yet implemented");
     }
@@ -19,5 +20,9 @@ class Math {
     }
 }
 
+
+Math math = new Math();
+
+math.MatrixOperationArithmetic.sommeMatrice
 
 // End of Deca Math library

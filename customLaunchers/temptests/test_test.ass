@@ -1,0 +1,133 @@
+	TSTO #3
+	BOV stack_overflow_error
+	ADDSP #3
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 2(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 3(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNewTable--------[2, 16]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  int[][] into memory at register R2
+	LOAD #3, R3	; loading 3 into memory
+	CMP #0, R3
+	BLT int_allocation_table_must_be_positive
+	LOAD #2, R4	; loading 2 into memory
+	CMP #0, R4
+	BLT int_allocation_table_must_be_positive
+	MUL R4, R3
+	ADD #2, R3
+	NEW R3, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	LOAD R3, R1
+	WINT
+	WNL
+	STORE R4, 1(R0)
+	LOAD R4, R1
+	WINT
+	WNL
+	LOAD R0, R2
+; --------EndNewTable--------[2, 16]-----
+	STORE R2, 1(GB)	; Initializing the variable x and loading it into memory
+; --------BeginAssignOp--------[3, 4]-----
+	LOAD #7, R3	; loading 7 into memory
+; --------StartStoreTableElements--------[3, 4]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  x the value in R3
+	LOAD #5, R4	; loading 5 into memory
+	CMP #1, R4
+	BLT int_allocation_table_must_be_positive
+	LOAD #3, R5	; loading 3 into memory
+	CMP #1, R5
+	BLT int_allocation_table_must_be_positive
+	LOAD 1(GB), R1	; loading x into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of x into memory
+	LOAD R0, R1
+	WINT
+	WNL
+	CMP R4, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R4
+	LOAD 1(GB), R1	; loading x into memory
+	LOAD 0(R1), R0	; loading size 2d of x into memory
+	CMP R5, R0
+	BLE table_dimension_are_not_respected
+	ADD R5, R4
+	LOAD R4, R0
+	LOAD #1, R0
+	LOAD #1, R6
+	ADD R0,R6
+	STORE R3, 2(R1, R6)
+; --------EndStoreTableElements--------[3, 4]-----
+; --------EndAssignOp--------[3, 4]-----
+; --------StartGetTableElements--------[4, 12]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  x into memory at register R2
+	LOAD #5, R3	; loading 5 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_positive
+	LOAD #3, R4	; loading 3 into memory
+	CMP #1, R4
+	BLT int_allocation_table_must_be_positive
+	LOAD 1(GB), R1	; loading x into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of x into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R3
+	LOAD 0(R1), R0	; loading size 2d of x into memory
+	CMP R4, R0
+	BLE table_dimension_are_not_respected
+	ADD R4, R3
+	;LOAD 2(R1, R3), R0
+	LOAD R0, R2
+; --------EndGetTableElements--------[4, 12]-----
+	LOAD R2, R1
+	;WINT
+	WNL
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+table_dimension_are_not_respected:
+	WSTR "Error: table_dimension_are_not_respected"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+int_allocation_table_must_be_positive:
+	WSTR "Error: int_allocation_table_must_be_positive"
+	WNL
+	ERROR
+; end main program

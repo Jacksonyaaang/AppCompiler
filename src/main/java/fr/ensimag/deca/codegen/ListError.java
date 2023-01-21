@@ -38,8 +38,11 @@ public class ListError {
         /*
          * 
          */
-        this.list.put("int_allocation_table_must_be_positive", false);
+        this.list.put("int_allocation_table_must_be_strictly_positive", false);
+        this.list.put("int_selection_table_must_be_positive", false);
         this.list.put("table_dimension_are_not_respected", false);
+        this.list.put("table_dimension_can_not_be_changed", false);
+        
     }
 
     public void activeError(String err_name){
