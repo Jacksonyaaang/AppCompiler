@@ -1,0 +1,61 @@
+// Description:
+//    Teste l'utilisation de la sélection et de l'héritage.
+//
+// Resultats:
+//
+//
+// Historique:
+//    cree le 21/01/2023
+class A {
+    protected int x ;
+    void init() {
+        x = 0 ;
+    }
+    void setX(int x) {
+        this.x = x ;
+    }
+    int getX() {
+        return x; ;
+    }
+
+    void displayX(){
+        println("Le champs x de la classe A vaut:",x);
+    }
+}
+class B extends A {
+    void setX(int x) {
+        this.x = 2*x ;
+    }
+    int getX() {
+        return x; ;
+    }
+    void displayX(){
+        println("Le champs x de la classe B vaut:",x);
+
+    }
+}
+class C extends A {
+    void setX(int x) {
+        this.x = 3*x ;
+    }
+    int getX() {
+        return x; ;
+    }
+    void displayX(){
+        println("Le champs x de la classe C vaut:",x);
+
+    }
+}
+
+{
+A a = new A() ;
+B b = new B() ;
+C c = new C() ;
+a.setX(5);
+b.setX(5);
+c.setX(5);
+print(a.getX(), b.getX(), c.getX());
+a.displayX();
+b.displayX();
+c.displayX();
+}

@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
@@ -12,6 +13,16 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.syntax.DecaParser.ExprContext;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
+import fr.ensimag.ima.pseudocode.instructions.BSR;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.ima.pseudocode.instructions.FLOAT;
+import fr.ensimag.ima.pseudocode.instructions.INT;
+
 
 public class Cast extends AbstractExpr{
 
@@ -30,6 +41,40 @@ public class Cast extends AbstractExpr{
         Validate.notNull(expr);
         this.typeCast = typeCast;
         this.expr = expr;
+    }
+
+    protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
+        compiler.incrementCastIncrement();
+        if( ((Identifier) typeCast).getType() == this.expr.getType()){
+            expr.codeGenInst(compiler);
+        }
+        else if((( (Identifier) typeCast).getType().isFloat())&&(expr.getType().isInt())){
+            expr.codeGenInst(compiler);
+            compiler.addInstruction(new FLOAT(expr.getRegisterDeRetour(), expr.getRegisterDeRetour()));
+        }
+        else if((this.typeCast.getDefinition().getType().isInt())&&(expr.getType().isFloat())){
+            expr.codeGenInst(compiler);
+            compiler.addInstruction(new INT(expr.getRegisterDeRetour(), expr.getRegisterDeRetour()));
+        }
+        else if (expr instanceof Null){
+            expr.codeGenInst(compiler);
+        }
+        else if((this.typeCast.getType().isClass())&&(this.expr.getType().isClass())){
+            InstanceOf verificationClassInstance = new InstanceOf(expr, typeCast);
+            verificationClassInstance.codeGenInst(compiler);
+            compiler.addInstruction(new CMP(new ImmediateInteger(1), verificationClassInstance.getRegisterDeRetour()));
+            compiler.addInstruction(new BEQ(new Label("load_item_and_leave_cast"+compiler.getCastIncrement())));
+            if (!(compiler.getCompilerOptions().isNoCheck())){
+                compiler.getErrorManagementUnit().activeError("cast_error");
+                compiler.addInstruction(new BRA(new Label("cast_error")));
+            }
+            compiler.addLabel(new Label("load_item_and_leave_cast"+compiler.getCastIncrement()));
+            verificationClassInstance.popRegisters(compiler);
+            compiler.getRegisterManagement().decrementOccupationRegister(expr.getRegisterDeRetour());
+            expr.codeGenInst(compiler);
+        }
+        this.setRegisterDeRetour(expr.getRegisterDeRetour());
+        this.transferPopRegisters(expr.getRegisterToPop());
     }
 
     @Override

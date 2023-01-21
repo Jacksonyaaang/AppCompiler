@@ -122,22 +122,54 @@ public class DeclField extends AbstractDeclField {
     }
 
     @Override
-    public void codeGenDelField(DecacCompiler compiler) throws CodeGenError {
-        if (initialization instanceof Initialization ){
-            this.initialization.codegenInitial(compiler);
-            compiler.addInstruction(new STORE(this.initialization.getRegistreDeRetour(),
-                                        varName.getExpDefinition().getOperand()), "Initializing the field "+ getVarName().getName()
-                                                                +" and loading it into memory"); 
+    public void CodeGenPlaceZeroInField(DecacCompiler compiler) throws CodeGenError {
+        if (type.getType() == compiler.environmentType.FLOAT){
+            compiler.addInstruction(new LOAD(new ImmediateFloat(0), Register.getR(0)),
+                    "loading 0.0  into memory to initialize field with type float to 0");
         }
         else{
-                compiler.addInstruction(new LOAD(new ImmediateInteger(0), Register.getR(0)),
-                        "loading 0  into memory to initialize field to 0");
-                compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(1)),
-                "loading class(this) into memory"+getVarName()+ "into memory");
-                compiler.addInstruction(new STORE(Register.getR(0),new RegisterOffset(((FieldDefinition) (varName.getExpDefinition())).getIndex(), Register.getR(1))),
-                            "Saving field  "+getVarName()+ " into memory");
+            compiler.addInstruction(new LOAD(new ImmediateInteger(0), Register.getR(0)),
+                    "loading 0  into memory to initialize field to 0");
+        }
+
+        compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(1)),
+                "loading class (this) into memory when working with field "+getVarName().getName());
+        compiler.addInstruction(new STORE(Register.getR(0),new RegisterOffset(((FieldDefinition) (varName.getExpDefinition())).getIndex(), Register.getR(1))),
+                "Saving field  "+getVarName().getName()+ " into memory");
+    }
+
+    @Override
+    public void codeGenDelField(DecacCompiler compiler) throws CodeGenError {
+        //If the field has been initialized, then we must place the value that has been
+        //assigned to field, and place it in the memory location that holds the field
+        if (initialization instanceof Initialization ){
+            GPRegister assignRegister = this.LoadAndReserveARegister(compiler);
+            compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), assignRegister),
+                    "[codeGenDelField][initialization] loading class (this) into memory when working with field "+getVarName().getName());
+            this.initialization.codegenInitial(compiler);
+            compiler.addInstruction(new STORE(this.initialization.getRegistreDeRetour(),
+                    new RegisterOffset(this.varName.getFieldDefinition().getIndex(), assignRegister)), "Initializing the field "+ getVarName().getName()
+                    +" and loading it into memory");
         }
     }
+
+    /**
+     * Cette méthodes est utilisé
+     */
+    protected GPRegister LoadAndReserveARegister(DecacCompiler compiler) throws CodeGenError {
+        GPRegister regReserved = null;
+        if (compiler.getRegisterManagement().areThereAnAvaliableRegsiterSup2()){
+            regReserved = compiler.getRegisterManagement().getAnEmptyStableRegisterAndReserveIt();
+            assert(regReserved !=null );
+            LOG.debug("[DeclField][LoadAndReserveARegister]  Reserving an non empty register with the name " + regReserved);
+        }
+        else{
+            throw new CodeGenError(getLocation(),"[DeclField][LoadAndReserveARegister] We must have empty registers when begin the field declaration process");
+        }
+
+        return regReserved;
+    }
+
 
 }
 

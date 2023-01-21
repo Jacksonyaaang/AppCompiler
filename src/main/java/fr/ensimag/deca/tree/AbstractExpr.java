@@ -173,12 +173,12 @@ public abstract class AbstractExpr extends AbstractInst {
         }
         else if (expectedType.isClass() && t.isClassOrNull()){
             if (!((ClassType)t).isSubClassOf((ClassType)expectedType)){
-                throw new ContextualError("Le type de l'expression de droite est " + t + " alors que le type attendu est " + expectedType, getLocation());
+                throw new ContextualError("Le type de l'expression est " + t + " alors que le type attendu est " + expectedType, getLocation());
             }else return this;
         }
         if (!expectedType.sameType(t)){
             //System.out.println("***************************************************");
-            throw new ContextualError("Le type de l'expression de droite est " + t + " alors que le type attendu est " + expectedType, getLocation());
+            throw new ContextualError("Le type de l'expression est " + t + " alors que le type attendu est " + expectedType, getLocation());
         }
         setType(expectedType);
         return this;
