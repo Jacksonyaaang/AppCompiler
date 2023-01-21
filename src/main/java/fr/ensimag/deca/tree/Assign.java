@@ -165,7 +165,7 @@ public class Assign extends AbstractBinaryExpr {
             else{
                 Type typOpRight = getRightOperand().verifyExpr(compiler, localEnv, currentClass);
                 if (!typOpLeft.sameType(typOpRight))
-                    throw new ContextualError("Impossible d'assigner le résultat de la méthode read à cette variable", getLocation());
+                    throw new ContextualError("Impossible d'assigner le résultat de la méthode read de type " + typOpRight.getName().getName() + " à cette variable de type " + typOpLeft.getName().getName(), getLocation());
             }
             setType(typOpLeft);
             return getType();

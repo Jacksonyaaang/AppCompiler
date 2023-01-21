@@ -1,0 +1,12 @@
+// Description:
+//    Teste l'appel de méthode sur un type primitif
+//
+// Resultats:
+//    Ligne 11: L'appelant de cette methode n'a pas pour type un type de classe
+//
+// Historique:
+//    cree le 20/01/2023
+{
+int b = 0;
+b.increment();
+}

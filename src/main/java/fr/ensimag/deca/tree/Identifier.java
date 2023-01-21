@@ -216,7 +216,7 @@ public class Identifier extends AbstractIdentifier {
         for (tmpEnv = localEnv; tmpEnv != null; tmpEnv = tmpEnv.getParent()){
             //precTempEnv = localEnv;
             if (!tmpEnv.getExp().containsKey(name) && tmpEnv.getParent() == null)
-                throw new ContextualError("L'identificateur " + getName().getName() + " n'est pas défini",getLocation());
+                throw new ContextualError("L'identificateur de variable " + getName().getName() + " n'est pas défini",getLocation());
             else if (tmpEnv.getExp().containsKey(name)) break;
         }
         Definition Defi = tmpEnv.get(name);

@@ -56,7 +56,7 @@ public class This extends AbstractExpr{
             throws ContextualError {
         LOG.debug("[This][verifyExpr]");
         if(currentClass == null){
-            throw new ContextualError("L'expression this. ne peut pas appeler un objet null", getLocation());
+            throw new ContextualError("L'expression \"this.\" est utilisable que dans le cadre de classes", getLocation());
         }
         setType(currentClass.getType());
         return currentClass.getType();

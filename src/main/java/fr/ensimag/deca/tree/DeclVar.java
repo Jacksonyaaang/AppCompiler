@@ -45,7 +45,7 @@ public class DeclVar extends AbstractDeclVar {
         type.setType(t);
         //Vérification de la condition type =/= void de la règle 3.17
         if(t.isVoid()) {
-            throw new ContextualError("Déclaraion de variables de type void impossible", getLocation());
+            throw new ContextualError("Déclaration de variables de type void impossible", getLocation());
         }
         initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
         VariableDefinition VDf = new VariableDefinition(type.getType(), varName.getLocation());

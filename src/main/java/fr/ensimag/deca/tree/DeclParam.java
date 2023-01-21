@@ -25,7 +25,7 @@ import fr.ensimag.ima.pseudocode.Register;
 public class DeclParam extends AbstractDeclParam {
 
 
-    
+
     private static final Logger LOG = Logger.getLogger(IntLiteral.class);
 
     final private AbstractIdentifier type;
@@ -78,19 +78,19 @@ public class DeclParam extends AbstractDeclParam {
             type.setType(typeParam);
             //make sure this type isn't Void
             if (typeParam.isVoid()){
-                throw new ContextualError("Le type void ne peut être un type d'une méthode", getLocation());
+                throw new ContextualError("Un paramètre de méthode ne peut être de type void", getLocation());
             }
             //verify environmentTypes has the type of Paramname 
             Map<Symbol, TypeDefinition> envTypes = compiler.environmentType.getEnvTypes();
-            if (!(envTypes.containsKey(typeParam.getName()))){
-                throw new ContextualError("Le type " + typeParam.getName() + " ne peut être utilisée comme paramétre de fonction", getLocation());
+            if (!envTypes.containsKey(typeParam.getName())){
+                throw new ContextualError("Le type " + getType().getName() + " n'est pas defini", getLocation());
             }
             ParamDefinition paramDef = new ParamDefinition(typeParam, getLocation());
             paramName.setDefinition(paramDef);
             try {
                 envParms.declare(paramName.getName(), paramDef);
             } catch (EnvironmentExp.DoubleDefException e) {
-                throw new ContextualError("double declaration de paramétre", getLocation());
+                throw new ContextualError("Il existe déjà un paramètre de nom " + paramName.getName().getName() + " dans la même méthode ", getLocation());
             }
             this.paramName.getExpDefinition().setOperand(new RegisterOffset(compiler.decrementParamCounterCompiler(), Register.LB)); 
             LOG.debug("[DeclParam][verifyDecleParam] Saving method parameter " + this.paramName.getName() + " into " + this.paramName.getExpDefinition().getOperand());

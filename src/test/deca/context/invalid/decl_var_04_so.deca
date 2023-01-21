@@ -2,7 +2,7 @@
 //    Teste la déclaration de variable non typée.
 //
 // Resultats:
-//    Ligne 12: L'identificateur a n'est pas défini.
+//    Ligne 12: L'identificateur de variable a n'est pas défini.
 //
 // Historique:
 //    cree le 13/01/2023

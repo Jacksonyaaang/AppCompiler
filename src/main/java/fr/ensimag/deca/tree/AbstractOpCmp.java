@@ -45,7 +45,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
         //Si le type des opérandes n'est pas approprié (ni int ni float ni boolean), une ContextualError est envoyée
         if (typeOpLeft.isBoolean() || typeOpRight.isBoolean() ){
             if (!(typeOpRight.isBoolean() && typeOpLeft.isBoolean()))
-                throw  new ContextualError("Comparaison incompatible entre " + typeOpRight.getName().getName() + " et " + typeOpLeft.getName().getName(), getLocation());
+                throw  new ContextualError("Comparaison impossible entre " + typeOpRight.getName().getName() + " et " + typeOpLeft.getName().getName(), getLocation());
         }
         // if((!typeOpLeft.isFloat() && !(typeOpLeft).isInt() && !typeOpLeft.isBoolean()) ||
         //     (!typeOpRight.isInt() && !(typeOpRight).isFloat() && !typeOpLeft.isBoolean())
@@ -66,7 +66,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
         }
         else if (typeOpLeft.isClassOrNull() && typeOpRight.isClassOrNull()){
             if (!getOperatorName().equals("==") && !getOperatorName().equals("!=")){
-                throw new ContextualError("comparaison Incompatible", getLocation());
+                throw new ContextualError("Comparaison impossible entre " + typeOpRight.getName().getName() + " et " + typeOpLeft.getName().getName(), getLocation());
             }
         }
         //si les deux opérandes sont des booléens on passe 

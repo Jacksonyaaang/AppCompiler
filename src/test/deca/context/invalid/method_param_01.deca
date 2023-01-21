@@ -1,0 +1,13 @@
+// Description:
+//    Vérifie que l'on ne peut pas mettre de paramètres de type void
+//
+// Resultats:
+//    Ligne 10: Un paramètre de méthode ne peut être de type void
+//
+// Historique:
+//    cree le 20/01/2023
+class A{
+    void test(void a){
+
+    }
+}

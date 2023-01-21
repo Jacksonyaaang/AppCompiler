@@ -34,8 +34,8 @@ public class Selection extends AbstractLValue {
     protected AbstractExpr obj;
     protected AbstractIdentifier field;
     /*
-     * Cette element sera utilisé pour accéder au caratéristique d'un tableau    
-     * qui sont size1D et size2D 
+     * Cette element sera utilisé pour accéder au caratéristique d'un tableau
+     * qui sont size1D et size2D
      */
 
     protected int tableIndex = 0;
@@ -53,29 +53,28 @@ public class Selection extends AbstractLValue {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError {
-        compiler.addComment("--------BeginSelection--------"+getLocation()+"-----");    
+        compiler.addComment("--------BeginSelection--------"+getLocation()+"-----");
         obj.codeGenInst(compiler);
         if (!compiler.getCompilerOptions().isNoCheck()){
             compiler.addInstruction(new CMP(new NullOperand(), obj.getRegisterDeRetour()), null);
-            compiler.addInstruction(new BEQ(new Label("deref_null_error")), 
+            compiler.addInstruction(new BEQ(new Label("deref_null_error")),
                                     "Checking if the class identifier is null");
             compiler.getErrorManagementUnit().activeError("deref_null_error");
         }
         if (obj.getType().isTable()){
             compiler.addInstruction(new LOAD(
                 new RegisterOffset( tableIndex, obj.getRegisterDeRetour()), obj.getRegisterDeRetour()),
-                 "Loading the field " + field.getName() +" into a register "); 
+                 "Loading the field " + field.getName() +" into a register ");
         }
         else {
             compiler.addInstruction(new LOAD(
                         new RegisterOffset( ((Identifier)field).getFieldDefinition().getIndex(), obj.getRegisterDeRetour()), obj.getRegisterDeRetour()),
-                         "Loading the field " + field.getName() +" into a register "); 
-        }
+                         "Loading the field " + field.getName() +" into a register ");
         this.setRegisterDeRetour(obj.getRegisterDeRetour());
         this.transferPopRegisters(obj.getRegisterToPop());
-        compiler.addComment("--------BeginSelection--------"+getLocation()+"-----");    
+        compiler.addComment("--------BeginSelection--------"+getLocation()+"-----");
     }
-    
+
     /**
      * the return type is obvously a "class"
      *    expression found : this, Lvalue (for class),  Cast
@@ -91,24 +90,25 @@ public class Selection extends AbstractLValue {
                 setType(compiler.environmentType.INT);
                 return compiler.environmentType.INT;
             }
-            
+
             //setType(t);  //error, miss 'this.type'
             if (!type.isClass()){
-                throw new ContextualError("[Using Error] The first selection must be a class or this ", getLocation());
+                throw new ContextualError(" Le type de l'expression utilisé pour une sélection doit être un type de classe ou \"this\"", getLocation());
             }
             LOG.debug("[Selection][verifyExpr] Class type is  " + ((ClassType)((obj).getType())).getDefinition().getType().getName());
             fieldDefi = (FieldDefinition)(((ClassType)((obj).getType())).getDefinition().getMembers().get(((Identifier)this.field).getName()));
             field.setDefinition(fieldDefi);
             if (fieldDefi==null){
-                throw new ContextualError("[Using Error] Can't find the field in the prevous declarations ", getLocation());
-                
+                throw new ContextualError("Le champs " + field.getName().getName() + " n'est pas défini", getLocation());
+
+
             }else{
                 if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
                     ClassDefinition classDes = ((FieldDefinition)this.field.getDefinition()).getContainingClass();
                      if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType) type).isSubClassOf(classDes.getType())) {
 
-                        throw new ContextualError("[Using Error] Obey the second condition, the current class must be the sub class of the field class", getLocation());
-                    } 
+                        throw new ContextualError(" La classe "+ currentClass.getType().getName().getName()+" doit être une sous-classe de " + currentClass.getSuperClass().getType().getName().getName() + "où est défini le champs" + getField().getName().getName(), getLocation());
+                    }
                     
                 }
             }
@@ -127,7 +127,7 @@ public class Selection extends AbstractLValue {
                     throw new ContextualError("Le tableau est 1D", getLocation());
                 }
                 tableIndex = 1;
-            }   
+            }
         }
         else{
             throw new ContextualError("Pour accéder au caratéristique du tableau, il utiliser les identificateurs suivants mettre size1D, size2D", getLocation());

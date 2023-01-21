@@ -1,0 +1,15 @@
+// Description:
+//    Teste la sélection sur un type primitif.
+//
+// Resultats:
+//    Ligne 14: Le type de l'expression utilisé pour une sélection doit être un type de classe ou "this"
+//
+// Historique:
+//    cree le 20/01/2023
+class B{
+    int x;
+}
+{
+int b = 0;
+b.x = 5;
+}

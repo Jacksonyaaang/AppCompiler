@@ -78,7 +78,7 @@ public class DeclClass extends AbstractDeclClass {
                                          Register.getR(0)));
 
         compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().put(classDefinition, new RegisterOffset(compiler.incrementGbCompiler(), Register.GB));
-        
+
         compiler.addInstruction(new STORE(Register.getR(0), compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(classDefinition)));
         
 
@@ -234,20 +234,26 @@ public class DeclClass extends AbstractDeclClass {
     protected void verifyClass(DecacCompiler compiler) throws ContextualError {
         if (!compiler.environmentType.getEnvTypes().containsKey(name.getName())){
             if (compiler.environmentType.getEnvTypes().containsKey(superClass.getName())){
-                //Ce traitement associe à l'indetificateur la class super sa classe definition de object
-                // Ceci sera utile pour le méthode de generation de code 
-                superClass.setDefinition((ClassDefinition) compiler.environmentType.getEnvTypes().get(
-                                                compiler.createSymbol(superClass.getName().getName())));
-                ClassType classType = new ClassType(name.getName(), getLocation(), 
-                                                    (ClassDefinition)compiler.environmentType.defOfType(superClass.getName()));
-                compiler.environmentType.getEnvTypes().put(name.getName(), (ClassDefinition) classType.getDefinition());
-                name.setDefinition((ClassDefinition) classType.getDefinition());
+                if (compiler.environmentType.getEnvTypes().get(superClass.getName()).getType().isClass()){
+                    //Ce traitement associe à l'indetificateur la class super sa classe definition de object
+                    // Ceci sera utile pour le méthode de generation de code 
+                    superClass.setDefinition((ClassDefinition) compiler.environmentType.getEnvTypes().get(
+                        compiler.createSymbol(superClass.getName().getName())));
+                    ClassType classType = new ClassType(name.getName(), getLocation(), 
+                            (ClassDefinition)compiler.environmentType.defOfType(superClass.getName()));
+                    compiler.environmentType.getEnvTypes().put(name.getName(), (ClassDefinition) classType.getDefinition());
+                    name.setDefinition((ClassDefinition) classType.getDefinition());
+                }
+                else{
+                    throw new ContextualError("Une super classe doit avoir un type de classe", getLocation());
+                }
+
             }
             else
-                throw new ContextualError("le super Class n'est pas déclaré", getLocation());   
+                throw new ContextualError("La super classe " + getSuperClass().getName() + " n'est pas définie", getLocation());
         }
         else 
-            throw new ContextualError("Double Déclaration de la class  " + name.getName().getName(), getLocation());
+            throw new ContextualError("Il existe déjà une classe de nom " + name.getName().getName(), getLocation());
     }
 
     @Override

@@ -1,0 +1,42 @@
+// Description:
+//    Teste l'oubli de l'héritage entre 2 classes
+//
+// Resultats:
+//    Ligne 34: L'identificateur x b'est pas défini
+//
+// Historique:
+//    cree le 20/01/2023
+class A {
+    protected int x;
+    float y;
+
+    void init (){
+        x = 0;
+        y = 0;
+    }
+    void setY(float y){
+        this.y = y;
+    }
+
+    void setX(int x){
+        this.x = x;
+    }
+
+    int getX(int x){
+        return x;
+    }
+}
+
+class B {
+    int z;
+
+    void init (){
+        x = 0;
+        y = 0;
+        z = 0;
+    }
+
+     void setZ(int z){
+        this.z = z;
+     }
+}

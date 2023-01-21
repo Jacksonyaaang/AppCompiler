@@ -45,7 +45,7 @@ public class New  extends AbstractExpr{
             throws ContextualError {
             Type t = className.verifyType(compiler);
             if(!t.isClass()){
-                throw new ContextualError("L'expression new est utilisée uniquement pour créer des objets dont le type est un type de classe", getLocation());
+                throw new ContextualError("L'expression \"new\" est utilisée uniquement pour créer des objets dont le type est un type de classe", getLocation());
             }
             setType(t);
         return t;

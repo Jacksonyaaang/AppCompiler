@@ -121,7 +121,7 @@ public class MethodCall extends AbstractExpr {
             Identifier methodIdent = (Identifier) methode;
             for (; tmpEnv != null; tmpEnv = tmpEnv.getParent()){
                 if (!tmpEnv.getExp().containsKey(methodIdent.getName()) && tmpEnv.getParent() == null)
-                    throw new ContextualError("L'identificateur " + methodIdent.getName().getName() + " n'est pas défini",getLocation());
+                    throw new ContextualError("L'identificateur de méthode " + methodIdent.getName().getName() + " n'est pas défini",getLocation());
                 else if (tmpEnv.getExp().containsKey(methodIdent.getName())) break;
             }
             Defi = tmpEnv.get(methodIdent.getName());
@@ -134,18 +134,18 @@ public class MethodCall extends AbstractExpr {
                         Type tPramCall = listParam.getList().get(compteur).verifyExpr(compiler, localEnv, currentClass);
                         Type tPramMeth = ((MethodDefinition)Defi).getSignature().paramNumber(compteur);
                         if (!tPramCall.sameType(tPramMeth)){
-                            throw new ContextualError("Signature de methode non prévu", getLocation());
+                            throw new ContextualError("Signature de methode erronée", getLocation());
                         }
                         compteur++;
                     }
                 }else{
-                    throw new ContextualError("Signature de methode non prévu", getLocation());
+                    throw new ContextualError("Signature de methode erronée", getLocation());
                 }
             }else{
-                throw new ContextualError("ce identificateur n'est pas defini comme methode", getLocation());
+                throw new ContextualError("L'identificateur " + methodIdent.getName().getName() +" n'est pas defini comme methode", getLocation());
             }
         }else{
-            throw new ContextualError("l'appelant de cette methode n'est pas une classe", getLocation());
+            throw new ContextualError("L'appelant de cette methode n'a pas pour type un type de classe", getLocation());
         }
         setType(Defi.getType());
         return Defi.getType();

@@ -103,9 +103,9 @@ public abstract class AbstractExpr extends AbstractInst {
             LOG.debug("[AbstractExpr][printPopRegisters] PopRegister contains "+ register);
         }
     }
-    
+
     /**
-     * verifyExprIsPositive ajoute des instruction pour vérifier que le registre de retour 
+     * verifyExprIsPositive ajoute des instruction pour vérifier que le registre de retour
      * d'une expression est positive. Si l'élement inférieur au égal à 0 on quitte
      * et lance une erreur
      * @param compiler
@@ -120,7 +120,7 @@ public abstract class AbstractExpr extends AbstractInst {
     }
 
     /**
-     * verifyExprIsPositive ajoute des instruction pour vérifier que le registre de retour 
+     * verifyExprIsPositive ajoute des instruction pour vérifier que le registre de retour
      * d'une expression est  positive. Si l'élement inférieur à 0 on quitte
      * et lance une erreur
      * @param compiler
@@ -136,8 +136,8 @@ public abstract class AbstractExpr extends AbstractInst {
 
 
     /**
-     * verifyExprIsLowerThenRegister ajoute des instruction pour vérifier que le registre de retour 
-     * d'une expression est inférieur ou égal à une autre valeur stockée dans le registe : registreComparaison 
+     * verifyExprIsLowerThenRegister ajoute des instruction pour vérifier que le registre de retour
+     * d'une expression est inférieur ou égal à une autre valeur stockée dans le registe : registreComparaison
      * @param compiler
      * @param expr
      */
@@ -151,7 +151,7 @@ public abstract class AbstractExpr extends AbstractInst {
 
 
 
-    
+
 
     boolean isImplicit() {
         return false;
@@ -226,11 +226,12 @@ public abstract class AbstractExpr extends AbstractInst {
         }
         else if (expectedType.isClass() && typeR.isClassOrNull()){
             if (!((ClassType)typeR).isSubClassOf((ClassType)expectedType)){
-                throw new ContextualError("Not expected type", getLocation());
+                throw new ContextualError("Le type de l'expression est " + typeR + " alors que le type attendu est " + expectedType, getLocation());
             }else return this;
         }
         if (!expectedType.sameType(typeR)){
-            throw new ContextualError("Not expected type", getLocation());
+            //System.out.println("***************************************************");
+            throw new ContextualError("Le type de l'expression est " + typeR + " alors que le type attendu est " + expectedType, getLocation());
         }
         setType(expectedType);
         LOG.debug("[AbstractExpr][verifyRValue] We found the type = " + typeR.getName() + " expected type is " + expectedType.getName());
@@ -262,7 +263,7 @@ public abstract class AbstractExpr extends AbstractInst {
         //Si le type de la condition est null ou n'est pas boolean, on jette une ContextualError
         if (type_cond != null && type_cond.isBoolean()) setType(type_cond);
         else{
-            throw new ContextualError("la condition doit être booléan", getLocation());
+            throw new ContextualError("la condition doit être de type boolean", getLocation());
         }
         setType(compiler.environmentType.BOOLEAN);
     }
