@@ -1,0 +1,15 @@
+class A2 {
+	public string field1 = "héritage d'attribut valide";
+	void printValide(){
+		println("héritage de méthode valide");
+	}
+}
+
+class B2 extends A2 {
+}
+
+{
+	B2 b;
+	println(b.field1);
+	b.method1();
+}

@@ -1,0 +1,57 @@
+`> [1, 0] Program
+   +> [1, 0] ListDeclClass [List with 1 elements]
+   |  []> [1, 0] DeclClass
+   |      +> [1, 6] Identifier (A)
+   |      +> [builtin] Identifier (Object)
+   |      +> ListDeclField [List with 2 elements]
+   |      |  []> [2, 18]  [visibility=PROTECTED]  DeclField
+   |      |  ||  +> [2, 14] Identifier (int)
+   |      |  ||  +> [2, 18] Identifier (x)
+   |      |  ||  `> NoInitialization
+   |      |  []> [3, 8]  [visibility=PUBLIC]  DeclField
+   |      |      +> [3, 4] Identifier (int)
+   |      |      +> [3, 8] Identifier (test_attribut)
+   |      |      `> NoInitialization
+   |      `> ListDeclMethod [List with 3 elements]
+   |         []> [5, 4] DeclMethod
+   |         ||  +> [5, 4] Identifier (int)
+   |         ||  +> [5, 8] Identifier (getX)
+   |         ||  +> [5, 14] ListDeclParam [List with 1 elements]
+   |         ||  |  []> [5, 14] DeclParam
+   |         ||  |      +> [5, 14] Identifier (boolean)
+   |         ||  |      `> [5, 22] Identifier (test2)
+   |         ||  `> [5, 29] MethodBody
+   |         ||     +> ListDeclVar [List with 0 elements]
+   |         ||     `> ListInst [List with 1 elements]
+   |         ||        []> [6, 8] Assign
+   |         ||            +> [6, 8] Identifier (x)
+   |         ||            `> [6, 12] Int (5)
+   |         []> [8, 4] DeclMethod
+   |         ||  +> [8, 4] Identifier (void)
+   |         ||  +> [8, 9] Identifier (setX)
+   |         ||  +> [8, 14] ListDeclParam [List with 1 elements]
+   |         ||  |  []> [8, 14] DeclParam
+   |         ||  |      +> [8, 14] Identifier (int)
+   |         ||  |      `> [8, 18] Identifier (x)
+   |         ||  `> [8, 21] MethodBody
+   |         ||     +> ListDeclVar [List with 1 elements]
+   |         ||     |  []> [9, 9] DeclVar
+   |         ||     |      +> [9, 5] Identifier (int)
+   |         ||     |      +> [9, 9] Identifier (alpha)
+   |         ||     |      `> [9, 17] Initialization
+   |         ||     |         `> [9, 17] Int (5)
+   |         ||     `> ListInst [List with 1 elements]
+   |         ||        []> [10, 13] Println
+   |         ||            `> ListExpr [List with 1 elements]
+   |         ||               []> [10, 13] StringLiteral (hello world)
+   |         []> [12, 4] DeclMethod
+   |             +> [12, 4] Identifier (void)
+   |             +> [12, 9] Identifier (method)
+   |             +> [12, 16] ListDeclParam [List with 1 elements]
+   |             |  []> [12, 16] DeclParam
+   |             |      +> [12, 16] Identifier (int)
+   |             |      `> [12, 20] Identifier (x)
+   |             `> [13, 6] MethodAsmBody
+   |                `> [13, 6] StringLiteral (" LOAD #2, R1
+     WINT ")
+   `> EmptyMain

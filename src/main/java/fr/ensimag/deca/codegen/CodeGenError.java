@@ -17,13 +17,6 @@ public class CodeGenError extends Exception {
         super(message + " Location is at = " + location);
 
     }
-    // Description:
-// Test de elseif et la manipulation correct de cela
-// Resultats:
-// 
-// Historique:
-//    cree le 01/01/2023
-
 
 
 }

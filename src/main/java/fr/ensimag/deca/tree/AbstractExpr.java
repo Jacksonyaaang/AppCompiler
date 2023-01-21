@@ -10,10 +10,14 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 import fr.ensimag.ima.pseudocode.instructions.PUSH;
+import fr.ensimag.ima.pseudocode.instructions.BLE;
+import fr.ensimag.ima.pseudocode.instructions.BLT;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
@@ -99,6 +103,33 @@ public abstract class AbstractExpr extends AbstractInst {
             LOG.debug("[AbstractExpr][printPopRegisters] PopRegister contains "+ register);
         }
     }
+    
+    /**
+     * verifyExprIsPositive ajoute des instruction pour vérifier que le registre de retour 
+     * d'une expression est strictement positive. Si l'élement inférieur au égal à 0 on quitte
+     * et lance une erreur
+     * @param compiler
+     * @param expr
+     */
+    protected void verifyExprIsPositive(DecacCompiler compiler, AbstractExpr expr){
+        compiler.addInstruction(new CMP(new ImmediateInteger(0), expr.getRegisterDeRetour()));
+        compiler.addInstruction(new BLT(new Label("int_allocation_table_must_be_positive")));
+        compiler.getErrorManagementUnit().activeError("int_allocation_table_must_be_positive");
+    }
+
+    /**
+     * verifyExprIsLowerThenRegister ajoute des instruction pour vérifier que le registre de retour 
+     * d'une expression est inférieur ou égal à une autre valeur stockée dans le registe : registreComparaison 
+     * @param compiler
+     * @param expr
+     */
+    protected void verifyExprIsLowerThenRegister(DecacCompiler compiler, AbstractExpr expr, GPRegister registreComparaison){
+        compiler.addInstruction(new CMP(expr.getRegisterDeRetour(), registreComparaison));
+        compiler.addInstruction(new BLE(new Label("table_dimension_are_not_respected")));
+        compiler.getErrorManagementUnit().activeError("table_dimension_are_not_respected");
+    }
+
+    
 
     boolean isImplicit() {
         return false;
@@ -302,5 +333,4 @@ public abstract class AbstractExpr extends AbstractInst {
         }
     }
 
-    
 }

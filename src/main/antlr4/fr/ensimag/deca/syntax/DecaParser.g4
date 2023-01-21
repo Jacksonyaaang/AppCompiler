@@ -489,6 +489,32 @@ primary_expr returns[AbstractExpr tree]
         $tree = new NewTable(tempIdentifier, arguementTableau);
         setLocation($tree, $NEW);
     }
+    | ident OBRACKET  e1=expr CBRACKET {
+            assert($e1.tree != null);
+            assert($ident.tree != null);
+            arguementTableau.add($e1.tree);
+            sbTable = new StringBuilder();
+            sbTable.append($ident.text); 
+            tempIdentifier = new Identifier(this.getDecacCompiler().createSymbol(sbTable.toString()));
+            setLocation(tempIdentifier, $ident.start);
+            $tree = new TableGetElement(tempIdentifier, arguementTableau);
+            setLocation($tree, $ident.start);
+        }
+    | ident OBRACKET e1=expr CBRACKET OBRACKET  e2=expr CBRACKET {
+        assert($ident.tree != null);
+        assert($e1.tree != null);
+        assert($e2.tree != null);
+        //On ajoute les expr dans le tableau, 
+        //qui sont utlisées comme argument
+        arguementTableau.add($e1.tree);
+        arguementTableau.add($e2.tree);
+        sbTable = new StringBuilder();
+        sbTable.append($ident.text); 
+        tempIdentifier = new Identifier(this.getDecacCompiler().createSymbol(sbTable.toString()));
+        setLocation(tempIdentifier, $ident.start);
+        $tree = new TableGetElement(tempIdentifier, arguementTableau);
+        setLocation($tree, $ident.start);
+    }
     | cast=OPARENT type CPARENT OPARENT expr CPARENT {
             assert($type.tree != null);
             assert($expr.tree != null);

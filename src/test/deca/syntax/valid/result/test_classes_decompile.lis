@@ -1,0 +1,82 @@
+class A3 {
+	public int x;
+	void A3(int i){
+		(this.x = i);
+	}
+	int getX(){
+		return this.x;
+	}
+	void setX(int i){
+		(this.x = i);
+	}
+	String toString(){
+		return ("x=" + this.x);
+	}
+	int setgetX(int i){
+		this.setX(i);
+		return this.getX();
+	}
+	void QuiSuisJe(){
+		println("Je suis un attribut de la classe A3");
+	}
+}
+
+class B3 extends A3 {
+	public float z;
+	public B3 successeur;
+	void B3(int i, float f){
+		(this.x = i);
+		(this.z = f);
+	}
+	void QuiSuisJe(){
+		println("Je suis un attribut de la classe A3");
+	}
+	String QuiSuisJe(String nom){
+		return test;
+	}
+	float getZ(){
+		return this.z;
+	}
+}
+
+{
+	A3 a = new A3();
+	float z1;
+	B3 b;
+	int y = a.x;
+	B3 b2 = new ACORRIGER();
+	println(a.getX());
+	println(y);
+	a.setX(2);
+	println(a.getX());
+	println(y);
+	println(a.toString());
+	println(a.setgetX(18));
+	a.QuiSuisJe();
+	b.QuiSuisJe();
+	Strinb.QuiSuisJe("b");
+	println(b.QuiSuisJe("b"));
+	(b2.successeur = null);
+	(b.successeur = b2);
+	(z1 = b.successeur.z);
+	if (a.instanceOf(A3)){
+		println("instanceOf reconnait l'appartenance");
+	}
+	else {
+		println("instanceOf ne reconnait pas l'appartenance");
+	}
+	if (b.instanceOf(A3)){
+		println("instanceOf reconnait la non appartenance");
+	}
+	else {
+		println("instanceOf ne reconnait pas la non appartenance");
+	}
+	(b2 = (B3) (b));
+	(y = b2.x);
+	println(b2.x);
+	(a = null);
+	if ((B instanceof A)){
+	}
+	else {
+	}
+}

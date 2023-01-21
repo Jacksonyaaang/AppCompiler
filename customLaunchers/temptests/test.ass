@@ -1,14 +1,59 @@
-	TSTO #1
-	BOV stack_overflow_error
-	ADDSP #1
 ; start main program
-; Main program
-; Beginning of main instructions:
-	LOAD #5, R2	; loading 5 into memory
-	STORE R2, 1(GB)	; Initializing the variable x and loading it into memory
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.Point2D.diag, R0
+	STORE R0, 5(GB)
+	LEA 1(GB), R0
+	LOAD R0,R1
+	LOAD #5,R4
+	LOAD 1(R0, R4), R2
+	;add R0, R4
+	LOAD R0,R1
+
+; -------------------------------------
+;        Main program
+; -------------------------------------
 	HALT
-stack_overflow_error:
-	WSTR "Error: stack_overflow_error"
-	WNL
-	ERROR
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : Point2D -------------------
+; ---------------------------------------------------
+; ------------Init method for class = Point2D--------
+init.Point2D:
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field x
+	STORE R0, 1(R1)	; Saving field  x into memory
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field y
+	STORE R0, 2(R1)	; Saving field  y into memory
+	RTS
+; ------------Code for method : diag with label =  code.Point2D.diag--------
+code.Point2D.diag:
+;  ---------ClassBodyCodeGeneration------
+fin.Point2D.diag:
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
 ; end main program

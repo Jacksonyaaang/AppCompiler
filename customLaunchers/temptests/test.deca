@@ -1,4 +1,8 @@
-{
-	int[][] x = new int[][5][4];
-}
-
+class Point2D {
+    int x ; // Abscisse
+    int y ; // Ordonnee
+    // Deplace ce point
+    // de a en diagonale.
+    void diag(int a) {
+    }
+}	

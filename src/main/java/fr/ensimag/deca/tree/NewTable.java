@@ -2,6 +2,7 @@ package fr.ensimag.deca.tree;
 
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -15,15 +16,20 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 //import net.bytebuddy.jar.asm.Label;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.ADD;
+import fr.ensimag.ima.pseudocode.instructions.BLT;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.NEW;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 import fr.ensimag.ima.pseudocode.instructions.LEA;
+import fr.ensimag.ima.pseudocode.instructions.MUL;
 import fr.ensimag.ima.pseudocode.instructions.PUSH;
 import fr.ensimag.ima.pseudocode.instructions.BSR;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 
 public class NewTable  extends AbstractExpr{
@@ -74,12 +80,51 @@ public class NewTable  extends AbstractExpr{
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
+        LOG.debug("[NewTable][codeGenInst] generating space for the table = " + tableType.getName());
+        this.setRegisterDeRetour(this.LoadGencode(compiler, true));
     }
 
     @Override
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
-        
+        assert(reg != null);
+        compiler.addComment("--------StartNewTable--------"+getLocation()+"-----");
+        LOG.debug("[NewTable][loadItemintoRegister] loading NewTable  =  "+ tableType.getName()+ " into memory at register " + reg);
+        compiler.addComment("[NewTable][loadItemintoRegister] loading NewTable  =  "+ tableType.getName()+ " into memory at register " + reg);
+        /*
+         *  On calcule le contenu de la dimension et on les met dans un registre 
+         */
+        ArrayList<AbstractExpr> listExprInit = new ArrayList<AbstractExpr>();
+        for (AbstractExpr  expr : initializers.getList()){
+            listExprInit.add(expr);
+            expr.codeGenInst(compiler);
+            verifyExprIsPositive(compiler, expr);
+        }   
+        if (initializers.size() == 1){
+            compiler.addInstruction(new ADD(new ImmediateInteger(1), listExprInit.get(0).getRegisterDeRetour()));
+            compiler.addInstruction(new NEW(listExprInit.get(0).getRegisterDeRetour(), Register.getR(0)));
+        }
+        else if(initializers.size() == 2){
+            compiler.addInstruction(new MUL(listExprInit.get(1).getRegisterDeRetour(), listExprInit.get(0).getRegisterDeRetour()));
+            compiler.addInstruction(new ADD(new ImmediateInteger(2), listExprInit.get(0).getRegisterDeRetour()));
+            compiler.addInstruction(new NEW(listExprInit.get(0).getRegisterDeRetour(), Register.getR(0)));
+        }
+
+        //On reserve suffisament d'espace pour les registers et l'adresse de la table de method
+        if (!(compiler.getCompilerOptions().isNoCheck())){
+            compiler.addInstruction(new BOV(new Label("heap_overflow_error")));
+            compiler.getErrorManagementUnit().activeError("heap_overflow_error");
+        }
+        for (AbstractExpr  expr : initializers.getList()){
+            expr.popRegisters(compiler);
+            compiler.getRegisterManagement().decrementOccupationRegister(expr.getRegisterDeRetour());
+        }   
+        compiler.addInstruction(new NEW(Register.getR(0), reg));
+        compiler.addComment("--------EndNewTable--------"+getLocation()+"-----");
     }
+
+
+
+
 
 
 

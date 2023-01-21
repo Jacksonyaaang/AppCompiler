@@ -35,6 +35,11 @@ public class ListError {
         this.list.put("deref_null_error", false);
         this.list.put("heap_overflow_error", false);
         this.list.put("cast_error", false);
+        /*
+         * 
+         */
+        this.list.put("int_allocation_table_must_be_positive", false);
+        this.list.put("table_dimension_are_not_respected", false);
     }
 
     public void activeError(String err_name){
@@ -47,7 +52,10 @@ public class ListError {
         }
     }
 
-
+    /**
+     * writeListError écrit en assembleur tout les erreurs activées
+     * @param compiler
+     */
     public void writeListError(DecacCompiler compiler){
         for(Map.Entry<String, Boolean> set : list.entrySet()){
             if(set.getValue()){

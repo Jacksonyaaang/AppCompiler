@@ -1,0 +1,27 @@
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:38) - [MethodDefinition][setLabel] Initialising label value 
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with code.Object.equals
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:46) - verify program: start
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:48) - Register unit management unit is null
+DEBUG fr.ensimag.deca.DecacCompiler.saveMainProgramState(DecacCompiler.java:128) - [DecacCompiler][saveMainProgramState] Saving state main program
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:36) - [ListDeclClass][verifyListClass] verify listClass pass 1: START
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:40) - [ListDeclClass][verifyListClass] verify listClass pass 1: END
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:48) - [ListDeclClass][verifyListClassMembers] verify listClass pass 2: START
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:52) - [ListDeclClass][verifyListClassMembers] verify listClass pass 2: END
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:59) - [ListDeclClass][verifyListClassBody] verify listClass pass 3: START
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:63) - [ListDeclClass][verifyListClassBody] verify listClass pass 3: END
+DEBUG fr.ensimag.deca.DecacCompiler.setMainProgramState(DecacCompiler.java:115) - [DecacCompiler][setMainProgramState] Seeting main state program
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:38) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:54) - [ListDeclVar][verifyListDeclVariable]
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:191) - [AbstractExpr][verifyInst] Verify the expression coming from the instruction
+DEBUG fr.ensimag.deca.tree.Assign.verifyExpr(Assign.java:128) - [Assign][verifyExpr] Verify left and right expression in assignment
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 1 elements]
+         []> [12, 0] Assign
+             +> [12, 0] Identifier (a)
+             `> [12, 4] Int (5)
+src/test/deca/context/invalid/decl_var_04_so.deca:12:0: L'identificateur a n'est pas défini
