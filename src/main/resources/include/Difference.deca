@@ -1,0 +1,118 @@
+class Sum{
+    void sommeIntInt1D(int[] table1, int[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] + table2[tableIterator];
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void sommeIntInt2D(int[][] table1, int[][] table2){
+        int tableIterator1D = 0;
+        int tableIterator2D = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            while (tableIterator1D < table1.size1D ){
+                while (tableIterator2D < table1.size2D ){
+                    table1[tableIterator1D][tableIterator2D] = table1[tableIterator1D][tableIterator2D] + table2[tableIterator1D][tableIterator2D];
+                    tableIterator = tableIterator + 1;
+                }
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void sommeFloatInt1D(float[] table1, int[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] + (float)(table2[tableIterator]);
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void sommeFloatInt2D(int[][] table1, int[][] table2){
+        int tableIterator1D = 0;
+        int tableIterator2D = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            while (tableIterator1D < table1.size1D ){
+                while (tableIterator2D < table1.size2D ){
+                    table1[tableIterator1D][tableIterator2D] = table1[tableIterator1D][tableIterator2D] + (float)(table2[tableIterator1D][tableIterator2D]);
+                    tableIterator = tableIterator + 1;
+                }
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void sommeIntFloat1D(float[] table1, int[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] + (int)(table2[tableIterator]);
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void sommeIntFloat2D(int[][] table1, int[][] table2){
+        int tableIterator1D = 0;
+        int tableIterator2D = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            while (tableIterator1D < table1.size1D ){
+                while (tableIterator2D < table1.size2D ){
+                    table1[tableIterator1D][tableIterator2D] = table1[tableIterator1D][tableIterator2D] + (int)(table2[tableIterator1D][tableIterator2D]);
+                    tableIterator = tableIterator + 1;
+                }
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void sommeFloatFloat1D(float[] table1, int[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] + table2[tableIterator];
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void sommeFloatFloat2D(int[][] table1, int[][] table2){
+        int tableIterator1D = 0;
+        int tableIterator2D = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            while (tableIterator1D < table1.size1D ){
+                while (tableIterator2D < table1.size2D ){
+                    table1[tableIterator1D][tableIterator2D] = table1[tableIterator1D][tableIterator2D] + table2[tableIterator1D][tableIterator2D];
+                    tableIterator = tableIterator + 1;
+                }
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+}

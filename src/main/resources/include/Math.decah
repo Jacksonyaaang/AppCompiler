@@ -2,27 +2,91 @@
 // Library for class Math of Deca, coded in Deca
 
 class Math {
-    MathOperation a = new MathOperation();
-    float sin(float f) {
-        println("sin(f) not yet implemented");
+
+    void setInt1DTable(int[] table, int value){
+        int tableIterator = 0;
+        while (tableIterator < table.size1D ){
+            table[tableIterator] = value;
+            tableIterator = tableIterator + 1;
+        }
     }
-    float cos(float f) {
-        println("cos(f) not yet implemented");
+
+    void setFloat1DTable(int[] table, float value){
+        int tableIterator = 0;
+        while (tableIterator < table.size1D ){
+            table[tableIterator] = value;
+            tableIterator = tableIterator + 1;
+        }
     }
-    float asin(float f) {
-        println("asin(f) not yet implemented");
+
+    void setInt2DTable(int[][] table, int value){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        while (tableIteratorY < table.size1D ){
+            while (tableIteratorX < table.size1D ){
+                table[tableIteratorX][tableIteratorY] = value;
+                tableIteratorX = tableIteratorX + 1;
+            }
+            tableIteratorY = tableIteratorY + 1;
+        }
     }
-    float atan(float f) {
-        println("atan(f) not yet implemented");
+
+    void setFloat2DTable(int[][] table, float value){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        while (tableIteratorY < table.size1D ){
+            while (tableIteratorX < table.size1D ){
+                table[tableIteratorX][tableIteratorY] = value;
+                tableIteratorX = tableIteratorX + 1;
+            }
+            tableIteratorY = tableIteratorY + 1;
+        }
     }
-    float ulp(float f) {
-        println("ulp(f) not yet implemented");
+
+    void set1DTableIntValue(int[] table, int value, int index){
+        table[index] = value;
+    }
+
+    void set2DTableIntValue(int[][] table, int value, int indexX, int indexY){
+        table[indexX][indexY] = value;
+    }
+
+    void set1DTableFloatValue(int[] table, float value, int index){
+        table[index] = value;
+    }
+
+    void set2DTableFloatValue(int[][] table, float value, int indexX, int indexY){
+        table[indexX][indexY] = value;
+    }
+
+    void printInt1DTable(int[] table){
+        int tableIterator = 0;
+        println("--------------");
+        print("Tableau1D = [");
+        while (tableIterator < table.size1D ){
+            print(table[tableIterator]," ,");
+            tableIterator = tableIterator + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+
+    void printInt2DTable(int[] table){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        println("--------------");
+        print("Tableau2D = [");
+        while (tableIteratorY < table.size1D ){
+            while (tableIteratorX < table.size1D-1 ){
+                print(table[tableIteratorX][tableIteratorY]," ,");
+                tableIteratorX = tableIteratorX + 1;
+            }
+            println(table[tableIteratorY][tableIteratorX]);
+            tableIteratorY = tableIteratorY + 1;
+        }
+        print("]");
+        println("--------------");
     }
 }
-
-
-Math math = new Math();
-
-math.MatrixOperationArithmetic.sommeMatrice
 
 // End of Deca Math library
