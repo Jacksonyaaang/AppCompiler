@@ -1,0 +1,19 @@
+// Description:
+//    Teste l'appel d'une méthode incomplet.
+//
+// Resultats:
+//    Ligne 18: Le champs inc n'est pas défini
+//
+// Historique:
+//    cree le 20/01/2023
+class B{
+    int x;
+    int y;
+    void increment(){
+        x = x +1;
+    }
+}
+{
+B b = new B();
+b.inc;
+}

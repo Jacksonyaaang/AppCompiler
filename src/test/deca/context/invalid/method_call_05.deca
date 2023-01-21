@@ -1,0 +1,20 @@
+// Description:
+//    Teste l'appel d'une méthode qui a le nom d'un champs.
+//
+// Resultats:
+//    Ligne 19: L'identificateur inc n'est pas defini comme methode
+//
+// Historique:
+//    cree le 20/01/2023
+class B{
+    int x;
+    int y;
+    int inc;
+    void increment(){
+        x = x +1;
+    }
+}
+{
+B b = new B();
+b.inc();
+}

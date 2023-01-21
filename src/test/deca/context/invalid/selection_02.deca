@@ -1,0 +1,15 @@
+// Description:
+//    Teste la sélection d'un champs non défini.
+//
+// Resultats:
+//    Ligne 14: Le champs y n'est pas défini
+//
+// Historique:
+//    cree le 20/01/2023
+class B{
+    int x;
+}
+{
+B b = new B();
+print(b.y);
+}

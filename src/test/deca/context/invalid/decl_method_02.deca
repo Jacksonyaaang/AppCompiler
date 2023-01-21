@@ -1,0 +1,21 @@
+// Description:
+//    Teste la redéfinition d'une méthode avec une signature différente
+//
+// Resultats:
+//    Ligne 17: La signature de la méthode setX dans la classe actuelle n'est pas identique à celle de la super classe
+//
+// Historique:
+//    cree le 20/01/2023
+class A{
+    int x;
+    int setX(int a){
+        x = a;
+    }
+}
+class B extends A{
+    int y;
+    void setX(int a, int b){
+    x = a;
+    y = b;
+    }
+}
