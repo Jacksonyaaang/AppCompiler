@@ -2,7 +2,7 @@
 //       Teste de return pour un type non prévu.
 // 
 // Resultats: 
-//      Ligne 18: Le type de l'expression de droite est float alors que le type attendu est int
+//      Ligne 12: Le type de l'expression de droite est float alors que le type attendu est int
 // 
 // Historique:
 //      cree le 21/01/2023

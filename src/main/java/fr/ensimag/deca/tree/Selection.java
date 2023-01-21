@@ -86,9 +86,12 @@ public class Selection extends AbstractLValue {
             }else{
                 if (((Identifier)this.field).getFieldDefinition().getVisibility()==Visibility.PROTECTED){
                     ClassDefinition classDes = ((FieldDefinition)this.field.getDefinition()).getContainingClass();
-                     if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType) type).isSubClassOf(classDes.getType())) {
+                    if (currentClass == null){
+                        throw new ContextualError("le Field est protected", getLocation());
+                    }
+                     else if (!currentClass.getType().isSubClassOf(classDes.getType())||!((ClassType) type).isSubClassOf(currentClass.getType())) {
 
-                        throw new ContextualError(" La classe "+ currentClass.getType().getName().getName()+ " et " + ((ClassType)type).getName().getName() + " doivent être des sous-classes de " + classDes.getType().getName().getName() + "où est défini le champs" + getField().getName().getName(), getLocation());
+                        throw new ContextualError(" La classe "+ currentClass.getType().getName().getName()+ " doit être un sous classe de " + classDes.getType().getName().getName() +  " où est défini le champs " + getField().getName().getName() + " et " + ((ClassType)type).getName().getName() + " doit être des sous-classes de " + currentClass.getType().getName().getName(), getLocation());
                     }
                     
                 }

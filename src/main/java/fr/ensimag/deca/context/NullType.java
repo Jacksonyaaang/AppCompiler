@@ -31,9 +31,6 @@ public class NullType extends Type {
     public boolean isClassOrNull() {
         return true;
     }
-    public boolean isSubClassOf(ClassType potentialSuperClass) {
-        return true;
-    }
 
 
 }

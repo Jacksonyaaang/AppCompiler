@@ -2,11 +2,11 @@
 //       Teste de selection d'un Field protected .
 // 
 // Resultats: 
-//      Ligne 18:La classe B et A doivent être des sous-classes de A où est défini le champs x
+//      Ligne 18:La classe B doit être un sous-classes de A où est défini le champs x 
+//	et la A doit être doit être un sous classe de B
 // 
 // Historique:
 //      cree le 21/01/2023
-
 class A{
  protected int x;
 }

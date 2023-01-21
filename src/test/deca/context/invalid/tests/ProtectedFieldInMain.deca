@@ -1,0 +1,16 @@
+// Description:
+//       Teste de selection d'un Field protected .
+// 
+// Resultats: 
+//      Ligne 15: le Field est protected
+// 
+// Historique:
+//      cree le 21/01/2023
+class A{
+  protected int x;
+}
+
+{
+  A a = new A();
+  a.x = 2;
+}
