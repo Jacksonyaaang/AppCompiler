@@ -1,0 +1,147 @@
+	TSTO #14
+	BOV stack_overflow_error
+	ADDSP #11
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 2(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 3(GB)
+	LEA 2(GB), R0
+	STORE R0, 4(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 5(GB)
+	LOAD code.Math.sin, R0
+	STORE R0, 6(GB)
+	LOAD code.Math.cos, R0
+	STORE R0, 7(GB)
+	LOAD code.Math.asin, R0
+	STORE R0, 8(GB)
+	LOAD code.Math.atan, R0
+	STORE R0, 9(GB)
+	LOAD code.Math.ulp, R0
+	STORE R0, 10(GB)
+	LOAD code.Math.test, R0
+	STORE R0, 11(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[4, 16]-----
+; [New][loadItemintoRegister] loading new of calss =  Math into memory at register R2
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 4(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Math
+	POP R2
+; --------EndNew--------[4, 16]-----
+	STORE R2, 1(GB)	; Initializing the variable math and loading it into memory
+; --------BeginMethodCall--------[5, 4]-----
+	ADDSP #1
+	LOAD 1(GB), R2	; loading math into memory
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 7(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[5, 4]-----
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : Math -------------------
+; ---------------------------------------------------
+; ------------Init method for class = Math--------
+init.Math:
+	RTS
+; ------------Code for method : sin with label =  code.Math.sin--------
+code.Math.sin:
+;  ---------ClassBodyCodeGeneration------
+	WSTR "sin(f) not yet implemented"
+	WNL
+	WSTR "Error: La méthode code.Math.sin doit retourner un element"
+	WNL
+	ERROR
+fin.Math.sin:
+	RTS
+; ------------Code for method : cos with label =  code.Math.cos--------
+code.Math.cos:
+;  ---------ClassBodyCodeGeneration------
+	WSTR "cos(f) not yet implemented"
+	WNL
+	WSTR "Error: La méthode code.Math.cos doit retourner un element"
+	WNL
+	ERROR
+fin.Math.cos:
+	RTS
+; ------------Code for method : asin with label =  code.Math.asin--------
+code.Math.asin:
+;  ---------ClassBodyCodeGeneration------
+	WSTR "asin(f) not yet implemented"
+	WNL
+	WSTR "Error: La méthode code.Math.asin doit retourner un element"
+	WNL
+	ERROR
+fin.Math.asin:
+	RTS
+; ------------Code for method : atan with label =  code.Math.atan--------
+code.Math.atan:
+;  ---------ClassBodyCodeGeneration------
+	WSTR "atan(f) not yet implemented"
+	WNL
+	WSTR "Error: La méthode code.Math.atan doit retourner un element"
+	WNL
+	ERROR
+fin.Math.atan:
+	RTS
+; ------------Code for method : ulp with label =  code.Math.ulp--------
+code.Math.ulp:
+;  ---------ClassBodyCodeGeneration------
+	WSTR "ulp(f) not yet implemented"
+	WNL
+	WSTR "Error: La méthode code.Math.ulp doit retourner un element"
+	WNL
+	ERROR
+fin.Math.ulp:
+	RTS
+; ------------Code for method : test with label =  code.Math.test--------
+code.Math.test:
+;  ---------ClassBodyCodeGeneration------
+	WSTR "ulp(f) not yet implemented"
+	WNL
+fin.Math.test:
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

@@ -1,8 +1,8 @@
 // Grenoble INP - Ensimag projet GL -*- mode: java -*-
 // Library for class Math of Deca, coded in Deca
+#include "matrix.decac"
 
 class Math {
-    MathOperation a = new MathOperation();
     float sin(float f) {
         println("sin(f) not yet implemented");
     }
@@ -18,11 +18,11 @@ class Math {
     float ulp(float f) {
         println("ulp(f) not yet implemented");
     }
+    void test() {
+        println("hello");
+    }
 }
 
 
-Math math = new Math();
-
-math.MatrixOperationArithmetic.sommeMatrice
 
 // End of Deca Math library

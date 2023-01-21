@@ -56,6 +56,15 @@ public class EnvironmentType {
         BOOLEAN = new BooleanType(booleanSymb);
         envTypes.put(booleanSymb, new TypeDefinition(BOOLEAN, Location.BUILTIN));
 
+
+        Symbol booleanTableSymb1D = compiler.createSymbol("boolean[]");
+        TABLEBOOLEAN1D = new TableType(booleanTableSymb1D, BOOLEAN, 1);
+        envTypes.put(booleanTableSymb1D, new TableDefinition(TABLEBOOLEAN1D, Location.BUILTIN));
+
+        Symbol booleanTableSymb2D = compiler.createSymbol("boolean[][]");
+        TABLEBOOLEAN2D = new TableType(booleanTableSymb2D, BOOLEAN, 2);
+        envTypes.put(booleanTableSymb2D, new TableDefinition(TABLEBOOLEAN2D, Location.BUILTIN));
+
         Symbol nullSymb = compiler.createSymbol("null");
         NULL = new NullType(nullSymb);
         envTypes.put(nullSymb, new TypeDefinition(NULL, Location.BUILTIN));
@@ -73,6 +82,15 @@ public class EnvironmentType {
         ClassDefinition defintionClassObject = new ClassDefinition(OBJECT, Location.BUILTIN, null);
         envTypes.put(objectSymb, defintionClassObject);
         
+        
+        Symbol objectTableSymb1D = compiler.createSymbol("Object[]");
+        TABLEOBJECT1D = new TableType(objectTableSymb1D, OBJECT, 1);
+        envTypes.put(objectTableSymb1D, new TableDefinition(TABLEOBJECT1D, Location.BUILTIN));
+
+        Symbol objectTableSymb2D = compiler.createSymbol("Object[][]");
+        TABLEOBJECT2D = new TableType(objectTableSymb2D, OBJECT, 2);
+        envTypes.put(objectTableSymb2D, new TableDefinition(TABLEOBJECT2D, Location.BUILTIN));
+
         //On défnit ici la méthode interne à la class object : la méthode equals qui 
         // compare deux instances de Object 
         Symbol equalsMethodObject = compiler.createSymbol("equals");
@@ -105,11 +123,15 @@ public class EnvironmentType {
     public final IntType     INT;
     public final TableType    TABLEINT1D;
     public final TableType    TABLEINT2D;
+    public final FloatType   FLOAT;
     public final TableType    TABLEFLAOT1D;
     public final TableType    TABLEFLAOT2D;
-    public final FloatType   FLOAT;
     public final StringType  STRING;
     public final BooleanType BOOLEAN;
+    public final TableType    TABLEBOOLEAN1D;
+    public final TableType    TABLEBOOLEAN2D;
     public final NullType NULL;
     public final ClassType OBJECT;
+    public final TableType    TABLEOBJECT1D;
+    public final TableType    TABLEOBJECT2D;
 }
