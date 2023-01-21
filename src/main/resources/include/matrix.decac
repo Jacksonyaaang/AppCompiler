@@ -1,0 +1,11 @@
+#include "Math.decah"
+
+class TestClass {
+    void testInclude() {
+        println("hello word");
+    }
+}
+
+
+
+// End of Deca Math library
