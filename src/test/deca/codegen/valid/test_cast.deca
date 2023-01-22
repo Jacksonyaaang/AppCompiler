@@ -11,7 +11,7 @@
 // Historique:
 // 
 
-/*
+
 class A{
     int i;
 }
@@ -34,4 +34,3 @@ class A{
     f=(float) (i);
     println(f);
 }
-*/

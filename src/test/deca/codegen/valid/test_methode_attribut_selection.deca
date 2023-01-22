@@ -9,13 +9,13 @@
 
 
 class A{
-    private int i;
-    public int m1(){}
+    int i;
+    int m1(){}
 }
 
 {
     A a=new A();
-    A.i=1;
-    println(A.i);
-    a.m1;
+    a.i=1;
+    println(a.i);
+    a.m1();
 }

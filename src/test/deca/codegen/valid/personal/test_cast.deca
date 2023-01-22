@@ -13,24 +13,24 @@
 
 
 class A{
-    public int i;
+    int i;
 }
 
 
 {
-    A a=A();
-    A b=A();
+    A a=new A();
+    A b=new A();
     int i,j;
     float f=3.5;
     i=1;
     a.i=1;
     b.i=2;
-    a=(A)b;
+    a=(A) (b);
     println(a.i);
-    j=(int)i;
+    j=(int) (i);
     println(j);
-    j=(int)f;
+    j=(int) (f);
     println(j);
-    f=(float)i;
+    f=(float) (i);
     println(f);
 }

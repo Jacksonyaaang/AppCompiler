@@ -10,17 +10,17 @@
 
 
 class A{
-    private int i;
-    public int getI(){
+    int i;
+    int getI(){
         return this.i;
     }
-    public void setI(int j){
+    void setI(int j){
         this.i=j;
     } 
 }
 
 {
     A a=new A();
-    A.setI(1);
+    a.setI(1);
     println(a.getI());
 }
