@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.util.Map;
 
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Category;
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
@@ -77,6 +78,8 @@ public class Selection extends AbstractLValue {
                 throw new ContextualError(" Le type de l'expression utilisé pour une sélection doit être un type de classe ou \"this\"", getLocation());
             }
             LOG.debug("[Selection][verifyExpr] Class type is  " + ((ClassType)((obj).getType())).getDefinition().getType().getName());
+            ExpDefinition expDefi = (((ClassType)((obj).getType())).getDefinition().getMembers().get(((Identifier)this.field).getName()));
+            if (expDefi == null || !expDefi.isField()) throw new ContextualError(" le membre de doite de la selection n'est pas un field", getLocation());
             fieldDefi = (FieldDefinition)(((ClassType)((obj).getType())).getDefinition().getMembers().get(((Identifier)this.field).getName()));
             field.setDefinition(fieldDefi);
             if (fieldDefi==null){
