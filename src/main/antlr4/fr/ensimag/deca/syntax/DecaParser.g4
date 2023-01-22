@@ -47,7 +47,6 @@ options {
     protected String symbolString = null;     
     protected ListExpr arguementTableau;
     protected Identifier tempIdentifier;
-
 }
 
 prog returns[AbstractProgram tree]

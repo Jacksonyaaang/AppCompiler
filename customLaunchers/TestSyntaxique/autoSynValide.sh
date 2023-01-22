@@ -14,7 +14,7 @@ THUMBS_UP='\U1F44D'
 SMILE='\U1F60E' 
 SCR='\U1F631'
 GREENFOND="\e[42m"
-echo -e "${GREENFOND} AUTO INVALIDE CONTEXT TEST START : ${ENDCOLOR} \n" 
+echo -e "${GREENFOND} AUTO INVALIDE SYNTAX TEST START : ${ENDCOLOR} \n" 
 
 test_context_valide (){
     if test_synt "$1" 2>&1 | grep -q -e "$i:[0-9]*"

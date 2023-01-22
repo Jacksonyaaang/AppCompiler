@@ -57,6 +57,7 @@ class MathOperation{
 
 
 
+
 {
     int[] int[][] 
     float[] float[][]
@@ -65,9 +66,6 @@ class MathOperation{
     int[] x = new int[4]; 
     int[] y = new int[7];
     float[] y = new float[7];
-    sommeflaotInt1D(float[])
-    sommeIntFloat1D
-    tableau_int[] =   tableau_int;{} + (int) tableau_float
 
     matrixManipulation.setInt1DTable(x,5);
     matrixManipulation.setInt1DTable(y,6);
@@ -75,6 +73,8 @@ class MathOperation{
     matrixManipulation.printInt1DTable(y);
     matrixManipulation.sommeIntInt1D(x,y);
     matrixManipulation.printInt1DTable(x);
+ }
+
     /*
     //int z;
    

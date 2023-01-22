@@ -109,6 +109,16 @@ public class EnvironmentType {
         }
     }
 
+    public void addTableClassType(DecacCompiler compiler, Symbol name, ClassType newClassType){
+        Symbol objectTableSymb1D = compiler.createSymbol(name.getName() + "[]");
+        TableType NewClassTable1D = new TableType(objectTableSymb1D, newClassType, 1);
+        envTypes.put(objectTableSymb1D, new TableDefinition(NewClassTable1D, Location.BUILTIN));
+
+        Symbol objectTableSymb2D = compiler.createSymbol(name.getName() + "[][]");
+        TableType NewClassTable2D = new TableType(objectTableSymb2D, newClassType, 2);
+        envTypes.put(objectTableSymb2D, new TableDefinition(NewClassTable2D, Location.BUILTIN));
+    }
+
     private final Map<Symbol, TypeDefinition> envTypes;
 
     public TypeDefinition defOfType(Symbol s) {

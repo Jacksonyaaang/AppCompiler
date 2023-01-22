@@ -1,0 +1,15 @@
+// Description:
+// Test la mauvaise déclaration
+// les types possible sont int, float, boolean et Object par 
+// défaut
+// Resultats: 
+//  TEST pas valide contextuelement
+// Historique:
+//    cree le 01/01/2023
+
+
+
+{
+    random[][] tableauFloat;
+    
+}

@@ -1,0 +1,29 @@
+// Description:
+// Test la declaration de tableau 1d
+// de int / flaot/ boolean/ 
+// Resultats:
+//  TEST valide syntaxiquement
+// Historique:
+//    cree le 01/01/2023
+
+{
+    //Declaration tableau entier
+    int[] x;
+    int[] y = new int[5];
+    int[] h = y;
+    int[] z = x;
+    
+    //Declaration tableau float
+    flaot[] e;
+    flaot[] g = new flaot[5];
+    flaot[] t = g;
+    flaot[] p = x;
+    
+    //Declaration tableau boolean
+
+    boolean[] bool1;
+    boolean[] bool2 = new boolean[5];
+    boolean[] bool3 = bool1;
+    boolean[] bool4 = bool2;
+
+}

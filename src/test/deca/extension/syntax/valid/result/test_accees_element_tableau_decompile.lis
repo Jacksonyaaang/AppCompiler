@@ -1,0 +1,8 @@
+{
+	int[] tableauInt = new int[][];
+	float[] tableauFloat = new int[][][][];
+	int x;
+	(tableauInt[] = 10);
+	(tableauFloat[][] = 20);
+	(x = (tableauFloat[][] * 2));
+}

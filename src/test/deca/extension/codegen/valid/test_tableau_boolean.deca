@@ -1,0 +1,57 @@
+// Description:
+// Test la declaration de tableau de boolean/ acces et modification de valeur
+// Resultats:
+// Le resulat attendu est dans le fichier avec "ce_nom"_output_expected  au le dossier ./result
+// Historique:
+//    cree le 01/01/2023
+
+
+{
+    int x = 2;
+    int y = 2;
+    int z = 2;
+    int h = 2;
+    int v = 2;
+    boolean b1 = true;
+    boolean b2 = true;
+    boolean b3 = false;
+    boolean b4 = false;
+
+
+    boolean[] bool_table = new boolean[5]; 
+    boolean[][] bool_matrix = new boolean[10][5];
+    
+    bool_table[1] = true;
+    
+    if (bool_table[1]){
+        println("the value is correct");
+    }
+    else{
+        println("A mistake occured");
+    }
+    bool_table[2] = bool_table[1];
+    
+    bool_matrix[3][1] = false;
+
+    if (!(bool_matrix[3][1])){
+        println("the value is correct");
+    }
+    else{
+        println("A mistake occured");
+    }
+
+    if((x<=2 && (y != z || h==v))&&((3>x && 2.5 >y) && (2.0==y && v == h) && b1 && b2 && !b3 && !b4 && bool_table[1])){
+        println("bool val = true");
+    }
+    else{
+        println("Problem with code");
+    }
+
+    if((x<=2 && (y != z || h==v))&&((3>x && 2.5 >y) && (2.0==y && v == h) && b1 && b2 && !b3 && !b4 && !bool_matrix[3][1])){
+        println("bool val = true");
+    }
+    else{
+        println("Problem with code");
+    }
+
+}

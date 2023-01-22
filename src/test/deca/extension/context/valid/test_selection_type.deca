@@ -1,0 +1,16 @@
+// Description:
+// Test la declaration de tableau 1d
+// pour des  classes  
+// Resultats:
+//  TEST valide contextuelement
+// Historique:
+//    cree le 01/01/2023
+
+
+
+{
+    int[] tableauInt = new int[5];
+    int x;
+    tableauInt[3] = 10;
+    x = tableauInt[3];
+}

@@ -1,0 +1,20 @@
+// Description:
+// Test la declaration de matrice/ acces et modification de valeur
+// Resultats:
+//  Le resulat attendu est dans le fichier avec "ce_nom"_output_expected au le dossier ./result
+// Historique:
+//    cree le 01/01/2023
+
+
+{
+    int[] x = new int[5]; 
+    int[] y = new int[5];
+    int u;
+    x[1] = 3;
+    println(x[1]);
+    x[2] = 2*x[1];
+    println(x[2]);
+    x[3] = 2;
+    u = ((((((((1*2)*2)*2)*2)*2)*2)*2))*((((((1*2)*2)*2)*2)*2)*x[3]);
+	println(u);
+}

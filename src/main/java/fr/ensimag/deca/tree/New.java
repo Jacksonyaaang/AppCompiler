@@ -43,12 +43,13 @@ public class New  extends AbstractExpr{
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
-            Type t = className.verifyType(compiler);
-            if(!t.isClass()){
+            Type type = className.verifyType(compiler);
+            if(!type.isClass()){
                 throw new ContextualError("L'expression \"new\" est utilisée uniquement pour créer des objets dont le type est un type de classe", getLocation());
             }
-            setType(t);
-        return t;
+            setType(type);
+            LOG.debug("[New][verifyExpr] returned type for new is  = " + type.getName());
+        return type;
     }
 
     @Override

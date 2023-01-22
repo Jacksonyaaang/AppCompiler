@@ -1,0 +1,13 @@
+// Description:
+// Test la mauvaise déclaration de tableau
+// Resultats:
+//  TEST pas valide syntaxiquement
+// Historique:
+//    cree le 01/01/2023
+
+
+
+{
+    int[1][2] tableauInt;
+
+}

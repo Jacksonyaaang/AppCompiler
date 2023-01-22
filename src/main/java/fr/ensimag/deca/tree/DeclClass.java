@@ -234,20 +234,14 @@ public class DeclClass extends AbstractDeclClass {
     protected void verifyClass(DecacCompiler compiler) throws ContextualError {
         if (!compiler.environmentType.getEnvTypes().containsKey(name.getName())){
             if (compiler.environmentType.getEnvTypes().containsKey(superClass.getName())){
-                if (compiler.environmentType.getEnvTypes().get(superClass.getName()).getType().isClass()){
-                    //Ce traitement associe à l'indetificateur la class super sa classe definition de object
-                    // Ceci sera utile pour le méthode de generation de code 
-                    superClass.setDefinition((ClassDefinition) compiler.environmentType.getEnvTypes().get(
-                        compiler.createSymbol(superClass.getName().getName())));
-                    ClassType classType = new ClassType(name.getName(), getLocation(), 
-                            (ClassDefinition)compiler.environmentType.defOfType(superClass.getName()));
-                    compiler.environmentType.getEnvTypes().put(name.getName(), (ClassDefinition) classType.getDefinition());
-                    name.setDefinition((ClassDefinition) classType.getDefinition());
-                }
-                else{
-                    throw new ContextualError("Une super classe doit avoir un type de classe", getLocation());
-                }
-
+                //Ce traitement associe à l'indetificateur la class super sa classe definition de object
+                // Ceci sera utile pour le méthode de generation de code 
+                superClass.setDefinition((ClassDefinition) compiler.environmentType.getEnvTypes().get(
+                                                compiler.createSymbol(superClass.getName().getName())));
+                ClassType classType = new ClassType(name.getName(), getLocation(), 
+                                                    (ClassDefinition)compiler.environmentType.defOfType(superClass.getName()));
+                compiler.environmentType.getEnvTypes().put(name.getName(), (ClassDefinition) classType.getDefinition());
+                name.setDefinition((ClassDefinition) classType.getDefinition());
             }
             else
                 throw new ContextualError("La super classe " + getSuperClass().getName() + " n'est pas définie", getLocation());

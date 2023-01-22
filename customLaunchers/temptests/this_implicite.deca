@@ -1,3 +1,15 @@
+class B{
+    int x;
+}
+class A{
+    B b;
+}
+class C{
+    void test(){
+        A a = new A();
+        a.b.x = 5;
+    }
+}
 
 
 {
