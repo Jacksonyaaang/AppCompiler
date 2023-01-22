@@ -11,7 +11,20 @@ class Math {
         }
     }
 
-    void setFloat1DTable(int[] table, float value){
+    void setInt2DTable(int[][] table, int value){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
+                table[tableIteratorX][tableIteratorY] = value;
+                tableIteratorX = tableIteratorX + 1;
+            }
+            tableIteratorX = 0;
+            tableIteratorY = tableIteratorY + 1;
+        }
+    }
+
+    void setFloat1DTable(float[] table, float value){
         int tableIterator = 0;
         while (tableIterator < table.size1D ){
             table[tableIterator] = value;
@@ -19,44 +32,17 @@ class Math {
         }
     }
 
-    void setInt2DTable(int[][] table, int value){
+    void setFloat2DTable(float[][] table, float value){
         int tableIteratorX = 0;
         int tableIteratorY = 0;
-        while (tableIteratorY < table.size1D ){
+        while (tableIteratorY < table.size2D ){
             while (tableIteratorX < table.size1D ){
                 table[tableIteratorX][tableIteratorY] = value;
                 tableIteratorX = tableIteratorX + 1;
             }
+            tableIteratorX = 0;
             tableIteratorY = tableIteratorY + 1;
         }
-    }
-
-    void setFloat2DTable(int[][] table, float value){
-        int tableIteratorX = 0;
-        int tableIteratorY = 0;
-        while (tableIteratorY < table.size1D ){
-            while (tableIteratorX < table.size1D ){
-                table[tableIteratorX][tableIteratorY] = value;
-                tableIteratorX = tableIteratorX + 1;
-            }
-            tableIteratorY = tableIteratorY + 1;
-        }
-    }
-
-    void set1DTableIntValue(int[] table, int value, int index){
-        table[index] = value;
-    }
-
-    void set2DTableIntValue(int[][] table, int value, int indexX, int indexY){
-        table[indexX][indexY] = value;
-    }
-
-    void set1DTableFloatValue(int[] table, float value, int index){
-        table[index] = value;
-    }
-
-    void set2DTableFloatValue(int[][] table, float value, int indexX, int indexY){
-        table[indexX][indexY] = value;
     }
 
     void printInt1DTable(int[] table){
@@ -71,22 +57,177 @@ class Math {
         println("--------------");
     }
 
-    void printInt2DTable(int[] table){
+    void printInt2DTable(int[][] table){
         int tableIteratorX = 0;
         int tableIteratorY = 0;
         println("--------------");
         print("Tableau2D = [");
-        while (tableIteratorY < table.size1D ){
-            while (tableIteratorX < table.size1D-1 ){
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
                 print(table[tableIteratorX][tableIteratorY]," ,");
                 tableIteratorX = tableIteratorX + 1;
             }
-            println(table[tableIteratorY][tableIteratorX]);
+            println("");
+            tableIteratorX = 0;
             tableIteratorY = tableIteratorY + 1;
         }
         print("]");
         println("--------------");
     }
+
+    void printFloat1DTable(float[] table){
+        int tableIterator = 0;
+        println("--------------");
+        print("Tableau1D = [");
+        while (tableIterator < table.size1D ){
+            print(table[tableIterator]," ,");
+            tableIterator = tableIterator + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+
+    void printFloat2DTable(float[][] table){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        println("--------------");
+        print("Tableau2D = [");
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
+                print(table[tableIteratorX][tableIteratorY]," ,");
+                tableIteratorX = tableIteratorX + 1;
+            }
+            println("");
+            tableIteratorX = 0;
+            tableIteratorY = tableIteratorY + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+
+    void copyIntInt1DTable(int[] dest, int[] src){
+        int i = 0;
+        if(src.size1D > dest.size1D ){
+            println("La taille du tableau copie doit être supérieure ou égale à la taille du tableau d'origine");
+            dimensionIncompatible();
+        }
+        while(i < src.size1D){
+            dest[i] = src[i];
+            i = i + 1;
+        }
+    }
+
+    void copyIntInt2DTable(int[][] dest, int[][] src){
+        int i = 0;
+        int j = 0;
+        if(src.size1D > dest.size1D || src.size2D > dest.size2D){
+            println("La taille du tableau copie doit être supérieure ou égale à la taille du tableau d'origine");
+            dimensionIncompatible();
+        }
+        while (j < src.size2D){
+            while (i < src.size1D){
+                dest[i][j] = src[i][j];
+                i = i +1;
+            }
+            i = 0;
+            j = j + 1;
+        }
+    }
+
+    void copyFloatFloat1DTable(float[] dest, float[] src){
+        int i = 0;
+        if(src.size1D > dest.size1D ){
+            println("La taille du tableau copie doit être supérieure ou égale à la taille du tableau d'origine");
+            dimensionIncompatible();
+        }
+        while(i < src.size1D){
+            dest[i] = src[i];
+            i = i + 1;
+        }
+    }
+
+    void copyFloatFloat2DTable(float[][] dest, float[][] src){
+        int i = 0;
+        int j = 0;
+        if(src.size1D > dest.size1D || src.size2D > dest.size2D){
+            println("La taille du tableau copie doit être supérieure ou égale à la taille du tableau d'origine");
+            dimensionIncompatible();
+        }
+        while (j < src.size2D){
+            while (i < src.size1D){
+                dest[i][j] = src[i][j];
+                i = i +1;
+            }
+            i = 0;
+            j = j + 1;
+        }
+    }
+
+    void copyFloatInt1DTable(float[] dest, int[] src){
+        int i = 0;
+        if(src.size1D > dest.size1D ){
+            println("La taille du tableau copie doit être supérieure ou égale à la taille du tableau d'origine");
+            dimensionIncompatible();
+        }
+        while(i < src.size1D){
+            dest[i] = (float)(src[i]);
+            i = i + 1;
+        }
+    }
+
+    void copyFloatInt2DTable(float[][] dest, int[][] src){
+        int i = 0;
+        int j = 0;
+        if(src.size1D > dest.size1D || src.size2D > dest.size2D){
+            println("La taille du tableau copie doit être supérieure ou égale à la taille du tableau d'origine");
+            dimensionIncompatible();
+        }
+        while (j < src.size2D){
+            while (i < src.size1D){
+                dest[i][j] = (float)(src[i][j]);
+                i = i +1;
+            }
+            i = 0;
+            j = j + 1;
+        }
+    }
+
+    void copyIntFloat1DTable(int[] dest, int[] src){
+        int i = 0;
+        if(src.size1D > dest.size1D ){
+            println("La taille du tableau copie doit être supérieure ou égale à la taille du tableau d'origine");
+            dimensionIncompatible();
+        }
+        while(i < src.size1D){
+            dest[i] = (int)(src[i]);
+            i = i + 1;
+        }
+    }
+
+    void copyIntFloat2DTable(float[][] dest, float[][] src){
+        int i = 0;
+        int j = 0;
+        if(src.size1D > dest.size1D || src.size2D > dest.size2D){
+            println("La taille du tableau copie doit être supérieure ou égale à la taille du tableau d'origine");
+            dimensionIncompatible();
+        }
+        while (j < src.size2D){
+            while (i < src.size1D){
+                dest[i][j] = (int)(src[i][j]);
+                i = i +1;
+            }
+            i = 0;
+            j = j + 1;
+        }
+    }
+
+    void dimensionIncompatible(){
+        println("Erreur de dimension");
+        throwError();
+    }
+
+    void throwError()
+        asm ("ERROR ");
 }
 
 // End of Deca Math library
