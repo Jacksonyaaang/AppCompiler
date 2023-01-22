@@ -10,7 +10,7 @@
 
 {
     int[] tableauInt = new int[5];
-    float[] tableauFloat = new int[5][5];
+    float[][] tableauFloat = new float[5][5];
     int x;
     tableauInt[3] = 10;
     tableauFloat[3][2] = 20;

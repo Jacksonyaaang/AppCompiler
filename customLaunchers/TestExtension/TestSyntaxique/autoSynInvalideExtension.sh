@@ -3,7 +3,7 @@
 cd "$(dirname "$0")"/../../..|| exit 1
 
 PATH=./src/test/script/launchers/:"$PATH"
-#PATH=./src/test/deca/extension/extension/context/valid/provided:"$PATH"
+#PATH=./src/test/deca/extension/context/valid/provided:"$PATH"
 
 RED="\e[31m"
 GREEN="\e[32m"
@@ -25,11 +25,11 @@ test_context_invalide (){
     fi
 }
 redirect_result(){
-    mkdir -p src/test/deca/extension/extension/syntax/invalid/result
-    test_synt "$1" > src/test/deca/extension/extension/syntax/invalid/result/$(basename "${1%.deca}").lis 2>&1 &
+    mkdir -p src/test/deca/extension/syntax/invalid/result
+    test_synt "$1" > src/test/deca/extension/syntax/invalid/result/$(basename "${1%.deca}").lis 2>&1 &
 }
 
-for i in src/test/deca/extension/extension/syntax/invalid/*.deca
+for i in src/test/deca/extension/syntax/invalid/*.deca
 do
     test_context_invalide "$i"
     redirect_result "$i"

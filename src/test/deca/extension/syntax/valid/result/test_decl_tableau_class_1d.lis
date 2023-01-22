@@ -1,0 +1,96 @@
+`> [9, 0] Program
+   +> [20, 0] ListDeclClass [List with 2 elements]
+   |  []> [9, 0] DeclClass
+   |  ||  +> [9, 6] Identifier (Point2D)
+   |  ||  +> [builtin] Identifier (Object)
+   |  ||  +> ListDeclField [List with 2 elements]
+   |  ||  |  []> [10, 8]  [visibility=PUBLIC]  DeclField
+   |  ||  |  ||  +> [10, 4] Identifier (int)
+   |  ||  |  ||  +> [10, 8] Identifier (x)
+   |  ||  |  ||  `> NoInitialization
+   |  ||  |  []> [11, 8]  [visibility=PUBLIC]  DeclField
+   |  ||  |      +> [11, 4] Identifier (int)
+   |  ||  |      +> [11, 8] Identifier (y)
+   |  ||  |      `> NoInitialization
+   |  ||  `> ListDeclMethod [List with 1 elements]
+   |  ||     []> [14, 4] DeclMethod
+   |  ||         +> [14, 4] Identifier (void)
+   |  ||         +> [14, 9] Identifier (diag)
+   |  ||         +> [14, 14] ListDeclParam [List with 1 elements]
+   |  ||         |  []> [14, 14] DeclParam
+   |  ||         |      +> [14, 14] Identifier (int)
+   |  ||         |      `> [14, 18] Identifier (a)
+   |  ||         `> [14, 21] MethodBody
+   |  ||            +> ListDeclVar [List with 0 elements]
+   |  ||            `> ListInst [List with 2 elements]
+   |  ||               []> [15, 8] Assign
+   |  ||               ||  +> [15, 8] Identifier (x)
+   |  ||               ||  `> [15, 12] Plus
+   |  ||               ||     +> [15, 12] Identifier (x)
+   |  ||               ||     `> [15, 16] Identifier (a)
+   |  ||               []> [16, 8] Assign
+   |  ||                   +> [16, 8] Identifier (y)
+   |  ||                   `> [16, 12] Plus
+   |  ||                      +> [16, 12] Identifier (y)
+   |  ||                      `> [16, 16] Identifier (a)
+   |  []> [20, 0] DeclClass
+   |      +> [20, 6] Identifier (Point3D)
+   |      +> [20, 22] Identifier (Point2D)
+   |      +> ListDeclField [List with 1 elements]
+   |      |  []> [21, 8]  [visibility=PUBLIC]  DeclField
+   |      |      +> [21, 4] Identifier (int)
+   |      |      +> [21, 8] Identifier (z)
+   |      |      `> NoInitialization
+   |      `> ListDeclMethod [List with 1 elements]
+   |         []> [22, 4] DeclMethod
+   |             +> [22, 4] Identifier (void)
+   |             +> [22, 9] Identifier (diag)
+   |             +> [22, 14] ListDeclParam [List with 1 elements]
+   |             |  []> [22, 14] DeclParam
+   |             |      +> [22, 14] Identifier (int)
+   |             |      `> [22, 18] Identifier (a)
+   |             `> [22, 21] MethodBody
+   |                +> ListDeclVar [List with 0 elements]
+   |                `> ListInst [List with 3 elements]
+   |                   []> [23, 8] Assign
+   |                   ||  +> [23, 8] Identifier (x)
+   |                   ||  `> [23, 12] Plus
+   |                   ||     +> [23, 12] Identifier (x)
+   |                   ||     `> [23, 16] Identifier (a)
+   |                   []> [24, 8] Assign
+   |                   ||  +> [24, 8] Identifier (y)
+   |                   ||  `> [24, 12] Plus
+   |                   ||     +> [24, 12] Identifier (y)
+   |                   ||     `> [24, 16] Identifier (a)
+   |                   []> [25, 8] Assign
+   |                       +> [25, 8] Identifier (z)
+   |                       `> [25, 12] Plus
+   |                          +> [25, 12] Identifier (z)
+   |                          `> [25, 16] Identifier (a)
+   `> [29, 0] Main
+      +> ListDeclVar [List with 3 elements]
+      |  []> [30, 12] DeclVar
+      |  ||  +> [30, 4] Identifier (Point2D)
+      |  ||  +> [30, 12] Identifier (point2d)
+      |  ||  `> [30, 22] Initialization
+      |  ||     `> [30, 22] New
+      |  ||        `> [30, 26] Identifier (Point2D)
+      |  []> [31, 13] DeclVar
+      |  ||  +> [31, 4] Identifier (Object[])
+      |  ||  +> [31, 13] Identifier (tableauObjet)
+      |  ||  `> [31, 28] Initialization
+      |  ||     `> [31, 28] NewTable
+      |  ||        +> [31, 28] Identifier (Object[])
+      |  ||        +> ListExpr [List with 1 elements]
+      |  ||        |  []> [31, 39] Int (1)
+      |  []> [32, 14] DeclVar
+      |      +> [32, 4] Identifier (Point2D[])
+      |      +> [32, 14] Identifier (listeDePoint2d)
+      |      `> NoInitialization
+      `> ListInst [List with 1 elements]
+         []> [33, 4] Assign
+             +> [33, 4] Identifier (listeDePoint2d)
+             `> [33, 21] NewTable
+                +> [33, 21] Identifier (Point2D[])
+                +> ListExpr [List with 1 elements]
+                |  []> [33, 33] Int (9)

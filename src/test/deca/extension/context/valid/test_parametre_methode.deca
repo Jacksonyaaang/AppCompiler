@@ -8,15 +8,24 @@ class MatriceSommeFloat{
                 tableIterator = tableIterator + 1;
             }
         }
-        else{
-            dimensionIncompatible();
+        
+    }
+
+    void setFloat1DTable(float[] table, float value){
+        int tableIterator = 0;
+        while (tableIterator < table.size1D ){
+            table[tableIterator] = value;
+            tableIterator = tableIterator + 1;
         }
     }
+
 }
 
 {
     MatriceSommeFloat somme = new MatriceSommeFloat();
-    flaot[] g = new flaot[5];
-    flaot[] h = new flaot[5];
+    float[] g = new float[5];
+    float[] h = new float[5];
+    somme.setFloat1DTable(g,3.0);
+    somme.setFloat1DTable(h,5.0);
     somme.sommeFloatFloat1D(g,h);
 }

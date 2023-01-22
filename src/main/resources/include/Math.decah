@@ -1,6 +1,5 @@
 // Grenoble INP - Ensimag projet GL -*- mode: java -*-
 // Library for class Math of Deca, coded in Deca
-#include "matrix.decah"
 
 class Math {
     float sin(float f) {

@@ -9,7 +9,7 @@
 
 {
     int[][] tableauInt = new int[2][5];
-    float[][] tableauFloat = new flaot[2][5];
+    float[][] tableauFloat = new float[2][5];
     int x;
     x = tableauFloat[2][3];
 }

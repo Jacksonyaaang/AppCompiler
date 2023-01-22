@@ -9,7 +9,7 @@
 
 {
     int[] tableauInt = new int[5];
-    float[] tableauFloat = new int[5][5];
+    float[][] tableauFloat = new float[5][5];
     print(tableauInt.size1D);
     print(tableauFloat.size1D);
     print(tableauFloat.size2D);
