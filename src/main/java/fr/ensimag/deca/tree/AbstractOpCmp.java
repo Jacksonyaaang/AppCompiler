@@ -34,6 +34,10 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
         //Vérification des expressions des membres de droite et de gauche
         getRightOperand().setType(getRightOperand().verifyExpr(compiler, localEnv, currentClass));
         getLeftOperand().setType(getLeftOperand().verifyExpr(compiler, localEnv, currentClass));
+        if (getLeftOperand() instanceof AbstractLValue && ((Identifier)getLeftOperand()).getExpDefinition().isMethod() ||
+            getRightOperand() instanceof AbstractLValue && ((Identifier)getRightOperand()).getExpDefinition().isMethod()){
+                throw new ContextualError("l'une de membre de la comparaison est une méthod", getLocation());
+            }
         
         Type typeOpLeft = getLeftOperand().getType();
         Type typeOpRight = getRightOperand().getType();

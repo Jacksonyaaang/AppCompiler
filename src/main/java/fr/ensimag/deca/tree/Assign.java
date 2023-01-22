@@ -134,6 +134,9 @@ public class Assign extends AbstractBinaryExpr {
             //Si on n'utilise pas la méthode readInt ou readFloat lors de l'affectation, on vérifie l'expression de droite de l'affectation
             if (!(getRightOperand() instanceof AbstractReadExpr))
                 setRightOperand(getRightOperand().verifyRValue(compiler, localEnv, currentClass, typOpLeft));
+                if (getRightOperand() instanceof AbstractLValue && ((Identifier)getRightOperand()).getExpDefinition().isMethod()){
+                    throw new ContextualError("on peut pas assigner une methode", getLocation());
+                }
             //Si on utilise la méthode readInt ou readFloat lors de l'affectation, on vérifie l'expression associée
             else{
                 Type typOpRight = getRightOperand().verifyExpr(compiler, localEnv, currentClass);
