@@ -1,0 +1,15 @@
+// Description:
+//    Teste la déclaration d'un champs et d'une variable de même nom.
+//
+// Resultats:
+//    Ligne 12: Il existe déjà une méthode ou un champs de nom a dans la classe A
+//
+// Historique:
+//    cree le 20/01/2023
+
+class A{
+    int a;
+    void a(){
+        a = 2*a;
+    }
+}

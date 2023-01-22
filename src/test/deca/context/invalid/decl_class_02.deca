@@ -1,0 +1,11 @@
+// Description:
+//    Vérifie que l'on ne peut pas hériter d'un type BUILTIN
+//
+// Resultats:
+//    Ligne 10: Une super classe doit avoir un type de classe.
+//
+// Historique:
+//    cree le 20/01/2023
+
+class A extends float{
+}
