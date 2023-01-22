@@ -1,4 +1,4 @@
-#include Math.decah
+#include "Math.decah"
 
 class Det extends Math {
     float bareissIntDeterminant(int[][] a) {
@@ -44,35 +44,4 @@ class Det extends Math {
         }
         return det;
     }
-}
-{
-Det matrixDet = new Det();
-    int[][] a = new int[2][2];
-    int[][] d = new int[3][3];
-    float res;
-    float[][] b = new float[3][3];
-    float[][] c = new float[3][3];
-
-    matrixDet.setInt2DTable(d,5);
-    matrixDet.setInt2DTable(a,5);
-    a[0][0] = 6;
-    a[1][0] = 9;
-    a[0][1] = 1;
-
-    res = matrixDet.bareissIntDeterminant(d);
-    print("Le déterminant de d avant modif est: ",res);
-
-    d[0][0] = 6;
-    d[1][0] = 9;
-    d[0][1] = 1;
-    d[2][2] = 17;
-    d[2][1] = 3;
-    d[0][2] = 8;
-
-    println("Test calcul du déterminant d'une matrice d'entier");
-    res = matrixDet.bareissIntDeterminant(a);
-    println("Le déterminant de a est: ",res);
-    res = matrixDet.bareissIntDeterminant(d);
-    println("Le déterminant de d est: ",res);
-
 }

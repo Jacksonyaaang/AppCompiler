@@ -1,0 +1,46 @@
+#include "Difference.decah"
+
+{
+    Difference matrixdiff1D = new Difference();
+    int[] x = new int[7];
+    float[] y = new float[7];
+    Difference matrixdiff2D = new Difference();
+    int[][] a = new int[3][3];
+    int[][] d = new int[3][3];
+    float[][] b = new float[3][3];
+    float[][] c = new float[3][3];
+
+    matrixdiff1D.setInt1DTable(x,5);
+    matrixdiff1D.setFloat1DTable(y,6.0);
+    matrixdiff1D.printInt1DTable(x);
+    matrixdiff1D.printFloat1DTable(y);
+    println("Test diff tableau 1D");
+    matrixdiff1D.diffIntFloat1D(x,y);
+    matrixdiff1D.printInt1DTable(x);
+
+    println("Test diff tableau 2D a");
+    matrixdiff2D.setInt2DTable(a,5);
+    matrixdiff2D.setFloat2DTable(b,6.0);
+    matrixdiff2D.printInt2DTable(a);
+    matrixdiff2D.printFloat2DTable(b);
+    matrixdiff2D.diffIntFloat2D(a,b);
+    matrixdiff2D.printInt2DTable(a);
+
+    println("diff float int b");
+    matrixdiff2D.diffFloatInt2D(b,a);
+    matrixdiff2D.printFloat2DTable(b);
+
+    println("diff float float b");
+    matrixdiff2D.setFloat2DTable(c,10.5);
+    matrixdiff2D.diffFloatFloat2D(b,c);
+    matrixdiff2D.printFloat2DTable(b);
+
+    println("diff int int a");
+    matrixdiff2D.setInt2DTable(d,2);
+    matrixdiff2D.diffIntInt2D(a,d);
+    matrixdiff2D.printInt2DTable(a);
+
+    b[0][1] = 3*b[0][0];
+    matrixdiff2D.printFloat2DTable(b);
+
+}

@@ -1,0 +1,25 @@
+#include "Trace.decah"
+
+{
+    Trace matrixTrace = new Trace();
+    int[][] a = new int[3][3];
+    int[][] d = new int[3][3];
+    float[][] b = new float[3][3];
+    float[][] c = new float[3][3];
+    int trace1;
+    float trace2;
+
+    matrixTrace.setInt2DTable(a,5);
+    trace1 = matrixTrace.getTraceInt(a);
+    println("La trace de la matrice a est: ", trace1);
+    a[1][1] = 2;
+    trace1 = matrixTrace.getTraceInt(a);
+    println("La trace de la matrice a après modification est: ", trace1);
+
+    matrixTrace.setFloat2DTable(b,6.2);
+    trace2 = matrixTrace.getTraceFloat(b);
+    println("La trace de la matrice b modification est: ", trace2);
+    b[1][1] = 2.3;
+    trace2 = matrixTrace.getTraceFloat(b);
+    println("La trace de la matrice b après modification est: ", trace2);
+}

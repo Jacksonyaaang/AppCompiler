@@ -1,0 +1,48 @@
+#include "Multiply_member_by_member.decah"
+
+{
+
+    MultMember matrixMultMb1D = new MultMember();
+    int[] x = new int[7];
+    float[] y = new float[7];
+    MultMember matrixMultMb2D = new MultMember();
+    int[][] a = new int[3][3];
+    int[][] d = new int[3][3];
+    float[][] b = new float[3][3];
+    float[][] c = new float[3][3];
+
+    matrixMultMb1D.setInt1DTable(x,5);
+    matrixMultMb1D.setFloat1DTable(y,6.0);
+    matrixMultMb1D.printInt1DTable(x);
+    matrixMultMb1D.printFloat1DTable(y);
+    println("Test multMb tableau 1D");
+    matrixMultMb1D.multMbIntFloat1D(x,y);
+    matrixMultMb1D.printInt1DTable(x);
+
+    println("Test Multiplication member by member tableau 2D a");
+    matrixMultMb2D.setInt2DTable(a,5);
+    matrixMultMb2D.setFloat2DTable(b,6.0);
+    matrixMultMb2D.printInt2DTable(a);
+    matrixMultMb2D.printFloat2DTable(b);
+    matrixMultMb2D.multMbIntFloat2D(a,b);
+    matrixMultMb2D.printInt2DTable(a);
+
+    println("Multiplication member by member float int b");
+    matrixMultMb2D.multMbFloatInt2D(b,a);
+    matrixMultMb2D.printFloat2DTable(b);
+
+    println("Multiplication member by member float float b");
+    matrixMultMb2D.setFloat2DTable(c,10.5);
+    matrixMultMb2D.multMbFloatFloat2D(b,c);
+    matrixMultMb2D.printFloat2DTable(b);
+
+    println("Multiplication member by member int int a");
+    matrixMultMb2D.setInt2DTable(d,2);
+    matrixMultMb2D.multMbIntInt2D(a,d);
+    matrixMultMb2D.printInt2DTable(a);
+
+
+    b[0][1] = 3*b[0][0];
+    matrixMultMb2D.printFloat2DTable(b);
+
+}
