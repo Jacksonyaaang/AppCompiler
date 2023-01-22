@@ -78,6 +78,10 @@ public class ClassType extends Type {
         //throw new UnsupportedOperationException("not yet implemented"); 
     }
 
+    public void setDefinition(ClassDefinition def) {
+        this.definition = def;
+    }
+
 
 }
 
