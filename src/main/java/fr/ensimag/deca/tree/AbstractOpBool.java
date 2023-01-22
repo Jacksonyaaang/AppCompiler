@@ -46,8 +46,8 @@ public abstract class AbstractOpBool extends AbstractBinaryExpr {
         getRightOperand().setType(getRightOperand().verifyExpr(compiler, localEnv, currentClass));
         getLeftOperand().setType(getLeftOperand().verifyExpr(compiler, localEnv, currentClass));
         //Si les deux opérandes ne sont pas de type boolean, on envoie une ContextualError
-        if (getLeftOperand() instanceof AbstractLValue && ((Identifier)getLeftOperand()).getExpDefinition().isMethod() ||
-            getRightOperand() instanceof AbstractLValue && ((Identifier)getRightOperand()).getExpDefinition().isMethod()){
+        if (getLeftOperand() instanceof AbstractIdentifier && ((Identifier)getLeftOperand()).getExpDefinition().isMethod() ||
+            getRightOperand() instanceof AbstractIdentifier && ((Identifier)getRightOperand()).getExpDefinition().isMethod()){
                 throw new ContextualError("l'une de membre de l'operation est une méthod", getLocation());
             }
         if (!(getLeftOperand().getType() instanceof BooleanType && getRightOperand().getType() instanceof  BooleanType)) {

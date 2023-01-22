@@ -39,8 +39,8 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         //Vérification des expressions des membres de droite et de gauche
         getRightOperand().setType(getRightOperand().verifyExpr(compiler, localEnv, currentClass));
         getLeftOperand().setType(getLeftOperand().verifyExpr(compiler, localEnv, currentClass));
-        if (getLeftOperand() instanceof AbstractLValue && ((Identifier)getLeftOperand()).getExpDefinition().isMethod() ||
-            getRightOperand() instanceof AbstractLValue && ((Identifier)getRightOperand()).getExpDefinition().isMethod()){
+        if (getLeftOperand() instanceof AbstractIdentifier && ((Identifier)getLeftOperand()).getExpDefinition().isMethod() ||
+            getRightOperand() instanceof AbstractIdentifier && ((Identifier)getRightOperand()).getExpDefinition().isMethod()){
                 throw new ContextualError("l'une de membre de l'operation est une méthod", getLocation());
             }
         // if (((Identifier)getLeftOperand()).getExpDefinition().isMethod() || ((Identifier)getRightOperand()).getExpDefinition().isMethod()){

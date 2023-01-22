@@ -127,14 +127,14 @@ public class Assign extends AbstractBinaryExpr {
                 ClassDefinition currentClass) throws ContextualError {
             LOG.debug("[Assign][verifyExpr] Verify left and right expression in assignment");
             Type typOpLeft = getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
-            if (((Identifier)getLeftOperand()).getExpDefinition().isMethod()) {
+            if (getLeftOperand() instanceof AbstractIdentifier && ((Identifier)getLeftOperand()).getExpDefinition().isMethod()) {
                 throw new ContextualError("on peut pas assigner une valeur à une method", getLocation());
                // System.out.println("********typeOpLeft est null mec***********************************************");
             }
             //Si on n'utilise pas la méthode readInt ou readFloat lors de l'affectation, on vérifie l'expression de droite de l'affectation
             if (!(getRightOperand() instanceof AbstractReadExpr))
                 setRightOperand(getRightOperand().verifyRValue(compiler, localEnv, currentClass, typOpLeft));
-                if (getRightOperand() instanceof AbstractLValue && ((Identifier)getRightOperand()).getExpDefinition().isMethod()){
+                if (getRightOperand() instanceof AbstractIdentifier && ((Identifier)getRightOperand()).getExpDefinition().isMethod()){
                     throw new ContextualError("on peut pas assigner une methode", getLocation());
                 }
             //Si on utilise la méthode readInt ou readFloat lors de l'affectation, on vérifie l'expression associée
