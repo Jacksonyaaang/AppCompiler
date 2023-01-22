@@ -1,3 +1,0 @@
-src/test/deca/extension/syntax/invalid/test_declaration_tableau_2.deca:11:12: no viable alternative at input 'int[][][]'
-Exception in thread "main" java.lang.NullPointerException: Cannot invoke "fr.ensimag.deca.tree.AbstractProgram.prettyPrint(java.io.PrintStream)" because "prog" is null
-	at fr.ensimag.deca.syntax.ManualTestSynt.main(ManualTestSynt.java:32)
