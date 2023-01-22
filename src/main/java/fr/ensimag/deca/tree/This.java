@@ -52,7 +52,7 @@ public class This extends AbstractExpr{
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
         LOG.debug("[This][verifyExpr]");
-        if(currentClass.getType().sameType(compiler.environmentType.OBJECT)){
+        if(currentClass == null){
             throw new ContextualError("L'expression this. ne peut pas appeler un objet de type Object", getLocation());
         }
         setType(currentClass.getType());
