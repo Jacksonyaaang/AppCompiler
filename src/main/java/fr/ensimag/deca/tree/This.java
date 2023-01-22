@@ -13,8 +13,6 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
-import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
@@ -36,27 +34,20 @@ public class This extends AbstractExpr{
     } 
 
     @Override
-    protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{   
-        LOG.debug("[This][codeGenInst] loading this into memory ");
-        this.setRegisterDeRetour(this.LoadGencode(compiler, true));
+    protected void codeGenInst(DecacCompiler compiler) throws CodeGenError {
+        GPRegister R=compiler.getRegisterManagement().getAnEmptyStableRegisterAndReserveIt();
+        this.setRegisterDeRetour(R);
+        compiler.addInstruction(new LOAD(-2(LB),R)); 
+        compiler.addInstruction(new CMP(null, R)); 
+        compiler.addInstruction(new BEQ(new Label("deref_null_error"))); 
     }
-
-    @Override
-    public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
-        assert(reg != null);
-        compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB),reg)); 
-        //A FAIRE 
-        // compiler.addInstruction(new CMP(null, R)); 
-        // compiler.addInstruction(new BEQ(new Label("deref_null_error"))); 
-    }
-
 
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
         LOG.debug("[This][verifyExpr]");
-        if(currentClass == null){
-            throw new ContextualError("L'expression this. ne peut pas appeler un objet null", getLocation());
+        if(currentClass.getType().sameType(compiler.environmentType.OBJECT)){
+            throw new ContextualError("L'expression this. ne peut pas appeler un objet de type Object", getLocation());
         }
         setType(currentClass.getType());
         return currentClass.getType();
@@ -88,3 +79,4 @@ public class This extends AbstractExpr{
 
 
 }
+

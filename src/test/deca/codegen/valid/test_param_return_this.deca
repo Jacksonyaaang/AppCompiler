@@ -1,0 +1,26 @@
+// Description:
+//    Test définition et instanciation de classe simple + sélection
+//
+//    TEST Essentiel partie C
+
+// Resultats:
+// 1
+// Historique:
+// 
+
+
+class A{
+    private int i;
+    public int getI(){
+        return this.i;
+    }
+    public void setI(int j){
+        this.i=j;
+    } 
+}
+
+{
+    A a=new A();
+    A.setI(1);
+    println(a.getI());
+}
