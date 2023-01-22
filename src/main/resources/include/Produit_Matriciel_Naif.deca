@@ -153,7 +153,7 @@ class MatrixMultiplication extends Math{
     }
 
     int[][] naiveMultiplyInt(int[][] a, int[][] b) {
-        int[][] c = new int[a.size2D][b.size1D];
+        int[][] c;
         int i = 0;
         int j = 0;
         int k = 0;
@@ -164,6 +164,7 @@ class MatrixMultiplication extends Math{
             println("Taille de matrice incompatible avec le produit matriciel");
             //throw new IllegalArgumentException("A:ligne: " + colA + " did not match B:Columns " + ligneB + ".");
         }
+        c = new int[a.size2D][b.size1D];
 
         while(i < a.size2D){
             while(j < b.size1D){

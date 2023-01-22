@@ -1,0 +1,679 @@
+class Math {
+
+    void setInt1DTable(int[] table, int value){
+        int tableIterator = 0;
+        while (tableIterator < table.size1D ){
+            table[tableIterator] = value;
+            tableIterator = tableIterator + 1;
+        }
+    }
+
+    void setInt2DTable(int[][] table, int value){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
+                table[tableIteratorX][tableIteratorY] = value;
+                tableIteratorX = tableIteratorX + 1;
+            }
+            tableIteratorX = 0;
+            tableIteratorY = tableIteratorY + 1;
+        }
+    }
+
+    void setFloat1DTable(float[] table, float value){
+        int tableIterator = 0;
+        while (tableIterator < table.size1D ){
+            table[tableIterator] = value;
+            tableIterator = tableIterator + 1;
+        }
+    }
+
+    void setFloat2DTable(float[][] table, float value){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
+                table[tableIteratorX][tableIteratorY] = value;
+                tableIteratorX = tableIteratorX + 1;
+            }
+            tableIteratorX = 0;
+            tableIteratorY = tableIteratorY + 1;
+        }
+    }
+
+    void printInt1DTable(int[] table){
+        int tableIterator = 0;
+        println("--------------");
+        print("Tableau1D = [");
+        while (tableIterator < table.size1D ){
+            print(table[tableIterator]," ,");
+            tableIterator = tableIterator + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+
+    void printInt2DTable(int[][] table){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        println("--------------");
+        print("Tableau2D = [");
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
+                print(table[tableIteratorX][tableIteratorY]," ,");
+                tableIteratorX = tableIteratorX + 1;
+            }
+            println("");
+            tableIteratorX = 0;
+            tableIteratorY = tableIteratorY + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+
+    void printFloat1DTable(float[] table){
+        int tableIterator = 0;
+        println("--------------");
+        print("Tableau1D = [");
+        while (tableIterator < table.size1D ){
+            print(table[tableIterator]," ,");
+            tableIterator = tableIterator + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+
+    void printFloat2DTable(float[][] table){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        println("--------------");
+        print("Tableau2D = [");
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
+                print(table[tableIteratorX][tableIteratorY]," ,");
+                tableIteratorX = tableIteratorX + 1;
+            }
+            println("");
+            tableIteratorX = 0;
+            tableIteratorY = tableIteratorY + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+
+    void copyInt2DTable(int[][] src, int[][] dest){
+        int i = 0;
+        int j = 0;
+        if(src.size1D > dest.size1D || src.size2D > dest.size2D){
+            dimensionIncompatible();
+        }
+        while (j < src.size2D){
+            while (i < src.size1D){
+                dest[i][j] = src[i][j];
+                i = i +1;
+            }
+            i = 0;
+            j = j + 1;
+        }
+    }
+
+    void dimensionIncompatible(){
+        println("Erreur de dimension");
+    }
+}
+
+class Difference extends Math{
+    void diffIntInt1D(int[] table1, int[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] - table2[tableIterator];
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void diffIntInt2D(int[][] table1, int[][] table2){
+        int tableIteratorY = 0;
+        int tableIteratorX = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
+                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] - table2[tableIteratorY][tableIteratorX];
+                    tableIteratorX = tableIteratorX + 1;
+                }
+                tableIteratorX = 0;
+                tableIteratorY = tableIteratorY + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void diffFloatInt1D(float[] table1, int[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] - (float)(table2[tableIterator]);
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void diffFloatInt2D(float[][] table1, int[][] table2){
+        int tableIteratorY = 0;
+        int tableIteratorX = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
+                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] - (float)(table2[tableIteratorY][tableIteratorX]);
+                    tableIteratorX = tableIteratorX + 1;
+                }
+                tableIteratorX = 0;
+                tableIteratorY = tableIteratorY + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void diffIntFloat1D(int[] table1, float[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] - (int)(table2[tableIterator]);
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void diffIntFloat2D(int[][] table1, float[][] table2){
+        int tableIteratorY = 0;
+        int tableIteratorX = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
+                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] - (int)(table2[tableIteratorY][tableIteratorX]);
+                    tableIteratorX = tableIteratorX + 1;
+                }
+                tableIteratorX = 0;
+                tableIteratorY = tableIteratorY + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void diffFloatFloat1D(float[] table1, float[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] - table2[tableIterator];
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void diffFloatFloat2D(float[][] table1, float[][] table2){
+        int tableIteratorY = 0;
+        int tableIteratorX = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
+                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] - table2[tableIteratorY][tableIteratorX];
+                    tableIteratorX = tableIteratorX + 1;
+                }
+                tableIteratorX = 0;
+                tableIteratorY = tableIteratorY + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void dimensionIncompatible(){
+        println("Erreur de dimension");
+    }
+
+}
+
+class Sum extends Math{
+    void sommeIntInt1D(int[] table1, int[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] + table2[tableIterator];
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void sommeIntInt2D(int[][] table1, int[][] table2){
+        int tableIteratorY = 0;
+        int tableIteratorX = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
+                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] + table2[tableIteratorY][tableIteratorX];
+                    tableIteratorX = tableIteratorX + 1;
+                }
+                tableIteratorX = 0;
+                tableIteratorY = tableIteratorY + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void sommeFloatInt1D(float[] table1, int[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] + (float)(table2[tableIterator]);
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void sommeFloatInt2D(float[][] table1, int[][] table2){
+        int tableIteratorY = 0;
+        int tableIteratorX = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
+                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] + (float)(table2[tableIteratorY][tableIteratorX]);
+                    tableIteratorX = tableIteratorX + 1;
+                }
+                tableIteratorX = 0;
+                tableIteratorY = tableIteratorY + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void sommeIntFloat1D(int[] table1, float[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] + (int)(table2[tableIterator]);
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void sommeIntFloat2D(int[][] table1, float[][] table2){
+        int tableIteratorY = 0;
+        int tableIteratorX = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
+                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] + (int)(table2[tableIteratorY][tableIteratorX]);
+                    tableIteratorX = tableIteratorX + 1;
+                }
+                tableIteratorX = 0;
+                tableIteratorY = tableIteratorY + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void sommeFloatFloat1D(float[] table1, float[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] + table2[tableIterator];
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void sommeFloatFloat2D(float[][] table1, float[][] table2){
+        int tableIteratorY = 0;
+        int tableIteratorX = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
+                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] + table2[tableIteratorY][tableIteratorX];
+                    tableIteratorX = tableIteratorX + 1;
+                }
+                tableIteratorX = 0;
+                tableIteratorY = tableIteratorY + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void dimensionIncompatible(){
+        println("Erreur de dimension");
+    }
+
+}
+
+class MatrixMultiplicationStrassen extends Math{
+
+    int[][] MultiplyIntStrassen(int[][] a, int[][] b) {
+        int n = a.size1D;
+        int[][] res;
+        int i = 0;
+        int j = 0;
+        int nextPowerOfTwo;
+        int[][] biggerA;
+        int[][] biggerB;
+        int[][] biggerRes;
+        int[][] a11 ;
+        int[][] a12 ;
+        int[][] a21 ;
+        int[][] a22 ;
+        int[][] b11 ;
+        int[][] b12 ;
+        int[][] b21 ;
+        int[][] b22 ;
+
+        int[][] prod1;
+        int[][] prod2;
+        int[][] prod3;
+        int[][] prod4;
+        int[][] prod5;
+        int[][] prod6;
+        int[][] prod7;
+
+        int[][] res11;
+        int[][] res12;
+        int[][] res21;
+        int[][] res22;
+
+        Sum matrixSum2D = new Sum();
+        Difference matrixDiff2D = new Difference();
+        Math matrixMath2D = new Math();
+
+        if ((a.size1D != b.size1D) || (a.size2D != b.size2D)){
+            dimensionIncompatible();
+        }
+
+        nextPowerOfTwo = nextPowerOfTwo(n);
+        biggerA = new int[nextPowerOfTwo][nextPowerOfTwo];
+        biggerB = new int[nextPowerOfTwo][nextPowerOfTwo];
+        biggerRes = new int[nextPowerOfTwo][nextPowerOfTwo];
+
+        matrixMath2D.setInt2DTable(biggerA,0);
+        matrixMath2D.setInt2DTable(biggerB,0);
+
+        matrixMath2D.copyInt2DTable(a,biggerA);
+        matrixMath2D.copyInt2DTable(b,biggerB);
+
+        res = new int[n][n];
+
+        a11 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        a12 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        a21 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        a22 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        b11 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        b12 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        b21 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        b22 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        
+        prod1 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        prod2 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        prod3 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        prod4 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        prod5 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        prod6 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        prod7 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        
+        res11 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        res12 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        res21 = new int[nextPowerOfTwo][nextPowerOfTwo];
+        res22 = new int[nextPowerOfTwo][nextPowerOfTwo];
+
+        if (n == 1) {
+            res[0][0] = a[0][0] * b[0][0];
+        } else {
+
+            i = 0;
+            while (i < nextPowerOfTwo/2) {
+                j = 0;
+                while (j < nextPowerOfTwo/2) {
+                    a11[i][j] = biggerA[i][j];
+                    j = j +1;
+                }
+                i = i + 1;
+            }
+            i = 0;
+            while (i < nextPowerOfTwo/2) {
+                j = nextPowerOfTwo/2;
+                while (j < n) {
+                    a12[i][j - nextPowerOfTwo/2] = biggerA[i][j];
+                    j = j + 1;
+                }
+                i = i + 1;
+            }
+            i = nextPowerOfTwo/2;
+            while (i < n) {
+                j = 0;
+                while (j < nextPowerOfTwo/2) {
+                    a21[i - nextPowerOfTwo/2][j] = biggerA[i][j];
+                    j = j + 1;
+                }
+                i = i + 1;
+            }
+            i = nextPowerOfTwo/2;
+            while (i < n) {
+                j = nextPowerOfTwo/2;
+                while (j < n) {
+                    a22[i - nextPowerOfTwo/2][j - nextPowerOfTwo/2] = biggerA[i][j];
+                    j = j + 1 ;
+                }
+                i = i + 1;
+            }
+            i = 0;
+            while (i < nextPowerOfTwo/2) {
+                j = 0;
+                while (j < nextPowerOfTwo/2) {
+                    b11[i][j] = biggerB[i][j];
+                    j = j + 1;
+                }
+                i = i + 1;
+            }
+            i = 0;
+            while (i < nextPowerOfTwo/2) {
+                j = nextPowerOfTwo/2;
+                while (j < n) {
+                    b12[i][j - nextPowerOfTwo/2] = biggerB[i][j];
+                    j = j + 1;
+                }
+                i = i + 1;
+            }
+            i = nextPowerOfTwo/2;
+            while (i < n) {
+                j = 0;
+                while (j < nextPowerOfTwo/2) {
+                    b21[i - nextPowerOfTwo/2][j] = biggerB[i][j];
+                    j = j + 1;
+                }
+                i = i + 1;
+            }
+            i = nextPowerOfTwo/2;
+            while (i < n) {
+                j = nextPowerOfTwo/2;
+                while (j < n) {
+                    b22[i - nextPowerOfTwo/2][j - nextPowerOfTwo/2] = biggerB[i][j];
+                    j = j + 1;
+                }
+                i = i + 1;
+            }
+
+            prod1 = MultiplyIntStrassen((sommeIntIntReturn2D(a11, a22)),(sommeIntIntReturn2D(b11, b22)));
+            prod2 = MultiplyIntStrassen(sommeIntIntReturn2D(a21, a22),b11);
+            prod3 = MultiplyIntStrassen(a11,diffIntIntReturn2D(b12, b22));
+            prod4 = MultiplyIntStrassen(a22,diffIntIntReturn2D(b21, b11));
+            prod5 = MultiplyIntStrassen(sommeIntIntReturn2D(a11, a12),b22);
+            prod6 = MultiplyIntStrassen(diffIntIntReturn2D(a21, a11),sommeIntIntReturn2D(b11, b12));
+            prod7 = MultiplyIntStrassen(diffIntIntReturn2D(a12, a22),sommeIntIntReturn2D(b21, b22));
+
+            res11 = sommeIntIntReturn2D(diffIntIntReturn2D(sommeIntIntReturn2D(prod1,prod4),prod5),prod7);
+            res12 = sommeIntIntReturn2D(prod3, prod5);
+            res21 = sommeIntIntReturn2D(prod2, prod4);
+            res22 = sommeIntIntReturn2D(diffIntIntReturn2D(sommeIntIntReturn2D(prod1, prod3),prod2),prod6);
+
+            copyInt2DMatrix(res11, biggerRes, 0, 0);
+            copyInt2DMatrix(res12, biggerRes, 0, nextPowerOfTwo/2);
+            copyInt2DMatrix(res21, biggerRes, nextPowerOfTwo/2, 0);
+            copyInt2DMatrix(res22, biggerRes, nextPowerOfTwo/2, nextPowerOfTwo/2);
+
+            i = 0;
+            j = 0;
+            while (j < res.size2D){
+                while (i < res.size1D){
+                    res[i][j] = biggerRes[i][j];
+                    i = i + 1;
+                }
+                i = 0;
+                j = j + 1;
+            }
+        }
+        return res;
+    }
+
+    int nextPowerOfTwo(int n) {
+        int power = 1;
+        while (power < n) {
+            power = power * 2;
+        }
+        return power;
+    }
+
+    void copyInt2DMatrix(int[][] src, int[][] dest, int startLig, int startCol) {
+        int i = 0;
+        int j = 0;
+
+        if(src.size1D != dest.size1D || src.size2D != dest.size2D){
+            dimensionIncompatible();
+        }
+        while (i < src.size2D) {
+            while (j < src.size1D) {
+                dest[startLig + i][startCol + j] = src[i][j];
+                j = j + 1;
+            }
+            i = i + 1;
+            j = 0;
+        }
+    }
+
+    int[][] sommeIntIntReturn2D(int[][] table1, int[][] table2){
+        int[][] res;
+        int tableIteratorY = 0;
+        int tableIteratorX = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            res = new int[table1.size2D][table1.size1D];
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
+                    res[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] + table2[tableIteratorY][tableIteratorX];
+                    tableIteratorX = tableIteratorX + 1;
+                }
+                tableIteratorX = 0;
+                tableIteratorY = tableIteratorY + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+        return res;
+    }
+
+    int[][] diffIntIntReturn2D(int[][] table1, int[][] table2){
+        int[][] res;
+        int tableIteratorY = 0;
+        int tableIteratorX = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            res = new int[table1.size2D][table1.size1D];
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
+                    res[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] - table2[tableIteratorY][tableIteratorX];
+                    tableIteratorX = tableIteratorX + 1;
+                }
+                tableIteratorX = 0;
+                tableIteratorY = tableIteratorY + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+        return res;
+    }
+    void dimensionIncompatible(){
+        println("Erreur de dimension");
+    }
+}
+
+
+{
+    MatrixMultiplicationStrassen matrixMult = new MatrixMultiplicationStrassen();
+    int[][] a = new int[3][3];
+    int[][] d = new int[3][3];
+    int[][] intRes = new int[3][3];
+    float[][] b = new float[3][3];
+    float[][] c = new float[3][3];
+    float[][] floatRes = new float[3][3];
+
+    println("Test produit matriciel Strassen int");
+    matrixMult.setInt2DTable(a,5);
+    matrixMult.setInt2DTable(d,3);
+    intRes = matrixMult.MultiplyIntStrassen(a,d);
+    matrixMult.printInt2DTable(intRes);
+
+    matrixMult.setInt2DTable(a,5);
+    a[0][0] = 2;
+    a[1][1] = 2;
+    a[2][2] = 2;
+    intRes = matrixMult.MultiplyIntStrassen(a,d);
+    matrixMult.printInt2DTable(intRes);
+
+    /*println("Test produit matriciel float");
+    matrixMult.setFloat2DTable(b,5.5);
+    matrixMult.setFloat2DTable(c,3.2);
+    floatRes = matrixMult.naiveMultiplyFloat(b,c);
+    matrixMult.printFloat2DTable(floatRes);
+
+    matrixMult.setFloat2DTable(b,5.5);
+    b[0][0] = 2.5;
+    b[1][1] = 3.5;
+    b[2][2] = 0.5;
+    floatRes = matrixMult.naiveMultiplyFloat(b,c);
+    matrixMult.printFloat2DTable(floatRes);*/
+}
