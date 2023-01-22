@@ -46,7 +46,6 @@ public class ListError {
         this.list.put("deref_null_error", false);
         this.list.put("heap_overflow_error", false);
         this.list.put("cast_error", false);
-
         /*
          * Erreur Extension 
          */

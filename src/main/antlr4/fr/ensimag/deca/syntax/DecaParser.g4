@@ -499,7 +499,7 @@ primary_expr returns[AbstractExpr tree]
             $tree = new TableGetElement(tempIdentifier, arguementTableau);
             setLocation($tree, $ident.start);
         }
-    | ident OBRACKET e1=expr CBRACKET OBRACKET  e2=expr CBRACKET {
+    | ident OBRACKET e1=expr CBRACKET OBRACKET  e2=expr CBRACKET { 
         assert($ident.tree != null);
         assert($e1.tree != null);
         assert($e2.tree != null);

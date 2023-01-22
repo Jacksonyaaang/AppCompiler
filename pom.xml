@@ -265,23 +265,6 @@
                     <!-- scripts automatique pour les tests unitaires -->
                     <!--<executions>-->
                     <!--mvn -Djacoco.skip=false verify -Dmaven.test.failure.ignore-->
-                    <execution>
-                        <id>Test-Contexuelle-Valide</id>
-                        <configuration>
-                            <executable>./customLaunchers/TestContexuelle/autoConValide.sh</executable>
-                        </configuration>
-                        <phase>test</phase>
-                        <goals><goal>exec</goal></goals>
-                    </execution>
-                    <execution>
-                        <id>Test-Contexuelle-Invalide</id>
-                        <configuration>
-                            <executable>./customLaunchers/TestContexuelle/autoConInvalide.sh</executable>
-                        </configuration>
-                        <phase>test</phase>
-                        <goals><goal>exec</goal></goals>
-                    </execution>
-
                     <!-- pour la partie syntaxe-->
                     <execution>
                         <id>Test-Syntaxe-Valide</id>
@@ -299,6 +282,23 @@
                         <phase>test</phase>
                         <goals><goal>exec</goal></goals>
                     </execution>
+                    <execution>
+                        <id>Test-Contexuelle-Valide</id>
+                        <configuration>
+                            <executable>./customLaunchers/TestContexuelle/autoConValide.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals><goal>exec</goal></goals>
+                    </execution>
+                    <execution>
+                        <id>Test-Contexuelle-Invalide</id>
+                        <configuration>
+                            <executable>./customLaunchers/TestContexuelle/autoConInvalide.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals><goal>exec</goal></goals>
+                    </execution>
+
                         <execution>
                         <id>Test-CodeGen-valide</id>
                         <configuration>
@@ -311,6 +311,55 @@
                         <id>Test-CodeGen-invalide</id>
                         <configuration>
                             <executable>./customLaunchers/TestCodegen/autoCodegenInvalid.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals><goal>exec</goal></goals>
+                    </execution>
+                    <execution>
+                        <id>Test-Extension-Syntaxe-Valide</id>
+                        <configuration>
+                            <executable>./customLaunchers/TestExtension/TestSyntaxique/autoSynValideExtension.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals><goal>exec</goal></goals>
+                    </execution>
+                    <execution>
+                        <id>Test-Extension-Syntaxe-Invalide</id>
+                        <configuration>
+                            <executable>./customLaunchers/TestExtension/TestSyntaxique/autoSynInvalideExtension.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals><goal>exec</goal></goals>
+                    </execution>
+                    <execution>
+                        <id>Test-Extension-Contexuelle-Valide</id>
+                        <configuration>
+                            <executable>./customLaunchers/TestExtension/TestContexuelle/autoConValideExtension.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals><goal>exec</goal></goals>
+                    </execution>
+                    <execution>
+                        <id>Test-Extension-Contexuelle-Invalide</id>
+                        <configuration>
+                            <executable>./customLaunchers/TestExtension/TestContexuelle/autoConInvalideExtension.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals><goal>exec</goal></goals>
+                    </execution>
+
+                        <execution>
+                        <id>Test-Extension-CodeGen-valide</id>
+                        <configuration>
+                            <executable>./customLaunchers/TestExtension/TestCodegen/autoCodegenValidExtension.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals><goal>exec</goal></goals>
+                    </execution>
+                     <execution>
+                        <id>Test-Extension-CodeGen-invalide</id>
+                        <configuration>
+                            <executable>./customLaunchers/TestExtension/TestCodegen/autoCodegenInvalidExtension.sh</executable>
                         </configuration>
                         <phase>test</phase>
                         <goals><goal>exec</goal></goals>

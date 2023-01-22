@@ -2384,7 +2384,7 @@ public class DecaParser extends AbstractDecaParser {
 				((Primary_exprContext)_localctx).e2 = expr();
 				setState(456);
 				match(CBRACKET);
-
+				 
 				        assert(((Primary_exprContext)_localctx).ident.tree != null);
 				        assert(((Primary_exprContext)_localctx).e1.tree != null);
 				        assert(((Primary_exprContext)_localctx).e2.tree != null);

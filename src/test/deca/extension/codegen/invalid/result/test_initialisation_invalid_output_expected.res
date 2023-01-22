@@ -1,0 +1,1 @@
+Error: int_allocation_table_must_be_strictly_positive

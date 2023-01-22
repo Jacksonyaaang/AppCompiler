@@ -141,7 +141,7 @@ public class  TableGetElement extends AbstractLValue{
             //On se positionne corectement dans la matrice en multipliant la ligne par la taille de la ligne
             compiler.addInstruction(new MUL(Register.getR(0), listExprInit.get(0).getRegisterDeRetour()));
             //On vérifie que la valeur donnée pour la dimension 2 est inférieur à la taille de la matrice
-            compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(1)), Register.getR(0)),
+            compiler.addInstruction(new LOAD(new RegisterOffset(1, Register.getR(1)), Register.getR(0)),
             "loading size 2d of "+tableIdentifier.getName()+ " into memory");
             verifyExprIsLowerThenRegister(compiler, listExprInit.get(1), Register.getR(0));
             //On ajoute la valeur des colonnes à l'indice

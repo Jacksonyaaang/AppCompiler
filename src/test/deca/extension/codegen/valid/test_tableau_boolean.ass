@@ -187,7 +187,7 @@ end_ifthenelse_1:
 	CMP R3, R0
 	BLE table_dimension_are_not_respected
 	MUL R0, R3
-	LOAD 0(R1), R0	; loading size 2d of bool_matrix into memory
+	LOAD 1(R1), R0	; loading size 2d of bool_matrix into memory
 	CMP R2, R0
 	BLE table_dimension_are_not_respected
 	ADD R2, R3
@@ -611,7 +611,7 @@ QUIT_AND_Called_When_Fail_id16:
 	CMP R3, R0
 	BLE table_dimension_are_not_respected
 	MUL R0, R3
-	LOAD 0(R1), R0	; loading size 2d of bool_matrix into memory
+	LOAD 1(R1), R0	; loading size 2d of bool_matrix into memory
 	CMP R2, R0
 	BLE table_dimension_are_not_respected
 	ADD R2, R3

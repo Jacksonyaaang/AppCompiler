@@ -1,0 +1,63 @@
+	ADDSP #3
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 2(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 3(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNewTable--------[10, 16]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  int[][] into memory at register R2
+	LOAD #2, R3	; loading 2 into memory
+	LOAD #10, R4	; loading 10 into memory
+	LOAD R3, R1
+	MUL R4, R1
+	ADD #2, R1
+	NEW R1, R0
+	STORE R3, 0(R0)
+	STORE R4, 1(R0)
+	LOAD R0, R2
+; --------EndNewTable--------[10, 16]-----
+	STORE R2, 1(GB)	; Initializing the variable x and loading it into memory
+; --------BeginAssignOp--------[11, 4]-----
+	LOAD #2, R3	; loading 2 into memory
+; --------StartStoreTableElements--------[11, 4]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  x the value in R3
+	LOAD #10, R4	; loading 10 into memory
+	LOAD #15, R5	; loading 15 into memory
+	LOAD 1(GB), R1	; loading x into memory
+	LOAD 0(R1), R0	; loading size 1d of x into memory
+	MUL R0, R4
+	LOAD 1(R1), R0	; loading size 2d of x into memory
+	ADD R5, R4	; adding index_y to size1D*index_x
+	LOAD R4, R0
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[11, 4]-----
+; --------EndAssignOp--------[11, 4]-----
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

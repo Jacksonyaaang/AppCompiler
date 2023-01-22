@@ -21,12 +21,13 @@ class MathOperation{
             }
         }
         else{
-            dimensionIncompatible();
+            dimensionIncompatible(table1.size1D, table2.size1D)
         }
     }
 
 
-    void dimensionIncompatible(){
+    void dimensionIncompatible(int a, int b){
+        println(" dimension incompatible ", a , "!=", b );
         println("Erreur de dimension");
         throwError();
     }

@@ -139,7 +139,7 @@
 	CMP R3, R0
 	BLE table_dimension_are_not_respected
 	MUL R0, R3
-	LOAD 0(R1), R0	; loading size 2d of listeDePoint2d into memory
+	LOAD 1(R1), R0	; loading size 2d of listeDePoint2d into memory
 	CMP R2, R0
 	BLE table_dimension_are_not_respected
 	ADD R2, R3
@@ -172,7 +172,7 @@
 	CMP R3, R0
 	BLE table_dimension_are_not_respected
 	MUL R0, R3
-	LOAD 0(R1), R0	; loading size 2d of listeDePoint2d into memory
+	LOAD 1(R1), R0	; loading size 2d of listeDePoint2d into memory
 	CMP R2, R0
 	BLE table_dimension_are_not_respected
 	ADD R2, R3
@@ -202,7 +202,7 @@
 	CMP R3, R0
 	BLE table_dimension_are_not_respected
 	MUL R0, R3
-	LOAD 0(R1), R0	; loading size 2d of listeDePoint2d into memory
+	LOAD 1(R1), R0	; loading size 2d of listeDePoint2d into memory
 	CMP R2, R0
 	BLE table_dimension_are_not_respected
 	ADD R2, R3

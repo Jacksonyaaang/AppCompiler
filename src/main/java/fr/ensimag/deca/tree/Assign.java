@@ -49,6 +49,7 @@ public class Assign extends AbstractBinaryExpr {
 
     @Override
     public void codeGenInst(DecacCompiler compiler) throws CodeGenError {
+            LOG.debug("[Assign][codeGenInst]Assign debug " + getLocation()  );    
             GPRegister assignRegister = this.LoadGencode(compiler, false);
             compiler.addComment("--------BeginAssignOp--------"+getLocation()+"-----");    
             this.getRightOperand().codeGenInst(compiler);
