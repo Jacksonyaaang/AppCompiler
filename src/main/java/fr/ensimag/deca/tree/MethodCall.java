@@ -133,7 +133,11 @@ public class MethodCall extends AbstractExpr {
                     while (compteur < listParam.getList().size()){
                         Type tPramCall = listParam.getList().get(compteur).verifyExpr(compiler, localEnv, currentClass);
                         Type tPramMeth = ((MethodDefinition)Defi).getSignature().paramNumber(compteur);
-                        if (!tPramCall.sameType(tPramMeth)){
+                        if ((tPramCall.isClassOrNull() && tPramMeth.isClass()) && !tPramCall.isNull() && !((ClassType)tPramCall).isSubClassOf((ClassType)tPramMeth)){
+                            throw new ContextualError("Signature de methode non prévu", getLocation());
+                        }
+                        else if (!tPramCall.isClassOrNull() && !tPramMeth.isClass() && !tPramCall.sameType(tPramMeth)){
+                            System.out.print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh*******************************");
                             throw new ContextualError("Signature de methode non prévu", getLocation());
                         }
                         compteur++;
