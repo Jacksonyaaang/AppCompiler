@@ -1,0 +1,175 @@
+class Math {
+
+    void setInt1DTable(int[] table, int value){
+        int tableIterator = 0;
+        while (tableIterator < table.size1D ){
+            table[tableIterator] = value;
+            tableIterator = tableIterator + 1;
+        }
+    }
+
+    void setInt2DTable(int[][] table, int value){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
+                table[tableIteratorX][tableIteratorY] = value;
+                tableIteratorX = tableIteratorX + 1;
+            }
+            tableIteratorX = 0;
+            tableIteratorY = tableIteratorY + 1;
+        }
+    }
+
+    void set1DTableIntValue(int[] table, int value, int index){
+        table[index] = value;
+    }
+
+    void set2DTableIntValue(int[][] table, int value, int indexX, int indexY){
+        table[indexX][indexY] = value;
+    }
+
+    void setFloat1DTable(float[] table, float value){
+        int tableIterator = 0;
+        while (tableIterator < table.size1D ){
+            table[tableIterator] = value;
+            tableIterator = tableIterator + 1;
+        }
+    }
+
+    void setFloat2DTable(float[][] table, float value){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
+                table[tableIteratorX][tableIteratorY] = value;
+                tableIteratorX = tableIteratorX + 1;
+            }
+            tableIteratorX = 0;
+            tableIteratorY = tableIteratorY + 1;
+        }
+    }
+
+    void set1DTableFloatValue(float[] table, float value, int index){
+        table[index] = value;
+    }
+
+    void set2DTableFloatValue(float[][] table, float value, int indexX, int indexY){
+        table[indexX][indexY] = value;
+    }
+
+    void printInt1DTable(int[] table){
+        int tableIterator = 0;
+        println("--------------");
+        print("Tableau1D = [");
+        while (tableIterator < table.size1D ){
+            print(table[tableIterator]," ,");
+            tableIterator = tableIterator + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+
+    void printInt2DTable(int[][] table){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        println("--------------");
+        print("Tableau2D = [");
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
+                print(table[tableIteratorX][tableIteratorY]," ,");
+                tableIteratorX = tableIteratorX + 1;
+            }
+            println("");
+            tableIteratorX = 0;
+            tableIteratorY = tableIteratorY + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+
+    void printFloat1DTable(float[] table){
+        int tableIterator = 0;
+        println("--------------");
+        print("Tableau1D = [");
+        while (tableIterator < table.size1D ){
+            print(table[tableIterator]," ,");
+            tableIterator = tableIterator + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+
+    void printFloat2DTable(float[][] table){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        println("--------------");
+        print("Tableau2D = [");
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
+                print(table[tableIteratorX][tableIteratorY]," ,");
+                tableIteratorX = tableIteratorX + 1;
+            }
+            println("");
+            tableIteratorX = 0;
+            tableIteratorY = tableIteratorY + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+}
+
+class Trace extends Math{
+    int getTraceInt(int[][] table){
+        int trace = 0;
+        int tableIterator = 0;
+        if(table.size1D != table.size2D){
+            println("Impossible de calculer la trace d'une matrice non carrée");
+            return 0;
+        }
+
+        while (tableIterator < table.size1D ){
+            trace = trace + table[tableIterator][tableIterator];
+            tableIterator = tableIterator + 1;
+        }
+        return trace;
+    }
+
+    float getTraceFloat(float[][] table){
+        float trace = 0;
+        int tableIterator = 0;
+        if(table.size1D != table.size2D){
+            println("Impossible de calculer la trace d'une matrice non carrée");
+            return 0;
+        }
+        while (tableIterator < table.size1D ){
+            trace = trace + table[tableIterator][tableIterator];
+            tableIterator = tableIterator + 1;
+        }
+        return trace;
+    }
+}
+
+{
+    Trace matrixTrace = new Trace();
+    int[][] a = new int[3][3];
+    int[][] d = new int[3][3];
+    float[][] b = new float[3][3];
+    float[][] c = new float[3][3];
+    int trace1;
+    float trace2;
+
+    matrixTrace.setInt2DTable(a,5);
+    trace1 = matrixTrace.getTraceInt(a);
+    println("La trace de la matrice a est: ", trace1);
+    a[1][1] = 2;
+    trace1 = matrixTrace.getTraceInt(a);
+    println("La trace de la matrice a après modification est: ", trace1);
+
+    matrixTrace.setFloat2DTable(b,6.2);
+    trace2 = matrixTrace.getTraceFloat(b);
+    println("La trace de la matrice b modification est: ", trace2);
+    b[1][1] = 2.3;
+    trace2 = matrixTrace.getTraceFloat(b);
+    println("La trace de la matrice b après modification est: ", trace2);
+}

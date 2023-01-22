@@ -21,14 +21,6 @@ class Math {
         }
     }
 
-    void set1DTableIntValue(int[] table, int value, int index){
-        table[index] = value;
-    }
-
-    void set2DTableIntValue(int[][] table, int value, int indexX, int indexY){
-        table[indexX][indexY] = value;
-    }
-
     void setFloat1DTable(float[] table, float value){
         int tableIterator = 0;
         while (tableIterator < table.size1D ){
@@ -48,14 +40,6 @@ class Math {
             tableIteratorX = 0;
             tableIteratorY = tableIteratorY + 1;
         }
-    }
-
-    void set1DTableFloatValue(float[] table, float value, int index){
-        table[index] = value;
-    }
-
-    void set2DTableFloatValue(float[][] table, float value, int indexX, int indexY){
-        table[indexX][indexY] = value;
     }
 
     void printInt1DTable(int[] table){
@@ -290,14 +274,7 @@ class MultMember extends Math{
         matrixMultMb2D.setInt2DTable(d,2);
         matrixMultMb2D.multMbIntInt2D(a,d);
         matrixMultMb2D.printInt2DTable(a);
-              
-        matrixMultMb2D.set2DTableIntValue(a,5,0,0);
-        matrixMultMb2D.set2DTableIntValue(a,3,2,2);
-        matrixMultMb2D.printInt2DTable(a);
-              
-        matrixMultMb2D.set2DTableFloatValue(b,3.2,0,0);
-        matrixMultMb2D.set2DTableFloatValue(b,5.9,2,2);
-        matrixMultMb2D.printFloat2DTable(b);
+
 
         b[0][1] = 3*b[0][0];
         matrixMultMb2D.printFloat2DTable(b);
