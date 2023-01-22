@@ -56,7 +56,8 @@ public class ClassType extends Type {
         if (otherType instanceof ClassType){
             if (this.getName().getName().equals(((ClassType)otherType).getName().getName()))
             return true;
-        }return false;
+        }
+        return false;
     }
 
     /**

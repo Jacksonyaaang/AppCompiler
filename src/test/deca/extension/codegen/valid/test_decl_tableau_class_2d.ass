@@ -1,0 +1,378 @@
+	TSTO #14
+	BOV stack_overflow_error
+	ADDSP #11
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 4(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 5(GB)
+	LEA 4(GB), R0
+	STORE R0, 6(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 7(GB)
+	LOAD code.Point2D.diag, R0
+	STORE R0, 8(GB)
+	LEA 6(GB), R0
+	STORE R0, 9(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 10(GB)
+	LOAD code.Point3D.diag, R0
+	STORE R0, 11(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[32, 22]-----
+; [New][loadItemintoRegister] loading new of calss =  Point2D into memory at register R2
+	NEW #3, R2
+	BOV heap_overflow_error
+	LEA 6(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Point2D
+	POP R2
+; --------EndNew--------[32, 22]-----
+	STORE R2, 1(GB)	; Initializing the variable point2d and loading it into memory
+; --------StartNewTable--------[33, 30]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  Object[][] into memory at register R2
+	LOAD #1, R3	; loading 1 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	CMP #1, R2
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	MUL R2, R1
+	ADD #2, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	STORE R2, 1(R0)
+	POP R2
+	LOAD R0, R2
+; --------EndNewTable--------[33, 30]-----
+	STORE R2, 2(GB)	; Initializing the variable tableauObjet and loading it into memory
+; --------BeginAssignOp--------[35, 4]-----
+; --------StartNewTable--------[35, 21]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  Point2D[][] into memory at register R3
+	PUSH R2
+	LOAD #9, R2	; loading 9 into memory
+	CMP #1, R2
+	BLT int_allocation_table_must_be_strictly_positive
+	PUSH R3
+	LOAD #4, R3	; loading 4 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R2, R1
+	MUL R3, R1
+	ADD #2, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R2, 0(R0)
+	STORE R3, 1(R0)
+	POP R2
+	POP R3
+	LOAD R0, R3
+; --------EndNewTable--------[35, 21]-----
+	STORE R3, 3(GB)	;  Assiging a value to listeDePoint2d
+	LOAD R3, R2	;  Return value of the assignement of =listeDePoint2dand storing it into R2
+; --------EndAssignOp--------[35, 4]-----
+; --------BeginAssignOp--------[36, 4]-----
+; --------StartNew--------[36, 27]-----
+; [New][loadItemintoRegister] loading new of calss =  Point2D into memory at register R3
+	NEW #3, R3
+	BOV heap_overflow_error
+	LEA 6(GB), R0
+	STORE R0, 0(R3)
+	PUSH R3
+	BSR init.Point2D
+	POP R3
+; --------EndNew--------[36, 27]-----
+; --------StartStoreTableElements--------[36, 4]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  listeDePoint2d the value in R3
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD #3, R3	; loading 3 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 3(GB), R1	; loading listeDePoint2d into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of listeDePoint2d into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	LOAD 1(R1), R0	; loading size 2d of listeDePoint2d into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	ADD R3, R2	; adding index_y to size1D*index_x
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[36, 4]-----
+; --------EndAssignOp--------[36, 4]-----
+; --------BeginAssignOp--------[37, 4]-----
+	LOAD #5, R3	; loading 5 into memory
+; --------StartGetTableElements--------[37, 4]-----
+	PUSH R2
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  listeDePoint2d into memory at register R2
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	PUSH R2
+	LOAD #3, R2	; loading 3 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD 3(GB), R1	; loading listeDePoint2d into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of listeDePoint2d into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R3
+	LOAD 0(R1), R0	; loading size 2d of listeDePoint2d into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	ADD R2, R3
+	LOAD 2(R1, R3), R0
+	POP R2
+	POP R3
+	LOAD R0, R2
+; --------EndGetTableElements--------[37, 4]-----
+	STORE R3, 1(R2)	; Saving field  x into memory
+	POP R2
+	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
+; --------EndAssignOp--------[37, 4]-----
+; --------BeginAssignOp--------[38, 4]-----
+	LOAD #5, R3	; loading 5 into memory
+; --------StartGetTableElements--------[38, 4]-----
+	PUSH R2
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  listeDePoint2d into memory at register R2
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	PUSH R2
+	LOAD #3, R2	; loading 3 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD 3(GB), R1	; loading listeDePoint2d into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of listeDePoint2d into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R3
+	LOAD 0(R1), R0	; loading size 2d of listeDePoint2d into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	ADD R2, R3
+	LOAD 2(R1, R3), R0
+	POP R2
+	POP R3
+	LOAD R0, R2
+; --------EndGetTableElements--------[38, 4]-----
+	STORE R3, 2(R2)	; Saving field  y into memory
+	POP R2
+	LOAD R3, R2	;  Return value of the assignement of =yand storing it into R2
+; --------EndAssignOp--------[38, 4]-----
+; --------BeginSelection--------[39, 12]-----
+; --------StartGetTableElements--------[39, 12]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  listeDePoint2d into memory at register R2
+	LOAD #2, R3	; loading 2 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	PUSH R2
+	LOAD #3, R2	; loading 3 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD 3(GB), R1	; loading listeDePoint2d into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of listeDePoint2d into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R3
+	LOAD 0(R1), R0	; loading size 2d of listeDePoint2d into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	ADD R2, R3
+	LOAD 2(R1, R3), R0
+	POP R2
+	LOAD R0, R2
+; --------EndGetTableElements--------[39, 12]-----
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R2), R2	; Loading the field x into a register 
+; --------BeginSelection--------[39, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+; --------BeginSelection--------[40, 12]-----
+	LOAD 3(GB), R2	; loading listeDePoint2d into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R2), R2	; Loading the field size1D into a register 
+; --------BeginSelection--------[40, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+; --------BeginSelection--------[41, 12]-----
+	LOAD 3(GB), R2	; loading listeDePoint2d into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R2), R2	; Loading the field size2D into a register 
+; --------BeginSelection--------[41, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : Point2D -------------------
+; ---------------------------------------------------
+; ------------Init method for class = Point2D--------
+init.Point2D:
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field x
+	STORE R0, 1(R1)	; Saving field  x into memory
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field y
+	STORE R0, 2(R1)	; Saving field  y into memory
+	RTS
+; ------------Code for method : diag with label =  code.Point2D.diag--------
+code.Point2D.diag:
+	TSTO #2
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------BeginAssignOp--------[17, 8]-----
+; --------StartBinaryOp--------[17, 12]-----
+	LOAD -2(LB), R3	; loading the class of the field x into memory
+	LOAD 1(R3), R3	; loading x into memory
+	ADD -3(LB), R3
+; --------EndBinaryOp--------[17, 12]-----
+	LOAD -2(LB), R2	; loading parent class =  Point2D into memory when working with field x
+	STORE R3, 1(R2)	; Saving field  x into memory
+	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
+; --------EndAssignOp--------[17, 8]-----
+; --------BeginAssignOp--------[18, 8]-----
+; --------StartBinaryOp--------[18, 12]-----
+	LOAD -2(LB), R3	; loading the class of the field y into memory
+	LOAD 2(R3), R3	; loading y into memory
+	ADD -3(LB), R3
+; --------EndBinaryOp--------[18, 12]-----
+	LOAD -2(LB), R2	; loading parent class =  Point2D into memory when working with field y
+	STORE R3, 2(R2)	; Saving field  y into memory
+	LOAD R3, R2	;  Return value of the assignement of =yand storing it into R2
+; --------EndAssignOp--------[18, 8]-----
+fin.Point2D.diag:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ---------------------------------------------------
+; ----------------- class : Point3D -------------------
+; ---------------------------------------------------
+; ------------Init method for class = Point3D--------
+init.Point3D:
+	TSTO #3
+	BOV stack_overflow_error
+	LOAD -2(LB), R0	; Placing the current class = Point3D adresse in the the stack before calling parent 
+	PUSH R0	; Placing this = Point3D into the stack
+	BSR init.Point2D	; Calling the initialisation method of parent classPoint2D
+	SUBSP #1
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field z
+	STORE R0, 3(R1)	; Saving field  z into memory
+	RTS
+; ------------Code for method : diag with label =  code.Point3D.diag--------
+code.Point3D.diag:
+	TSTO #2
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------BeginAssignOp--------[25, 8]-----
+; --------StartBinaryOp--------[25, 12]-----
+	LOAD -2(LB), R3	; loading the class of the field x into memory
+	LOAD 1(R3), R3	; loading x into memory
+	ADD -3(LB), R3
+; --------EndBinaryOp--------[25, 12]-----
+	LOAD -2(LB), R2	; loading parent class =  Point2D into memory when working with field x
+	STORE R3, 1(R2)	; Saving field  x into memory
+	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
+; --------EndAssignOp--------[25, 8]-----
+; --------BeginAssignOp--------[26, 8]-----
+; --------StartBinaryOp--------[26, 12]-----
+	LOAD -2(LB), R3	; loading the class of the field y into memory
+	LOAD 2(R3), R3	; loading y into memory
+	ADD -3(LB), R3
+; --------EndBinaryOp--------[26, 12]-----
+	LOAD -2(LB), R2	; loading parent class =  Point2D into memory when working with field y
+	STORE R3, 2(R2)	; Saving field  y into memory
+	LOAD R3, R2	;  Return value of the assignement of =yand storing it into R2
+; --------EndAssignOp--------[26, 8]-----
+; --------BeginAssignOp--------[27, 8]-----
+; --------StartBinaryOp--------[27, 12]-----
+	LOAD -2(LB), R3	; loading the class of the field z into memory
+	LOAD 3(R3), R3	; loading z into memory
+	ADD -3(LB), R3
+; --------EndBinaryOp--------[27, 12]-----
+	LOAD -2(LB), R2	; loading parent class =  Point3D into memory when working with field z
+	STORE R3, 3(R2)	; Saving field  z into memory
+	LOAD R3, R2	;  Return value of the assignement of =zand storing it into R2
+; --------EndAssignOp--------[27, 8]-----
+fin.Point3D.diag:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+table_dimension_are_not_respected:
+	WSTR "Error: table_dimension_are_not_respected"
+	WNL
+	ERROR
+int_selection_table_must_be_positive:
+	WSTR "Error: int_selection_table_must_be_positive"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+int_allocation_table_must_be_strictly_positive:
+	WSTR "Error: int_allocation_table_must_be_strictly_positive"
+	WNL
+	ERROR
+; end main program

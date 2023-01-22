@@ -1,0 +1,48 @@
+`> [11, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [11, 0] Main
+      +> ListDeclVar [List with 3 elements]
+      |  []> [12, 10] DeclVar
+      |  ||  +> [12, 4] Identifier (int[])
+      |  ||  +> [12, 10] Identifier (tableauInt)
+      |  ||  `> [12, 23] Initialization
+      |  ||     `> [12, 23] NewTable
+      |  ||        +> [12, 23] Identifier (int[])
+      |  ||        +> ListExpr [List with 1 elements]
+      |  ||        |  []> [12, 31] Int (5)
+      |  []> [13, 12] DeclVar
+      |  ||  +> [13, 4] Identifier (float[])
+      |  ||  +> [13, 12] Identifier (tableauFloat)
+      |  ||  `> [13, 27] Initialization
+      |  ||     `> [13, 27] NewTable
+      |  ||        +> [13, 27] Identifier (int[][])
+      |  ||        +> ListExpr [List with 2 elements]
+      |  ||        |  []> [13, 35] Int (5)
+      |  ||        |  []> [13, 38] Int (5)
+      |  []> [14, 8] DeclVar
+      |      +> [14, 4] Identifier (int)
+      |      +> [14, 8] Identifier (x)
+      |      `> NoInitialization
+      `> ListInst [List with 3 elements]
+         []> [15, 4] Assign
+         ||  +> [15, 4] TableGetElement
+         ||  |  +> [15, 4] Identifier (tableauInt)
+         ||  |  `> ListExpr [List with 1 elements]
+         ||  |     []> [15, 15] Int (3)
+         ||  `> [15, 20] Int (10)
+         []> [16, 4] Assign
+         ||  +> [16, 4] TableGetElement
+         ||  |  +> [16, 4] Identifier (tableauFloat)
+         ||  |  `> ListExpr [List with 2 elements]
+         ||  |     []> [16, 17] Int (3)
+         ||  |     []> [16, 20] Int (2)
+         ||  `> [16, 25] Int (20)
+         []> [17, 4] Assign
+             +> [17, 4] Identifier (x)
+             `> [17, 8] Multiply
+                +> [17, 8] TableGetElement
+                |  +> [17, 8] Identifier (tableauFloat)
+                |  `> ListExpr [List with 2 elements]
+                |     []> [17, 21] Int (3)
+                |     []> [17, 24] Int (2)
+                `> [17, 28] Int (2)

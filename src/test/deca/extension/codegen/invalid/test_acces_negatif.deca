@@ -1,0 +1,12 @@
+// Description:
+// Test l'acces d'element invalid matrice 
+// Resultats:
+//  Le resulat attendu est dans le fichier avec "ce_nom"_output_expected au le dossier ./result
+// Historique:
+//    cree le 01/01/2023
+
+
+{
+    int[] x = new int[2]; 
+    x[-20] =2;
+}

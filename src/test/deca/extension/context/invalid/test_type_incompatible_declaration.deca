@@ -1,0 +1,12 @@
+// Description:
+// Test la mauvaise déclaration de tableau
+// Resultats:
+//  TEST pas valide contextuelement
+// Historique:
+//    cree le 01/01/2023
+
+
+
+{
+    int[][] tableauInt = new float[][];
+}

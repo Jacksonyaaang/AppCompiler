@@ -1,0 +1,86 @@
+// Description:
+// Test la declaration de matrice/ l'appel de matrice 
+// dans une matrice, modification de la matrice dans une methode 
+// acess au paramétre d'une methode, l'acces au element, 
+// l'indexation correct des tableaux, la declaration et l'initialisation
+// Resultats:
+//  Le resulat attendu est dans le fichier avec "ce_nom"_output_expected au le dossier ./result
+// Historique:
+//    cree le 01/01/2023
+
+
+
+class MathOperation{
+    void sommeIntInt1D(int[] table1, int[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] + table2[tableIterator];
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+    void sommeFloatInt1D(float[] table1, int[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] + table2[tableIterator];
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+
+
+    void dimensionIncompatible(){
+        println("Erreur de dimension");
+        throwError();
+    }
+    
+    void throwError()
+	    asm ("ERROR ");
+    	
+    void setInt1DTable(int[] table, int value){
+        int tableIterator = 0;
+        while (tableIterator < table.size1D ){
+            table[tableIterator] = value;
+            tableIterator = tableIterator + 1;
+        }
+    }
+    void printInt1DTable(int[] table){
+        int tableIterator = 0;
+        println("--------------");
+        print("Tableau1D = [");
+        while (tableIterator < table.size1D ){
+            print(table[tableIterator]," ,");
+            tableIterator = tableIterator + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+}
+
+
+
+
+
+{
+
+
+    MathOperation matrixManipulation = new MathOperation(); 
+    int[] x = new int[5]; 
+    int[] y = new int[5];
+
+    matrixManipulation.setInt1DTable(x,5);
+    matrixManipulation.setInt1DTable(y,6);
+    matrixManipulation.printInt1DTable(x);  
+    matrixManipulation.printInt1DTable(y);
+    matrixManipulation.sommeIntInt1D(x,y);
+    matrixManipulation.printInt1DTable(x);
+ }

@@ -1,0 +1,15 @@
+// Description:
+// Test la mauvaise assignation de 
+// tableau
+// Resultats:
+//  TEST pas valide contextuelement
+// Historique:
+//    cree le 01/01/2023
+
+
+
+{
+    int[][] tableauInt;
+    float[][] tableauFloat = new float[][];
+    tableauInt[1][2] = tableauFloat[5][4];
+}

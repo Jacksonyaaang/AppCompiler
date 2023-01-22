@@ -242,6 +242,7 @@ public class DeclClass extends AbstractDeclClass {
                                                     (ClassDefinition)compiler.environmentType.defOfType(superClass.getName()));
                 compiler.environmentType.getEnvTypes().put(name.getName(), (ClassDefinition) classType.getDefinition());
                 name.setDefinition((ClassDefinition) classType.getDefinition());
+                compiler.environmentType.addTableClassType(compiler, name.getName(), classType);
             }
             else
                 throw new ContextualError("le super Class n'est pas déclaré", getLocation());   

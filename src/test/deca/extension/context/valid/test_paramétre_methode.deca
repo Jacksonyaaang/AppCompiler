@@ -1,0 +1,22 @@
+
+class MatriceSommeFloat{
+    void sommeFloatFloat1D(float[] table1, float[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] + table2[tableIterator];
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            dimensionIncompatible();
+        }
+    }
+}
+
+{
+    MatriceSommeFloat somme = new MatriceSommeFloat();
+    flaot[] g = new flaot[5];
+    flaot[] h = new flaot[5];
+    somme.sommeFloatFloat1D(g,h);
+}

@@ -1,0 +1,303 @@
+	TSTO #8
+	BOV stack_overflow_error
+	ADDSP #5
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 4(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 5(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNewTable--------[10, 14]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  int[] into memory at register R2
+	LOAD #5, R3	; loading 5 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	ADD #1, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	LOAD R0, R2
+; --------EndNewTable--------[10, 14]-----
+	STORE R2, 1(GB)	; Initializing the variable x and loading it into memory
+; --------StartNewTable--------[11, 14]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  int[] into memory at register R2
+	LOAD #5, R3	; loading 5 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	ADD #1, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	LOAD R0, R2
+; --------EndNewTable--------[11, 14]-----
+	STORE R2, 2(GB)	; Initializing the variable y and loading it into memory
+; --------BeginAssignOp--------[13, 4]-----
+	LOAD #3, R3	; loading 3 into memory
+; --------StartStoreTableElements--------[13, 4]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  x the value in R3
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD 1(GB), R1	; loading x into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of x into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD R2, R0
+	POP R2
+	STORE R3, 1(R1, R0)
+; --------EndStoreTableElements--------[13, 4]-----
+; --------EndAssignOp--------[13, 4]-----
+; --------StartGetTableElements--------[14, 12]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  x into memory at register R2
+	LOAD #1, R3	; loading 1 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 1(GB), R1	; loading x into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of x into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R3), R0
+	LOAD R0, R2
+; --------EndGetTableElements--------[14, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+; --------BeginAssignOp--------[15, 4]-----
+; --------StartBinaryOp--------[15, 11]-----
+	LOAD #2, R3	; loading 2 into memory
+; --------StartGetTableElements--------[15, 13]-----
+	PUSH R2
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  x into memory at register R2
+	PUSH R3
+	LOAD #1, R3	; loading 1 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 1(GB), R1	; loading x into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of x into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R3), R0
+	POP R3
+	LOAD R0, R2
+; --------EndGetTableElements--------[15, 13]-----
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[15, 11]-----
+; --------StartStoreTableElements--------[15, 4]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  x the value in R3
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD 1(GB), R1	; loading x into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of x into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD R2, R0
+	POP R2
+	STORE R3, 1(R1, R0)
+; --------EndStoreTableElements--------[15, 4]-----
+; --------EndAssignOp--------[15, 4]-----
+; --------StartGetTableElements--------[16, 12]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  x into memory at register R2
+	LOAD #2, R3	; loading 2 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 1(GB), R1	; loading x into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of x into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R3), R0
+	LOAD R0, R2
+; --------EndGetTableElements--------[16, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+; --------BeginAssignOp--------[17, 4]-----
+	LOAD #2, R3	; loading 2 into memory
+; --------StartStoreTableElements--------[17, 4]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  x the value in R3
+	PUSH R2
+	LOAD #3, R2	; loading 3 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD 1(GB), R1	; loading x into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of x into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD R2, R0
+	POP R2
+	STORE R3, 1(R1, R0)
+; --------EndStoreTableElements--------[17, 4]-----
+; --------EndAssignOp--------[17, 4]-----
+; --------BeginAssignOp--------[18, 4]-----
+; --------StartBinaryOp--------[18, 8]-----
+; --------StartBinaryOp--------[18, 10]-----
+; --------StartBinaryOp--------[18, 11]-----
+; --------StartBinaryOp--------[18, 12]-----
+; --------StartBinaryOp--------[18, 13]-----
+; --------StartBinaryOp--------[18, 14]-----
+; --------StartBinaryOp--------[18, 15]-----
+; --------StartBinaryOp--------[18, 16]-----
+	LOAD #1, R3	; loading 1 into memory
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[18, 16]-----
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[18, 15]-----
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[18, 14]-----
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[18, 13]-----
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[18, 12]-----
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[18, 11]-----
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[18, 10]-----
+; --------StartBinaryOp--------[18, 41]-----
+; --------StartBinaryOp--------[18, 42]-----
+; --------StartBinaryOp--------[18, 43]-----
+; --------StartBinaryOp--------[18, 44]-----
+; --------StartBinaryOp--------[18, 45]-----
+; --------StartBinaryOp--------[18, 46]-----
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[18, 46]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[18, 45]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[18, 44]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[18, 43]-----
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[18, 42]-----
+; --------StartGetTableElements--------[18, 63]-----
+	PUSH R3
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  x into memory at register R3
+	PUSH R2
+	LOAD #3, R2	; loading 3 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD 1(GB), R1	; loading x into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of x into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R2), R0
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[18, 63]-----
+	MUL R3, R2
+	POP R3
+; --------EndBinaryOp--------[18, 41]-----
+	MUL R2, R3
+	POP R2
+; --------EndBinaryOp--------[18, 8]-----
+	STORE R3, 3(GB)	;  Assiging a value to u
+	LOAD R3, R2	;  Return value of the assignement of =uand storing it into R2
+; --------EndAssignOp--------[18, 4]-----
+	LOAD 3(GB), R2	; loading u into memory
+	LOAD R2, R1
+	WINT
+	WNL
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+table_dimension_are_not_respected:
+	WSTR "Error: table_dimension_are_not_respected"
+	WNL
+	ERROR
+int_selection_table_must_be_positive:
+	WSTR "Error: int_selection_table_must_be_positive"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+int_allocation_table_must_be_strictly_positive:
+	WSTR "Error: int_allocation_table_must_be_strictly_positive"
+	WNL
+	ERROR
+; end main program

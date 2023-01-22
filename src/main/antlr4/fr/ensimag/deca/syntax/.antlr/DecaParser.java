@@ -140,7 +140,6 @@ public class DecaParser extends AbstractDecaParser {
 	    protected ListExpr arguementTableau;
 	    protected Identifier tempIdentifier;
 
-
 	public DecaParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
