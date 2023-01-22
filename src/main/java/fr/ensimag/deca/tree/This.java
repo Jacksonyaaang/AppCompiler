@@ -59,6 +59,8 @@ public class This extends AbstractExpr{
         return currentClass.getType();
     }
 
+    
+
     @Override
     public void decompile(IndentPrintStream s) {
         if(isBool()){

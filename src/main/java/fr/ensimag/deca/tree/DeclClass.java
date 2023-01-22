@@ -229,26 +229,32 @@ public class DeclClass extends AbstractDeclClass {
     }
 
 
-
     @Override
     protected void verifyClass(DecacCompiler compiler) throws ContextualError {
         if (!compiler.environmentType.getEnvTypes().containsKey(name.getName())){
             if (compiler.environmentType.getEnvTypes().containsKey(superClass.getName())){
-                //Ce traitement associe à l'indetificateur la class super sa classe definition de object
-                // Ceci sera utile pour le méthode de generation de code 
-                superClass.setDefinition((ClassDefinition) compiler.environmentType.getEnvTypes().get(
-                                                compiler.createSymbol(superClass.getName().getName())));
-                ClassType classType = new ClassType(name.getName(), getLocation(), 
-                                                    (ClassDefinition)compiler.environmentType.defOfType(superClass.getName()));
-                compiler.environmentType.getEnvTypes().put(name.getName(), (ClassDefinition) classType.getDefinition());
-                name.setDefinition((ClassDefinition) classType.getDefinition());
-                compiler.environmentType.addTableClassType(compiler, name.getName(), classType);
+                if (compiler.environmentType.getEnvTypes().get(superClass.getName()).getType().isClass()){
+                    //Ce traitement associe à l'indetificateur la class super sa classe definition de object
+                    // Ceci sera utile pour le méthode de generation de code 
+                    superClass.setDefinition((ClassDefinition) compiler.environmentType.getEnvTypes().get(
+                        compiler.createSymbol(superClass.getName().getName())));
+                    ClassType classType = new ClassType(name.getName(), getLocation(), 
+                            (ClassDefinition)compiler.environmentType.defOfType(superClass.getName()));
+                    compiler.environmentType.getEnvTypes().put(name.getName(), (ClassDefinition) classType.getDefinition());
+                    name.setDefinition((ClassDefinition) classType.getDefinition());
+                    compiler.environmentType.addTableClassType(compiler, name.getName(), classType);
+                }
+                else{
+                    throw new ContextualError("Une super classe doit avoir un type de classe", getLocation());
+                }
+
             }
-            else
-                throw new ContextualError("le super Class n'est pas déclaré", getLocation());   
+            else{
+                throw new ContextualError("La super classe " + getSuperClass().getName() + " n'est pas définie", getLocation());
+            }
         }
         else 
-            throw new ContextualError("Double Déclaration de la class  " + name.getName().getName(), getLocation());
+            throw new ContextualError("Il existe déjà une classe de nom " + name.getName().getName(), getLocation());
     }
 
     @Override

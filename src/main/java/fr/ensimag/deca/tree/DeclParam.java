@@ -90,7 +90,7 @@ public class DeclParam extends AbstractDeclParam {
             try {
                 envParms.declare(paramName.getName(), paramDef);
             } catch (EnvironmentExp.DoubleDefException e) {
-                throw new ContextualError("double declaration de paramétre", getLocation());
+                throw new ContextualError("Il existe déjà un paramètre de nom " + paramName.getName().getName() + " dans la même méthode ", getLocation());
             }
             this.paramName.getExpDefinition().setOperand(new RegisterOffset(compiler.decrementParamCounterCompiler(), Register.LB)); 
             LOG.debug("[DeclParam][verifyDecleParam] Saving method parameter " + this.paramName.getName() + " into " + this.paramName.getExpDefinition().getOperand());

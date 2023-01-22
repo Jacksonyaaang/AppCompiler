@@ -1,0 +1,11 @@
+// Description:
+//    Teste la déclaration d'une classe qui hérite de elle-même
+//
+// Resultats:
+//    Ligne 10: La super classe A n'est pas définie
+//
+// Historique:
+//    cree le 20/01/2023
+
+class A extends A{
+}

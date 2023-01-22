@@ -111,6 +111,7 @@ public class MethodCall extends AbstractExpr {
 
     public ListExpr getListParam() { return listParam;}
 
+
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
         throws ContextualError {
@@ -121,7 +122,7 @@ public class MethodCall extends AbstractExpr {
             Identifier methodIdent = (Identifier) methode;
             for (; tmpEnv != null; tmpEnv = tmpEnv.getParent()){
                 if (!tmpEnv.getExp().containsKey(methodIdent.getName()) && tmpEnv.getParent() == null)
-                    throw new ContextualError("L'identificateur " + methodIdent.getName().getName() + " n'est pas défini",getLocation());
+                    throw new ContextualError("L'identificateur de  méthode " + methodIdent.getName().getName() + " n'est pas défini",getLocation());
                 else if (tmpEnv.getExp().containsKey(methodIdent.getName())) break;
             }
             Defi = tmpEnv.get(methodIdent.getName());

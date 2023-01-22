@@ -226,11 +226,11 @@ public abstract class AbstractExpr extends AbstractInst {
         }
         else if (expectedType.isClass() && typeR.isClassOrNull()){
             if (!((ClassType)typeR).isSubClassOf((ClassType)expectedType)){
-                throw new ContextualError("Not expected type", getLocation());
+                throw new ContextualError("Le type de l'expression de droite est " + typeR + " alors que le type attendu est " + expectedType, getLocation());
             }else return this;
         }
         if (!expectedType.sameType(typeR)){
-            throw new ContextualError("Not expected type", getLocation());
+            throw new ContextualError("Le type de l'expression de droite est " + typeR + " alors que le type attendu est " + expectedType, getLocation());
         }
         setType(expectedType);
         LOG.debug("[AbstractExpr][verifyRValue] We found the type = " + typeR.getName() + " expected type is " + expectedType.getName());

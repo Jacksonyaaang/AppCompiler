@@ -110,7 +110,7 @@ public class DeclField extends AbstractDeclField {
             localEnv.declare(varName.getName(), varName.getExpDefinition()); 
         } 
         catch (EnvironmentExp.DoubleDefException e) {
-            throw new ContextualError("y'a deja un field ou une methode du même nom", getLocation());
+            throw new ContextualError("Il existe déjà un champs ou une méthode de même nom " + varName.getName().getName() + " dans la classe " + currentClass.getType().getName().getName(), getLocation());
         }
         currentClass.setNumberOfFields(_index);    
     }
@@ -120,6 +120,7 @@ public class DeclField extends AbstractDeclField {
         ClassDefinition currentClass) throws ContextualError{
         initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
     }
+
 
     @Override
     public void CodeGenPlaceZeroInField(DecacCompiler compiler) throws CodeGenError {
@@ -170,9 +171,6 @@ public class DeclField extends AbstractDeclField {
         return regReserved;
     }
 
-
-
-
-
 }
+
 

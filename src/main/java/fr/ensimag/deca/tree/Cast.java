@@ -86,15 +86,18 @@ public class Cast extends AbstractExpr{
         if (t2.isVoid()){
             throw new ContextualError("On ne peut pas convertir le type d'une expression de type void", getLocation());
         }
-        else if ((t1.isFloat() && !t2.isInt()) || (t1.isInt() && !t2.isFloat()) ||
-                (t2.isFloat() && !t1.isInt()) || (t2.isInt() && !t1.isFloat())){
-                    throw new ContextualError("On ne peut convertir le type d'une expression de type int qu'en Float et vice-versa", getLocation());
+
+        else if ((t1.isFloat() && !t2.isInt() && !t2.isFloat()) || (t1.isInt() && !t2.isFloat() && !t2.isInt()) ||
+                (t2.isFloat() && !t1.isInt() && !t1.isFloat()) || (t2.isInt() && !t1.isFloat() && !t1.isInt())){
+                    throw new ContextualError("On ne peut que convertir un Int en Float et vice-versa", getLocation());
         }
         else if ((t1.isClass() && t2.isClass() && !((ClassType)t1).isSubClassOf((ClassType)t2) &&
                  !((ClassType)t2).isSubClassOf((ClassType)t1)) || t2.isNull() ||
                  (t1.isNull() && !t2.isClass())){
-                throw new ContextualError("Cast impossible", getLocation());
+                throw new ContextualError("Cast impossible entre ces deux types", getLocation());
         }
+        //return compiler.environmentType.FLOAT;
+        setType(typeCast.getType());
         return typeCast.getType();
     }
     
@@ -117,5 +120,6 @@ public class Cast extends AbstractExpr{
     @Override
     protected void iterChildren(TreeFunction f) {
         typeCast.iter(f) ;
+        expr.iter(f);         
     }
 }
