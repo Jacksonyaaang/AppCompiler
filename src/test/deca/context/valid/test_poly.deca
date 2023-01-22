@@ -1,0 +1,24 @@
+// Description:
+//    Teste l'oubli de l'héritage entre 2 classes
+//
+// Resultats:
+//    TEST PASS
+//
+// Historique:
+//    cree le 20/01/2023
+class A {
+    protected int x ;
+    int getX() {
+        return x ;
+    }
+    void setX(int x) {
+        this.x = x ;
+    }
+}
+
+{
+A a = new A() ;
+
+a.setX(1) ; 
+println("a.getX() = ", a.getX()) ;
+}

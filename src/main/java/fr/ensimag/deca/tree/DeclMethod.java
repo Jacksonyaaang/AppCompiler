@@ -193,7 +193,7 @@ public class DeclMethod extends AbstractDeclMethod {
         //first verify they have the same signature
         int sizeSigSuper=sigSuper.size();
         if (sizeSigSuper != sigCurrMethod.size()){
-            throw new ContextualError("Sorry the current signature is not the same of the super class's correspond signature", getLocation());
+            throw new ContextualError("Le nombre d'arguments de la signature de la méthode " + methodName.getName().getName() + "  dans la classe actuelle n'est pas identique à celle de la super classe", getLocation());
         }
         for (int i=0;i<sizeSigSuper; ++i){
             if (!sigSuper.paramNumber(i).sameType(sigCurrMethod.paramNumber(i))){
@@ -203,17 +203,17 @@ public class DeclMethod extends AbstractDeclMethod {
         //then verify the type return is the sub-type of corresponding super-class's types
         if (!currTypeReturen.isClass()){  //the primitif type
             if (!superTypeReturn.sameType(currTypeReturen))
-            throw new ContextualError("[ERROR] The current method don't have a proper type", getLocation());
+                throw new ContextualError("Le type de retour de la methode déclarée n'a pas le même type que celui de sa super-classe alors que leur noms sont identiques ", getLocation());
         }else{
             //the current return type is a type of class 
             if (superTypeReturn.isClass()){
                 if (((ClassType)currTypeReturen).isSubClassOf(((ClassType)superTypeReturn))){
                     return ;  // get out this fucntion without any exception 
                 }else{
-                    throw new ContextualError("[ERROR] The current method don't have a proper type", getLocation());
+                    throw new ContextualError("Le type de retour de la methode déclarée n'est pas une sous classe de la méthode avec le même nom en provenence de sa super classe ", getLocation());
                 }
             }else{  //one classType one primitif type
-                throw new ContextualError("[ERROR] The current method don't have a proper type", getLocation());
+                throw new ContextualError("Le type de retour de la methode déclarée est un type primitif mais sa méthode de même nom de sa super classe est un type de classe", getLocation());
             }
         }
     }

@@ -126,19 +126,19 @@ public class DeclField extends AbstractDeclField {
     public void CodeGenPlaceZeroInField(DecacCompiler compiler) throws CodeGenError {
         if (type.getType() == compiler.environmentType.FLOAT){
             compiler.addInstruction(new LOAD(new ImmediateFloat(0), Register.getR(0)),
-            "loading 0.0  into memory to initialize field with type float to 0");
+                    "loading 0.0  into memory to initialize field with type float to 0");
         }
         else{
             compiler.addInstruction(new LOAD(new ImmediateInteger(0), Register.getR(0)),
-                "loading 0  into memory to initialize field to 0");
+                    "loading 0  into memory to initialize field to 0");
         }
 
         compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(1)),
-        "loading class (this) into memory when working with field "+getVarName().getName());
+                "loading class (this) into memory when working with field "+getVarName().getName());
         compiler.addInstruction(new STORE(Register.getR(0),new RegisterOffset(((FieldDefinition) (varName.getExpDefinition())).getIndex(), Register.getR(1))),
-                    "Saving field  "+getVarName().getName()+ " into memory");
+                "Saving field  "+getVarName().getName()+ " into memory");
     }
-    
+
     @Override
     public void codeGenDelField(DecacCompiler compiler) throws CodeGenError {
         //If the field has been initialized, then we must place the value that has been 
@@ -170,6 +170,7 @@ public class DeclField extends AbstractDeclField {
 
         return regReserved;
     }
+
 
 }
 

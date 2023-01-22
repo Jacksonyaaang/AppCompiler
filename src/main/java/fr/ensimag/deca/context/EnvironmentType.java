@@ -97,7 +97,7 @@ public class EnvironmentType {
         Symbol equalsMethodObject = compiler.createSymbol("equals");
         Signature signature = new Signature();
         signature.add(OBJECT);
-        MethodDefinition defintionMethodEquals = new MethodDefinition(VOID, Location.BUILTIN, signature, defintionClassObject.incNumberOfMethods());
+        MethodDefinition defintionMethodEquals = new MethodDefinition(BOOLEAN, Location.BUILTIN, signature, defintionClassObject.incNumberOfMethods());
         defintionMethodEquals.setMethodname("equals");
         defintionMethodEquals.setLabel(new Label("code.Object.equals"));
         try {

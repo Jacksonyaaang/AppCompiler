@@ -1,0 +1,62 @@
+// Description:
+//    Teste l'oubli de l'héritage entre 2 classes
+//
+// Resultats:
+//    TEST PASS
+//
+// Historique:
+//    cree le 20/01/2023
+class A {
+    int x;
+    float y;
+
+    void init (){
+        x = 0;
+        y = 0.0;
+    }
+    void setY(float y){
+        this.y = y;
+    }
+
+    void setX(int x){
+        this.x = x;
+    }
+
+    int getX(){
+        return x;
+    }
+
+    float getY(){
+        return y;
+    }
+}
+
+class B extends A{
+    int z;
+
+    void init (){
+        x = 0;
+        y = 0.0;
+        z = 0;
+    }
+
+    void setZ(int z){
+        this.z = z;
+    }
+
+    int getZ(){
+        return z;
+    }
+}
+
+{
+B b = new B();
+b.setX(5);
+b.setY(10.5);
+b.setZ(20);
+println("Les coordonnées de b avant réinitialisation sont: ", b.getX(),"|", b.getY(),"|", b.getZ());
+println("Les coordonnées entières de b avant réinitialisation sont: ", b.getX(),"|", (int)(b.getY()),"|", b.getZ());
+b.init();
+println("Les coordonnées de b après réinitialisation sont: ", b.getX(),"|", b.getY(),"|", b.getZ());
+
+}

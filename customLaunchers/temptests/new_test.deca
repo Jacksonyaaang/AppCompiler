@@ -6,7 +6,7 @@ class A{
         return x+y+z;
     }
     boolean checkifsumistrue(){
-        if (x+y+z){
+        if (x+y+z >= 0){
             return true;
         }
     }
@@ -24,5 +24,8 @@ class A{
     A test2 = new A();
     test1.x = 5;
     test2.x = 5;
-    test1.equals(test2);
+
 }
+
+   
+

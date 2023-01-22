@@ -1,0 +1,13 @@
+// Description:
+//    Teste l'utilisation d'un paramètre de type non défini.
+//
+// Resultats:
+//    Ligne 10: Le type String n'est pas defini
+//
+// Historique:
+//    cree le 20/01/2023
+class A{
+    void test(String a){
+
+    }
+}
