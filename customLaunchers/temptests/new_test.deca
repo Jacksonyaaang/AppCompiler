@@ -1,0 +1,28 @@
+class A{
+    int x;
+    int y;
+    int z;
+    int sommefields(){
+        return x+y+z;
+    }
+    boolean checkifsumistrue(){
+        if (x+y+z){
+            return true;
+        }
+    }
+    boolean equals(Object otherClass){
+        if (otherClass instanceof A){
+            if (((A)(otherClass)).x == this.x){
+                println("cast and instance of work");
+            }
+        }
+    }
+}
+
+{
+    A test1 = new A();
+    A test2 = new A();
+    test1.x = 5;
+    test2.x = 5;
+    test1.equals(test2);
+}
