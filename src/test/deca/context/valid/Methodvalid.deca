@@ -1,0 +1,15 @@
+// Description:
+//    Teste method declaration .
+//
+// Resultats:
+//   PASS
+
+
+class A{
+  int x;
+  boolean f(){
+    boolean y;
+    y = f();
+    return y;
+  }
+}

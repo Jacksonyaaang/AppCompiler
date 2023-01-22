@@ -1,0 +1,17 @@
+// Description:
+//       Teste de selection avec un Field non defini.
+// 
+// Resultats: 
+//      Ligne 16: Le champs n'est pas défini
+// 
+// Historique:
+//      cree le 21/01/2023
+
+class A{
+   int x;
+}
+
+{
+  A a = new A();
+  a.y = 1;
+}

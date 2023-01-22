@@ -1,0 +1,11 @@
+// Description:
+//       Teste de New pour un type qutre que le type classe.
+// 
+// Resultats: 
+//      Ligne 10: L'expression \"new\" est utilisée uniquement pour créer des objets dont le type est un type de classe
+// 
+// Historique:
+//      cree le 21/01/2023
+{
+  int y = new int();
+} 

@@ -1,0 +1,15 @@
+// Description:
+//       Teste de selection avec un idenficateur non defini.
+// 
+// Resultats: 
+//      Ligne 14: L'identificateur de variable a n'est pas défini
+// 
+// Historique:
+//      cree le 21/01/2023
+class A{
+  int x;
+}
+
+{
+  a.x = 2;
+}

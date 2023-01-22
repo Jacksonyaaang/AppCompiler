@@ -1,0 +1,23 @@
+// Description:
+//    Teste method declaration when the same name in the super-class occured.
+//
+// Resultats:
+//   test valide
+
+class Animal{
+   int food=0;
+   void eat(){
+
+   }
+}
+
+class Cow extends Animal{
+   void eat(){
+
+   }
+}
+
+//main   
+{
+
+}

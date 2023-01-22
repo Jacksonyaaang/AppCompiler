@@ -1,0 +1,13 @@
+// Description:
+//       intialisation d'un field par un identificateur non defini
+//
+// Resultats: 
+//      Ligne 11: L'identificateur de variable y n'est pas défini
+// 
+// Historique:
+//      cree le 20/01/2023
+
+class A{
+   int x = y;
+}
+

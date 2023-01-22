@@ -39,7 +39,10 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         //Vérification des expressions des membres de droite et de gauche
         getRightOperand().setType(getRightOperand().verifyExpr(compiler, localEnv, currentClass));
         getLeftOperand().setType(getLeftOperand().verifyExpr(compiler, localEnv, currentClass));
-
+        if (getLeftOperand() instanceof Identifier && ((Identifier)getLeftOperand()).getExpDefinition().isMethod() ||
+            getRightOperand() instanceof Identifier && ((Identifier)getRightOperand()).getExpDefinition().isMethod()){
+                throw new ContextualError("l'une de membre de l'operation est une méthod", getLocation());
+        }
 
         //Si le type des opérandes n'est pas approprié(ni int ni float), une ContextualError est envoyée
         if(!getLeftOperand().getType().isFloat() && !(getLeftOperand().getType()).isInt() ||

@@ -1,0 +1,18 @@
+// Description:
+//       Teste de method call sur un objet defini mais pas de type classe.
+// 
+// Resultats: 
+//      Ligne 16: l'appelant de cette methode n'est pas une classe
+// 
+// Historique:
+//      cree le 21/01/2023
+class A{
+  void f(){
+    println("mthodCall");
+  }
+  
+  void callf(){
+    int x = 0;
+    x.f();
+  }
+}

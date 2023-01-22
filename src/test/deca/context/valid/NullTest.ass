@@ -1,0 +1,67 @@
+	TSTO #8
+	BOV stack_overflow_error
+	ADDSP #5
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 2(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 3(GB)
+	LEA 2(GB), R0
+	STORE R0, 4(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 5(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[5, 8]-----
+; [New][loadItemintoRegister] loading new of calss =  A into memory at register R2
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 4(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+; --------EndNew--------[5, 8]-----
+	STORE R2, 1(GB)	; Initializing the variable a and loading it into memory
+; --------BeginAssignOp--------[6, 2]-----
+	LOAD #0, R3	; loading 0 into the register for null expr
+	STORE R3, 1(GB)	;  Assiging a value to a
+	LOAD R3, R2	;  Return value of the assignement of =aand storing it into R2
+; --------EndAssignOp--------[6, 2]-----
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : A -------------------
+; ---------------------------------------------------
+; ------------Init method for class = A--------
+init.A:
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

@@ -213,7 +213,7 @@ public abstract class AbstractExpr extends AbstractInst {
             EnvironmentExp localEnv, ClassDefinition currentClass, 
             Type expectedType)
             throws ContextualError {
-        LOG.debug("[AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments" );
+        LOG.debug("[AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = " + getLocation() );
         //Vérification du membre de droite d'une affectation
         Type typeR = this.verifyExpr(compiler, localEnv, currentClass);
         LOG.debug("[AbstractExpr][verifyRValue] right type is  = " + typeR.getName() + " expected type is " + expectedType.getName());

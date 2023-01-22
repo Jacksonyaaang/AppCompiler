@@ -1,0 +1,15 @@
+// Description:
+//       Teste de method call non defini.
+// 
+// Resultats: 
+//      Ligne 14: L'identificateur de  méthode mCall n'est pas défini
+// 
+// Historique:
+//      cree le 21/01/2023
+class A{
+}
+
+{
+  A a = new A();
+  a.mCall();
+}

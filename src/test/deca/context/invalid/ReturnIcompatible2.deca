@@ -1,0 +1,20 @@
+// Description:
+//       Teste de return pour un type non prévu.
+// 
+// Resultats: 
+//      Ligne 18: Le type de l'expression de droite est B alors que le type attendu est A
+// 
+// Historique:
+//      cree le 21/01/2023
+class A{
+}
+
+class B{
+}
+
+class C{
+  A f(){
+    B b = new B();
+    return b;
+  }
+}

@@ -1,0 +1,14 @@
+// Description:
+//       Teste de type d'une variable dans le corps d'une méthode.
+// 
+// Resultats: 
+//      Ligne 12: Le type randomtype n'est pas defini
+// 
+// Historique:
+//      cree le 21/01/2023
+
+class A{
+  void f(){
+     randomtype x;
+  }
+}

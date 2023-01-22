@@ -1,0 +1,17 @@
+// Description:
+//       Teste de method call sur un objet non defini.
+// 
+// Resultats: 
+//      Ligne 16: L'identificateur de variable a n'est pas défini
+// 
+// Historique:
+//      cree le 21/01/2023
+class A{
+   void f(){
+      println("methodCall");
+   }
+}
+
+{
+   a.f();
+}
