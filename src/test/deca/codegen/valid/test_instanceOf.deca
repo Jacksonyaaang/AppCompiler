@@ -33,10 +33,10 @@ class H extends C{}
     C c = new C();
     D d =new D();
     H p = new H();
+    
     if(b instanceof A){
         println("instanceof fonctionne b instanceof A");
     }
-    /*
         if((x<=2 && (y != z || h==v))&&((3>x && 2.5 >y) && (2.0==y && v == h) && b1 && b2 && !b3 && !b4 && b instanceof A)){
         println("Gestion de registre correct avec instance of ");
         }
@@ -45,7 +45,6 @@ class H extends C{}
     if(b instanceof Object){
         println("instanceof fonctionne b -> instanceof Object");
     }
-    */
     
     if(a instanceof B){
         println("Problem with code");

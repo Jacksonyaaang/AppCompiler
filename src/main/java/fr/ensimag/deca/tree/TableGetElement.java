@@ -40,7 +40,7 @@ import fr.ensimag.ima.pseudocode.instructions.BSR;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 
-public class  TableGetElement extends AbstractLValue{
+public class TableGetElement extends AbstractLValue{
     
     
     private static final Logger LOG = Logger.getLogger(TableGetElement.class);

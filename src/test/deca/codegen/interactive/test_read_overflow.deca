@@ -1,0 +1,12 @@
+// Description:
+// Test les deux read expr; readInt et readfloat
+// Resultats:
+// Pour un input trés large ca retourne une erreur overflow 
+// Historique:
+//    cree le 01/01/2023
+/* */ 
+
+{
+    float a = readFloat();
+    println(a);
+}

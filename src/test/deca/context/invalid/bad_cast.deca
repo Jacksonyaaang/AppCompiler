@@ -1,0 +1,24 @@
+
+// Description:
+//       Teste le cast incompatible entre les classes.
+// 	 au moment d'initialisation des fields
+// Resultats: 
+//      erreur : bad cast
+// 
+// Historique:
+//      cree le 20/01/2023
+
+class B{
+    int x;
+}
+class A{
+    B b;
+}
+
+{
+    B b=new B();
+    A a1 =  new A(); 
+    A a2 =  new A(); 
+    b = (B)(a1);
+}
+

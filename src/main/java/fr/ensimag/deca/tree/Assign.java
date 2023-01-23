@@ -16,9 +16,12 @@ import fr.ensimag.ima.pseudocode.DVal;
 import org.apache.log4j.Logger;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.BRA;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 /**
  * Assignment, i.e. lvalue = expr.
@@ -127,6 +130,13 @@ public class Assign extends AbstractBinaryExpr {
                 }
                 else if ( !((Selection)getLeftOperand()).getObj().getType().isTable()) {
                     ((Selection)getLeftOperand()).getObj().codeGenInst(compiler);
+                    
+                    if (!compiler.getCompilerOptions().isNoCheck()){
+                        compiler.addInstruction(new CMP(new NullOperand(), ((Selection)getLeftOperand()).getObj().getRegisterDeRetour()));
+                        compiler.addInstruction(new BEQ(new Label("deref_null_error")),
+                                                "Checking if the class identifier is null");
+                        compiler.getErrorManagementUnit().activeError("deref_null_error");
+                    }
                     compiler.addInstruction(new STORE(this.getRightOperand().getRegisterDeRetour(),new RegisterOffset(((((Identifier)(((Selection)getLeftOperand()).getField())).getFieldDefinition())).getIndex(), ((Selection)getLeftOperand()).getObj().getRegisterDeRetour())),
                     "Saving field  "+  (((Identifier)(((Selection)getLeftOperand()).getField()))).getName() + " into memory");
                     ((Selection)getLeftOperand()).getObj().popRegisters(compiler);
