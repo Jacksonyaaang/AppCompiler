@@ -1,0 +1,124 @@
+#include "extension_matricielle.decah"
+
+    {
+// tempo tests*************************************************************************************************************************************
+        MatrixTraitement mm = new MatrixTraitement();
+    //    int[][] mat = new int[15][15];
+    //    float[][] matFlo = new float[3][3];
+       int itrX =0;
+       int itrY =0;
+    //    int[][] testSup = new int[mat.size1D][mat.size2D];
+    //    float[][] testSupFlo = new float[matFlo.size1D][matFlo.size2D];
+//
+    //    int[][] matTrans = new int[10][10];
+    //    int[][] transInt = new int[matTrans.size2D][matTrans.size1D];
+    //    float[][] matTranFlo = new float[5][5];
+    //    float[][] testTranFlo = new float[matTranFlo.size2D][matTranFlo.size1D];
+//
+    //    int[][] matFlattenInt = new int[2][5];
+    //    int[] testFlattenInt = new int[matFlattenInt.size1D*matFlattenInt.size2D];
+    //    float[][] matFlattenFloat = new float[5][5];
+    //    float[] testFlattenFloat = new float[matFlattenFloat.size1D*matFlattenFloat.size2D];
+
+    //test for inversion: 
+        float[][] matInver = new float[3][3];
+        float[][] testMatInver ;
+
+        
+
+
+        //affectation:************************************
+        //for int
+//        while (itrX < mat.size1D ){
+//            while (itrY < mat.size2D ){
+//                mat[itrX][itrY] = 1;
+//                itrY = itrY + 1;
+//        }
+//            itrY=0;
+//            itrX = itrX + 1;
+//        }
+//        itrX=0;
+//        itrY=0;
+//        //for float (sup)
+//        while (itrX < matFlo.size1D ){
+//            while (itrY < matFlo.size2D ){
+//                matFlo[itrX][itrY] = 1;
+//                itrY = itrY + 1;
+//        }
+//            itrY=0;
+//            itrX = itrX + 1;
+//        }
+//
+
+ //       itrX=0;
+ //       itrY=0;
+ //       while (itrX < matTrans.size1D ){
+ //           while (itrY < matTrans.size2D ){
+ //               matTrans[itrX][itrY] = itrX;
+ //               itrY = itrY + 1;
+ //       }
+ //           itrY=0;
+ //           itrX = itrX + 1;
+ //       }
+
+        //set values for test inversion:
+        matInver[0][0]=1;
+        matInver[0][1]=2;
+        matInver[0][2]=3;
+        matInver[1][0]=0;
+        matInver[1][1]=1;
+        matInver[1][2]=4;
+        matInver[2][0]=5;
+        matInver[2][1]=6;
+        matInver[2][2]=4;
+
+
+
+
+
+
+        //testSuperior*********************************************
+        //testSup = mm.triangleInfInt(mat);
+        //testSupFlo=mm.triangleInfFloat(matFlo);
+        //transInt=mm.transposeMatrixInt(matTrans);
+        //testTranFlo=mm.transposeMatrixFloat(matTranFlo);
+        //testFlattenInt = mm.flattenMatrixInt(matFlattenInt);
+        
+        testMatInver=mm.helperInversion(matInver);
+
+        //print:************************************
+        itrX=0;
+        itrY=0;
+        println("testtttttt");
+
+
+        //template to print 1D
+     //   while (itrX<testFlattenInt.size1D){
+     //       print(testFlattenInt[itrX]);
+     //       print(" ");
+     //       itrX=itrX+1;
+     //   }
+     //   println("");
+
+
+
+        //template to print 2D
+        println("");
+        while (itrX < testMatInver.size1D ){
+            while (itrY < testMatInver.size2D ){
+                print(testMatInver[itrX][itrY]);
+                print(" ");
+                itrY = itrY + 1;
+        }
+            println(); 
+            itrY=0; 
+            itrX = itrX + 1;
+        }
+
+    
+
+
+    }
+
+
+    

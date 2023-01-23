@@ -1,0 +1,32 @@
+#include "Math.decah"
+
+class Trace extends Math{
+    int getTraceInt(int[][] table){
+        int trace = 0;
+        int tableIterator = 0;
+        if(table.size1D != table.size2D){
+            println("Impossible de calculer la trace d'une matrice non carrée");
+            dimensionIncompatible();
+        }
+
+        while (tableIterator < table.size1D ){
+            trace = trace + table[tableIterator][tableIterator];
+            tableIterator = tableIterator + 1;
+        }
+        return trace;
+    }
+
+    float getTraceFloat(float[][] table){
+        float trace = 0;
+        int tableIterator = 0;
+        if(table.size1D != table.size2D){
+            println("Impossible de calculer la trace d'une matrice non carrée");
+            dimensionIncompatible();
+        }
+        while (tableIterator < table.size1D ){
+            trace = trace + table[tableIterator][tableIterator];
+            tableIterator = tableIterator + 1;
+        }
+        return trace;
+    }
+}

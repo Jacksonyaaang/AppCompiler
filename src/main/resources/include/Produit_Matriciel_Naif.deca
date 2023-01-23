@@ -1,0 +1,221 @@
+class Math {
+
+    void setInt1DTable(int[] table, int value){
+        int tableIterator = 0;
+        while (tableIterator < table.size1D ){
+            table[tableIterator] = value;
+            tableIterator = tableIterator + 1;
+        }
+    }
+
+    void setInt2DTable(int[][] table, int value){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
+                table[tableIteratorX][tableIteratorY] = value;
+                tableIteratorX = tableIteratorX + 1;
+            }
+            tableIteratorX = 0;
+            tableIteratorY = tableIteratorY + 1;
+        }
+    }
+
+    void set1DTableIntValue(int[] table, int value, int index){
+        table[index] = value;
+    }
+
+    void set2DTableIntValue(int[][] table, int value, int indexX, int indexY){
+        table[indexX][indexY] = value;
+    }
+
+    void setFloat1DTable(float[] table, float value){
+        int tableIterator = 0;
+        while (tableIterator < table.size1D ){
+            table[tableIterator] = value;
+            tableIterator = tableIterator + 1;
+        }
+    }
+
+    void setFloat2DTable(float[][] table, float value){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
+                table[tableIteratorX][tableIteratorY] = value;
+                tableIteratorX = tableIteratorX + 1;
+            }
+            tableIteratorX = 0;
+            tableIteratorY = tableIteratorY + 1;
+        }
+    }
+
+    void set1DTableFloatValue(float[] table, float value, int index){
+        table[index] = value;
+    }
+
+    void set2DTableFloatValue(float[][] table, float value, int indexX, int indexY){
+        table[indexX][indexY] = value;
+    }
+
+    void printInt1DTable(int[] table){
+        int tableIterator = 0;
+        println("--------------");
+        print("Tableau1D = [");
+        while (tableIterator < table.size1D ){
+            print(table[tableIterator]," ,");
+            tableIterator = tableIterator + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+
+    void printInt2DTable(int[][] table){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        println("--------------");
+        print("Tableau2D = [");
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
+                print(table[tableIteratorX][tableIteratorY]," ,");
+                tableIteratorX = tableIteratorX + 1;
+            }
+            println("");
+            tableIteratorX = 0;
+            tableIteratorY = tableIteratorY + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+
+    void printFloat1DTable(float[] table){
+        int tableIterator = 0;
+        println("--------------");
+        print("Tableau1D = [");
+        while (tableIterator < table.size1D ){
+            print(table[tableIterator]," ,");
+            tableIterator = tableIterator + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+
+    void printFloat2DTable(float[][] table){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        println("--------------");
+        print("Tableau2D = [");
+        while (tableIteratorY < table.size2D ){
+            while (tableIteratorX < table.size1D ){
+                print(table[tableIteratorX][tableIteratorY]," ,");
+                tableIteratorX = tableIteratorX + 1;
+            }
+            println("");
+            tableIteratorX = 0;
+            tableIteratorY = tableIteratorY + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+}
+
+class MatrixMultiplication extends Math{
+
+    float[][] naiveMultiplyFloat(float[][] a, float[][] b) {
+        float[][] c = new float[a.size2D][b.size1D];
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        float s = 0.0;
+        this.setFloat2DTable(c,0.0);
+
+        if (a.size1D != b.size2D) {
+            println("Taille de matrice incompatible avec le produit matriciel");
+            //throw new IllegalArgumentException("A:ligne: " + colA + " did not match B:Columns " + ligneB + ".");
+        }
+
+        while(i < a.size2D){
+            while(j < b.size1D){
+                s = 0.0;
+                k = 0;
+                while(k < a.size1D){
+                    s = s + a[i][k] * b[k][j];
+                    k = k + 1;
+                }
+                c[i][j] = s;
+                j = j + 1;
+
+            }
+            j = 0;
+            i = i + 1;
+        }
+        return c;
+    }
+
+    int[][] naiveMultiplyInt(int[][] a, int[][] b) {
+        int[][] c;
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        int s = 0;
+        this.setInt2DTable(c,0);
+
+        if (a.size1D != b.size2D) {
+            println("Taille de matrice incompatible avec le produit matriciel");
+            //throw new IllegalArgumentException("A:ligne: " + colA + " did not match B:Columns " + ligneB + ".");
+        }
+        c = new int[a.size2D][b.size1D];
+
+        while(i < a.size2D){
+            while(j < b.size1D){
+                s = 0;
+                k = 0;
+                while(k < a.size1D){
+                    s = s + b[i][k] * a[k][j];
+                    k = k + 1;
+                }
+                c[i][j] = s;
+                j = j + 1;
+            }
+            j = 0;
+            i = i + 1;
+        }
+        return c;
+    }
+}
+
+{
+    MatrixMultiplication matrixMult = new MatrixMultiplication();
+    int[][] a = new int[3][3];
+    int[][] d = new int[3][3];
+    int[][] intRes = new int[3][3];
+    float[][] b = new float[3][3];
+    float[][] c = new float[3][3];
+    float[][] floatRes = new float[3][3];
+
+    println("Test produit matriciel int");
+    matrixMult.setInt2DTable(a,5);
+    matrixMult.setInt2DTable(d,3);
+    intRes = matrixMult.naiveMultiplyInt(a,d);
+    matrixMult.printInt2DTable(intRes);
+
+    matrixMult.setInt2DTable(a,5);
+    a[0][0] = 2;
+    a[1][1] = 2;
+    a[2][2] = 2;
+    intRes = matrixMult.naiveMultiplyInt(a,d);
+    matrixMult.printInt2DTable(intRes);
+
+    println("Test produit matriciel float");
+    matrixMult.setFloat2DTable(b,5.5);
+    matrixMult.setFloat2DTable(c,3.2);
+    floatRes = matrixMult.naiveMultiplyFloat(b,c);
+    matrixMult.printFloat2DTable(floatRes);
+
+    matrixMult.setFloat2DTable(b,5.5);
+    b[0][0] = 2.5;
+    b[1][1] = 3.5;
+    b[2][2] = 0.5;
+    floatRes = matrixMult.naiveMultiplyFloat(b,c);
+    matrixMult.printFloat2DTable(floatRes);
+}

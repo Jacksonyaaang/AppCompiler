@@ -120,6 +120,11 @@ public class Cast extends AbstractExpr{
     @Override
     protected void iterChildren(TreeFunction f) {
         typeCast.iter(f) ;
-        expr.iter(f);         
+        expr.iter(f);
     }
+<<<<<<< HEAD
 }
+=======
+
+}
+>>>>>>> origin/extention_operations_Stev

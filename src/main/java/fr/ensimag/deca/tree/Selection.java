@@ -35,8 +35,8 @@ public class Selection extends AbstractLValue {
     protected AbstractExpr obj;
     protected AbstractIdentifier field;
     /*
-     * Cette element sera utilisé pour accéder au caratéristique d'un tableau    
-     * qui sont size1D et size2D 
+     * Cette element sera utilisé pour accéder au caratéristique d'un tableau
+     * qui sont size1D et size2D
      */
 
     protected int tableIndex = 0;
@@ -65,7 +65,7 @@ public class Selection extends AbstractLValue {
         if (obj.getType().isTable()){
             compiler.addInstruction(new LOAD(
                 new RegisterOffset( tableIndex, obj.getRegisterDeRetour()), obj.getRegisterDeRetour()),
-                 "Loading the field " + field.getName() +" into a register "); 
+                 "Loading the field " + field.getName() +" into a register ");
         }
         else {
             compiler.addInstruction(new LOAD(
@@ -91,8 +91,8 @@ public class Selection extends AbstractLValue {
                 traitementAcessDimension(compiler, localEnv, currentClass);
                 setType(compiler.environmentType.INT);
                 return compiler.environmentType.INT;
-            }     
-            //setType(t);  //error, miss 'this.type'
+            }
+
             if (!type.isClass()){
                 throw new ContextualError(" Le type de l'expression utilisé pour une sélection doit être un type de classe ou \"this\"", getLocation());
             }
@@ -133,7 +133,7 @@ public class Selection extends AbstractLValue {
                     throw new ContextualError("Le tableau est 1D", getLocation());
                 }
                 tableIndex = 1;
-            }   
+            }
         }
         else{
             throw new ContextualError("Pour accéder au caratéristique du tableau, il utiliser les identificateurs suivants mettre size1D, size2D", getLocation());

@@ -1,0 +1,136 @@
+#include "Math.decah"
+
+class MultMember extends Math{
+    void multMbIntInt1D(int[] table1, int[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] * table2[tableIterator];
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            println("Les deux matrices doivent être de la même taille pour la multiplication membre par membre");
+            dimensionIncompatible();
+        }
+    }
+
+    void multMbIntInt2D(int[][] table1, int[][] table2){
+        int tableIteratorY = 0;
+        int tableIteratorX = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
+                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] * table2[tableIteratorY][tableIteratorX];
+                    tableIteratorX = tableIteratorX + 1;
+                }
+                tableIteratorX = 0;
+                tableIteratorY = tableIteratorY + 1;
+            }
+        }
+        else{
+            println("Les deux matrices doivent être de la même taille pour la multiplication membre par membre");
+            dimensionIncompatible();
+        }
+    }
+
+    void multMbFloatInt1D(float[] table1, int[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] * (float)(table2[tableIterator]);
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            println("Les deux matrices doivent être de la même taille pour la multiplication membre par membre");
+            dimensionIncompatible();
+        }
+    }
+
+    void multMbFloatInt2D(float[][] table1, int[][] table2){
+        int tableIteratorY = 0;
+        int tableIteratorX = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
+                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] * (float)(table2[tableIteratorY][tableIteratorX]);
+                    tableIteratorX = tableIteratorX + 1;
+                }
+                tableIteratorX = 0;
+                tableIteratorY = tableIteratorY + 1;
+            }
+        }
+        else{
+            println("Les deux matrices doivent être de la même taille pour la multiplication membre par membre");
+            dimensionIncompatible();
+        }
+    }
+
+    void multMbIntFloat1D(int[] table1, float[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] * (int)(table2[tableIterator]);
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            println("Les deux matrices doivent être de la même taille pour la multiplication membre par membre");
+            dimensionIncompatible();
+        }
+    }
+
+    void multMbIntFloat2D(int[][] table1, float[][] table2){
+        int tableIteratorY = 0;
+        int tableIteratorX = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
+                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] * (int)(table2[tableIteratorY][tableIteratorX]);
+                    tableIteratorX = tableIteratorX + 1;
+                }
+                tableIteratorX = 0;
+                tableIteratorY = tableIteratorY + 1;
+            }
+        }
+        else{
+            println("Les deux matrices doivent être de la même taille pour la multiplication membre par membre");
+            dimensionIncompatible();
+        }
+    }
+
+    void multMbFloatFloat1D(float[] table1, float[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] * table2[tableIterator];
+                tableIterator = tableIterator + 1;
+            }
+        }
+        else{
+            println("Les deux matrices doivent être de la même taille pour la multiplication membre par membre");
+            dimensionIncompatible();
+        }
+    }
+
+    void multMbFloatFloat2D(float[][] table1, float[][] table2){
+        int tableIteratorY = 0;
+        int tableIteratorX = 0;
+        if ((table1.size1D == table2.size1D) && (table1.size2D == table2.size2D)){
+            while (tableIteratorY < table1.size2D ){
+                while (tableIteratorX < table1.size1D ){
+                    table1[tableIteratorY][tableIteratorX] = table1[tableIteratorY][tableIteratorX] * table2[tableIteratorY][tableIteratorX];
+                    tableIteratorX = tableIteratorX + 1;
+                }
+                tableIteratorX = 0;
+                tableIteratorY = tableIteratorY + 1;
+            }
+        }
+        else{
+            println("Les deux matrices doivent être de la même taille pour la multiplication membre par membre");
+            dimensionIncompatible();
+        }
+    }
+
+}

@@ -103,9 +103,9 @@ public abstract class AbstractExpr extends AbstractInst {
             LOG.debug("[AbstractExpr][printPopRegisters] PopRegister contains "+ register);
         }
     }
-    
+
     /**
-     * verifyExprIsPositive ajoute des instruction pour vérifier que le registre de retour 
+     * verifyExprIsPositive ajoute des instruction pour vérifier que le registre de retour
      * d'une expression est positive. Si l'élement inférieur au égal à 0 on quitte
      * et lance une erreur
      * @param compiler
@@ -120,7 +120,7 @@ public abstract class AbstractExpr extends AbstractInst {
     }
 
     /**
-     * verifyExprIsPositive ajoute des instruction pour vérifier que le registre de retour 
+     * verifyExprIsPositive ajoute des instruction pour vérifier que le registre de retour
      * d'une expression est  positive. Si l'élement inférieur à 0 on quitte
      * et lance une erreur
      * @param compiler
@@ -136,8 +136,8 @@ public abstract class AbstractExpr extends AbstractInst {
 
 
     /**
-     * verifyExprIsLowerThenRegister ajoute des instruction pour vérifier que le registre de retour 
-     * d'une expression est inférieur ou égal à une autre valeur stockée dans le registe : registreComparaison 
+     * verifyExprIsLowerThenRegister ajoute des instruction pour vérifier que le registre de retour
+     * d'une expression est inférieur ou égal à une autre valeur stockée dans le registe : registreComparaison
      * @param compiler
      * @param expr
      */
@@ -151,7 +151,7 @@ public abstract class AbstractExpr extends AbstractInst {
 
 
 
-    
+
 
     boolean isImplicit() {
         return false;

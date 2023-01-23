@@ -1,0 +1,110 @@
+// Description:
+//    Teste le calcul de déterminant sur des tableaux de flottants et d'entiers
+//
+// Resultats:
+//
+//    Test Division membre par membre de tableaux 1D
+//    --------------
+//    Tableau1D = [
+//    5 ,5 ,5 ,5 ,5 ,5 ,5 ,]--------------
+//    --------------
+//    Tableau1D = [
+//    6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,]--------------
+//    Le résultat de la division membre par membre est:
+//    --------------
+//    Tableau1D = [
+//    0 ,0 ,0 ,0 ,0 ,0 ,0 ,]--------------
+//
+//    Test division membre par membre tableau 2D
+//    Division membre par membre entre un tableau de int rempli de 5 et un tableau de float rempli de 6.0
+//    Le résultat de la division membre par membre est:
+//    --------------
+//    Tableau2D = [
+//    0 ,0 ,0 ,
+//    0 ,0 ,0 ,
+//    0 ,0 ,0 ,
+//    ]--------------
+//
+//    Division membre par membre entre un tableau de float rempli de 6.8 et un tableau de int rempli de 5
+//    --------------
+//    Tableau2D = [
+//    1.36000e+00 ,1.36000e+00 ,1.36000e+00 ,
+//    1.36000e+00 ,1.36000e+00 ,1.36000e+00 ,
+//    1.36000e+00 ,1.36000e+00 ,1.36000e+00 ,
+//    ]--------------
+//
+//    Division membre par membre entre un tableau de float rempli de 6.0 et un tableau de float rempli de 10.5
+//    Le résultat de la division membre par membre est:
+//    --------------
+//    Tableau2D = [
+//    5.71429e-01 ,5.71429e-01 ,5.71429e-01 ,
+//    5.71429e-01 ,5.71429e-01 ,5.71429e-01 ,
+//    5.71429e-01 ,5.71429e-01 ,5.71429e-01 ,
+//    ]--------------
+//
+//    Division membre par membre entre un tableau de int rempli de 5 et un tableau de int rempli de 2
+//    Le résultat de la division membre par membre est:
+//    --------------
+//    Tableau2D = [
+//    2 ,2 ,2 ,
+//    2 ,2 ,2 ,
+//    2 ,2 ,2 ,
+//    ]--------------
+//
+// Historique:
+//    cree le 21/01/2023
+
+#include "Divide_member_by_member.decah"
+
+{
+    DivMember matrixDivMb = new DivMember();
+    int[] x = new int[7];
+    float[] y = new float[7];
+    int[][] a = new int[3][3];
+    int[][] d = new int[3][3];
+    float[][] b = new float[3][3];
+    float[][] c = new float[3][3];
+
+    println("Test Division membre par membre de tableaux 1D");
+    matrixDivMb.setInt1DTable(x,5);
+    matrixDivMb.setFloat1DTable(y,6.0);
+    matrixDivMb.printInt1DTable(x);
+    matrixDivMb.printFloat1DTable(y);
+    matrixDivMb.divMbIntFloat1D(x,y);
+    println("Le résultat de la division membre par membre est: ");
+    matrixDivMb.printInt1DTable(x);
+    println("");
+
+    println("Test division membre par membre tableau 2D");
+    println("Division membre par membre entre un tableau de int rempli de 5 et un tableau de float rempli de 6.0");
+    matrixDivMb.setInt2DTable(a,5);
+    matrixDivMb.setFloat2DTable(b,6.0);
+    matrixDivMb.divMbIntFloat2D(a,b);
+    println("Le résultat de la division membre par membre est: ");
+    matrixDivMb.printInt2DTable(a);
+    println("");
+
+    println("Division membre par membre entre un tableau de float rempli de 6.8 et un tableau de int rempli de 5 ");
+    matrixDivMb.setInt2DTable(a,5);
+    matrixDivMb.setFloat2DTable(b,6.8);
+    matrixDivMb.divMbFloatInt2D(b,a);
+    matrixDivMb.printFloat2DTable(b);
+    println("");
+
+    println("Division membre par membre entre un tableau de float rempli de 6.0 et un tableau de float rempli de 10.5");
+    matrixDivMb.setFloat2DTable(c,10.5);
+    matrixDivMb.setFloat2DTable(b,6.0);
+    matrixDivMb.divMbFloatFloat2D(b,c);
+    println("Le résultat de la division membre par membre est: ");
+    matrixDivMb.printFloat2DTable(b);
+    println("");
+
+    println("Division membre par membre entre un tableau de int rempli de 5 et un tableau de int rempli de 2");
+    matrixDivMb.setInt2DTable(d,2);
+    matrixDivMb.setInt2DTable(a,5);
+    matrixDivMb.divMbIntInt2D(a,d);
+    println("Le résultat de la division membre par membre est: ");
+    matrixDivMb.printInt2DTable(a);
+    println("");
+
+    }
