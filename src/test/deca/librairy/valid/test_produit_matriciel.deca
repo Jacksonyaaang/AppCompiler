@@ -42,8 +42,8 @@
 #include "Produit_Matriciel_Naif.decah"
 {
     MatrixMultiplication matrixMult = new MatrixMultiplication();
-    int[][] a = new int[3][3];
-    int[][] d = new int[3][3];
+    int[][] a = new int[3][2];
+    int[][] d = new int[2][3];
     int[][] intRes = new int[3][3];
     float[][] b = new float[3][3];
     float[][] c = new float[3][3];
@@ -52,20 +52,19 @@
     println("Produit matriciel entre un tableau de int rempli de 5 et un tableau de int rempli de 3");
     matrixMult.setInt2DTable(a,5);
     matrixMult.setInt2DTable(d,3);
-    println(5);
+    matrixMult.printInt2DTable(a);
+    matrixMult.printInt2DTable(d);
     intRes = matrixMult.naiveMultiplyInt(a,d);
-    println(5);
-
     matrixMult.printInt2DTable(intRes);
     println("");
 
     println("Produit matriciel après modification de plusieurs éléments de a");
     a[0][0] = 1;
     a[1][1] = 0;
-    a[0][2] = 9;
+    a[2][1] = 9;
     d[0][0] = 7;
-    d[2][1] = 4;
-    d[1][2] = 0;
+    d[1][2] = 4;
+    d[1][0] = 0;
     intRes = matrixMult.naiveMultiplyInt(a,d);
     matrixMult.printInt2DTable(a);
     matrixMult.printInt2DTable(d);
