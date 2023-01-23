@@ -62,14 +62,14 @@ class Math {
         int tableIteratorY = 0;
         println("--------------");
         println("Tableau2D = [");
-        while (tableIteratorY < table.size2D ){
-            while (tableIteratorX < table.size1D ){
+        while (tableIteratorX < table.size1D ){
+            while (tableIteratorY < table.size2D ){
                 print(table[tableIteratorX][tableIteratorY]," ,");
-                tableIteratorX = tableIteratorX + 1;
+                tableIteratorY = tableIteratorY + 1;
             }
             println("");
-            tableIteratorX = 0;
-            tableIteratorY = tableIteratorY + 1;
+            tableIteratorY = 0;
+            tableIteratorX = tableIteratorX + 1;
         }
         print("]");
         println("--------------");
@@ -92,14 +92,14 @@ class Math {
         int tableIteratorY = 0;
         println("--------------");
         println("Tableau2D = [");
-        while (tableIteratorY < table.size2D ){
-            while (tableIteratorX < table.size1D ){
+        while (tableIteratorX < table.size1D ){
+            while (tableIteratorY < table.size2D ){
                 print(table[tableIteratorX][tableIteratorY]," ,");
-                tableIteratorX = tableIteratorX + 1;
+                tableIteratorY = tableIteratorY + 1;
             }
             println("");
-            tableIteratorX = 0;
-            tableIteratorY = tableIteratorY + 1;
+            tableIteratorY = 0;
+            tableIteratorX = tableIteratorX + 1;
         }
         print("]");
         println("--------------");
