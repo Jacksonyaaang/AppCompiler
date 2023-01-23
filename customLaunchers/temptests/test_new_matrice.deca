@@ -34,7 +34,7 @@ class MatrixTraitement{
                     matInver[indexRow][indexCol]=mat[indexRow][indexCol];
                     println("-----");
                 }else{
-                    //matInver[indexRow][indexCol]=1;
+                    matInver[indexRow][indexCol]=1;
                 }
 
                 indexCol=indexCol+1;
