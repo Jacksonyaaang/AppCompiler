@@ -11,7 +11,9 @@
     println("Test produit matriciel int");
     matrixMult.setInt2DTable(a,5);
     matrixMult.setInt2DTable(d,3);
+    println("1");
     intRes = matrixMult.naiveMultiplyInt(a,d);
+    println("1");
     matrixMult.printInt2DTable(intRes);
 
     matrixMult.setInt2DTable(a,5);

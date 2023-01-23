@@ -39,13 +39,14 @@ class MatrixMultiplication extends Math{
         int j = 0;
         int k = 0;
         int s = 0;
-        this.setInt2DTable(c,0);
+        MatrixMultiplication matrixMult = new MatrixMultiplication();
 
         if (a.size1D != b.size2D) {
             println("Taille de matrice incompatible avec le produit matriciel:", a.size1D, " != ", b.size2D);
             dimensionIncompatible();
         }
         c = new int[a.size2D][b.size1D];
+        matrixMult.setInt2DTable(c,0);
 
         while(i < a.size2D){
             while(j < b.size1D){
