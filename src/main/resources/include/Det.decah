@@ -1,7 +1,7 @@
 #include "Math.decah"
 
 class Det extends Math {
-    float bareissIntDeterminant(int[][] a) {
+    int bareissIntDeterminant(int[][] a) {
         int n = a.size1D;
         float det = 1;
         int i = 0;
@@ -14,23 +14,56 @@ class Det extends Math {
             println("La matrice doit être carrée pour le calcul du déterminant: ", a.size1D, " != ", a.size2D);
             dimensionIncompatible();
             }
-        println(n);
         b = new float[n][n];
-        println(b.size1D, b.size2D);
         copyFloatInt2DTable(b,a);
-        printFloat2DTable(b);
+        while (i < n) {
+            if (a[i][i] == 0) {
+                return 0;
+            }
+            j = i + 1;
+            while (j < n) {
+                if (b[i][i]<= 0.000001) {
+                    return 0;
+                }
+                t = b[j][i] / b[i][i];
+                k = i;
+                while (k < n) {
+
+                    b[j][k] = b[j][k] - t * b[i][k];
+                    k = k + 1;
+                }
+                j = j + 1;
+            }
+            det = det * b[i][i];
+            i = i + 1;
+        }
+        return (int)(det);
+    }
+    float bareissFloatDeterminant(float[][] a) {
+        int n = a.size1D;
+        float det = 1;
+        int i = 0;
+        int j;
+        int k;
+        float t;
+        float[][] b ;
+
+        if(a.size1D != a.size2D){
+            println("La matrice doit être carrée pour le calcul du déterminant: ", a.size1D, " != ", a.size2D);
+            dimensionIncompatible();
+            }
+        b = new float[n][n];
+        copyFloatFloat2DTable(b,a);
         while (i < n) {
             if (a[i][i] == 0) {
                 return 0.0;
             }
             j = i + 1;
             while (j < n) {
-                println("b[i][i] = ",b[i][i]);
                 if (b[i][i]<= 0.000001) {
                     return 0.0;
                 }
                 t = b[j][i] / b[i][i];
-                println("t = ",t);
                 k = i;
                 while (k < n) {
 

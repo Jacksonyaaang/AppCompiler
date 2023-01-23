@@ -48,7 +48,7 @@ class Math {
     void printInt1DTable(int[] table){
         int tableIterator = 0;
         println("--------------");
-        print("Tableau1D = [");
+        println("Tableau1D = [");
         while (tableIterator < table.size1D ){
             print(table[tableIterator]," ,");
             tableIterator = tableIterator + 1;
@@ -61,7 +61,7 @@ class Math {
         int tableIteratorX = 0;
         int tableIteratorY = 0;
         println("--------------");
-        print("Tableau2D = [");
+        println("Tableau2D = [");
         while (tableIteratorY < table.size2D ){
             while (tableIteratorX < table.size1D ){
                 print(table[tableIteratorX][tableIteratorY]," ,");
@@ -78,7 +78,7 @@ class Math {
     void printFloat1DTable(float[] table){
         int tableIterator = 0;
         println("--------------");
-        print("Tableau1D = [");
+        println("Tableau1D = [");
         while (tableIterator < table.size1D ){
             print(table[tableIterator]," ,");
             tableIterator = tableIterator + 1;
@@ -91,7 +91,7 @@ class Math {
         int tableIteratorX = 0;
         int tableIteratorY = 0;
         println("--------------");
-        print("Tableau2D = [");
+        println("Tableau2D = [");
         while (tableIteratorY < table.size2D ){
             while (tableIteratorX < table.size1D ){
                 print(table[tableIteratorX][tableIteratorY]," ,");
