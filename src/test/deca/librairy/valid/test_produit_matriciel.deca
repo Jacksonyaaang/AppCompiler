@@ -1,5 +1,5 @@
 // Description:
-//    Teste le calcul de déterminant sur des tableaux de flottants et d'entiers
+//    Teste le produit matriciel sur des tableaux de flottants et d'entiers
 //
 // Resultats:
 //    Produit matriciel entre un tableau de int rempli de 5 et un tableau de int rempli de 3

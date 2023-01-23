@@ -1,0 +1,27 @@
+// Description:
+//    Teste le calcul de déterminant sur des matrices de taille non appropriée
+//
+// Resultats:
+//    Taille de matrice incompatible avec le produit matriciel:3 != 2
+//    Erreur de dimension
+//
+// Historique:
+//    cree le 22/01/2023
+
+#include "Produit_Matriciel_Naif.decah"
+    {
+    MatrixMultiplication matrixMult=new MatrixMultiplication();
+    int[][]a=new int[3][2];
+    int[][]d=new int[3][2];
+    int[][]intRes=new int[3][3];
+
+    println("Produit matriciel entre un tableau de int rempli de 5 et un tableau de int rempli de 3");
+    matrixMult.setInt2DTable(a,5);
+    matrixMult.setInt2DTable(d,3);
+    matrixMult.printInt2DTable(a);
+    matrixMult.printInt2DTable(d);
+    intRes=matrixMult.naiveMultiplyInt(a,d);
+    matrixMult.printInt2DTable(intRes);
+    println("");
+
+    }
