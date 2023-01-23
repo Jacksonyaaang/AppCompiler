@@ -1,3 +1,0 @@
-src/test/deca/syntax/invalid/26_class_bad_visibility.deca:11:16: no viable alternative at input 'privateintx'
-Exception in thread "main" java.lang.NullPointerException: Cannot invoke "fr.ensimag.deca.tree.AbstractProgram.prettyPrint(java.io.PrintStream)" because "prog" is null
-	at fr.ensimag.deca.syntax.ManualTestSynt.main(ManualTestSynt.java:32)

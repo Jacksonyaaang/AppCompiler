@@ -1,3 +1,0 @@
-src/test/deca/syntax/invalid/32_test_bad_instance_of.deca:11:29: mismatched input 'println' expecting IDENT
-Exception in thread "main" java.lang.NullPointerException: Cannot invoke "fr.ensimag.deca.tree.AbstractProgram.prettyPrint(java.io.PrintStream)" because "prog" is null
-	at fr.ensimag.deca.syntax.ManualTestSynt.main(ManualTestSynt.java:32)
