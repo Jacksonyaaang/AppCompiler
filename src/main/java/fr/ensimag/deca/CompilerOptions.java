@@ -66,7 +66,9 @@ public class CompilerOptions {
     }
     
     private void printbool() {
-        for (int i=0; i<numberOfOptions; i++){System.out.println("bool " + i + " " + optionsInvoked[i]); }
+        for (int i=0; i<numberOfOptions; i++){
+            //System.out.println("bool " + i + " " + optionsInvoked[i]);
+        }
     }
 
     public boolean isDecompile() {

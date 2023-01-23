@@ -9,7 +9,7 @@ class A{
   int x;
   boolean f(){
     boolean y;
-    y = f();
-    return y;
+    //y = f();
+    return f();
   }
 }

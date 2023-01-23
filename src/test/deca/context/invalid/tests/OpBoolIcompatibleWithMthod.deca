@@ -1,0 +1,15 @@
+// Description:
+//       Teste d'Opération Booléens incompatible à pour l'un des opérandes
+//       un identificateur de methode de type int 
+// Resultats: 
+//      Ligne 12: l'une de membre de l'operation est une méthod
+// 
+// Historique:
+//      cree le 22/01/2023
+class A{
+  boolean f(){
+    boolean b = true;
+    b = b + f;
+    return b;
+  }
+}

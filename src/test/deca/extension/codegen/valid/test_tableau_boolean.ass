@@ -72,7 +72,7 @@
 	LOAD #1, R2	; loading 1 into memory
 	CMP #0, R2
 	BLT int_selection_table_must_be_positive
-	LOAD 10(GB), R1	; loading bool_table into memory
+	LOAD 10(GB), R1	; [saving] loading bool_table into memory
 	CMP #null, R1
 	BEQ deref_null_error	; Checking if the class identifier is null
 	LOAD 0(R1), R0	; loading size 1d of bool_table into memory
@@ -131,7 +131,7 @@ end_ifthenelse_1:
 	LOAD #2, R2	; loading 2 into memory
 	CMP #0, R2
 	BLT int_selection_table_must_be_positive
-	LOAD 10(GB), R1	; loading bool_table into memory
+	LOAD 10(GB), R1	; [saving] loading bool_table into memory
 	CMP #null, R1
 	BEQ deref_null_error	; Checking if the class identifier is null
 	LOAD 0(R1), R0	; loading size 1d of bool_table into memory
@@ -154,17 +154,17 @@ end_ifthenelse_1:
 	LOAD #1, R3	; loading 1 into memory
 	CMP #0, R3
 	BLT int_selection_table_must_be_positive
-	LOAD 11(GB), R1	; loading bool_matrix into memory
+	LOAD 11(GB), R1	; [saving] loading bool_matrix into memory
 	CMP #null, R1
 	BEQ deref_null_error	; Checking if the class identifier is null
 	LOAD 0(R1), R0	; loading size 1d of bool_matrix into memory
 	CMP R2, R0
 	BLE table_dimension_are_not_respected
-	MUL R0, R2
 	LOAD 1(R1), R0	; loading size 2d of bool_matrix into memory
 	CMP R3, R0
 	BLE table_dimension_are_not_respected
-	ADD R3, R2	; adding index_y to size1D*index_x
+	MUL R0, R2
+	ADD R3, R2
 	LOAD R2, R0
 	POP R3
 	POP R2
@@ -186,10 +186,10 @@ end_ifthenelse_1:
 	LOAD 0(R1), R0	; loading size 1d of bool_matrix into memory
 	CMP R3, R0
 	BLE table_dimension_are_not_respected
-	MUL R0, R3
 	LOAD 1(R1), R0	; loading size 2d of bool_matrix into memory
 	CMP R2, R0
 	BLE table_dimension_are_not_respected
+	MUL R0, R3
 	ADD R2, R3
 	LOAD 2(R1, R3), R0
 	POP R2
@@ -610,10 +610,10 @@ QUIT_AND_Called_When_Fail_id16:
 	LOAD 0(R1), R0	; loading size 1d of bool_matrix into memory
 	CMP R3, R0
 	BLE table_dimension_are_not_respected
-	MUL R0, R3
 	LOAD 1(R1), R0	; loading size 2d of bool_matrix into memory
 	CMP R2, R0
 	BLE table_dimension_are_not_respected
+	MUL R0, R3
 	ADD R2, R3
 	LOAD 2(R1, R3), R0
 	POP R2
@@ -660,9 +660,11 @@ end_ifthenelse_4:
 ; ------------------Start generateCodeForObjectEquals location:
 code.Object.equals:
 	LOAD -2(LB), R0
-	CMP -3(LB), R0
+	CMP R1, R0
 	SEQ R0	; Comparaison this et paramètre d'equals
 fin.Object.equals:
+	RTS
+init.Object:
 	RTS
 ; -------------------------------------
 ;        Liste Erreur

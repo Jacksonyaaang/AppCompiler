@@ -29,6 +29,9 @@ import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.NEW;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
+import fr.ensimag.ima.pseudocode.instructions.WNL;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import fr.ensimag.ima.pseudocode.instructions.LEA;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.MUL;
@@ -134,18 +137,27 @@ public class  TableGetElement extends AbstractLValue{
         verifyExprIsLowerThenRegister(compiler, listExprInit.get(0), Register.getR(0));
 
         if (initializers.size() == 1){
-            //Ajout de 1 pour ce positionner corectement, par rapport à la matrice
+            //Ajout de 1 pour ce positionner correctement, par rapport à la matrice
             compiler.addInstruction(new LOAD(new RegisterIndirectOffset(1, Register.getR(1), listExprInit.get(0).getRegisterDeRetour()), Register.getR(0)));
         }
         else if(initializers.size() == 2){
-            //On se positionne corectement dans la matrice en multipliant la ligne par la taille de la ligne
-            compiler.addInstruction(new MUL(Register.getR(0), listExprInit.get(0).getRegisterDeRetour()));
+            //compiler.addInstruction(new WSTR("-----selection---"));
             //On vérifie que la valeur donnée pour la dimension 2 est inférieur à la taille de la matrice
             compiler.addInstruction(new LOAD(new RegisterOffset(1, Register.getR(1)), Register.getR(0)),
             "loading size 2d of "+tableIdentifier.getName()+ " into memory");
             verifyExprIsLowerThenRegister(compiler, listExprInit.get(1), Register.getR(0));
+                //On se positionne corectement dans la matrice en multipliant la ligne par la taille de la colonne
+            compiler.addInstruction(new MUL(Register.getR(0), listExprInit.get(0).getRegisterDeRetour()));
+
             //On ajoute la valeur des colonnes à l'indice
             compiler.addInstruction(new ADD(listExprInit.get(1).getRegisterDeRetour(), listExprInit.get(0).getRegisterDeRetour()));
+            
+            // compiler.addInstruction(new PUSH(Register.getR(1)));
+            // compiler.addInstruction(new LOAD(listExprInit.get(0).getRegisterDeRetour(), Register.getR(1)));
+            // compiler.addInstruction(new WINT());
+            // compiler.addInstruction(new WNL());
+            // compiler.addInstruction(new POP(Register.getR(1)));
+
             /**
              * Pour récupére les élements de la matrice, il faut avoir le bon index. On commener à faire la multiplication la valeur de la ligne donnée par la taille de la ligne
              * et on ajoute la colonne donée. Enfin on se positionne corecteemnt par rapport à la taille de lam matrice  
@@ -187,11 +199,22 @@ public class  TableGetElement extends AbstractLValue{
             //Ajoute de 1 pour avoir le correct index
             verifyExprIsPositive(compiler, expr);
         }
+        // compiler.addInstruction(new WSTR("-----saving init---" +tableIdentifier.getName()));
+        // compiler.addInstruction(new WNL());
+        // compiler.addInstruction(new LOAD(listExprInit.get(0).getRegisterDeRetour(), Register.getR(1)));
+        // compiler.addInstruction(new WINT());
+        // compiler.addInstruction(new WNL());
+        
+        // compiler.addInstruction(new LOAD(listExprInit.get(1).getRegisterDeRetour(), Register.getR(1)));
+        // compiler.addInstruction(new WINT());
+        // compiler.addInstruction(new WNL());
+        // compiler.addInstruction(new WSTR("-----saving end---"));
+        // compiler.addInstruction(new WNL());
         /**
          * On met l'adresse de la matrice dans un registre qui est dans ce cas le registre R1
          */
         compiler.addInstruction(new LOAD(tableIdentifier.getExpDefinition().getOperand(), Register.getR(1)),
-            "loading "+tableIdentifier.getName()+ " into memory");
+            "[saving] loading "+tableIdentifier.getName()+ " into memory");
         /**
          * On vérifie que l'adresse de la matrice n'est pas nulle
          */
@@ -201,6 +224,7 @@ public class  TableGetElement extends AbstractLValue{
                                     "Checking if the class identifier is null");
             compiler.getErrorManagementUnit().activeError("deref_null_error");
         }
+        //compiler.addInstruction(new WSTR("-----saving---"));
         /**
          * On vérifie que les indices donnée par l'utilisateur sont inférieur aux dimension 
          * de la matrice on vérifie donc que 0(R1) < Rx 
@@ -217,26 +241,77 @@ public class  TableGetElement extends AbstractLValue{
             compiler.addInstruction(new STORE(exprRightOperand.getRegisterDeRetour(), new RegisterIndirectOffset(1, Register.getR(1), Register.getR(0))));
         }
         else if(initializers.size() == 2){
-            //On se positionne corectement dans la matrice en multipliant la ligne par la taille de la ligne
-            compiler.addInstruction(new MUL(Register.getR(0), listExprInit.get(0).getRegisterDeRetour()));
             //On vérifie que la valeur donnée pour la dimension 2 est inférieur à la taille de la matrice
-            //operation à vérifier 1(R1) < Ry 
             compiler.addInstruction(new LOAD(new RegisterOffset(1, Register.getR(1)), Register.getR(0)),
             "loading size 2d of "+tableIdentifier.getName()+ " into memory");
             verifyExprIsLowerThenRegister(compiler, listExprInit.get(1), Register.getR(0));
+                //On se positionne corectement dans la matrice en multipliant la ligne par la taille de la colonne
+            compiler.addInstruction(new MUL(Register.getR(0), listExprInit.get(0).getRegisterDeRetour()));
+
             //On ajoute la valeur des colonnes à l'indice
-            compiler.addInstruction(new ADD(listExprInit.get(1).getRegisterDeRetour(), listExprInit.get(0).getRegisterDeRetour()), "adding index_y to size1D*index_x");
+            compiler.addInstruction(new ADD(listExprInit.get(1).getRegisterDeRetour(), listExprInit.get(0).getRegisterDeRetour()));
+            // compiler.addInstruction(new PUSH(Register.getR(1)));
+            // compiler.addInstruction(new LOAD(listExprInit.get(0).getRegisterDeRetour(), Register.getR(1)));
+            // compiler.addInstruction(new WINT());
+            // compiler.addInstruction(new WNL());
+            // compiler.addInstruction(new POP(Register.getR(1)));
+
+            
+            //On vérifie que la valeur donnée pour la dimension 2 est inférieur à la taille de la matrice
+            // compiler.addInstruction(new LOAD(new RegisterOffset(1, Register.getR(1)), Register.getR(0)),
+            // "loading size 2d of "+tableIdentifier.getName()+ " into memory");
+            // verifyExprIsLowerThenRegister(compiler, listExprInit.get(1), Register.getR(0));
+            //     //On se positionne corectement dans la matrice en multipliant la ligne par la taille de la colonne
+            // compiler.addInstruction(new MUL(Register.getR(0), listExprInit.get(0).getRegisterDeRetour()));
+            // compiler.addInstruction(new ADD(listExprInit.get(1).getRegisterDeRetour(), listExprInit.get(0).getRegisterDeRetour()), "adding index_y to size1D*index_x");
+
+
+            // compiler.addInstruction(new LOAD(new RegisterOffset(1, Register.getR(1)), Register.getR(0)),
+            // "loading size 2d of "+tableIdentifier.getName()+ " into memory");
+            // verifyExprIsLowerThenRegister(compiler, listExprInit.get(1), Register.getR(0));
+            //     //On se positionne corectement dans la matrice en multipliant la ligne par la taille de la colonne
+            // compiler.addInstruction(new MUL(Register.getR(0), listExprInit.get(0).getRegisterDeRetour()));
+            // compiler.addInstruction(new ADD(listExprInit.get(1).getRegisterDeRetour(), listExprInit.get(0).getRegisterDeRetour()), "adding index_y to size1D*index_x");
+
+            //On se positionne corectement dans la matrice en multipliant la ligne par la taille de la ligne
+            // compiler.addInstruction(new MUL(Register.getR(0), listExprInit.get(0).getRegisterDeRetour()));
+            // //On vérifie que la valeur donnée pour la dimension 2 est inférieur à la taille de la matrice
+            // //operation à vérifier 1(R1) < Ry 
+            // compiler.addInstruction(new LOAD(new RegisterOffset(1, Register.getR(1)), Register.getR(0)),
+            //     "loading size 2d of "+tableIdentifier.getName()+ " into memory");
+            // verifyExprIsLowerThenRegister(compiler, listExprInit.get(1), Register.getR(0));
+            // //On ajoute la valeur des colonnes à l'indice
+            //compiler.addInstruction(new ADD(listExprInit.get(1).getRegisterDeRetour(), listExprInit.get(0).getRegisterDeRetour()), "adding index_y to size1D*index_x");
             /**
              * Pour récupére les élements de la matrice, il faut avoir le bon index. On commener à faire la multiplication la valeur de la ligne donnée par la taille de la ligne
              * et on ajoute la colonne donée. Enfin on se positionne corecteemnt par rapport à la taille de lam matrice  
-             */
+            //  */
+            // compiler.addInstruction(new PUSH(Register.getR(1)));
+            // compiler.addInstruction(new LOAD(listExprInit.get(0).getRegisterDeRetour(), Register.getR(1)));
+            // compiler.addInstruction(new WINT());
+            // compiler.addInstruction(new WNL());
+            // compiler.addInstruction(new POP(Register.getR(1)));
+
             compiler.addInstruction(new LOAD(listExprInit.get(0).getRegisterDeRetour(), Register.getR(0)));
             Collections.reverse(listExprInit);
             for (AbstractExpr  expr : listExprInit){
                 expr.popRegisters(compiler);
                 compiler.getRegisterManagement().decrementOccupationRegister(expr.getRegisterDeRetour());
-            } 
+            }
+
+            // compiler.addInstruction(new PUSH(Register.getR(1)));
+            // compiler.addInstruction(new WNL()); 
+            // compiler.addInstruction(new WSTR("SAVING FINAL START")); 
+            // compiler.addInstruction(new LOAD(Register.getR(0), Register.getR(1)));
+            // compiler.addInstruction(new WNL()); 
+            // compiler.addInstruction(new WINT());
+            // compiler.addInstruction(new WNL()); 
+            // compiler.addInstruction(new WSTR("SAVING FINAL END")); 
+            // compiler.addInstruction(new WNL()); 
+            // compiler.addInstruction(new POP(Register.getR(1)));
+
             compiler.addInstruction(new STORE(exprRightOperand.getRegisterDeRetour(), new RegisterIndirectOffset(2, Register.getR(1), Register.getR(0))), "Selecting the elemnt stored in 2(R1, R0)");
+        
         }
         compiler.addComment("--------EndStoreTableElements--------"+getLocation()+"-----");
     }

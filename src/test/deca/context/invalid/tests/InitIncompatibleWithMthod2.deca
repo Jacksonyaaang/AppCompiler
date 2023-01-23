@@ -1,0 +1,15 @@
+// Description:
+//       Teste d'initialisation incompatible entr un idenficateur de .
+// 	 méthode à droite
+// Resultats: 
+//      Ligne 11: le membre de droite est un identificateur de method
+// 
+// Historique:
+//      cree le 22/01/2023
+class A{
+  int f(){
+    int x = f;
+    return x;
+  }
+}
+

@@ -1,0 +1,12 @@
+// Description:
+//       Teste de return invalid sur un identicateur de méthod
+// Resultats: 
+//      Ligne 10: l'identificateur de retour ne peut pas être une méthode
+// 
+// Historique:
+//      cree le 22/01/2023
+class A{
+  int f(){
+    return f;
+  }
+}

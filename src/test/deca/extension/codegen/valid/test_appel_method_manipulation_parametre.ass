@@ -253,7 +253,7 @@ while_begin1:
 	LOAD 1(LB), R2	; loading tableIterator into memory
 	CMP #0, R2
 	BLT int_selection_table_must_be_positive
-	LOAD -3(LB), R1	; loading table1 into memory
+	LOAD -3(LB), R1	; [saving] loading table1 into memory
 	CMP #null, R1
 	BEQ deref_null_error	; Checking if the class identifier is null
 	LOAD 0(R1), R0	; loading size 1d of table1 into memory
@@ -386,7 +386,7 @@ while_begin2:
 	LOAD 1(LB), R2	; loading tableIterator into memory
 	CMP #0, R2
 	BLT int_selection_table_must_be_positive
-	LOAD -3(LB), R1	; loading table1 into memory
+	LOAD -3(LB), R1	; [saving] loading table1 into memory
 	CMP #null, R1
 	BEQ deref_null_error	; Checking if the class identifier is null
 	LOAD 0(R1), R0	; loading size 1d of table1 into memory
@@ -491,7 +491,7 @@ while_begin3:
 	LOAD 1(LB), R2	; loading tableIterator into memory
 	CMP #0, R2
 	BLT int_selection_table_must_be_positive
-	LOAD -3(LB), R1	; loading table into memory
+	LOAD -3(LB), R1	; [saving] loading table into memory
 	CMP #null, R1
 	BEQ deref_null_error	; Checking if the class identifier is null
 	LOAD 0(R1), R0	; loading size 1d of table into memory
@@ -589,9 +589,11 @@ fin.MathOperation.printInt1DTable:
 ; ------------------Start generateCodeForObjectEquals location:
 code.Object.equals:
 	LOAD -2(LB), R0
-	CMP -3(LB), R0
+	CMP R1, R0
 	SEQ R0	; Comparaison this et paramètre d'equals
 fin.Object.equals:
+	RTS
+init.Object:
 	RTS
 ; -------------------------------------
 ;        Liste Erreur

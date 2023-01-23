@@ -41,6 +41,9 @@ public class Return extends AbstractInst {
             throw new ContextualError("Le type de retour de la méthode ne peut être void", getLocation());
         }
         getExprReturn().verifyRValue(compiler, localEnv, currentClass, returnType);
+        if (getExprReturn() instanceof AbstractIdentifier && ((Identifier)getExprReturn()).getExpDefinition().isMethod()){
+            throw new ContextualError("l'identificateur de retour ne peut pas être une méthode", getLocation());
+        }
     }
 
     @Override
