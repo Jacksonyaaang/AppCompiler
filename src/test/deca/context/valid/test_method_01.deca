@@ -6,6 +6,14 @@
 //
 // Historique:
 //    cree le 20/01/2023
+// Description:
+//    Teste sur les classes
+//
+// Resultats:
+//    TEST PASS
+//
+// Historique:
+//    cree le 20/01/2023
 class A {
     protected int x, y ;
     float z;
@@ -23,9 +31,9 @@ class A {
 }
 
 {
-A a = new A() ;
-int b = readint();
-float f = readfloat();
-a.setXY(b, f);
-println(a.getX(), a.getY()) ;
+    A a = new A() ;
+    int b = readInt();
+    float f = readFloat();
+    a.setXY(b, f);
+    println(a.getX(), a.getY()) ;
 }

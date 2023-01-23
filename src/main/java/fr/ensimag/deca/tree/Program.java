@@ -110,7 +110,7 @@ public class Program extends AbstractProgram {
         Label fin_equals=new Label("fin.Object.equals");
         compiler.addLabel(new Label("code.Object.equals"));
         compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(0)));// (@this -> R2)
-        compiler.addInstruction(new CMP(Register.getR(1), Register.getR(0)));
+        compiler.addInstruction(new CMP(new RegisterOffset(-3, Register.LB), Register.getR(0)));
         compiler.addInstruction(new SEQ(Register.getR(0)),"Comparaison this et paramètre d'equals");
         compiler.addLabel(fin_equals);
         compiler.addInstruction(new RTS()); 

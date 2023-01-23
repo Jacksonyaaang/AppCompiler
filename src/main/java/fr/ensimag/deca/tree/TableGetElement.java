@@ -141,7 +141,6 @@ public class  TableGetElement extends AbstractLValue{
             compiler.addInstruction(new LOAD(new RegisterIndirectOffset(1, Register.getR(1), listExprInit.get(0).getRegisterDeRetour()), Register.getR(0)));
         }
         else if(initializers.size() == 2){
-            //compiler.addInstruction(new WSTR("-----selection---"));
             //On vérifie que la valeur donnée pour la dimension 2 est inférieur à la taille de la matrice
             compiler.addInstruction(new LOAD(new RegisterOffset(1, Register.getR(1)), Register.getR(0)),
             "loading size 2d of "+tableIdentifier.getName()+ " into memory");
@@ -205,7 +204,6 @@ public class  TableGetElement extends AbstractLValue{
                                     "Checking if the class identifier is null");
             compiler.getErrorManagementUnit().activeError("deref_null_error");
         }
-        //compiler.addInstruction(new WSTR("-----saving---"));
         /**
          * On vérifie que les indices donnée par l'utilisateur sont inférieur aux dimension 
          * de la matrice on vérifie donc que 0(R1) < Rx 

@@ -27,7 +27,7 @@
 ; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  x the value in R3
 	LOAD #20, R4	; loading 20 into memory
 	OPP R4, R4	; Doing an unary minus
-	LOAD 1(GB), R1	; loading x into memory
+	LOAD 1(GB), R1	; [saving] loading x into memory
 	LOAD 0(R1), R0	; loading size 1d of x into memory
 	LOAD R4, R0
 	STORE R3, 1(R1, R0)
@@ -43,9 +43,11 @@
 ; ------------------Start generateCodeForObjectEquals location:
 code.Object.equals:
 	LOAD -2(LB), R0
-	CMP -3(LB), R0
+	CMP R1, R0
 	SEQ R0	; Comparaison this et paramètre d'equals
 fin.Object.equals:
+	RTS
+init.Object:
 	RTS
 ; -------------------------------------
 ;        Liste Erreur

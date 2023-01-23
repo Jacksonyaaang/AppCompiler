@@ -1,0 +1,16 @@
+// Description:
+//    Test de la déclaration de la class object
+//    Test de la méthode equals
+// Resultats:
+//
+// Historique:
+// 
+
+
+{
+    Object object = new Object();
+    Object object1 = new Object();
+    if (!(object.equals(object1))){
+        println("equals method work");
+    }
+}

@@ -1,4 +1,4 @@
 instanceof fonctionne b instanceof A
-Problem with code
+instanceof fonctionne a not instanceof B
 instanceof fonctionne H instanceof A
-problem with code
+instanceof fonctionne c is not  instanceof D

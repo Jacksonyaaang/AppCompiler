@@ -1,0 +1,1540 @@
+	TSTO #13
+	BOV stack_overflow_error
+	ADDSP #10
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 6(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 7(GB)
+	LEA 6(GB), R0
+	STORE R0, 8(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 9(GB)
+	LOAD code.MatrixTraitement.calculate, R0
+	STORE R0, 10(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[133, 30]-----
+; [New][loadItemintoRegister] loading new of calss =  MatrixTraitement into memory at register R2
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 8(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.MatrixTraitement
+	POP R2
+; --------EndNew--------[133, 30]-----
+	STORE R2, 1(GB)	; Initializing the variable mm and loading it into memory
+; --------StartNewTable--------[134, 29]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  float[][] into memory at register R2
+	LOAD #3, R3	; loading 3 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	PUSH R2
+	LOAD #3, R2	; loading 3 into memory
+	CMP #1, R2
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	MUL R2, R1
+	ADD #2, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	STORE R2, 1(R0)
+	POP R2
+	LOAD R0, R2
+; --------EndNewTable--------[134, 29]-----
+	STORE R2, 2(GB)	; Initializing the variable matInver and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 4(GB)	; Initializing the variable itrX and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 5(GB)	; Initializing the variable itrY and loading it into memory
+; --------BeginAssignOp--------[139, 8]-----
+	LOAD #1, R3	; loading 1 into memory
+	FLOAT R3, R3	; Doing an unary minus
+; --------StartStoreTableElements--------[139, 8]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  matInver the value in R3
+	PUSH R2
+	LOAD #0, R2	; loading 0 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD #0, R3	; loading 0 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 2(GB), R1	; [saving] loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[139, 8]-----
+; --------EndAssignOp--------[139, 8]-----
+; --------BeginAssignOp--------[140, 8]-----
+	LOAD #2, R3	; loading 2 into memory
+	FLOAT R3, R3	; Doing an unary minus
+; --------StartStoreTableElements--------[140, 8]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  matInver the value in R3
+	PUSH R2
+	LOAD #0, R2	; loading 0 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD #1, R3	; loading 1 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 2(GB), R1	; [saving] loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[140, 8]-----
+; --------EndAssignOp--------[140, 8]-----
+; --------BeginAssignOp--------[141, 8]-----
+	LOAD #3, R3	; loading 3 into memory
+	FLOAT R3, R3	; Doing an unary minus
+; --------StartStoreTableElements--------[141, 8]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  matInver the value in R3
+	PUSH R2
+	LOAD #0, R2	; loading 0 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 2(GB), R1	; [saving] loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[141, 8]-----
+; --------EndAssignOp--------[141, 8]-----
+; --------BeginAssignOp--------[142, 8]-----
+	LOAD #0, R3	; loading 0 into memory
+	FLOAT R3, R3	; Doing an unary minus
+; --------StartStoreTableElements--------[142, 8]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  matInver the value in R3
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD #0, R3	; loading 0 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 2(GB), R1	; [saving] loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[142, 8]-----
+; --------EndAssignOp--------[142, 8]-----
+; --------BeginAssignOp--------[143, 8]-----
+	LOAD #1, R3	; loading 1 into memory
+	FLOAT R3, R3	; Doing an unary minus
+; --------StartStoreTableElements--------[143, 8]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  matInver the value in R3
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD #1, R3	; loading 1 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 2(GB), R1	; [saving] loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[143, 8]-----
+; --------EndAssignOp--------[143, 8]-----
+; --------BeginAssignOp--------[144, 8]-----
+	LOAD #4, R3	; loading 4 into memory
+	FLOAT R3, R3	; Doing an unary minus
+; --------StartStoreTableElements--------[144, 8]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  matInver the value in R3
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 2(GB), R1	; [saving] loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[144, 8]-----
+; --------EndAssignOp--------[144, 8]-----
+; --------BeginAssignOp--------[145, 8]-----
+	LOAD #5, R3	; loading 5 into memory
+	FLOAT R3, R3	; Doing an unary minus
+; --------StartStoreTableElements--------[145, 8]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  matInver the value in R3
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD #0, R3	; loading 0 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 2(GB), R1	; [saving] loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[145, 8]-----
+; --------EndAssignOp--------[145, 8]-----
+; --------BeginAssignOp--------[146, 8]-----
+	LOAD #6, R3	; loading 6 into memory
+	FLOAT R3, R3	; Doing an unary minus
+; --------StartStoreTableElements--------[146, 8]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  matInver the value in R3
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD #1, R3	; loading 1 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 2(GB), R1	; [saving] loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[146, 8]-----
+; --------EndAssignOp--------[146, 8]-----
+; --------BeginAssignOp--------[147, 8]-----
+	LOAD #4, R3	; loading 4 into memory
+	FLOAT R3, R3	; Doing an unary minus
+; --------StartStoreTableElements--------[147, 8]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  matInver the value in R3
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 2(GB), R1	; [saving] loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[147, 8]-----
+; --------EndAssignOp--------[147, 8]-----
+; --------BeginAssignOp--------[149, 8]-----
+; --------BeginMethodCall--------[149, 21]-----
+	ADDSP #2
+	LOAD 1(GB), R3	; loading mm into memory
+	STORE R3, 0(SP)
+	LOAD 2(GB), R3	; loading matInver into memory
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	LOAD R0, R3
+	SUBSP #2
+; --------EndMethodCall--------[149, 21]-----
+	STORE R3, 3(GB)	;  Assiging a value to testMatInver
+	LOAD R3, R2	;  Return value of the assignement of =testMatInverand storing it into R2
+; --------EndAssignOp--------[149, 8]-----
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : MatrixTraitement -------------------
+; ---------------------------------------------------
+; ------------Init method for class = MatrixTraitement--------
+init.MatrixTraitement:
+	RTS
+; ------------Code for method : calculate with label =  code.MatrixTraitement.calculate--------
+code.MatrixTraitement.calculate:
+	TSTO #16
+	BOV stack_overflow_error
+	ADDSP #11
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------BeginSelection--------[6, 19]-----
+	LOAD -3(LB), R2	; loading mat into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R2), R2	; Loading the field size1D into a register 
+; --------BeginSelection--------[6, 19]-----
+	STORE R2, 1(LB)	; Initializing the variable size and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 2(LB)	; Initializing the variable indexRow and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 3(LB)	; Initializing the variable indexCol and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	FLOAT R2, R2	; Doing an unary minus
+	STORE R2, 4(LB)	; Initializing the variable tempo and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	FLOAT R2, R2	; Doing an unary minus
+	STORE R2, 5(LB)	; Initializing the variable tempoK and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	FLOAT R2, R2	; Doing an unary minus
+	STORE R2, 6(LB)	; Initializing the variable buffer and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 7(LB)	; Initializing the variable k and loading it into memory
+; --------StartNewTable--------[13, 29]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  float[][] into memory at register R2
+	LOAD 1(LB), R3	; loading size into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+; --------StartBinaryOp--------[13, 45]-----
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	MUL 1(LB), R2
+; --------EndBinaryOp--------[13, 45]-----
+	CMP #1, R2
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	MUL R2, R1
+	ADD #2, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	STORE R2, 1(R0)
+	POP R2
+	LOAD R0, R2
+; --------EndNewTable--------[13, 29]-----
+	STORE R2, 8(LB)	; Initializing the variable matInver and loading it into memory
+; --------StartNewTable--------[14, 35]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  float[][] into memory at register R2
+	LOAD 1(LB), R3	; loading size into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	PUSH R2
+	LOAD 1(LB), R2	; loading size into memory
+	CMP #1, R2
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	MUL R2, R1
+	ADD #2, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	STORE R2, 1(R0)
+	POP R2
+	LOAD R0, R2
+; --------EndNewTable--------[14, 35]-----
+	STORE R2, 9(LB)	; Initializing the variable matInverResult and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 10(LB)	; Initializing the variable inX and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 11(LB)	; Initializing the variable inY and loading it into memory
+while_begin1:
+; --------StartBinaryOp--------[18, 15]-----
+	LOAD 10(LB), R2	; loading inX into memory
+; --------BeginSelection--------[18, 21]-----
+	LOAD -3(LB), R3	; loading mat into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[18, 21]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[18, 15]-----
+	CMP #1, R2
+	BNE while_end1
+while_begin2:
+; --------StartBinaryOp--------[19, 19]-----
+	LOAD 11(LB), R2	; loading inY into memory
+; --------BeginSelection--------[19, 25]-----
+	LOAD -3(LB), R3	; loading mat into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[19, 25]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[19, 19]-----
+	CMP #1, R2
+	BNE while_end2
+; --------StartGetTableElements--------[20, 22]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  mat into memory at register R2
+	LOAD 10(LB), R3	; loading inX into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	PUSH R2
+	LOAD 11(LB), R2	; loading inY into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; loading mat into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of mat into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of mat into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R3
+	ADD R2, R3
+	LOAD 2(R1, R3), R0
+	POP R2
+	LOAD R0, R2
+; --------EndGetTableElements--------[20, 22]-----
+	LOAD R2, R1
+	WFLOAT
+	WSTR " "
+; --------BeginAssignOp--------[22, 16]-----
+; --------StartBinaryOp--------[22, 22]-----
+	LOAD 11(LB), R3	; loading inY into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[22, 22]-----
+	STORE R3, 11(LB)	;  Assiging a value to inY
+	LOAD R3, R2	;  Return value of the assignement of =inYand storing it into R2
+; --------EndAssignOp--------[22, 16]-----
+	BRA while_begin2
+while_end2:
+	WNL
+; --------BeginAssignOp--------[25, 12]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 11(LB)	;  Assiging a value to inY
+	LOAD R3, R2	;  Return value of the assignement of =inYand storing it into R2
+; --------EndAssignOp--------[25, 12]-----
+; --------BeginAssignOp--------[26, 12]-----
+; --------StartBinaryOp--------[26, 18]-----
+	LOAD 10(LB), R3	; loading inX into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[26, 18]-----
+	STORE R3, 10(LB)	;  Assiging a value to inX
+	LOAD R3, R2	;  Return value of the assignement of =inXand storing it into R2
+; --------EndAssignOp--------[26, 12]-----
+	BRA while_begin1
+while_end1:
+while_begin3:
+; --------StartBinaryOp--------[29, 15]-----
+	LOAD 2(LB), R2	; loading indexRow into memory
+	CMP 1(LB), R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[29, 15]-----
+	CMP #1, R2
+	BNE while_end3
+; --------BeginAssignOp--------[30, 12]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 3(LB)	;  Assiging a value to indexCol
+	LOAD R3, R2	;  Return value of the assignement of =indexColand storing it into R2
+; --------EndAssignOp--------[30, 12]-----
+while_begin4:
+; --------StartBinaryOp--------[31, 18]-----
+	LOAD 3(LB), R2	; loading indexCol into memory
+; --------BeginSelection--------[31, 27]-----
+	LOAD 8(LB), R3	; loading matInver into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[31, 27]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[31, 18]-----
+	CMP #1, R2
+	BNE while_end4
+; --------StartBinaryOp--------[32, 19]-----
+	LOAD 3(LB), R2	; loading indexCol into memory
+	CMP 1(LB), R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[32, 19]-----
+; ---------Startif-----------[32, 16]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else1
+	WSTR "x = "
+	LOAD 2(LB), R2	; loading indexRow into memory
+	LOAD R2, R1
+	WINT
+	WSTR " y = "
+	LOAD 3(LB), R3	; loading indexCol into memory
+	LOAD R3, R1
+	WINT
+	WNL
+; --------BeginAssignOp--------[34, 20]-----
+; --------StartGetTableElements--------[34, 49]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  mat into memory at register R3
+	PUSH R2
+	LOAD 2(LB), R2	; loading indexRow into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 3(LB), R3	; loading indexCol into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; loading mat into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of mat into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of mat into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD 2(R1, R2), R0
+	POP R3
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[34, 49]-----
+; --------StartStoreTableElements--------[34, 20]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  matInver the value in R3
+	PUSH R2
+	LOAD 2(LB), R2	; loading indexRow into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 3(LB), R3	; loading indexCol into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 8(LB), R1	; [saving] loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[34, 20]-----
+; --------EndAssignOp--------[34, 20]-----
+	WSTR "-----"
+	WNL
+	BRA end_ifthenelse_1
+else1:
+; --------BeginAssignOp--------[37, 20]-----
+	LOAD #1, R3	; loading 1 into memory
+	FLOAT R3, R3	; Doing an unary minus
+; --------StartStoreTableElements--------[37, 20]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  matInver the value in R3
+	PUSH R2
+	LOAD 2(LB), R2	; loading indexRow into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 3(LB), R3	; loading indexCol into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 8(LB), R1	; [saving] loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[37, 20]-----
+; --------EndAssignOp--------[37, 20]-----
+end_ifthenelse_1:
+; ---------Endif-----------
+; --------BeginAssignOp--------[40, 16]-----
+; --------StartBinaryOp--------[40, 25]-----
+	LOAD 3(LB), R3	; loading indexCol into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[40, 25]-----
+	STORE R3, 3(LB)	;  Assiging a value to indexCol
+	LOAD R3, R2	;  Return value of the assignement of =indexColand storing it into R2
+; --------EndAssignOp--------[40, 16]-----
+	BRA while_begin4
+while_end4:
+; --------BeginAssignOp--------[42, 12]-----
+	LOAD #1, R3	; loading 1 into memory
+	FLOAT R3, R3	; Doing an unary minus
+; --------StartStoreTableElements--------[42, 12]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  matInver the value in R3
+	PUSH R2
+	LOAD 2(LB), R2	; loading indexRow into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+; --------StartBinaryOp--------[42, 31]-----
+	PUSH R3
+	LOAD 1(LB), R3	; loading size into memory
+	ADD 2(LB), R3
+; --------EndBinaryOp--------[42, 31]-----
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 8(LB), R1	; [saving] loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[42, 12]-----
+; --------EndAssignOp--------[42, 12]-----
+; --------BeginAssignOp--------[43, 12]-----
+; --------StartBinaryOp--------[43, 21]-----
+	LOAD 2(LB), R3	; loading indexRow into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[43, 21]-----
+	STORE R3, 2(LB)	;  Assiging a value to indexRow
+	LOAD R3, R2	;  Return value of the assignement of =indexRowand storing it into R2
+; --------EndAssignOp--------[43, 12]-----
+	BRA while_begin3
+while_end3:
+; --------BeginAssignOp--------[47, 8]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 10(LB)	;  Assiging a value to inX
+	LOAD R3, R2	;  Return value of the assignement of =inXand storing it into R2
+; --------EndAssignOp--------[47, 8]-----
+; --------BeginAssignOp--------[48, 8]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 11(LB)	;  Assiging a value to inY
+	LOAD R3, R2	;  Return value of the assignement of =inYand storing it into R2
+; --------EndAssignOp--------[48, 8]-----
+	WSTR ""
+	WNL
+while_begin5:
+; --------StartBinaryOp--------[50, 15]-----
+	LOAD 10(LB), R2	; loading inX into memory
+; --------BeginSelection--------[50, 21]-----
+	LOAD 8(LB), R3	; loading matInver into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[50, 21]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[50, 15]-----
+	CMP #1, R2
+	BNE while_end5
+while_begin6:
+; --------StartBinaryOp--------[51, 19]-----
+	LOAD 11(LB), R2	; loading inY into memory
+; --------BeginSelection--------[51, 25]-----
+	LOAD 8(LB), R3	; loading matInver into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[51, 25]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[51, 19]-----
+	CMP #1, R2
+	BNE while_end6
+; --------StartGetTableElements--------[52, 22]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  matInver into memory at register R2
+	LOAD 10(LB), R3	; loading inX into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	PUSH R2
+	LOAD 11(LB), R2	; loading inY into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD 8(LB), R1	; loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R3
+	ADD R2, R3
+	LOAD 2(R1, R3), R0
+	POP R2
+	LOAD R0, R2
+; --------EndGetTableElements--------[52, 22]-----
+	LOAD R2, R1
+	WFLOAT
+	WSTR " "
+; --------BeginAssignOp--------[54, 16]-----
+; --------StartBinaryOp--------[54, 22]-----
+	LOAD 11(LB), R3	; loading inY into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[54, 22]-----
+	STORE R3, 11(LB)	;  Assiging a value to inY
+	LOAD R3, R2	;  Return value of the assignement of =inYand storing it into R2
+; --------EndAssignOp--------[54, 16]-----
+	BRA while_begin6
+while_end6:
+	WNL
+; --------BeginAssignOp--------[57, 12]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 11(LB)	;  Assiging a value to inY
+	LOAD R3, R2	;  Return value of the assignement of =inYand storing it into R2
+; --------EndAssignOp--------[57, 12]-----
+; --------BeginAssignOp--------[58, 12]-----
+; --------StartBinaryOp--------[58, 18]-----
+	LOAD 10(LB), R3	; loading inX into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[58, 18]-----
+	STORE R3, 10(LB)	;  Assiging a value to inX
+	LOAD R3, R2	;  Return value of the assignement of =inXand storing it into R2
+; --------EndAssignOp--------[58, 12]-----
+	BRA while_begin5
+while_end5:
+; --------BeginAssignOp--------[64, 8]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 3(LB)	;  Assiging a value to indexCol
+	LOAD R3, R2	;  Return value of the assignement of =indexColand storing it into R2
+; --------EndAssignOp--------[64, 8]-----
+; --------BeginAssignOp--------[65, 8]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 2(LB)	;  Assiging a value to indexRow
+	LOAD R3, R2	;  Return value of the assignement of =indexRowand storing it into R2
+; --------EndAssignOp--------[65, 8]-----
+while_begin7:
+; --------StartBinaryOp--------[66, 15]-----
+	LOAD 2(LB), R2	; loading indexRow into memory
+	CMP 1(LB), R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[66, 15]-----
+	CMP #1, R2
+	BNE while_end7
+; --------BeginAssignOp--------[67, 12]-----
+; --------StartGetTableElements--------[67, 18]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  matInver into memory at register R3
+	PUSH R2
+	LOAD 2(LB), R2	; loading indexRow into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 2(LB), R3	; loading indexRow into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 8(LB), R1	; loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD 2(R1, R2), R0
+	POP R3
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[67, 18]-----
+	STORE R3, 4(LB)	;  Assiging a value to tempo
+	LOAD R3, R2	;  Return value of the assignement of =tempoand storing it into R2
+; --------EndAssignOp--------[67, 12]-----
+; --------BeginAssignOp--------[68, 12]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 3(LB)	;  Assiging a value to indexCol
+	LOAD R3, R2	;  Return value of the assignement of =indexColand storing it into R2
+; --------EndAssignOp--------[68, 12]-----
+while_begin8:
+; --------StartBinaryOp--------[69, 18]-----
+	LOAD 3(LB), R2	; loading indexCol into memory
+; --------StartBinaryOp--------[69, 27]-----
+	LOAD #2, R3	; loading 2 into memory
+	MUL 1(LB), R3
+; --------EndBinaryOp--------[69, 27]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[69, 18]-----
+	CMP #1, R2
+	BNE while_end8
+; --------BeginAssignOp--------[70, 16]-----
+; --------StartBinaryOp--------[70, 45]-----
+; --------StartGetTableElements--------[70, 45]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  matInver into memory at register R3
+	PUSH R2
+	LOAD 2(LB), R2	; loading indexRow into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 3(LB), R3	; loading indexCol into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 8(LB), R1	; loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD 2(R1, R2), R0
+	POP R3
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[70, 45]-----
+	DIV 4(LB), R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[70, 45]-----
+; --------StartStoreTableElements--------[70, 16]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  matInver the value in R3
+	PUSH R2
+	LOAD 2(LB), R2	; loading indexRow into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 3(LB), R3	; loading indexCol into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 8(LB), R1	; [saving] loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[70, 16]-----
+; --------EndAssignOp--------[70, 16]-----
+; --------BeginAssignOp--------[72, 16]-----
+; --------StartBinaryOp--------[72, 25]-----
+	LOAD 3(LB), R3	; loading indexCol into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[72, 25]-----
+	STORE R3, 3(LB)	;  Assiging a value to indexCol
+	LOAD R3, R2	;  Return value of the assignement of =indexColand storing it into R2
+; --------EndAssignOp--------[72, 16]-----
+	BRA while_begin8
+while_end8:
+; --------BeginAssignOp--------[77, 12]-----
+; --------StartBinaryOp--------[77, 14]-----
+	LOAD 2(LB), R3	; loading indexRow into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[77, 14]-----
+	STORE R3, 7(LB)	;  Assiging a value to k
+	LOAD R3, R2	;  Return value of the assignement of =kand storing it into R2
+; --------EndAssignOp--------[77, 12]-----
+while_begin9:
+; --------StartBinaryOp--------[78, 19]-----
+	LOAD 7(LB), R2	; loading k into memory
+; --------BeginSelection--------[78, 21]-----
+	LOAD 8(LB), R3	; loading matInver into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[78, 21]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[78, 19]-----
+	CMP #1, R2
+	BNE while_end9
+; --------BeginAssignOp--------[79, 16]-----
+; --------StartGetTableElements--------[79, 23]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  matInver into memory at register R3
+	PUSH R2
+	LOAD 7(LB), R2	; loading k into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 2(LB), R3	; loading indexRow into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 8(LB), R1	; loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD 2(R1, R2), R0
+	POP R3
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[79, 23]-----
+	STORE R3, 5(LB)	;  Assiging a value to tempoK
+	LOAD R3, R2	;  Return value of the assignement of =tempoKand storing it into R2
+; --------EndAssignOp--------[79, 16]-----
+; --------BeginAssignOp--------[80, 16]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 3(LB)	;  Assiging a value to indexCol
+	LOAD R3, R2	;  Return value of the assignement of =indexColand storing it into R2
+; --------EndAssignOp--------[80, 16]-----
+while_begin10:
+; --------StartBinaryOp--------[81, 22]-----
+	LOAD 3(LB), R2	; loading indexCol into memory
+; --------BeginSelection--------[81, 31]-----
+	LOAD 8(LB), R3	; loading matInver into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[81, 31]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[81, 22]-----
+	CMP #1, R2
+	BNE while_end10
+; --------BeginAssignOp--------[82, 20]-----
+; --------StartBinaryOp--------[82, 42]-----
+; --------StartGetTableElements--------[82, 42]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  matInver into memory at register R3
+	PUSH R2
+	LOAD 7(LB), R2	; loading k into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 3(LB), R3	; loading indexCol into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 8(LB), R1	; loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD 2(R1, R2), R0
+	POP R3
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[82, 42]-----
+; --------StartBinaryOp--------[82, 64]-----
+; --------StartGetTableElements--------[82, 64]-----
+	PUSH R2
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  matInver into memory at register R2
+	PUSH R3
+	LOAD 2(LB), R3	; loading indexRow into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	PUSH R2
+	LOAD 3(LB), R2	; loading indexCol into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD 8(LB), R1	; loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R3
+	ADD R2, R3
+	LOAD 2(R1, R3), R0
+	POP R2
+	POP R3
+	LOAD R0, R2
+; --------EndGetTableElements--------[82, 64]-----
+	MUL 5(LB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[82, 64]-----
+	SUB R2, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R2
+; --------EndBinaryOp--------[82, 42]-----
+; --------StartStoreTableElements--------[82, 20]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  matInver the value in R3
+	PUSH R2
+	LOAD 7(LB), R2	; loading k into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 3(LB), R3	; loading indexCol into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 8(LB), R1	; [saving] loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[82, 20]-----
+; --------EndAssignOp--------[82, 20]-----
+; --------BeginAssignOp--------[84, 20]-----
+; --------StartBinaryOp--------[84, 29]-----
+	LOAD 3(LB), R3	; loading indexCol into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[84, 29]-----
+	STORE R3, 3(LB)	;  Assiging a value to indexCol
+	LOAD R3, R2	;  Return value of the assignement of =indexColand storing it into R2
+; --------EndAssignOp--------[84, 20]-----
+	BRA while_begin10
+while_end10:
+; --------BeginAssignOp--------[87, 16]-----
+; --------StartBinaryOp--------[87, 18]-----
+	LOAD 7(LB), R3	; loading k into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[87, 18]-----
+	STORE R3, 7(LB)	;  Assiging a value to k
+	LOAD R3, R2	;  Return value of the assignement of =kand storing it into R2
+; --------EndAssignOp--------[87, 16]-----
+	BRA while_begin9
+while_end9:
+; --------BeginAssignOp--------[92, 12]-----
+; --------StartBinaryOp--------[92, 21]-----
+	LOAD 2(LB), R3	; loading indexRow into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[92, 21]-----
+	STORE R3, 2(LB)	;  Assiging a value to indexRow
+	LOAD R3, R2	;  Return value of the assignement of =indexRowand storing it into R2
+; --------EndAssignOp--------[92, 12]-----
+	BRA while_begin7
+while_end7:
+; --------BeginAssignOp--------[95, 8]-----
+; --------StartBinaryOp--------[95, 17]-----
+; --------BeginSelection--------[95, 17]-----
+	LOAD 8(LB), R3	; loading matInver into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[95, 17]-----
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	SUB R2, R3
+	POP R2
+; --------EndBinaryOp--------[95, 17]-----
+	STORE R3, 2(LB)	;  Assiging a value to indexRow
+	LOAD R3, R2	;  Return value of the assignement of =indexRowand storing it into R2
+; --------EndAssignOp--------[95, 8]-----
+while_begin11:
+; --------StartBinaryOp--------[96, 15]-----
+	LOAD 2(LB), R2	; loading indexRow into memory
+	LOAD #0, R3	; loading 0 into memory
+	CMP R3, R2	; Comparing registers for GreaterOrEqual operation 
+	SGE R2	; Placing GreaterOrEqual result into the register  
+; --------EndBinaryOp--------[96, 15]-----
+	CMP #1, R2
+	BNE while_end11
+; --------BeginAssignOp--------[97, 12]-----
+; --------StartBinaryOp--------[97, 14]-----
+	LOAD 2(LB), R3	; loading indexRow into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	SUB R2, R3
+	POP R2
+; --------EndBinaryOp--------[97, 14]-----
+	STORE R3, 7(LB)	;  Assiging a value to k
+	LOAD R3, R2	;  Return value of the assignement of =kand storing it into R2
+; --------EndAssignOp--------[97, 12]-----
+while_begin12:
+; --------StartBinaryOp--------[98, 18]-----
+	LOAD 7(LB), R2	; loading k into memory
+	LOAD #0, R3	; loading 0 into memory
+	CMP R3, R2	; Comparing registers for GreaterOrEqual operation 
+	SGE R2	; Placing GreaterOrEqual result into the register  
+; --------EndBinaryOp--------[98, 18]-----
+	CMP #1, R2
+	BNE while_end12
+; --------BeginAssignOp--------[99, 16]-----
+; --------StartGetTableElements--------[99, 23]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  matInver into memory at register R3
+	PUSH R2
+	LOAD 7(LB), R2	; loading k into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 2(LB), R3	; loading indexRow into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 8(LB), R1	; loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD 2(R1, R2), R0
+	POP R3
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[99, 23]-----
+	STORE R3, 6(LB)	;  Assiging a value to buffer
+	LOAD R3, R2	;  Return value of the assignement of =bufferand storing it into R2
+; --------EndAssignOp--------[99, 16]-----
+; --------BeginAssignOp--------[100, 16]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 3(LB)	;  Assiging a value to indexCol
+	LOAD R3, R2	;  Return value of the assignement of =indexColand storing it into R2
+; --------EndAssignOp--------[100, 16]-----
+while_begin13:
+; --------StartBinaryOp--------[101, 23]-----
+	LOAD 3(LB), R2	; loading indexCol into memory
+; --------BeginSelection--------[101, 32]-----
+	LOAD 8(LB), R3	; loading matInver into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[101, 32]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[101, 23]-----
+	CMP #1, R2
+	BNE while_end13
+; --------BeginAssignOp--------[102, 20]-----
+; --------StartBinaryOp--------[102, 43]-----
+; --------StartGetTableElements--------[102, 43]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  matInver into memory at register R3
+	PUSH R2
+	LOAD 7(LB), R2	; loading k into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 3(LB), R3	; loading indexCol into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 8(LB), R1	; loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD 2(R1, R2), R0
+	POP R3
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[102, 43]-----
+; --------StartBinaryOp--------[102, 65]-----
+; --------StartGetTableElements--------[102, 65]-----
+	PUSH R2
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  matInver into memory at register R2
+	PUSH R3
+	LOAD 2(LB), R3	; loading indexRow into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	PUSH R2
+	LOAD 3(LB), R2	; loading indexCol into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD 8(LB), R1	; loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R3
+	ADD R2, R3
+	LOAD 2(R1, R3), R0
+	POP R2
+	POP R3
+	LOAD R0, R2
+; --------EndGetTableElements--------[102, 65]-----
+	MUL 6(LB), R2
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+; --------EndBinaryOp--------[102, 65]-----
+	SUB R2, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R2
+; --------EndBinaryOp--------[102, 43]-----
+; --------StartStoreTableElements--------[102, 20]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  matInver the value in R3
+	PUSH R2
+	LOAD 7(LB), R2	; loading k into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 3(LB), R3	; loading indexCol into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 8(LB), R1	; [saving] loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[102, 20]-----
+; --------EndAssignOp--------[102, 20]-----
+; --------BeginAssignOp--------[103, 20]-----
+; --------StartBinaryOp--------[103, 29]-----
+	LOAD 3(LB), R3	; loading indexCol into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[103, 29]-----
+	STORE R3, 3(LB)	;  Assiging a value to indexCol
+	LOAD R3, R2	;  Return value of the assignement of =indexColand storing it into R2
+; --------EndAssignOp--------[103, 20]-----
+	BRA while_begin13
+while_end13:
+; --------BeginAssignOp--------[106, 16]-----
+; --------StartBinaryOp--------[106, 18]-----
+	LOAD 7(LB), R3	; loading k into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	SUB R2, R3
+	POP R2
+; --------EndBinaryOp--------[106, 18]-----
+	STORE R3, 7(LB)	;  Assiging a value to k
+	LOAD R3, R2	;  Return value of the assignement of =kand storing it into R2
+; --------EndAssignOp--------[106, 16]-----
+	BRA while_begin12
+while_end12:
+; --------BeginAssignOp--------[110, 12]-----
+; --------StartBinaryOp--------[110, 21]-----
+	LOAD 2(LB), R3	; loading indexRow into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	SUB R2, R3
+	POP R2
+; --------EndBinaryOp--------[110, 21]-----
+	STORE R3, 2(LB)	;  Assiging a value to indexRow
+	LOAD R3, R2	;  Return value of the assignement of =indexRowand storing it into R2
+; --------EndAssignOp--------[110, 12]-----
+	BRA while_begin11
+while_end11:
+; --------BeginAssignOp--------[114, 8]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 10(LB)	;  Assiging a value to inX
+	LOAD R3, R2	;  Return value of the assignement of =inXand storing it into R2
+; --------EndAssignOp--------[114, 8]-----
+; --------BeginAssignOp--------[115, 8]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 11(LB)	;  Assiging a value to inY
+	LOAD R3, R2	;  Return value of the assignement of =inYand storing it into R2
+; --------EndAssignOp--------[115, 8]-----
+while_begin14:
+; --------StartBinaryOp--------[116, 14]-----
+	LOAD 10(LB), R2	; loading inX into memory
+	CMP 1(LB), R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[116, 14]-----
+	CMP #1, R2
+	BNE while_end14
+; --------BeginAssignOp--------[117, 12]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 11(LB)	;  Assiging a value to inY
+	LOAD R3, R2	;  Return value of the assignement of =inYand storing it into R2
+; --------EndAssignOp--------[117, 12]-----
+while_begin15:
+; --------StartBinaryOp--------[118, 19]-----
+	LOAD 11(LB), R2	; loading inY into memory
+	CMP 1(LB), R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[118, 19]-----
+	CMP #1, R2
+	BNE while_end15
+; --------BeginAssignOp--------[119, 16]-----
+; --------StartGetTableElements--------[119, 41]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  matInver into memory at register R3
+	PUSH R2
+	LOAD 10(LB), R2	; loading inX into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+; --------StartBinaryOp--------[119, 55]-----
+	PUSH R3
+	LOAD 1(LB), R3	; loading size into memory
+	ADD 11(LB), R3
+; --------EndBinaryOp--------[119, 55]-----
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 8(LB), R1	; loading matInver into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInver into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInver into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD 2(R1, R2), R0
+	POP R3
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[119, 41]-----
+; --------StartStoreTableElements--------[119, 16]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  matInverResult the value in R3
+	PUSH R2
+	LOAD 10(LB), R2	; loading inX into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 11(LB), R3	; loading inY into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 9(LB), R1	; [saving] loading matInverResult into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of matInverResult into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of matInverResult into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[119, 16]-----
+; --------EndAssignOp--------[119, 16]-----
+; --------BeginAssignOp--------[120, 16]-----
+; --------StartBinaryOp--------[120, 20]-----
+	LOAD 11(LB), R3	; loading inY into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[120, 20]-----
+	STORE R3, 11(LB)	;  Assiging a value to inY
+	LOAD R3, R2	;  Return value of the assignement of =inYand storing it into R2
+; --------EndAssignOp--------[120, 16]-----
+	BRA while_begin15
+while_end15:
+; --------BeginAssignOp--------[122, 12]-----
+; --------StartBinaryOp--------[122, 16]-----
+	LOAD 10(LB), R3	; loading inX into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[122, 16]-----
+	STORE R3, 10(LB)	;  Assiging a value to inX
+	LOAD R3, R2	;  Return value of the assignement of =inXand storing it into R2
+; --------EndAssignOp--------[122, 12]-----
+	BRA while_begin14
+while_end14:
+	LOAD 9(LB), R2	; loading matInverResult into memory
+	LOAD R2, R0
+	BRA fin.MatrixTraitement.calculate
+	WSTR "Error: La méthode code.MatrixTraitement.calculate doit retourner un element"
+	WNL
+	ERROR
+fin.MatrixTraitement.calculate:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+table_dimension_are_not_respected:
+	WSTR "Error: table_dimension_are_not_respected"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error: overflow_error"
+	WNL
+	ERROR
+int_selection_table_must_be_positive:
+	WSTR "Error: int_selection_table_must_be_positive"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+int_allocation_table_must_be_strictly_positive:
+	WSTR "Error: int_allocation_table_must_be_strictly_positive"
+	WNL
+	ERROR
+; end main program

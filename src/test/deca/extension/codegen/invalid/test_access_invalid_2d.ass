@@ -30,11 +30,11 @@
 ; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  x the value in R3
 	LOAD #10, R4	; loading 10 into memory
 	LOAD #15, R5	; loading 15 into memory
-	LOAD 1(GB), R1	; loading x into memory
+	LOAD 1(GB), R1	; [saving] loading x into memory
 	LOAD 0(R1), R0	; loading size 1d of x into memory
-	MUL R0, R4
 	LOAD 1(R1), R0	; loading size 2d of x into memory
-	ADD R5, R4	; adding index_y to size1D*index_x
+	MUL R0, R4
+	ADD R5, R4
 	LOAD R4, R0
 	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
 ; --------EndStoreTableElements--------[11, 4]-----
@@ -49,9 +49,11 @@
 ; ------------------Start generateCodeForObjectEquals location:
 code.Object.equals:
 	LOAD -2(LB), R0
-	CMP -3(LB), R0
+	CMP R1, R0
 	SEQ R0	; Comparaison this et paramètre d'equals
 fin.Object.equals:
+	RTS
+init.Object:
 	RTS
 ; -------------------------------------
 ;        Liste Erreur

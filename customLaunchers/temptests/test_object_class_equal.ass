@@ -1,0 +1,94 @@
+	TSTO #7
+	BOV stack_overflow_error
+	ADDSP #4
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[11, 20]-----
+; [New][loadItemintoRegister] loading new of calss =  Object into memory at register R2
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Object
+	POP R2
+; --------EndNew--------[11, 20]-----
+	STORE R2, 1(GB)	; Initializing the variable object and loading it into memory
+; --------StartNew--------[12, 21]-----
+; [New][loadItemintoRegister] loading new of calss =  Object into memory at register R2
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Object
+	POP R2
+; --------EndNew--------[12, 21]-----
+	STORE R2, 2(GB)	; Initializing the variable object1 and loading it into memory
+; --------BeginMethodCall--------[13, 10]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading object into memory
+	STORE R2, 0(SP)
+	LOAD 2(GB), R2	; loading object1 into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 1(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[13, 10]-----
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+; ---------Startif-----------[13, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else1
+	WSTR "equals method work"
+	WNL
+	BRA end_ifthenelse_1
+else1:
+end_ifthenelse_1:
+; ---------Endif-----------
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

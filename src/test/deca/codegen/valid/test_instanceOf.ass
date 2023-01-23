@@ -107,18 +107,12 @@
 ; --------EndNew--------[35, 10]-----
 	STORE R2, 14(GB)	; Initializing the variable p and loading it into memory
 ; --------------BeginInstanceof----------[36, 7]+-----
-	WSTR "START instanceof"
-	WNL
 	LEA 17(GB), R0	; loading method table of A
 	LEA 19(GB), R1	; loading method table of B
 	CMP R1, R0
 	BEQ instanceOf_Object1	; si les deux classes sont les mêmes , on retourne immédiatement true
 	LOAD 11(GB), R2	; loading b into memory
-	WSTR "BEFORE LOOP"
-	WNL
 loopbegin1:
-	WSTR "INSIDE LOOP"
-	WNL
 	CMP R0, R2
 	BEQ instanceOf_Object1	; loopend
 	LOAD 0(R2), R2
@@ -126,18 +120,12 @@ loopbegin1:
 	BEQ endfalse1
 	BRA loopbegin1
 instanceOf_Object1:
-	WSTR "TRUE "
-	WNL
 	LOAD #1, R0
 	BRA endtrue1
 endfalse1:
-	WSTR "FALSE "
-	WNL
 	LOAD #0, R0
 endtrue1:
 	LOAD R0, R2
-	WSTR "END instanceof"
-	WNL
 ; --------------EndInstanceof----------[36, 7]-----
 ; ---------Startif-----------[36, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
@@ -149,18 +137,12 @@ else1:
 end_ifthenelse_1:
 ; ---------Endif-----------
 ; --------------BeginInstanceof----------[50, 7]+-----
-	WSTR "START instanceof"
-	WNL
 	LEA 19(GB), R0	; loading method table of B
 	LEA 17(GB), R1	; loading method table of A
 	CMP R1, R0
 	BEQ instanceOf_Object2	; si les deux classes sont les mêmes , on retourne immédiatement true
 	LOAD 10(GB), R2	; loading a into memory
-	WSTR "BEFORE LOOP"
-	WNL
 loopbegin2:
-	WSTR "INSIDE LOOP"
-	WNL
 	CMP R0, R2
 	BEQ instanceOf_Object2	; loopend
 	LOAD 0(R2), R2
@@ -168,18 +150,12 @@ loopbegin2:
 	BEQ endfalse2
 	BRA loopbegin2
 instanceOf_Object2:
-	WSTR "TRUE "
-	WNL
 	LOAD #1, R0
 	BRA endtrue2
 endfalse2:
-	WSTR "FALSE "
-	WNL
 	LOAD #0, R0
 endtrue2:
 	LOAD R0, R2
-	WSTR "END instanceof"
-	WNL
 ; --------------EndInstanceof----------[50, 7]-----
 ; ---------Startif-----------[50, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
@@ -193,18 +169,12 @@ else2:
 end_ifthenelse_2:
 ; ---------Endif-----------
 ; --------------BeginInstanceof----------[57, 7]+-----
-	WSTR "START instanceof"
-	WNL
 	LEA 17(GB), R0	; loading method table of A
 	LEA 25(GB), R1	; loading method table of H
 	CMP R1, R0
 	BEQ instanceOf_Object3	; si les deux classes sont les mêmes , on retourne immédiatement true
 	LOAD 14(GB), R2	; loading p into memory
-	WSTR "BEFORE LOOP"
-	WNL
 loopbegin3:
-	WSTR "INSIDE LOOP"
-	WNL
 	CMP R0, R2
 	BEQ instanceOf_Object3	; loopend
 	LOAD 0(R2), R2
@@ -212,18 +182,12 @@ loopbegin3:
 	BEQ endfalse3
 	BRA loopbegin3
 instanceOf_Object3:
-	WSTR "TRUE "
-	WNL
 	LOAD #1, R0
 	BRA endtrue3
 endfalse3:
-	WSTR "FALSE "
-	WNL
 	LOAD #0, R0
 endtrue3:
 	LOAD R0, R2
-	WSTR "END instanceof"
-	WNL
 ; --------------EndInstanceof----------[57, 7]-----
 ; ---------Startif-----------[57, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
@@ -235,18 +199,12 @@ else3:
 end_ifthenelse_3:
 ; ---------Endif-----------
 ; --------------BeginInstanceof----------[61, 10]+-----
-	WSTR "START instanceof"
-	WNL
 	LEA 23(GB), R0	; loading method table of D
 	LEA 21(GB), R1	; loading method table of C
 	CMP R1, R0
 	BEQ instanceOf_Object4	; si les deux classes sont les mêmes , on retourne immédiatement true
 	LOAD 12(GB), R2	; loading c into memory
-	WSTR "BEFORE LOOP"
-	WNL
 loopbegin4:
-	WSTR "INSIDE LOOP"
-	WNL
 	CMP R0, R2
 	BEQ instanceOf_Object4	; loopend
 	LOAD 0(R2), R2
@@ -254,18 +212,12 @@ loopbegin4:
 	BEQ endfalse4
 	BRA loopbegin4
 instanceOf_Object4:
-	WSTR "TRUE "
-	WNL
 	LOAD #1, R0
 	BRA endtrue4
 endfalse4:
-	WSTR "FALSE "
-	WNL
 	LOAD #0, R0
 endtrue4:
 	LOAD R0, R2
-	WSTR "END instanceof"
-	WNL
 ; --------------EndInstanceof----------[61, 10]-----
 	CMP #0, R2	; Applying not operand
 	SEQ R2	; Applying not operand
@@ -344,7 +296,7 @@ init.H:
 ; ------------------Start generateCodeForObjectEquals location:
 code.Object.equals:
 	LOAD -2(LB), R0
-	CMP R1, R0
+	CMP -3(LB), R0
 	SEQ R0	; Comparaison this et paramètre d'equals
 fin.Object.equals:
 	RTS
