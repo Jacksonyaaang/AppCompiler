@@ -1,0 +1,56 @@
+	ADDSP #4
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+	LOAD #5, R2	; loading 5 into memory
+	STORE R2, 1(GB)	; Initializing the variable x and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 2(GB)	; Initializing the variable y and loading it into memory
+; --------BeginAssignOp--------[11, 4]-----
+; --------StartBinaryOp--------[11, 8]-----
+	LOAD 1(GB), R3	; loading x into memory
+	LOAD #0, R0
+	CMP 2(GB), R0
+	BEQ div0_error	; Checking for modulo by 0 the operation is between two ints 
+	REM 2(GB), R3
+; --------EndBinaryOp--------[11, 8]-----
+	STORE R3, 1(GB)	;  Assiging a value to x
+	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
+; --------EndAssignOp--------[11, 4]-----
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+div0_error:
+	WSTR "Error: div0_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

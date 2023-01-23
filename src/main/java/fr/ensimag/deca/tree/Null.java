@@ -8,6 +8,7 @@ import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 import org.apache.log4j.Logger;
@@ -34,7 +35,7 @@ public class Null extends AbstractExpr{
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister reg)  throws CodeGenError{
         assert(reg != null);
         LOG.debug("[Null][loadItemintoRegister] loading 0 into the register " + reg);
-        compiler.addInstruction(new LOAD(new ImmediateInteger(0) , reg),
+        compiler.addInstruction(new LOAD(new NullOperand() , reg),
                                      "loading 0 into the register for null expr"); 
     }
 

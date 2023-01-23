@@ -35,7 +35,7 @@
 ; ------------------Start generateCodeForObjectEquals location:
 code.Object.equals:
 	LOAD -2(LB), R0
-	CMP R1, R0
+	CMP -3(LB), R0
 	SEQ R0	; Comparaison this et paramètre d'equals
 fin.Object.equals:
 	RTS

@@ -10,6 +10,7 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
@@ -64,7 +65,12 @@ public class InstanceOf extends AbstractExpr {
         Label instanceOfObject = new Label("instanceOf_Object"+compiler.getInstanceOfIncrementer());
         
         if (expr.getType().isNull()){
-            compiler.addInstruction(new BRA(instanceOfObject));
+            this.expr.codeGenInst(compiler);
+            GPRegister regLoop = expr.getRegisterDeRetour();
+            compiler.addInstruction(new LOAD(new ImmediateInteger(0), regLoop));
+            this.setRegisterDeRetour(regLoop);
+            this.transferPopRegisters(expr.getRegisterToPop());
+            return ;
         }
 
         //compiler.addInstruction(new WSTR("START instanceof"));

@@ -1,0 +1,31 @@
+// Description:
+//    Test de tout les cas de cast normalement correctes
+// Resultats attendu:
+// test cast
+//
+// Historique:
+// 
+
+
+class A{
+    int i;
+}
+
+
+{
+    A a=new A();
+    A b=new A();
+    int i,j;
+    float f=3.5;
+    i=1;
+    a.i=1;
+    b.i=2;
+    a=(A) (b);
+    println(a.i);
+    j=(int) (i);
+    println(j);
+    j=(int) (f);
+    println(j);
+    f=(float) (i);
+    println(f);
+}

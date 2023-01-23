@@ -1,0 +1,26 @@
+// Description:
+//    Test overflow, division des entiers
+// Resultats:
+// Erreur : bad_cast 
+// Historique:
+//    cree le 01/01/2023
+
+class B{
+    int x;
+    int f(){
+        
+    }
+}
+class A{
+    B b;
+    int f(){
+        
+    }
+}
+
+{
+    B b=new B();
+    A a1 =  new A(); 
+        
+    b = (B) (null);
+}

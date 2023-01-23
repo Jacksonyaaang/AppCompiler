@@ -50,6 +50,8 @@
 	LOAD #1, R3	; loading 1 into memory
 	PUSH R2
 	LOAD 1(GB), R2	; loading a into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
 	STORE R3, 1(R2)	; Saving field  i into memory
 	POP R2
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
@@ -58,6 +60,8 @@
 	LOAD #2, R3	; loading 2 into memory
 	PUSH R2
 	LOAD 2(GB), R2	; loading b into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
 	STORE R3, 1(R2)	; Saving field  i into memory
 	POP R2
 	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2

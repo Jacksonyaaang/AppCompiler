@@ -1,0 +1,41 @@
+#include "Produit_Matriciel_Naif.decah"
+{
+    MatrixMultiplication matrixMult = new MatrixMultiplication();
+    int[][] a = new int[3][3];
+    int[][] d = new int[3][3];
+    int[][] intRes = new int[3][3];
+    float[][] b = new float[3][3];
+    float[][] c = new float[3][3];
+    float[][] floatRes = new float[3][3];
+
+    println("Test produit matriciel int");
+    matrixMult.setInt2DTable(a,5);
+    matrixMult.setInt2DTable(d,3);
+    println("----------");
+    println("1");
+    intRes = matrixMult.naiveMultiplyInt(a,d);
+    println("----------");
+    println("1");
+    matrixMult.printInt2DTable(intRes);
+    println("----------");
+
+    matrixMult.setInt2DTable(a,5);
+    a[0][0] = 2;
+    a[1][1] = 2;
+    a[2][2] = 2;
+    intRes = matrixMult.naiveMultiplyInt(a,d);
+    matrixMult.printInt2DTable(intRes);
+
+    println("Test produit matriciel float");
+    matrixMult.setFloat2DTable(b,5.5);
+    matrixMult.setFloat2DTable(c,3.2);
+    floatRes = matrixMult.naiveMultiplyFloat(b,c);
+    matrixMult.printFloat2DTable(floatRes);
+
+    matrixMult.setFloat2DTable(b,5.5);
+    b[0][0] = 2.5;
+    b[1][1] = 3.5;
+    b[2][2] = 0.5;
+    floatRes = matrixMult.naiveMultiplyFloat(b,c);
+    matrixMult.printFloat2DTable(floatRes);
+}

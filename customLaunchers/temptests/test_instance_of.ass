@@ -243,12 +243,16 @@ end_ifthenelse_8:
 ; --------BeginAssignOp--------[59, 4]-----
 	LOAD #5, R3	; loading 5 into memory
 	LOAD 1(GB), R4	; loading test1 into memory
+	CMP #null, R4
+	BEQ deref_null_error	; Checking if the class identifier is null
 	STORE R3, 1(R4)	; Saving field  x into memory
 	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
 ; --------EndAssignOp--------[59, 4]-----
 ; --------BeginAssignOp--------[60, 4]-----
 	LOAD #5, R3	; loading 5 into memory
 	LOAD 2(GB), R4	; loading test5 into memory
+	CMP #null, R4
+	BEQ deref_null_error	; Checking if the class identifier is null
 	STORE R3, 1(R4)	; Saving field  x into memory
 	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
 ; --------EndAssignOp--------[60, 4]-----
@@ -559,7 +563,7 @@ init.D:
 ; ------------------Start generateCodeForObjectEquals location:
 code.Object.equals:
 	LOAD -2(LB), R0
-	CMP R1, R0
+	CMP -3(LB), R0
 	SEQ R0	; Comparaison this et paramètre d'equals
 fin.Object.equals:
 	RTS
