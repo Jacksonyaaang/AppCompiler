@@ -1,0 +1,12 @@
+// Description:
+// Test les deux read expr; readInt et readfloat
+// Resultats:
+// Pour le input : retourn l'element de l'entree 
+// Historique:
+//    cree le 01/01/2023
+/* */ 
+
+{
+    int a = readInt();
+    println(a);
+}

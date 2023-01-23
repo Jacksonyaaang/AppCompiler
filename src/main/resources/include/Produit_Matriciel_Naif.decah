@@ -42,11 +42,11 @@ class MatrixMultiplication extends Math{
         int k = 0;
         int s = 0;
         MatrixMultiplication matrixMult = new MatrixMultiplication();
-        int n = a.size2D;
-        int m = b.size1D;
-        int p = b.size2D;
+        int n = a.size1D;
+        int m = b.size2D;
+        int p = b.size1D;
 
-        if (a.size1D != b.size2D) {
+        if (a.size2D != b.size1D) {
             println("Taille de matrice incompatible avec le produit matriciel:", a.size1D, " != ", b.size2D);
             dimensionIncompatible();
         }

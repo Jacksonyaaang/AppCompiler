@@ -4,7 +4,7 @@ import java.util.HashMap;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import fr.ensimag.ima.pseudocode.instructions.WNL;
-import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Label; 
 import fr.ensimag.ima.pseudocode.instructions.ERROR;
 import org.apache.log4j.Logger;
 

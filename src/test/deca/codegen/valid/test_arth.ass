@@ -288,7 +288,8 @@
 ; --------EndBinaryOp--------[35, 6]-----
 	PUSH R2
 	LOAD #2, R2	; loading 2 into memory
-	CMP #0, R3
+	LOAD #0, R0
+	CMP R2, R0
 	BEQ div0_error	; Checking for modulo by 0 the operation is between two ints 
 	REM R2, R3
 	POP R2

@@ -1,0 +1,25 @@
+// Description:
+//    Test le retrun d'une méthode
+// Resultats:
+// Erreur : deref_null_error 
+// Historique:
+//    cree le 01/01/2023
+
+class B{
+    int x;
+    int f(){
+        
+    }
+}
+class A{
+    B b;
+    int f(){
+        
+    }
+}
+
+{
+    B b=new B();
+    A a1 =  new A(); 
+    int x = a1.f();
+}

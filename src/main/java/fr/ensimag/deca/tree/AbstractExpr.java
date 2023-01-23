@@ -225,7 +225,7 @@ public abstract class AbstractExpr extends AbstractInst {
             return cF;
         }
         else if (expectedType.isClass() && typeR.isClassOrNull()){
-            if (!((ClassType)typeR).isSubClassOf((ClassType)expectedType)){
+            if (!typeR.isNull() &&!((ClassType)typeR).isSubClassOf((ClassType)expectedType)){
                 throw new ContextualError("Le type de l'expression de droite est " + typeR + " alors que le type attendu est " + expectedType, getLocation());
             }else return this;
         }

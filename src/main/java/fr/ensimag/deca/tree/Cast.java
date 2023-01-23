@@ -92,8 +92,7 @@ public class Cast extends AbstractExpr{
                     throw new ContextualError("On ne peut que convertir un Int en Float et vice-versa", getLocation());
         }
         else if ((t1.isClass() && t2.isClass() && !((ClassType)t1).isSubClassOf((ClassType)t2) &&
-                 !((ClassType)t2).isSubClassOf((ClassType)t1)) || t2.isNull() ||
-                 (t1.isNull() && !t2.isClass())){
+                 !((ClassType)t2).isSubClassOf((ClassType)t1))  || t1.isNull() ){
                 throw new ContextualError("Cast impossible entre ces deux types", getLocation());
         }
         //return compiler.environmentType.FLOAT;

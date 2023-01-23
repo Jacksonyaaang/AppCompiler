@@ -1,0 +1,12 @@
+// Description:
+//    Test  division des entiers
+// Resultats:
+// Erreur : division par 0 
+// Historique:
+//    cree le 01/01/2023
+
+{
+    int x = 5;
+    int y = 0;
+    x = x%y;
+}

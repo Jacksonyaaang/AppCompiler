@@ -1,0 +1,6 @@
+{    
+    int[][] a = new int[3][2];
+    a[0][2] = 5;
+    println(a[0][2]);
+    println(a[0][2]);
+}

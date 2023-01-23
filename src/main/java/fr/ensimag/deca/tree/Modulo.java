@@ -6,8 +6,10 @@ import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.REM;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
 
 import org.apache.log4j.Logger;
 
@@ -51,7 +53,8 @@ public class Modulo extends AbstractOpArith {
                     +val + " and " + resultRegister);
 
         DVal literal0 = new ImmediateInteger(0);
-        compiler.addInstruction(new CMP(literal0, resultRegister));                                            
+        compiler.addInstruction(new LOAD(literal0, Register.getR(0) ));                                            
+        compiler.addInstruction(new CMP(val, Register.getR(0) ));                                            
         compiler.addInstruction(new BEQ(new Label("div0_error")), "Checking for modulo by 0 "
                                     +"the operation is between two ints ");
         compiler.getErrorManagementUnit().activeError("div0_error");

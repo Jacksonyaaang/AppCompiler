@@ -15,17 +15,18 @@
 // Historique:
 //    cree le 20/01/2023
 class A {
-    protected int x, y ;
+    protected int x;
+    protected float y;
     float z;
     int getX() {
         return x ;
     }
-    void setXY(int x, int y) {
+    void setXY(int x, float y) {
         this.x = x ;
         this.y = y ;
     }
 
-    int getY(){
+    float getY(){
         return y;
     }
 }

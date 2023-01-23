@@ -82,7 +82,8 @@
 	WNL
 ; --------StartBinaryOp--------[43, 12]-----
 	LOAD 2(GB), R2	; loading y into memory
-	CMP #0, R2
+	LOAD #0, R0
+	CMP 1(GB), R0
 	BEQ div0_error	; Checking for modulo by 0 the operation is between two ints 
 	REM 1(GB), R2
 ; --------EndBinaryOp--------[43, 12]-----
@@ -91,7 +92,8 @@
 	WNL
 ; --------StartBinaryOp--------[44, 12]-----
 	LOAD 1(GB), R2	; loading x into memory
-	CMP #0, R2
+	LOAD #0, R0
+	CMP 2(GB), R0
 	BEQ div0_error	; Checking for modulo by 0 the operation is between two ints 
 	REM 2(GB), R2
 ; --------EndBinaryOp--------[44, 12]-----

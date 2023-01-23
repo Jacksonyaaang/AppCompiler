@@ -1,32 +1,109 @@
-	TSTO #10
+	TSTO #12
 	BOV stack_overflow_error
-	ADDSP #10
+	ADDSP #9
 ; start main program
 ; -------------------------------------
 ;        Method Table
 ; -------------------------------------
 	LOAD #null, R0
-	STORE R0, 2(GB)
-	LOAD code.Object.equals, R0
-	STORE R0, 3(GB)
-	LEA 2(GB), R0
 	STORE R0, 4(GB)
 	LOAD code.Object.equals, R0
 	STORE R0, 5(GB)
-	LEA 2(GB), R0
+	LEA 4(GB), R0
 	STORE R0, 6(GB)
 	LOAD code.Object.equals, R0
 	STORE R0, 7(GB)
-	LEA 2(GB), R0
+	LEA 4(GB), R0
 	STORE R0, 8(GB)
 	LOAD code.Object.equals, R0
 	STORE R0, 9(GB)
-	LOAD code.C.test, R0
-	STORE R0, 10(GB)
 ; -------------------------------------
 ;        Main program
 ; -------------------------------------
 ; Beginning of main instructions:
+; --------StartNew--------[11, 8]-----
+; [New][loadItemintoRegister] loading new of calss =  B into memory at register R2
+	NEW #2, R2
+	BOV heap_overflow_error
+	LEA 6(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.B
+	POP R2
+; --------EndNew--------[11, 8]-----
+	STORE R2, 1(GB)	; Initializing the variable b and loading it into memory
+; --------StartNew--------[12, 12]-----
+; [New][loadItemintoRegister] loading new of calss =  A into memory at register R2
+	NEW #2, R2
+	BOV heap_overflow_error
+	LEA 8(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+; --------EndNew--------[12, 12]-----
+	STORE R2, 2(GB)	; Initializing the variable a1 and loading it into memory
+; --------StartNew--------[13, 12]-----
+; [New][loadItemintoRegister] loading new of calss =  A into memory at register R2
+	NEW #2, R2
+	BOV heap_overflow_error
+	LEA 8(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+; --------EndNew--------[13, 12]-----
+	STORE R2, 3(GB)	; Initializing the variable a2 and loading it into memory
+; --------BeginAssignOp--------[14, 4]-----
+	LOAD #null, R3	; loading 0 into the register for null expr
+	STORE R3, 1(GB)	;  Assiging a value to b
+	LOAD R3, R2	;  Return value of the assignement of =band storing it into R2
+; --------EndAssignOp--------[14, 4]-----
+; --------BeginAssignOp--------[15, 4]-----
+; --------StartNew--------[15, 11]-----
+; [New][loadItemintoRegister] loading new of calss =  B into memory at register R3
+	NEW #2, R3
+	BOV heap_overflow_error
+	LEA 6(GB), R0
+	STORE R0, 0(R3)
+	PUSH R3
+	BSR init.B
+	POP R3
+; --------EndNew--------[15, 11]-----
+	LOAD 3(GB), R4	; loading a2 into memory
+	CMP #null, R4
+	BEQ deref_null_error	; Checking if the class identifier is null
+	STORE R3, 1(R4)	; Saving field  b into memory
+	LOAD R3, R2	;  Return value of the assignement of =band storing it into R2
+; --------EndAssignOp--------[15, 4]-----
+; --------StartBinaryOp--------[16, 10]-----
+	LOAD 2(GB), R2	; loading a1 into memory
+	CMP 3(GB), R2	; Comparing registers for Equals operation 
+	SEQ R2	; Placing Equals result into the register  
+; --------EndBinaryOp--------[16, 10]-----
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+; ---------Startif-----------[16, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else1
+	WSTR "egalité adresse fonctionne"
+	WNL
+	BRA end_ifthenelse_1
+else1:
+end_ifthenelse_1:
+; ---------Endif-----------
+; --------------BeginInstanceof----------[19, 8]+-----
+	LOAD #null, R2	; loading 0 into the register for null expr
+	LOAD #0, R2
+; ---------Startif-----------[19, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else2
+	WSTR "null instance of works"
+	WNL
+	BRA end_ifthenelse_2
+else2:
+end_ifthenelse_2:
+; ---------Endif-----------
 	HALT
 ; -------------------------------------
 ;        Classes
@@ -49,48 +126,6 @@ init.A:
 	LOAD -2(LB), R1	; loading class (this) into memory when working with field b
 	STORE R0, 1(R1)	; Saving field  b into memory
 	RTS
-; ---------------------------------------------------
-; ----------------- class : C -------------------
-; ---------------------------------------------------
-; ------------Init method for class = C--------
-init.C:
-	RTS
-; ------------Code for method : test with label =  code.C.test--------
-code.C.test:
-	TSTO #7
-	BOV stack_overflow_error
-	ADDSP #1
-	PUSH R4	; Pushing and poping registers used in the method
-	PUSH R3	; Pushing and poping registers used in the method
-	PUSH R2	; Pushing and poping registers used in the method
-;  ---------ClassBodyCodeGeneration------
-; --------StartNew--------[9, 14]-----
-; [New][loadItemintoRegister] loading new of calss =  A into memory at register R2
-	NEW #2, R2
-	BOV heap_overflow_error
-	LEA 6(GB), R0
-	STORE R0, 0(R2)
-	PUSH R2
-	BSR init.A
-	POP R2
-; --------EndNew--------[9, 14]-----
-	STORE R2, 1(LB)	; Initializing the variable a and loading it into memory
-; --------BeginAssignOp--------[10, 8]-----
-	LOAD #5, R3	; loading 5 into memory
-; --------BeginSelection--------[10, 8]-----
-	LOAD 1(LB), R4	; loading a into memory
-	CMP #null, R4
-	BEQ deref_null_error	; Checking if the class identifier is null
-	LOAD 1(R4), R4	; Loading the field b into a register 
-; --------BeginSelection--------[10, 8]-----
-	STORE R3, 1(R4)	; Saving field  x into memory
-	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
-; --------EndAssignOp--------[10, 8]-----
-fin.C.test:
-	POP R2	; Pushing and poping registers used in the method
-	POP R3	; Pushing and poping registers used in the method
-	POP R4	; Pushing and poping registers used in the method
-	RTS
 ; -------------------------------------
 ;        Method equal
 ; -------------------------------------
@@ -100,6 +135,8 @@ code.Object.equals:
 	CMP -3(LB), R0
 	SEQ R0	; Comparaison this et paramètre d'equals
 fin.Object.equals:
+	RTS
+init.Object:
 	RTS
 ; -------------------------------------
 ;        Liste Erreur

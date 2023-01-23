@@ -1,0 +1,22 @@
+
+
+class B{
+    int x;
+}
+class A{
+    B b;
+}
+
+{
+    B b=new B();
+    A a1 =  new A(); 
+    A a2 =  new A(); 
+    b = null;
+    a2.b = new B();
+    if (!(a1==a2)){
+        println("egalité adresse fonctionne");
+    }
+    if (null instanceof A){
+        println("null instance of works");
+    }
+}
