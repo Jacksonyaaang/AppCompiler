@@ -1,3 +1,44 @@
+// Description:
+//    Teste le calcul de déterminant sur des tableaux de flottants et d'entiers
+//
+// Resultats:
+//    Produit matriciel entre un tableau de int rempli de 5 et un tableau de int rempli de 3
+//    --------------
+//    Tableau2D = [
+//    45 ,45 ,45 ,
+//    45 ,45 ,45 ,
+//    45 ,45 ,45 ,
+//    ]--------------
+//
+//    Produit matriciel après modification de plusieurs éléments de a
+//    --------------
+//    Tableau2D = [
+//    36 ,36 ,36 ,
+//    36 ,36 ,36 ,
+//    36 ,36 ,36 ,
+//    ]--------------
+//
+//    Produit matriciel entre un tableau de float rempli de 5.5 et un tableau de float rempli de 3.2
+//    --------------
+//    Tableau2D = [
+//    5.28000e+01 ,5.28000e+01 ,5.28000e+01 ,
+//    5.28000e+01 ,5.28000e+01 ,5.28000e+01 ,
+//    5.28000e+01 ,5.28000e+01 ,5.28000e+01 ,
+//    ]--------------
+//
+//    Produit matriciel après modification de plusieurs éléments de b
+//    --------------
+//    Tableau2D = [
+//    4.32000e+01 ,4.64000e+01 ,3.68000e+01 ,
+//    4.32000e+01 ,4.64000e+01 ,3.68000e+01 ,
+//    4.32000e+01 ,4.64000e+01 ,3.68000e+01 ,
+//    ]--------------
+//
+//
+// Historique:
+//    cree le 22/01/2023
+
+
 #include "Produit_Matriciel_Naif.decah"
 {
     MatrixMultiplication matrixMult = new MatrixMultiplication();
@@ -8,31 +49,44 @@
     float[][] c = new float[3][3];
     float[][] floatRes = new float[3][3];
 
-    println("Test produit matriciel int");
+    println("Produit matriciel entre un tableau de int rempli de 5 et un tableau de int rempli de 3");
     matrixMult.setInt2DTable(a,5);
     matrixMult.setInt2DTable(d,3);
-    println("1");
+    println(5);
     intRes = matrixMult.naiveMultiplyInt(a,d);
-    println("1");
+    println(5);
+
+    matrixMult.printInt2DTable(intRes);
+    println("");
+
+    println("Produit matriciel après modification de plusieurs éléments de a");
+    a[0][0] = 1;
+    a[1][1] = 0;
+    a[0][2] = 9;
+    d[0][0] = 7;
+    d[2][1] = 4;
+    d[1][2] = 0;
+    intRes = matrixMult.naiveMultiplyInt(a,d);
+    matrixMult.printInt2DTable(a);
+    matrixMult.printInt2DTable(d);
     matrixMult.printInt2DTable(intRes);
 
-    matrixMult.setInt2DTable(a,5);
-    a[0][0] = 2;
-    a[1][1] = 2;
-    a[2][2] = 2;
-    intRes = matrixMult.naiveMultiplyInt(a,d);
+    intRes = matrixMult.naiveMultiplyInt(d,a);
     matrixMult.printInt2DTable(intRes);
+    println("");
 
-    println("Test produit matriciel float");
+    println("Produit matriciel entre un tableau de float rempli de 5.5 et un tableau de float rempli de 3.2");
     matrixMult.setFloat2DTable(b,5.5);
     matrixMult.setFloat2DTable(c,3.2);
     floatRes = matrixMult.naiveMultiplyFloat(b,c);
     matrixMult.printFloat2DTable(floatRes);
+    println("");
 
-    matrixMult.setFloat2DTable(b,5.5);
+    println("Produit matriciel après modification de plusieurs éléments de b");
     b[0][0] = 2.5;
     b[1][1] = 3.5;
     b[2][2] = 0.5;
+    b[2][0] = 7.2;
     floatRes = matrixMult.naiveMultiplyFloat(b,c);
     matrixMult.printFloat2DTable(floatRes);
 }

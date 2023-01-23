@@ -201,7 +201,7 @@ class MatrixTraitement{
     }
     // helper inverse d’une matrice float...............................................................
     
-     float[][] calculate(float[][] mat){
+     float[][] calculateFloat(float[][] mat){
 
         int size = mat.size1D;  //change
         int indexRow =0;
@@ -301,7 +301,7 @@ class MatrixTraitement{
 
 
     //helper inversion for int ................................................................................
-         int[][] calculate(int[][] mat){
+         int[][] calculateInt(int[][] mat){
 
         int size = mat.size1D;  //change
         int indexRow =0;
@@ -403,8 +403,9 @@ class MatrixTraitement{
     //inverse d'une matrice int :  faut le derminant l'invervient !!!!!!
     int[][] inversionInt(int[][] mat){
         int[][] res;
-        int derminant;
-        //call derminant fucntion...............................................................
+        float determinant;
+        Det matrixDet = new Det();
+        determinant = matrixDet.bareissIntDeterminant(mat);
 
         if (mat.size1D!=mat.size2D||derminant==0){
             dimensionIncompatible(mat.size1D, mat.size2D);
@@ -418,8 +419,9 @@ class MatrixTraitement{
     //inverse d’une matrice float
     float[][] inversionFloat(float[][] mat){
         float[][] res;
-        int derminant;
-        //call derminant fucntion...............................................................
+        float determinant;
+        Det matrixDet = new Det();
+        determinant = matrixDet.bareissFloatDeterminant(mat);
 
         if (mat.size1D!=mat.size2D||derminant==0){
             dimensionIncompatible(mat.size1D, mat.size2D);
