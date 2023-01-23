@@ -1,0 +1,21 @@
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:38) - [MethodDefinition][setLabel] Initialising label value 
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with code.Object.equals
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:46) - verify program: start
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:48) - Register unit management unit is null
+DEBUG fr.ensimag.deca.DecacCompiler.saveMainProgramState(DecacCompiler.java:128) - [DecacCompiler][saveMainProgramState] Saving state main program
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:36) - [ListDeclClass][verifyListClass] verify listClass pass 1: START
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:40) - [ListDeclClass][verifyListClass] verify listClass pass 1: END
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:48) - [ListDeclClass][verifyListClassMembers] verify listClass pass 2: START
+DEBUG fr.ensimag.deca.tree.ListDeclField.verifyListDeclField(ListDeclField.java:54) - [ListDeclField][verifyListDeclField]
+DEBUG fr.ensimag.deca.tree.ListDeclMethod.verifyListDeclMethod(ListDeclMethod.java:32) - [ListDeclMethod][verifyListDeclMethod]
+INFO  fr.ensimag.deca.tree.ListDeclMethod.verifyListDeclMethod(ListDeclMethod.java:34) - [ListDeclMethod][verifyListDeclMethod] Verifing the method : f
+DEBUG fr.ensimag.deca.tree.DeclMethod.verifyDeclMethodSimple(DeclMethod.java:120) - [DeclMethod][verifyDecleMethod] Verifing the declaration of a method in pass 2 || MethodName =  f
+DEBUG fr.ensimag.deca.DecacCompiler.setMethodProgramState(DecacCompiler.java:141) - [DecacCompiler][setMethodProgramState] Entring a method program
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.ListDeclParam.verifyListDeclParam(ListDeclParam.java:47) - [ListDeclParam][verifyListDeclParam] Start
+DEBUG fr.ensimag.deca.tree.DeclParam.verifyDeclParam(DeclParam.java:76) - [DeclParam][verifyDecleParam] Verifing method parameter : x
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.DeclParam.verifyDeclParam(DeclParam.java:96) - [DeclParam][verifyDecleParam] Saving method parameter x into -3(LB)
+DEBUG fr.ensimag.deca.tree.DeclParam.verifyDeclParam(DeclParam.java:76) - [DeclParam][verifyDecleParam] Verifing method parameter : x
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+src/test/deca/context/invalid/DoubleDeclParam.deca:11:16: Il existe déjà un paramètre de nom x dans la même méthode 

@@ -1,0 +1,7 @@
+{
+	int[] tableauInt = new int[][];
+	float[] tableauFloat = new int[][][][];
+	print(tableauInt.size1D);
+	print(tableauFloat.size1D);
+	print(tableauFloat.size2D);
+}

@@ -9,6 +9,6 @@
 
 {
     //Quand on fait le new, il faut spécifier la dimension
-    int[][] tableauInt = new int[1][][];
+    int[][] tableauInt = new int[][1][1];
     
 }

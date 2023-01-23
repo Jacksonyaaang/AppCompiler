@@ -1,0 +1,3 @@
+src/test/deca/syntax/invalid/7_decl_var_sans_equal.deca:12:10: extraneous input '6' expecting ';'
+Exception in thread "main" java.lang.NullPointerException: Cannot invoke "fr.ensimag.deca.tree.AbstractProgram.prettyPrint(java.io.PrintStream)" because "prog" is null
+	at fr.ensimag.deca.syntax.ManualTestSynt.main(ManualTestSynt.java:32)

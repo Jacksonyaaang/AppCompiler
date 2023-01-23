@@ -1,0 +1,24 @@
+{
+	int x = 2;
+	int y = 2;
+	int z = 2;
+	int h = 2;
+	int v = 2;
+	boolean b1 = true;
+	boolean b2 = true;
+	boolean b3 = false;
+	boolean b4 = false;
+	if ((((x <= 2) && ((y != z) || (h == v))) && (((((((3 > x) && (0x1.4p1 > y)) && ((0x1.0p1 == y) && (v == h))) && b1) && b2) && !b3) && !b4))){
+		println("bool val = true");
+	}
+	else {
+		println("Problem with code");
+	}
+	if ((((x < 5) && ((y != z) || (h == v))) && (((((((3 > x) && (0x1.4p1 > y)) && ((0x1.0p1 == y) && (v < 0x1.4p2))) && b1) && b2) && !b3) && !b4))){
+		println("bool val = true");
+	}
+	else {
+		println("Problem with code");
+	}
+	;
+}

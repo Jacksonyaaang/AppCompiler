@@ -1,0 +1,28 @@
+/*
+class A{
+	int x = 1;
+}
+
+{
+	Object[] tableObject = new Object[10];
+	tableObject[1] = new A();
+	println("((A)(tableObject[1])).x = ", ((A)(tableObject[1])).x);
+}
+*/
+
+
+
+class A{
+	int x = 1;
+}
+class B extends A{
+	int x = 2;
+}
+
+{
+	A[] tableA = new A[10];
+	tableA[1] = new B();
+	println("((B)(tableA[1])).x = ", ((B)(tableA[1])).x);
+}
+
+

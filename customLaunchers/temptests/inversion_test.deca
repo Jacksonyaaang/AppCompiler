@@ -1,3 +1,18 @@
+#include "Difference.decah"
+
+{
+    Difference matrixDiff = new Difference();
+    int[][] a = new int[3][5];
+    int[][] d = new int[3][3];
+    matrixDiff.setInt2DTable(a,5);
+    matrixDiff.setFloat2DTable(b,6.0);
+    matrixDiff.diffIntFloat2D(a,b);
+}
+
+    println("Le résultat de la soustraction est: ");
+    matrixDiff.printInt2DTable(a);
+    println("");
+}
 
 
 class MatrixTraitement{

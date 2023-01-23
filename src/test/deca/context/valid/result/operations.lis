@@ -1,0 +1,434 @@
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:38) - [MethodDefinition][setLabel] Initialising label value 
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with code.Object.equals
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:46) - verify program: start
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:48) - Register unit management unit is null
+DEBUG fr.ensimag.deca.DecacCompiler.saveMainProgramState(DecacCompiler.java:128) - [DecacCompiler][saveMainProgramState] Saving state main program
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:36) - [ListDeclClass][verifyListClass] verify listClass pass 1: START
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:40) - [ListDeclClass][verifyListClass] verify listClass pass 1: END
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:48) - [ListDeclClass][verifyListClassMembers] verify listClass pass 2: START
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:52) - [ListDeclClass][verifyListClassMembers] verify listClass pass 2: END
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:59) - [ListDeclClass][verifyListClassBody] verify listClass pass 3: START
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:63) - [ListDeclClass][verifyListClassBody] verify listClass pass 3: END
+DEBUG fr.ensimag.deca.DecacCompiler.setMainProgramState(DecacCompiler.java:115) - [DecacCompiler][setMainProgramState] Seeting main state program
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:38) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:54) - [ListDeclVar][verifyListDeclVariable]
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [3, 12]
+DEBUG fr.ensimag.deca.tree.IntLiteral.verifyExpr(IntLiteral.java:54) - [IntLiteral][verifyExpr]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = int expected type is int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = int expected type is int
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving x into 1(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [4, 12]
+DEBUG fr.ensimag.deca.tree.IntLiteral.verifyExpr(IntLiteral.java:54) - [IntLiteral][verifyExpr]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = int expected type is int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = int expected type is int
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving y into 2(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [5, 10]
+DEBUG fr.ensimag.deca.tree.IntLiteral.verifyExpr(IntLiteral.java:54) - [IntLiteral][verifyExpr]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = int expected type is int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = int expected type is int
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving a into 3(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [6, 10]
+DEBUG fr.ensimag.deca.tree.IntLiteral.verifyExpr(IntLiteral.java:54) - [IntLiteral][verifyExpr]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = int expected type is int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = int expected type is int
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving b into 4(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [7, 11]
+DEBUG fr.ensimag.deca.tree.IntLiteral.verifyExpr(IntLiteral.java:54) - [IntLiteral][verifyExpr]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = int expected type is int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = int expected type is int
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving c into 5(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [8, 16]
+DEBUG fr.ensimag.deca.tree.BooleanLiteral.verifyExpr(BooleanLiteral.java:49) - [BooleanLiteral][verifyExpr]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving z into 6(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [10, 15]
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:38) - [AbstractOpArith][verifyExpr] Verify the arithmetic expressions
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = int expected type is int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = int expected type is int
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving plus into 7(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [11, 16]
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:38) - [AbstractOpArith][verifyExpr] Verify the arithmetic expressions
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = int expected type is int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = int expected type is int
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving minus into 8(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [12, 17]
+DEBUG fr.ensimag.deca.tree.Modulo.verifyExpr(Modulo.java:39) - [Modulo][verifyExpr]
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = int expected type is int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = int expected type is int
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving modulo into 9(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [13, 17]
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:38) - [AbstractOpArith][verifyExpr] Verify the arithmetic expressions
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = int expected type is int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = int expected type is int
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving divide into 10(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [14, 19]
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:38) - [AbstractOpArith][verifyExpr] Verify the arithmetic expressions
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = int expected type is int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = int expected type is int
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving multiply into 11(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [16, 20]
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:33) - [AbstractOpCmp][verifyExpr] Verify the comparison expressions
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:45) - [AbstractOpCmp][verifyExpr] verify type left operand:int
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:46) - [AbstractOpCmp][verifyExpr] verify type right operand:int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving equal into 12(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [17, 24]
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:33) - [AbstractOpCmp][verifyExpr] Verify the comparison expressions
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:45) - [AbstractOpCmp][verifyExpr] verify type left operand:int
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:46) - [AbstractOpCmp][verifyExpr] verify type right operand:int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving different into 13(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [20, 29]
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:33) - [AbstractOpCmp][verifyExpr] Verify the comparison expressions
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:45) - [AbstractOpCmp][verifyExpr] verify type left operand:int
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:46) - [AbstractOpCmp][verifyExpr] verify type right operand:int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving greaterOrEqual into 14(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [21, 26]
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:33) - [AbstractOpCmp][verifyExpr] Verify the comparison expressions
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:45) - [AbstractOpCmp][verifyExpr] verify type left operand:int
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:46) - [AbstractOpCmp][verifyExpr] verify type right operand:int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving greaterThan into 15(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [22, 27]
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:33) - [AbstractOpCmp][verifyExpr] Verify the comparison expressions
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:45) - [AbstractOpCmp][verifyExpr] verify type left operand:int
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:46) - [AbstractOpCmp][verifyExpr] verify type right operand:int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving lowerOrEqual into 16(GB)
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [23, 34]
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:33) - [AbstractOpCmp][verifyExpr] Verify the comparison expressions
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:45) - [AbstractOpCmp][verifyExpr] verify type left operand:int
+DEBUG fr.ensimag.deca.tree.AbstractOpCmp.verifyExpr(AbstractOpCmp.java:46) - [AbstractOpCmp][verifyExpr] verify type right operand:int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving greaterOrEuqualThan into 17(GB)
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:244) - [AbstractExpr][verifyInst] Verify the expression coming from the instruction
+DEBUG fr.ensimag.deca.tree.Assign.verifyExpr(Assign.java:172) - [Assign][verifyExpr] Verify left and right expression in assignment
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [25, 8]
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:38) - [AbstractOpArith][verifyExpr] Verify the arithmetic expressions
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:38) - [AbstractOpArith][verifyExpr] Verify the arithmetic expressions
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:38) - [AbstractOpArith][verifyExpr] Verify the arithmetic expressions
+DEBUG fr.ensimag.deca.tree.IntLiteral.verifyExpr(IntLiteral.java:54) - [IntLiteral][verifyExpr]
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:38) - [AbstractOpArith][verifyExpr] Verify the arithmetic expressions
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.IntLiteral.verifyExpr(IntLiteral.java:54) - [IntLiteral][verifyExpr]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = int expected type is int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = int expected type is int
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:244) - [AbstractExpr][verifyInst] Verify the expression coming from the instruction
+DEBUG fr.ensimag.deca.tree.Assign.verifyExpr(Assign.java:172) - [Assign][verifyExpr] Verify left and right expression in assignment
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [26, 9]
+DEBUG fr.ensimag.deca.tree.AbstractOpBool.verifyExpr(AbstractOpBool.java:44) - [AbstractOpBool][verifyExpr] Verify the boolean expressions
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.AbstractOpBool.verifyExpr(AbstractOpBool.java:44) - [AbstractOpBool][verifyExpr] Verify the boolean expressions
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:42) - verify Main: end
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:60) - verify program: end
+`> [1, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [1, 0] Main
+      +> ListDeclVar [List with 17 elements]
+      |  []> [3, 8] DeclVar
+      |  ||  +> [3, 4] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [3, 8] Identifier (x)
+      |  ||  |  definition: variable defined at [3, 8], type=int
+      |  ||  `> [3, 12] Initialization
+      |  ||     `> [3, 12] Int (18)
+      |  ||        type: int
+      |  []> [4, 8] DeclVar
+      |  ||  +> [4, 4] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [4, 8] Identifier (y)
+      |  ||  |  definition: variable defined at [4, 8], type=int
+      |  ||  `> [4, 12] Initialization
+      |  ||     `> [4, 12] Int (5)
+      |  ||        type: int
+      |  []> [5, 8] DeclVar
+      |  ||  +> [5, 4] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [5, 8] Identifier (a)
+      |  ||  |  definition: variable defined at [5, 8], type=int
+      |  ||  `> [5, 10] Initialization
+      |  ||     `> [5, 10] Int (0)
+      |  ||        type: int
+      |  []> [6, 8] DeclVar
+      |  ||  +> [6, 4] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [6, 8] Identifier (b)
+      |  ||  |  definition: variable defined at [6, 8], type=int
+      |  ||  `> [6, 10] Initialization
+      |  ||     `> [6, 10] Int (99)
+      |  ||        type: int
+      |  []> [7, 8] DeclVar
+      |  ||  +> [7, 4] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [7, 8] Identifier (c)
+      |  ||  |  definition: variable defined at [7, 8], type=int
+      |  ||  `> [7, 11] Initialization
+      |  ||     `> [7, 11] Int (7)
+      |  ||        type: int
+      |  []> [8, 12] DeclVar
+      |  ||  +> [8, 4] Identifier (boolean)
+      |  ||  |  definition: type (builtin), type=boolean
+      |  ||  +> [8, 12] Identifier (z)
+      |  ||  |  definition: variable defined at [8, 12], type=boolean
+      |  ||  `> [8, 16] Initialization
+      |  ||     `> [8, 16] BooleanLiteral (false)
+      |  ||        type: boolean
+      |  []> [10, 8] DeclVar
+      |  ||  +> [10, 4] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [10, 8] Identifier (plus)
+      |  ||  |  definition: variable defined at [10, 8], type=int
+      |  ||  `> [10, 15] Initialization
+      |  ||     `> [10, 15] Plus
+      |  ||        type: int
+      |  ||        +> [10, 15] Identifier (x)
+      |  ||        |  definition: variable defined at [3, 8], type=int
+      |  ||        `> [10, 19] Identifier (y)
+      |  ||           definition: variable defined at [4, 8], type=int
+      |  []> [11, 8] DeclVar
+      |  ||  +> [11, 4] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [11, 8] Identifier (minus)
+      |  ||  |  definition: variable defined at [11, 8], type=int
+      |  ||  `> [11, 16] Initialization
+      |  ||     `> [11, 16] Minus
+      |  ||        type: int
+      |  ||        +> [11, 16] Identifier (x)
+      |  ||        |  definition: variable defined at [3, 8], type=int
+      |  ||        `> [11, 20] Identifier (y)
+      |  ||           definition: variable defined at [4, 8], type=int
+      |  []> [12, 8] DeclVar
+      |  ||  +> [12, 4] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [12, 8] Identifier (modulo)
+      |  ||  |  definition: variable defined at [12, 8], type=int
+      |  ||  `> [12, 17] Initialization
+      |  ||     `> [12, 17] Modulo
+      |  ||        type: int
+      |  ||        +> [12, 17] Identifier (x)
+      |  ||        |  definition: variable defined at [3, 8], type=int
+      |  ||        `> [12, 21] Identifier (y)
+      |  ||           definition: variable defined at [4, 8], type=int
+      |  []> [13, 8] DeclVar
+      |  ||  +> [13, 4] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [13, 8] Identifier (divide)
+      |  ||  |  definition: variable defined at [13, 8], type=int
+      |  ||  `> [13, 17] Initialization
+      |  ||     `> [13, 17] Divide
+      |  ||        type: int
+      |  ||        +> [13, 17] Identifier (x)
+      |  ||        |  definition: variable defined at [3, 8], type=int
+      |  ||        `> [13, 21] Identifier (y)
+      |  ||           definition: variable defined at [4, 8], type=int
+      |  []> [14, 8] DeclVar
+      |  ||  +> [14, 4] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [14, 8] Identifier (multiply)
+      |  ||  |  definition: variable defined at [14, 8], type=int
+      |  ||  `> [14, 19] Initialization
+      |  ||     `> [14, 19] Multiply
+      |  ||        type: int
+      |  ||        +> [14, 19] Identifier (x)
+      |  ||        |  definition: variable defined at [3, 8], type=int
+      |  ||        `> [14, 23] Identifier (y)
+      |  ||           definition: variable defined at [4, 8], type=int
+      |  []> [16, 12] DeclVar
+      |  ||  +> [16, 4] Identifier (boolean)
+      |  ||  |  definition: type (builtin), type=boolean
+      |  ||  +> [16, 12] Identifier (equal)
+      |  ||  |  definition: variable defined at [16, 12], type=boolean
+      |  ||  `> [16, 20] Initialization
+      |  ||     `> [16, 20] Equals
+      |  ||        type: boolean
+      |  ||        +> [16, 20] Identifier (x)
+      |  ||        |  definition: variable defined at [3, 8], type=int
+      |  ||        `> [16, 25] Identifier (y)
+      |  ||           definition: variable defined at [4, 8], type=int
+      |  []> [17, 12] DeclVar
+      |  ||  +> [17, 4] Identifier (boolean)
+      |  ||  |  definition: type (builtin), type=boolean
+      |  ||  +> [17, 12] Identifier (different)
+      |  ||  |  definition: variable defined at [17, 12], type=boolean
+      |  ||  `> [17, 24] Initialization
+      |  ||     `> [17, 24] NotEquals
+      |  ||        type: boolean
+      |  ||        +> [17, 24] Identifier (x)
+      |  ||        |  definition: variable defined at [3, 8], type=int
+      |  ||        `> [17, 28] Identifier (y)
+      |  ||           definition: variable defined at [4, 8], type=int
+      |  []> [20, 12] DeclVar
+      |  ||  +> [20, 4] Identifier (boolean)
+      |  ||  |  definition: type (builtin), type=boolean
+      |  ||  +> [20, 12] Identifier (greaterOrEqual)
+      |  ||  |  definition: variable defined at [20, 12], type=boolean
+      |  ||  `> [20, 29] Initialization
+      |  ||     `> [20, 29] GreaterOrEqual
+      |  ||        type: boolean
+      |  ||        +> [20, 29] Identifier (x)
+      |  ||        |  definition: variable defined at [3, 8], type=int
+      |  ||        `> [20, 34] Identifier (y)
+      |  ||           definition: variable defined at [4, 8], type=int
+      |  []> [21, 12] DeclVar
+      |  ||  +> [21, 4] Identifier (boolean)
+      |  ||  |  definition: type (builtin), type=boolean
+      |  ||  +> [21, 12] Identifier (greaterThan)
+      |  ||  |  definition: variable defined at [21, 12], type=boolean
+      |  ||  `> [21, 26] Initialization
+      |  ||     `> [21, 26] Greater
+      |  ||        type: boolean
+      |  ||        +> [21, 26] Identifier (x)
+      |  ||        |  definition: variable defined at [3, 8], type=int
+      |  ||        `> [21, 30] Identifier (y)
+      |  ||           definition: variable defined at [4, 8], type=int
+      |  []> [22, 12] DeclVar
+      |  ||  +> [22, 4] Identifier (boolean)
+      |  ||  |  definition: type (builtin), type=boolean
+      |  ||  +> [22, 12] Identifier (lowerOrEqual)
+      |  ||  |  definition: variable defined at [22, 12], type=boolean
+      |  ||  `> [22, 27] Initialization
+      |  ||     `> [22, 27] GreaterOrEqual
+      |  ||        type: boolean
+      |  ||        +> [22, 27] Identifier (x)
+      |  ||        |  definition: variable defined at [3, 8], type=int
+      |  ||        `> [22, 32] Identifier (y)
+      |  ||           definition: variable defined at [4, 8], type=int
+      |  []> [23, 12] DeclVar
+      |      +> [23, 4] Identifier (boolean)
+      |      |  definition: type (builtin), type=boolean
+      |      +> [23, 12] Identifier (greaterOrEuqualThan)
+      |      |  definition: variable defined at [23, 12], type=boolean
+      |      `> [23, 34] Initialization
+      |         `> [23, 34] GreaterOrEqual
+      |            type: boolean
+      |            +> [23, 34] Identifier (x)
+      |            |  definition: variable defined at [3, 8], type=int
+      |            `> [23, 39] Identifier (y)
+      |               definition: variable defined at [4, 8], type=int
+      `> ListInst [List with 2 elements]
+         []> [25, 4] Assign
+         ||  type: int
+         ||  +> [25, 4] Identifier (x)
+         ||  |  definition: variable defined at [3, 8], type=int
+         ||  `> [25, 8] Multiply
+         ||     type: int
+         ||     +> [25, 8] Int (2)
+         ||     |  type: int
+         ||     `> [25, 11] Plus
+         ||        type: int
+         ||        +> [25, 11] Plus
+         ||        |  type: int
+         ||        |  +> [25, 11] Identifier (a)
+         ||        |  |  definition: variable defined at [5, 8], type=int
+         ||        |  `> [25, 13] Identifier (b)
+         ||        |     definition: variable defined at [6, 8], type=int
+         ||        `> [25, 16] Minus
+         ||           type: int
+         ||           +> [25, 16] Identifier (c)
+         ||           |  definition: variable defined at [7, 8], type=int
+         ||           `> [25, 18] Int (5)
+         ||              type: int
+         []> [26, 4] Assign
+             type: boolean
+             +> [26, 4] Identifier (z)
+             |  definition: variable defined at [8, 12], type=boolean
+             `> [26, 9] Or
+                type: boolean
+                +> [26, 9] And
+                |  type: boolean
+                |  +> [26, 9] Identifier (equal)
+                |  |  definition: variable defined at [16, 12], type=boolean
+                |  `> [26, 16] Identifier (different)
+                |     definition: variable defined at [17, 12], type=boolean
+                `> [26, 27] Identifier (greaterOrEqual)
+                   definition: variable defined at [20, 12], type=boolean

@@ -1,0 +1,47 @@
+/*
+class A{int x;}
+
+{
+    //Déclaration de tableauxs
+    int[] tabInt = new int[5]; float[][] floatMat = new float[15][3]; A[] tabA = new A[5];
+    //Attribution des valeurs aux éléments du tableau
+    tabInt[1] = 5; floatMat[7][2] = 7; tabA[3] = new A();
+    //Récupération et exploitation des éléments du tableau:
+    println(tabInt[1]);
+    tabA[3].x = 2;
+    println(tabA[3].x);
+    println( 2*(int)(floatMat[7][2]) );
+}
+
+*/
+
+
+
+{
+    int[] table = new int[-5];
+    int[] x = new int[5]; 
+    int[][] matriceEntier = new int[5][4]; 
+    int iterX = 0;
+    while (iterX < x.size1D){
+        x[iterX] = iterX;
+        iterX = iterX+1;
+    }
+    println("nb lig=", matriceEntier.size1D, " / nb col=", matriceEntier.size2D);
+}
+
+/*
+class A{int x;}
+{
+//Déclaration de tableaux
+int[] tabInt = new int[5]; float[][] floatMat = new float[15][3]; A[] tabA = new A[5];
+//Attribution des valeurs aux éléments du tableau
+tabInt[1] = 5; floatMat[7][2] = 7; tabA[3] = new A();
+//Récupération et exploitation des éléments du tableau:
+println("tabInt[1] = ", tabInt[1]);
+tabA[3].x = 2;
+println("tabA[3].x = ", tabA[3].x);
+println( "2*(int)(floatMat[7][2]) = ", 2*(int)(floatMat[7][2]) );
+}
+
+*/
+
