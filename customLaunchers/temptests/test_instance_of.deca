@@ -1,0 +1,67 @@
+class A{
+    int x;
+    int y;
+    int z;
+    protected int h = 2;
+    int sommefields(){
+        return x+y+z;
+    }
+    boolean checkifsumistrue(){
+        if (x+y+z >= 0){
+            return true;
+        }
+    }
+    boolean equals(Object otherClass){
+        if ((otherClass instanceof A)){
+            if (((A)(otherClass)).x == this.x){
+                println(this.x, "==", ((A)(otherClass)).x);
+                println("cast and instance of work");
+                return true;
+            }
+        }
+        println("cast and instance of work in the bad case");
+        return false;
+    }
+}
+
+class B{
+    }
+
+
+class C extends B{
+    }
+
+class D extends C{
+    }
+
+{
+    A test1 = new A();
+    A test5 = new A();
+    B test2 = new B();
+    C test3 = new C();
+    D test4 = new D();
+    if (test1 instanceof Object){
+        println("Object compraison works");
+    }
+    if (test1 instanceof B){
+        println("cast does not instance of work");
+    }
+    if (test2 instanceof B){
+        println("cast works");
+    }
+    if (test3 instanceof B){
+        println("cast works");
+    }
+    if (!(test4 instanceof A)){
+        println("cast works");
+    }
+
+    test1.x = 5;
+    test5.x = 5;
+    test1.equals(test5);
+    test1.equals(test2);
+
+}
+
+   
+

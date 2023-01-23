@@ -1,0 +1,220 @@
+	TSTO #11
+	BOV stack_overflow_error
+	ADDSP #8
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 4(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 5(GB)
+	LEA 4(GB), R0
+	STORE R0, 6(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 7(GB)
+	LOAD code.SuiteFibonacci.Fibonacci, R0
+	STORE R0, 8(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[32, 21]-----
+; [New][loadItemintoRegister] loading new of calss =  SuiteFibonacci into memory at register R2
+	NEW #4, R2
+	BOV heap_overflow_error
+	LEA 6(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.SuiteFibonacci
+	POP R2
+; --------EndNew--------[32, 21]-----
+	STORE R2, 1(GB)	; Initializing the variable s and loading it into memory
+	LOAD #200, R2	; loading 200 into memory
+	STORE R2, 2(GB)	; Initializing the variable c and loading it into memory
+; --------BeginMethodCall--------[34, 12]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading s into memory
+	STORE R2, 0(SP)
+	LOAD 2(GB), R2	; loading c into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[34, 12]-----
+	STORE R2, 3(GB)	; Initializing the variable x and loading it into memory
+	LOAD 3(GB), R2	; loading x into memory
+	LOAD R2, R1
+	WINT
+	WNL
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : SuiteFibonacci -------------------
+; ---------------------------------------------------
+; ------------Init method for class = SuiteFibonacci--------
+init.SuiteFibonacci:
+	TSTO #2
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field nbr1
+	STORE R0, 1(R1)	; Saving field  nbr1 into memory
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field nbr2
+	STORE R0, 2(R1)	; Saving field  nbr2 into memory
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field nbr3
+	STORE R0, 3(R1)	; Saving field  nbr3 into memory
+	LOAD -2(LB), R2	; [codeGenDelField][initialization] loading class (this) into memory when working with field nbr1
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 1(R2)	; Initializing the field nbr1 and loading it into memory
+	LOAD -2(LB), R2	; [codeGenDelField][initialization] loading class (this) into memory when working with field nbr2
+	LOAD #1, R3	; loading 1 into memory
+	STORE R3, 2(R2)	; Initializing the field nbr2 and loading it into memory
+	LOAD -2(LB), R2	; [codeGenDelField][initialization] loading class (this) into memory when working with field nbr3
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 3(R2)	; Initializing the field nbr3 and loading it into memory
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : Fibonacci with label =  code.SuiteFibonacci.Fibonacci--------
+code.SuiteFibonacci.Fibonacci:
+	TSTO #5
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------StartBinaryOp--------[21, 11]-----
+	LOAD -3(LB), R2	; loading c into memory
+	LOAD #0, R3	; loading 0 into memory
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[21, 11]-----
+; ---------Startif-----------[21, 8]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else1
+	LOAD #0, R2	; loading 0 into memory
+	LOAD R2, R0
+	BRA fin.SuiteFibonacci.Fibonacci
+	BRA end_ifthenelse_1
+else1:
+; --------StartOr--------[24, 17]-----
+; --------StartBinaryOp--------[24, 17]-----
+	LOAD -3(LB), R2	; loading c into memory
+	LOAD #1, R3	; loading 1 into memory
+	CMP R3, R2	; Comparing registers for Equals operation 
+	SEQ R2	; Placing Equals result into the register  
+; --------EndBinaryOp--------[24, 17]-----
+	CMP #1, R2	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_1	; [Or] checking if the first element is false
+; --------StartBinaryOp--------[24, 26]-----
+	LOAD -3(LB), R3	; loading c into memory
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	CMP R2, R3	; Comparing registers for Equals operation 
+	SEQ R3	; Placing Equals result into the register  
+	POP R2
+; --------EndBinaryOp--------[24, 26]-----
+	CMP #0, R3	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_1	; [OR] checking if the second element is true 
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
+End_Or_Id_1:
+; --------EndOr--------[24, 17]-----
+; ---------Startif-----------[24, 8]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else2
+	LOAD #1, R2	; loading 1 into memory
+	LOAD R2, R0
+	BRA fin.SuiteFibonacci.Fibonacci
+	BRA end_ifthenelse_2
+else2:
+end_ifthenelse_2:
+; ---------Endif-----------
+end_ifthenelse_1:
+; ---------Endif-----------
+; --------StartBinaryOp--------[27, 15]-----
+; --------BeginMethodCall--------[27, 15]-----
+	ADDSP #2
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+; --------StartBinaryOp--------[27, 25]-----
+	LOAD -3(LB), R2	; loading c into memory
+	LOAD #1, R3	; loading 1 into memory
+	SUB R3, R2
+; --------EndBinaryOp--------[27, 25]-----
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[27, 15]-----
+; --------BeginMethodCall--------[27, 30]-----
+	ADDSP #2
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+; --------StartBinaryOp--------[27, 40]-----
+	LOAD -3(LB), R3	; loading c into memory
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	SUB R2, R3
+	POP R2
+; --------EndBinaryOp--------[27, 40]-----
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	LOAD R0, R3
+	SUBSP #2
+; --------EndMethodCall--------[27, 30]-----
+	ADD R3, R2
+; --------EndBinaryOp--------[27, 15]-----
+	LOAD R2, R0
+	BRA fin.SuiteFibonacci.Fibonacci
+	WSTR "Error: La méthode code.SuiteFibonacci.Fibonacci doit retourner un element"
+	WNL
+	ERROR
+fin.SuiteFibonacci.Fibonacci:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

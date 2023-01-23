@@ -1,0 +1,132 @@
+	TSTO #6
+	BOV stack_overflow_error
+	ADDSP #5
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 4(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 5(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNewTable--------[10, 14]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  int[] into memory at register R2
+	LOAD #5, R3	; loading 5 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	ADD #1, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	LOAD R0, R2
+; --------EndNewTable--------[10, 14]-----
+	STORE R2, 1(GB)	; Initializing the variable x and loading it into memory
+; --------StartNewTable--------[11, 14]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  int[] into memory at register R2
+	LOAD #5, R3	; loading 5 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	ADD #1, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	LOAD R0, R2
+; --------EndNewTable--------[11, 14]-----
+	STORE R2, 2(GB)	; Initializing the variable h and loading it into memory
+; --------StartNewTable--------[12, 16]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  int[][] into memory at register R2
+	LOAD #5, R3	; loading 5 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	PUSH R2
+	LOAD #10, R2	; loading 10 into memory
+	CMP #1, R2
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	MUL R2, R1
+	ADD #2, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	STORE R2, 1(R0)
+	POP R2
+	LOAD R0, R2
+; --------EndNewTable--------[12, 16]-----
+	STORE R2, 3(GB)	; Initializing the variable y and loading it into memory
+; --------BeginSelection--------[13, 12]-----
+	LOAD 1(GB), R2	; loading x into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R2), R2	; Loading the field size1D into a register 
+; --------BeginSelection--------[13, 12]-----
+	LOAD R2, R1
+	WINT
+	WSTR "expected = 5"
+	WNL
+; --------BeginSelection--------[14, 12]-----
+	LOAD 3(GB), R2	; loading y into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R2), R2	; Loading the field size1D into a register 
+; --------BeginSelection--------[14, 12]-----
+	LOAD R2, R1
+	WINT
+	WSTR "expected = 5"
+	WNL
+; --------BeginSelection--------[15, 12]-----
+	LOAD 3(GB), R2	; loading y into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R2), R2	; Loading the field size2D into a register 
+; --------BeginSelection--------[15, 12]-----
+	LOAD R2, R1
+	WINT
+	WSTR "expected = 10"
+	WNL
+; --------BeginAssignOp--------[16, 4]-----
+	LOAD 2(GB), R3	; loading h into memory
+	STORE R3, 1(GB)	;  Assiging a value to x
+	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
+; --------EndAssignOp--------[16, 4]-----
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+int_allocation_table_must_be_strictly_positive:
+	WSTR "Error: int_allocation_table_must_be_strictly_positive"
+	WNL
+	ERROR
+; end main program

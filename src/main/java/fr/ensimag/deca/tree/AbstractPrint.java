@@ -47,7 +47,7 @@ public abstract class AbstractPrint extends AbstractInst {
         for (AbstractExpr expr : arguments.getList()){
             expr.setType(expr.verifyExpr(compiler, localEnv, currentClass));
             if (expr.getType().isBoolean())
-                throw  new ContextualError("On ne peut pas print de booléens ", getLocation());
+                throw  new ContextualError("L'instruction print est incompatible avec un booléen ", getLocation());
         }
     }
 

@@ -1,0 +1,268 @@
+<<<<<<< HEAD
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:38) - [MethodDefinition][setLabel] Initialising label value 
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with code.object.equals
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:46) - verify program: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:36) - [ListDeclClass][verifyListClass] verify listClass pass 1: START
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:40) - [ListDeclClass][verifyListClass] verify listClass pass 1: END
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:48) - [ListDeclClass][verifyListClassMembers] verify listClass pass 2: START
+DEBUG fr.ensimag.deca.tree.ListDeclField.verifyListDeclField(ListDeclField.java:54) - [ListDeclField][verifyListDeclField]
+DEBUG fr.ensimag.deca.tree.ListDeclMethod.verifyListDeclMethod(ListDeclMethod.java:32) - [ListDeclMethod][verifyListDeclMethod]
+DEBUG fr.ensimag.deca.tree.ListDeclField.verifyListDeclField(ListDeclField.java:54) - [ListDeclField][verifyListDeclField]
+DEBUG fr.ensimag.deca.tree.ListDeclMethod.verifyListDeclMethod(ListDeclMethod.java:32) - [ListDeclMethod][verifyListDeclMethod]
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:52) - [ListDeclClass][verifyListClassMembers] verify listClass pass 2: END
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:59) - [ListDeclClass][verifyListClassBody] verify listClass pass 3: START
+DEBUG fr.ensimag.deca.tree.ListDeclField.verifyInitFields(ListDeclField.java:62) - [ListDeclField][verifyInitListDeclField]
+DEBUG fr.ensimag.deca.tree.ListDeclMethod.verifyListDeclMethodBody(ListDeclMethod.java:41) - [ListDeclMethod][verifyListDeclMethod]
+DEBUG fr.ensimag.deca.tree.ListDeclField.verifyInitFields(ListDeclField.java:62) - [ListDeclField][verifyInitListDeclField]
+DEBUG fr.ensimag.deca.tree.ListDeclMethod.verifyListDeclMethodBody(ListDeclMethod.java:41) - [ListDeclMethod][verifyListDeclMethod]
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:63) - [ListDeclClass][verifyListClassBody] verify listClass pass 3: END
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:38) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:54) - [ListDeclVar][verifyListDeclVariable]
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:232) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.Initialization.verifyInitialization(Initialization.java:50) - [Initialization][verifyInitialization]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:162) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:232) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:63) - [DeclVar] Saving b into 1(GB)
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]
+DEBUG fr.ensimag.deca.tree.IfThenElse.verifyInst(IfThenElse.java:48) - [IfThenElse][verifyInst] Verify the condition and the instructions of the if then else
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyCondition(AbstractExpr.java:199) - [AbstractExpr][verifyInst] Verify the condition of a While or ifEhenElse
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:212) - [Identifier][verifyExpr] Verifying the exp of an identifier 
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:232) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:46) - [AbstractPrint][verifyInst] Verify the expressions in the print instruction
+DEBUG fr.ensimag.deca.tree.StringLiteral.verifyExpr(StringLiteral.java:41) - [StringLiteral][verifyExpr]
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:47) - verify Main: end
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:53) - verify program: end
+DEBUG fr.ensimag.deca.tree.ListDeclClass.codeGenListClassTableau(ListDeclClass.java:67) - [ListDeclClass][codeGenListClassTableau] Code generation pass 1: START
+DEBUG fr.ensimag.deca.tree.DeclClass.codeGenTableauDeMethod(DeclClass.java:67) - [DeclClass][codeGenTableauDeMethod] Generating the table method || ClassName =  A // Super class  = object
+DEBUG fr.ensimag.deca.tree.DeclClass.codeGenTableauDeMethod(DeclClass.java:69) - [DeclClass][codeGenTableauDeMethod] Class definitions are : 
+ Main class =  type defined at [12, 0], type=A 
+ Super class  = type (builtin), type=object
+DEBUG fr.ensimag.deca.tree.DeclClass.codeGenTableauDeMethod(DeclClass.java:76) - [DeclClass][codeGenTableauDeMethod] Current methode table adresses 
+-----Start table Method Table----
+type (builtin), type=object -> 2(GB)
+-----End table Method Table  ----
+
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with code.object.equals
+DEBUG fr.ensimag.deca.tree.DeclClass.codeGenTableauDeMethod(DeclClass.java:67) - [DeclClass][codeGenTableauDeMethod] Generating the table method || ClassName =  B // Super class  = A
+DEBUG fr.ensimag.deca.tree.DeclClass.codeGenTableauDeMethod(DeclClass.java:69) - [DeclClass][codeGenTableauDeMethod] Class definitions are : 
+ Main class =  type defined at [14, 0], type=B 
+ Super class  = type defined at [12, 0], type=A
+DEBUG fr.ensimag.deca.tree.DeclClass.codeGenTableauDeMethod(DeclClass.java:76) - [DeclClass][codeGenTableauDeMethod] Current methode table adresses 
+-----Start table Method Table----
+type (builtin), type=object -> 2(GB)
+type defined at [12, 0], type=A -> 4(GB)
+-----End table Method Table  ----
+
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with code.object.equals
+DEBUG fr.ensimag.deca.tree.ListDeclClass.codeGenListClassTableau(ListDeclClass.java:71) - [ListDeclClass][codeGenListClassTableau] Code generation pass 1: END
+DEBUG fr.ensimag.deca.tree.ListDeclClass.codeGenListClassMethod(ListDeclClass.java:75) - [ListDeclClass][codeGenListClassMethod] Code generation pass 2 classes: START
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:38) - [MethodDefinition][setLabel] Initialising label value 
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with init.A
+INFO  fr.ensimag.deca.tree.DeclClass.codeGenMethodInitialisation(DeclClass.java:112) - [DeclClass][codeGenMethodInitialisation] Defining code initilization method
+DEBUG fr.ensimag.deca.tree.ListDeclField.CodeGenListPlaceZeroInField(ListDeclField.java:69) - [ListDeclField][CodeGenListPlaceZeroInField] Placing Zero In All fields
+DEBUG fr.ensimag.deca.tree.ListDeclField.CodeGenListInitializeField(ListDeclField.java:77) - [ListDeclField][CodeGenListInitializeField] Initializing the fields
+DEBUG fr.ensimag.deca.tree.DeclClass.codeGenMethodInitialisation(DeclClass.java:141) - [DeclClass][codeGenMethodInitialisation] sizeStackMax = 0
+DEBUG fr.ensimag.deca.tree.ListDeclMethod.codeGenListMethod(ListDeclMethod.java:49) - [ListDeclMethod][CodeGenListMethodProgram]
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:38) - [MethodDefinition][setLabel] Initialising label value 
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with init.B
+INFO  fr.ensimag.deca.tree.DeclClass.codeGenMethodInitialisation(DeclClass.java:112) - [DeclClass][codeGenMethodInitialisation] Defining code initilization method
+DEBUG fr.ensimag.deca.tree.ListDeclField.CodeGenListPlaceZeroInField(ListDeclField.java:69) - [ListDeclField][CodeGenListPlaceZeroInField] Placing Zero In All fields
+DEBUG fr.ensimag.deca.tree.ListDeclField.CodeGenListInitializeField(ListDeclField.java:77) - [ListDeclField][CodeGenListInitializeField] Initializing the fields
+DEBUG fr.ensimag.deca.tree.DeclClass.codeGenMethodInitialisation(DeclClass.java:141) - [DeclClass][codeGenMethodInitialisation] sizeStackMax = 3
+DEBUG fr.ensimag.deca.codegen.ListError.activeError(ListError.java:44) - ERROR is being made to value true stack_overflow_error
+DEBUG fr.ensimag.deca.tree.ListDeclMethod.codeGenListMethod(ListDeclMethod.java:49) - [ListDeclMethod][CodeGenListMethodProgram]
+DEBUG fr.ensimag.deca.tree.ListDeclClass.codeGenListClassMethod(ListDeclClass.java:80) - [ListDeclClass][codeGenListClassMethod] Code generation pass 2 classes: END
+DEBUG fr.ensimag.deca.tree.New.codeGenInst(New.java:63) - [New][codeGenInst] generating new for the class = B
+DEBUG fr.ensimag.deca.tree.AbstractExpr.LoadGencode(AbstractExpr.java:259) - [Abstractexpr][LoadGencode]  Reserving an non empty register with the name R2
+DEBUG fr.ensimag.deca.tree.New.loadItemintoRegister(New.java:70) - [New][loadItemintoRegister] loading new of calss =  B into memory at register R2
+DEBUG fr.ensimag.deca.tree.IfThenElse.codeGenInst(IfThenElse.java:57) - [IfThenElse][CodeGenInst] generating code for IfThenElse
+DEBUG fr.ensimag.deca.tree.Identifier.codeGenInst(Identifier.java:58) - [Identifier][codeGenInst] Loading identifier into memory with name = b
+DEBUG fr.ensimag.deca.tree.AbstractExpr.LoadGencode(AbstractExpr.java:259) - [Abstractexpr][LoadGencode]  Reserving an non empty register with the name R2
+DEBUG fr.ensimag.deca.tree.Identifier.loadItemintoRegister(Identifier.java:65) - [Identifier][loadItemintoRegister] Loading b into the register R2
+DEBUG fr.ensimag.deca.tree.AbstractExpr.LoadGencode(AbstractExpr.java:259) - [Abstractexpr][LoadGencode]  Reserving an non empty register with the name R3
+DEBUG fr.ensimag.deca.codegen.ListError.activeError(ListError.java:44) - ERROR is being made to value true stack_overflow_error
+	TSTO #3
+	BOV stack_overflow_error
+; ---------------------------------------------------
+; ----------------- class : B -------------------
+; ---------------------------------------------------
+; ------------Init method for class = B--------
+init.B:
+	TSTO #3
+	BOV stack_overflow_error
+	LOAD -2(LB), R0	; Placing the current class = B adresse in the the stack before calling parent 
+	PUSH R0	; Placing this = B into the stack
+	BSR init.A	; Calling the initialisation method of parent classA
+	SUBSP #1
+	RTS
+; Beginning of main instructions:
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 6(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+	STORE R2, 1(GB)	; Initializing the variable b and loading it into memory
+	LOAD 1(GB), R2	; loading b into memory
+	LOAD 4(GB), R3	; loading method table of A
+	CMP #null, R3
+	BEQ instanceOf_Object	; sifr.ensimag.deca.tree.Identifier@482f8f11est Object, on retourne immédiatement true
+=======
+	TSTO #12
+	BOV stack_overflow_error
+	ADDSP #12
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 7(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 8(GB)
+	LEA 7(GB), R0
+	STORE R0, 9(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 10(GB)
+	LEA 9(GB), R0
+	STORE R0, 11(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 12(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[16, 8]-----
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+; --------EndNew--------[16, 8]-----
+	STORE R2, 1(GB)	; Initializing the variable b and loading it into memory
+; --------StartNew--------[17, 8]-----
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+; --------EndNew--------[17, 8]-----
+	STORE R2, 2(GB)	; Initializing the variable x and loading it into memory
+; --------StartNew--------[18, 8]-----
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+; --------EndNew--------[18, 8]-----
+	STORE R2, 3(GB)	; Initializing the variable y and loading it into memory
+; --------StartNew--------[19, 8]-----
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+; --------EndNew--------[19, 8]-----
+	STORE R2, 4(GB)	; Initializing the variable u and loading it into memory
+; --------StartNew--------[20, 8]-----
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+; --------EndNew--------[20, 8]-----
+	STORE R2, 5(GB)	; Initializing the variable l and loading it into memory
+; --------StartNew--------[21, 8]-----
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 11(GB), R0
+	STORE R0, 0(R2)
+	BSR init.B
+; --------EndNew--------[21, 8]-----
+	STORE R2, 6(GB)	; Initializing the variable p and loading it into memory
+; --------------BeginInstanceof----------[23, 7]+-----
+	LOAD 1(GB), R2	; loading b into memory
+	LOAD 9(GB), R3	; loading method table of A
+	CMP #null, R3
+	BEQ instanceOf_Object	; sifr.ensimag.deca.tree.Identifier@1593948dest Object, on retourne immédiatement true
+>>>>>>> origin/PartieCclass
+loopbegin:
+	LOAD 0(R2), R2
+	CMP #null, R2
+	BEQ endfalse
+	CMP R2, R3
+	BNE loopbegin	; loopend
+instanceOf_Object:
+	LOAD #1, R3
+	BRA endtrue
+endfalse:
+	LOAD #0, R3
+endtrue:
+<<<<<<< HEAD
+; ---------Startif-----------[18, 4]
+=======
+; --------------EndInstanceof----------[23, 7]-----
+; ---------Startif-----------[23, 4]
+>>>>>>> origin/PartieCclass
+	CMP #1, R3	; Comparing expr output in the ifthenelse
+	BNE else1
+	WSTR "instanceof fonctionne"
+	WNL
+	BRA end_ifthenelse_1
+else1:
+end_ifthenelse_1:
+; ---------Endif-----------
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : A -------------------
+; ---------------------------------------------------
+; ------------Init method for class = A--------
+init.A:
+	RTS
+; ---------------------------------------------------
+; ----------------- class : B -------------------
+; ---------------------------------------------------
+; ------------Init method for class = B--------
+init.B:
+	TSTO #3
+	BOV stack_overflow_error
+	LOAD -2(LB), R0	; Placing the current class = B adresse in the the stack before calling parent 
+	PUSH R0	; Placing this = B into the stack
+	BSR init.A	; Calling the initialisation method of parent classA
+	SUBSP #1
+	RTS
+; -------------------------------------
+<<<<<<< HEAD
+;        Liste Erreur
+; -------------------------------------
+=======
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+>>>>>>> origin/PartieCclass
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+<<<<<<< HEAD
+
+=======
+; end main program
+>>>>>>> origin/PartieCclass

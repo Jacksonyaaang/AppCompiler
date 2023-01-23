@@ -1,0 +1,110 @@
+// Description:
+//    Teste la différence de tableaux de flottants et d'entiers
+//
+// Resultats:
+//
+//    Test Soustraction de tableaux 1D
+//    --------------
+//    Tableau1D = [
+//    5 ,5 ,5 ,5 ,5 ,5 ,5 ,]--------------
+//    --------------
+//    Tableau1D = [
+//    6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,]--------------
+//    Le résultat de la soustraction est: 
+//    --------------
+//    Tableau1D = [
+//    -1 ,-1 ,-1 ,-1 ,-1 ,-1 ,-1 ,]--------------
+//
+//    Test soustraction tableau 2D
+//    Soustraction entre un tableau de int rempli de 5 et un tableau de float rempli de 6.0
+//    Le résultat de la soustraction est: 
+//    --------------
+//    Tableau2D = [
+//    -1 ,-1 ,-1 ,
+//    -1 ,-1 ,-1 ,
+//    -1 ,-1 ,-1 ,
+//    ]--------------
+//
+//    Soustraction entre un tableau de float rempli de 6.8 et un tableau de int rempli de 5 
+//    --------------
+//    Tableau2D = [
+//    1.80000e+00 ,1.80000e+00 ,1.80000e+00 ,
+//    1.80000e+00 ,1.80000e+00 ,1.80000e+00 ,
+//    1.80000e+00 ,1.80000e+00 ,1.80000e+00 ,
+//    ]--------------
+//
+//    Soustraction entre un tableau de float rempli de 6.0 et un tableau de float rempli de 10.5
+//    Le résultat de la soustraction est: 
+//    --------------
+//    Tableau2D = [
+//    -4.50000e+00 ,-4.50000e+00 ,-4.50000e+00 ,
+//    -4.50000e+00 ,-4.50000e+00 ,-4.50000e+00 ,
+//    -4.50000e+00 ,-4.50000e+00 ,-4.50000e+00 ,
+//    ]--------------
+//
+//    Soustraction entre un tableau de int rempli de 5 et un tableau de int rempli de 2
+//    Le résultat de la soustraction est: 
+//    --------------
+//    Tableau2D = [
+//    3 ,3 ,3 ,
+//    3 ,3 ,3 ,
+//    3 ,3 ,3 ,
+//    ]--------------
+//
+// Historique:
+//    cree le 21/01/2023
+
+#include "Difference.decah"
+
+{
+    Difference matrixDiff = new Difference();
+    int[] x = new int[7];
+    float[] y = new float[7];
+    int[][] a = new int[3][3];
+    int[][] d = new int[3][3];
+    float[][] b = new float[3][3];
+    float[][] c = new float[3][3];
+
+    println("Test Soustraction de tableaux 1D");
+    matrixDiff.setInt1DTable(x,5);
+    matrixDiff.setFloat1DTable(y,6.0);
+    matrixDiff.printInt1DTable(x);
+    matrixDiff.printFloat1DTable(y);
+    matrixDiff.diffIntFloat1D(x,y);
+    println("Le résultat de la soustraction est: ");
+    matrixDiff.printInt1DTable(x);
+    println("");
+
+    println("Test soustraction tableau 2D");
+    println("Soustraction entre un tableau de int rempli de 5 et un tableau de float rempli de 6.0");
+    matrixDiff.setInt2DTable(a,5);
+    matrixDiff.setFloat2DTable(b,6.0);
+    matrixDiff.diffIntFloat2D(a,b);
+    println("Le résultat de la soustraction est: ");
+    matrixDiff.printInt2DTable(a);
+    println("");
+
+    println("Soustraction entre un tableau de float rempli de 6.8 et un tableau de int rempli de 5 ");
+    matrixDiff.setInt2DTable(a,5);
+    matrixDiff.setFloat2DTable(b,6.8);
+    matrixDiff.diffFloatInt2D(b,a);
+    matrixDiff.printFloat2DTable(b);
+    println("");
+
+    println("Soustraction entre un tableau de float rempli de 6.0 et un tableau de float rempli de 10.5");
+   matrixDiff.setFloat2DTable(c,10.5);
+    matrixDiff.setFloat2DTable(b,6.0);
+    matrixDiff.diffFloatFloat2D(b,c);
+    println("Le résultat de la soustraction est: ");
+    matrixDiff.printFloat2DTable(b);
+    println("");
+
+    println("Soustraction entre un tableau de int rempli de 5 et un tableau de int rempli de 2");
+    matrixDiff.setInt2DTable(d,2);
+    matrixDiff.setInt2DTable(a,5);
+    matrixDiff.diffIntInt2D(a,d);
+    println("Le résultat de la soustraction est: ");
+    matrixDiff.printInt2DTable(a);
+    println("");
+
+    }

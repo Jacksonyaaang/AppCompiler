@@ -2,9 +2,17 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CodeGenError;
+import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.LabelOperand;
+import fr.ensimag.ima.pseudocode.NullOperand;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.*;
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -36,17 +44,79 @@ public class Program extends AbstractProgram {
     @Override
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify program: start");
+        if (compiler.getRegisterManagement() == null){
+            LOG.debug("Register unit management unit is null");
+        }
+        else
+        {
+            LOG.debug("Register unit management unit not null");
+        }
+        compiler.saveMainProgramState();
+        classes.verifyListClass(compiler);
+        classes.verifyListClassMembers(compiler);
+        classes.verifyListClassBody(compiler);
+        compiler.setMainProgramState();
         main.verifyMain(compiler);
         LOG.debug("verify program: end");
     }
 
     @Override
     public void codeGenProgram(DecacCompiler compiler) throws CodeGenError{
-        // A FAIRE: compléter ce squelette très rudimentaire de code
-        compiler.addComment("Main program");
+        compiler.addComment("-------------------------------------");
+        compiler.addComment("       Method Table");
+        compiler.addComment("-------------------------------------");
+        compiler.setMainProgramState();
+        //Generating methode table for object and the other elements
+        generateMethodTableForObjectClass(compiler);
+        //Generation de code class
+        classes.codeGenListClassTableau(compiler);
+        //Code class end 
+        compiler.setMainProgramState();
+        compiler.addComment("-------------------------------------");
+        compiler.addComment("       Main program");
+        compiler.addComment("-------------------------------------");
+        classes.codeGenListClassMethod(compiler);
+        compiler.setMainProgramState();
         main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());
+
+        // Ajoute de code de class et la liste des méthodes
+        compiler.addComment("-------------------------------------");
+        compiler.addComment("       Classes");
+        compiler.addComment("-------------------------------------");
+        compiler.getProgram().append(classes.getClassesProgram());
+        compiler.addComment("-------------------------------------");
+        compiler.addComment("       Method equal");
+        compiler.addComment("-------------------------------------");
+        generateCodeForObjectEquals(compiler);
+        compiler.addComment("-------------------------------------");
+        compiler.addComment("       Liste Erreur");
+        compiler.addComment("-------------------------------------");
         compiler.getErrorManagementUnit().writeListError(compiler);
+    }
+
+    public void generateMethodTableForObjectClass(DecacCompiler compiler) throws CodeGenError{
+        ClassDefinition objectClassDefinition = (ClassDefinition) compiler.environmentType.getEnvTypes().get(compiler.createSymbol("Object"));
+        compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().put(objectClassDefinition, new RegisterOffset(compiler.incrementGbCompiler(), Register.GB));
+        compiler.addInstruction(new LOAD(new NullOperand(), Register.getR(0)));
+        compiler.addInstruction(new STORE(Register.getR(0), compiler.getTableDeMethodeCompiler().getAdresseTableDeMethod().get(objectClassDefinition)));
+        compiler.addInstruction(new LOAD((DVal) new LabelOperand(new Label("code."+objectClassDefinition.getType().getName().getName()+".equals")),
+                                                 Register.getR(0)));
+        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.incrementGbCompiler(), Register.GB)));
+    }
+
+    public void generateCodeForObjectEquals(DecacCompiler compiler) throws CodeGenError{
+        compiler.addComment("------------------Start generateCodeForObjectEquals location:");
+        Label fin_equals=new Label("fin.Object.equals");
+        compiler.addLabel(new Label("code.Object.equals"));
+        compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(0)));// (@this -> R2)
+        compiler.addInstruction(new CMP(new RegisterOffset(-3, Register.LB), Register.getR(0)));
+        compiler.addInstruction(new SEQ(Register.getR(0)),"Comparaison this et paramètre d'equals");
+        compiler.addLabel(fin_equals);
+        compiler.addInstruction(new RTS()); 
+        compiler.addLabel(new Label("init.Object"));
+        compiler.addInstruction(new RTS()); 
+
     }
 
     @Override
@@ -60,6 +130,7 @@ public class Program extends AbstractProgram {
         classes.iter(f);
         main.iter(f);
     }
+    
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {
         classes.prettyPrint(s, prefix, false);

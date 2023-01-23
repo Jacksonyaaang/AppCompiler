@@ -1,0 +1,15 @@
+// Description:
+//       Teste de Double Declaration d'une variable dans le corps d'une méthode.
+// 
+// Resultats: 
+//      Ligne 13: Double déclaration
+// 
+// Historique:
+//      cree le 21/01/2023
+
+class A{
+   void f(){
+      int x;
+      int x;
+   }
+}

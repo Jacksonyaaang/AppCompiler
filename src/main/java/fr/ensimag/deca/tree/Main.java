@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
  * @date 01/01/2023
  */
 public class Main extends AbstractMain {
+    
     private static final Logger LOG = Logger.getLogger(Main.class);
     
     private ListDeclVar declVariables;
@@ -35,11 +36,6 @@ public class Main extends AbstractMain {
     @Override
     protected void verifyMain(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify Main: start");
-        // A FAIRE: Appeler méthodes "verify*" de ListDeclVarSet et ListInst.
-        // Vous avez le droit de changer le profil fourni pour ces méthodes
-        // (mais ce n'est à priori pas nécessaire).
-        /*On initialise d'abord l'environnement d'expression de parent null dans le cas
-        de sans Object */
         EnvironmentExp EnvExpInit = new EnvironmentExp(null);
         declVariables.verifyListDeclVariable(compiler, EnvExpInit, null);
         insts.verifyListInst(compiler, EnvExpInit, null, null);
@@ -55,7 +51,10 @@ public class Main extends AbstractMain {
         //On reserve de l'espace dans le stack
         if (sizeStack != 0){
             compiler.getErrorManagementUnit().activeError("stack_overflow_error");
-            compiler.getProgram().addFirst(new ADDSP(new ImmediateInteger(sizeStack)));
+            //On reserve uniquement de l'espace dont on stock des valeurs de registres
+            if (compiler.getStackManagement().getGbCounter() != 0){
+                compiler.getProgram().addFirst(new ADDSP(new ImmediateInteger(compiler.getStackManagement().getGbCounter())));
+            }
             if (!(compiler.getCompilerOptions().isNoCheck())) {
                 compiler.getProgram().addFirst(new BOV(new Label("stack_overflow_error")));
                 compiler.getProgram().addFirst(new TSTO(new ImmediateInteger(sizeStack)));

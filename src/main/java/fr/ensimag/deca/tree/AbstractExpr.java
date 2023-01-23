@@ -4,15 +4,20 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 import fr.ensimag.ima.pseudocode.instructions.PUSH;
+import fr.ensimag.ima.pseudocode.instructions.BLE;
+import fr.ensimag.ima.pseudocode.instructions.BLT;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
@@ -99,6 +104,55 @@ public abstract class AbstractExpr extends AbstractInst {
         }
     }
 
+    /**
+     * verifyExprIsPositive ajoute des instruction pour vérifier que le registre de retour
+     * d'une expression est positive. Si l'élement inférieur au égal à 0 on quitte
+     * et lance une erreur
+     * @param compiler
+     * @param expr
+     */
+    protected void verifyExprIsStrictlyPositive(DecacCompiler compiler, AbstractExpr expr){
+        if (!(compiler.getCompilerOptions().isNoCheck())){
+            compiler.addInstruction(new CMP(new ImmediateInteger(1), expr.getRegisterDeRetour()));
+            compiler.addInstruction(new BLT(new Label("int_allocation_table_must_be_strictly_positive")));
+            compiler.getErrorManagementUnit().activeError("int_allocation_table_must_be_strictly_positive");
+        }
+    }
+
+    /**
+     * verifyExprIsPositive ajoute des instruction pour vérifier que le registre de retour
+     * d'une expression est  positive. Si l'élement inférieur à 0 on quitte
+     * et lance une erreur
+     * @param compiler
+     * @param expr
+     */
+    protected void verifyExprIsPositive(DecacCompiler compiler, AbstractExpr expr){
+        if (!(compiler.getCompilerOptions().isNoCheck())){
+            compiler.addInstruction(new CMP(new ImmediateInteger(0), expr.getRegisterDeRetour()));
+            compiler.addInstruction(new BLT(new Label("int_selection_table_must_be_positive")));
+            compiler.getErrorManagementUnit().activeError("int_selection_table_must_be_positive");
+        }
+    }
+
+
+    /**
+     * verifyExprIsLowerThenRegister ajoute des instruction pour vérifier que le registre de retour
+     * d'une expression est inférieur ou égal à une autre valeur stockée dans le registe : registreComparaison
+     * @param compiler
+     * @param expr
+     */
+    protected void verifyExprIsLowerThenRegister(DecacCompiler compiler, AbstractExpr expr, GPRegister registreComparaison){
+        if (!(compiler.getCompilerOptions().isNoCheck())){
+            compiler.addInstruction(new CMP(expr.getRegisterDeRetour(), registreComparaison));
+            compiler.addInstruction(new BLE(new Label("table_dimension_are_not_respected")));
+            compiler.getErrorManagementUnit().activeError("table_dimension_are_not_respected");
+        }
+    }
+
+
+
+
+
     boolean isImplicit() {
         return false;
     }
@@ -159,24 +213,30 @@ public abstract class AbstractExpr extends AbstractInst {
             EnvironmentExp localEnv, ClassDefinition currentClass, 
             Type expectedType)
             throws ContextualError {
-        LOG.debug("[AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments" );
+        LOG.debug("[AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = " + getLocation() );
         //Vérification du membre de droite d'une affectation
-        Type t = this.verifyExpr(compiler, localEnv, currentClass);
-
+        Type typeR = this.verifyExpr(compiler, localEnv, currentClass);
+        LOG.debug("[AbstractExpr][verifyRValue] right type is  = " + typeR.getName() + " expected type is " + expectedType.getName());
         // Conversion du membre droit en float s'il est de tye int et que le membre de gauche est de type float
-        if (expectedType.isFloat() && t.isInt()){
+        if (expectedType.isFloat() && typeR.isInt()){
             ConvFloat cF = new ConvFloat(this);
             cF.verifyExpr(compiler, localEnv, currentClass);
             LOG.debug("[Assign][verifyExpr] Conv int -> float");
             return cF;
         }
-        if (!expectedType.sameType(t))
-            throw new ContextualError("Not expected type", getLocation());
+        else if (expectedType.isClass() && typeR.isClassOrNull()){
+            if (!typeR.isNull() &&!((ClassType)typeR).isSubClassOf((ClassType)expectedType)){
+                throw new ContextualError("Le type de l'expression de droite est " + typeR + " alors que le type attendu est " + expectedType, getLocation());
+            }else return this;
+        }
+        if (!expectedType.sameType(typeR)){
+            throw new ContextualError("Le type de l'expression de droite est " + typeR + " alors que le type attendu est " + expectedType, getLocation());
+        }
         setType(expectedType);
+        LOG.debug("[AbstractExpr][verifyRValue] We found the type = " + typeR.getName() + " expected type is " + expectedType.getName());
         return this;
     }
-    
-    
+        
     @Override
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
@@ -202,7 +262,7 @@ public abstract class AbstractExpr extends AbstractInst {
         //Si le type de la condition est null ou n'est pas boolean, on jette une ContextualError
         if (type_cond != null && type_cond.isBoolean()) setType(type_cond);
         else{
-            throw new ContextualError("la condition doit être booléan", getLocation());
+            throw new ContextualError("la condition doit être de type boolean", getLocation());
         }
         setType(compiler.environmentType.BOOLEAN);
     }
@@ -295,5 +355,4 @@ public abstract class AbstractExpr extends AbstractInst {
         }
     }
 
-    
 }

@@ -1,0 +1,1 @@
+equals method work

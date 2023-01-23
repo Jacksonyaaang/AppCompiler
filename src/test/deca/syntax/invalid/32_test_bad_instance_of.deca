@@ -1,0 +1,12 @@
+// Description:
+//    Test d'un mauvais instanceof
+//
+// Resultats:
+//    Ligne 11
+//
+// Historique:
+//    cree le 01/01/2023
+
+{
+    boolean a = A instanceof println();
+}

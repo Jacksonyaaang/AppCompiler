@@ -1,0 +1,14 @@
+// Description:
+//       Comparaison Incompatible entre un identificateur de méthode 
+//       entier et un entier
+// Resultats: 
+//      Ligne 11: Le type de l'expression de droite est A alors que le type attendu est B
+// 
+// Historique:
+//      cree le 22/01/2023
+class A{
+  int f(){
+    boolean b = (5 == f);
+    return 0;
+  }
+}

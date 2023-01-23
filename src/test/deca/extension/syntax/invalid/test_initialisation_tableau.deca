@@ -1,0 +1,14 @@
+// Description:
+// Test la mauvaise initialisation de tableau
+// Resultats:
+//  TEST pas valide syntaxiquement
+// Historique:
+//    cree le 01/01/2023
+
+
+
+{
+    //Quand on fait le new, il faut spécifier la dimension
+    int[][] tableauInt = new int[][];
+
+}

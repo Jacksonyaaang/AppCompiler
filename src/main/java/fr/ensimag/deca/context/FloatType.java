@@ -10,7 +10,7 @@ import fr.ensimag.ima.pseudocode.ImmediateFloat;
  * @date 01/01/2023
  */
 public class FloatType extends Type {
-
+    
     public FloatType(SymbolTable.Symbol name) {
         super(name);
     }

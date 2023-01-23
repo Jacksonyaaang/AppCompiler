@@ -2,7 +2,7 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.codegen.RegisterMangementUnit;
+import fr.ensimag.deca.codegen.RegisterManagementUnit;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.codegen.CodeGenError;
 import fr.ensimag.ima.pseudocode.*;
@@ -54,11 +54,18 @@ public class DeclVar extends AbstractDeclVar {
             localEnv.declare(varName.getName(), varName.getExpDefinition());
         } 
         catch (EnvironmentExp.DoubleDefException e) {
-            throw new ContextualError(e.getMessage(), getLocation());
+            throw new ContextualError("Double déclaration", getLocation());
         }
+        //varName.verifyExpr(compiler, localEnv, currentClass);
         //On associe à la variable défini une adresse dans le stack avec une adresse X(Gb)
-        this.varName.getExpDefinition().setOperand(new RegisterOffset(compiler.incrementGbCompiler(), Register.GB)); 
-        LOG.debug("[DeclVar] Saving " + this.varName.getName() + " into " + this.varName.getExpDefinition().getOperand());
+        if (currentClass == null){
+            this.varName.getExpDefinition().setOperand(new RegisterOffset(compiler.incrementGbCompiler(), Register.GB)); 
+            LOG.debug("[DeclVar] Saving " + this.varName.getName() + " into " + this.varName.getExpDefinition().getOperand());
+        }
+        else{
+            this.varName.getExpDefinition().setOperand(new RegisterOffset(compiler.incrementLbCompiler(), Register.LB)); 
+            LOG.debug("[DeclVar] Saving method variable " + this.varName.getName() + " into " + this.varName.getExpDefinition().getOperand());
+        }
     }
 
     @Override

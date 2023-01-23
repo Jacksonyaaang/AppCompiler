@@ -1,0 +1,120 @@
+	TSTO #9
+	BOV stack_overflow_error
+	ADDSP #6
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 2(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 3(GB)
+	LEA 2(GB), R0
+	STORE R0, 4(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 5(GB)
+	LOAD code.A.m1, R0
+	STORE R0, 6(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[19, 8]-----
+; [New][loadItemintoRegister] loading new of calss =  A into memory at register R2
+	NEW #2, R2
+	BOV heap_overflow_error
+	LEA 4(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+; --------EndNew--------[19, 8]-----
+	STORE R2, 1(GB)	; Initializing the variable a and loading it into memory
+; --------BeginAssignOp--------[20, 4]-----
+	LOAD #1, R3	; loading 1 into memory
+	PUSH R2
+	LOAD 1(GB), R2	; loading a into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	STORE R3, 1(R2)	; Saving field  i into memory
+	POP R2
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[20, 4]-----
+; --------BeginSelection--------[21, 12]-----
+	LOAD 1(GB), R2	; loading a into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R2), R2	; Loading the field i into a register 
+; --------BeginSelection--------[21, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+; --------BeginMethodCall--------[22, 4]-----
+	ADDSP #1
+	LOAD 1(GB), R2	; loading a into memory
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[22, 4]-----
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : A -------------------
+; ---------------------------------------------------
+; ------------Init method for class = A--------
+init.A:
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field i
+	STORE R0, 1(R1)	; Saving field  i into memory
+	RTS
+; ------------Code for method : m1 with label =  code.A.m1--------
+code.A.m1:
+	TSTO #1
+	BOV stack_overflow_error
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD -2(LB), R2	; loading the class of the field i into memory
+	LOAD 1(R2), R2	; loading i into memory
+	LOAD R2, R0
+	BRA fin.A.m1
+	WSTR "Error: La méthode code.A.m1 doit retourner un element"
+	WNL
+	ERROR
+fin.A.m1:
+	POP R2	; Pushing and poping registers used in the method
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

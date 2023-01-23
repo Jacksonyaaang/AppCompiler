@@ -44,6 +44,7 @@ public abstract class Definition {
 
     private Location location;
     private Type type;
+    
     public boolean isField() {
         return false;
     }
@@ -57,6 +58,10 @@ public abstract class Definition {
     }
 
     public boolean isParam() {
+        return false;
+    }
+    
+    public boolean isTable() {
         return false;
     }
 

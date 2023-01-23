@@ -1,0 +1,33 @@
+// Description:
+//    Teste method declaration .
+//
+// Resultats:
+//   PASS
+
+class Animal{
+   int food=0;
+   int eat(int a){
+
+   }
+} 
+class AnimalSol extends Animal{
+
+}
+
+class AnimalSolFarm extends AnimalSol{
+   AnimalSol methodSpecial(Animal aa, Animal bb){
+
+   }
+}
+
+class Cow extends AnimalSolFarm{
+   int eat(int a){
+   return eat(4);
+   }
+}
+
+
+//main   
+{
+
+}

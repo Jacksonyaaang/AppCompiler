@@ -1,0 +1,16 @@
+// Description:
+// Test l'acces à la dimension d'un tableau
+// Resultats:
+//  TEST valide contextuelement
+// Historique:
+//    cree le 01/01/2023
+
+
+
+{
+    int[] tableauInt = new int[5];
+    float[][] tableauFloat = new float[5][5];
+    print(tableauInt.size1D);
+    print(tableauFloat.size1D);
+    print(tableauFloat.size2D);
+}

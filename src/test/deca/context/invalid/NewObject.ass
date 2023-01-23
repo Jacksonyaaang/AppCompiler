@@ -1,0 +1,52 @@
+	TSTO #6
+	BOV stack_overflow_error
+	ADDSP #3
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 2(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 3(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[3, 16]-----
+; [New][loadItemintoRegister] loading new of calss =  Object into memory at register R2
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 2(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Object
+	POP R2
+; --------EndNew--------[3, 16]-----
+	STORE R2, 1(GB)	; Initializing the variable obj and loading it into memory
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

@@ -1,0 +1,17 @@
+class A {
+    protected int x ;
+    int test_attribut;
+	
+    int getX( boolean test2) {
+        x = 5 ;
+    }
+    void setX(int x) {
+	    int alpha = 5 ;
+	    println("hello world");
+    }
+    void method(int x)
+	asm (" LOAD #2, R1
+     WINT ");	    
+
+}
+

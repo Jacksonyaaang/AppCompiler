@@ -1,0 +1,15 @@
+// Description:
+// On ne peux associer à un tableau de int 2d 
+// que un tableau de int 2d
+// Resultats:
+//  TEST pas valide contextuelement
+// Historique:
+//    cree le 01/01/2023
+
+
+
+{
+    //Quand on fait le new, il faut spécifier la dimension
+    int[][] tableauInt = new int[1];
+    
+}

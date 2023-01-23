@@ -1,0 +1,13 @@
+// Description:
+//       Teste de type d'une variable dans le corps d'une méthode.
+// 
+// Resultats: 
+//      Ligne 11: Déclaration de variables de type void impossible
+// 
+// Historique:
+//      cree le 21/01/2023
+class A{
+  void f(){
+    void x;
+  }
+}

@@ -1,0 +1,19 @@
+// Description:
+//       Teste de return pour le type void.
+// 
+// Resultats: 
+//      Ligne 17: Le type de retour de la méthode ne peut être void
+// 
+// Historique:
+//      cree le 21/01/2023
+class A{
+  void f(){
+  }
+}
+
+class B{
+  A a = new A();
+  void g(){
+    return a.f();
+  }
+}

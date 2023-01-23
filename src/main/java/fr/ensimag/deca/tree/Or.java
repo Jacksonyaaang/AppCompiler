@@ -25,7 +25,7 @@ public class Or extends AbstractOpBool {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{    
-        super.setBoolOpIdentifier(compiler.getStackManagement().incrementOpBoolIncrementer());
+        super.setBoolOpIdentifier(compiler.incrementOpBoolIncrementer());
         LOG.debug("[Or][codeGenInst] Working on Or boolean operation // Location " +getLocation());
         LOG.debug("[Or][codeGenInst] Exploring Left");
         //A FAIRE, optimisation du code de la boucle if

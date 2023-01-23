@@ -1,0 +1,29 @@
+// Description:
+//    somme entre deux tableaux avec des different taille
+//
+// Resultats:
+// erreur
+// Historique:
+//    cree le 21/01/2023
+
+#include "Multiply_member_by_member.decah"
+
+{
+    MultMember matrixMultMb = new MultMember();
+    int[] x = new int[7];
+    float[] y = new float[7];
+    int[][] a = new int[3][3];
+    int[][] d = new int[3][3];
+    float[][] b = new float[3][10];
+    float[][] c = new float[3][3];
+
+    println("Test produit membre par membre tableau 2D");
+    println("Produit membre par membre entre un tableau de int rempli de 5 et un tableau de float rempli de 6.0");
+    matrixMultMb.setInt2DTable(a,5);
+    matrixMultMb.setFloat2DTable(b,6.0);
+    matrixMultMb.multMbIntFloat2D(a,b);
+    println("Le résultat du produit membre par membre est: ");
+    matrixMultMb.printInt2DTable(a);
+    println("");
+
+}

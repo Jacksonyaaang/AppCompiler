@@ -1,0 +1,26 @@
+// Description:
+//    somme entre deux tableaux avec des different taille
+//
+// Resultats:
+// erreur
+// Historique:
+//    cree le 21/01/2023
+
+#include "Difference.decah"
+
+{
+    Difference matrixDiff = new Difference();
+    int[] x = new int[7];
+    float[] y = new float[8];
+
+    println("Test Soustraction de tableaux 1D");
+    matrixDiff.setInt1DTable(x,5);
+    matrixDiff.setFloat1DTable(y,6.0);
+    matrixDiff.printInt1DTable(x);
+    matrixDiff.printFloat1DTable(y);
+    matrixDiff.diffIntFloat1D(x,y);
+    println("Le résultat de la soustraction est: ");
+    matrixDiff.printInt1DTable(x);
+    println("");
+
+}

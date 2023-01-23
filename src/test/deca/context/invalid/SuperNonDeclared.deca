@@ -1,0 +1,14 @@
+// Description:
+//       le super doit être déclaré avant le fils.
+//
+// Resultats: 
+//      Ligne 10: La super classe B n'est pas définie.
+// 
+// Historique:
+//      cree le 20/01/2023
+
+class A extends B{
+}
+class B{
+}
+

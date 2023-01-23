@@ -1,0 +1,13 @@
+// Description:
+//    Teste l'utilisation de plusieurs paramètres de même type.
+//
+// Resultats:
+//    Ligne 10: Il existe déjà un paramètre de nom a dans la même méthode
+//
+// Historique:
+//    cree le 20/01/2023
+class A{
+    void test(int a, float a){
+
+    }
+}

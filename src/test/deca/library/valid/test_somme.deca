@@ -1,0 +1,110 @@
+// Description:
+//    Teste l'adition de tableaux de flottants et d'entiers
+//
+// Resultats:
+//
+//    Test somme de tableaux 1D
+//    --------------
+//    Tableau1D = [
+//    5 ,5 ,5 ,5 ,5 ,5 ,5 ,]--------------
+//    --------------
+//    Tableau1D = [
+//    6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,]--------------
+//    Le résultat de la somme est:
+//    --------------
+//    Tableau1D = [
+//    11 ,11 ,11 ,11 ,11 ,11 ,11 ,]--------------
+//
+//    Test somme tableau 2D
+//    Somme entre un tableau de int rempli de 5 et un tableau de float rempli de 6.0
+//    Le résultat de la somme est:
+//    --------------
+//    Tableau2D = [
+//    11 ,11 ,11 ,
+//    11 ,11 ,11 ,
+//    11 ,11 ,11 ,
+//    ]--------------
+//
+//    Somme entre un tableau de float rempli de 6.8 et un tableau de int rempli de 5
+//    --------------
+//    Tableau2D = [
+//    1.18000e+01 ,1.18000e+01 ,1.18000e+01 ,
+//    1.18000e+01 ,1.18000e+01 ,1.18000e+01 ,
+//    1.18000e+01 ,1.18000e+01 ,1.18000e+01 ,
+//    ]--------------
+//
+//    Somme entre un tableau de float rempli de 10.5 et un tableau de float rempli de 6.0
+//    Le résultat de la somme est:
+//    --------------
+//    Tableau2D = [
+//    1.65000e+01 ,1.65000e+01 ,1.65000e+01 ,
+//    1.65000e+01 ,1.65000e+01 ,1.65000e+01 ,
+//    1.65000e+01 ,1.65000e+01 ,1.65000e+01 ,
+//    ]--------------
+//
+//    Somme entre un tableau de int rempli de 2 et un tableau de int rempli de 5
+//    Le résultat de la somme est:
+//    --------------
+//    Tableau2D = [
+//    7 ,7 ,7 ,
+//    7 ,7 ,7 ,
+//    7 ,7 ,7 ,
+//    ]--------------
+//
+// Historique:
+//    cree le 21/01/2023
+
+#include "Sum.decah"
+
+{
+    Sum matrixsum = new Sum();
+    int[] x = new int[7];
+    float[] y = new float[7];
+    int[][] a = new int[3][3];
+    int[][] d = new int[3][3];
+    float[][] b = new float[3][3];
+    float[][] c = new float[3][3];
+
+    println("Test somme de tableaux 1D");
+    matrixsum.setInt1DTable(x,5);
+    matrixsum.setFloat1DTable(y,6.0);
+    matrixsum.printInt1DTable(x);
+    matrixsum.printFloat1DTable(y);
+    matrixsum.sommeIntFloat1D(x,y);
+    println("Le résultat de la somme est: ");
+    matrixsum.printInt1DTable(x);
+    println("");
+
+    println("Test somme tableau 2D");
+    println("Somme entre un tableau de int rempli de 5 et un tableau de float rempli de 6.0");
+    matrixsum.setInt2DTable(a,5);
+    matrixsum.setFloat2DTable(b,6.0);
+    matrixsum.sommeIntFloat2D(a,b);
+    println("Le résultat de la somme est: ");
+    matrixsum.printInt2DTable(a);
+    println("");
+
+    println("Somme entre un tableau de float rempli de 6.8 et un tableau de int rempli de 5 ");
+    matrixsum.setInt2DTable(a,5);
+    matrixsum.setFloat2DTable(b,6.8);
+    matrixsum.sommeFloatInt2D(b,a);
+    matrixsum.printFloat2DTable(b);
+    println("");
+
+    println("Somme entre un tableau de float rempli de 10.5 et un tableau de float rempli de 6.0");
+    matrixsum.setFloat2DTable(c,10.5);
+    matrixsum.setFloat2DTable(b,6.0);
+    matrixsum.sommeFloatFloat2D(b,c);
+    println("Le résultat de la somme est: ");
+    matrixsum.printFloat2DTable(b);
+    println("");
+
+    println("Somme entre un tableau de int rempli de 2 et un tableau de int rempli de 5");
+    matrixsum.setInt2DTable(d,2);
+    matrixsum.setInt2DTable(a,5);
+    matrixsum.sommeIntInt2D(a,d);
+    println("Le résultat de la somme est: ");
+    matrixsum.printInt2DTable(a);
+    println("");
+
+    }

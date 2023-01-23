@@ -1,0 +1,36 @@
+
+
+// Description: 
+//    test d'erreur de stack overflow sur méthode récursive (suite de fibonacci)
+//    TEST Essentiel partie C
+// Resultats attendu:(en ajoutant un zéro à c, on obtient une stack_overflow_error)
+//  ** IMA ** ERREUR ** Ligne 145 : 
+//    BSR : Debordement de la pile
+// Historique:
+// créé le 22/01/2023
+// validé le 22/01/2023
+
+
+class SuiteFibonacci{  
+  
+    int nbr1=0;
+    int nbr2=1;  
+    int nbr3=0; 
+  
+    int Fibonacci(int c){    
+        if(c < 0){
+            return 0;
+        }    
+        else if (c ==1 || c ==2){
+            return 1;
+        }
+        return Fibonacci(c-1)+Fibonacci(c-2);    
+    } 
+}
+
+{    
+    SuiteFibonacci s=new SuiteFibonacci();
+    int c = 200;  
+    int x = s.Fibonacci(c);
+    println(x);
+}  

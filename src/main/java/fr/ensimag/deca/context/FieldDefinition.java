@@ -31,7 +31,16 @@ public class FieldDefinition extends ExpDefinition {
         this.containingClass = memberOf;
         this.index = index;
     }
-    
+
+    public FieldDefinition(Type type, Location location, Visibility visibility, int index) {
+        super(type, location);
+        this.visibility = visibility;
+        this.index = index;
+        this.containingClass = null;
+    }
+
+
+
     @Override
     public FieldDefinition asFieldDefinition(String errorMessage, Location l)
             throws ContextualError {

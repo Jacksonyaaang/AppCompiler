@@ -48,7 +48,7 @@ public class While extends AbstractInst {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{
-        identifier = compiler.getStackManagement().incrementWhileIncrementer();
+        identifier = compiler.incrementWhileIncrementer();
         LOG.debug("[While][CodeGenInst] generating code for While");
         Label whileBegin = new Label("while_begin" + identifier);
         Label whileEnd = new Label("while_end"+ identifier);

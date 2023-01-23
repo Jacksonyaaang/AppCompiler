@@ -1,0 +1,20 @@
+// Description:
+// test si l'usage d'une méthode qui ne soit pas de type void et 
+// qui ne possède pas d'instruction return déclenche une erreur         
+//
+// Resultats:
+//  
+// 
+// Historique:
+//    cree le 15/01/2023
+
+class A1{
+    public int sansRetour(){
+        int x=2;
+    }
+}
+
+{
+    A1 a;
+    a.sansRetour();
+}

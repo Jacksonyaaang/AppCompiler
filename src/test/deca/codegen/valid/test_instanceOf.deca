@@ -1,0 +1,71 @@
+// Description:
+//    Test d'utilisation simple de Instance of
+//    TEST langage complet partie C
+// Resultats attendu:
+
+// Historique:
+// 18/01/2023
+
+
+
+class A{}
+
+class B extends A{}
+
+class C extends B{}
+
+class D extends A{}
+
+class H extends C{}
+
+{
+    int x = 2;
+    int y = 2;
+    int z = 2;
+    int h = 2;
+    int v = 2;
+    boolean b1 = true;
+    boolean b2 = true;
+    boolean b3 = false;
+    boolean b4 = false;
+    A a = new A();
+    B b =new B();
+    C c = new C();
+    D d =new D();
+    H p = new H();
+    
+    if(b instanceof A){
+        println("instanceof fonctionne b instanceof A");
+    }
+        if((x<=2 && (y != z || h==v))&&((3>x && 2.5 >y) && (2.0==y && v == h) && b1 && b2 && !b3 && !b4 && b instanceof A)){
+        println("Gestion de registre correct avec instance of ");
+        }
+
+
+    if(b instanceof Object){
+        println("instanceof fonctionne b -> instanceof Object");
+    }
+    
+    if(a instanceof B){
+        println("Problem with code");
+    }
+    else{
+        println("instanceof fonctionne a not instanceof B");
+    }
+
+    if(p instanceof A){
+        println("instanceof fonctionne H instanceof A");
+    }
+
+    if (!(c instanceof D)){
+        println("instanceof fonctionne c is not  instanceof D");
+    }
+    else{
+        println("problem with code");
+    }
+
+
+
+
+
+}

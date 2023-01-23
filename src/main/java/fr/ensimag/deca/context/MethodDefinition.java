@@ -2,7 +2,11 @@ package fr.ensimag.deca.context;
 
 import fr.ensimag.deca.tree.Location;
 import fr.ensimag.ima.pseudocode.Label;
+
+import javax.print.DocFlavor.STRING;
+
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 /**
  * Definition of a method
@@ -12,20 +16,48 @@ import org.apache.commons.lang.Validate;
  */
 public class MethodDefinition extends ExpDefinition {
 
+    private static final Logger LOG = Logger.getLogger(MethodDefinition.class);
+
+    
     @Override
     public boolean isMethod() {
         return true;
     }
 
     public Label getLabel() {
+        if (label == null){
+            LOG.debug("[MethodDefinition][getLabel] Label is null");
+        }
         Validate.isTrue(label != null,
                 "setLabel() should have been called before");
         return label;
     }
 
     public void setLabel(Label label) {
-        this.label = label;
+        if (this.label == null){
+            LOG.debug("[MethodDefinition][setLabel] Initialising label value ");
+            this.label = label;
+        }
+        LOG.debug("[MethodDefinition][setLabel] Trying to modify label with " + label.toString());
     }
+
+    public Label getEndLabel() {
+        if (endLabel == null){
+            LOG.debug("[MethodDefinition][getendLabel] endLabel is null");
+        }
+        Validate.isTrue(endLabel != null,
+                "setendLabel() should have been called before");
+        return endLabel;
+    }
+
+    public void setEndLabel(Label endLabel) {
+        if (this.endLabel == null){
+            LOG.debug("[MethodDefinition][setendLabel] Initialising endLabel value ");
+            this.endLabel = endLabel;
+        }
+        LOG.debug("[MethodDefinition][setendLabel] Trying to modify endLabel with " + endLabel.toString());
+    }
+
 
     public int getIndex() {
         return index;
@@ -40,8 +72,11 @@ public class MethodDefinition extends ExpDefinition {
     }
 
     private final Signature signature;
-    private Label label;
+    private Label label = null;
+    private Label endLabel = null;
     
+
+
     /**
      * 
      * @param type Return type of the method
@@ -62,6 +97,16 @@ public class MethodDefinition extends ExpDefinition {
     @Override
     public String getNature() {
         return "method";
+    }
+
+    private String methodName = null;
+
+    public String setMethodname(String name) {
+        return methodName = name;
+    }
+
+    public String getMethodname() {
+        return methodName;
     }
 
     @Override

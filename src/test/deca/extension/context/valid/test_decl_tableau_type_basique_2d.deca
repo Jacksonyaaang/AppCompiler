@@ -1,0 +1,26 @@
+// Description:
+// Test la declaration de tableau 2d
+// de int / float/ boolean/ 
+// Resultats:
+//  TEST valide contextuelement
+// Historique:
+//    cree le 01/01/2023
+
+{
+    //Declaration tableau entier
+    int[][] x;
+    int[][] y = new int[5][8];
+    int[][] h = y;
+    int[][] z = x;
+    //Declaration tableau float
+    float[][] e;
+    float[][] g = new float[5][8];
+    float[][] t = g;
+    float[][] p = e;
+    //Declaration tableau boolean
+    boolean[][] bool1;
+    boolean[][] bool2 = new boolean[5][8];
+    boolean[][] bool3 = bool1;
+    boolean[][] bool4 = bool2;
+
+}

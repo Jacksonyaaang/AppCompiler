@@ -1,0 +1,50 @@
+	ADDSP #3
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 2(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 3(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNewTable--------[10, 16]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  int[][] into memory at register R2
+	LOAD #2000000, R3	; loading 2000000 into memory
+	LOAD #20000000, R4	; loading 20000000 into memory
+	LOAD R3, R1
+	MUL R4, R1
+	ADD #2, R1
+	NEW R1, R0
+	STORE R3, 0(R0)
+	STORE R4, 1(R0)
+	LOAD R0, R2
+; --------EndNewTable--------[10, 16]-----
+	STORE R2, 1(GB)	; Initializing the variable x and loading it into memory
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

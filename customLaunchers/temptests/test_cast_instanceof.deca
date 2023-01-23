@@ -1,0 +1,91 @@
+// Description:
+//  test de features variées: classe fille, usage de méthode dans une méthode, attribut du type de sa propre classe
+//  , polymorphisme, réécriture et redéfinitions ect...
+//
+// test compilation et exécution du fichier assembleur
+// Resultats attendu 
+//4
+//4
+//2
+//4
+//18
+//Je suis une instance de la classe A
+//Je suis une instance de la classe B
+//5.50000e+00
+//0
+// instanceOf reconnait l'appartenance
+// instanceOf reconnait la non appartenance
+// 5
+
+// 
+// Historique:
+//    cree le 15/01/2023
+
+class A{
+    int x;
+    int getX(){
+        return this.x;
+    }
+    void setX(int i){
+        this.x=i;
+    }
+    int setgetX(int i){
+        this.setX(i);
+        return this.getX();
+    }
+    void QuiSuisJe(){
+        println("Je suis une instance de la classe A");
+    }
+}
+class B extends A{
+    float z;
+    B successeur;
+    void QuiSuisJe(){
+        println("Je suis une instance de la classe B");
+    }
+    float getZ(){
+        float h = this.z;
+        return h ;
+    }
+
+    void setZ(int z){
+        this.x=z;
+    }
+}
+
+{
+    
+    A a=new A();
+    float z1;
+    B b= new B();
+    int y;
+    B b2=new B();
+    B b3=new B();
+    b3.x=9;
+    b3.z=9.9;
+    b2.x=5;
+    b2.z=5.5;
+    a.x=4;
+    y=a.getX();
+    println(a.getX());
+    println(y);
+    a.setX(2);
+    println(a.getX());
+    println(y);
+    println(a.setgetX(18));
+    a.QuiSuisJe();
+    b.QuiSuisJe();
+    b2.successeur=null;
+    //b2.successeur=b3;
+    b.successeur=b2;
+    z1=b.successeur.z;
+    //if(b instanceOf B){
+    //    println("instanceOf reconnait une instance d'une certaine classe");
+    //}
+    println(z1);
+    b=(B)(b2);
+    y=b.x;
+    println(y);
+}
+
+

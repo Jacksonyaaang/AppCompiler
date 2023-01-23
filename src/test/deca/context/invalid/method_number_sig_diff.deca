@@ -1,0 +1,23 @@
+// Description:
+//    Test:  when the argument number in the signiture of the current method declaration is different from the same-name method in the super-class occured.
+//
+// Resultats:
+//   method_obj_test.deca:18:3: [ERROR] The current method don't have a proper type
+
+class Animal{
+   int food=0;
+   float eat(int a, float b){
+
+   }
+}
+
+class Cow extends Animal{
+   float eat(int a, float b, Animal c){
+
+   }
+}
+
+//main   
+{
+
+}

@@ -1,0 +1,444 @@
+#include "Det.decah"
+
+class MatrixTraitement{
+//matrice Superérieur: int[][]
+
+    int[][] triangleSupInt(int[][] mat){
+        int size = mat.size1D;
+        int[][] result = new int[size][size];
+        int itrRow = 0;
+        int itrCol = 0;
+
+        if (size==mat.size2D){
+            while (itrRow<size){
+                while (itrCol<size){
+                    if (itrCol<itrRow){
+                        result[itrRow][itrCol]=0;
+                    }else{
+                        result[itrRow][itrCol]=mat[itrRow][itrCol];
+                    }
+
+                    itrCol=itrCol+1;
+                }
+                itrCol=0;
+                itrRow=itrRow+1;
+            }
+        }else{
+            dimensionIncompatible(mat.size1D, mat.size2D);
+        }
+        return result;
+    }
+    
+//matrice Superérieur: float[][]
+    float[][] triangleSupFloat(float[][] mat){
+        int size = mat.size1D;
+        float[][] result = new float[size][size];
+        int itrRow = 0;
+        int itrCol = 0;
+
+        if (size==mat.size2D){
+            while (itrRow<size){
+                while (itrCol<size){
+                    if (itrCol<itrRow){
+                        result[itrRow][itrCol]=0;
+                    }else{
+                        result[itrRow][itrCol]=mat[itrRow][itrCol];
+                    }
+
+                    itrCol=itrCol+1;
+                }
+                itrCol=0;
+                itrRow=itrRow+1;
+            }
+        }else{
+            dimensionIncompatible(mat.size1D, mat.size2D);
+        }
+        return result;
+    }
+
+
+    //matrice inférieure: int[][]
+
+    int[][] triangleInfInt(int[][] mat){
+        int size = mat.size1D;
+        int[][] result = new int[size][size];
+        int itrRow = 0;
+        int itrCol = 0;
+
+        if (size==mat.size2D){
+            while (itrRow<size){
+                while (itrCol<size){
+                    if (itrCol<=itrRow){
+                        result[itrRow][itrCol]=mat[itrRow][itrCol];
+                        
+                    }else{
+                        result[itrRow][itrCol]=0;
+                    }
+
+                    itrCol=itrCol+1;
+                }
+                itrCol=0;
+                itrRow=itrRow+1;
+            }
+        }else{
+            dimensionIncompatible(mat.size1D, mat.size2D);
+        }
+        return result;
+    }
+
+
+    //matrice inférieure: float[][]
+        float[][] triangleInfFloat(float[][] mat){
+        int size = mat.size1D;
+        float[][] result = new float[size][size];
+        int itrRow = 0;
+        int itrCol = 0;
+
+        if (size==mat.size2D){
+            while (itrRow<size){
+                while (itrCol<size){
+                    if (itrCol<=itrRow){
+                        result[itrRow][itrCol]=mat[itrRow][itrCol];
+                        
+                    }else{
+                        result[itrRow][itrCol]=0;
+                    }
+
+                    itrCol=itrCol+1;
+                }
+                itrCol=0;
+                itrRow=itrRow+1;
+            }
+        }else{
+                dimensionIncompatible(mat.size1D, mat.size2D);
+        }
+        return result;
+    }
+    //matrice transposée int
+    int[][] transposeMatrixInt(int[][] mat){
+        int sizeRow = mat.size1D;
+        int sizeCol = mat.size2D;
+        int[][] result = new int[sizeCol][sizeRow];
+        int itrRow = 0;
+        int itrCol = 0;
+        while (itrRow<sizeRow){
+            while (itrCol<sizeCol){
+                result[itrCol][itrRow] = mat[itrRow][itrCol];
+                itrCol=itrCol+1;
+            }
+            itrCol=0;
+            itrRow=itrRow+1;
+        }
+        return result;
+    }
+
+    //matrice transposée float
+    float[][] transposeMatrixFloat(float[][] mat){
+        int sizeRow = mat.size1D;
+        int sizeCol = mat.size2D;
+        float[][] result = new float[sizeCol][sizeRow];
+        int itrRow = 0;
+        int itrCol = 0;
+        while (itrRow<sizeRow){
+            while (itrCol<sizeCol){
+                result[itrCol][itrRow] = mat[itrRow][itrCol];
+                itrCol=itrCol+1;
+            }
+            itrCol=0;
+            itrRow=itrRow+1;
+        }
+        return result;
+    }
+    //Flatten for int [][]
+    int[] flattenMatrixInt(int[][] mat){
+        int sizeRow = mat.size1D;
+        int sizeCol = mat.size2D;
+        int dimension=sizeCol*sizeRow;
+        int[] result = new int[dimension];
+        int itrRow = 0;
+        int itrCol = 0;
+        int itrResult=0;
+
+
+        //print(dimension);
+        //println("[debug] my dimension");
+        //println("[debug] my dimension");
+        while (itrRow<sizeRow){
+            while (itrCol<sizeCol){
+                result[itrResult] = mat[itrRow][itrCol];
+                itrResult=itrResult+1;
+                itrCol=itrCol+1;
+            }
+            itrCol=0;
+            itrRow=itrRow+1;
+        }
+        return result;
+    }
+    //Flatten for float [][]
+    float[] flattenMatrixFloat(float[][] mat){
+        int sizeRow = mat.size1D;
+        int sizeCol = mat.size2D;
+        int dimension=sizeCol*sizeRow;
+        float[] result = new float[dimension];
+        int itrRow = 0;
+        int itrCol = 0;
+        int itrResult=0;
+
+
+        //print(dimension);
+        //println("[debug] my dimension");
+        //println("[debug] my dimension");
+        while (itrRow<sizeRow){
+            while (itrCol<sizeCol){
+                result[itrResult] = mat[itrRow][itrCol];
+                itrResult=itrResult+1;
+                itrCol=itrCol+1;
+            }
+            itrCol=0;
+            itrRow=itrRow+1;
+        }
+        return result;
+    }
+    // helper inverse d’une matrice float...............................................................
+    
+     float[][] helperInversionFloat(float[][] mat){
+
+        int size = mat.size1D;  //change
+        int indexRow =0;
+        int indexCol =0;
+        float tempo=0;
+        float tempoK=0;
+        float buffer=0;
+        int k=0; //index 
+        float[][] matInver = new float[size][2*size];
+        float[][] matInverResult = new float[size][size];
+        int inX=0;
+        int inY=0;
+
+
+        while (indexRow<size){
+            indexCol= 0;
+            while(indexCol<matInver.size2D){
+                if(indexCol<size){
+                    matInver[indexRow][indexCol]=mat[indexRow][indexCol];
+                }else{
+                    matInver[indexRow][indexCol]=0;
+                }
+
+                indexCol=indexCol+1;
+            }
+            matInver[indexRow][size+indexRow]=1;  
+
+            indexRow=indexRow+1;
+        }
+
+
+
+        indexCol=0;
+        indexRow=0;
+        while (indexRow<size){
+            tempo=matInver[indexRow][indexRow];
+            indexCol= 0;
+            while(indexCol<2*size){
+                matInver[indexRow][indexCol]=matInver[indexRow][indexCol]/tempo;
+                
+                indexCol=indexCol+1;
+            }
+            
+            /*********** */
+            //indexCol=0;
+            k=indexRow+1;
+            while (k<matInver.size1D){   
+                tempoK=matInver[k][indexRow];
+                indexCol=0;
+                while(indexCol<matInver.size2D){           
+                    matInver[k][indexCol]=matInver[k][indexCol]-matInver[indexRow][indexCol]*tempoK;
+                    
+                    indexCol=indexCol+1;
+                }
+                
+                k=k+1;
+            }        
+            /*********** */
+            
+            
+            indexRow=indexRow+1;
+        }
+       
+        indexRow=matInver.size1D-1;   
+        while (indexRow>=0){
+            k=indexRow-1;
+            while(k>=0){
+                buffer=matInver[k][indexRow];
+                indexCol=0;
+                while (indexCol<matInver.size2D){  
+                    matInver[k][indexCol] =matInver[k][indexCol]-matInver[indexRow][indexCol]*buffer;
+                    indexCol=indexCol+1;
+                }  
+                
+                k=k-1;
+            }
+            
+            
+            indexRow=indexRow-1;
+        }
+
+       
+        inX=0;
+        inY=0;
+        while(inX<size){
+            inY=0;
+            while (inY<size){
+                matInverResult[inX][inY]=matInver[inX][size+inY];
+                inY=inY+1;
+            }
+            inX=inX+1;
+        }
+
+        return matInverResult;
+    }
+
+
+
+    //helper inversion for int ................................................................................
+         int[][] helperInversionInt(int[][] mat){
+
+        int size = mat.size1D;  //change
+        int indexRow =0;
+        int indexCol =0;
+        int tempo=0;
+        int tempoK=0;
+        int buffer=0;
+        int k=0; //index 
+        int[][] matInver = new int[size][2*size];
+        int[][] matInverResult = new int[size][size];
+        int inX=0;
+        int inY=0;
+
+
+        while (indexRow<size){
+            indexCol= 0;
+            while(indexCol<matInver.size2D){
+                if(indexCol<size){
+                    matInver[indexRow][indexCol]=mat[indexRow][indexCol];
+                }else{
+                    matInver[indexRow][indexCol]=0;
+                }
+
+                indexCol=indexCol+1;
+            }
+            matInver[indexRow][size+indexRow]=1;  
+
+            indexRow=indexRow+1;
+        }
+
+
+
+        indexCol=0;
+        indexRow=0;
+        while (indexRow<size){
+            tempo=matInver[indexRow][indexRow];
+            indexCol= 0;
+            while(indexCol<2*size){
+                matInver[indexRow][indexCol]=matInver[indexRow][indexCol]/tempo;
+                
+                indexCol=indexCol+1;
+            }
+            
+            /*********** */
+            //indexCol=0;
+            k=indexRow+1;
+            while (k<matInver.size1D){  
+                tempoK=matInver[k][indexRow];
+                indexCol=0;
+                while(indexCol<matInver.size2D){         
+                    matInver[k][indexCol]=matInver[k][indexCol]-matInver[indexRow][indexCol]*tempoK;
+                    
+                    indexCol=indexCol+1;
+                }
+                
+                k=k+1;
+            }        
+            /*********** */
+            
+            
+            indexRow=indexRow+1;
+        }
+    
+        indexRow=matInver.size1D-1;   
+        while (indexRow>=0){
+            k=indexRow-1;
+            while(k>=0){
+                buffer=matInver[k][indexRow];
+                indexCol=0;
+                while (indexCol<matInver.size2D){  
+                    matInver[k][indexCol] =matInver[k][indexCol]-matInver[indexRow][indexCol]*buffer;
+                    indexCol=indexCol+1;
+                }  
+                
+                k=k-1;
+            }
+            
+            
+            indexRow=indexRow-1;
+        }
+
+       
+        inX=0;
+        inY=0;
+        while(inX<size){
+            inY=0;
+            while (inY<size){
+                matInverResult[inX][inY]=matInver[inX][size+inY];
+                inY=inY+1;
+            }
+            inX=inX+1;
+        }
+
+        return matInverResult;
+    }
+
+
+
+    //inverse d'une matrice int :  faut le derminant l'invervient !!!!!!
+    int[][] inversionInt(int[][] mat){
+        int[][] res;
+        float determinant;
+        Det matrixDet = new Det();
+        determinant = matrixDet.bareissIntDeterminant(mat);
+
+        if (mat.size1D!=mat.size2D||determinant==0){
+            dimensionIncompatible(mat.size1D, mat.size2D);
+        }else{
+            res=helperInversionInt(mat);
+        }
+        return res;
+    }
+    
+
+    //inverse d’une matrice float
+    float[][] inversionFloat(float[][] mat){
+        float[][] res;
+        float determinant;
+        Det matrixDet = new Det();
+        determinant = matrixDet.bareissFloatDeterminant(mat);
+
+        if (mat.size1D!=mat.size2D||determinant==0){
+            dimensionIncompatible(mat.size1D, mat.size2D);
+        }else{
+            res=helperInversionFloat(mat);
+        }
+        return res;
+    }
+    
+
+    //error MatrixTraitement
+    void dimensionIncompatible(int a, int b){
+        println(" dimension incompatible ", a , "!=", b );
+        println("Erreur de dimension");
+        throwError();
+    }
+
+    void throwError()
+        asm ("ERROR ");
+}

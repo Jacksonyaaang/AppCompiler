@@ -1,8 +1,17 @@
-	TSTO #5
+	TSTO #7
 	BOV stack_overflow_error
-	ADDSP #5
+	ADDSP #3
 ; start main program
-; Main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 2(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 3(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
 ; Beginning of main instructions:
 ; --------StartBinaryOp--------[24, 10]-----
 ; --------StartBinaryOp--------[24, 11]-----
@@ -279,7 +288,8 @@
 ; --------EndBinaryOp--------[35, 6]-----
 	PUSH R2
 	LOAD #2, R2	; loading 2 into memory
-	CMP #0, R3
+	LOAD #0, R0
+	CMP R2, R0
 	BEQ div0_error	; Checking for modulo by 0 the operation is between two ints 
 	REM R2, R3
 	POP R2
@@ -993,6 +1003,24 @@
 	WINT
 	WNL
 	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
 div0_error:
 	WSTR "Error: div0_error"
 	WNL

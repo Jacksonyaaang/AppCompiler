@@ -1,0 +1,17 @@
+// Description:
+//    Test d'un mauvais call fonction
+//
+// Resultats:
+//    Ligne 11
+//
+// Historique:
+//    cree le 01/01/2023
+
+class A{
+
+}
+
+{
+    A a = new A();
+    a = b.method(a a a );
+}

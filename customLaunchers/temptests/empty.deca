@@ -1,0 +1,117 @@
+// Description:
+//    Teste le calcul de déterminant sur un tableau d'entiers
+//
+// Resultats:
+//    --------------
+//    Tableau2D = [
+//    9 ,
+//    ]--------------
+//    Le déterminant de la matrice est: 9
+//    
+//    --------------
+//    Tableau2D = [
+//    6 ,9 ,
+//    1 ,5 ,
+//    ]--------------
+//    Le déterminant de la matrice est: 21
+//    
+//    --------------
+//    Tableau2D = [
+//    6 ,5 ,5 ,
+//    5 ,5 ,5 ,
+//    5 ,5 ,5 ,
+//    ]--------------
+//    Le déterminant de la matrice est: 0
+//    
+//    --------------
+//    Tableau2D = [
+//    6 ,9 ,5 ,
+//    5 ,5 ,5 ,
+//    5 ,5 ,5 ,
+//    ]--------------
+//    Le déterminant de la matrice est: 0
+//    
+//    --------------
+//    Tableau2D = [
+//    6 ,9 ,5 ,
+//    1 ,5 ,5 ,
+//    5 ,5 ,5 ,
+//    ]--------------
+//    Le déterminant de la matrice est: 80
+//    
+//    --------------
+//    Tableau2D = [
+//    6 ,9 ,5 ,
+//    1 ,5 ,5 ,
+//    5 ,5 ,17 ,
+//    ]--------------
+//    Le déterminant de la matrice est: 332
+//    
+//    --------------
+//    Tableau2D = [
+//    6 ,9 ,5 ,
+//    1 ,5 ,3 ,
+//    5 ,5 ,17 ,
+//    ]--------------
+//    Le déterminant de la matrice est: 302
+//
+// Historique:
+//    cree le 21/01/2023
+
+#include "Det.decah"
+
+{
+    Det matrixDet = new Det();
+    int[][] a = new int[2][2];
+    int[][] d = new int[3][3];
+    int[][] e = new int[1][1];
+
+    matrixDet.printInt2DTable(matInver);
+    println("Le déterminant de la matrice matInver est: ", matrixDet.bareissIntDeterminant(matInver));
+    println("");
+
+    matrixDet.setInt2DTable(d,5);
+    matrixDet.setInt2DTable(a,5);
+    a[0][0] = 6;
+    a[1][0] = 9;
+    a[0][1] = 1;
+    e[0][0] = 9;
+
+    matrixDet.printInt2DTable(e);
+    println("Le déterminant de la matrice est: ", matrixDet.bareissIntDeterminant(e));
+    println("");
+
+    matrixDet.printInt2DTable(a);
+    println("Le déterminant de la matrice est: ", matrixDet.bareissIntDeterminant(a));
+    println("");
+
+    d[0][0] = 6;
+    matrixDet.printInt2DTable(d);
+    println("Le déterminant de la matrice est: ", matrixDet.bareissIntDeterminant(d));
+    println("");
+
+    d[1][0] = 9;
+    matrixDet.printInt2DTable(d);
+    println("Le déterminant de la matrice est: ", matrixDet.bareissIntDeterminant(d));
+    println("");
+
+    d[0][1] = 1;
+    matrixDet.printInt2DTable(d);
+    println("Le déterminant de la matrice est: ", matrixDet.bareissIntDeterminant(d));
+    println("");
+
+    d[2][2] = 17;
+    matrixDet.printInt2DTable(d);
+    println("Le déterminant de la matrice est: ", matrixDet.bareissIntDeterminant(d));
+    println("");
+
+    d[2][1] = 3;
+    matrixDet.printInt2DTable(d);
+    println("Le déterminant de la matrice est: ", matrixDet.bareissIntDeterminant(d));
+    println("");
+
+    d[0][2] = 8;
+    matrixDet.printInt2DTable(d);
+    println("Le déterminant de la matrice est: ", matrixDet.bareissIntDeterminant(d));
+    println("");
+}

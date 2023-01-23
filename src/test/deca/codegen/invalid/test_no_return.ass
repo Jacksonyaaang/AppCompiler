@@ -1,0 +1,108 @@
+	ADDSP #11
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 4(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 5(GB)
+	LEA 4(GB), R0
+	STORE R0, 6(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 7(GB)
+	LOAD code.B.f, R0
+	STORE R0, 8(GB)
+	LEA 4(GB), R0
+	STORE R0, 9(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 10(GB)
+	LOAD code.A.f, R0
+	STORE R0, 11(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[22, 8]-----
+; [New][loadItemintoRegister] loading new of calss =  B into memory at register R2
+	NEW #2, R2
+	LEA 6(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.B
+	POP R2
+; --------EndNew--------[22, 8]-----
+	STORE R2, 1(GB)	; Initializing the variable b and loading it into memory
+; --------StartNew--------[23, 12]-----
+; [New][loadItemintoRegister] loading new of calss =  A into memory at register R2
+	NEW #2, R2
+	LEA 9(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+; --------EndNew--------[23, 12]-----
+	STORE R2, 2(GB)	; Initializing the variable a1 and loading it into memory
+; --------BeginMethodCall--------[24, 12]-----
+	ADDSP #1
+	LOAD 2(GB), R2	; loading a1 into memory
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[24, 12]-----
+	STORE R2, 3(GB)	; Initializing the variable x and loading it into memory
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : B -------------------
+; ---------------------------------------------------
+; ------------Init method for class = B--------
+init.B:
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field x
+	STORE R0, 1(R1)	; Saving field  x into memory
+	RTS
+; ------------Code for method : f with label =  code.B.f--------
+code.B.f:
+;  ---------ClassBodyCodeGeneration------
+fin.B.f:
+	RTS
+; ---------------------------------------------------
+; ----------------- class : A -------------------
+; ---------------------------------------------------
+; ------------Init method for class = A--------
+init.A:
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field b
+	STORE R0, 1(R1)	; Saving field  b into memory
+	RTS
+; ------------Code for method : f with label =  code.A.f--------
+code.A.f:
+;  ---------ClassBodyCodeGeneration------
+fin.A.f:
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

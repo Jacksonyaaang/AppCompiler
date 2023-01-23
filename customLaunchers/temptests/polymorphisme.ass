@@ -1,0 +1,211 @@
+	TSTO #10
+	BOV stack_overflow_error
+	ADDSP #7
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 2(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 3(GB)
+	LEA 2(GB), R0
+	STORE R0, 4(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 5(GB)
+	LEA 4(GB), R0
+	STORE R0, 6(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 7(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNewTable--------[23, 14]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  A[] into memory at register R2
+	LOAD #10, R3	; loading 10 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	ADD #1, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	LOAD R0, R2
+; --------EndNewTable--------[23, 14]-----
+	STORE R2, 1(GB)	; Initializing the variable tableA and loading it into memory
+; --------BeginAssignOp--------[24, 1]-----
+; --------StartNew--------[24, 13]-----
+; [New][loadItemintoRegister] loading new of calss =  B into memory at register R3
+	NEW #3, R3
+	BOV heap_overflow_error
+	LEA 6(GB), R0
+	STORE R0, 0(R3)
+	PUSH R3
+	BSR init.B
+	POP R3
+; --------EndNew--------[24, 13]-----
+; --------StartStoreTableElements--------[24, 1]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  tableA the value in R3
+	LOAD #1, R4	; loading 1 into memory
+	CMP #0, R4
+	BLT int_selection_table_must_be_positive
+	LOAD 1(GB), R1	; [saving] loading tableA into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of tableA into memory
+	CMP R4, R0
+	BLE table_dimension_are_not_respected
+	LOAD R4, R0
+	STORE R3, 1(R1, R0)
+; --------EndStoreTableElements--------[24, 1]-----
+; --------EndAssignOp--------[24, 1]-----
+	WSTR "((B)(tableB[1])).x = "
+; --------BeginSelection--------[25, 34]-----
+; --------------BeginInstanceof----------null+-----
+	LEA 6(GB), R0	; loading method table of B
+	LEA 4(GB), R1	; loading method table of A
+	CMP R1, R0
+	BEQ instanceOf_Object1	; si les deux classes sont les mêmes , on retourne immédiatement true
+; --------StartGetTableElements--------[25, 39]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  tableA into memory at register R2
+	LOAD #1, R3	; loading 1 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 1(GB), R1	; loading tableA into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of tableA into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R3), R0
+	LOAD R0, R2
+; --------EndGetTableElements--------[25, 39]-----
+loopbegin1:
+	CMP R0, R2
+	BEQ instanceOf_Object1	; loopend
+	LOAD 0(R2), R2
+	CMP #null, R2
+	BEQ endfalse1
+	BRA loopbegin1
+instanceOf_Object1:
+	LOAD #1, R0
+	BRA endtrue1
+endfalse1:
+	LOAD #0, R0
+endtrue1:
+	LOAD R0, R2
+; --------------EndInstanceof----------null-----
+	CMP #1, R2
+	BEQ load_item_and_leave_cast1
+	BRA cast_error
+load_item_and_leave_cast1:
+; --------StartGetTableElements--------[25, 39]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  tableA into memory at register R2
+	LOAD #1, R3	; loading 1 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 1(GB), R1	; loading tableA into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of tableA into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R3), R0
+	LOAD R0, R2
+; --------EndGetTableElements--------[25, 39]-----
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 2(R2), R2	; Loading the field x into a register 
+; --------BeginSelection--------[25, 34]-----
+	LOAD R2, R1
+	WINT
+	WNL
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : A -------------------
+; ---------------------------------------------------
+; ------------Init method for class = A--------
+init.A:
+	TSTO #2
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field x
+	STORE R0, 1(R1)	; Saving field  x into memory
+	LOAD -2(LB), R2	; [codeGenDelField][initialization] loading class (this) into memory when working with field x
+	LOAD #1, R3	; loading 1 into memory
+	STORE R3, 1(R2)	; Initializing the field x and loading it into memory
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ---------------------------------------------------
+; ----------------- class : B -------------------
+; ---------------------------------------------------
+; ------------Init method for class = B--------
+init.B:
+	TSTO #5
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+	LOAD -2(LB), R0	; Placing the current class = B adresse in the the stack before calling parent 
+	PUSH R0	; Placing this = B into the stack
+	BSR init.A	; Calling the initialisation method of parent classA
+	SUBSP #1
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field x
+	STORE R0, 2(R1)	; Saving field  x into memory
+	LOAD -2(LB), R2	; [codeGenDelField][initialization] loading class (this) into memory when working with field x
+	LOAD #2, R3	; loading 2 into memory
+	STORE R3, 2(R2)	; Initializing the field x and loading it into memory
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+table_dimension_are_not_respected:
+	WSTR "Error: table_dimension_are_not_respected"
+	WNL
+	ERROR
+int_selection_table_must_be_positive:
+	WSTR "Error: int_selection_table_must_be_positive"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+cast_error:
+	WSTR "Error: cast_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+int_allocation_table_must_be_strictly_positive:
+	WSTR "Error: int_allocation_table_must_be_strictly_positive"
+	WNL
+	ERROR
+; end main program

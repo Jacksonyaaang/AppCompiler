@@ -1,3 +1,5 @@
+
+
 package fr.ensimag.deca.context;
 
 import java.util.HashMap;
@@ -42,19 +44,59 @@ public class EnvironmentExp {
         private static final long serialVersionUID = -2733379901827316441L;
     }
 
+    private EnvironmentExp currentExp = null;  // used to get the current environement expression when "get(symbol)"
+
+    public EnvironmentExp getCurrentExp() {
+        return currentExp;
+    }
+
     /**
      * Return the definition of the symbol in the environment, or null if the
      * symbol is undefined.
      */
     public ExpDefinition get(Symbol key) {
-        //return this.envExp.get(key);
-        //throw new UnsupportedOperationException("not yet implemented");
         if (!envExp.containsKey(key)&&parentEnvironment==null)
             return null;
-        if (envExp.containsKey(key))
+        if (envExp.containsKey(key)){
+            currentExp=this;
             return envExp.get(key);
+        }
         return parentEnvironment.get(key);
     }
+
+    /**
+     * Cette methode retourne la premier methode qu'elle rencontre 
+     * qui a un index égal à celui donnée en paramétre 
+     */
+    public MethodDefinition getMethodIndex(int index) {
+        for(Map.Entry<Symbol, ExpDefinition> entry : envExp.entrySet()){
+            if (entry.getValue() instanceof MethodDefinition){
+                if ( ((MethodDefinition) entry.getValue()).getIndex() == index){
+                    return (MethodDefinition) entry.getValue();
+                }
+            }
+        }
+        if (parentEnvironment == null){
+            return null;
+        }
+        return parentEnvironment.getMethodIndex(index);
+    }
+
+    /**
+     * Retourne l'environement qui contient la methode donnée en paramétre  
+     */
+    public EnvironmentExp getMethodEnvioremnent(MethodDefinition methodDefinition) {
+        for(Map.Entry<Symbol, ExpDefinition> entry : envExp.entrySet()){
+            if (entry.getValue() ==  methodDefinition){
+                return this;
+            }
+        }
+        if (parentEnvironment == null){
+            return null;
+        }
+        return parentEnvironment.getMethodEnvioremnent(methodDefinition);
+    }
+
 
     /**
      * Add the definition def associated to the symbol name in the environment.
@@ -73,12 +115,19 @@ public class EnvironmentExp {
      */
     public void declare(Symbol name, ExpDefinition def) throws DoubleDefException {
         if (!envExp.containsKey(name)) envExp.put(name, def);
-        else {throw new DoubleDefException("La variable est déjà déclarée");}
-        //throw new UnsupportedOperationException("not yet implemented");
+        else {throw new DoubleDefException("La variable " + name.getName() + " est déjà déclarée");}
     }
 
     public Map<Symbol, ExpDefinition> getExp(){
         return envExp;
     }
+
+    public void setParentEnvironment(EnvironmentExp parentEnvironment) {
+        this.parentEnvironment = parentEnvironment;
+    }
+    public EnvironmentExp getParent(){
+        return parentEnvironment;
+    }
+
 
 }

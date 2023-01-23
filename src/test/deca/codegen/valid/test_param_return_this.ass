@@ -1,0 +1,141 @@
+	TSTO #10
+	BOV stack_overflow_error
+	ADDSP #7
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 2(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 3(GB)
+	LEA 2(GB), R0
+	STORE R0, 4(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 5(GB)
+	LOAD code.A.getI, R0
+	STORE R0, 6(GB)
+	LOAD code.A.setI, R0
+	STORE R0, 7(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[23, 8]-----
+; [New][loadItemintoRegister] loading new of calss =  A into memory at register R2
+	NEW #2, R2
+	BOV heap_overflow_error
+	LEA 4(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+; --------EndNew--------[23, 8]-----
+	STORE R2, 1(GB)	; Initializing the variable a and loading it into memory
+; --------BeginMethodCall--------[24, 4]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading a into memory
+	STORE R2, 0(SP)
+	LOAD #1, R2	; loading 1 into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[24, 4]-----
+; --------BeginMethodCall--------[25, 12]-----
+	ADDSP #1
+	LOAD 1(GB), R2	; loading a into memory
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[25, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : A -------------------
+; ---------------------------------------------------
+; ------------Init method for class = A--------
+init.A:
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field i
+	STORE R0, 1(R1)	; Saving field  i into memory
+	RTS
+; ------------Code for method : getI with label =  code.A.getI--------
+code.A.getI:
+	TSTO #1
+	BOV stack_overflow_error
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------BeginSelection--------[15, 15]-----
+	LOAD -2(LB), R2
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R2), R2	; Loading the field i into a register 
+; --------BeginSelection--------[15, 15]-----
+	LOAD R2, R0
+	BRA fin.A.getI
+	WSTR "Error: La méthode code.A.getI doit retourner un element"
+	WNL
+	ERROR
+fin.A.getI:
+	POP R2	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : setI with label =  code.A.setI--------
+code.A.setI:
+	TSTO #2
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------BeginAssignOp--------[18, 8]-----
+	LOAD -3(LB), R3	; loading j into memory
+	LOAD -2(LB), R2	; loading parent class =  A into memory when working with field i
+	STORE R3, 1(R2)	; Saving field  i into memory
+	LOAD R3, R2	;  Return value of the assignement of this . = i and storing it into R2
+; --------EndAssignOp--------[18, 8]-----
+fin.A.setI:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

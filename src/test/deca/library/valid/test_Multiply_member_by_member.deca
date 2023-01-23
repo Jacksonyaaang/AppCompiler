@@ -1,0 +1,110 @@
+// Description:
+//    Teste la multiplication membre par membre de tableaux de flottants et d'entiers
+//
+// Resultats:
+//
+//    Test produit membre par membre de tableaux 1D
+//    --------------
+//    Tableau1D = [
+//    5 ,5 ,5 ,5 ,5 ,5 ,5 ,]--------------
+//    --------------
+//    Tableau1D = [
+//    6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,6.00000e+00 ,]--------------
+//    Le résultat du produit membre par membre est:
+//    --------------
+//    Tableau1D = [
+//    30 ,30 ,30 ,30 ,30 ,30 ,30 ,]--------------
+//
+//    Test produit membre par membre tableau 2D
+//    Produit membre par membre entre un tableau de int rempli de 5 et un tableau de float rempli de 6.0
+//    Le résultat du produit membre par membre est:
+//    --------------
+//    Tableau2D = [
+//    30 ,30 ,30 ,
+//    30 ,30 ,30 ,
+//    30 ,30 ,30 ,
+//    ]--------------
+//
+//    Produit membre par membre entre un tableau de float rempli de 6.8 et un tableau de int rempli de 5
+//    --------------
+//    Tableau2D = [
+//    3.40000e+01 ,3.40000e+01 ,3.40000e+01 ,
+//    3.40000e+01 ,3.40000e+01 ,3.40000e+01 ,
+//    3.40000e+01 ,3.40000e+01 ,3.40000e+01 ,
+//    ]--------------
+//
+//    Produit membre par membre entre un tableau de float rempli de 6.0 et un tableau de float rempli de 10.5
+//    Le résultat du produit membre par membre est:
+//    --------------
+//    Tableau2D = [
+//    6.30000e+01 ,6.30000e+01 ,6.30000e+01 ,
+//    6.30000e+01 ,6.30000e+01 ,6.30000e+01 ,
+//    6.30000e+01 ,6.30000e+01 ,6.30000e+01 ,
+//    ]--------------
+//
+//    Produit membre par membre entre un tableau de int rempli de 5 et un tableau de int rempli de 2
+//    Le résultat de la produit membre par membre est:
+//    --------------
+//    Tableau2D = [
+//    10 ,10 ,10 ,
+//    10 ,10 ,10 ,
+//    10 ,10 ,10 ,
+//    ]--------------
+//
+// Historique:
+//    cree le 21/01/2023
+
+#include "Multiply_member_by_member.decah"
+
+{
+    MultMember matrixMultMb = new MultMember();
+    int[] x = new int[7];
+    float[] y = new float[7];
+    int[][] a = new int[3][3];
+    int[][] d = new int[3][3];
+    float[][] b = new float[3][3];
+    float[][] c = new float[3][3];
+
+    println("Test produit membre par membre de tableaux 1D");
+    matrixMultMb.setInt1DTable(x,5);
+    matrixMultMb.setFloat1DTable(y,6.0);
+    matrixMultMb.printInt1DTable(x);
+    matrixMultMb.printFloat1DTable(y);
+    matrixMultMb.multMbIntFloat1D(x,y);
+    println("Le résultat du produit membre par membre est: ");
+    matrixMultMb.printInt1DTable(x);
+    println("");
+
+    println("Test produit membre par membre tableau 2D");
+    println("Produit membre par membre entre un tableau de int rempli de 5 et un tableau de float rempli de 6.0");
+    matrixMultMb.setInt2DTable(a,5);
+    matrixMultMb.setFloat2DTable(b,6.0);
+    matrixMultMb.multMbIntFloat2D(a,b);
+    println("Le résultat du produit membre par membre est: ");
+    matrixMultMb.printInt2DTable(a);
+    println("");
+
+    println("Produit membre par membre entre un tableau de float rempli de 6.8 et un tableau de int rempli de 5 ");
+    matrixMultMb.setInt2DTable(a,5);
+    matrixMultMb.setFloat2DTable(b,6.8);
+    matrixMultMb.multMbFloatInt2D(b,a);
+    matrixMultMb.printFloat2DTable(b);
+    println("");
+
+    println("Produit membre par membre entre un tableau de float rempli de 6.0 et un tableau de float rempli de 10.5");
+   matrixMultMb.setFloat2DTable(c,10.5);
+    matrixMultMb.setFloat2DTable(b,6.0);
+    matrixMultMb.multMbFloatFloat2D(b,c);
+    println("Le résultat du produit membre par membre est: ");
+    matrixMultMb.printFloat2DTable(b);
+    println("");
+
+    println("Produit membre par membre entre un tableau de int rempli de 5 et un tableau de int rempli de 2");
+    matrixMultMb.setInt2DTable(d,2);
+    matrixMultMb.setInt2DTable(a,5);
+    matrixMultMb.multMbIntInt2D(a,d);
+    println("Le résultat de la produit membre par membre est: ");
+    matrixMultMb.printInt2DTable(a);
+    println("");
+
+    }

@@ -1,0 +1,13 @@
+// Description:
+//       field de type void
+//
+// Resultats: 
+//      Ligne 11: Déclaration de Field de type void impossible
+// 
+// Historique:
+//      cree le 20/01/2023
+
+class A{
+   void x;
+}
+

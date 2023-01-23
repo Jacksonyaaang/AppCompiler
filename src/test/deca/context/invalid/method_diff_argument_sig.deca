@@ -1,0 +1,24 @@
+// Description:
+//    Test:  when the argument in the signiture of the current method declaration is different from the same-name method in the super-class occured.
+//          (they have the same numbe of argment in their signiture)
+// Resultats:
+//   method_diff_argument_sig.deca:15:3: Sorry the current signature is not the same of the super class's correspond signature
+
+
+class Animal{
+   int food=0;
+   float eat(int a, float b, int c){
+
+   }
+}
+
+class Cow extends Animal{
+   float eat(int a, float b, Animal c){
+
+   }
+}
+
+//main   
+{
+
+}

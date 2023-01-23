@@ -1,0 +1,696 @@
+	TSTO #16
+	BOV stack_overflow_error
+	ADDSP #13
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 12(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 13(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+	LOAD #2, R2	; loading 2 into memory
+	STORE R2, 1(GB)	; Initializing the variable x and loading it into memory
+	LOAD #2, R2	; loading 2 into memory
+	STORE R2, 2(GB)	; Initializing the variable y and loading it into memory
+	LOAD #2, R2	; loading 2 into memory
+	STORE R2, 3(GB)	; Initializing the variable z and loading it into memory
+	LOAD #2, R2	; loading 2 into memory
+	STORE R2, 4(GB)	; Initializing the variable h and loading it into memory
+	LOAD #2, R2	; loading 2 into memory
+	STORE R2, 5(GB)	; Initializing the variable v and loading it into memory
+	LOAD #1, R2	; loading true into memory
+	STORE R2, 6(GB)	; Initializing the variable b1 and loading it into memory
+	LOAD #1, R2	; loading true into memory
+	STORE R2, 7(GB)	; Initializing the variable b2 and loading it into memory
+	LOAD #0, R2	; loading false into memory
+	STORE R2, 8(GB)	; Initializing the variable b3 and loading it into memory
+	LOAD #0, R2	; loading false into memory
+	STORE R2, 9(GB)	; Initializing the variable b4 and loading it into memory
+; --------StartNewTable--------[21, 27]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  boolean[] into memory at register R2
+	LOAD #5, R3	; loading 5 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	ADD #1, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	LOAD R0, R2
+; --------EndNewTable--------[21, 27]-----
+	STORE R2, 10(GB)	; Initializing the variable bool_table and loading it into memory
+; --------StartNewTable--------[22, 30]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  boolean[][] into memory at register R2
+	LOAD #10, R3	; loading 10 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	PUSH R2
+	LOAD #5, R2	; loading 5 into memory
+	CMP #1, R2
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	MUL R2, R1
+	ADD #2, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	STORE R2, 1(R0)
+	POP R2
+	LOAD R0, R2
+; --------EndNewTable--------[22, 30]-----
+	STORE R2, 11(GB)	; Initializing the variable bool_matrix and loading it into memory
+; --------BeginAssignOp--------[24, 4]-----
+	LOAD #1, R3	; loading true into memory
+; --------StartStoreTableElements--------[24, 4]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  bool_table the value in R3
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD 10(GB), R1	; [saving] loading bool_table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of bool_table into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD R2, R0
+	POP R2
+	STORE R3, 1(R1, R0)
+; --------EndStoreTableElements--------[24, 4]-----
+; --------EndAssignOp--------[24, 4]-----
+; --------StartGetTableElements--------[26, 8]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  bool_table into memory at register R2
+	LOAD #1, R3	; loading 1 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 10(GB), R1	; loading bool_table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of bool_table into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R3), R0
+	LOAD R0, R2
+; --------EndGetTableElements--------[26, 8]-----
+; ---------Startif-----------[26, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else1
+	WSTR "the value is correct"
+	WNL
+	BRA end_ifthenelse_1
+else1:
+	WSTR "A mistake occured"
+	WNL
+end_ifthenelse_1:
+; ---------Endif-----------
+; --------BeginAssignOp--------[32, 4]-----
+; --------StartGetTableElements--------[32, 20]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  bool_table into memory at register R3
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD 10(GB), R1	; loading bool_table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of bool_table into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R2), R0
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[32, 20]-----
+; --------StartStoreTableElements--------[32, 4]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  bool_table the value in R3
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD 10(GB), R1	; [saving] loading bool_table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of bool_table into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD R2, R0
+	POP R2
+	STORE R3, 1(R1, R0)
+; --------EndStoreTableElements--------[32, 4]-----
+; --------EndAssignOp--------[32, 4]-----
+; --------BeginAssignOp--------[34, 4]-----
+	LOAD #0, R3	; loading false into memory
+; --------StartStoreTableElements--------[34, 4]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  bool_matrix the value in R3
+	PUSH R2
+	LOAD #3, R2	; loading 3 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD #1, R3	; loading 1 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 11(GB), R1	; [saving] loading bool_matrix into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of bool_matrix into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of bool_matrix into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[34, 4]-----
+; --------EndAssignOp--------[34, 4]-----
+; --------StartGetTableElements--------[36, 10]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  bool_matrix into memory at register R2
+	LOAD #3, R3	; loading 3 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD 11(GB), R1	; loading bool_matrix into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of bool_matrix into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of bool_matrix into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R3
+	ADD R2, R3
+	LOAD 2(R1, R3), R0
+	POP R2
+	LOAD R0, R2
+; --------EndGetTableElements--------[36, 10]-----
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+; ---------Startif-----------[36, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else2
+	WSTR "the value is correct"
+	WNL
+	BRA end_ifthenelse_2
+else2:
+	WSTR "A mistake occured"
+	WNL
+end_ifthenelse_2:
+; ---------Endif-----------
+; --------StartAND--------[43, 7]-----
+; --------StartAND--------[43, 8]-----
+; --------StartBinaryOp--------[43, 8]-----
+	LOAD 1(GB), R2	; loading x into memory
+	LOAD #2, R3	; loading 2 into memory
+	CMP R3, R2	; Comparing registers for LowerOrEqual operation 
+	SLE R2	; Placing LowerOrEqual result into the register  
+; --------EndBinaryOp--------[43, 8]-----
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_2	; [AND] checking if the first element is false
+; --------StartOr--------[43, 17]-----
+; --------StartBinaryOp--------[43, 17]-----
+	LOAD 2(GB), R3	; loading y into memory
+	CMP 3(GB), R3	; Comparing registers for NotEquals operation 
+	SNE R3	; Placing NotEquals result into the register  
+; --------EndBinaryOp--------[43, 17]-----
+	CMP #1, R3	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_3	; [Or] checking if the first element is false
+; --------StartBinaryOp--------[43, 27]-----
+	PUSH R2
+	LOAD 4(GB), R2	; loading h into memory
+	CMP 5(GB), R2	; Comparing registers for Equals operation 
+	SEQ R2	; Placing Equals result into the register  
+; --------EndBinaryOp--------[43, 27]-----
+	CMP #0, R2	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_3	; [OR] checking if the second element is true 
+	LOAD #1, R3	; Or is true , We place the value 1 in the return Register
+	POP R2
+End_Or_Id_3:
+; --------EndOr--------[43, 17]-----
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id2	; [AND] checking if the first element is true
+End_And_False_Id_2:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id2	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id2:
+QUIT_AND_Called_When_Fail_id2:
+; --------EndAND--------[43, 8]-----
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_1	; [AND] checking if the first element is false
+; --------StartAND--------[43, 36]-----
+; --------StartAND--------[43, 36]-----
+; --------StartAND--------[43, 36]-----
+; --------StartAND--------[43, 36]-----
+; --------StartAND--------[43, 36]-----
+; --------StartAND--------[43, 36]-----
+; --------StartAND--------[43, 37]-----
+; --------StartBinaryOp--------[43, 37]-----
+	LOAD #3, R3	; loading 3 into memory
+	CMP 1(GB), R3	; Comparing registers for Greater operation 
+	SGT R3	; Placing Greater result into the register  
+; --------EndBinaryOp--------[43, 37]-----
+	CMP #0, R3	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_10	; [AND] checking if the first element is false
+; --------StartBinaryOp--------[43, 44]-----
+	PUSH R2
+	LOAD #0x1.4p1, R2	; loading 2.5 into memory
+	PUSH R3
+	LOAD 2(GB), R3	; loading y into memory
+	FLOAT R3, R3	; Doing an unary minus
+	CMP R3, R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+	POP R3
+; --------EndBinaryOp--------[43, 44]-----
+	CMP #0, R2	; [AND]Comparing in the right branch 
+	BNE AND_Success_id10	; [AND] checking if the first element is true
+End_And_False_Id_10:
+	LOAD #0, R3	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id10	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id10:
+	POP R2
+QUIT_AND_Called_When_Fail_id10:
+; --------EndAND--------[43, 37]-----
+	CMP #0, R3	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_9	; [AND] checking if the first element is false
+; --------StartAND--------[43, 56]-----
+; --------StartBinaryOp--------[43, 56]-----
+	PUSH R2
+	LOAD #0x1.0p1, R2	; loading 2.0 into memory
+	PUSH R3
+	LOAD 2(GB), R3	; loading y into memory
+	FLOAT R3, R3	; Doing an unary minus
+	CMP R3, R2	; Comparing registers for Equals operation 
+	SEQ R2	; Placing Equals result into the register  
+	POP R3
+; --------EndBinaryOp--------[43, 56]-----
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_11	; [AND] checking if the first element is false
+; --------StartBinaryOp--------[43, 66]-----
+	PUSH R3
+	LOAD 5(GB), R3	; loading v into memory
+	CMP 4(GB), R3	; Comparing registers for Equals operation 
+	SEQ R3	; Placing Equals result into the register  
+; --------EndBinaryOp--------[43, 66]-----
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id11	; [AND] checking if the first element is true
+End_And_False_Id_11:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id11	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id11:
+	POP R3
+QUIT_AND_Called_When_Fail_id11:
+; --------EndAND--------[43, 56]-----
+	CMP #0, R2	; [AND]Comparing in the right branch 
+	BNE AND_Success_id9	; [AND] checking if the first element is true
+End_And_False_Id_9:
+	LOAD #0, R3	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id9	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id9:
+	POP R2
+QUIT_AND_Called_When_Fail_id9:
+; --------EndAND--------[43, 36]-----
+	CMP #0, R3	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_8	; [AND] checking if the first element is false
+	PUSH R2
+	LOAD 6(GB), R2	; loading b1 into memory
+	CMP #0, R2	; [AND]Comparing in the right branch 
+	BNE AND_Success_id8	; [AND] checking if the first element is true
+End_And_False_Id_8:
+	LOAD #0, R3	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id8	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id8:
+	POP R2
+QUIT_AND_Called_When_Fail_id8:
+; --------EndAND--------[43, 36]-----
+	CMP #0, R3	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_7	; [AND] checking if the first element is false
+	PUSH R2
+	LOAD 7(GB), R2	; loading b2 into memory
+	CMP #0, R2	; [AND]Comparing in the right branch 
+	BNE AND_Success_id7	; [AND] checking if the first element is true
+End_And_False_Id_7:
+	LOAD #0, R3	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id7	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id7:
+	POP R2
+QUIT_AND_Called_When_Fail_id7:
+; --------EndAND--------[43, 36]-----
+	CMP #0, R3	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_6	; [AND] checking if the first element is false
+	PUSH R2
+	LOAD 8(GB), R2	; loading b3 into memory
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; [AND]Comparing in the right branch 
+	BNE AND_Success_id6	; [AND] checking if the first element is true
+End_And_False_Id_6:
+	LOAD #0, R3	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id6	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id6:
+	POP R2
+QUIT_AND_Called_When_Fail_id6:
+; --------EndAND--------[43, 36]-----
+	CMP #0, R3	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_5	; [AND] checking if the first element is false
+	PUSH R2
+	LOAD 9(GB), R2	; loading b4 into memory
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; [AND]Comparing in the right branch 
+	BNE AND_Success_id5	; [AND] checking if the first element is true
+End_And_False_Id_5:
+	LOAD #0, R3	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id5	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id5:
+	POP R2
+QUIT_AND_Called_When_Fail_id5:
+; --------EndAND--------[43, 36]-----
+	CMP #0, R3	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_4	; [AND] checking if the first element is false
+; --------StartGetTableElements--------[43, 103]-----
+	PUSH R2
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  bool_table into memory at register R2
+	PUSH R3
+	LOAD #1, R3	; loading 1 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 10(GB), R1	; loading bool_table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of bool_table into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R3), R0
+	POP R3
+	LOAD R0, R2
+; --------EndGetTableElements--------[43, 103]-----
+	CMP #0, R2	; [AND]Comparing in the right branch 
+	BNE AND_Success_id4	; [AND] checking if the first element is true
+End_And_False_Id_4:
+	LOAD #0, R3	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id4	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id4:
+	POP R2
+QUIT_AND_Called_When_Fail_id4:
+; --------EndAND--------[43, 36]-----
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id1	; [AND] checking if the first element is true
+End_And_False_Id_1:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id1	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id1:
+QUIT_AND_Called_When_Fail_id1:
+; --------EndAND--------[43, 7]-----
+; ---------Startif-----------[43, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else3
+	WSTR "bool val = true"
+	WNL
+	BRA end_ifthenelse_3
+else3:
+	WSTR "Problem with code"
+	WNL
+end_ifthenelse_3:
+; ---------Endif-----------
+; --------StartAND--------[50, 7]-----
+; --------StartAND--------[50, 8]-----
+; --------StartBinaryOp--------[50, 8]-----
+	LOAD 1(GB), R2	; loading x into memory
+	LOAD #2, R3	; loading 2 into memory
+	CMP R3, R2	; Comparing registers for LowerOrEqual operation 
+	SLE R2	; Placing LowerOrEqual result into the register  
+; --------EndBinaryOp--------[50, 8]-----
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_13	; [AND] checking if the first element is false
+; --------StartOr--------[50, 17]-----
+; --------StartBinaryOp--------[50, 17]-----
+	LOAD 2(GB), R3	; loading y into memory
+	CMP 3(GB), R3	; Comparing registers for NotEquals operation 
+	SNE R3	; Placing NotEquals result into the register  
+; --------EndBinaryOp--------[50, 17]-----
+	CMP #1, R3	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_14	; [Or] checking if the first element is false
+; --------StartBinaryOp--------[50, 27]-----
+	PUSH R2
+	LOAD 4(GB), R2	; loading h into memory
+	CMP 5(GB), R2	; Comparing registers for Equals operation 
+	SEQ R2	; Placing Equals result into the register  
+; --------EndBinaryOp--------[50, 27]-----
+	CMP #0, R2	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_14	; [OR] checking if the second element is true 
+	LOAD #1, R3	; Or is true , We place the value 1 in the return Register
+	POP R2
+End_Or_Id_14:
+; --------EndOr--------[50, 17]-----
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id13	; [AND] checking if the first element is true
+End_And_False_Id_13:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id13	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id13:
+QUIT_AND_Called_When_Fail_id13:
+; --------EndAND--------[50, 8]-----
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_12	; [AND] checking if the first element is false
+; --------StartAND--------[50, 36]-----
+; --------StartAND--------[50, 36]-----
+; --------StartAND--------[50, 36]-----
+; --------StartAND--------[50, 36]-----
+; --------StartAND--------[50, 36]-----
+; --------StartAND--------[50, 36]-----
+; --------StartAND--------[50, 37]-----
+; --------StartBinaryOp--------[50, 37]-----
+	LOAD #3, R3	; loading 3 into memory
+	CMP 1(GB), R3	; Comparing registers for Greater operation 
+	SGT R3	; Placing Greater result into the register  
+; --------EndBinaryOp--------[50, 37]-----
+	CMP #0, R3	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_21	; [AND] checking if the first element is false
+; --------StartBinaryOp--------[50, 44]-----
+	PUSH R2
+	LOAD #0x1.4p1, R2	; loading 2.5 into memory
+	PUSH R3
+	LOAD 2(GB), R3	; loading y into memory
+	FLOAT R3, R3	; Doing an unary minus
+	CMP R3, R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+	POP R3
+; --------EndBinaryOp--------[50, 44]-----
+	CMP #0, R2	; [AND]Comparing in the right branch 
+	BNE AND_Success_id21	; [AND] checking if the first element is true
+End_And_False_Id_21:
+	LOAD #0, R3	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id21	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id21:
+	POP R2
+QUIT_AND_Called_When_Fail_id21:
+; --------EndAND--------[50, 37]-----
+	CMP #0, R3	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_20	; [AND] checking if the first element is false
+; --------StartAND--------[50, 56]-----
+; --------StartBinaryOp--------[50, 56]-----
+	PUSH R2
+	LOAD #0x1.0p1, R2	; loading 2.0 into memory
+	PUSH R3
+	LOAD 2(GB), R3	; loading y into memory
+	FLOAT R3, R3	; Doing an unary minus
+	CMP R3, R2	; Comparing registers for Equals operation 
+	SEQ R2	; Placing Equals result into the register  
+	POP R3
+; --------EndBinaryOp--------[50, 56]-----
+	CMP #0, R2	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_22	; [AND] checking if the first element is false
+; --------StartBinaryOp--------[50, 66]-----
+	PUSH R3
+	LOAD 5(GB), R3	; loading v into memory
+	CMP 4(GB), R3	; Comparing registers for Equals operation 
+	SEQ R3	; Placing Equals result into the register  
+; --------EndBinaryOp--------[50, 66]-----
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id22	; [AND] checking if the first element is true
+End_And_False_Id_22:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id22	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id22:
+	POP R3
+QUIT_AND_Called_When_Fail_id22:
+; --------EndAND--------[50, 56]-----
+	CMP #0, R2	; [AND]Comparing in the right branch 
+	BNE AND_Success_id20	; [AND] checking if the first element is true
+End_And_False_Id_20:
+	LOAD #0, R3	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id20	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id20:
+	POP R2
+QUIT_AND_Called_When_Fail_id20:
+; --------EndAND--------[50, 36]-----
+	CMP #0, R3	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_19	; [AND] checking if the first element is false
+	PUSH R2
+	LOAD 6(GB), R2	; loading b1 into memory
+	CMP #0, R2	; [AND]Comparing in the right branch 
+	BNE AND_Success_id19	; [AND] checking if the first element is true
+End_And_False_Id_19:
+	LOAD #0, R3	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id19	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id19:
+	POP R2
+QUIT_AND_Called_When_Fail_id19:
+; --------EndAND--------[50, 36]-----
+	CMP #0, R3	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_18	; [AND] checking if the first element is false
+	PUSH R2
+	LOAD 7(GB), R2	; loading b2 into memory
+	CMP #0, R2	; [AND]Comparing in the right branch 
+	BNE AND_Success_id18	; [AND] checking if the first element is true
+End_And_False_Id_18:
+	LOAD #0, R3	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id18	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id18:
+	POP R2
+QUIT_AND_Called_When_Fail_id18:
+; --------EndAND--------[50, 36]-----
+	CMP #0, R3	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_17	; [AND] checking if the first element is false
+	PUSH R2
+	LOAD 8(GB), R2	; loading b3 into memory
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; [AND]Comparing in the right branch 
+	BNE AND_Success_id17	; [AND] checking if the first element is true
+End_And_False_Id_17:
+	LOAD #0, R3	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id17	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id17:
+	POP R2
+QUIT_AND_Called_When_Fail_id17:
+; --------EndAND--------[50, 36]-----
+	CMP #0, R3	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_16	; [AND] checking if the first element is false
+	PUSH R2
+	LOAD 9(GB), R2	; loading b4 into memory
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; [AND]Comparing in the right branch 
+	BNE AND_Success_id16	; [AND] checking if the first element is true
+End_And_False_Id_16:
+	LOAD #0, R3	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id16	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id16:
+	POP R2
+QUIT_AND_Called_When_Fail_id16:
+; --------EndAND--------[50, 36]-----
+	CMP #0, R3	; [AND]Comparing in the left branch 
+	BEQ End_And_False_Id_15	; [AND] checking if the first element is false
+; --------StartGetTableElements--------[50, 104]-----
+	PUSH R2
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  bool_matrix into memory at register R2
+	PUSH R3
+	LOAD #3, R3	; loading 3 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD 11(GB), R1	; loading bool_matrix into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of bool_matrix into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of bool_matrix into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R3
+	ADD R2, R3
+	LOAD 2(R1, R3), R0
+	POP R2
+	POP R3
+	LOAD R0, R2
+; --------EndGetTableElements--------[50, 104]-----
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+	CMP #0, R2	; [AND]Comparing in the right branch 
+	BNE AND_Success_id15	; [AND] checking if the first element is true
+End_And_False_Id_15:
+	LOAD #0, R3	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id15	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id15:
+	POP R2
+QUIT_AND_Called_When_Fail_id15:
+; --------EndAND--------[50, 36]-----
+	CMP #0, R3	; [AND]Comparing in the right branch 
+	BNE AND_Success_id12	; [AND] checking if the first element is true
+End_And_False_Id_12:
+	LOAD #0, R2	; And is false, We place the value 0 in the return Register
+	BRA QUIT_AND_Called_When_Fail_id12	; [AND] Branch will be used in the case when the left operand is falsein order to avoir poping pushing operations relate to right operand
+AND_Success_id12:
+QUIT_AND_Called_When_Fail_id12:
+; --------EndAND--------[50, 7]-----
+; ---------Startif-----------[50, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else4
+	WSTR "bool val = true"
+	WNL
+	BRA end_ifthenelse_4
+else4:
+	WSTR "Problem with code"
+	WNL
+end_ifthenelse_4:
+; ---------Endif-----------
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+table_dimension_are_not_respected:
+	WSTR "Error: table_dimension_are_not_respected"
+	WNL
+	ERROR
+int_selection_table_must_be_positive:
+	WSTR "Error: int_selection_table_must_be_positive"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+int_allocation_table_must_be_strictly_positive:
+	WSTR "Error: int_allocation_table_must_be_strictly_positive"
+	WNL
+	ERROR
+; end main program

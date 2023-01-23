@@ -1,0 +1,38 @@
+class A {
+    protected int x ;
+
+    int getX() {
+        return x ;
+    }
+
+    void setX(int x) {
+        this.x = x ;
+    }
+}
+
+class B extends A{
+    public y;
+
+    void setYAndX(int y, int x){
+        this.y = y;
+        this.x = x;
+    }
+    int getX() {
+        return 2*x ;
+        y = getX(x);
+        y = this.getX();
+    }
+}
+
+{
+    A a = new A() ;
+    B b = null;
+    B b2 = new B();
+    A a2 = (A) (b2);
+
+    if(a2 instanceof A){print("true");}
+    b.getX();
+    a.setX(1) ;
+    b.setYAndX(5,2);
+    println("a.getX() = ", a.getX()) ;
+}

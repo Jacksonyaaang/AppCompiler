@@ -1,6 +1,15 @@
-	ADDSP #2
+	ADDSP #4
 ; start main program
-; Main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
 ; Beginning of main instructions:
 	LOAD #0x1.2ced32p127, R2	; loading 2.0E38 into memory
 	STORE R2, 1(GB)	; Initializing the variable x and loading it into memory
@@ -17,6 +26,24 @@
 	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
 ; --------EndAssignOp--------[11, 4]-----
 	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
 stack_overflow_error:
 	WSTR "Error: stack_overflow_error"
 	WNL

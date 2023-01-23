@@ -15,6 +15,8 @@ OBRACE : '{';
 CBRACE : '}';
 OPARENT : '(';
 CPARENT : ')';
+OBRACKET : '[';
+CBRACKET : ']';
 SEMI : ';';
 COMMA : ',';
 PRINT : 'print';
@@ -33,7 +35,7 @@ GEQ : '>=';
 LEQ : '<=';
 GT : '>';
 LT : '<';
-INSTANCEOF: 'instaceof';
+INSTANCEOF: 'instanceof';
 PLUS : '+';
 MINUS : '-';
 TIMES : '*';
@@ -76,18 +78,18 @@ fragment NUMHEX : DIGITHEX+;
 fragment FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 'f' |  ); 
 FLOAT : FLOATDEC | FLOATHEX;
 
-//Erreur pris du poly
-//Les littéraux flottants sont convertis en arrondissant si besoin au flottant IEEE-754 simple précision
-//le plus proche. Une erreur de compilation est levée si un littéral est trop grand et que l’arrondi se fait
-//vers l’infini, ou bien qu’un littéral non nul est trop petit et que l’arrondi se fait vers zéro. A FAIRE
 
 fragment EOL : '\n'; 
 fragment STRING_CAR : ~('"' | '\\' | '\n');
 STRING : '"' (STRING_CAR | '\\"' | '\\\\')* '"';
-MULTI_LINE_STRING : '"' (STRING_CAR | EOL | '\\"' | '\\\\')* '"';
+MULTI_LINE_STRING : '"' (STRING_CAR | '\n' | '\\"' | '\\\\')* '"';
+
 
 fragment FILENAME : (LETTER | DIGIT | '.' | '-' | '_')+;
-INCLUDE : '#include' (' ')* '"' FILENAME '"';
+INCLUDE : '#include' (' ')* '"' FILENAME '"' {
+   super.doInclude(getText());
+   };
+
 
 //A FAIRE copied from the slide 36 Analyse lexicale
 // L'inclusion de fichier est traitée en analyse lexicale.

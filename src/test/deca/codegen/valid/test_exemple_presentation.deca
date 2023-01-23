@@ -1,0 +1,64 @@
+// Description:
+// Test la fonctionalité de selection,
+// l'appel de methode, 
+// le typage dynamique,
+// l'access au champ et modification des champs
+// dans les classes et dans la boucle main
+// Resultats
+// Le program doit affichier
+// Historique:
+//    cree le 19/01/2023
+
+class Point2D {
+    int x ; // Abscisse
+    int y ; // Ordonnee
+    // Deplace ce point
+    // de a en diagonale.
+    void diag(int a) {
+        x = x + a;
+        y = y + a;
+    }
+}
+
+class Point3D extends Point2D {
+    int z; // Hauteur
+    int e = this.z;
+
+    // On redefinit la methode diag,
+    // pour tenir compte de z
+    void diag(int a) {
+        x = x + a;
+        y = y + a;
+        z = z + a;
+    }
+    int sommeElements(int a, int h, int t) {
+        int l = a+h+t+x+y;
+        return l;
+    }
+
+    int mult_elements(int a, float t) {
+        int result;
+        this.e = a;
+        result = this.e*((int) (t));
+        return result;
+    }
+
+}
+
+{
+    int y = 7;
+    int p = 19;
+    Point2D p1, p2;
+    Point3D p3;
+    p1 = new Point2D();
+    p1.diag(1);
+    p3 = new Point3D();
+    p3.diag(2);
+    p2 = p3;
+    p2.diag(3);
+    println("p3.z = ", p3.z); // p3.z = 5
+    p3.y = 15;
+    println("p3.y = ", p3.y); // p3.y = 15
+    println("sommeElements = ", p3.sommeElements(y,p, 8)); // sommeElements = 54
+    println("mult_elements = ", p3.mult_elements(y,8.0)); // mult_elements = 56
+}

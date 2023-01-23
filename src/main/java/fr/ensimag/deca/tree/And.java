@@ -28,10 +28,11 @@ public class And extends AbstractOpBool {
     
     @Override
     protected void codeGenInst(DecacCompiler compiler) throws CodeGenError{ 
-        super.setBoolOpIdentifier(compiler.getStackManagement().incrementOpBoolIncrementer());
+        super.setBoolOpIdentifier(compiler.incrementOpBoolIncrementer());
         LOG.debug("[And][codeGenInst] Working on And boolean operation Location ="+ getLocation());
         LOG.debug("[And][codeGenInst] Exploring Left");
         compiler.addComment("--------StartAND--------"+getLocation()+"-----");
+        //On calcule initialement l'operand gauche et on la compare à 0
         getLeftOperand().codeGenInst(compiler);
         LOG.debug("Left register " + getLeftOperand().getRegisterDeRetour());
         compiler.addInstruction(new CMP(new ImmediateInteger(0), getLeftOperand().getRegisterDeRetour()), 
@@ -39,6 +40,7 @@ public class And extends AbstractOpBool {
         compiler.addInstruction(new BEQ(new Label("End_And_False_Id_" +super.getBoolOpIdentifier() )), 
                                         "[AND] checking if the first element is false");
         getRightOperand().codeGenInst(compiler);
+        //On calcule l'operand droite et on la compare à 0
         if (getRightOperand().getRegisterDeRetour() != getLeftOperand().getRegisterDeRetour()){
             LOG.debug("[And][codeGenInst] Exploring Right");
             compiler.addInstruction(new CMP(new ImmediateInteger(0), getRightOperand().getRegisterDeRetour()), 

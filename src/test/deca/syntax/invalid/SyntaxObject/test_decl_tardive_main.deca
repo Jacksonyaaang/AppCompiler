@@ -1,0 +1,14 @@
+// Description:
+// test si la déclaration de variable dans le bloc instruction de main provoque une erreur       
+//
+// Resultats:
+//  
+// 
+// Historique:
+//    cree le 15/01/2023
+
+{
+    int x=1;
+    x=5;
+    int y;
+}

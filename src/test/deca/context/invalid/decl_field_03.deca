@@ -1,0 +1,12 @@
+// Description:
+//    Teste la déclaration d'un champs de type non défini.
+//
+// Resultats:
+//    Ligne 11: Le type String n'est pas defini
+//
+// Historique:
+//    cree le 20/01/2023
+
+class A{
+    String  a;
+}

@@ -1,0 +1,16 @@
+// Description:
+//       le super existe dans l'environement mais n'a de type class.
+//
+// Resultats: 
+//      Ligne 14: Une super classe doit avoir un type de classe
+// 
+// Historique:
+//      cree le 20/01/2023
+
+class A{
+  int x;
+}
+
+class B extends x{
+}
+

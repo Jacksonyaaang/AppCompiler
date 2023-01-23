@@ -1,0 +1,595 @@
+	TSTO #20
+	BOV stack_overflow_error
+	ADDSP #17
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 6(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 7(GB)
+	LEA 6(GB), R0
+	STORE R0, 8(GB)
+	LOAD code.A.equals, R0
+	STORE R0, 9(GB)
+	LOAD code.A.sommefields, R0
+	STORE R0, 10(GB)
+	LOAD code.A.checkifsumistrue, R0
+	STORE R0, 11(GB)
+	LEA 6(GB), R0
+	STORE R0, 12(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 13(GB)
+	LEA 12(GB), R0
+	STORE R0, 14(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 15(GB)
+	LEA 14(GB), R0
+	STORE R0, 16(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 17(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[47, 14]-----
+; [New][loadItemintoRegister] loading new of calss =  A into memory at register R2
+	NEW #5, R2
+	BOV heap_overflow_error
+	LEA 8(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+; --------EndNew--------[47, 14]-----
+	STORE R2, 1(GB)	; Initializing the variable test1 and loading it into memory
+; --------StartNew--------[48, 14]-----
+; [New][loadItemintoRegister] loading new of calss =  A into memory at register R2
+	NEW #5, R2
+	BOV heap_overflow_error
+	LEA 8(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+; --------EndNew--------[48, 14]-----
+	STORE R2, 2(GB)	; Initializing the variable test5 and loading it into memory
+; --------StartNew--------[49, 14]-----
+; [New][loadItemintoRegister] loading new of calss =  B into memory at register R2
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 12(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.B
+	POP R2
+; --------EndNew--------[49, 14]-----
+	STORE R2, 3(GB)	; Initializing the variable test2 and loading it into memory
+; --------StartNew--------[50, 14]-----
+; [New][loadItemintoRegister] loading new of calss =  C into memory at register R2
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 14(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.C
+	POP R2
+; --------EndNew--------[50, 14]-----
+	STORE R2, 4(GB)	; Initializing the variable test3 and loading it into memory
+; --------StartNew--------[51, 14]-----
+; [New][loadItemintoRegister] loading new of calss =  D into memory at register R2
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 16(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.D
+	POP R2
+; --------EndNew--------[51, 14]-----
+	STORE R2, 5(GB)	; Initializing the variable test4 and loading it into memory
+; --------------BeginInstanceof----------[52, 8]+-----
+	LEA 6(GB), R0	; loading method table of Object
+	LEA 8(GB), R1	; loading method table of A
+	CMP R1, R0
+	BEQ instanceOf_Object4	; si les deux classes sont les mêmes , on retourne immédiatement true
+	LOAD 1(GB), R2	; loading test1 into memory
+loopbegin4:
+	CMP R0, R2
+	BEQ instanceOf_Object4	; loopend
+	LOAD 0(R2), R2
+	CMP #null, R2
+	BEQ endfalse4
+	BRA loopbegin4
+instanceOf_Object4:
+	LOAD #1, R0
+	BRA endtrue4
+endfalse4:
+	LOAD #0, R0
+endtrue4:
+	LOAD R0, R2
+; --------------EndInstanceof----------[52, 8]-----
+; ---------Startif-----------[52, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else4
+	WSTR "Object compraison works"
+	WNL
+	BRA end_ifthenelse_4
+else4:
+end_ifthenelse_4:
+; ---------Endif-----------
+; --------------BeginInstanceof----------[55, 8]+-----
+	LEA 12(GB), R0	; loading method table of B
+	LEA 8(GB), R1	; loading method table of A
+	CMP R1, R0
+	BEQ instanceOf_Object5	; si les deux classes sont les mêmes , on retourne immédiatement true
+	LOAD 1(GB), R2	; loading test1 into memory
+loopbegin5:
+	CMP R0, R2
+	BEQ instanceOf_Object5	; loopend
+	LOAD 0(R2), R2
+	CMP #null, R2
+	BEQ endfalse5
+	BRA loopbegin5
+instanceOf_Object5:
+	LOAD #1, R0
+	BRA endtrue5
+endfalse5:
+	LOAD #0, R0
+endtrue5:
+	LOAD R0, R2
+; --------------EndInstanceof----------[55, 8]-----
+; ---------Startif-----------[55, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else5
+	WSTR "cast does not instance of work"
+	WNL
+	BRA end_ifthenelse_5
+else5:
+end_ifthenelse_5:
+; ---------Endif-----------
+; --------------BeginInstanceof----------[58, 8]+-----
+	LEA 12(GB), R0	; loading method table of B
+	LEA 12(GB), R1	; loading method table of B
+	CMP R1, R0
+	BEQ instanceOf_Object6	; si les deux classes sont les mêmes , on retourne immédiatement true
+	LOAD 3(GB), R2	; loading test2 into memory
+loopbegin6:
+	CMP R0, R2
+	BEQ instanceOf_Object6	; loopend
+	LOAD 0(R2), R2
+	CMP #null, R2
+	BEQ endfalse6
+	BRA loopbegin6
+instanceOf_Object6:
+	LOAD #1, R0
+	BRA endtrue6
+endfalse6:
+	LOAD #0, R0
+endtrue6:
+	LOAD R0, R2
+; --------------EndInstanceof----------[58, 8]-----
+; ---------Startif-----------[58, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else6
+	WSTR "cast works"
+	WNL
+	BRA end_ifthenelse_6
+else6:
+end_ifthenelse_6:
+; ---------Endif-----------
+; --------------BeginInstanceof----------[61, 8]+-----
+	LEA 12(GB), R0	; loading method table of B
+	LEA 14(GB), R1	; loading method table of C
+	CMP R1, R0
+	BEQ instanceOf_Object7	; si les deux classes sont les mêmes , on retourne immédiatement true
+	LOAD 4(GB), R2	; loading test3 into memory
+loopbegin7:
+	CMP R0, R2
+	BEQ instanceOf_Object7	; loopend
+	LOAD 0(R2), R2
+	CMP #null, R2
+	BEQ endfalse7
+	BRA loopbegin7
+instanceOf_Object7:
+	LOAD #1, R0
+	BRA endtrue7
+endfalse7:
+	LOAD #0, R0
+endtrue7:
+	LOAD R0, R2
+; --------------EndInstanceof----------[61, 8]-----
+; ---------Startif-----------[61, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else7
+	WSTR "cast works"
+	WNL
+	BRA end_ifthenelse_7
+else7:
+end_ifthenelse_7:
+; ---------Endif-----------
+; --------------BeginInstanceof----------[64, 10]+-----
+	LEA 8(GB), R0	; loading method table of A
+	LEA 16(GB), R1	; loading method table of D
+	CMP R1, R0
+	BEQ instanceOf_Object8	; si les deux classes sont les mêmes , on retourne immédiatement true
+	LOAD 5(GB), R2	; loading test4 into memory
+loopbegin8:
+	CMP R0, R2
+	BEQ instanceOf_Object8	; loopend
+	LOAD 0(R2), R2
+	CMP #null, R2
+	BEQ endfalse8
+	BRA loopbegin8
+instanceOf_Object8:
+	LOAD #1, R0
+	BRA endtrue8
+endfalse8:
+	LOAD #0, R0
+endtrue8:
+	LOAD R0, R2
+; --------------EndInstanceof----------[64, 10]-----
+	CMP #0, R2	; Applying not operand
+	SEQ R2	; Applying not operand
+; ---------Startif-----------[64, 4]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else8
+	WSTR "cast works"
+	WNL
+	BRA end_ifthenelse_8
+else8:
+end_ifthenelse_8:
+; ---------Endif-----------
+; --------BeginAssignOp--------[68, 4]-----
+	LOAD #5, R3	; loading 5 into memory
+	PUSH R2
+	LOAD 1(GB), R2	; loading test1 into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	STORE R3, 1(R2)	; Saving field  x into memory
+	POP R2
+	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
+; --------EndAssignOp--------[68, 4]-----
+; --------BeginAssignOp--------[69, 4]-----
+	LOAD #5, R3	; loading 5 into memory
+	PUSH R2
+	LOAD 2(GB), R2	; loading test5 into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	STORE R3, 1(R2)	; Saving field  x into memory
+	POP R2
+	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
+; --------EndAssignOp--------[69, 4]-----
+; --------BeginMethodCall--------[70, 4]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading test1 into memory
+	STORE R2, 0(SP)
+	LOAD 2(GB), R2	; loading test5 into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 1(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[70, 4]-----
+; --------BeginMethodCall--------[71, 4]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading test1 into memory
+	STORE R2, 0(SP)
+	LOAD 3(GB), R2	; loading test2 into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 1(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[71, 4]-----
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : A -------------------
+; ---------------------------------------------------
+; ------------Init method for class = A--------
+init.A:
+	TSTO #2
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field x
+	STORE R0, 1(R1)	; Saving field  x into memory
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field y
+	STORE R0, 2(R1)	; Saving field  y into memory
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field z
+	STORE R0, 3(R1)	; Saving field  z into memory
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field h
+	STORE R0, 4(R1)	; Saving field  h into memory
+	LOAD -2(LB), R2	; [codeGenDelField][initialization] loading class (this) into memory when working with field h
+	LOAD #2, R3	; loading 2 into memory
+	STORE R3, 4(R2)	; Initializing the field h and loading it into memory
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : sommefields with label =  code.A.sommefields--------
+code.A.sommefields:
+	TSTO #2
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------StartBinaryOp--------[16, 15]-----
+; --------StartBinaryOp--------[16, 15]-----
+	LOAD -2(LB), R2	; loading the class of the field x into memory
+	LOAD 1(R2), R2	; loading x into memory
+	LOAD -2(LB), R3	; loading the class of the field y into memory
+	LOAD 2(R3), R3	; loading y into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[16, 15]-----
+	LOAD -2(LB), R3	; loading the class of the field z into memory
+	LOAD 3(R3), R3	; loading z into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[16, 15]-----
+	LOAD R2, R0
+	BRA fin.A.sommefields
+	WSTR "Error: La méthode code.A.sommefields doit retourner un element"
+	WNL
+	ERROR
+fin.A.sommefields:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : checkifsumistrue with label =  code.A.checkifsumistrue--------
+code.A.checkifsumistrue:
+	TSTO #2
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------StartBinaryOp--------[19, 12]-----
+; --------StartBinaryOp--------[19, 12]-----
+; --------StartBinaryOp--------[19, 12]-----
+	LOAD -2(LB), R2	; loading the class of the field x into memory
+	LOAD 1(R2), R2	; loading x into memory
+	LOAD -2(LB), R3	; loading the class of the field y into memory
+	LOAD 2(R3), R3	; loading y into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[19, 12]-----
+	LOAD -2(LB), R3	; loading the class of the field z into memory
+	LOAD 3(R3), R3	; loading z into memory
+	ADD R3, R2
+; --------EndBinaryOp--------[19, 12]-----
+	LOAD #0, R3	; loading 0 into memory
+	CMP R3, R2	; Comparing registers for GreaterOrEqual operation 
+	SGE R2	; Placing GreaterOrEqual result into the register  
+; --------EndBinaryOp--------[19, 12]-----
+; ---------Startif-----------[19, 8]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else1
+	LOAD #1, R2	; loading true into memory
+	LOAD R2, R0
+	BRA fin.A.checkifsumistrue
+	BRA end_ifthenelse_1
+else1:
+end_ifthenelse_1:
+; ---------Endif-----------
+	WSTR "Error: La méthode code.A.checkifsumistrue doit retourner un element"
+	WNL
+	ERROR
+fin.A.checkifsumistrue:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : equals with label =  code.A.equals--------
+code.A.equals:
+	TSTO #2
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------------BeginInstanceof----------[24, 13]+-----
+	LEA 8(GB), R0	; loading method table of A
+	LEA 6(GB), R1	; loading method table of Object
+	CMP R1, R0
+	BEQ instanceOf_Object1	; si les deux classes sont les mêmes , on retourne immédiatement true
+	LOAD -3(LB), R2	; loading otherClass into memory
+loopbegin1:
+	CMP R0, R2
+	BEQ instanceOf_Object1	; loopend
+	LOAD 0(R2), R2
+	CMP #null, R2
+	BEQ endfalse1
+	BRA loopbegin1
+instanceOf_Object1:
+	LOAD #1, R0
+	BRA endtrue1
+endfalse1:
+	LOAD #0, R0
+endtrue1:
+	LOAD R0, R2
+; --------------EndInstanceof----------[24, 13]-----
+; ---------Startif-----------[24, 8]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else2
+; --------StartBinaryOp--------[25, 16]-----
+; --------BeginSelection--------[25, 16]-----
+; --------------BeginInstanceof----------null+-----
+	LEA 8(GB), R0	; loading method table of A
+	LEA 6(GB), R1	; loading method table of Object
+	CMP R1, R0
+	BEQ instanceOf_Object2	; si les deux classes sont les mêmes , on retourne immédiatement true
+	LOAD -3(LB), R2	; loading otherClass into memory
+loopbegin2:
+	CMP R0, R2
+	BEQ instanceOf_Object2	; loopend
+	LOAD 0(R2), R2
+	CMP #null, R2
+	BEQ endfalse2
+	BRA loopbegin2
+instanceOf_Object2:
+	LOAD #1, R0
+	BRA endtrue2
+endfalse2:
+	LOAD #0, R0
+endtrue2:
+	LOAD R0, R2
+; --------------EndInstanceof----------null-----
+	CMP #1, R2
+	BEQ load_item_and_leave_cast1
+	BRA cast_error
+load_item_and_leave_cast1:
+	LOAD -3(LB), R2	; loading otherClass into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R2), R2	; Loading the field x into a register 
+; --------BeginSelection--------[25, 16]-----
+; --------BeginSelection--------[25, 39]-----
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field x into a register 
+; --------BeginSelection--------[25, 39]-----
+	CMP R3, R2	; Comparing registers for Equals operation 
+	SEQ R2	; Placing Equals result into the register  
+; --------EndBinaryOp--------[25, 16]-----
+; ---------Startif-----------[25, 12]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else3
+; --------BeginSelection--------[26, 24]-----
+	LOAD -2(LB), R2
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R2), R2	; Loading the field x into a register 
+; --------BeginSelection--------[26, 24]-----
+	LOAD R2, R1
+	WINT
+	WSTR "=="
+; --------BeginSelection--------[26, 38]-----
+; --------------BeginInstanceof----------null+-----
+	LEA 8(GB), R0	; loading method table of A
+	LEA 6(GB), R1	; loading method table of Object
+	CMP R1, R0
+	BEQ instanceOf_Object3	; si les deux classes sont les mêmes , on retourne immédiatement true
+	LOAD -3(LB), R3	; loading otherClass into memory
+loopbegin3:
+	CMP R0, R3
+	BEQ instanceOf_Object3	; loopend
+	LOAD 0(R3), R3
+	CMP #null, R3
+	BEQ endfalse3
+	BRA loopbegin3
+instanceOf_Object3:
+	LOAD #1, R0
+	BRA endtrue3
+endfalse3:
+	LOAD #0, R0
+endtrue3:
+	LOAD R0, R3
+; --------------EndInstanceof----------null-----
+	CMP #1, R3
+	BEQ load_item_and_leave_cast2
+	BRA cast_error
+load_item_and_leave_cast2:
+	LOAD -3(LB), R3	; loading otherClass into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field x into a register 
+; --------BeginSelection--------[26, 38]-----
+	LOAD R3, R1
+	WINT
+	WNL
+	WSTR "cast and instance of work"
+	WNL
+	LOAD #1, R2	; loading true into memory
+	LOAD R2, R0
+	BRA fin.A.equals
+	BRA end_ifthenelse_3
+else3:
+end_ifthenelse_3:
+; ---------Endif-----------
+	BRA end_ifthenelse_2
+else2:
+end_ifthenelse_2:
+; ---------Endif-----------
+	WSTR "cast and instance of work in the bad case"
+	WNL
+	LOAD #0, R2	; loading false into memory
+	LOAD R2, R0
+	BRA fin.A.equals
+	WSTR "Error: La méthode code.A.equals doit retourner un element"
+	WNL
+	ERROR
+fin.A.equals:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ---------------------------------------------------
+; ----------------- class : B -------------------
+; ---------------------------------------------------
+; ------------Init method for class = B--------
+init.B:
+	RTS
+; ---------------------------------------------------
+; ----------------- class : C -------------------
+; ---------------------------------------------------
+; ------------Init method for class = C--------
+init.C:
+	TSTO #3
+	BOV stack_overflow_error
+	LOAD -2(LB), R0	; Placing the current class = C adresse in the the stack before calling parent 
+	PUSH R0	; Placing this = C into the stack
+	BSR init.B	; Calling the initialisation method of parent classB
+	SUBSP #1
+	RTS
+; ---------------------------------------------------
+; ----------------- class : D -------------------
+; ---------------------------------------------------
+; ------------Init method for class = D--------
+init.D:
+	TSTO #3
+	BOV stack_overflow_error
+	LOAD -2(LB), R0	; Placing the current class = D adresse in the the stack before calling parent 
+	PUSH R0	; Placing this = D into the stack
+	BSR init.C	; Calling the initialisation method of parent classC
+	SUBSP #1
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+cast_error:
+	WSTR "Error: cast_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

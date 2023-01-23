@@ -1,0 +1,117 @@
+
+
+class MatrixTraitement{
+     float[][] calculate(float[][] mat){
+
+        int size = mat.size1D;  //change
+        int indexRow =0;
+        int indexCol =0;
+        float tempo=0;
+        float tempoK=0;
+        float buffer=0;
+        int k=0; //index 
+        float[][] matInver = new float[size][2*size];
+
+        while (indexRow<size){
+            while(indexCol<2*size){
+                matInver[indexRow][indexCol]=mat[indexRow][indexCol];
+                indexCol=indexCol+1;
+            }
+            matInver[indexRow][size+indexRow]=1;   //3   mb change !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            indexCol= 0;
+            indexRow=indexRow+1;
+        }
+        println("passed this point");
+
+        indexCol=0;
+        indexRow=0;
+        while (indexRow<size){
+            tempo=matInver[indexRow][indexRow];
+            indexCol= 0;
+            while(indexCol<2*size){
+                matInver[indexRow][indexCol]=matInver[indexRow][indexCol]/tempo;
+                indexCol=indexCol+1;
+            }
+            
+            /*********** */
+            //indexCol=0;
+            k=indexRow+1;
+            while (k<matInver.size1D){   //should change to matInvert.size1D;!!!!!!!!!!!!!!!!!!!!!!!
+                tempoK=matInver[k][indexRow];
+                indexCol=0;
+                while(indexCol<matInver.size2D){           //should change to matInvert.size2D;!!!!!!!!!!!!!!!!!!!!!!!
+                    matInver[k][indexCol]=matInver[k][indexCol]-matInver[indexRow][indexCol]*tempoK;
+                    
+                    indexCol=indexCol+1;
+                }
+                
+                k=k+1;
+            }        
+            /*********** */
+            
+            
+            indexRow=indexRow+1;
+        }
+        println("passed this point");
+        /************************************************************************************************************************ */
+        indexRow=matInver.size1D-1;    //should change to matInvert.size1D;!!!!!!!!!!!!!!!!!!!!!!!
+        while (indexRow>=0){
+            k=indexRow-1;
+            while(k>=0){
+                buffer=matInver[k][indexRow];
+                indexCol=0;
+                while (indexCol<matInver.size2D){  //should change to matInvert.size1D;!!!!!!!!!!!!!!!!!!!!!!!
+                    matInver[k][indexCol] =matInver[k][indexCol]-matInver[indexRow][indexCol]*buffer;
+                    indexCol=indexCol+1;
+                }  
+                
+                k=k-1;
+            }
+            
+            
+            indexRow=indexRow-1;
+        }
+
+        /****************************************************************************************************************** */
+        return matInver;
+    }
+
+
+
+}  //end of class
+
+{
+        MatrixTraitement mm = new MatrixTraitement();
+        float[][] matInver = new float[3][3];
+        float[][] testMatInver ;
+        int itrX=0;
+        int itrY=0;
+        //set values for test inversion:
+        matInver[0][0]=1;
+        matInver[0][1]=2;
+        matInver[0][2]=3;
+        matInver[1][0]=0;
+        matInver[1][1]=1;
+        matInver[1][2]=4;
+        matInver[2][0]=5;
+        matInver[2][1]=6;
+        matInver[2][2]=4;
+
+        testMatInver=mm.calculate(matInver);
+
+        //template to print 2D
+        println("");
+        while (itrX < matInver.size1D ){
+            while (itrY < matInver.size2D ){
+                print(matInver[itrX][itrY]);
+                print(" ");
+                itrY = itrY + 1;
+        }
+            println(); 
+            itrY=0; 
+            itrX = itrX + 1;
+        }
+}
+
+        
+ 

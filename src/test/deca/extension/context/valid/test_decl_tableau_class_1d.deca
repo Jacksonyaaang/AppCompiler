@@ -1,0 +1,36 @@
+// Description:
+// Test la declaration de tableau 1d
+// pour des  classes  
+// Resultats:
+//  TEST valide contextuelement
+// Historique:
+//    cree le 01/01/2023
+
+class Point2D {
+    int x ; // Abscisse
+    int y ; // Ordonnee
+    // Deplace ce point
+    // de a en diagonale.
+    void diag(int a) {
+        x = x + a;
+        y = y + a;
+    }
+}
+
+class Point3D extends Point2D {
+    int z; // Hauteur
+    void diag(int a) {
+        x = x + a;
+        y = y + a;
+        z = z + a;
+    }
+}
+
+{
+    Point2D point2d = new Point2D();
+    Object[] tableauObjet = new Object[1];
+    Point2D[] listeDePoint2d;
+    Point2D[] listeDePoint2dPrime;
+    listeDePoint2dPrime[5] = listeDePoint2dPrime[2];
+    listeDePoint2d = new Point2D[9];
+}

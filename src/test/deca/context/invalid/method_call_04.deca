@@ -1,0 +1,19 @@
+// Description:
+//    Teste l'appel d'une méthode avec une signature incorrecte.
+//
+// Resultats:
+//    Ligne 18: Signature de methode erronée
+//
+// Historique:
+//    cree le 20/01/2023
+class B{
+    int x;
+    int y;
+    void increment(int i){
+        x = x +1;
+    }
+}
+{
+B b = new B();
+b.increment(2.0);
+}

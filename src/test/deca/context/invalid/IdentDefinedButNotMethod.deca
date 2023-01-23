@@ -1,0 +1,17 @@
+// Description:
+//       Teste de method call invalid.
+// 
+// Resultats: 
+//      Ligne 16: ce identificateur n'est pas defini comme methode
+// 
+// Historique:
+//      cree le 21/01/2023
+
+class A{
+  int method;
+}
+
+{
+  A a = new A();
+  a.method();
+}

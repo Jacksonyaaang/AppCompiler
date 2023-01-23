@@ -1,0 +1,31 @@
+
+class MatriceSommeFloat{
+    void sommeFloatFloat1D(float[] table1, float[] table2){
+        int tableIterator = 0;
+        if (table1.size1D == table2.size1D){
+            while (tableIterator < table1.size1D ){
+                table1[tableIterator] = table1[tableIterator] + table2[tableIterator];
+                tableIterator = tableIterator + 1;
+            }
+        }
+        
+    }
+
+    void setFloat1DTable(float[] table, float value){
+        int tableIterator = 0;
+        while (tableIterator < table.size1D ){
+            table[tableIterator] = value;
+            tableIterator = tableIterator + 1;
+        }
+    }
+
+}
+
+{
+    MatriceSommeFloat somme = new MatriceSommeFloat();
+    float[] g = new float[5];
+    float[] h = new float[5];
+    somme.setFloat1DTable(g,3.0);
+    somme.setFloat1DTable(h,5.0);
+    somme.sommeFloatFloat1D(g,h);
+}

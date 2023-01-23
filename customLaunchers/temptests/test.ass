@@ -1,0 +1,480 @@
+	TSTO #15
+	BOV stack_overflow_error
+	ADDSP #12
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 4(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 5(GB)
+	LEA 4(GB), R0
+	STORE R0, 6(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 7(GB)
+	LOAD code.MathOperation.sommeIntInt1D, R0
+	STORE R0, 8(GB)
+	LOAD code.MathOperation.dimensionIncompatible, R0
+	STORE R0, 9(GB)
+	LOAD code.MathOperation.throwError, R0
+	STORE R0, 10(GB)
+	LOAD code.MathOperation.setInt1DTable, R0
+	STORE R0, 11(GB)
+	LOAD code.MathOperation.printInt1DTable, R0
+	STORE R0, 12(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[43, 39]-----
+; [New][loadItemintoRegister] loading new of calss =  MathOperation into memory at register R2
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 6(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.MathOperation
+	POP R2
+; --------EndNew--------[43, 39]-----
+	STORE R2, 1(GB)	; Initializing the variable matrixManipulation and loading it into memory
+; --------StartNewTable--------[44, 14]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  int[] into memory at register R2
+	LOAD #4, R3	; loading 4 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	ADD #1, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	LOAD R0, R2
+; --------EndNewTable--------[44, 14]-----
+	STORE R2, 2(GB)	; Initializing the variable x and loading it into memory
+; --------StartNewTable--------[45, 14]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  int[] into memory at register R2
+	LOAD #7, R3	; loading 7 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	ADD #1, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	LOAD R0, R2
+; --------EndNewTable--------[45, 14]-----
+	STORE R2, 3(GB)	; Initializing the variable y and loading it into memory
+; --------BeginMethodCall--------[46, 4]-----
+	ADDSP #3
+	LOAD 1(GB), R2	; loading matrixManipulation into memory
+	STORE R2, 0(SP)
+	LOAD 2(GB), R2	; loading x into memory
+	STORE R2, -1(SP)
+	LOAD #5, R2	; loading 5 into memory
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 5(R2)
+	LOAD R0, R2
+	SUBSP #3
+; --------EndMethodCall--------[46, 4]-----
+; --------BeginMethodCall--------[47, 4]-----
+	ADDSP #3
+	LOAD 1(GB), R2	; loading matrixManipulation into memory
+	STORE R2, 0(SP)
+	LOAD 3(GB), R2	; loading y into memory
+	STORE R2, -1(SP)
+	LOAD #6, R2	; loading 6 into memory
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 5(R2)
+	LOAD R0, R2
+	SUBSP #3
+; --------EndMethodCall--------[47, 4]-----
+; --------BeginMethodCall--------[48, 4]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading matrixManipulation into memory
+	STORE R2, 0(SP)
+	LOAD 2(GB), R2	; loading x into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 6(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[48, 4]-----
+; --------BeginMethodCall--------[49, 4]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading matrixManipulation into memory
+	STORE R2, 0(SP)
+	LOAD 3(GB), R2	; loading y into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 6(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[49, 4]-----
+; --------BeginMethodCall--------[50, 4]-----
+	ADDSP #3
+	LOAD 1(GB), R2	; loading matrixManipulation into memory
+	STORE R2, 0(SP)
+	LOAD 2(GB), R2	; loading x into memory
+	STORE R2, -1(SP)
+	LOAD 3(GB), R2	; loading y into memory
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	LOAD R0, R2
+	SUBSP #3
+; --------EndMethodCall--------[50, 4]-----
+; --------BeginMethodCall--------[51, 4]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading matrixManipulation into memory
+	STORE R2, 0(SP)
+	LOAD 2(GB), R2	; loading x into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 6(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[51, 4]-----
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : MathOperation -------------------
+; ---------------------------------------------------
+; ------------Init method for class = MathOperation--------
+init.MathOperation:
+	RTS
+; ------------Code for method : sommeIntInt1D with label =  code.MathOperation.sommeIntInt1D--------
+code.MathOperation.sommeIntInt1D:
+	TSTO #6
+	BOV stack_overflow_error
+	ADDSP #1
+	PUSH R5	; Pushing and poping registers used in the method
+	PUSH R4	; Pushing and poping registers used in the method
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable tableIterator and loading it into memory
+; --------StartBinaryOp--------[4, 12]-----
+; --------BeginSelection--------[4, 12]-----
+	LOAD -3(LB), R2	; loading table1 into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R2), R2	; Loading the field size1D into a register 
+; --------BeginSelection--------[4, 12]-----
+; --------BeginSelection--------[4, 29]-----
+	LOAD -4(LB), R3	; loading table2 into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[4, 29]-----
+	CMP R3, R2	; Comparing registers for Equals operation 
+	SEQ R2	; Placing Equals result into the register  
+; --------EndBinaryOp--------[4, 12]-----
+; ---------Startif-----------[4, 8]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else1
+while_begin1:
+; --------StartBinaryOp--------[5, 19]-----
+	LOAD 1(LB), R2	; loading tableIterator into memory
+; --------BeginSelection--------[5, 35]-----
+	LOAD -3(LB), R3	; loading table1 into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[5, 35]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[5, 19]-----
+	CMP #1, R2
+	BNE while_end1
+; --------BeginAssignOp--------[6, 16]-----
+; --------StartBinaryOp--------[6, 40]-----
+; --------StartGetTableElements--------[6, 40]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  table1 into memory at register R3
+	LOAD 1(LB), R4	; loading tableIterator into memory
+	CMP #0, R4
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; loading table1 into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of table1 into memory
+	CMP R4, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R4), R0
+	LOAD R0, R3
+; --------EndGetTableElements--------[6, 40]-----
+; --------StartGetTableElements--------[6, 64]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  table2 into memory at register R4
+	LOAD 1(LB), R5	; loading tableIterator into memory
+	CMP #0, R5
+	BLT int_selection_table_must_be_positive
+	LOAD -4(LB), R1	; loading table2 into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of table2 into memory
+	CMP R5, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R5), R0
+	LOAD R0, R4
+; --------EndGetTableElements--------[6, 64]-----
+	ADD R4, R3
+; --------EndBinaryOp--------[6, 40]-----
+; --------StartStoreTableElements--------[6, 16]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  table1 the value in R3
+	LOAD 1(LB), R4	; loading tableIterator into memory
+	CMP #0, R4
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; loading table1 into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of table1 into memory
+	CMP R4, R0
+	BLE table_dimension_are_not_respected
+	LOAD R4, R0
+	STORE R3, 1(R1, R0)
+; --------EndStoreTableElements--------[6, 16]-----
+; --------EndAssignOp--------[6, 16]-----
+; --------BeginAssignOp--------[7, 16]-----
+; --------StartBinaryOp--------[7, 32]-----
+	LOAD 1(LB), R3	; loading tableIterator into memory
+	LOAD #1, R4	; loading 1 into memory
+	ADD R4, R3
+; --------EndBinaryOp--------[7, 32]-----
+	STORE R3, 1(LB)	;  Assiging a value to tableIterator
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorand storing it into R2
+; --------EndAssignOp--------[7, 16]-----
+	BRA while_begin1
+while_end1:
+	BRA end_ifthenelse_1
+else1:
+; --------BeginMethodCall--------[11, 12]-----
+	ADDSP #1
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[11, 12]-----
+end_ifthenelse_1:
+; ---------Endif-----------
+fin.MathOperation.sommeIntInt1D:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	POP R4	; Pushing and poping registers used in the method
+	POP R5	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : dimensionIncompatible with label =  code.MathOperation.dimensionIncompatible--------
+code.MathOperation.dimensionIncompatible:
+	TSTO #2
+	BOV stack_overflow_error
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	WSTR "Erreur de dimension"
+	WNL
+; --------BeginMethodCall--------[16, 8]-----
+	ADDSP #1
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 4(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[16, 8]-----
+fin.MathOperation.dimensionIncompatible:
+	POP R2	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : throwError with label =  code.MathOperation.throwError--------
+code.MathOperation.throwError:
+;  ---------ClassBodyAsmCodeGeneration------
+ERROR 
+fin.MathOperation.throwError:
+	RTS
+; ------------Code for method : setInt1DTable with label =  code.MathOperation.setInt1DTable--------
+code.MathOperation.setInt1DTable:
+	TSTO #4
+	BOV stack_overflow_error
+	ADDSP #1
+	PUSH R4	; Pushing and poping registers used in the method
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable tableIterator and loading it into memory
+while_begin2:
+; --------StartBinaryOp--------[24, 15]-----
+	LOAD 1(LB), R2	; loading tableIterator into memory
+; --------BeginSelection--------[24, 31]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[24, 31]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[24, 15]-----
+	CMP #1, R2
+	BNE while_end2
+; --------BeginAssignOp--------[25, 12]-----
+	LOAD -4(LB), R3	; loading value into memory
+; --------StartStoreTableElements--------[25, 12]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  table the value in R3
+	LOAD 1(LB), R4	; loading tableIterator into memory
+	CMP #0, R4
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; loading table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of table into memory
+	CMP R4, R0
+	BLE table_dimension_are_not_respected
+	LOAD R4, R0
+	STORE R3, 1(R1, R0)
+; --------EndStoreTableElements--------[25, 12]-----
+; --------EndAssignOp--------[25, 12]-----
+; --------BeginAssignOp--------[26, 12]-----
+; --------StartBinaryOp--------[26, 28]-----
+	LOAD 1(LB), R3	; loading tableIterator into memory
+	LOAD #1, R4	; loading 1 into memory
+	ADD R4, R3
+; --------EndBinaryOp--------[26, 28]-----
+	STORE R3, 1(LB)	;  Assiging a value to tableIterator
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorand storing it into R2
+; --------EndAssignOp--------[26, 12]-----
+	BRA while_begin2
+while_end2:
+fin.MathOperation.setInt1DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	POP R4	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : printInt1DTable with label =  code.MathOperation.printInt1DTable--------
+code.MathOperation.printInt1DTable:
+	TSTO #4
+	BOV stack_overflow_error
+	ADDSP #1
+	PUSH R4	; Pushing and poping registers used in the method
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable tableIterator and loading it into memory
+	WSTR "--------------"
+	WNL
+	WSTR "Tableau1D = ["
+while_begin3:
+; --------StartBinaryOp--------[33, 15]-----
+	LOAD 1(LB), R2	; loading tableIterator into memory
+; --------BeginSelection--------[33, 31]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[33, 31]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[33, 15]-----
+	CMP #1, R2
+	BNE while_end3
+; --------StartGetTableElements--------[34, 18]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  table into memory at register R2
+	LOAD 1(LB), R3	; loading tableIterator into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; loading table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of table into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R3), R0
+	LOAD R0, R2
+; --------EndGetTableElements--------[34, 18]-----
+	LOAD R2, R1
+	WINT
+	WSTR " ,"
+; --------BeginAssignOp--------[35, 12]-----
+; --------StartBinaryOp--------[35, 28]-----
+	LOAD 1(LB), R3	; loading tableIterator into memory
+	LOAD #1, R4	; loading 1 into memory
+	ADD R4, R3
+; --------EndBinaryOp--------[35, 28]-----
+	STORE R3, 1(LB)	;  Assiging a value to tableIterator
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorand storing it into R2
+; --------EndAssignOp--------[35, 12]-----
+	BRA while_begin3
+while_end3:
+	WSTR "]"
+	WSTR "--------------"
+	WNL
+fin.MathOperation.printInt1DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	POP R4	; Pushing and poping registers used in the method
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+table_dimension_are_not_respected:
+	WSTR "Error: table_dimension_are_not_respected"
+	WNL
+	ERROR
+int_selection_table_must_be_positive:
+	WSTR "Error: int_selection_table_must_be_positive"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+int_allocation_table_must_be_strictly_positive:
+	WSTR "Error: int_allocation_table_must_be_strictly_positive"
+	WNL
+	ERROR
+; end main program

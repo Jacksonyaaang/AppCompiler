@@ -1,0 +1,13 @@
+// Description:
+//       Double Declaration de classe 
+// Resultats: 
+//      Ligne 11:Il existe déjà une classe de nom A
+//
+// Historique:
+//      cree le 20/01/2023
+
+class A{
+}
+class A{
+}
+

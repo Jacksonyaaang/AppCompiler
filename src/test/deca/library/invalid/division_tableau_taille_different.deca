@@ -1,0 +1,33 @@
+// Description:
+//    somme entre deux tableaux avec des different taille
+//
+// Resultats:
+// erreur
+// Historique:
+//    cree le 21/01/2023
+
+#include "Divide_member_by_member.decah"
+
+{
+    DivMember matrixDivMb = new DivMember();
+    int[] x = new int[7];
+    float[] y = new float[8];
+    int[][] a = new int[3][3];
+    int[][] d = new int[3][3];
+    float[][] b = new float[3][3];
+    float[][] c = new float[3][3];
+
+    println("Test Division membre par membre de tableaux 1D");
+    matrixDivMb.setInt1DTable(x,5);
+    matrixDivMb.setFloat1DTable(y,6.0);
+    matrixDivMb.printInt1DTable(x);
+    matrixDivMb.printFloat1DTable(y);
+    matrixDivMb.divMbIntFloat1D(x,y);
+    println("Le résultat de la division membre par membre est: ");
+    matrixDivMb.printInt1DTable(x);
+    println("");
+
+
+}
+
+ 

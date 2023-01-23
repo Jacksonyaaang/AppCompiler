@@ -50,6 +50,10 @@ public class Initialization extends AbstractInitialization {
         LOG.debug("[Initialization][verifyInitialization]");
         //Vérification du membre de droite lors d'une initialisation
         expression = expression.verifyRValue(compiler, localEnv, currentClass, t);
+        if (expression instanceof AbstractIdentifier && ((Identifier)expression).getExpDefinition().isMethod()) {
+            throw new ContextualError("le membre de droite est un identificateur de method", getLocation());
+           // System.out.println("********typeOpLeft est null mec***********************************************");
+        }
     }
 
 

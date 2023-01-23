@@ -1,0 +1,167 @@
+	TSTO #6
+	BOV stack_overflow_error
+	ADDSP #6
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 5(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 6(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNewTable--------[21, 18]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  int[] into memory at register R2
+	LOAD #5, R3	; loading 5 into memory
+	OPP R3, R3	; Doing an unary minus
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	ADD #1, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	LOAD R0, R2
+; --------EndNewTable--------[21, 18]-----
+	STORE R2, 1(GB)	; Initializing the variable table and loading it into memory
+; --------StartNewTable--------[22, 14]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  int[] into memory at register R2
+	LOAD #5, R3	; loading 5 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	ADD #1, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	LOAD R0, R2
+; --------EndNewTable--------[22, 14]-----
+	STORE R2, 2(GB)	; Initializing the variable x and loading it into memory
+; --------StartNewTable--------[23, 28]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  int[][] into memory at register R2
+	LOAD #5, R3	; loading 5 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD #4, R4	; loading 4 into memory
+	CMP #1, R4
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	MUL R4, R1
+	ADD #2, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	STORE R4, 1(R0)
+	LOAD R0, R2
+; --------EndNewTable--------[23, 28]-----
+	STORE R2, 3(GB)	; Initializing the variable matriceEntier and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 4(GB)	; Initializing the variable iterX and loading it into memory
+while_begin1:
+; --------StartBinaryOp--------[25, 11]-----
+	LOAD 4(GB), R2	; loading iterX into memory
+; --------BeginSelection--------[25, 19]-----
+	LOAD 2(GB), R3	; loading x into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[25, 19]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[25, 11]-----
+	CMP #1, R2
+	BNE while_end1
+; --------BeginAssignOp--------[26, 8]-----
+	LOAD 4(GB), R3	; loading iterX into memory
+; --------StartStoreTableElements--------[26, 8]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  x the value in R3
+	LOAD 4(GB), R4	; loading iterX into memory
+	CMP #0, R4
+	BLT int_selection_table_must_be_positive
+	LOAD 2(GB), R1	; [saving] loading x into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of x into memory
+	CMP R4, R0
+	BLE table_dimension_are_not_respected
+	LOAD R4, R0
+	STORE R3, 1(R1, R0)
+; --------EndStoreTableElements--------[26, 8]-----
+; --------EndAssignOp--------[26, 8]-----
+; --------BeginAssignOp--------[27, 8]-----
+; --------StartBinaryOp--------[27, 16]-----
+	LOAD 4(GB), R3	; loading iterX into memory
+	LOAD #1, R4	; loading 1 into memory
+	ADD R4, R3
+; --------EndBinaryOp--------[27, 16]-----
+	STORE R3, 4(GB)	;  Assiging a value to iterX
+	LOAD R3, R2	;  Return value of the assignement of =iterXand storing it into R2
+; --------EndAssignOp--------[27, 8]-----
+	BRA while_begin1
+while_end1:
+	WSTR "nb lig="
+; --------BeginSelection--------[29, 23]-----
+	LOAD 3(GB), R2	; loading matriceEntier into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R2), R2	; Loading the field size1D into a register 
+; --------BeginSelection--------[29, 23]-----
+	LOAD R2, R1
+	WINT
+	WSTR " / nb col="
+; --------BeginSelection--------[29, 59]-----
+	LOAD 3(GB), R3	; loading matriceEntier into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[29, 59]-----
+	LOAD R3, R1
+	WINT
+	WNL
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+table_dimension_are_not_respected:
+	WSTR "Error: table_dimension_are_not_respected"
+	WNL
+	ERROR
+int_selection_table_must_be_positive:
+	WSTR "Error: int_selection_table_must_be_positive"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+int_allocation_table_must_be_strictly_positive:
+	WSTR "Error: int_allocation_table_must_be_strictly_positive"
+	WNL
+	ERROR
+; end main program

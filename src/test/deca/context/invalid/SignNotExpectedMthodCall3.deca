@@ -1,0 +1,20 @@
+// Description:
+//       Teste de signature non prévu de la method call.
+// 
+// Resultats: 
+//      Ligne 19: Signature de methode non prévu
+// 
+// Historique:
+//      cree le 21/01/2023
+class A{
+}
+
+class B{
+  void mthod(int x, A a){
+  }
+}
+
+{
+  B b = new B();
+  b.mthod(2, b);
+}

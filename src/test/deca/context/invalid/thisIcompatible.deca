@@ -1,0 +1,13 @@
+// Description:
+//       Teste de this hors une classe .
+// 
+// Resultats: 
+//      Ligne 12: L'expression \"this.\" est utilisable que dans le cadre de classes
+// 
+// Historique:
+//      cree le 21/01/2023
+
+{
+  int x;
+  this.x = 0;
+}

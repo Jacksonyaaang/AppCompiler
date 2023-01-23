@@ -1,0 +1,12 @@
+// Description:
+//    Teste la déclaration d'un champs de type void.
+//
+// Resultats:
+//    Ligne 11: Déclaration de Field de type void impossible
+//
+// Historique:
+//    cree le 20/01/2023
+
+class A{
+    void  a;
+}

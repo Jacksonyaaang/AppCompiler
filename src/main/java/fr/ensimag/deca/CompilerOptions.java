@@ -45,8 +45,13 @@ public class CompilerOptions {
     
     private boolean decompile;
     private boolean verfiryAndStop;
+    /**
+     * Si la valeur de nocheck est vrai, 
+     * on n'ajoute pas le traitement d'erreur en runtime
+     */
     private boolean noCheck = false;
 
+    
     public boolean isNoCheck() {
         return noCheck;
     }
@@ -61,7 +66,9 @@ public class CompilerOptions {
     }
     
     private void printbool() {
-        for (int i=0; i<numberOfOptions; i++){System.out.println("bool " + i + " " + optionsInvoked[i]); }
+        for (int i=0; i<numberOfOptions; i++){
+            //System.out.println("bool " + i + " " + optionsInvoked[i]);
+        }
     }
 
     public boolean isDecompile() {

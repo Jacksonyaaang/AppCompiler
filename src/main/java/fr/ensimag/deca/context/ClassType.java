@@ -56,8 +56,8 @@ public class ClassType extends Type {
         if (otherType instanceof ClassType){
             if (this.getName().getName().equals(((ClassType)otherType).getName().getName()))
             return true;
-        }return false;
-        //throw new UnsupportedOperationException("not yet implemented");
+        }
+        return false;
     }
 
     /**
@@ -65,16 +65,19 @@ public class ClassType extends Type {
      */
     public boolean isSubClassOf(ClassType potentialSuperClass) {
         ClassDefinition CurClassDef = this.getDefinition();
-        while (CurClassDef.getSuperClass() != null){
-            ClassType CurClass = CurClassDef.getSuperClass().getType();
+        if (this.isNull()) return true;
+        while (CurClassDef != null){
+            ClassType CurClass = CurClassDef.getType();
             if (CurClass.sameType(potentialSuperClass)) {
                 return true;
             }
             CurClassDef = CurClassDef.getSuperClass();    
         }
         return false;
-        
-        //throw new UnsupportedOperationException("not yet implemented"); 
+    }
+
+    public void setDefinition(ClassDefinition def) {
+        this.definition = def;
     }
 
 
