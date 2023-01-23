@@ -62,7 +62,9 @@ public class DeclClass extends AbstractDeclClass {
     StackManagementUnit initMethodStackManagementUnit = new StackManagementUnit();
     IMAProgram initMethodProgram = new IMAProgram();
 
-
+    /**
+     * Ce code est utilisée pour génere le tableau de méthode 
+     */
     public void codeGenTableauDeMethod(DecacCompiler compiler) throws CodeGenError {
         LOG.debug("[DeclClass][codeGenTableauDeMethod] Generating the table method || ClassName =  " + 
                 name.getName().getName()  + " // Super class  = " + superClass.getName().getName());
@@ -105,6 +107,11 @@ public class DeclClass extends AbstractDeclClass {
         classProgram.append(methods.getMethodsPrograms());
     }
 
+    /**
+     * Ce code ajoute la méthode de l'initialisation de la classe
+     * @param compiler
+     * @throws CodeGenError
+     */
     public void codeGenMethodInitialisation(DecacCompiler compiler) throws CodeGenError {
         setUpMethodDefinition(compiler);
         //We set the value of the stack to 0, and if we ever do function calls we add 2 to this field. In this case
@@ -158,7 +165,11 @@ public class DeclClass extends AbstractDeclClass {
         classProgram.append(initMethodProgram);
     }   
 
-
+    /**
+     * Ce code associe à une methode une définition
+     * @param compiler
+     * @throws CodeGenError
+     */
     public void setUpMethodDefinition(DecacCompiler compiler) throws CodeGenError{
         MethodDefinition defintionMethodInitClass = new MethodDefinition(compiler.environmentType.VOID, Location.BUILTIN, 
                             new Signature(), name.getClassDefinition().getNumberOfMethods()+1);

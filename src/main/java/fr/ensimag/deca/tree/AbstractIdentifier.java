@@ -102,7 +102,6 @@ public abstract class AbstractIdentifier extends AbstractLValue {
      * @param compiler 
      * @param reg le registre auquelle on mettra l'adresse associé au identificateur 
      */
-
     @Override
     public void loadItemintoRegister(DecacCompiler compiler, GPRegister regReserved) throws CodeGenError {
         throw new CodeGenError(getLocation(), "This method should not be called at this level, loadItemintoRegister");

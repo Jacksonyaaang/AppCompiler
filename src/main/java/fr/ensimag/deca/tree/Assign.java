@@ -155,6 +155,7 @@ public class Assign extends AbstractBinaryExpr {
                 }
             }
             else if (getLeftOperand() instanceof TableGetElement ){
+                    //On appelle une methode qui fait le calcule de la position d'operateur gauche
                     ( (TableGetElement) getLeftOperand()).saveRegsiterIntoAdress(compiler, getRightOperand());
             }
 

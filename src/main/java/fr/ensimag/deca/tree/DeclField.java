@@ -121,7 +121,9 @@ public class DeclField extends AbstractDeclField {
         initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
     }
 
-
+    /**
+     * CodeGenPlaceZeroInField met des zero dans un champ
+     */
     @Override
     public void CodeGenPlaceZeroInField(DecacCompiler compiler) throws CodeGenError {
         if (type.getType() == compiler.environmentType.FLOAT){
@@ -139,6 +141,9 @@ public class DeclField extends AbstractDeclField {
                 "Saving field  "+getVarName().getName()+ " into memory");
     }
 
+    /**
+     * codeGenDelField initialise les variables qui ont une initialization non null 
+     */
     @Override
     public void codeGenDelField(DecacCompiler compiler) throws CodeGenError {
         //If the field has been initialized, then we must place the value that has been 

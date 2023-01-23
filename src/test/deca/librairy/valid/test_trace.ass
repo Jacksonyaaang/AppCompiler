@@ -1,0 +1,2783 @@
+	TSTO #52
+	BOV stack_overflow_error
+	ADDSP #49
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 6(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 7(GB)
+	LEA 6(GB), R0
+	STORE R0, 8(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 9(GB)
+	LOAD code.Math.setInt1DTable, R0
+	STORE R0, 10(GB)
+	LOAD code.Math.setInt2DTable, R0
+	STORE R0, 11(GB)
+	LOAD code.Math.setFloat1DTable, R0
+	STORE R0, 12(GB)
+	LOAD code.Math.setFloat2DTable, R0
+	STORE R0, 13(GB)
+	LOAD code.Math.printInt1DTable, R0
+	STORE R0, 14(GB)
+	LOAD code.Math.printInt2DTable, R0
+	STORE R0, 15(GB)
+	LOAD code.Math.printFloat1DTable, R0
+	STORE R0, 16(GB)
+	LOAD code.Math.printFloat2DTable, R0
+	STORE R0, 17(GB)
+	LOAD code.Math.copyIntInt1DTable, R0
+	STORE R0, 18(GB)
+	LOAD code.Math.copyIntInt2DTable, R0
+	STORE R0, 19(GB)
+	LOAD code.Math.copyFloatFloat1DTable, R0
+	STORE R0, 20(GB)
+	LOAD code.Math.copyFloatFloat2DTable, R0
+	STORE R0, 21(GB)
+	LOAD code.Math.copyFloatInt1DTable, R0
+	STORE R0, 22(GB)
+	LOAD code.Math.copyFloatInt2DTable, R0
+	STORE R0, 23(GB)
+	LOAD code.Math.copyIntFloat1DTable, R0
+	STORE R0, 24(GB)
+	LOAD code.Math.copyIntFloat2DTable, R0
+	STORE R0, 25(GB)
+	LOAD code.Math.dimensionIncompatible, R0
+	STORE R0, 26(GB)
+	LOAD code.Math.throwError, R0
+	STORE R0, 27(GB)
+	LEA 8(GB), R0
+	STORE R0, 28(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 29(GB)
+	LOAD code.Math.setInt1DTable, R0
+	STORE R0, 30(GB)
+	LOAD code.Math.setInt2DTable, R0
+	STORE R0, 31(GB)
+	LOAD code.Math.setFloat1DTable, R0
+	STORE R0, 32(GB)
+	LOAD code.Math.setFloat2DTable, R0
+	STORE R0, 33(GB)
+	LOAD code.Math.printInt1DTable, R0
+	STORE R0, 34(GB)
+	LOAD code.Math.printInt2DTable, R0
+	STORE R0, 35(GB)
+	LOAD code.Math.printFloat1DTable, R0
+	STORE R0, 36(GB)
+	LOAD code.Math.printFloat2DTable, R0
+	STORE R0, 37(GB)
+	LOAD code.Math.copyIntInt1DTable, R0
+	STORE R0, 38(GB)
+	LOAD code.Math.copyIntInt2DTable, R0
+	STORE R0, 39(GB)
+	LOAD code.Math.copyFloatFloat1DTable, R0
+	STORE R0, 40(GB)
+	LOAD code.Math.copyFloatFloat2DTable, R0
+	STORE R0, 41(GB)
+	LOAD code.Math.copyFloatInt1DTable, R0
+	STORE R0, 42(GB)
+	LOAD code.Math.copyFloatInt2DTable, R0
+	STORE R0, 43(GB)
+	LOAD code.Math.copyIntFloat1DTable, R0
+	STORE R0, 44(GB)
+	LOAD code.Math.copyIntFloat2DTable, R0
+	STORE R0, 45(GB)
+	LOAD code.Math.dimensionIncompatible, R0
+	STORE R0, 46(GB)
+	LOAD code.Math.throwError, R0
+	STORE R0, 47(GB)
+	LOAD code.Trace.getTraceInt, R0
+	STORE R0, 48(GB)
+	LOAD code.Trace.getTraceFloat, R0
+	STORE R0, 49(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[59, 24]-----
+; [New][loadItemintoRegister] loading new of calss =  Trace into memory at register R2
+	NEW #1, R2
+	BOV heap_overflow_error
+	LEA 28(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Trace
+	POP R2
+; --------EndNew--------[59, 24]-----
+	STORE R2, 1(GB)	; Initializing the variable matrixTrace and loading it into memory
+; --------StartNewTable--------[60, 16]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  int[][] into memory at register R2
+	LOAD #3, R3	; loading 3 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	PUSH R2
+	LOAD #3, R2	; loading 3 into memory
+	CMP #1, R2
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	MUL R2, R1
+	ADD #2, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	STORE R2, 1(R0)
+	POP R2
+	LOAD R0, R2
+; --------EndNewTable--------[60, 16]-----
+	STORE R2, 2(GB)	; Initializing the variable a and loading it into memory
+; --------StartNewTable--------[61, 16]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  int[][] into memory at register R2
+	LOAD #3, R3	; loading 3 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	PUSH R2
+	LOAD #3, R2	; loading 3 into memory
+	CMP #1, R2
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	MUL R2, R1
+	ADD #2, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	STORE R2, 1(R0)
+	POP R2
+	LOAD R0, R2
+; --------EndNewTable--------[61, 16]-----
+	STORE R2, 3(GB)	; Initializing the variable d and loading it into memory
+; --------StartNewTable--------[62, 18]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  float[][] into memory at register R2
+	LOAD #3, R3	; loading 3 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	PUSH R2
+	LOAD #3, R2	; loading 3 into memory
+	CMP #1, R2
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	MUL R2, R1
+	ADD #2, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	STORE R2, 1(R0)
+	POP R2
+	LOAD R0, R2
+; --------EndNewTable--------[62, 18]-----
+	STORE R2, 4(GB)	; Initializing the variable b and loading it into memory
+; --------StartNewTable--------[63, 18]-----
+; [NewTable][loadItemintoRegister] loading NewTable  =  float[][] into memory at register R2
+	LOAD #3, R3	; loading 3 into memory
+	CMP #1, R3
+	BLT int_allocation_table_must_be_strictly_positive
+	PUSH R2
+	LOAD #3, R2	; loading 3 into memory
+	CMP #1, R2
+	BLT int_allocation_table_must_be_strictly_positive
+	LOAD R3, R1
+	MUL R2, R1
+	ADD #2, R1
+	NEW R1, R0
+	BOV heap_overflow_error
+	STORE R3, 0(R0)
+	STORE R2, 1(R0)
+	POP R2
+	LOAD R0, R2
+; --------EndNewTable--------[63, 18]-----
+	STORE R2, 5(GB)	; Initializing the variable c and loading it into memory
+; --------BeginMethodCall--------[65, 4]-----
+	ADDSP #3
+	LOAD 1(GB), R2	; loading matrixTrace into memory
+	STORE R2, 0(SP)
+	LOAD 2(GB), R2	; loading a into memory
+	STORE R2, -1(SP)
+	LOAD #5, R2	; loading 5 into memory
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	LOAD R0, R2
+	SUBSP #3
+; --------EndMethodCall--------[65, 4]-----
+; --------BeginMethodCall--------[66, 4]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading matrixTrace into memory
+	STORE R2, 0(SP)
+	LOAD 2(GB), R2	; loading a into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 7(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[66, 4]-----
+	WSTR "La trace de la matrice est: "
+; --------BeginMethodCall--------[67, 44]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading matrixTrace into memory
+	STORE R2, 0(SP)
+	LOAD 2(GB), R2	; loading a into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 20(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[67, 44]-----
+	LOAD R2, R1
+	WINT
+	WNL
+	WSTR ""
+	WNL
+; --------BeginAssignOp--------[69, 4]-----
+	LOAD #2, R3	; loading 2 into memory
+; --------StartStoreTableElements--------[69, 4]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  a the value in R3
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD #1, R3	; loading 1 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 2(GB), R1	; [saving] loading a into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of a into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of a into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[69, 4]-----
+; --------EndAssignOp--------[69, 4]-----
+; --------BeginMethodCall--------[70, 4]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading matrixTrace into memory
+	STORE R2, 0(SP)
+	LOAD 2(GB), R2	; loading a into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 7(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[70, 4]-----
+	WSTR "La trace de la matrice est: "
+; --------BeginMethodCall--------[71, 44]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading matrixTrace into memory
+	STORE R2, 0(SP)
+	LOAD 2(GB), R2	; loading a into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 20(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[71, 44]-----
+	LOAD R2, R1
+	WINT
+	WNL
+	WSTR ""
+	WNL
+; --------BeginAssignOp--------[73, 4]-----
+	LOAD #42, R3	; loading 42 into memory
+; --------StartStoreTableElements--------[73, 4]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  a the value in R3
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 2(GB), R1	; [saving] loading a into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of a into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of a into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[73, 4]-----
+; --------EndAssignOp--------[73, 4]-----
+; --------BeginMethodCall--------[74, 4]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading matrixTrace into memory
+	STORE R2, 0(SP)
+	LOAD 2(GB), R2	; loading a into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 7(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[74, 4]-----
+	WSTR "La trace de la matrice est: "
+; --------BeginMethodCall--------[75, 44]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading matrixTrace into memory
+	STORE R2, 0(SP)
+	LOAD 2(GB), R2	; loading a into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 20(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[75, 44]-----
+	LOAD R2, R1
+	WINT
+	WNL
+	WSTR ""
+	WNL
+; --------BeginMethodCall--------[78, 4]-----
+	ADDSP #3
+	LOAD 1(GB), R2	; loading matrixTrace into memory
+	STORE R2, 0(SP)
+	LOAD 4(GB), R2	; loading b into memory
+	STORE R2, -1(SP)
+	LOAD #0x1.acccccp2, R2	; loading 6.7 into memory
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 5(R2)
+	LOAD R0, R2
+	SUBSP #3
+; --------EndMethodCall--------[78, 4]-----
+; --------BeginMethodCall--------[79, 4]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading matrixTrace into memory
+	STORE R2, 0(SP)
+	LOAD 4(GB), R2	; loading b into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 9(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[79, 4]-----
+	WSTR "La trace de la matrice est: "
+; --------BeginMethodCall--------[80, 44]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading matrixTrace into memory
+	STORE R2, 0(SP)
+	LOAD 4(GB), R2	; loading b into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 21(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[80, 44]-----
+	LOAD R2, R1
+	WFLOAT
+	WNL
+	WSTR ""
+	WNL
+; --------BeginAssignOp--------[82, 4]-----
+	LOAD #0x1.266666p1, R3	; loading 2.3 into memory
+; --------StartStoreTableElements--------[82, 4]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  b the value in R3
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD #1, R3	; loading 1 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 4(GB), R1	; [saving] loading b into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of b into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of b into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[82, 4]-----
+; --------EndAssignOp--------[82, 4]-----
+; --------BeginMethodCall--------[83, 4]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading matrixTrace into memory
+	STORE R2, 0(SP)
+	LOAD 4(GB), R2	; loading b into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 9(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[83, 4]-----
+	WSTR "La trace de la matrice est: "
+; --------BeginMethodCall--------[84, 44]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading matrixTrace into memory
+	STORE R2, 0(SP)
+	LOAD 4(GB), R2	; loading b into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 21(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[84, 44]-----
+	LOAD R2, R1
+	WFLOAT
+	WNL
+	WSTR ""
+	WNL
+; --------BeginAssignOp--------[86, 4]-----
+	LOAD #0x1.0cccccp2, R3	; loading 4.2 into memory
+; --------StartStoreTableElements--------[86, 4]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  b the value in R3
+	PUSH R2
+	LOAD #2, R2	; loading 2 into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD #2, R3	; loading 2 into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD 4(GB), R1	; [saving] loading b into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of b into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of b into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[86, 4]-----
+; --------EndAssignOp--------[86, 4]-----
+; --------BeginMethodCall--------[87, 4]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading matrixTrace into memory
+	STORE R2, 0(SP)
+	LOAD 4(GB), R2	; loading b into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 9(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[87, 4]-----
+	WSTR "La trace de la matrice est: "
+; --------BeginMethodCall--------[88, 44]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading matrixTrace into memory
+	STORE R2, 0(SP)
+	LOAD 4(GB), R2	; loading b into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 21(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[88, 44]-----
+	LOAD R2, R1
+	WFLOAT
+	WNL
+	WSTR ""
+	WNL
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : Math -------------------
+; ---------------------------------------------------
+; ------------Init method for class = Math--------
+init.Math:
+	RTS
+; ------------Code for method : setInt1DTable with label =  code.Math.setInt1DTable--------
+code.Math.setInt1DTable:
+	TSTO #4
+	BOV stack_overflow_error
+	ADDSP #1
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable tableIterator and loading it into memory
+while_begin1:
+; --------StartBinaryOp--------[8, 15]-----
+	LOAD 1(LB), R2	; loading tableIterator into memory
+; --------BeginSelection--------[8, 31]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[8, 31]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[8, 15]-----
+	CMP #1, R2
+	BNE while_end1
+; --------BeginAssignOp--------[9, 12]-----
+	LOAD -4(LB), R3	; loading value into memory
+; --------StartStoreTableElements--------[9, 12]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  table the value in R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading tableIterator into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; [saving] loading table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of table into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD R2, R0
+	POP R2
+	STORE R3, 1(R1, R0)
+; --------EndStoreTableElements--------[9, 12]-----
+; --------EndAssignOp--------[9, 12]-----
+; --------BeginAssignOp--------[10, 12]-----
+; --------StartBinaryOp--------[10, 28]-----
+	LOAD 1(LB), R3	; loading tableIterator into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[10, 28]-----
+	STORE R3, 1(LB)	;  Assiging a value to tableIterator
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorand storing it into R2
+; --------EndAssignOp--------[10, 12]-----
+	BRA while_begin1
+while_end1:
+fin.Math.setInt1DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : setInt2DTable with label =  code.Math.setInt2DTable--------
+code.Math.setInt2DTable:
+	TSTO #6
+	BOV stack_overflow_error
+	ADDSP #2
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable tableIteratorX and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 2(LB)	; Initializing the variable tableIteratorY and loading it into memory
+while_begin2:
+; --------StartBinaryOp--------[17, 15]-----
+	LOAD 2(LB), R2	; loading tableIteratorY into memory
+; --------BeginSelection--------[17, 32]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[17, 32]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[17, 15]-----
+	CMP #1, R2
+	BNE while_end2
+while_begin3:
+; --------StartBinaryOp--------[18, 19]-----
+	LOAD 1(LB), R2	; loading tableIteratorX into memory
+; --------BeginSelection--------[18, 36]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[18, 36]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[18, 19]-----
+	CMP #1, R2
+	BNE while_end3
+; --------BeginAssignOp--------[19, 16]-----
+	LOAD -4(LB), R3	; loading value into memory
+; --------StartStoreTableElements--------[19, 16]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  table the value in R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading tableIteratorX into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 2(LB), R3	; loading tableIteratorY into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; [saving] loading table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of table into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of table into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[19, 16]-----
+; --------EndAssignOp--------[19, 16]-----
+; --------BeginAssignOp--------[20, 16]-----
+; --------StartBinaryOp--------[20, 33]-----
+	LOAD 1(LB), R3	; loading tableIteratorX into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[20, 33]-----
+	STORE R3, 1(LB)	;  Assiging a value to tableIteratorX
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorXand storing it into R2
+; --------EndAssignOp--------[20, 16]-----
+	BRA while_begin3
+while_end3:
+; --------BeginAssignOp--------[22, 12]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 1(LB)	;  Assiging a value to tableIteratorX
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorXand storing it into R2
+; --------EndAssignOp--------[22, 12]-----
+; --------BeginAssignOp--------[23, 12]-----
+; --------StartBinaryOp--------[23, 29]-----
+	LOAD 2(LB), R3	; loading tableIteratorY into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[23, 29]-----
+	STORE R3, 2(LB)	;  Assiging a value to tableIteratorY
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorYand storing it into R2
+; --------EndAssignOp--------[23, 12]-----
+	BRA while_begin2
+while_end2:
+fin.Math.setInt2DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : setFloat1DTable with label =  code.Math.setFloat1DTable--------
+code.Math.setFloat1DTable:
+	TSTO #4
+	BOV stack_overflow_error
+	ADDSP #1
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable tableIterator and loading it into memory
+while_begin4:
+; --------StartBinaryOp--------[29, 15]-----
+	LOAD 1(LB), R2	; loading tableIterator into memory
+; --------BeginSelection--------[29, 31]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[29, 31]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[29, 15]-----
+	CMP #1, R2
+	BNE while_end4
+; --------BeginAssignOp--------[30, 12]-----
+	LOAD -4(LB), R3	; loading value into memory
+; --------StartStoreTableElements--------[30, 12]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  table the value in R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading tableIterator into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; [saving] loading table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of table into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD R2, R0
+	POP R2
+	STORE R3, 1(R1, R0)
+; --------EndStoreTableElements--------[30, 12]-----
+; --------EndAssignOp--------[30, 12]-----
+; --------BeginAssignOp--------[31, 12]-----
+; --------StartBinaryOp--------[31, 28]-----
+	LOAD 1(LB), R3	; loading tableIterator into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[31, 28]-----
+	STORE R3, 1(LB)	;  Assiging a value to tableIterator
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorand storing it into R2
+; --------EndAssignOp--------[31, 12]-----
+	BRA while_begin4
+while_end4:
+fin.Math.setFloat1DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : setFloat2DTable with label =  code.Math.setFloat2DTable--------
+code.Math.setFloat2DTable:
+	TSTO #6
+	BOV stack_overflow_error
+	ADDSP #2
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable tableIteratorX and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 2(LB)	; Initializing the variable tableIteratorY and loading it into memory
+while_begin5:
+; --------StartBinaryOp--------[38, 15]-----
+	LOAD 2(LB), R2	; loading tableIteratorY into memory
+; --------BeginSelection--------[38, 32]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[38, 32]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[38, 15]-----
+	CMP #1, R2
+	BNE while_end5
+while_begin6:
+; --------StartBinaryOp--------[39, 19]-----
+	LOAD 1(LB), R2	; loading tableIteratorX into memory
+; --------BeginSelection--------[39, 36]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[39, 36]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[39, 19]-----
+	CMP #1, R2
+	BNE while_end6
+; --------BeginAssignOp--------[40, 16]-----
+	LOAD -4(LB), R3	; loading value into memory
+; --------StartStoreTableElements--------[40, 16]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  table the value in R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading tableIteratorX into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 2(LB), R3	; loading tableIteratorY into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; [saving] loading table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of table into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of table into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[40, 16]-----
+; --------EndAssignOp--------[40, 16]-----
+; --------BeginAssignOp--------[41, 16]-----
+; --------StartBinaryOp--------[41, 33]-----
+	LOAD 1(LB), R3	; loading tableIteratorX into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[41, 33]-----
+	STORE R3, 1(LB)	;  Assiging a value to tableIteratorX
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorXand storing it into R2
+; --------EndAssignOp--------[41, 16]-----
+	BRA while_begin6
+while_end6:
+; --------BeginAssignOp--------[43, 12]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 1(LB)	;  Assiging a value to tableIteratorX
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorXand storing it into R2
+; --------EndAssignOp--------[43, 12]-----
+; --------BeginAssignOp--------[44, 12]-----
+; --------StartBinaryOp--------[44, 29]-----
+	LOAD 2(LB), R3	; loading tableIteratorY into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[44, 29]-----
+	STORE R3, 2(LB)	;  Assiging a value to tableIteratorY
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorYand storing it into R2
+; --------EndAssignOp--------[44, 12]-----
+	BRA while_begin5
+while_end5:
+fin.Math.setFloat2DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : printInt1DTable with label =  code.Math.printInt1DTable--------
+code.Math.printInt1DTable:
+	TSTO #4
+	BOV stack_overflow_error
+	ADDSP #1
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable tableIterator and loading it into memory
+	WSTR "--------------"
+	WNL
+	WSTR "Tableau1D = ["
+	WNL
+while_begin7:
+; --------StartBinaryOp--------[52, 15]-----
+	LOAD 1(LB), R2	; loading tableIterator into memory
+; --------BeginSelection--------[52, 31]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[52, 31]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[52, 15]-----
+	CMP #1, R2
+	BNE while_end7
+; --------StartGetTableElements--------[53, 18]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  table into memory at register R2
+	LOAD 1(LB), R3	; loading tableIterator into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; loading table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of table into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R3), R0
+	LOAD R0, R2
+; --------EndGetTableElements--------[53, 18]-----
+	LOAD R2, R1
+	WINT
+	WSTR " ,"
+; --------BeginAssignOp--------[54, 12]-----
+; --------StartBinaryOp--------[54, 28]-----
+	LOAD 1(LB), R3	; loading tableIterator into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[54, 28]-----
+	STORE R3, 1(LB)	;  Assiging a value to tableIterator
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorand storing it into R2
+; --------EndAssignOp--------[54, 12]-----
+	BRA while_begin7
+while_end7:
+	WSTR "]"
+	WSTR "--------------"
+	WNL
+fin.Math.printInt1DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : printInt2DTable with label =  code.Math.printInt2DTable--------
+code.Math.printInt2DTable:
+	TSTO #5
+	BOV stack_overflow_error
+	ADDSP #2
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable tableIteratorX and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 2(LB)	; Initializing the variable tableIteratorY and loading it into memory
+	WSTR "--------------"
+	WNL
+	WSTR "Tableau2D = ["
+	WNL
+while_begin8:
+; --------StartBinaryOp--------[65, 15]-----
+	LOAD 2(LB), R2	; loading tableIteratorY into memory
+; --------BeginSelection--------[65, 32]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[65, 32]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[65, 15]-----
+	CMP #1, R2
+	BNE while_end8
+while_begin9:
+; --------StartBinaryOp--------[66, 19]-----
+	LOAD 1(LB), R2	; loading tableIteratorX into memory
+; --------BeginSelection--------[66, 36]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[66, 36]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[66, 19]-----
+	CMP #1, R2
+	BNE while_end9
+; --------StartGetTableElements--------[67, 22]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  table into memory at register R2
+	LOAD 1(LB), R3	; loading tableIteratorX into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	PUSH R2
+	LOAD 2(LB), R2	; loading tableIteratorY into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; loading table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of table into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of table into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R3
+	ADD R2, R3
+	LOAD 2(R1, R3), R0
+	POP R2
+	LOAD R0, R2
+; --------EndGetTableElements--------[67, 22]-----
+	LOAD R2, R1
+	WINT
+	WSTR " ,"
+; --------BeginAssignOp--------[68, 16]-----
+; --------StartBinaryOp--------[68, 33]-----
+	LOAD 1(LB), R3	; loading tableIteratorX into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[68, 33]-----
+	STORE R3, 1(LB)	;  Assiging a value to tableIteratorX
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorXand storing it into R2
+; --------EndAssignOp--------[68, 16]-----
+	BRA while_begin9
+while_end9:
+	WSTR ""
+	WNL
+; --------BeginAssignOp--------[71, 12]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 1(LB)	;  Assiging a value to tableIteratorX
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorXand storing it into R2
+; --------EndAssignOp--------[71, 12]-----
+; --------BeginAssignOp--------[72, 12]-----
+; --------StartBinaryOp--------[72, 29]-----
+	LOAD 2(LB), R3	; loading tableIteratorY into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[72, 29]-----
+	STORE R3, 2(LB)	;  Assiging a value to tableIteratorY
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorYand storing it into R2
+; --------EndAssignOp--------[72, 12]-----
+	BRA while_begin8
+while_end8:
+	WSTR "]"
+	WSTR "--------------"
+	WNL
+fin.Math.printInt2DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : printFloat1DTable with label =  code.Math.printFloat1DTable--------
+code.Math.printFloat1DTable:
+	TSTO #4
+	BOV stack_overflow_error
+	ADDSP #1
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable tableIterator and loading it into memory
+	WSTR "--------------"
+	WNL
+	WSTR "Tableau1D = ["
+	WNL
+while_begin10:
+; --------StartBinaryOp--------[82, 15]-----
+	LOAD 1(LB), R2	; loading tableIterator into memory
+; --------BeginSelection--------[82, 31]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[82, 31]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[82, 15]-----
+	CMP #1, R2
+	BNE while_end10
+; --------StartGetTableElements--------[83, 18]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  table into memory at register R2
+	LOAD 1(LB), R3	; loading tableIterator into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; loading table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of table into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R3), R0
+	LOAD R0, R2
+; --------EndGetTableElements--------[83, 18]-----
+	LOAD R2, R1
+	WFLOAT
+	WSTR " ,"
+; --------BeginAssignOp--------[84, 12]-----
+; --------StartBinaryOp--------[84, 28]-----
+	LOAD 1(LB), R3	; loading tableIterator into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[84, 28]-----
+	STORE R3, 1(LB)	;  Assiging a value to tableIterator
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorand storing it into R2
+; --------EndAssignOp--------[84, 12]-----
+	BRA while_begin10
+while_end10:
+	WSTR "]"
+	WSTR "--------------"
+	WNL
+fin.Math.printFloat1DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : printFloat2DTable with label =  code.Math.printFloat2DTable--------
+code.Math.printFloat2DTable:
+	TSTO #5
+	BOV stack_overflow_error
+	ADDSP #2
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable tableIteratorX and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 2(LB)	; Initializing the variable tableIteratorY and loading it into memory
+	WSTR "--------------"
+	WNL
+	WSTR "Tableau2D = ["
+	WNL
+while_begin11:
+; --------StartBinaryOp--------[95, 15]-----
+	LOAD 2(LB), R2	; loading tableIteratorY into memory
+; --------BeginSelection--------[95, 32]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[95, 32]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[95, 15]-----
+	CMP #1, R2
+	BNE while_end11
+while_begin12:
+; --------StartBinaryOp--------[96, 19]-----
+	LOAD 1(LB), R2	; loading tableIteratorX into memory
+; --------BeginSelection--------[96, 36]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[96, 36]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[96, 19]-----
+	CMP #1, R2
+	BNE while_end12
+; --------StartGetTableElements--------[97, 22]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  table into memory at register R2
+	LOAD 1(LB), R3	; loading tableIteratorX into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	PUSH R2
+	LOAD 2(LB), R2	; loading tableIteratorY into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; loading table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of table into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of table into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R3
+	ADD R2, R3
+	LOAD 2(R1, R3), R0
+	POP R2
+	LOAD R0, R2
+; --------EndGetTableElements--------[97, 22]-----
+	LOAD R2, R1
+	WFLOAT
+	WSTR " ,"
+; --------BeginAssignOp--------[98, 16]-----
+; --------StartBinaryOp--------[98, 33]-----
+	LOAD 1(LB), R3	; loading tableIteratorX into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[98, 33]-----
+	STORE R3, 1(LB)	;  Assiging a value to tableIteratorX
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorXand storing it into R2
+; --------EndAssignOp--------[98, 16]-----
+	BRA while_begin12
+while_end12:
+	WSTR ""
+	WNL
+; --------BeginAssignOp--------[101, 12]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 1(LB)	;  Assiging a value to tableIteratorX
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorXand storing it into R2
+; --------EndAssignOp--------[101, 12]-----
+; --------BeginAssignOp--------[102, 12]-----
+; --------StartBinaryOp--------[102, 29]-----
+	LOAD 2(LB), R3	; loading tableIteratorY into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[102, 29]-----
+	STORE R3, 2(LB)	;  Assiging a value to tableIteratorY
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorYand storing it into R2
+; --------EndAssignOp--------[102, 12]-----
+	BRA while_begin11
+while_end11:
+	WSTR "]"
+	WSTR "--------------"
+	WNL
+fin.Math.printFloat2DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : copyIntInt1DTable with label =  code.Math.copyIntInt1DTable--------
+code.Math.copyIntInt1DTable:
+	TSTO #4
+	BOV stack_overflow_error
+	ADDSP #1
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable i and loading it into memory
+; --------StartBinaryOp--------[110, 11]-----
+; --------BeginSelection--------[110, 11]-----
+	LOAD -4(LB), R2	; loading src into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R2), R2	; Loading the field size1D into a register 
+; --------BeginSelection--------[110, 11]-----
+; --------BeginSelection--------[110, 24]-----
+	LOAD -3(LB), R3	; loading dest into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[110, 24]-----
+	CMP R3, R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+; --------EndBinaryOp--------[110, 11]-----
+; ---------Startif-----------[110, 8]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else1
+	WSTR "La taille du tableau copie doit être supérieure ou égale à la taille du tableau d'origine"
+	WNL
+; --------BeginMethodCall--------[112, 12]-----
+	ADDSP #1
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 18(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[112, 12]-----
+	BRA end_ifthenelse_1
+else1:
+end_ifthenelse_1:
+; ---------Endif-----------
+while_begin13:
+; --------StartBinaryOp--------[114, 14]-----
+	LOAD 1(LB), R2	; loading i into memory
+; --------BeginSelection--------[114, 18]-----
+	LOAD -4(LB), R3	; loading src into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[114, 18]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[114, 14]-----
+	CMP #1, R2
+	BNE while_end13
+; --------BeginAssignOp--------[115, 12]-----
+; --------StartGetTableElements--------[115, 22]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  src into memory at register R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading i into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD -4(LB), R1	; loading src into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of src into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R2), R0
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[115, 22]-----
+; --------StartStoreTableElements--------[115, 12]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  dest the value in R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading i into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; [saving] loading dest into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of dest into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD R2, R0
+	POP R2
+	STORE R3, 1(R1, R0)
+; --------EndStoreTableElements--------[115, 12]-----
+; --------EndAssignOp--------[115, 12]-----
+; --------BeginAssignOp--------[116, 12]-----
+; --------StartBinaryOp--------[116, 16]-----
+	LOAD 1(LB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[116, 16]-----
+	STORE R3, 1(LB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[116, 12]-----
+	BRA while_begin13
+while_end13:
+fin.Math.copyIntInt1DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : copyIntInt2DTable with label =  code.Math.copyIntInt2DTable--------
+code.Math.copyIntInt2DTable:
+	TSTO #6
+	BOV stack_overflow_error
+	ADDSP #2
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable i and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 2(LB)	; Initializing the variable j and loading it into memory
+; --------StartOr--------[123, 11]-----
+; --------StartBinaryOp--------[123, 11]-----
+; --------BeginSelection--------[123, 11]-----
+	LOAD -4(LB), R2	; loading src into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R2), R2	; Loading the field size1D into a register 
+; --------BeginSelection--------[123, 11]-----
+; --------BeginSelection--------[123, 24]-----
+	LOAD -3(LB), R3	; loading dest into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[123, 24]-----
+	CMP R3, R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+; --------EndBinaryOp--------[123, 11]-----
+	CMP #1, R2	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_1	; [Or] checking if the first element is false
+; --------StartBinaryOp--------[123, 39]-----
+; --------BeginSelection--------[123, 39]-----
+	LOAD -4(LB), R3	; loading src into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[123, 39]-----
+; --------BeginSelection--------[123, 52]-----
+	PUSH R2
+	LOAD -3(LB), R2	; loading dest into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R2), R2	; Loading the field size2D into a register 
+; --------BeginSelection--------[123, 52]-----
+	CMP R2, R3	; Comparing registers for Greater operation 
+	SGT R3	; Placing Greater result into the register  
+	POP R2
+; --------EndBinaryOp--------[123, 39]-----
+	CMP #0, R3	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_1	; [OR] checking if the second element is true 
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
+End_Or_Id_1:
+; --------EndOr--------[123, 11]-----
+; ---------Startif-----------[123, 8]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else2
+	WSTR "La taille du tableau copie doit être supérieure ou égale à la taille du tableau d'origine"
+	WNL
+; --------BeginMethodCall--------[125, 12]-----
+	ADDSP #1
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 18(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[125, 12]-----
+	BRA end_ifthenelse_2
+else2:
+end_ifthenelse_2:
+; ---------Endif-----------
+while_begin14:
+; --------StartBinaryOp--------[127, 15]-----
+	LOAD 2(LB), R2	; loading j into memory
+; --------BeginSelection--------[127, 19]-----
+	LOAD -4(LB), R3	; loading src into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[127, 19]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[127, 15]-----
+	CMP #1, R2
+	BNE while_end14
+while_begin15:
+; --------StartBinaryOp--------[128, 19]-----
+	LOAD 1(LB), R2	; loading i into memory
+; --------BeginSelection--------[128, 23]-----
+	LOAD -4(LB), R3	; loading src into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[128, 23]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[128, 19]-----
+	CMP #1, R2
+	BNE while_end15
+; --------BeginAssignOp--------[129, 16]-----
+; --------StartGetTableElements--------[129, 29]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  src into memory at register R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading i into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 2(LB), R3	; loading j into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD -4(LB), R1	; loading src into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of src into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of src into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD 2(R1, R2), R0
+	POP R3
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[129, 29]-----
+; --------StartStoreTableElements--------[129, 16]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  dest the value in R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading i into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 2(LB), R3	; loading j into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; [saving] loading dest into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of dest into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of dest into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[129, 16]-----
+; --------EndAssignOp--------[129, 16]-----
+; --------BeginAssignOp--------[130, 16]-----
+; --------StartBinaryOp--------[130, 20]-----
+	LOAD 1(LB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[130, 20]-----
+	STORE R3, 1(LB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[130, 16]-----
+	BRA while_begin15
+while_end15:
+; --------BeginAssignOp--------[132, 12]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 1(LB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[132, 12]-----
+; --------BeginAssignOp--------[133, 12]-----
+; --------StartBinaryOp--------[133, 16]-----
+	LOAD 2(LB), R3	; loading j into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[133, 16]-----
+	STORE R3, 2(LB)	;  Assiging a value to j
+	LOAD R3, R2	;  Return value of the assignement of =jand storing it into R2
+; --------EndAssignOp--------[133, 12]-----
+	BRA while_begin14
+while_end14:
+fin.Math.copyIntInt2DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : copyFloatFloat1DTable with label =  code.Math.copyFloatFloat1DTable--------
+code.Math.copyFloatFloat1DTable:
+	TSTO #4
+	BOV stack_overflow_error
+	ADDSP #1
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable i and loading it into memory
+; --------StartBinaryOp--------[139, 11]-----
+; --------BeginSelection--------[139, 11]-----
+	LOAD -4(LB), R2	; loading src into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R2), R2	; Loading the field size1D into a register 
+; --------BeginSelection--------[139, 11]-----
+; --------BeginSelection--------[139, 24]-----
+	LOAD -3(LB), R3	; loading dest into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[139, 24]-----
+	CMP R3, R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+; --------EndBinaryOp--------[139, 11]-----
+; ---------Startif-----------[139, 8]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else3
+	WSTR "La taille du tableau copie doit être supérieure ou égale à la taille du tableau d'origine"
+	WNL
+; --------BeginMethodCall--------[141, 12]-----
+	ADDSP #1
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 18(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[141, 12]-----
+	BRA end_ifthenelse_3
+else3:
+end_ifthenelse_3:
+; ---------Endif-----------
+while_begin16:
+; --------StartBinaryOp--------[143, 14]-----
+	LOAD 1(LB), R2	; loading i into memory
+; --------BeginSelection--------[143, 18]-----
+	LOAD -4(LB), R3	; loading src into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[143, 18]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[143, 14]-----
+	CMP #1, R2
+	BNE while_end16
+; --------BeginAssignOp--------[144, 12]-----
+; --------StartGetTableElements--------[144, 22]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  src into memory at register R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading i into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD -4(LB), R1	; loading src into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of src into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R2), R0
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[144, 22]-----
+; --------StartStoreTableElements--------[144, 12]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  dest the value in R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading i into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; [saving] loading dest into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of dest into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD R2, R0
+	POP R2
+	STORE R3, 1(R1, R0)
+; --------EndStoreTableElements--------[144, 12]-----
+; --------EndAssignOp--------[144, 12]-----
+; --------BeginAssignOp--------[145, 12]-----
+; --------StartBinaryOp--------[145, 16]-----
+	LOAD 1(LB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[145, 16]-----
+	STORE R3, 1(LB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[145, 12]-----
+	BRA while_begin16
+while_end16:
+fin.Math.copyFloatFloat1DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : copyFloatFloat2DTable with label =  code.Math.copyFloatFloat2DTable--------
+code.Math.copyFloatFloat2DTable:
+	TSTO #6
+	BOV stack_overflow_error
+	ADDSP #2
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable i and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 2(LB)	; Initializing the variable j and loading it into memory
+; --------StartOr--------[152, 11]-----
+; --------StartBinaryOp--------[152, 11]-----
+; --------BeginSelection--------[152, 11]-----
+	LOAD -4(LB), R2	; loading src into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R2), R2	; Loading the field size1D into a register 
+; --------BeginSelection--------[152, 11]-----
+; --------BeginSelection--------[152, 24]-----
+	LOAD -3(LB), R3	; loading dest into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[152, 24]-----
+	CMP R3, R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+; --------EndBinaryOp--------[152, 11]-----
+	CMP #1, R2	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_2	; [Or] checking if the first element is false
+; --------StartBinaryOp--------[152, 39]-----
+; --------BeginSelection--------[152, 39]-----
+	LOAD -4(LB), R3	; loading src into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[152, 39]-----
+; --------BeginSelection--------[152, 52]-----
+	PUSH R2
+	LOAD -3(LB), R2	; loading dest into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R2), R2	; Loading the field size2D into a register 
+; --------BeginSelection--------[152, 52]-----
+	CMP R2, R3	; Comparing registers for Greater operation 
+	SGT R3	; Placing Greater result into the register  
+	POP R2
+; --------EndBinaryOp--------[152, 39]-----
+	CMP #0, R3	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_2	; [OR] checking if the second element is true 
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
+End_Or_Id_2:
+; --------EndOr--------[152, 11]-----
+; ---------Startif-----------[152, 8]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else4
+	WSTR "La taille du tableau copie doit être supérieure ou égale à la taille du tableau d'origine"
+	WNL
+; --------BeginMethodCall--------[154, 12]-----
+	ADDSP #1
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 18(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[154, 12]-----
+	BRA end_ifthenelse_4
+else4:
+end_ifthenelse_4:
+; ---------Endif-----------
+while_begin17:
+; --------StartBinaryOp--------[156, 15]-----
+	LOAD 2(LB), R2	; loading j into memory
+; --------BeginSelection--------[156, 19]-----
+	LOAD -4(LB), R3	; loading src into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[156, 19]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[156, 15]-----
+	CMP #1, R2
+	BNE while_end17
+while_begin18:
+; --------StartBinaryOp--------[157, 19]-----
+	LOAD 1(LB), R2	; loading i into memory
+; --------BeginSelection--------[157, 23]-----
+	LOAD -4(LB), R3	; loading src into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[157, 23]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[157, 19]-----
+	CMP #1, R2
+	BNE while_end18
+; --------BeginAssignOp--------[158, 16]-----
+; --------StartGetTableElements--------[158, 29]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  src into memory at register R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading i into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 2(LB), R3	; loading j into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD -4(LB), R1	; loading src into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of src into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of src into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD 2(R1, R2), R0
+	POP R3
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[158, 29]-----
+; --------StartStoreTableElements--------[158, 16]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  dest the value in R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading i into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 2(LB), R3	; loading j into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; [saving] loading dest into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of dest into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of dest into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[158, 16]-----
+; --------EndAssignOp--------[158, 16]-----
+; --------BeginAssignOp--------[159, 16]-----
+; --------StartBinaryOp--------[159, 20]-----
+	LOAD 1(LB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[159, 20]-----
+	STORE R3, 1(LB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[159, 16]-----
+	BRA while_begin18
+while_end18:
+; --------BeginAssignOp--------[161, 12]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 1(LB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[161, 12]-----
+; --------BeginAssignOp--------[162, 12]-----
+; --------StartBinaryOp--------[162, 16]-----
+	LOAD 2(LB), R3	; loading j into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[162, 16]-----
+	STORE R3, 2(LB)	;  Assiging a value to j
+	LOAD R3, R2	;  Return value of the assignement of =jand storing it into R2
+; --------EndAssignOp--------[162, 12]-----
+	BRA while_begin17
+while_end17:
+fin.Math.copyFloatFloat2DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : copyFloatInt1DTable with label =  code.Math.copyFloatInt1DTable--------
+code.Math.copyFloatInt1DTable:
+	TSTO #4
+	BOV stack_overflow_error
+	ADDSP #1
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable i and loading it into memory
+; --------StartBinaryOp--------[168, 11]-----
+; --------BeginSelection--------[168, 11]-----
+	LOAD -4(LB), R2	; loading src into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R2), R2	; Loading the field size1D into a register 
+; --------BeginSelection--------[168, 11]-----
+; --------BeginSelection--------[168, 24]-----
+	LOAD -3(LB), R3	; loading dest into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[168, 24]-----
+	CMP R3, R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+; --------EndBinaryOp--------[168, 11]-----
+; ---------Startif-----------[168, 8]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else5
+	WSTR "La taille du tableau copie doit être supérieure ou égale à la taille du tableau d'origine"
+	WNL
+; --------BeginMethodCall--------[170, 12]-----
+	ADDSP #1
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 18(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[170, 12]-----
+	BRA end_ifthenelse_5
+else5:
+end_ifthenelse_5:
+; ---------Endif-----------
+while_begin19:
+; --------StartBinaryOp--------[172, 14]-----
+	LOAD 1(LB), R2	; loading i into memory
+; --------BeginSelection--------[172, 18]-----
+	LOAD -4(LB), R3	; loading src into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[172, 18]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[172, 14]-----
+	CMP #1, R2
+	BNE while_end19
+; --------BeginAssignOp--------[173, 12]-----
+; --------StartGetTableElements--------[173, 30]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  src into memory at register R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading i into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD -4(LB), R1	; loading src into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of src into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R2), R0
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[173, 30]-----
+	FLOAT R3, R3
+; --------StartStoreTableElements--------[173, 12]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  dest the value in R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading i into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; [saving] loading dest into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of dest into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD R2, R0
+	POP R2
+	STORE R3, 1(R1, R0)
+; --------EndStoreTableElements--------[173, 12]-----
+; --------EndAssignOp--------[173, 12]-----
+; --------BeginAssignOp--------[174, 12]-----
+; --------StartBinaryOp--------[174, 16]-----
+	LOAD 1(LB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[174, 16]-----
+	STORE R3, 1(LB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[174, 12]-----
+	BRA while_begin19
+while_end19:
+fin.Math.copyFloatInt1DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : copyFloatInt2DTable with label =  code.Math.copyFloatInt2DTable--------
+code.Math.copyFloatInt2DTable:
+	TSTO #6
+	BOV stack_overflow_error
+	ADDSP #2
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable i and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 2(LB)	; Initializing the variable j and loading it into memory
+; --------StartOr--------[181, 11]-----
+; --------StartBinaryOp--------[181, 11]-----
+; --------BeginSelection--------[181, 11]-----
+	LOAD -4(LB), R2	; loading src into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R2), R2	; Loading the field size1D into a register 
+; --------BeginSelection--------[181, 11]-----
+; --------BeginSelection--------[181, 24]-----
+	LOAD -3(LB), R3	; loading dest into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[181, 24]-----
+	CMP R3, R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+; --------EndBinaryOp--------[181, 11]-----
+	CMP #1, R2	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_3	; [Or] checking if the first element is false
+; --------StartBinaryOp--------[181, 39]-----
+; --------BeginSelection--------[181, 39]-----
+	LOAD -4(LB), R3	; loading src into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[181, 39]-----
+; --------BeginSelection--------[181, 52]-----
+	PUSH R2
+	LOAD -3(LB), R2	; loading dest into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R2), R2	; Loading the field size2D into a register 
+; --------BeginSelection--------[181, 52]-----
+	CMP R2, R3	; Comparing registers for Greater operation 
+	SGT R3	; Placing Greater result into the register  
+	POP R2
+; --------EndBinaryOp--------[181, 39]-----
+	CMP #0, R3	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_3	; [OR] checking if the second element is true 
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
+End_Or_Id_3:
+; --------EndOr--------[181, 11]-----
+; ---------Startif-----------[181, 8]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else6
+	WSTR "La taille du tableau copie doit être supérieure ou égale à la taille du tableau d'origine"
+	WNL
+; --------BeginMethodCall--------[183, 12]-----
+	ADDSP #1
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 18(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[183, 12]-----
+	BRA end_ifthenelse_6
+else6:
+end_ifthenelse_6:
+; ---------Endif-----------
+while_begin20:
+; --------StartBinaryOp--------[185, 15]-----
+	LOAD 2(LB), R2	; loading j into memory
+; --------BeginSelection--------[185, 19]-----
+	LOAD -4(LB), R3	; loading src into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[185, 19]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[185, 15]-----
+	CMP #1, R2
+	BNE while_end20
+while_begin21:
+; --------StartBinaryOp--------[186, 19]-----
+	LOAD 1(LB), R2	; loading i into memory
+; --------BeginSelection--------[186, 23]-----
+	LOAD -4(LB), R3	; loading src into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[186, 23]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[186, 19]-----
+	CMP #1, R2
+	BNE while_end21
+; --------BeginAssignOp--------[187, 16]-----
+; --------StartGetTableElements--------[187, 37]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  src into memory at register R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading i into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 2(LB), R3	; loading j into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD -4(LB), R1	; loading src into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of src into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of src into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD 2(R1, R2), R0
+	POP R3
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[187, 37]-----
+	FLOAT R3, R3
+; --------StartStoreTableElements--------[187, 16]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  dest the value in R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading i into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 2(LB), R3	; loading j into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; [saving] loading dest into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of dest into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of dest into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[187, 16]-----
+; --------EndAssignOp--------[187, 16]-----
+; --------BeginAssignOp--------[188, 16]-----
+; --------StartBinaryOp--------[188, 20]-----
+	LOAD 1(LB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[188, 20]-----
+	STORE R3, 1(LB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[188, 16]-----
+	BRA while_begin21
+while_end21:
+; --------BeginAssignOp--------[190, 12]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 1(LB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[190, 12]-----
+; --------BeginAssignOp--------[191, 12]-----
+; --------StartBinaryOp--------[191, 16]-----
+	LOAD 2(LB), R3	; loading j into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[191, 16]-----
+	STORE R3, 2(LB)	;  Assiging a value to j
+	LOAD R3, R2	;  Return value of the assignement of =jand storing it into R2
+; --------EndAssignOp--------[191, 12]-----
+	BRA while_begin20
+while_end20:
+fin.Math.copyFloatInt2DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : copyIntFloat1DTable with label =  code.Math.copyIntFloat1DTable--------
+code.Math.copyIntFloat1DTable:
+	TSTO #4
+	BOV stack_overflow_error
+	ADDSP #1
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable i and loading it into memory
+; --------StartBinaryOp--------[197, 11]-----
+; --------BeginSelection--------[197, 11]-----
+	LOAD -4(LB), R2	; loading src into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R2), R2	; Loading the field size1D into a register 
+; --------BeginSelection--------[197, 11]-----
+; --------BeginSelection--------[197, 24]-----
+	LOAD -3(LB), R3	; loading dest into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[197, 24]-----
+	CMP R3, R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+; --------EndBinaryOp--------[197, 11]-----
+; ---------Startif-----------[197, 8]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else7
+	WSTR "La taille du tableau copie doit être supérieure ou égale à la taille du tableau d'origine"
+	WNL
+; --------BeginMethodCall--------[199, 12]-----
+	ADDSP #1
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 18(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[199, 12]-----
+	BRA end_ifthenelse_7
+else7:
+end_ifthenelse_7:
+; ---------Endif-----------
+while_begin22:
+; --------StartBinaryOp--------[201, 14]-----
+	LOAD 1(LB), R2	; loading i into memory
+; --------BeginSelection--------[201, 18]-----
+	LOAD -4(LB), R3	; loading src into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[201, 18]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[201, 14]-----
+	CMP #1, R2
+	BNE while_end22
+; --------BeginAssignOp--------[202, 12]-----
+; --------StartGetTableElements--------[202, 28]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  src into memory at register R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading i into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD -4(LB), R1	; loading src into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of src into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1, R2), R0
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[202, 28]-----
+; --------StartStoreTableElements--------[202, 12]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  dest the value in R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading i into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; [saving] loading dest into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of dest into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD R2, R0
+	POP R2
+	STORE R3, 1(R1, R0)
+; --------EndStoreTableElements--------[202, 12]-----
+; --------EndAssignOp--------[202, 12]-----
+; --------BeginAssignOp--------[203, 12]-----
+; --------StartBinaryOp--------[203, 16]-----
+	LOAD 1(LB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[203, 16]-----
+	STORE R3, 1(LB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[203, 12]-----
+	BRA while_begin22
+while_end22:
+fin.Math.copyIntFloat1DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : copyIntFloat2DTable with label =  code.Math.copyIntFloat2DTable--------
+code.Math.copyIntFloat2DTable:
+	TSTO #6
+	BOV stack_overflow_error
+	ADDSP #2
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable i and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 2(LB)	; Initializing the variable j and loading it into memory
+; --------StartOr--------[210, 11]-----
+; --------StartBinaryOp--------[210, 11]-----
+; --------BeginSelection--------[210, 11]-----
+	LOAD -4(LB), R2	; loading src into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R2), R2	; Loading the field size1D into a register 
+; --------BeginSelection--------[210, 11]-----
+; --------BeginSelection--------[210, 24]-----
+	LOAD -3(LB), R3	; loading dest into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[210, 24]-----
+	CMP R3, R2	; Comparing registers for Greater operation 
+	SGT R2	; Placing Greater result into the register  
+; --------EndBinaryOp--------[210, 11]-----
+	CMP #1, R2	; [Or]Comparing in the left branch 
+	BEQ End_Or_Id_4	; [Or] checking if the first element is false
+; --------StartBinaryOp--------[210, 39]-----
+; --------BeginSelection--------[210, 39]-----
+	LOAD -4(LB), R3	; loading src into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[210, 39]-----
+; --------BeginSelection--------[210, 52]-----
+	PUSH R2
+	LOAD -3(LB), R2	; loading dest into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R2), R2	; Loading the field size2D into a register 
+; --------BeginSelection--------[210, 52]-----
+	CMP R2, R3	; Comparing registers for Greater operation 
+	SGT R3	; Placing Greater result into the register  
+	POP R2
+; --------EndBinaryOp--------[210, 39]-----
+	CMP #0, R3	; [Or]Comparing in the right branch 
+	BEQ End_Or_Id_4	; [OR] checking if the second element is true 
+	LOAD #1, R2	; Or is true , We place the value 1 in the return Register
+End_Or_Id_4:
+; --------EndOr--------[210, 11]-----
+; ---------Startif-----------[210, 8]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else8
+	WSTR "La taille du tableau copie doit être supérieure ou égale à la taille du tableau d'origine"
+	WNL
+; --------BeginMethodCall--------[212, 12]-----
+	ADDSP #1
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 18(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[212, 12]-----
+	BRA end_ifthenelse_8
+else8:
+end_ifthenelse_8:
+; ---------Endif-----------
+while_begin23:
+; --------StartBinaryOp--------[214, 15]-----
+	LOAD 2(LB), R2	; loading j into memory
+; --------BeginSelection--------[214, 19]-----
+	LOAD -4(LB), R3	; loading src into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[214, 19]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[214, 15]-----
+	CMP #1, R2
+	BNE while_end23
+while_begin24:
+; --------StartBinaryOp--------[215, 19]-----
+	LOAD 1(LB), R2	; loading i into memory
+; --------BeginSelection--------[215, 23]-----
+	LOAD -4(LB), R3	; loading src into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[215, 23]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[215, 19]-----
+	CMP #1, R2
+	BNE while_end24
+; --------BeginAssignOp--------[216, 16]-----
+; --------StartGetTableElements--------[216, 35]-----
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  src into memory at register R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading i into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 2(LB), R3	; loading j into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD -4(LB), R1	; loading src into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of src into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of src into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD 2(R1, R2), R0
+	POP R3
+	POP R2
+	LOAD R0, R3
+; --------EndGetTableElements--------[216, 35]-----
+	INT R3, R3
+	FLOAT R3, R3	; Doing an unary minus
+; --------StartStoreTableElements--------[216, 16]-----
+; [TableGetElement][loadItemintoRegister] storing into TableGetElement  =  dest the value in R3
+	PUSH R2
+	LOAD 1(LB), R2	; loading i into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	PUSH R3
+	LOAD 2(LB), R3	; loading j into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; [saving] loading dest into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of dest into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of dest into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R2
+	ADD R3, R2
+	LOAD R2, R0
+	POP R3
+	POP R2
+	STORE R3, 2(R1, R0)	; Selecting the elemnt stored in 2(R1, R0)
+; --------EndStoreTableElements--------[216, 16]-----
+; --------EndAssignOp--------[216, 16]-----
+; --------BeginAssignOp--------[217, 16]-----
+; --------StartBinaryOp--------[217, 20]-----
+	LOAD 1(LB), R3	; loading i into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[217, 20]-----
+	STORE R3, 1(LB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[217, 16]-----
+	BRA while_begin24
+while_end24:
+; --------BeginAssignOp--------[219, 12]-----
+	LOAD #0, R3	; loading 0 into memory
+	STORE R3, 1(LB)	;  Assiging a value to i
+	LOAD R3, R2	;  Return value of the assignement of =iand storing it into R2
+; --------EndAssignOp--------[219, 12]-----
+; --------BeginAssignOp--------[220, 12]-----
+; --------StartBinaryOp--------[220, 16]-----
+	LOAD 2(LB), R3	; loading j into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[220, 16]-----
+	STORE R3, 2(LB)	;  Assiging a value to j
+	LOAD R3, R2	;  Return value of the assignement of =jand storing it into R2
+; --------EndAssignOp--------[220, 12]-----
+	BRA while_begin23
+while_end23:
+fin.Math.copyIntFloat2DTable:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : dimensionIncompatible with label =  code.Math.dimensionIncompatible--------
+code.Math.dimensionIncompatible:
+	TSTO #2
+	BOV stack_overflow_error
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	WSTR "Erreur de dimension"
+	WNL
+; --------BeginMethodCall--------[226, 8]-----
+	ADDSP #1
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 19(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[226, 8]-----
+fin.Math.dimensionIncompatible:
+	POP R2	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : throwError with label =  code.Math.throwError--------
+code.Math.throwError:
+;  ---------ClassBodyAsmCodeGeneration------
+ERROR 
+fin.Math.throwError:
+	RTS
+; ---------------------------------------------------
+; ----------------- class : Trace -------------------
+; ---------------------------------------------------
+; ------------Init method for class = Trace--------
+init.Trace:
+	TSTO #3
+	BOV stack_overflow_error
+	LOAD -2(LB), R0	; Placing the current class = Trace adresse in the the stack before calling parent 
+	PUSH R0	; Placing this = Trace into the stack
+	BSR init.Math	; Calling the initialisation method of parent classMath
+	SUBSP #1
+	RTS
+; ------------Code for method : getTraceInt with label =  code.Trace.getTraceInt--------
+code.Trace.getTraceInt:
+	TSTO #7
+	BOV stack_overflow_error
+	ADDSP #2
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 1(LB)	; Initializing the variable trace and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 2(LB)	; Initializing the variable tableIterator and loading it into memory
+; --------StartBinaryOp--------[7, 11]-----
+; --------BeginSelection--------[7, 11]-----
+	LOAD -3(LB), R2	; loading table into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R2), R2	; Loading the field size1D into a register 
+; --------BeginSelection--------[7, 11]-----
+; --------BeginSelection--------[7, 27]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[7, 27]-----
+	CMP R3, R2	; Comparing registers for NotEquals operation 
+	SNE R2	; Placing NotEquals result into the register  
+; --------EndBinaryOp--------[7, 11]-----
+; ---------Startif-----------[7, 8]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else9
+	WSTR "Impossible de calculer la trace d'une matrice non carrée"
+	WNL
+; --------BeginMethodCall--------[9, 12]-----
+	ADDSP #1
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 18(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[9, 12]-----
+	BRA end_ifthenelse_9
+else9:
+end_ifthenelse_9:
+; ---------Endif-----------
+while_begin25:
+; --------StartBinaryOp--------[12, 15]-----
+	LOAD 2(LB), R2	; loading tableIterator into memory
+; --------BeginSelection--------[12, 31]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[12, 31]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[12, 15]-----
+	CMP #1, R2
+	BNE while_end25
+; --------BeginAssignOp--------[13, 12]-----
+; --------StartBinaryOp--------[13, 20]-----
+	LOAD 1(LB), R3	; loading trace into memory
+; --------StartGetTableElements--------[13, 28]-----
+	PUSH R2
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  table into memory at register R2
+	PUSH R3
+	LOAD 2(LB), R3	; loading tableIterator into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	PUSH R2
+	LOAD 2(LB), R2	; loading tableIterator into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; loading table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of table into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of table into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R3
+	ADD R2, R3
+	LOAD 2(R1, R3), R0
+	POP R2
+	POP R3
+	LOAD R0, R2
+; --------EndGetTableElements--------[13, 28]-----
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[13, 20]-----
+	STORE R3, 1(LB)	;  Assiging a value to trace
+	LOAD R3, R2	;  Return value of the assignement of =traceand storing it into R2
+; --------EndAssignOp--------[13, 12]-----
+; --------BeginAssignOp--------[14, 12]-----
+; --------StartBinaryOp--------[14, 28]-----
+	LOAD 2(LB), R3	; loading tableIterator into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[14, 28]-----
+	STORE R3, 2(LB)	;  Assiging a value to tableIterator
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorand storing it into R2
+; --------EndAssignOp--------[14, 12]-----
+	BRA while_begin25
+while_end25:
+	LOAD 1(LB), R2	; loading trace into memory
+	LOAD R2, R0
+	BRA fin.Trace.getTraceInt
+	WSTR "Error: La méthode code.Trace.getTraceInt doit retourner un element"
+	WNL
+	ERROR
+fin.Trace.getTraceInt:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : getTraceFloat with label =  code.Trace.getTraceFloat--------
+code.Trace.getTraceFloat:
+	TSTO #7
+	BOV stack_overflow_error
+	ADDSP #2
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+	LOAD #0, R2	; loading 0 into memory
+	FLOAT R2, R2	; Doing an unary minus
+	STORE R2, 1(LB)	; Initializing the variable trace and loading it into memory
+	LOAD #0, R2	; loading 0 into memory
+	STORE R2, 2(LB)	; Initializing the variable tableIterator and loading it into memory
+; --------StartBinaryOp--------[22, 11]-----
+; --------BeginSelection--------[22, 11]-----
+	LOAD -3(LB), R2	; loading table into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R2), R2	; Loading the field size1D into a register 
+; --------BeginSelection--------[22, 11]-----
+; --------BeginSelection--------[22, 27]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field size2D into a register 
+; --------BeginSelection--------[22, 27]-----
+	CMP R3, R2	; Comparing registers for NotEquals operation 
+	SNE R2	; Placing NotEquals result into the register  
+; --------EndBinaryOp--------[22, 11]-----
+; ---------Startif-----------[22, 8]
+	CMP #1, R2	; Comparing expr output in the ifthenelse
+	BNE else10
+	WSTR "Impossible de calculer la trace d'une matrice non carrée"
+	WNL
+; --------BeginMethodCall--------[24, 12]-----
+	ADDSP #1
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 18(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[24, 12]-----
+	BRA end_ifthenelse_10
+else10:
+end_ifthenelse_10:
+; ---------Endif-----------
+while_begin26:
+; --------StartBinaryOp--------[26, 15]-----
+	LOAD 2(LB), R2	; loading tableIterator into memory
+; --------BeginSelection--------[26, 31]-----
+	LOAD -3(LB), R3	; loading table into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R3), R3	; Loading the field size1D into a register 
+; --------BeginSelection--------[26, 31]-----
+	CMP R3, R2	; Comparing registers for Lower operation 
+	SLT R2	; Placing Lower result into the register  
+; --------EndBinaryOp--------[26, 15]-----
+	CMP #1, R2
+	BNE while_end26
+; --------BeginAssignOp--------[27, 12]-----
+; --------StartBinaryOp--------[27, 20]-----
+	LOAD 1(LB), R3	; loading trace into memory
+; --------StartGetTableElements--------[27, 28]-----
+	PUSH R2
+; [TableGetElement][loadItemintoRegister] loading TableGetElement  =  table into memory at register R2
+	PUSH R3
+	LOAD 2(LB), R3	; loading tableIterator into memory
+	CMP #0, R3
+	BLT int_selection_table_must_be_positive
+	PUSH R2
+	LOAD 2(LB), R2	; loading tableIterator into memory
+	CMP #0, R2
+	BLT int_selection_table_must_be_positive
+	LOAD -3(LB), R1	; loading table into memory
+	CMP #null, R1
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 0(R1), R0	; loading size 1d of table into memory
+	CMP R3, R0
+	BLE table_dimension_are_not_respected
+	LOAD 1(R1), R0	; loading size 2d of table into memory
+	CMP R2, R0
+	BLE table_dimension_are_not_respected
+	MUL R0, R3
+	ADD R2, R3
+	LOAD 2(R1, R3), R0
+	POP R2
+	POP R3
+	LOAD R0, R2
+; --------EndGetTableElements--------[27, 28]-----
+	ADD R2, R3
+	BOV overflow_error	; Checking for overflow since the operation is between two floats 
+	POP R2
+; --------EndBinaryOp--------[27, 20]-----
+	STORE R3, 1(LB)	;  Assiging a value to trace
+	LOAD R3, R2	;  Return value of the assignement of =traceand storing it into R2
+; --------EndAssignOp--------[27, 12]-----
+; --------BeginAssignOp--------[28, 12]-----
+; --------StartBinaryOp--------[28, 28]-----
+	LOAD 2(LB), R3	; loading tableIterator into memory
+	PUSH R2
+	LOAD #1, R2	; loading 1 into memory
+	ADD R2, R3
+	POP R2
+; --------EndBinaryOp--------[28, 28]-----
+	STORE R3, 2(LB)	;  Assiging a value to tableIterator
+	LOAD R3, R2	;  Return value of the assignement of =tableIteratorand storing it into R2
+; --------EndAssignOp--------[28, 12]-----
+	BRA while_begin26
+while_end26:
+	LOAD 1(LB), R2	; loading trace into memory
+	LOAD R2, R0
+	BRA fin.Trace.getTraceFloat
+	WSTR "Error: La méthode code.Trace.getTraceFloat doit retourner un element"
+	WNL
+	ERROR
+fin.Trace.getTraceFloat:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+table_dimension_are_not_respected:
+	WSTR "Error: table_dimension_are_not_respected"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error: overflow_error"
+	WNL
+	ERROR
+int_selection_table_must_be_positive:
+	WSTR "Error: int_selection_table_must_be_positive"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+int_allocation_table_must_be_strictly_positive:
+	WSTR "Error: int_allocation_table_must_be_strictly_positive"
+	WNL
+	ERROR
+; end main program

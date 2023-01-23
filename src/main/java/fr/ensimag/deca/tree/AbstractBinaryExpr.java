@@ -82,6 +82,7 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         checkIfWeWorkWithFloatAndIfConvIsNeeded(compiler);
         getLeftOperand().codeGenInst(compiler);
         LOG.debug(" [AbstractBinaryExpr][codeGenInst] Left register " + getLeftOperand().getRegisterDeRetour());
+        
         //S'il s'agit d'un identificateur dans l'operand droit, on fait un traitement spécial 
         //qui exploite l'adresse de l'indentificateur
         if (rightOperandIdentifier(compiler, rightOperand) != null){
@@ -112,6 +113,11 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         compiler.addComment("--------EndBinaryOp--------"+getLocation()+"-----");
     }
 
+    /**
+     * Cette methode vérifie si on travail avec des floats, elle sera utilisée dans 
+     * la division et les operation artithmetiques
+     * @param compiler
+     */
     public void checkIfWeWorkWithFloatAndIfConvIsNeeded(DecacCompiler compiler){
         LOG.debug("[AbstractBinaryExpr][checkIfWeWorkWithFloatAndIfConvIsNeeded] Checking if i am working with floats");
         if (getLeftOperand().getType() == compiler.environmentType.FLOAT 

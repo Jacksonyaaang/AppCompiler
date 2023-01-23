@@ -1,0 +1,29 @@
+// Description:
+//    somme entre deux tableaux avec des different taille
+//
+// Resultats:
+// erreur
+// Historique:
+//    cree le 21/01/2023
+
+#include "Sum.decah"
+
+{
+    Sum matrixsum = new Sum();
+    int[] x = new int[7];
+    float[] y = new float[7];
+    int[][] a = new int[3][5];
+    int[][] d = new int[3][3];
+    float[][] b = new float[3][3];
+    float[][] c = new float[3][3];
+
+
+    println("Test somme tableau 2D");
+    println("Somme entre un tableau de int rempli de 5 et un tableau de float rempli de 6.0");
+    matrixsum.setInt2DTable(a,5);
+    matrixsum.setFloat2DTable(b,6.0);
+    matrixsum.sommeIntFloat2D(a,b);
+    println("Le résultat de la somme est: ");
+    matrixsum.printInt2DTable(a);
+    println("");
+}

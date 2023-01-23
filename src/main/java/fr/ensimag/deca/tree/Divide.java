@@ -35,6 +35,7 @@ public class Divide extends AbstractOpArith {
         LOG.debug("[Division][executeBinaryOperation] Running Division operation " );
         if (!getWorkWithFloats()){
             assert(val instanceof GPRegister);
+            // On vérifie si on divise par 0
             DVal literal0 = new ImmediateInteger(0);
             compiler.addInstruction(new CMP(literal0, (GPRegister)(val) ));                                            
             compiler.addInstruction(new BEQ(new Label("div0_error")), "Checking for division by 0"

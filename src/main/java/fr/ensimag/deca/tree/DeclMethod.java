@@ -257,6 +257,9 @@ public class DeclMethod extends AbstractDeclMethod {
         int sizeStackMax = compiler.getStackManagement().measureStacksizeNeededMethod(compiler);
         LOG.debug("[DeclClass][codeGenMethodInitialisation] sizeStackMax = " + sizeStackMax);
         if  (sizeStackMax !=0){
+            /**
+             * On ajoute la vérification d'espace dans le stack
+             */
             compiler.getErrorManagementUnit().activeError("stack_overflow_error");
             if (compiler.getStackManagement().getLbCounter() !=0){
                 compiler.getProgram().addFirst(new ADDSP(new ImmediateInteger(compiler.getStackManagement().getLbCounter())));
