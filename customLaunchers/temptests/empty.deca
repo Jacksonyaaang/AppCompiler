@@ -1,0 +1,32 @@
+class A{
+        void printInt2DTable(int[][] table){
+        int tableIteratorX = 0;
+        int tableIteratorY = 0;
+        println("--------------");
+        print("Tableau2D = [");
+        while (tableIteratorX < table.size1D ){
+            while (tableIteratorY < table.size2D ){
+                print(table[tableIteratorX][tableIteratorY]," ,");
+                tableIteratorY = tableIteratorY + 1;
+            }
+            println("");
+            tableIteratorY = 0;
+            tableIteratorX = tableIteratorX + 1;
+        }
+        print("]");
+        println("--------------");
+    }
+}
+{
+    int x = 0;
+    int y = 0;
+    A a = new A();
+	int[][]  table= new int[3][2];
+    table[0][0] = 1;
+    table[0][1] = 2;
+    table[1][0] = 3;
+    table[1][1] = 4;
+    table[2][0] = 5;
+    table[2][1] = 6;
+    a.printInt2DTable(table);
+}
