@@ -39,15 +39,9 @@ public class EnvironmentType {
         FLOAT = new FloatType(floatSymb);
         envTypes.put(floatSymb, new TypeDefinition(FLOAT, Location.BUILTIN));
 
-<<<<<<< HEAD
         Symbol floatTableSymb1D = compiler.createSymbol("float[]");
         TABLEFLOAT1D = new TableType(floatTableSymb1D, FLOAT, 1);
         envTypes.put(floatTableSymb1D, new TableDefinition(TABLEFLOAT1D, Location.BUILTIN));
-=======
-        Symbol flaotTableSymb1D = compiler.createSymbol("float[]");
-        TABLEFLAOT1D = new TableType(flaotTableSymb1D, FLOAT, 1);
-        envTypes.put(flaotTableSymb1D, new TableDefinition(TABLEFLAOT1D, Location.BUILTIN));
->>>>>>> origin/extention_operations_Stev
 
         Symbol floatTableSymb2D = compiler.createSymbol("float[][]");
         TABLEFLOAT2D = new TableType(floatTableSymb2D, FLOAT, 2);

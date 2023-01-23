@@ -122,9 +122,4 @@ public class Cast extends AbstractExpr{
         typeCast.iter(f) ;
         expr.iter(f);
     }
-<<<<<<< HEAD
 }
-=======
-
-}
->>>>>>> origin/extention_operations_Stev

@@ -13,5 +13,6 @@ class C{
 
 
 {
-    int[] x;
+    B b=new B();
+    b = null;
 }
