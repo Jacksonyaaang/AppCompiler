@@ -8,5 +8,5 @@
 
 
 {
-    int[][] tableauInt = new float[][];
+    int[][] tableauInt = new float[5][6];
 }

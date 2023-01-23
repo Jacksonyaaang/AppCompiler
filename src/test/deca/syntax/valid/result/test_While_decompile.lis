@@ -1,0 +1,26 @@
+{
+	int i = 0;
+	int valide = 0;
+	boolean b1 = true;
+	boolean b2 = false;
+	int x = 2;
+	int y = x;
+	int z = 3;
+	while ((i < 4)) {
+		(i = (i + 1));
+	}
+	if ((i == 4)){
+		(valide = (valide + 1));
+	}
+	else {
+	}
+	while ((((x < (y + z)) && (b1 || b2)) || b2)) {
+		(x = (x + 1));
+	}
+	if ((x == 5)){
+		(valide = (valide + 10));
+	}
+	else {
+	}
+	println("while[ ", valide, "/11 ]");
+}

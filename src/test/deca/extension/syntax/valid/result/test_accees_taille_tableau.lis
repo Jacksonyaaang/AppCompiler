@@ -1,0 +1,37 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 2 elements]
+      |  []> [11, 10] DeclVar
+      |  ||  +> [11, 4] Identifier (int[])
+      |  ||  +> [11, 10] Identifier (tableauInt)
+      |  ||  `> [11, 23] Initialization
+      |  ||     `> [11, 23] NewTable
+      |  ||        +> [11, 23] Identifier (int[])
+      |  ||        +> ListExpr [List with 1 elements]
+      |  ||        |  []> [11, 31] Int (5)
+      |  []> [12, 12] DeclVar
+      |      +> [12, 4] Identifier (float[])
+      |      +> [12, 12] Identifier (tableauFloat)
+      |      `> [12, 27] Initialization
+      |         `> [12, 27] NewTable
+      |            +> [12, 27] Identifier (int[][])
+      |            +> ListExpr [List with 2 elements]
+      |            |  []> [12, 35] Int (5)
+      |            |  []> [12, 38] Int (5)
+      `> ListInst [List with 3 elements]
+         []> [13, 10] Print
+         ||  `> ListExpr [List with 1 elements]
+         ||     []> [13, 10] Selection
+         ||         +> [13, 10] Identifier (tableauInt)
+         ||         `> [13, 21] Identifier (size1D)
+         []> [14, 10] Print
+         ||  `> ListExpr [List with 1 elements]
+         ||     []> [14, 10] Selection
+         ||         +> [14, 10] Identifier (tableauFloat)
+         ||         `> [14, 23] Identifier (size1D)
+         []> [15, 10] Print
+             `> ListExpr [List with 1 elements]
+                []> [15, 10] Selection
+                    +> [15, 10] Identifier (tableauFloat)
+                    `> [15, 23] Identifier (size2D)

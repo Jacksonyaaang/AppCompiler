@@ -1,0 +1,51 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 2 elements]
+      |  []> [11, 8] DeclVar
+      |  ||  +> [11, 4] Identifier (int)
+      |  ||  +> [11, 8] Identifier (u)
+      |  ||  `> [11, 12] Initialization
+      |  ||     `> [11, 12] Int (42)
+      |  []> [11, 16] DeclVar
+      |      +> [11, 4] Identifier (int)
+      |      +> [11, 16] Identifier (v)
+      |      `> [11, 18] Initialization
+      |         `> [11, 18] Int (0)
+      `> ListInst [List with 2 elements]
+         []> [13, 11] While
+         ||  +> [13, 12] Not
+         ||  |  `> [13, 13] Equals
+         ||  |     +> [13, 13] Identifier (u)
+         ||  |     `> [13, 16] Int (1)
+         ||  `> ListInst [List with 2 elements]
+         ||     []> [14, 1] IfThenElse
+         ||     ||  +> [14, 5] Equals
+         ||     ||  |  +> [14, 5] Modulo
+         ||     ||  |  |  +> [14, 5] Identifier (u)
+         ||     ||  |  |  `> [14, 7] Int (2)
+         ||     ||  |  `> [14, 12] Int (0)
+         ||     ||  +> ListInst [List with 1 elements]
+         ||     ||  |  []> [15, 5] Assign
+         ||     ||  |      +> [15, 5] Identifier (u)
+         ||     ||  |      `> [15, 9] Divide
+         ||     ||  |         +> [15, 9] Identifier (u)
+         ||     ||  |         `> [15, 11] Int (2)
+         ||     ||  `> ListInst [List with 1 elements]
+         ||     ||     []> [17, 5] Assign
+         ||     ||         +> [17, 5] Identifier (u)
+         ||     ||         `> [17, 9] Plus
+         ||     ||            +> [17, 9] Plus
+         ||     ||            |  +> [17, 9] Multiply
+         ||     ||            |  |  +> [17, 9] Int (2)
+         ||     ||            |  |  `> [17, 11] Identifier (u)
+         ||     ||            |  `> [17, 14] Identifier (u)
+         ||     ||            `> [17, 18] Int (1)
+         ||     []> [19, 1] Assign
+         ||         +> [19, 1] Identifier (v)
+         ||         `> [19, 5] Plus
+         ||            +> [19, 5] Identifier (v)
+         ||            `> [19, 9] Int (1)
+         []> [22, 12] Println
+             `> ListExpr [List with 1 elements]
+                []> [22, 12] Identifier (v)

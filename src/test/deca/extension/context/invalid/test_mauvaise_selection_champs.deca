@@ -9,6 +9,6 @@
 
 
 {
-    float[][] tableauFloat = new float[][];
+    float[][] tableauFloat = new float[5][6];
     print(tableauFloat.randomName);
 }

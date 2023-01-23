@@ -1,0 +1,154 @@
+{
+	boolean b1 = true;
+	boolean b2 = false;
+	int i = 0;
+	int x = 2;
+	int y = 1;
+	int z = 3;
+	float f1 = 0x1.4p2;
+	float f2 = 0x1.2p2;
+	if (true){
+		println("true is true ");
+	}
+	else {
+		println("true is false ");
+	}
+	if (b1){
+		println("b1=true is true");
+	}
+	else {
+	}
+	if ((b1 && b1)){
+		(i = (i + 1000));
+	}
+	else {
+	}
+	if (!(b1 && b2)){
+		(i = (i + 100));
+	}
+	else {
+	}
+	if (!(b2 && b1)){
+		(i = (i + 10));
+	}
+	else {
+	}
+	if (!(b2 && b2)){
+		(i = (i + 1));
+	}
+	else {
+	}
+	println("b1&&b2[ ", i, "/1111 ]");
+	(i = 0);
+	if ((b1 || b1)){
+		(i = (i + 1000));
+	}
+	else {
+	}
+	if ((b1 || b2)){
+		(i = (i + 100));
+	}
+	else {
+	}
+	if ((b2 || b1)){
+		(i = (i + 10));
+	}
+	else {
+	}
+	if (!(b2 || b2)){
+		(i = (i + 1));
+	}
+	else {
+	}
+	println("b1||b2[ ", i, "/1111 ]");
+	(i = 0);
+	if ((x > y)){
+		(i = (i + 100000));
+	}
+	else {
+	}
+	if (!(x < y)){
+		(b1 = true);
+		(i = (i + 10000));
+	}
+	else {
+	}
+	(y = 0);
+	(x = 1);
+	if ((x >= y)){
+		(i = (i + 1000));
+	}
+	else {
+	}
+	if (!(x <= y)){
+		(i = (i + 100));
+	}
+	else {
+	}
+	(y = 1);
+	if ((x <= y)){
+		(i = (i + 10));
+	}
+	else {
+	}
+	if ((x >= y)){
+		(i = (i + 1));
+	}
+	else {
+	}
+	println("x(float:greater/lower)f2[ ", i, "/111111 ]");
+	(i = 0);
+	if ((f1 > f2)){
+		(i = (i + 100000));
+	}
+	else {
+	}
+	if (!(f1 < f2)){
+		(b1 = true);
+		(i = (i + 10000));
+	}
+	else {
+	}
+	(f2 = 0);
+	(f1 = 1);
+	if ((f1 >= f2)){
+		(i = (i + 1000));
+	}
+	else {
+	}
+	if (!(f1 <= f2)){
+		(i = (i + 100));
+	}
+	else {
+	}
+	(f2 = 1);
+	if ((f1 <= f2)){
+		(i = (i + 10));
+	}
+	else {
+	}
+	if ((f1 >= f2)){
+		(i = (i + 1));
+	}
+	else {
+	}
+	println("f1(float:greater/lower)f2[ ", i, "/111111 ]");
+	(i = 0);
+	if ((((x < (y + z)) && (b1 || b2)) || b2)){
+		(i = (i + 100));
+	}
+	else {
+	}
+	if (!!!!!!!!!!(x < z)){
+		(i = (i + 10));
+	}
+	else {
+	}
+	if (!!!!!!!!!!!(x < z)){
+	}
+	else {
+		(i = (i + 1));
+	}
+	println("comparaison plus complexes[ ", i, "/111 ]");
+	(i = 0);
+}
