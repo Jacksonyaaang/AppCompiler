@@ -28,8 +28,8 @@ test_codegen_invalid (){
 }
 
 redirect_result(){
-    ima "$1" > src/test/deca/librairy/invalid/result/$(basename "${1%.ass}")_output.res 
-    compare_output src/test/deca/librairy/invalid/result/$(basename "${1%.ass}")_output.res
+    ima "$1" > src/test/deca/library/invalid/result/$(basename "${1%.ass}")_output.res 
+    compare_output src/test/deca/library/invalid/result/$(basename "${1%.ass}")_output.res
 }
 
 compare_output(){
@@ -63,8 +63,8 @@ test_codegen_invalid_no_check (){
 }
 
 redirect_result_no_check (){
-    ima "$1" > src/test/deca/librairy/invalid/result/$(basename "${1%.ass}")_output_no_check.res 
-    compare_output_no_check src/test/deca/librairy/invalid/result/$(basename "${1%.ass}")_output_no_check.res
+    ima "$1" > src/test/deca/library/invalid/result/$(basename "${1%.ass}")_output_no_check.res 
+    compare_output_no_check src/test/deca/library/invalid/result/$(basename "${1%.ass}")_output_no_check.res
 }
 
 compare_output_no_check(){
@@ -87,28 +87,28 @@ compare_output_no_check(){
 }
 
 
-for i in src/test/deca/librairy/invalid/*.deca
+for i in src/test/deca/library/invalid/*.deca
 do
     # echo "$i"
     test_codegen_invalid "$i" "16"
 done
 
 
-for i in src/test/deca/librairy/invalid/*.ass
+for i in src/test/deca/library/invalid/*.ass
 do
     # echo "$i"
     redirect_result "$i"
 done
 
 echo -----------Nocheck------------ 
-for i in src/test/deca/librairy/invalid/*.deca
+for i in src/test/deca/library/invalid/*.deca
 do
     # echo "$i"
     test_codegen_invalid_no_check "$i" "16"
 done
 
 
-for i in src/test/deca/librairy/invalid/*.ass
+for i in src/test/deca/library/invalid/*.ass
 do
     # echo "$i"
     redirect_result_no_check "$i"

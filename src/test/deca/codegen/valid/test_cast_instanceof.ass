@@ -1,0 +1,494 @@
+	TSTO #25
+	BOV stack_overflow_error
+	ADDSP #22
+; start main program
+; -------------------------------------
+;        Method Table
+; -------------------------------------
+	LOAD #null, R0
+	STORE R0, 7(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 8(GB)
+	LEA 7(GB), R0
+	STORE R0, 9(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 10(GB)
+	LOAD code.A.getX, R0
+	STORE R0, 11(GB)
+	LOAD code.A.setX, R0
+	STORE R0, 12(GB)
+	LOAD code.A.setgetX, R0
+	STORE R0, 13(GB)
+	LOAD code.A.QuiSuisJe, R0
+	STORE R0, 14(GB)
+	LEA 9(GB), R0
+	STORE R0, 15(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 16(GB)
+	LOAD code.A.getX, R0
+	STORE R0, 17(GB)
+	LOAD code.A.setX, R0
+	STORE R0, 18(GB)
+	LOAD code.A.setgetX, R0
+	STORE R0, 19(GB)
+	LOAD code.B.QuiSuisJe, R0
+	STORE R0, 20(GB)
+	LOAD code.B.getZ, R0
+	STORE R0, 21(GB)
+	LOAD code.B.setZ, R0
+	STORE R0, 22(GB)
+; -------------------------------------
+;        Main program
+; -------------------------------------
+; Beginning of main instructions:
+; --------StartNew--------[58, 8]-----
+; [New][loadItemintoRegister] loading new of calss =  A into memory at register R2
+	NEW #2, R2
+	BOV heap_overflow_error
+	LEA 9(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+; --------EndNew--------[58, 8]-----
+	STORE R2, 1(GB)	; Initializing the variable a and loading it into memory
+; --------StartNew--------[60, 9]-----
+; [New][loadItemintoRegister] loading new of calss =  B into memory at register R2
+	NEW #4, R2
+	BOV heap_overflow_error
+	LEA 15(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.B
+	POP R2
+; --------EndNew--------[60, 9]-----
+	STORE R2, 3(GB)	; Initializing the variable b and loading it into memory
+; --------StartNew--------[62, 9]-----
+; [New][loadItemintoRegister] loading new of calss =  B into memory at register R2
+	NEW #4, R2
+	BOV heap_overflow_error
+	LEA 15(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.B
+	POP R2
+; --------EndNew--------[62, 9]-----
+	STORE R2, 5(GB)	; Initializing the variable b2 and loading it into memory
+; --------StartNew--------[63, 9]-----
+; [New][loadItemintoRegister] loading new of calss =  B into memory at register R2
+	NEW #4, R2
+	BOV heap_overflow_error
+	LEA 15(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.B
+	POP R2
+; --------EndNew--------[63, 9]-----
+	STORE R2, 6(GB)	; Initializing the variable b3 and loading it into memory
+; --------BeginAssignOp--------[64, 4]-----
+	LOAD #9, R3	; loading 9 into memory
+	PUSH R2
+	LOAD 6(GB), R2	; loading b3 into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	STORE R3, 1(R2)	; Saving field  x into memory
+	POP R2
+	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
+; --------EndAssignOp--------[64, 4]-----
+; --------BeginAssignOp--------[65, 4]-----
+	LOAD #0x1.3cccccp3, R3	; loading 9.9 into memory
+	PUSH R2
+	LOAD 6(GB), R2	; loading b3 into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	STORE R3, 2(R2)	; Saving field  z into memory
+	POP R2
+	LOAD R3, R2	;  Return value of the assignement of =zand storing it into R2
+; --------EndAssignOp--------[65, 4]-----
+; --------BeginAssignOp--------[66, 4]-----
+	LOAD #5, R3	; loading 5 into memory
+	PUSH R2
+	LOAD 5(GB), R2	; loading b2 into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	STORE R3, 1(R2)	; Saving field  x into memory
+	POP R2
+	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
+; --------EndAssignOp--------[66, 4]-----
+; --------BeginAssignOp--------[67, 4]-----
+	LOAD #0x1.6p2, R3	; loading 5.5 into memory
+	PUSH R2
+	LOAD 5(GB), R2	; loading b2 into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	STORE R3, 2(R2)	; Saving field  z into memory
+	POP R2
+	LOAD R3, R2	;  Return value of the assignement of =zand storing it into R2
+; --------EndAssignOp--------[67, 4]-----
+; --------BeginAssignOp--------[68, 4]-----
+	LOAD #4, R3	; loading 4 into memory
+	PUSH R2
+	LOAD 1(GB), R2	; loading a into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	STORE R3, 1(R2)	; Saving field  x into memory
+	POP R2
+	LOAD R3, R2	;  Return value of the assignement of =xand storing it into R2
+; --------EndAssignOp--------[68, 4]-----
+; --------BeginAssignOp--------[69, 4]-----
+; --------BeginMethodCall--------[69, 6]-----
+	ADDSP #1
+	LOAD 1(GB), R3	; loading a into memory
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	LOAD R0, R3
+	SUBSP #1
+; --------EndMethodCall--------[69, 6]-----
+	STORE R3, 4(GB)	;  Assiging a value to y
+	LOAD R3, R2	;  Return value of the assignement of =yand storing it into R2
+; --------EndAssignOp--------[69, 4]-----
+; --------BeginMethodCall--------[70, 12]-----
+	ADDSP #1
+	LOAD 1(GB), R2	; loading a into memory
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[70, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+	LOAD 4(GB), R2	; loading y into memory
+	LOAD R2, R1
+	WINT
+	WNL
+; --------BeginMethodCall--------[72, 4]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading a into memory
+	STORE R2, 0(SP)
+	LOAD #2, R2	; loading 2 into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[72, 4]-----
+; --------BeginMethodCall--------[73, 12]-----
+	ADDSP #1
+	LOAD 1(GB), R2	; loading a into memory
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[73, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+	LOAD 4(GB), R2	; loading y into memory
+	LOAD R2, R1
+	WINT
+	WNL
+; --------BeginMethodCall--------[75, 12]-----
+	ADDSP #2
+	LOAD 1(GB), R2	; loading a into memory
+	STORE R2, 0(SP)
+	LOAD #18, R2	; loading 18 into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 4(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[75, 12]-----
+	LOAD R2, R1
+	WINT
+	WNL
+; --------BeginMethodCall--------[76, 4]-----
+	ADDSP #1
+	LOAD 1(GB), R2	; loading a into memory
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 5(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[76, 4]-----
+; --------BeginMethodCall--------[77, 4]-----
+	ADDSP #1
+	LOAD 3(GB), R2	; loading b into memory
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 5(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[77, 4]-----
+; --------BeginAssignOp--------[78, 4]-----
+	LOAD #null, R3	; loading 0 into the register for null expr
+	PUSH R2
+	LOAD 5(GB), R2	; loading b2 into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	STORE R3, 3(R2)	; Saving field  successeur into memory
+	POP R2
+	LOAD R3, R2	;  Return value of the assignement of =successeurand storing it into R2
+; --------EndAssignOp--------[78, 4]-----
+; --------BeginAssignOp--------[80, 4]-----
+	LOAD 5(GB), R3	; loading b2 into memory
+	PUSH R2
+	LOAD 3(GB), R2	; loading b into memory
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	STORE R3, 3(R2)	; Saving field  successeur into memory
+	POP R2
+	LOAD R3, R2	;  Return value of the assignement of =successeurand storing it into R2
+; --------EndAssignOp--------[80, 4]-----
+; --------BeginAssignOp--------[81, 4]-----
+; --------BeginSelection--------[81, 7]-----
+; --------BeginSelection--------[81, 7]-----
+	LOAD 3(GB), R3	; loading b into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 3(R3), R3	; Loading the field successeur into a register 
+; --------BeginSelection--------[81, 7]-----
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 2(R3), R3	; Loading the field z into a register 
+; --------BeginSelection--------[81, 7]-----
+	STORE R3, 2(GB)	;  Assiging a value to z1
+	LOAD R3, R2	;  Return value of the assignement of =z1and storing it into R2
+; --------EndAssignOp--------[81, 4]-----
+	LOAD 2(GB), R2	; loading z1 into memory
+	LOAD R2, R1
+	WFLOAT
+	WNL
+; --------BeginAssignOp--------[86, 4]-----
+	LOAD 5(GB), R3	; loading b2 into memory
+	STORE R3, 3(GB)	;  Assiging a value to b
+	LOAD R3, R2	;  Return value of the assignement of =band storing it into R2
+; --------EndAssignOp--------[86, 4]-----
+; --------BeginAssignOp--------[87, 4]-----
+; --------BeginSelection--------[87, 6]-----
+	LOAD 3(GB), R3	; loading b into memory
+	CMP #null, R3
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R3), R3	; Loading the field x into a register 
+; --------BeginSelection--------[87, 6]-----
+	STORE R3, 4(GB)	;  Assiging a value to y
+	LOAD R3, R2	;  Return value of the assignement of =yand storing it into R2
+; --------EndAssignOp--------[87, 4]-----
+	LOAD 4(GB), R2	; loading y into memory
+	LOAD R2, R1
+	WINT
+	WNL
+	HALT
+; -------------------------------------
+;        Classes
+; -------------------------------------
+; ---------------------------------------------------
+; ----------------- class : A -------------------
+; ---------------------------------------------------
+; ------------Init method for class = A--------
+init.A:
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field x
+	STORE R0, 1(R1)	; Saving field  x into memory
+	RTS
+; ------------Code for method : getX with label =  code.A.getX--------
+code.A.getX:
+	TSTO #1
+	BOV stack_overflow_error
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------BeginSelection--------[27, 15]-----
+	LOAD -2(LB), R2
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 1(R2), R2	; Loading the field x into a register 
+; --------BeginSelection--------[27, 15]-----
+	LOAD R2, R0
+	BRA fin.A.getX
+	WSTR "Error: La méthode code.A.getX doit retourner un element"
+	WNL
+	ERROR
+fin.A.getX:
+	POP R2	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : setX with label =  code.A.setX--------
+code.A.setX:
+	TSTO #2
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------BeginAssignOp--------[30, 8]-----
+	LOAD -3(LB), R3	; loading i into memory
+	LOAD -2(LB), R2	; loading parent class =  A into memory when working with field x
+	STORE R3, 1(R2)	; Saving field  x into memory
+	LOAD R3, R2	;  Return value of the assignement of this . = x and storing it into R2
+; --------EndAssignOp--------[30, 8]-----
+fin.A.setX:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : setgetX with label =  code.A.setgetX--------
+code.A.setgetX:
+	TSTO #3
+	BOV stack_overflow_error
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------BeginMethodCall--------[33, 8]-----
+	ADDSP #2
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD -3(LB), R2	; loading i into memory
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	LOAD R0, R2
+	SUBSP #2
+; --------EndMethodCall--------[33, 8]-----
+; --------BeginMethodCall--------[34, 15]-----
+	ADDSP #1
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2	; checking that class adresse is not null
+	BEQ deref_null_error
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	LOAD R0, R2
+	SUBSP #1
+; --------EndMethodCall--------[34, 15]-----
+	LOAD R2, R0
+	BRA fin.A.setgetX
+	WSTR "Error: La méthode code.A.setgetX doit retourner un element"
+	WNL
+	ERROR
+fin.A.setgetX:
+	POP R2	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : QuiSuisJe with label =  code.A.QuiSuisJe--------
+code.A.QuiSuisJe:
+;  ---------ClassBodyCodeGeneration------
+	WSTR "Je suis une instance de la classe A"
+	WNL
+fin.A.QuiSuisJe:
+	RTS
+; ---------------------------------------------------
+; ----------------- class : B -------------------
+; ---------------------------------------------------
+; ------------Init method for class = B--------
+init.B:
+	TSTO #3
+	BOV stack_overflow_error
+	LOAD -2(LB), R0	; Placing the current class = B adresse in the the stack before calling parent 
+	PUSH R0	; Placing this = B into the stack
+	BSR init.A	; Calling the initialisation method of parent classA
+	SUBSP #1
+	LOAD #0x0.0p0, R0	; loading 0.0  into memory to initialize field with type float to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field z
+	STORE R0, 2(R1)	; Saving field  z into memory
+	LOAD #0, R0	; loading 0  into memory to initialize field to 0
+	LOAD -2(LB), R1	; loading class (this) into memory when working with field successeur
+	STORE R0, 3(R1)	; Saving field  successeur into memory
+	RTS
+; ------------Code for method : QuiSuisJe with label =  code.B.QuiSuisJe--------
+code.B.QuiSuisJe:
+;  ---------ClassBodyCodeGeneration------
+	WSTR "Je suis une instance de la classe B"
+	WNL
+fin.B.QuiSuisJe:
+	RTS
+; ------------Code for method : getZ with label =  code.B.getZ--------
+code.B.getZ:
+	TSTO #2
+	BOV stack_overflow_error
+	ADDSP #1
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------BeginSelection--------[47, 18]-----
+	LOAD -2(LB), R2
+	CMP #null, R2
+	BEQ deref_null_error	; Checking if the class identifier is null
+	LOAD 2(R2), R2	; Loading the field z into a register 
+; --------BeginSelection--------[47, 18]-----
+	STORE R2, 1(LB)	; Initializing the variable h and loading it into memory
+	LOAD 1(LB), R2	; loading h into memory
+	LOAD R2, R0
+	BRA fin.B.getZ
+	WSTR "Error: La méthode code.B.getZ doit retourner un element"
+	WNL
+	ERROR
+fin.B.getZ:
+	POP R2	; Pushing and poping registers used in the method
+	RTS
+; ------------Code for method : setZ with label =  code.B.setZ--------
+code.B.setZ:
+	TSTO #2
+	BOV stack_overflow_error
+	PUSH R3	; Pushing and poping registers used in the method
+	PUSH R2	; Pushing and poping registers used in the method
+;  ---------ClassBodyCodeGeneration------
+; --------BeginAssignOp--------[52, 8]-----
+	LOAD -3(LB), R3	; loading z into memory
+	LOAD -2(LB), R2	; loading parent class =  A into memory when working with field x
+	STORE R3, 1(R2)	; Saving field  x into memory
+	LOAD R3, R2	;  Return value of the assignement of this . = x and storing it into R2
+; --------EndAssignOp--------[52, 8]-----
+fin.B.setZ:
+	POP R2	; Pushing and poping registers used in the method
+	POP R3	; Pushing and poping registers used in the method
+	RTS
+; -------------------------------------
+;        Method equal
+; -------------------------------------
+; ------------------Start generateCodeForObjectEquals location:
+code.Object.equals:
+	LOAD -2(LB), R0
+	CMP -3(LB), R0
+	SEQ R0	; Comparaison this et paramètre d'equals
+fin.Object.equals:
+	RTS
+init.Object:
+	RTS
+; -------------------------------------
+;        Liste Erreur
+; -------------------------------------
+deref_null_error:
+	WSTR "Error: deref_null_error"
+	WNL
+	ERROR
+heap_overflow_error:
+	WSTR "Error: heap_overflow_error"
+	WNL
+	ERROR
+stack_overflow_error:
+	WSTR "Error: stack_overflow_error"
+	WNL
+	ERROR
+; end main program

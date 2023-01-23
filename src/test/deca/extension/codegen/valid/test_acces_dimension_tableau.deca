@@ -8,9 +8,10 @@
 
 {
     int[] x = new int[5]; 
+    int[] h = new int[5];
     int[][] y = new int[5][10];
     println(x.size1D, "expected = 5");
     println(y.size1D, "expected = 5");
     println(y.size2D, "expected = 10");
-
+    x = h;
 }

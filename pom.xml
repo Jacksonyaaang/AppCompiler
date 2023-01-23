@@ -298,7 +298,14 @@
                         <phase>test</phase>
                         <goals><goal>exec</goal></goals>
                     </execution>
-
+                        <execution>
+                        <id>Test-CodeGen-interactive</id>
+                        <configuration>
+                            <executable>./customLaunchers/TestCodegen/autoCodegenInteractive.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals><goal>exec</goal></goals>
+                    </execution>
                         <execution>
                         <id>Test-CodeGen-valide</id>
                         <configuration>
@@ -364,6 +371,24 @@
                         <phase>test</phase>
                         <goals><goal>exec</goal></goals>
                     </execution>
+
+                        <execution>
+                        <id>Test-Extension-library-CodeGen-valide</id>
+                        <configuration>
+                            <executable>./customLaunchers/TestExtension/TestBibliotheque/autoCodegenValidExtension.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals><goal>exec</goal></goals>
+                    </execution>
+                     <execution>
+                        <id>Test-Extension-library-CodeGen-invalide</id>
+                        <configuration>
+                            <executable>./customLaunchers/TestExtension/TestBibliotheque/autoCodegenInvalidExtension.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals><goal>exec</goal></goals>
+                    </execution>
+
                 </executions>
 
             </plugin>

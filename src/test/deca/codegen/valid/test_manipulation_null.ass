@@ -78,13 +78,11 @@
 	POP R2
 	LOAD R3, R2	;  Return value of the assignement of =band storing it into R2
 ; --------EndAssignOp--------[23, 4]-----
-; --------StartBinaryOp--------[24, 10]-----
+; --------StartBinaryOp--------[24, 8]-----
 	LOAD 2(GB), R2	; loading a1 into memory
 	CMP 3(GB), R2	; Comparing registers for NotEquals operation 
 	SNE R2	; Placing NotEquals result into the register  
-; --------EndBinaryOp--------[24, 10]-----
-	CMP #0, R2	; Applying not operand
-	SEQ R2	; Applying not operand
+; --------EndBinaryOp--------[24, 8]-----
 ; ---------Startif-----------[24, 4]
 	CMP #1, R2	; Comparing expr output in the ifthenelse
 	BNE else1

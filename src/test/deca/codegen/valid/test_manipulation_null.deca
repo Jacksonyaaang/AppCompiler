@@ -21,7 +21,7 @@ class A{
     A a2 =  new A(); 
     b = null;
     a2.b = new B();
-    if (!(a1!=a2)){
+    if (a1!=a2){
         println("egalité adresse fonctionne");
     }
 }

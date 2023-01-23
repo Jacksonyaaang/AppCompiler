@@ -1,0 +1,15 @@
+// Description:
+//       Teste l'affectation incompatible entre un identificateur de 
+//       methode à gauche
+// Resultats: 
+//      Ligne 12: on peut pas assigner une valeur à une method
+// 
+// Historique:
+//      cree le 22/01/2023
+class A{
+  int f(){
+    int x = 0;
+    f = 5;
+    return x;
+  }
+}

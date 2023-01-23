@@ -66,9 +66,9 @@
     int[][] d = new int[3][3];
     int[][] e = new int[1][1];
 
-    matrixDet.printInt2DTable(matInver);
-    println("Le déterminant de la matrice matInver est: ", matrixDet.bareissIntDeterminant(matInver));
-    println("");
+//    matrixDet.printInt2DTable(matInver);
+  //  println("Le déterminant de la matrice matInver est: ", matrixDet.bareissIntDeterminant(matInver));
+   // println("");
 
     matrixDet.setInt2DTable(d,5);
     matrixDet.setInt2DTable(a,5);
@@ -114,4 +114,11 @@
     matrixDet.printInt2DTable(d);
     println("Le déterminant de la matrice est: ", matrixDet.bareissIntDeterminant(d));
     println("");
-}
+
+
+
+
+
+
+
+    }

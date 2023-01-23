@@ -29,10 +29,10 @@ test_codegen_valide (){
 redirect_result(){
     if grep "/test_Readoperation.ass"  <<< $1
     then  
-        ima "$1" < src/test/deca/librairy/valid/Input_read_operation.txt > src/test/deca/librairy/valid/result/$(basename "${1%.ass}")_output.res 
+        ima "$1" < src/test/deca/library/valid/Input_read_operation.txt > src/test/deca/library/valid/result/$(basename "${1%.ass}")_output.res 
     else 
-        ima "$1" > src/test/deca/librairy/valid/result/$(basename "${1%.ass}")_output.res 
-        compare_output src/test/deca/librairy/valid/result/$(basename "${1%.ass}")_output.res
+        ima "$1" > src/test/deca/library/valid/result/$(basename "${1%.ass}")_output.res 
+        compare_output src/test/deca/library/valid/result/$(basename "${1%.ass}")_output.res
     fi
 }
 
@@ -56,28 +56,28 @@ compare_output(){
 }
 
 
-for i in src/test/deca/librairy/valid/*.deca
+for i in src/test/deca/library/valid/*.deca
 do
     #echo "$i"
     test_codegen_valide "$i" "16"
 done
 
 
-for i in src/test/deca/librairy/valid/*.ass
+for i in src/test/deca/library/valid/*.ass
 do
     # echo "$i"
     redirect_result "$i"
 done
 
 
-for i in src/test/deca/librairy/valid/*.deca
+for i in src/test/deca/library/valid/*.deca
 do
     echo "----------HARD----------- decac -r 4"
     test_codegen_valide "$i" "4"
 done
 
 
-for i in src/test/deca/librairy/valid/*.ass
+for i in src/test/deca/library/valid/*.ass
 do
     # echo "$i"
     redirect_result "$i"
