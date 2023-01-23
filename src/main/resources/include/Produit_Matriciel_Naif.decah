@@ -3,17 +3,19 @@
 class MatrixMultiplication extends Math{
 
     float[][] naiveMultiplyFloat(float[][] a, float[][] b) {
-        float[][] c = new float[a.size2D][b.size1D];
+        float[][] c;
         int i = 0;
         int j = 0;
         int k = 0;
         float s = 0.0;
-        this.setFloat2DTable(c,0.0);
+        MatrixMultiplication matrixMult = new MatrixMultiplication();
 
         if (a.size1D != b.size2D) {
             println("Taille de matrice incompatible avec le produit matriciel:", a.size1D, " != ", b.size2D);
             dimensionIncompatible();
         }
+        c = new float[a.size2D][b.size1D];
+        matrixMult.setFloat2DTable(c,0.0);
 
         while(i < a.size2D){
             while(j < b.size1D){
@@ -39,26 +41,31 @@ class MatrixMultiplication extends Math{
         int j = 0;
         int k = 0;
         int s = 0;
-        this.setInt2DTable(c,0);
+        MatrixMultiplication matrixMult = new MatrixMultiplication();
+        int n = a.size1D;
+        int m = b.size2D;
+        int p = b.size1D;
 
-        if (a.size1D != b.size2D) {
+        if (a.size2D != b.size1D) {
             println("Taille de matrice incompatible avec le produit matriciel:", a.size1D, " != ", b.size2D);
             dimensionIncompatible();
         }
-        c = new int[a.size2D][b.size1D];
+        c = new int[n][m];
+        matrixMult.setInt2DTable(c,0);
 
-        while(i < a.size2D){
-            while(j < b.size1D){
+        while(i < n){
+            j = 0;
+            while(j < m){
                 s = 0;
                 k = 0;
-                while(k < a.size1D){
-                    s = s + b[i][k] * a[k][j];
+                while(k < p){
+                    s = s + a[i][k] * b[k][j];
                     k = k + 1;
                 }
                 c[i][j] = s;
                 j = j + 1;
             }
-            j = 0;
+
             i = i + 1;
         }
         return c;

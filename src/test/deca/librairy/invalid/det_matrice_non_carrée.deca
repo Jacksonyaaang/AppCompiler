@@ -1,0 +1,22 @@
+// Description:
+//    Teste le calcul de déterminant sur des matrices non carrées
+//
+// Resultats:
+//    Le Det de la matrice est: La matrice doit être carrée pour le calcul du déterminant: 3 != 2
+//    Erreur de dimension
+//
+// Historique:
+//    cree le 22/01/2023
+
+#include "Det.decah"
+
+    {
+    Det matrixDet=new Det();
+    int[][]a=new int[3][2];
+    int[][]d=new int[2][3];
+
+    matrixDet.setInt2DTable(a,5);
+    println("Le Det de la matrice est: ",matrixDet.bareissIntDeterminant(a));
+    println("");
+
+    }

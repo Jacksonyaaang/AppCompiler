@@ -84,12 +84,13 @@
         //testTranFlo=mm.transposeMatrixFloat(matTranFlo);
         //testFlattenInt = mm.flattenMatrixInt(matFlattenInt);
         
-        testMatInver=mm.helperInversion(matInver);
+        testMatInver=mm.helperInversionFloat(matInver);
 
         //print:************************************
         itrX=0;
         itrY=0;
-        println("testtttttt");
+
+
 
 
         //template to print 1D
@@ -120,5 +121,36 @@
 
     }
 
+//        {
+//        MatrixTraitement mm = new MatrixTraitement();
+//        float[][] matInver = new float[3][3];
+//        float[][] testMatInver ;
+//        int itrX=0;
+//        int itrY=0;
+//        //set values for test inversion:
+//        matInver[0][0]=1;
+//        matInver[0][1]=2;
+//        matInver[0][2]=3;
+//        matInver[1][0]=0;
+//        matInver[1][1]=1;
+//        matInver[1][2]=4;
+//        matInver[2][0]=5;
+//        matInver[2][1]=6;
+//        matInver[2][2]=4;
+//
+//        testMatInver=mm.inversionFloat(matInver);
+//
+//        //template to print 2D
+//        println("");
+//        while (itrX < testMatInver.size1D ){
+//        while (itrY < testMatInver.size2D ){
+//        print(testMatInver[itrX][itrY]);
+//        print(" ");
+//        itrY = itrY + 1;
+//        }
+//        println();
+//        itrY=0;
+//        itrX = itrX + 1;
+//        }
 
     
