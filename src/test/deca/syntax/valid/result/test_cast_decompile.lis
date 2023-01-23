@@ -1,0 +1,22 @@
+class A {
+	public int i;
+}
+
+{
+	A a = new A();
+	A b = new A();
+	int i;
+	int j;
+	float f = 0x1.cp1;
+	(i = 1);
+	(a.i = 1);
+	(b.i = 2);
+	(a = (A) (b));
+	println(a.i);
+	(j = (int) (i));
+	println(j);
+	(j = (int) (f));
+	println(j);
+	(f = (float) (i));
+	println(f);
+}

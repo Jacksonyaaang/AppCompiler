@@ -1,0 +1,75 @@
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:38) - [MethodDefinition][setLabel] Initialising label value 
+DEBUG fr.ensimag.deca.context.MethodDefinition.setLabel(MethodDefinition.java:41) - [MethodDefinition][setLabel] Trying to modify label with code.Object.equals
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:46) - verify program: start
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:48) - Register unit management unit is null
+DEBUG fr.ensimag.deca.DecacCompiler.saveMainProgramState(DecacCompiler.java:128) - [DecacCompiler][saveMainProgramState] Saving state main program
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:36) - [ListDeclClass][verifyListClass] verify listClass pass 1: START
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:40) - [ListDeclClass][verifyListClass] verify listClass pass 1: END
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:48) - [ListDeclClass][verifyListClassMembers] verify listClass pass 2: START
+DEBUG fr.ensimag.deca.tree.ListDeclField.verifyListDeclField(ListDeclField.java:54) - [ListDeclField][verifyListDeclField]
+DEBUG fr.ensimag.deca.tree.DeclField.verifyDeclField(DeclField.java:91) - [DeclField][verifyDecleField] Verify a Field declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.ListDeclMethod.verifyListDeclMethod(ListDeclMethod.java:32) - [ListDeclMethod][verifyListDeclMethod]
+INFO  fr.ensimag.deca.tree.ListDeclMethod.verifyListDeclMethod(ListDeclMethod.java:34) - [ListDeclMethod][verifyListDeclMethod] Verifing the method : f
+DEBUG fr.ensimag.deca.tree.DeclMethod.verifyDeclMethodSimple(DeclMethod.java:120) - [DeclMethod][verifyDecleMethod] Verifing the declaration of a method in pass 2 || MethodName =  f
+DEBUG fr.ensimag.deca.DecacCompiler.setMethodProgramState(DecacCompiler.java:141) - [DecacCompiler][setMethodProgramState] Entring a method program
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.ListDeclParam.verifyListDeclParam(ListDeclParam.java:47) - [ListDeclParam][verifyListDeclParam] Start
+INFO  fr.ensimag.deca.tree.DeclMethod.verifyDeclMethodSimple(DeclMethod.java:136) - [DeclMethod][verifyDecleMethod] Method = f does not exists, adding a new one to the local env with index 2
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:52) - [ListDeclClass][verifyListClassMembers] verify listClass pass 2: END
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:59) - [ListDeclClass][verifyListClassBody] verify listClass pass 3: START
+DEBUG fr.ensimag.deca.tree.ListDeclField.verifyInitFields(ListDeclField.java:62) - [ListDeclField][verifyInitListDeclField]
+DEBUG fr.ensimag.deca.tree.ListDeclMethod.verifyListDeclMethodBody(ListDeclMethod.java:41) - [ListDeclMethod][verifyListDeclMethod]
+DEBUG fr.ensimag.deca.DecacCompiler.setMethodProgramState(DecacCompiler.java:141) - [DecacCompiler][setMethodProgramState] Entring a method program
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:54) - [ListDeclVar][verifyListDeclVariable]
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:43) - [DeclVar][verifyDecleVar] Verify a variable declaration
+DEBUG fr.ensimag.deca.tree.Identifier.verifyType(Identifier.java:234) - [Identifier][verifyType] Verify that declaration type is correct
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:67) - [DeclVar] Saving method variable y into 1(LB)
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:35) - [ListInst][verifyListInst]
+DEBUG fr.ensimag.deca.tree.Return.verifyInst(Return.java:39) - [Return][verifyInst]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:216) - [AbstractExpr][verifyRValue] Verify the right expression of (implicit) assignments --- location = [13, 11]
+DEBUG fr.ensimag.deca.tree.This.verifyExpr(This.java:54) - [This][verifyExpr]
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:219) - [AbstractExpr][verifyRValue] right type is  = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:236) - [AbstractExpr][verifyRValue] We found the type = boolean expected type is boolean
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:63) - [ListDeclClass][verifyListClassBody] verify listClass pass 3: END
+DEBUG fr.ensimag.deca.DecacCompiler.setMainProgramState(DecacCompiler.java:115) - [DecacCompiler][setMainProgramState] Seeting main state program
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:60) - verify program: end
+`> [8, 0] Program
+   +> [8, 0] ListDeclClass [List with 1 elements]
+   |  []> [8, 0] DeclClass
+   |      +> [8, 6] Identifier (A)
+   |      |  definition: type defined at [8, 0], type=A
+   |      +> [builtin] Identifier (Object)
+   |      |  definition: type (builtin), type=Object
+   |      +> ListDeclField [List with 1 elements]
+   |      |  []> [9, 6]  [visibility=PUBLIC]  DeclField
+   |      |      +> [9, 2] Identifier (int)
+   |      |      |  definition: type (builtin), type=int
+   |      |      +> [9, 6] Identifier (x)
+   |      |      |  definition: field defined at [9, 6], type=int
+   |      |      `> NoInitialization
+   |      `> ListDeclMethod [List with 1 elements]
+   |         []> [10, 2] DeclMethod
+   |             +> [10, 2] Identifier (boolean)
+   |             |  definition: type (builtin), type=boolean
+   |             +> [10, 10] Identifier (f)
+   |             |  definition: method defined at [10, 2], type=boolean
+   |             +> ListDeclParam [List with 0 elements]
+   |             `> [10, 13] MethodBody
+   |                +> ListDeclVar [List with 1 elements]
+   |                |  []> [11, 12] DeclVar
+   |                |      +> [11, 4] Identifier (boolean)
+   |                |      |  definition: type (builtin), type=boolean
+   |                |      +> [11, 12] Identifier (y)
+   |                |      |  definition: variable defined at [11, 12], type=boolean
+   |                |      `> NoInitialization
+   |                `> ListInst [List with 1 elements]
+   |                   []> [13, 11] Return
+   |                       `> [13, 11] MethodCall
+   |                          type: boolean
+   |                          +> [13, 11] This
+   |                          |  type: A
+   |                          +> [13, 11] Identifier (f)
+   |                          |  definition: method defined at [10, 2], type=boolean
+   |                          `> ListExpr [List with 0 elements]
+   `> EmptyMain

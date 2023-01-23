@@ -1,0 +1,71 @@
+`> [9, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [9, 0] Main
+      +> ListDeclVar [List with 12 elements]
+      |  []> [11, 10] DeclVar
+      |  ||  +> [11, 4] Identifier (int[])
+      |  ||  +> [11, 10] Identifier (x)
+      |  ||  `> NoInitialization
+      |  []> [12, 10] DeclVar
+      |  ||  +> [12, 4] Identifier (int[])
+      |  ||  +> [12, 10] Identifier (y)
+      |  ||  `> [12, 14] Initialization
+      |  ||     `> [12, 14] NewTable
+      |  ||        +> [12, 14] Identifier (int[])
+      |  ||        +> ListExpr [List with 1 elements]
+      |  ||        |  []> [12, 22] Int (5)
+      |  []> [13, 10] DeclVar
+      |  ||  +> [13, 4] Identifier (int[])
+      |  ||  +> [13, 10] Identifier (h)
+      |  ||  `> [13, 14] Initialization
+      |  ||     `> [13, 14] Identifier (y)
+      |  []> [14, 10] DeclVar
+      |  ||  +> [14, 4] Identifier (int[])
+      |  ||  +> [14, 10] Identifier (z)
+      |  ||  `> [14, 14] Initialization
+      |  ||     `> [14, 14] Identifier (x)
+      |  []> [17, 12] DeclVar
+      |  ||  +> [17, 4] Identifier (float[])
+      |  ||  +> [17, 12] Identifier (e)
+      |  ||  `> NoInitialization
+      |  []> [18, 12] DeclVar
+      |  ||  +> [18, 4] Identifier (float[])
+      |  ||  +> [18, 12] Identifier (g)
+      |  ||  `> [18, 16] Initialization
+      |  ||     `> [18, 16] NewTable
+      |  ||        +> [18, 16] Identifier (float[])
+      |  ||        +> ListExpr [List with 1 elements]
+      |  ||        |  []> [18, 26] Int (5)
+      |  []> [19, 12] DeclVar
+      |  ||  +> [19, 4] Identifier (float[])
+      |  ||  +> [19, 12] Identifier (t)
+      |  ||  `> [19, 16] Initialization
+      |  ||     `> [19, 16] Identifier (g)
+      |  []> [20, 12] DeclVar
+      |  ||  +> [20, 4] Identifier (float[])
+      |  ||  +> [20, 12] Identifier (p)
+      |  ||  `> [20, 16] Initialization
+      |  ||     `> [20, 16] Identifier (x)
+      |  []> [24, 14] DeclVar
+      |  ||  +> [24, 4] Identifier (boolean[])
+      |  ||  +> [24, 14] Identifier (bool1)
+      |  ||  `> NoInitialization
+      |  []> [25, 14] DeclVar
+      |  ||  +> [25, 4] Identifier (boolean[])
+      |  ||  +> [25, 14] Identifier (bool2)
+      |  ||  `> [25, 22] Initialization
+      |  ||     `> [25, 22] NewTable
+      |  ||        +> [25, 22] Identifier (boolean[])
+      |  ||        +> ListExpr [List with 1 elements]
+      |  ||        |  []> [25, 34] Int (5)
+      |  []> [26, 14] DeclVar
+      |  ||  +> [26, 4] Identifier (boolean[])
+      |  ||  +> [26, 14] Identifier (bool3)
+      |  ||  `> [26, 22] Initialization
+      |  ||     `> [26, 22] Identifier (bool1)
+      |  []> [27, 14] DeclVar
+      |      +> [27, 4] Identifier (boolean[])
+      |      +> [27, 14] Identifier (bool4)
+      |      `> [27, 22] Initialization
+      |         `> [27, 22] Identifier (bool2)
+      `> ListInst [List with 0 elements]
