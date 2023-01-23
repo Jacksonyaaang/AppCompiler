@@ -84,12 +84,14 @@
         //testTranFlo=mm.transposeMatrixFloat(matTranFlo);
         //testFlattenInt = mm.flattenMatrixInt(matFlattenInt);
         
-        testMatInver=mm.helperInversion(matInver);
+        testMatInver=mm.helperInversionFloat(matInver);
 
         //print:************************************
         itrX=0;
         itrY=0;
         println("testtttttt");
+
+
 
 
         //template to print 1D
